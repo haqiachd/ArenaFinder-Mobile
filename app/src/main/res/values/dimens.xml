@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="acc_stroke_radius_input">@dimen/_8sdp</dimen>
+
+</resources>

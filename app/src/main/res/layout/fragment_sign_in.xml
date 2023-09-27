@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.SignInFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/acc_il_sport"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:src="@drawable/il_account_welcome"
+                android:scaleType="centerCrop"
+                android:contentDescription="ilustrasi orang olahraga"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <LinearLayout
+                android:id="@+id/acc_lin_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/acc_il_sport"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat Email"
+                    android:textColor="#02406D"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="#07ACF3"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_2sdp"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_43sdp"
+                        android:textColor="#808080"
+                        android:inputType="textEmailAddress"
+                        android:autofillHints="emailAddress"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Kata Sandi"
+                    android:textColor="#02406D"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="#07ACF3"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_2sdp"
+                    app:endIconMode="password_toggle"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_43sdp"
+                        android:textColor="#02406D"
+                        android:inputType="textPassword"
+                        android:autofillHints="password"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/acc_lupa_sandi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Lupa Sandi?"
+                android:textColor="#02406D"
+                app:layout_constraintTop_toBottomOf="@id/acc_lin_input"
+                app:layout_constraintEnd_toEndOf="@id/acc_lin_input"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/acc_btn_signin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:backgroundTint="#02406D"
+                android:text="Masuk"
+                android:textAllCaps="false"
+                app:cornerRadius="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/acc_lupa_sandi"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/signin_cons_masuk_dengan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/acc_btn_signin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <View
+                    android:id="@+id/signin_line_left"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="#767F8F"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/signin_masuk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Masuk dengan"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/signin_line_left"
+                    />
+
+                <View
+                    android:id="@+id/signin_line_right"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="#767F8F"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/signin_masuk"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/signin_google"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_logo_google"
+                app:layout_constraintTop_toBottomOf="@id/signin_cons_masuk_dengan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/signin_google"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <TextView
+                    android:id="@+id/signin_txt_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:text="Belum punya akun?"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    />
+
+                <TextView
+                    android:id="@+id/signin_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daftar Disini"
+                    android:textColor="#02406D"
+                    />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>
