@@ -13,9 +13,6 @@
         android:theme="@style/Theme.ArenaFinder"
         tools:targetApi="34">
         <activity
-            android:name=".ui.activity.SplashScreen"
-            android:exported="true"
-            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

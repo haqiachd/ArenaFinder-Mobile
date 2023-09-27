@@ -1,59 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.SplashScreen"
-    >
+    tools:context=".splashscreen.SplashScreen"
+    android:id="@+id/splash_screen"
+    android:backgroundTint="@color/biru_gelap">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/spls_constraint_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logoc2"/>
 
-        <ImageView
-            android:id="@+id/spls_logo_gsteam"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:src="@drawable/logo_polije"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+</RelativeLayout>
 
-        <TextView
-            android:id="@+id/spls_app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:text="@string/app_name"
-            android:textColor="#000000"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spls_logo_gsteam"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ProgressBar
-        android:id="@+id/spls_progress"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="100dp"
-        android:indeterminateTint="@color/purple_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spls_constraint_top"
-        />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
