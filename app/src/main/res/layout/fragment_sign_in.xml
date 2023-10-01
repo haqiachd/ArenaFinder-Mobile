@@ -62,6 +62,7 @@
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/signin_inp_email"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_43sdp"
                         android:textColor="#808080"
@@ -94,6 +95,7 @@
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/signin_inp_pass"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_43sdp"
                         android:textColor="#02406D"
@@ -106,7 +108,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/acc_lupa_sandi"
+                android:id="@+id/signin_lupa_sandi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -117,7 +119,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/acc_btn_signin"
+                android:id="@+id/signin_btn_signin"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -127,7 +129,7 @@
                 android:text="Masuk"
                 android:textAllCaps="false"
                 app:cornerRadius="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@id/acc_lupa_sandi"
+                app:layout_constraintTop_toBottomOf="@id/signin_lupa_sandi"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -135,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/acc_btn_signin"
+                app:layout_constraintTop_toBottomOf="@id/signin_btn_signin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
