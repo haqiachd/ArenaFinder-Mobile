@@ -14,4 +14,10 @@
         <!-- Customize your theme here. -->
 
     </style>
+
+    <style name="Theme.SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/biru_gelap</item>
+    </style>
+
 </resources>

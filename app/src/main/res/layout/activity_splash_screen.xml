@@ -10,10 +10,12 @@
     >
 
     <ImageView
+        android:id="@+id/splash_logo_app"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_200sdp"
-        android:scaleType="centerCrop"
+        android:layout_marginBottom="@dimen/_80sdp"
         android:src="@drawable/ic_app_icon_c2"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/app_name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,6 +23,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/splash_loading"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        app:lottie_rawRes="@raw/raw_splash_loading"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintTop_toBottomOf="@id/splash_logo_app"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
