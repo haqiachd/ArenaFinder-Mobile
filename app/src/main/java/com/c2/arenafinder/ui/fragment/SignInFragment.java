@@ -62,5 +62,9 @@ public class SignInFragment extends Fragment {
                     .commit();
         });
 
+        view.findViewById(R.id.acc_btn_signin).setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), MainActivity.class));
+        });
+
     }
 }

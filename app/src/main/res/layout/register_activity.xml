@@ -5,16 +5,17 @@
     android:id="@+id/layout_login"
     android:layout_width="410dp"
     android:layout_height="730dp"
-    android:background="@color/blue"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@drawable/custom_edittext"
+        android:background="@color/white"
         app:cardCornerRadius="20dp"
         app:cardElevation="20dp">
 
@@ -32,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="Register"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/white"
                 android:textSize="36dp"
                 android:textStyle="bold"
                 android:visibility="visible" />
@@ -42,8 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_person_24"
+                android:background="@color/white"
+                android:drawableLeft="@color/white"
                 android:drawablePadding="8dp"
                 android:hint="Username"
                 android:padding="8dp"
@@ -55,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_person_24"
+                android:background="@color/white"
+                android:drawableLeft="@color/white"
                 android:drawablePadding="8dp"
                 android:hint="Email"
                 android:padding="8dp"
@@ -69,8 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_lock_24"
+                android:background="@color/white"
+                android:drawableLeft="@color/white"
                 android:drawablePadding="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"
@@ -83,8 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_lock_24"
+                android:background="@color/white"
+                android:drawableLeft="@color/white"
                 android:drawablePadding="8dp"
                 android:hint="Konfirmasi Password"
                 android:inputType="textPassword"
@@ -97,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/blue"
+                android:backgroundTint="@color/white"
                 android:text="Daftar"
                 android:textSize="18dp" />
 

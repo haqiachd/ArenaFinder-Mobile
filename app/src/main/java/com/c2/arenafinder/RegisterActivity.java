@@ -1,4 +1,4 @@
-package com.example.fragment;
+package com.c2.arenafinder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_main);
+        setContentView(R.layout.register_activity);
         username = findViewById(R.id.username);
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.password);

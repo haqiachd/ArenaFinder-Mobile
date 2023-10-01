@@ -19,4 +19,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55sdp"
+        app:mbn_backgroundBottomColor="@color/white"
+        app:mbn_selectedIconColor="@color/dogerblue"
+        app:mbn_defaultIconColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
