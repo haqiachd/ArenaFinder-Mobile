@@ -1,6 +1,7 @@
 package com.c2.arenafinder.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -9,10 +10,14 @@ import android.os.Vibrator;
 
 import androidx.annotation.NonNull;
 
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+
 public class ArenaFinder {
 
     public static int VIBRATOR_SHORT = 150;
-    public static int VIBRATOR_LONG = 300;
+    public static int VIBRATOR_MEDIUM = 500;
+    public static int VIBRATOR_LONG = 1000;
 
     public static void playVibrator(@NonNull Context context, int millis){
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -33,6 +38,13 @@ public class ArenaFinder {
             return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         }
         return false;
+    }
+
+    public static void restartApplication(@NonNull Context context, Class<?> activity){
+        Intent intent = new Intent(context, activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+        LogApp.info(context, LogTag.APPLICATION, "Aplikasi direstart");
     }
 
 }

@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,13 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.google.GoogleUsers;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
@@ -33,12 +39,16 @@ public class SignInFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private GoogleUsers google;
+
     private Button btnSignIn;
+    private ImageView btnGoogle;
     private TextView txtLupaSandi;
     private TextInputEditText inpEmail, inpPassword;
 
     private void initViews(View view){
         btnSignIn = view.findViewById(R.id.signin_btn_signin);
+        btnGoogle = view.findViewById(R.id.signin_google);
         txtLupaSandi = view.findViewById(R.id.signin_lupa_sandi);
         inpEmail = view.findViewById(R.id.signin_inp_email);
         inpPassword = view.findViewById(R.id.signin_inp_pass);
@@ -79,6 +89,17 @@ public class SignInFragment extends Fragment {
         onClickGroups();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        google.onActivityResult(requestCode, resultCode, data);
+
+        if (google.isAccountSelected()){
+            Toast.makeText(requireContext(), google.getUserData().getDisplayName(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void onClickGroups(){
 
         txtLupaSandi.setOnClickListener(v -> {
@@ -111,6 +132,25 @@ public class SignInFragment extends Fragment {
                 }
             });
 
+        });
+
+        btnGoogle.setOnClickListener(v -> {
+            LogApp.info(requireContext(), v, "Button Google diclick");
+
+            // jika terhubung internet
+            if (ArenaFinder.isInternetConnected(requireContext())){
+                if (google == null){
+                    google = new GoogleUsers(requireActivity());
+                }else {
+                    google.resetLastSignIn();
+                }
+                // membuka google sign-in intent
+                startActivityForResult(google.getIntent(), GoogleUsers.REQUEST_CODE);
+            }else {
+                LogApp.warn(requireContext(), LogTag.GOOGLE_SIGN, "no internet connection");
+                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                Toast.makeText(requireContext(), getString(R.string.err_no_internet), Toast.LENGTH_SHORT).show();
+            }
         });
 
     }

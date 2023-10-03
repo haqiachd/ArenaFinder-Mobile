@@ -18,7 +18,7 @@
             >
 
             <ImageView
-                android:id="@+id/acc_il_sport"
+                android:id="@+id/signin_il_sport"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200sdp"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -31,14 +31,14 @@
                 />
 
             <LinearLayout
-                android:id="@+id/acc_lin_input"
+                android:id="@+id/signin_lin_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/acc_il_sport"
+                app:layout_constraintTop_toBottomOf="@id/signin_il_sport"
                 >
 
                 <TextView
@@ -114,8 +114,8 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="Lupa Sandi?"
                 android:textColor="#02406D"
-                app:layout_constraintTop_toBottomOf="@id/acc_lin_input"
-                app:layout_constraintEnd_toEndOf="@id/acc_lin_input"
+                app:layout_constraintTop_toBottomOf="@id/signin_lin_input"
+                app:layout_constraintEnd_toEndOf="@id/signin_lin_input"
                 />
 
             <com.google.android.material.button.MaterialButton
