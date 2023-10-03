@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">192.168.155.152</domain>
+        <domain includeSubdomains="true">192.168.155.152</domain>       <!-- Local -->
+        <domain includeSubdomains="true">172.16.106.92</domain>         <!-- Lab Mobile -->
+        <domain includeSubdomains="true">172.16.106.186</domain>        <!-- Lab KSI -->
+        <domain includeSubdomains="true">172.16.103.152</domain>        <!-- Lab MMC -->
+        <domain includeSubdomains="true">172.16.104.101</domain>        <!-- Classroom A -->
     </domain-config>
 </network-security-config>

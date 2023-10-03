@@ -19,6 +19,8 @@ import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
