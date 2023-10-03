@@ -15,7 +15,7 @@ public class UserModel {
     @SerializedName("email")
     private String email;
     @Expose
-    @SerializedName("nama")
+    @SerializedName("full_name")
     private String nama;
     @Expose
     @SerializedName("password")

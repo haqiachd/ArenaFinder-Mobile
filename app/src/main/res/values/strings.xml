@@ -2,8 +2,17 @@
     <string name="app_name">ArenaFinder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_aktivitas">Aktivitas</string>
+    <string name="menu_referensi">Referensi</string>
+    <string name="menu_profile">Profile</string>
 
     <string name="alt_app_logo">Logo C2</string>
+
+    <string name="dia_positive_ok">OK</string>
+    <string name="dia_negative_cancel">BATAL</string>
+    <string name="dia_title_confirm">Konfirmasi</string>
+    <string name="dia_msg_confirm_logout">Apakah Kamu Ingin Logout?</string>
 
     <string name="err_no_internet">Tidak ada koneksi Internet.</string>
     <string name="err_no_data_selected">Tidak ada data yang dipilih.</string>

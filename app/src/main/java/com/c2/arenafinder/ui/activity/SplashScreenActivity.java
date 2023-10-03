@@ -12,11 +12,16 @@ import android.widget.ImageView;
 import com.airbnb.lottie.LottieAnimationView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.DataShared;
+import com.c2.arenafinder.util.UsersUtil;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
 
+    private UsersUtil usersUtil;
+
     private ImageView appIcon;
+
     private LottieAnimationView loading;
 
     private void initViews(){
@@ -29,6 +34,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         initViews();
+        usersUtil = new UsersUtil(getApplicationContext());
 
         // remove status bar dan navigation bar
         getWindow().getDecorView().post(() -> new Thread(() -> runOnUiThread(() -> {
@@ -39,8 +45,13 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         new Handler().postDelayed(
                 () -> {
-                    startActivity(new Intent(this, AccountActivity.class));
-                    finish();
+                   if (usersUtil.isSignIn()){
+                       startActivity(new Intent(this, MainActivity.class));
+                       finish();
+                   }else {
+                       startActivity(new Intent(this, AccountActivity.class));
+                       finish();
+                   }
                 },
                 3000L
         );

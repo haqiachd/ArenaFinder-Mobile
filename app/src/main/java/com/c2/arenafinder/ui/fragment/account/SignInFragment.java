@@ -15,16 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.c2.arenafinder.data.model.UserModel;
+import com.google.android.material.textfield.TextInputEditText;
+
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.google.GoogleUsers;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
+import com.c2.arenafinder.data.local.DataShared;
+import com.c2.arenafinder.data.local.DataShared.KEY;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
-import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +43,7 @@ public class SignInFragment extends Fragment {
     private String mParam2;
 
     private GoogleUsers google;
+    private DataShared dataShared;
 
     private Button btnSignIn;
     private ImageView btnGoogle;
@@ -84,6 +89,7 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        dataShared = new DataShared(requireContext());
 
         onClickGroups();
     }
@@ -119,6 +125,14 @@ public class SignInFragment extends Fragment {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                     if (response.body().getStatus().equals("success")){
+                        // save data ke preferences
+                        UserModel data = response.body().getData();
+                        dataShared.setData(KEY.ACC_USERNAME, data.getUsername());
+                        dataShared.setData(KEY.ACC_EMAIL, data.getEmail());
+                        dataShared.setData(KEY.ACC_FULL_NAME, data.getNama());
+                        dataShared.setData(KEY.ACC_LEVEL, data.getLevel());
+
+                        // open main activity
                         Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
                     }else {
