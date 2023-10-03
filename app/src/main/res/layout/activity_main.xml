@@ -8,15 +8,11 @@
     tools:context=".ui.activity.MainActivity"
     >
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/main_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World"
-        android:textSize="@dimen/_30ssp"
-        android:textAlignment="center"
-        android:textColor="@color/teal_700"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_55sdp"
         />
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation

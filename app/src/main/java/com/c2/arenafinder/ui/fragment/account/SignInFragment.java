@@ -1,4 +1,4 @@
-package com.c2.arenafinder.ui.fragment;
+package com.c2.arenafinder.ui.fragment.account;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +22,9 @@ import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -121,6 +120,7 @@ public class SignInFragment extends Fragment {
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                     if (response.body().getStatus().equals("success")){
                         Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
                     }else {
                         Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }

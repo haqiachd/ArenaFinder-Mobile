@@ -8,8 +8,13 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 
@@ -46,5 +51,6 @@ public class ArenaFinder {
         context.startActivity(intent);
         LogApp.info(context, LogTag.APPLICATION, "Aplikasi direstart");
     }
+
 
 }
