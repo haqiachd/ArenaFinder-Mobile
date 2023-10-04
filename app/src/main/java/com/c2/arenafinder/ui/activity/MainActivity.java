@@ -1,8 +1,16 @@
 package com.c2.arenafinder.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 import com.c2.arenafinder.R;
@@ -18,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static int MENU_HOME = 1, MENU_AKTIVITAS = 2, MENU_REFERENSI = 3, MENU_PROFILE = 4;
 
+    private static final int PERMISSION_REQUEST_STORAGE = 2;
+
     private MeowBottomNavigation bottomNavigation;
     private TextView txtAppbar;
 
@@ -31,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+
+        checkAndRequestStoragePermission();
 
         bottomNavigation.add(new MeowBottomNavigation.Model(MENU_HOME, R.drawable.ic_bottom_nav_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(MENU_AKTIVITAS, R.drawable.ic_bottom_nav_activity));
@@ -75,6 +87,29 @@ public class MainActivity extends AppCompatActivity {
             return null;
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission was granted, you can proceed with your logic (e.g., open the gallery).
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Method to check and request permission if needed.
+    private void checkAndRequestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, request it.
+            Toast.makeText(this, "Request Permission", Toast.LENGTH_SHORT).show();
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
+        }
     }
 
 }

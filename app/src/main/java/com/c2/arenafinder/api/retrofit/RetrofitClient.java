@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class RetrofitClient {
 
 //    public static final String BASE_URL = "http://192.168.155.152/arenafinder-web/mobile/"; // Local
-    public static final String BASE_URL = "http://172.16.106.150/arenafinder-web/mobile/"; // Lab Mobile
+    public static final String BASE_URL = "http://172.16.106.119/arenafinder-web/mobile/"; // Lab Mobile
 //      public static final String BASE_URL = "http://172.16.106.186/arenafinder-web/mobile/"; // Lab KSI
 //      public static final String BASE_URL = "http://172.16.103.152/arenafinder-web/mobile/"; // Lab MMC
 //      public static final String BASE_URL = "http://172.16.104.101/arenafinder-web/mobile/"; // Classroom A

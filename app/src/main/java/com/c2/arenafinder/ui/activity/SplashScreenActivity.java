@@ -1,14 +1,22 @@
 package com.c2.arenafinder.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.airbnb.lottie.LottieAnimationView;
 
 import com.c2.arenafinder.R;
@@ -19,6 +27,8 @@ import com.c2.arenafinder.util.UsersUtil;
 public class SplashScreenActivity extends AppCompatActivity {
 
     private UsersUtil usersUtil;
+
+    private static final int PERMISSION_REQUEST_STORAGE = 2;
 
     private ImageView appIcon;
 
@@ -45,7 +55,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         new Handler().postDelayed(
                 () -> {
-                   if (usersUtil.isSignIn()){
+
+                    if (usersUtil.isSignIn()){
                        startActivity(new Intent(this, MainActivity.class));
                        finish();
                    }else {
@@ -56,4 +67,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 3000L
         );
     }
+
+
 }

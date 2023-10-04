@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.fragment.main;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -127,19 +128,21 @@ public class ProfileFragment extends Fragment {
     }
 
     private void choosePhoto() {
-        if (ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(requireActivity(),
-                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    PERMISSION_REQUEST_STORAGE);
-            Toast.makeText(requireActivity(), "permission needed", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(requireActivity(), "permission granted", Toast.LENGTH_SHORT).show();
+//        if (ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED
+//                && ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//
+//            ActivityCompat.requestPermissions(requireActivity(),
+//                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                    PERMISSION_REQUEST_STORAGE);
+//
+//            Toast.makeText(requireActivity(), "permission needed", Toast.LENGTH_SHORT).show();
+//        }else{
+//            Toast.makeText(requireActivity(), "permission granted", Toast.LENGTH_SHORT).show();
             openGallery();
-        }
+//        }
+//        checkAndRequestStoragePermission();
     }
 
     public void openGallery() {
@@ -158,14 +161,18 @@ public class ProfileFragment extends Fragment {
         RetrofitClient.getInstance().uploadPhotoMultipart(action, photoPart).enqueue(new Callback<UsersResponse>() {
             @Override
             public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                if(response != null) {
-                    Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }
+//                if(response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                    Toast.makeText(requireContext(), "Photo profile berhasil diupdate", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+//                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                }
             }
 
             @Override
             public void onFailure(Call<UsersResponse> call, Throwable t) {
                 ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_FAILURE, t.getMessage());
                 Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -186,21 +193,31 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_STORAGE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        switch (requestCode) {
+//            case PERMISSION_REQUEST_STORAGE: {
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.length > 0
+//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//
+//                    openGallery();
+//                }
+//
+//                return;
+//            }
+//        }
+//    }
 
-                    openGallery();
-                }
-
-                return;
-            }
+    // Method to check and request permission if needed.
+    private void checkAndRequestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            openGallery();
+        }else {
+            Toast.makeText(requireActivity(), "Permission Denied :v", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

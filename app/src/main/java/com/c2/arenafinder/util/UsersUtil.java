@@ -14,7 +14,8 @@ public class UsersUtil {
     }
 
     public boolean isSignIn(){
-        return !dataShared.getData(KEY.ACC_USERNAME).isEmpty();
+        return  dataShared.contains(KEY.ACC_USERNAME) &&
+                !dataShared.getData(KEY.ACC_USERNAME).isEmpty();
     }
 
     public String getUsername(){

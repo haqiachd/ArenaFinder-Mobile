@@ -27,13 +27,13 @@ public interface RetrofitEndPoint {
     );
 
     @Multipart
-    @POST("update_pp.php")
+    @POST("update_pp_old.php")
     Call<UsersResponse> uploadPhotoMultipart(
             @Part("action") RequestBody action,
             @Part MultipartBody.Part photo);
 
     @FormUrlEncoded
-    @POST("update_pp.php")
+    @POST("update_pp_old.php")
     Call<UsersResponse> uploadPhotoBase64(
             @Field("action") String action,
             @Field("photo") String photo);
