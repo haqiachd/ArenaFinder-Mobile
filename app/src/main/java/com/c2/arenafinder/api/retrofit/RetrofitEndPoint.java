@@ -16,4 +16,10 @@ public interface RetrofitEndPoint {
             @Field("password") String password
     );
 
+    @FormUrlEncoded
+    @POST("login_google.php")
+    Call<UsersResponse> loginGoogle(
+            @Field("email") String email
+    );
+
 }

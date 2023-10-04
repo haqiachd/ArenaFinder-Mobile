@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.data.model.UserModel;
+import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
 import com.c2.arenafinder.R;
@@ -29,6 +32,8 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,11 +52,12 @@ public class SignInFragment extends Fragment {
 
     private Button btnSignIn;
     private ImageView btnGoogle;
-    private TextView txtLupaSandi;
+    private TextView txtLupaSandi, btnSignUp;
     private TextInputEditText inpEmail, inpPassword;
 
     private void initViews(View view){
         btnSignIn = view.findViewById(R.id.signin_btn_signin);
+        btnSignUp = view.findViewById(R.id.signin_register);
         btnGoogle = view.findViewById(R.id.signin_google);
         txtLupaSandi = view.findViewById(R.id.signin_lupa_sandi);
         inpEmail = view.findViewById(R.id.signin_inp_email);
@@ -101,11 +107,39 @@ public class SignInFragment extends Fragment {
         google.onActivityResult(requestCode, resultCode, data);
 
         if (google.isAccountSelected()){
-            Toast.makeText(requireContext(), google.getUserData().getDisplayName(), Toast.LENGTH_SHORT).show();
+
+            RetrofitEndPoint endPoint = RetrofitClient.getInstance();
+            endPoint.loginGoogle(google.getUserData().getEmail())
+                    .enqueue(new Callback<UsersResponse>() {
+                        @Override
+                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                            if (response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                                // saving data ke preferences
+                                UserModel data = response.body().getData();
+                                dataShared.setData(KEY.ACC_USERNAME, data.getUsername());
+                                dataShared.setData(KEY.ACC_EMAIL, data.getEmail());
+                                dataShared.setData(KEY.ACC_FULL_NAME, data.getNama());
+                                dataShared.setData(KEY.ACC_LEVEL, data.getLevel());
+
+                                // open main activity
+                                Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
+                            }else {
+                                Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UsersResponse> call, Throwable t) {
+
+                        }
+                    });
+
         }
     }
 
     private void onClickGroups(){
+
 
         txtLupaSandi.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
@@ -125,7 +159,7 @@ public class SignInFragment extends Fragment {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                     if (response.body().getStatus().equals("success")){
-                        // save data ke preferences
+                        // saving data ke preferences
                         UserModel data = response.body().getData();
                         dataShared.setData(KEY.ACC_USERNAME, data.getUsername());
                         dataShared.setData(KEY.ACC_EMAIL, data.getEmail());
@@ -165,6 +199,10 @@ public class SignInFragment extends Fragment {
                 ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                 Toast.makeText(requireContext(), getString(R.string.err_no_internet), Toast.LENGTH_SHORT).show();
             }
+        });
+
+        btnSignUp.setOnClickListener(v -> {
+            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFragmentFirst(), true);
         });
 
     }

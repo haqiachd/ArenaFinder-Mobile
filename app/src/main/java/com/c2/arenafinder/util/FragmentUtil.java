@@ -23,6 +23,12 @@ public class FragmentUtil {
         }
     }
 
+    public static void switchFragmentAccount(
+            @NonNull FragmentManager fragmentManager, Fragment fragment, boolean backStack
+    ){
+        switchFragment(fragmentManager, fragment, R.id.acc_frame_layout, backStack);
+    }
+
     public static void switchFragmentMain(
             @NonNull FragmentManager fragmentManager, Fragment fragment, boolean backStack
     ){
