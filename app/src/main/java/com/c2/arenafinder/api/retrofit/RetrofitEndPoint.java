@@ -14,28 +14,28 @@ import retrofit2.http.Part;
 public interface RetrofitEndPoint {
 
     @FormUrlEncoded
-    @POST("login.php")
+    @POST("users/login.php")
     Call<UsersResponse> login (
             @Field("email") String email,
             @Field("password") String password
     );
 
     @FormUrlEncoded
-    @POST("login_google.php")
+    @POST("users/login_google.php")
     Call<UsersResponse> loginGoogle(
             @Field("email") String email
     );
 
     @Multipart
-    @POST("update_pp_old.php")
+    @POST("users/update_pp.php")
     Call<UsersResponse> uploadPhotoMultipart(
             @Part("action") RequestBody action,
             @Part MultipartBody.Part photo);
 
     @FormUrlEncoded
-    @POST("update_pp_old.php")
+    @POST("users/update_pp.php")
     Call<UsersResponse> uploadPhotoBase64(
-            @Field("action") String action,
+            @Field("email") String email,
             @Field("photo") String photo);
 
 }

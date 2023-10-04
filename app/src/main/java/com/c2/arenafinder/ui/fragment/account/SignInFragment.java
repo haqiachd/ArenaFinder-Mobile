@@ -34,6 +34,7 @@ import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -108,6 +109,10 @@ public class SignInFragment extends Fragment {
 
         if (google.isAccountSelected()){
 
+            if (google.getUserData().getPhotoUrl() != null){
+                LogApp.info(requireContext(), String.valueOf(google.getUserData().getPhotoUrl()));
+            }
+
             RetrofitEndPoint endPoint = RetrofitClient.getInstance();
             endPoint.loginGoogle(google.getUserData().getEmail())
                     .enqueue(new Callback<UsersResponse>() {
@@ -120,6 +125,7 @@ public class SignInFragment extends Fragment {
                                 dataShared.setData(KEY.ACC_EMAIL, data.getEmail());
                                 dataShared.setData(KEY.ACC_FULL_NAME, data.getNama());
                                 dataShared.setData(KEY.ACC_LEVEL, data.getLevel());
+                                dataShared.setData(KEY.ACC_PHOTO, data.getUserPhoto());
 
                                 // open main activity
                                 Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
@@ -131,7 +137,8 @@ public class SignInFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<UsersResponse> call, Throwable t) {
-
+                            ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_MEDIUM);
+                            Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 

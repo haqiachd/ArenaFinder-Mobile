@@ -10,13 +10,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import android.provider.MediaStore;
 
-import android.os.FileUtils;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,25 +21,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.AccountActivity;
 import com.c2.arenafinder.util.ArenaFinder;
-import com.c2.arenafinder.util.FileUtil;
 import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;
 
-import java.io.File;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,7 +58,7 @@ public class ProfileFragment extends Fragment {
 
     private UsersUtil usersUtil;
     private Button btnLogout;
-    private TextView txtUsername, txtEmail, txtName, txtLevel, btnChoose, btnUpload1, btnUpload2;
+    private TextView txtUsername, txtEmail, txtName, txtLevel, btnChoose, btnUpload;
     private CircleImageView imgPhoto;
 
     private void initViews(View view){
@@ -75,8 +68,7 @@ public class ProfileFragment extends Fragment {
         txtName = view.findViewById(R.id.mpr_txt_nama);
         txtLevel = view.findViewById(R.id.mpr_txt_level);
         btnChoose = view.findViewById(R.id.mpr_choose_pp);
-        btnUpload1 = view.findViewById(R.id.mpr_upload1_pp);
-        btnUpload2 = view.findViewById(R.id.mpr_upload2_pp);
+        btnUpload = view.findViewById(R.id.mpr_upload_pp);
         imgPhoto = view.findViewById(R.id.mpr_img_photo);
     }
 
@@ -120,9 +112,9 @@ public class ProfileFragment extends Fragment {
         txtName.setText(usersUtil.getFullName());
         txtLevel.setText(usersUtil.getLevel());
 
-//        btnChoose.setOnClickListener(this);
-//        btnUpload1.setOnClickListener(this);
-//        btnUpload2.setOnClickListener(this);
+        Glide.with(requireActivity())
+                .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
+                .into(imgPhoto);
 
         onClickGroups();
     }
@@ -152,37 +144,24 @@ public class ProfileFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);
     }
 
-    private void uploadMultipart(File file) {
-        RequestBody photoBody = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo",
-                file.getName(), photoBody);
-
-        RequestBody action = RequestBody.create(MediaType.parse("text/plain"), TYPE_1);
-        RetrofitClient.getInstance().uploadPhotoMultipart(action, photoPart).enqueue(new Callback<UsersResponse>() {
+    private void uploadPhoto(String imgBase64) {
+        RetrofitClient.getInstance().uploadPhotoBase64(usersUtil.getEmail(), imgBase64).enqueue(new Callback<UsersResponse>() {
             @Override
             public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-//                if(response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
-                    Toast.makeText(requireContext(), "Photo profile berhasil diupdate", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-//                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-            }
+                if (RetrofitClient.apakahSukses(response)){
+                    assert response.body() != null;
+                    UserModel model = response.body().getData();
+                    usersUtil.setUserPhoto(model.getUserPhoto());
 
-            @Override
-            public void onFailure(Call<UsersResponse> call, Throwable t) {
-                ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
-                LogApp.info(requireContext(), LogTag.RETROFIT_ON_FAILURE, t.getMessage());
-                Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+                    Glide.with(requireContext())
+                            .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
+                            .into(imgPhoto);
 
-    private void uploadBase64(String imgBase64) {
-        RetrofitClient.getInstance().uploadPhotoBase64(TYPE_2, imgBase64).enqueue(new Callback<UsersResponse>() {
-            @Override
-            public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }else {
+                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -256,16 +235,7 @@ public class ProfileFragment extends Fragment {
             choosePhoto();
         });
 
-        btnUpload1.setOnClickListener(v -> {
-            if(uri != null) {
-                File file = FileUtil.getFile(requireActivity(), uri);
-                uploadMultipart(file);
-            }else{
-                Toast.makeText(requireActivity(), "You must choose the image", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnUpload2.setOnClickListener(v -> {
+        btnUpload.setOnClickListener(v -> {
             if(uri != null) {
                 Bitmap bitmap = null;
                 try {
@@ -275,7 +245,7 @@ public class ProfileFragment extends Fragment {
                 }
 
                 String encoded = ImageUtil.bitmapToBase64String(bitmap, 100);
-                uploadBase64(encoded);
+                uploadPhoto(encoded);
             }else{
                 Toast.makeText(requireActivity(), "You must choose the image", Toast.LENGTH_SHORT).show();
             }

@@ -34,11 +34,20 @@ public class UsersUtil {
         return dataShared.getData(KEY.ACC_LEVEL);
     }
 
+    public void setUserPhoto(String newUserPhoto){
+        dataShared.setData(KEY.ACC_PHOTO, newUserPhoto);
+    }
+
+    public String getUserPhoto(){
+        return dataShared.getData(KEY.ACC_PHOTO);
+    }
+
     public void signOut(){
         dataShared.setNullData(KEY.ACC_USERNAME);
         dataShared.setNullData(KEY.ACC_EMAIL);
         dataShared.setNullData(KEY.ACC_FULL_NAME);
         dataShared.setNullData(KEY.ACC_LEVEL);
+        dataShared.setNullData(KEY.ACC_PHOTO);
     }
 
 }

@@ -54,22 +54,11 @@
                     />
 
                 <TextView
-                    android:id="@+id/mpr_upload1_pp"
+                    android:id="@+id/mpr_upload_pp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Upload 1"
-                    android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/primary_color"
-                    />
-
-                <TextView
-                    android:id="@+id/mpr_upload2_pp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Upload 2"
+                    android:text="Upload"
                     android:textSize="@dimen/_12sdp"
                     android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/primary_color"
