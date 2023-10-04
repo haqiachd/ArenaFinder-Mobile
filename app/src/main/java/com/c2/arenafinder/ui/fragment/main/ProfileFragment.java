@@ -1,12 +1,21 @@
 package com.c2.arenafinder.ui.fragment.main;
 
-import android.content.DialogInterface;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import android.provider.MediaStore;
 
+import android.os.FileUtils;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,23 +24,48 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.AccountActivity;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.FileUtil;
+import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;
+
+import java.io.File;
+import java.io.IOException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static final int PICK_IMAGE = 1;
+    private static final int PERMISSION_REQUEST_STORAGE = 2;
+
+    private static final String TYPE_1 = "multipart";
+    private static final String TYPE_2 = "base64";
+
+    private Uri uri;
+
     private String mParam1;
     private String mParam2;
 
     private UsersUtil usersUtil;
     private Button btnLogout;
-    private TextView txtUsername, txtEmail, txtName, txtLevel;
+    private TextView txtUsername, txtEmail, txtName, txtLevel, btnChoose, btnUpload1, btnUpload2;
+    private CircleImageView imgPhoto;
 
     private void initViews(View view){
         btnLogout = view.findViewById(R.id.mpr_btn_logout);
@@ -39,6 +73,10 @@ public class ProfileFragment extends Fragment {
         txtEmail = view.findViewById(R.id.mpr_txt_email);
         txtName = view.findViewById(R.id.mpr_txt_nama);
         txtLevel = view.findViewById(R.id.mpr_txt_level);
+        btnChoose = view.findViewById(R.id.mpr_choose_pp);
+        btnUpload1 = view.findViewById(R.id.mpr_upload1_pp);
+        btnUpload2 = view.findViewById(R.id.mpr_upload2_pp);
+        imgPhoto = view.findViewById(R.id.mpr_img_photo);
     }
 
     public ProfileFragment() {
@@ -81,7 +119,99 @@ public class ProfileFragment extends Fragment {
         txtName.setText(usersUtil.getFullName());
         txtLevel.setText(usersUtil.getLevel());
 
+//        btnChoose.setOnClickListener(this);
+//        btnUpload1.setOnClickListener(this);
+//        btnUpload2.setOnClickListener(this);
+
         onClickGroups();
+    }
+
+    private void choosePhoto() {
+        if (ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    PERMISSION_REQUEST_STORAGE);
+            Toast.makeText(requireActivity(), "permission needed", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(requireActivity(), "permission granted", Toast.LENGTH_SHORT).show();
+            openGallery();
+        }
+    }
+
+    public void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);
+    }
+
+    private void uploadMultipart(File file) {
+        RequestBody photoBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo",
+                file.getName(), photoBody);
+
+        RequestBody action = RequestBody.create(MediaType.parse("text/plain"), TYPE_1);
+        RetrofitClient.getInstance().uploadPhotoMultipart(action, photoPart).enqueue(new Callback<UsersResponse>() {
+            @Override
+            public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                if(response != null) {
+                    Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsersResponse> call, Throwable t) {
+                ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
+                Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void uploadBase64(String imgBase64) {
+        RetrofitClient.getInstance().uploadPhotoBase64(TYPE_2, imgBase64).enqueue(new Callback<UsersResponse>() {
+            @Override
+            public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<UsersResponse> call, Throwable t) {
+                ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
+                Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    openGallery();
+                }
+
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            if(data != null) {
+                uri = data.getData();
+
+                imgPhoto.setImageURI(uri);
+            }
+        }
     }
 
     private void onClickGroups(){
@@ -102,6 +232,36 @@ public class ProfileFragment extends Fragment {
                     },
                     (dialog, which) -> {}
             );
+        });
+
+        btnChoose.setOnClickListener(v -> {
+            LogApp.info(requireContext(), LogTag.ON_CLICK, "Button Choose Diclik");
+            choosePhoto();
+        });
+
+        btnUpload1.setOnClickListener(v -> {
+            if(uri != null) {
+                File file = FileUtil.getFile(requireActivity(), uri);
+                uploadMultipart(file);
+            }else{
+                Toast.makeText(requireActivity(), "You must choose the image", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnUpload2.setOnClickListener(v -> {
+            if(uri != null) {
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                String encoded = ImageUtil.bitmapToBase64String(bitmap, 100);
+                uploadBase64(encoded);
+            }else{
+                Toast.makeText(requireActivity(), "You must choose the image", Toast.LENGTH_SHORT).show();
+            }
         });
 
     }
