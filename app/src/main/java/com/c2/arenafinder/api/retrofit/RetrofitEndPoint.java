@@ -2,14 +2,10 @@ package com.c2.arenafinder.api.retrofit;
 
 import com.c2.arenafinder.data.response.UsersResponse;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
 public interface RetrofitEndPoint {
 
@@ -26,11 +22,14 @@ public interface RetrofitEndPoint {
             @Field("email") String email
     );
 
-    @Multipart
-    @POST("users/update_pp.php")
-    Call<UsersResponse> uploadPhotoMultipart(
-            @Part("action") RequestBody action,
-            @Part MultipartBody.Part photo);
+    @FormUrlEncoded
+    @POST("users/register.php")
+    Call<UsersResponse> register(
+            @Field("username") String username,
+            @Field("email") String email,
+            @Field("full_name") String fullName,
+            @Field("password") String password
+    );
 
     @FormUrlEncoded
     @POST("users/update_pp.php")

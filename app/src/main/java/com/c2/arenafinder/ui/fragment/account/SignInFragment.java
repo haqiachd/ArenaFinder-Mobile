@@ -172,6 +172,7 @@ public class SignInFragment extends Fragment {
                         dataShared.setData(KEY.ACC_EMAIL, data.getEmail());
                         dataShared.setData(KEY.ACC_FULL_NAME, data.getNama());
                         dataShared.setData(KEY.ACC_LEVEL, data.getLevel());
+                        dataShared.setData(KEY.ACC_PHOTO, data.getUserPhoto());
 
                         // open main activity
                         Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();

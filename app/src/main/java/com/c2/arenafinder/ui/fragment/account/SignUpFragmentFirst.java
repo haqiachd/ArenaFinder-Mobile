@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,8 +10,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.material.button.MaterialButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUpFragmentFirst extends Fragment {
 
@@ -19,6 +31,17 @@ public class SignUpFragmentFirst extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private EditText inpUsername, inpEmail, inpName, inpPassword;
+    private MaterialButton btnSignUp;
+
+    private void initViews(View view){
+        inpUsername = view.findViewById(R.id.signup1_inp_username);
+        inpEmail = view.findViewById(R.id.signup1_inp_email);
+        inpName = view.findViewById(R.id.signup1_inp_name);
+        inpPassword = view.findViewById(R.id.signup1_inp_password);
+        btnSignUp = view.findViewById(R.id.signup1_next);
+    }
 
     public SignUpFragmentFirst() {
         // Required empty public constructor
@@ -52,5 +75,52 @@ public class SignUpFragmentFirst extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initViews(view);
+        onClickGroups();
+    }
+
+    private void onClickGroups(){
+
+        btnSignUp.setOnClickListener(v -> {
+            String username = inpUsername.getText().toString(),
+                   email = inpEmail.getText().toString(),
+                   fullName = inpName.getText().toString(),
+                   password = inpPassword.getText().toString();
+
+            RetrofitClient.getInstance().register(username, email, fullName, password)
+                    .enqueue(new Callback<UsersResponse>() {
+                        @Override
+                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                            if(RetrofitClient.apakahSukses(response)){
+                                ArenaFinder.showAlertDialog(
+                                        requireContext(), getString(R.string.dia_title_inform), getString(R.string.dia_msg_inform_signup),
+                                        false,
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(), false);
+                                            }
+                                        },
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(), false);
+                                            }
+                                        }
+                                );
+                            }else {
+                                assert response.body() != null;
+                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UsersResponse> call, Throwable t) {
+                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
+
     }
 }

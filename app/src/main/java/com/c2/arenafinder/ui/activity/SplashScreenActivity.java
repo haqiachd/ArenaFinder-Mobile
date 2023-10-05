@@ -1,26 +1,19 @@
 package com.c2.arenafinder.ui.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.data.local.DataShared;
 import com.c2.arenafinder.util.UsersUtil;
 
 @SuppressLint("CustomSplashScreen")
@@ -67,6 +60,5 @@ public class SplashScreenActivity extends AppCompatActivity {
                 3000L
         );
     }
-
 
 }

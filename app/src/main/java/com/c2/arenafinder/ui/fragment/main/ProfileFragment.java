@@ -114,6 +114,7 @@ public class ProfileFragment extends Fragment {
 
         Glide.with(requireActivity())
                 .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
+                .placeholder(R.drawable.ic_profile)
                 .into(imgPhoto);
 
         onClickGroups();
@@ -155,6 +156,7 @@ public class ProfileFragment extends Fragment {
 
                     Glide.with(requireContext())
                             .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
+                            .placeholder(R.drawable.ic_profile)
                             .into(imgPhoto);
 
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
