@@ -1,54 +1,52 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ForgotPasswordFragment extends Fragment {
+public class GantiSandiFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_EMAIL = "email";
 
-    private EditText inpEmail;
-    private Button btnSend;
+    private String email;
 
-    private String mParam1;
-    private String mParam2;
+    private EditText inpPassword;
+    private MaterialButton btnSend;
 
-    public ForgotPasswordFragment() {
+    public GantiSandiFragment() {
         // Required empty public constructor
     }
 
     private void initViews(View view){
-        inpEmail = view.findViewById(R.id.forgot_email);
-        btnSend = view.findViewById(R.id.forgot_button);
+        inpPassword = view.findViewById(R.id.chgpass_inp_username);
+        btnSend = view.findViewById(R.id.chgpass_next);
     }
 
-    public static ForgotPasswordFragment newInstance(String param1, String param2) {
-        ForgotPasswordFragment fragment = new ForgotPasswordFragment();
+    public static GantiSandiFragment newInstance(String email) {
+        GantiSandiFragment fragment = new GantiSandiFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_EMAIL, email);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,8 +55,7 @@ public class ForgotPasswordFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            email = getArguments().getString(ARG_EMAIL);
         }
     }
 
@@ -66,31 +63,42 @@ public class ForgotPasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forgot_password, container, false);
+        return inflater.inflate(R.layout.fragment_ganti_sandi, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
-
         onClickGroups();
     }
 
-    public void onClickGroups(){
+    private void onClickGroups(){
 
         btnSend.setOnClickListener(v -> {
-            RetrofitClient.getInstance().cekUser(inpEmail.getText().toString())
+
+            RetrofitClient.getInstance().updatePassword(email, inpPassword.getText().toString())
                     .enqueue(new Callback<UsersResponse>() {
                         @Override
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                             if (response.body() != null && RetrofitClient.apakahSukses(response)){
 
-                                FragmentUtil.switchFragmentAccount(
-                                        requireActivity().getSupportFragmentManager(),
-                                        GantiSandiFragment.newInstance(inpEmail.getText().toString()),
-                                        false
-                                );
+                                new AlertDialog.Builder(requireContext())
+                                        .setTitle(R.string.dia_title_inform)
+                                        .setMessage(R.string.dia_msg_password_changed)
+                                        .setCancelable(false)
+                                        .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                                FragmentUtil.switchFragmentAccount(
+                                                        requireActivity().getSupportFragmentManager(), new SignInFragment(), false
+                                                );
+
+                                            }
+                                        })
+                                        .create()
+                                        .show();
 
                             }else {
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -103,6 +111,7 @@ public class ForgotPasswordFragment extends Fragment {
                             Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
         });
 
     }

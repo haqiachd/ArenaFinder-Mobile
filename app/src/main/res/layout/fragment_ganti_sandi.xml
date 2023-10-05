@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.account.GantiSandiFragment"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_20ssp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="true"
+            app:endIconMode="password_toggle"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="@dimen/_2sdp"
+            app:boxStrokeColor="@color/dogerblue"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+            app:boxCornerRadiusTopStart="@dimen/_20sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/chgpass_inp_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukan Password"
+                android:inputType="textPassword"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/dogerblue"
+                android:textSize="@dimen/_11ssp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chgpass_next"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/primary_color"
+            app:cornerRadius="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@id/signup_linear"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>
