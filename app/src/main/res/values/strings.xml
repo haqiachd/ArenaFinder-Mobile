@@ -14,8 +14,10 @@
     <string name="dia_positive_login">Login</string>
     <string name="dia_title_confirm">Konfirmasi</string>
     <string name="dia_title_inform">Informasi</string>
+    <string name="dia_title_warning">Peringatan</string>
     <string name="dia_msg_confirm_logout">Apakah Kamu Ingin Logout?</string>
     <string name="dia_msg_inform_signup">Daftar akun berhasil, Silahkan ke menu Login.</string>
+    <string name="dia_msg_account_is_registered">Akun tersebut sudah terdaftar!</string>
 
     <string name="err_no_internet">Tidak ada koneksi Internet.</string>
     <string name="err_no_data_selected">Tidak ada data yang dipilih.</string>

@@ -48,9 +48,6 @@ public class ProfileFragment extends Fragment {
     private static final int PICK_IMAGE = 1;
     private static final int PERMISSION_REQUEST_STORAGE = 2;
 
-    private static final String TYPE_1 = "multipart";
-    private static final String TYPE_2 = "base64";
-
     private Uri uri;
 
     private String mParam1;
@@ -199,7 +196,6 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -207,7 +203,10 @@ public class ProfileFragment extends Fragment {
             if(data != null) {
                 uri = data.getData();
 
-                imgPhoto.setImageURI(uri);
+                Glide.with(requireContext())
+                        .load(uri)
+                        .placeholder(R.drawable.ic_profile)
+                        .into(imgPhoto);
             }
         }
     }

@@ -1,23 +1,31 @@
 package com.c2.arenafinder.ui.fragment.account;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.google.GoogleUsers;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
@@ -32,8 +40,11 @@ public class SignUpFragmentFirst extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private GoogleUsers google;
+
     private EditText inpUsername, inpEmail, inpName, inpPassword;
     private MaterialButton btnSignUp;
+    private ImageView btnGoogle;
 
     private void initViews(View view){
         inpUsername = view.findViewById(R.id.signup1_inp_username);
@@ -41,6 +52,7 @@ public class SignUpFragmentFirst extends Fragment {
         inpName = view.findViewById(R.id.signup1_inp_name);
         inpPassword = view.findViewById(R.id.signup1_inp_password);
         btnSignUp = view.findViewById(R.id.signup1_next);
+        btnGoogle = view.findViewById(R.id.signup_google);
     }
 
     public SignUpFragmentFirst() {
@@ -77,6 +89,49 @@ public class SignUpFragmentFirst extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
         onClickGroups();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        google.onActivityResult(requestCode, resultCode, data);
+
+        if(google.isAccountSelected()){
+
+            GoogleSignInAccount account = google.getUserData();
+
+            RetrofitClient.getInstance().cekUser(account.getEmail()).enqueue(new Callback<UsersResponse>() {
+                @Override
+                public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                    if (response.body() != null && RetrofitClient.apakahSukses(response)){
+                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                        new AlertDialog.Builder(requireContext())
+                                .setTitle(R.string.dia_title_warning)
+                                .setMessage(R.string.dia_msg_account_is_registered)
+                                .setCancelable(false)
+                                .setPositiveButton(R.string.dia_positive_ok, (dialog, which) -> {
+                                    dialog.dismiss();
+                                })
+                                .create().show();
+                    }else {
+                        FragmentUtil.switchFragmentAccount(
+                                requireActivity().getSupportFragmentManager(),
+                                SignUpGoogle.newInstance(google.getUserData().getEmail(), google.getUserData().getDisplayName()),
+                                false
+                        );
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UsersResponse> call, @NonNull Throwable t) {
+                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
+                    Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        }
     }
 
     private void onClickGroups(){
@@ -120,6 +175,22 @@ public class SignUpFragmentFirst extends Fragment {
                             Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+        });
+
+        btnGoogle.setOnClickListener(v -> {
+            LogApp.info(requireContext(), v, LogTag.ON_CLICK, "Button google di click");
+
+            if(ArenaFinder.isInternetConnected(requireContext())){
+                if(google == null){
+                    google = new GoogleUsers(requireActivity());
+                }else {
+                    google.resetLastSignIn();
+                }
+                startActivityForResult(google.getIntent(), GoogleUsers.REQUEST_CODE);
+            }else{
+                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
+                Toast.makeText(requireContext(), getString(R.string.err_no_internet), Toast.LENGTH_SHORT).show();
+            }
         });
 
     }

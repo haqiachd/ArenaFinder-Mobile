@@ -8,8 +8,10 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 
 import com.c2.arenafinder.R;
@@ -49,6 +51,7 @@ public class ArenaFinder {
         context.startActivity(intent);
         LogApp.info(context, LogTag.APPLICATION, "Aplikasi direstart");
     }
+
 
     public static void showAlertDialog(
             Context context, String title, String message, boolean cancelable,
