@@ -39,7 +39,7 @@ public class GantiSandiFragment extends Fragment {
     }
 
     private void initViews(View view){
-        inpPassword = view.findViewById(R.id.chgpass_inp_username);
+        inpPassword = view.findViewById(R.id.chgpass_inp_password);
         btnSend = view.findViewById(R.id.chgpass_next);
     }
 

@@ -31,10 +31,37 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/chgpass_inp_username"
+                android:id="@+id/chgpass_inp_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan Password"
+                android:inputType="textPassword"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/dogerblue"
+                android:textSize="@dimen/_11ssp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="true"
+            app:endIconMode="password_toggle"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="@dimen/_2sdp"
+            app:boxStrokeColor="@color/dogerblue"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+            app:boxCornerRadiusTopStart="@dimen/_20sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/chgpass_inp_konf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Konfirmasi Password (nanti dulu)"
                 android:inputType="textPassword"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/dogerblue"
@@ -48,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_30sdp"
-            android:text="Sign Up"
+            android:text="Ganti Sandi"
             android:textAllCaps="false"
             android:backgroundTint="@color/primary_color"
             app:cornerRadius="@dimen/_5sdp"

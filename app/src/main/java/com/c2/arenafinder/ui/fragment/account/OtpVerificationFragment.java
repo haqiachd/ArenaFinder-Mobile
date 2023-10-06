@@ -131,7 +131,7 @@ public class OtpVerificationFragment extends Fragment {
                                     .setTitle(R.string.dia_title_inform)
                                     .setMessage(R.string.dia_msg_otp_forgot_suc)
                                     .setCancelable(false)
-                                    .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
+                                    .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             FragmentUtil.switchFragmentAccount(

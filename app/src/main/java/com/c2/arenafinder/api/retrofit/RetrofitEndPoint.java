@@ -62,6 +62,14 @@ public interface RetrofitEndPoint {
             @Field("photo") String photo);
 
     @FormUrlEncoded
+    @POST("users/update_acc.php")
+    Call<UsersResponse> updateAccount(
+            @Field("email") String email,
+            @Field("username") String username,
+            @Field("full_name") String fullName
+    );
+
+    @FormUrlEncoded
     @POST("email/mail.php")
     Call<VerifyResponse> sendEmail(
             @Field("email") String email,

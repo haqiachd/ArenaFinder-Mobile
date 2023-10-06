@@ -1,9 +1,11 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -80,43 +82,54 @@ public class ForgotPasswordFragment extends Fragment {
     public void onClickGroups(){
 
         btnSend.setOnClickListener(v -> {
-            RetrofitClient.getInstance().cekUser(inpEmail.getText().toString())
-                    .enqueue(new Callback<UsersResponse>() {
-                        @Override
-                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                            if (response.body() != null && RetrofitClient.apakahSukses(response)){
 
-                                RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), "forgotpass")
-                                                .enqueue(new Callback<VerifyResponse>() {
-                                                    @Override
-                                                    public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
-                                                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
-                                                            FragmentUtil.switchFragmentAccount(
-                                                                    requireActivity().getSupportFragmentManager(),
-                                                                    OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp(), "forgotpass"),
-                                                                    false);
-                                                        }else {
-                                                            Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
+        RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), "forgotpass")
+            .enqueue(new Callback<VerifyResponse>() {
+                @Override
+                public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                    if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
+                        new AlertDialog.Builder(requireContext())
+                                .setTitle(R.string.dia_title_inform)
+                                .setMessage(R.string.dia_msg_inform_forgot)
+                                .setPositiveButton(R.string.dia_positive_verify, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        FragmentUtil.switchFragmentAccount(
+                                                requireActivity().getSupportFragmentManager(),
+                                                OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp(), "forgotpass"),
+                                                false);
+                                    }
+                                })
+                                .create().show();
+                    }else {
+                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-                                                    @Override
-                                                    public void onFailure(Call<VerifyResponse> call, Throwable t) {
-                                                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
+                @Override
+                public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                    Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
-                            }else {
-                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<UsersResponse> call, Throwable t) {
-                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+//            RetrofitClient.getInstance().cekUser(inpEmail.getText().toString())
+//                    .enqueue(new Callback<UsersResponse>() {
+//                        @Override
+//                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+//                            if (response.body() != null && RetrofitClient.apakahSukses(response)){
+//
+//
+//                            }else {
+//                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<UsersResponse> call, Throwable t) {
+//                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+//                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
         });
 
     }

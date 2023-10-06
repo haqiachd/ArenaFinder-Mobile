@@ -1,4 +1,4 @@
-package com.c2.arenafinder.ui.fragment.main;
+package com.c2.arenafinder.ui.fragment.submain;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,25 +12,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import android.provider.MediaStore;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.local.DataShared;
+import com.c2.arenafinder.data.local.DataShared.KEY;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
-import com.c2.arenafinder.ui.activity.AccountActivity;
-import com.c2.arenafinder.ui.activity.MainActivity;
-import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;
@@ -42,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileFragment extends Fragment {
+public class EditAccountFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -50,34 +50,31 @@ public class ProfileFragment extends Fragment {
     private static final int PICK_IMAGE = 1;
     private static final int PERMISSION_REQUEST_STORAGE = 2;
 
-    private Uri uri;
-
     private String mParam1;
     private String mParam2;
-
     private UsersUtil usersUtil;
-    private Button btnLogout;
-    private TextView txtUsername, txtEmail, txtName, txtLevel, btnChoose, btnUpload, btnEdit;
+    private DataShared dataShared;
+    private Uri uri;
+
+    private Button btnSimpan;
+    private TextView btnChoose;
+    private EditText inpUsername, inpNama;
     private CircleImageView imgPhoto;
 
-    private void initViews(View view){
-        btnLogout = view.findViewById(R.id.mpr_btn_logout);
-        txtUsername = view.findViewById(R.id.mpr_txt_username);
-        txtEmail = view.findViewById(R.id.mpr_txt_email);
-        txtName = view.findViewById(R.id.mpr_txt_nama);
-        txtLevel = view.findViewById(R.id.mpr_txt_level);
-        btnChoose = view.findViewById(R.id.mpr_choose_pp);
-        btnUpload = view.findViewById(R.id.mpr_upload_pp);
-        btnEdit = view.findViewById(R.id.mpr_test);
-        imgPhoto = view.findViewById(R.id.mpr_img_photo);
-    }
-
-    public ProfileFragment() {
+    public EditAccountFragment() {
         // Required empty public constructor
     }
 
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    private void initViews(View view){
+        btnSimpan = view.findViewById(R.id.edacc_simpan);
+        inpUsername = view.findViewById(R.id.edacc_inp_username);
+        inpNama = view.findViewById(R.id.edacc_inp_name);
+        imgPhoto = view.findViewById(R.id.edacc_photo);
+        btnChoose = view.findViewById(R.id.edacc_choose_pp);
+    }
+
+    public static EditAccountFragment newInstance(String param1, String param2) {
+        EditAccountFragment fragment = new EditAccountFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -98,41 +95,25 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_edit_account, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initViews(view);
         usersUtil = new UsersUtil(requireContext());
-
-        txtUsername.setText(usersUtil.getUsername());
-        txtEmail.setText(usersUtil.getEmail());
-        txtName.setText(usersUtil.getFullName());
-        txtLevel.setText(usersUtil.getLevel());
+        dataShared = new DataShared(requireContext());
+        initViews(view);
 
         Glide.with(requireActivity())
                 .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
                 .placeholder(R.drawable.ic_profile)
                 .into(imgPhoto);
+
+        inpUsername.setText(usersUtil.getUsername());
+        inpNama.setText(usersUtil.getFullName());
 
         onClickGroups();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        txtUsername.setText(usersUtil.getUsername());
-        txtEmail.setText(usersUtil.getEmail());
-        txtName.setText(usersUtil.getFullName());
-        txtLevel.setText(usersUtil.getLevel());
-
-        Glide.with(requireActivity())
-                .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
-                .placeholder(R.drawable.ic_profile)
-                .into(imgPhoto);
     }
 
     private void choosePhoto() {
@@ -148,7 +129,7 @@ public class ProfileFragment extends Fragment {
 //            Toast.makeText(requireActivity(), "permission needed", Toast.LENGTH_SHORT).show();
 //        }else{
 //            Toast.makeText(requireActivity(), "permission granted", Toast.LENGTH_SHORT).show();
-            openGallery();
+        openGallery();
 //        }
 //        checkAndRequestStoragePermission();
     }
@@ -187,6 +168,38 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void updateAccount(){
+
+        RetrofitClient.getInstance().updateAccount(
+                usersUtil.getEmail(), inpUsername.getText().toString(), inpNama.getText().toString()
+        ).enqueue(new Callback<UsersResponse>() {
+            @Override
+            public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+
+                if (response.body() != null && RetrofitClient.apakahSukses(response)){
+                    // update data di preference
+                    UserModel model = response.body().getData();
+                    dataShared.setData(KEY.ACC_USERNAME, model.getUsername());
+                    dataShared.setData(KEY.ACC_FULL_NAME, model.getNama());
+                    dataShared.setData(KEY.ACC_PHOTO, model.getUserPhoto());
+
+                    Toast.makeText(requireContext(), R.string.suc_account_edited, Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UsersResponse> call, Throwable t) {
+                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
+                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 //    @Override
@@ -231,30 +244,7 @@ public class ProfileFragment extends Fragment {
 
     private void onClickGroups(){
 
-        btnLogout.setOnClickListener(v -> {
-            LogApp.info(requireContext(), LogTag.ON_CLICK, "Logout Account");
-            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-            // konfirmasi logout
-            ArenaFinder.showAlertDialog(
-                    requireContext(), getString(R.string.dia_title_confirm), getString(R.string.dia_msg_confirm_logout),
-                    false,
-                    (dialog, which) -> {
-                        usersUtil.signOut();
-                        if (!usersUtil.isSignIn()) {
-                            Toast.makeText(requireContext(), "Logout Sukses", Toast.LENGTH_SHORT).show();
-                            ArenaFinder.restartApplication(requireContext(), AccountActivity.class);
-                        }
-                    },
-                    (dialog, which) -> {}
-            );
-        });
-
-        btnChoose.setOnClickListener(v -> {
-            LogApp.info(requireContext(), LogTag.ON_CLICK, "Button Choose Diclik");
-            choosePhoto();
-        });
-
-        btnUpload.setOnClickListener(v -> {
+        btnSimpan.setOnClickListener(v -> {
             if(uri != null) {
                 Bitmap bitmap = null;
                 try {
@@ -265,20 +255,16 @@ public class ProfileFragment extends Fragment {
 
                 String encoded = ImageUtil.bitmapToBase64String(bitmap, 100);
                 uploadPhoto(encoded);
+                updateAccount();
             }else{
                 Toast.makeText(requireActivity(), "You must choose the image", Toast.LENGTH_SHORT).show();
             }
         });
 
-        btnEdit.setOnClickListener(v -> {
-
-            startActivity(
-                    new Intent(requireContext(), SubMainActivity.class)
-                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.EDIT_ACCOUNT)
-            );
-
+        btnChoose.setOnClickListener(v -> {
+            LogApp.info(requireContext(), LogTag.ON_CLICK, "Button Choose Diclik");
+            choosePhoto();
         });
-
 
     }
 }

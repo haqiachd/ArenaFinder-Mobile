@@ -35,4 +35,10 @@ public class FragmentUtil {
         switchFragment(fragmentManager, fragment, R.id.main_frame, backStack);
     }
 
+    public static void switchFragmentSubMain(
+            @NonNull FragmentManager fragmentManager, Fragment fragment, boolean backStack
+    ){
+        switchFragment(fragmentManager, fragment, R.id.sub_frame_layout, backStack);
+    }
+
 }

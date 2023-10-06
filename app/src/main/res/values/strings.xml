@@ -18,13 +18,15 @@
     <string name="dia_title_warning">Peringatan</string>
     <string name="dia_msg_confirm_logout">Apakah Kamu Ingin Logout?</string>
     <string name="dia_msg_otp_signup_suc">OTP yang kamu masukan valid, Silahkan login dengan akun kamu.</string>
-    <string name="dia_msg_otp_forgot_suc">OTP yang kamu masukan valid, Silahkan login dengan password baru kamu.</string>
+    <string name="dia_msg_otp_forgot_suc">OTP yang kamu masukan valid, Silahkan mengganti password kamu.</string>
     <string name="dia_msg_inform_signup">Daftar akun berhasil, Kamu akan menerima kode OTP untuk verifikasi akun kamu.</string>
     <string name="dia_msg_account_is_registered">Akun tersebut sudah terdaftar!</string>
     <string name="dia_msg_password_changed">Password berhasil diubah, Silahkan login dengan password yang baru.</string>
+    <string name="dia_msg_inform_forgot">Kami telah mengirimkan kode OTP ke email kamu untuk melakukan verifikasi.</string>
 
     <string name="msg_otp_input">Masukan kode OTP.</string>
     <string name="suc_otp_valid">Kode OTP valid</string>
+    <string name="suc_account_edited">Akun berhasil diedit</string>
     <string name="err_no_internet">Tidak ada koneksi Internet.</string>
     <string name="err_no_data_selected">Tidak ada data yang dipilih.</string>
     <string name="err_google_auth_connection">Tidak dapat terhubung dengan Google Auth.</string>
