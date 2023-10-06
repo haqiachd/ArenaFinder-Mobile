@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.util.ArenaFinder;
@@ -94,7 +93,7 @@ public class ForgotPasswordFragment extends Fragment {
                                                         if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
                                                             FragmentUtil.switchFragmentAccount(
                                                                     requireActivity().getSupportFragmentManager(),
-                                                                    OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp()),
+                                                                    OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp(), "forgotpass"),
                                                                     false);
                                                         }else {
                                                             Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

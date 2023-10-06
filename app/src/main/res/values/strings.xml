@@ -11,12 +11,15 @@
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_login">LOGIN</string>
+    <string name="dia_positive_verify">VERIFIKASI</string>
     <string name="dia_negative_cancel">BATAL</string>
     <string name="dia_title_confirm">Konfirmasi</string>
     <string name="dia_title_inform">Informasi</string>
     <string name="dia_title_warning">Peringatan</string>
     <string name="dia_msg_confirm_logout">Apakah Kamu Ingin Logout?</string>
-    <string name="dia_msg_inform_signup">Daftar akun berhasil, Silahkan ke menu Login.</string>
+    <string name="dia_msg_otp_signup_suc">OTP yang kamu masukan valid, Silahkan login dengan akun kamu.</string>
+    <string name="dia_msg_otp_forgot_suc">OTP yang kamu masukan valid, Silahkan login dengan password baru kamu.</string>
+    <string name="dia_msg_inform_signup">Daftar akun berhasil, Kamu akan menerima kode OTP untuk verifikasi akun kamu.</string>
     <string name="dia_msg_account_is_registered">Akun tersebut sudah terdaftar!</string>
     <string name="dia_msg_password_changed">Password berhasil diubah, Silahkan login dengan password yang baru.</string>
 

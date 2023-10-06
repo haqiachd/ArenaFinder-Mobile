@@ -22,6 +22,7 @@ import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -147,22 +148,45 @@ public class SignUpFragmentFirst extends Fragment {
                         @Override
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                             if(RetrofitClient.apakahSukses(response)){
-                                ArenaFinder.showAlertDialog(
-                                        requireContext(), getString(R.string.dia_title_inform), getString(R.string.dia_msg_inform_signup),
-                                        false,
-                                        new DialogInterface.OnClickListener() {
+
+                                RetrofitClient.getInstance().sendEmail(email, "signup")
+                                        .enqueue(new Callback<VerifyResponse>() {
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(), false);
+                                            public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                                                if(response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
+
+                                                    new AlertDialog.Builder(requireContext())
+                                                            .setTitle(R.string.dia_title_inform)
+                                                            .setMessage(R.string.dia_msg_inform_signup)
+                                                            .setCancelable(false)
+                                                            .setPositiveButton(R.string.dia_positive_verify, new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                                    FragmentUtil.switchFragmentAccount(
+                                                                            requireActivity().getSupportFragmentManager(),
+                                                                            OtpVerificationFragment.newInstance(email, response.body().getData().getOtp(), "signup"),
+                                                                            false
+                                                                    );
+
+                                                                }
+                                                            })
+                                                            .create()
+                                                            .show();
+
+                                                }else {
+                                                    assert response.body() != null;
+                                                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
                                             }
-                                        },
-                                        new DialogInterface.OnClickListener() {
+
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(), false);
+                                            public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
-                                        }
-                                );
+                                        });
+
                             }else {
                                 assert response.body() != null;
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

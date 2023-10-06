@@ -1,9 +1,11 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -24,9 +26,11 @@ public class OtpVerificationFragment extends Fragment {
 
     private static final String ARG_EMAIL = "email";
     private static final String ARG_OTP = "otp";
+    private static final String ARG_TYPE = "type";
 
     private String email;
     private String otp;
+    private String type;
 
     private MaterialButton btnSend;
     private TextView helperText;
@@ -42,11 +46,12 @@ public class OtpVerificationFragment extends Fragment {
         helperText = view.findViewById(R.id.otp_helper);
     }
 
-    public static OtpVerificationFragment newInstance(String email, String otp) {
+    public static OtpVerificationFragment newInstance(String email, String otp, String type) {
         OtpVerificationFragment fragment = new OtpVerificationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_EMAIL, email);
         args.putString(ARG_OTP, otp);
+        args.putString(ARG_TYPE, type);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,6 +62,7 @@ public class OtpVerificationFragment extends Fragment {
         if (getArguments() != null) {
             email = getArguments().getString(ARG_EMAIL);
             otp = getArguments().getString(ARG_OTP);
+            type = getArguments().getString(ARG_TYPE);
         }
     }
 
@@ -100,11 +106,45 @@ public class OtpVerificationFragment extends Fragment {
                     helperText.setText(R.string.suc_otp_valid);
                     inpOtp.showSuccess();
 
-                    FragmentUtil.switchFragmentAccount(
-                            requireActivity().getSupportFragmentManager(),
-                            GantiSandiFragment.newInstance(email),
-                            false
-                    );
+                    switch (type){
+                        case "signup" : {
+                            new AlertDialog.Builder(requireContext())
+                                    .setTitle(R.string.dia_title_inform)
+                                    .setMessage(R.string.dia_msg_otp_signup_suc)
+                                    .setCancelable(false)
+                                    .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FragmentUtil.switchFragmentAccount(
+                                                    requireActivity().getSupportFragmentManager(),
+                                                    new SignInFragment(),
+                                                    false
+                                            );
+                                        }
+                                    })
+                                    .create().show();
+
+                            break;
+                        }
+                        case "forgotpass" : {
+                            new AlertDialog.Builder(requireContext())
+                                    .setTitle(R.string.dia_title_inform)
+                                    .setMessage(R.string.dia_msg_otp_forgot_suc)
+                                    .setCancelable(false)
+                                    .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FragmentUtil.switchFragmentAccount(
+                                                    requireActivity().getSupportFragmentManager(),
+                                                    GantiSandiFragment.newInstance(email),
+                                                    false
+                                            );
+                                        }
+                                    })
+                                    .create().show();
+                            break;
+                        }
+                    }
 
                 }else{
                     helperText.setText(R.string.err_otp_invalid);
