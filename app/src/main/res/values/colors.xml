@@ -19,4 +19,7 @@
     <color name="granite_grey">#6B6666</color>
     <color name="azure">#007FFF</color>
     <color name="dogerblue">#1e90ff</color>
+    <color name="dimgray">#696969</color>
+    <color name="jade_green">#00A86B</color>
+    <color name="butterfly_blue">#30A2FF</color>
 </resources>

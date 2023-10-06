@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.account.OtpVerificationFragment"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+        <in.aabhasjindal.otptextview.OtpTextView
+            android:id="@+id/otp_inp_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_150sdp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/dimgray"
+            android:textColor="@color/black"
+            android:importantForAutofill="no"
+            app:layout_constraintTop_toTopOf="parent"
+            app:width="@dimen/_35sdp"
+            app:height="@dimen/_35sdp"
+            app:otp_text_size="@dimen/_24ssp"
+            app:bar_active_color="@color/azure"
+            app:bar_inactive_color="@color/dimgray"
+            app:bar_error_color="@color/vivid_orange"
+            app:bar_success_color="@color/jade_green"
+            app:bar_enabled="true"
+            app:bar_height="3dp"
+            app:length="6"
+            app:otp=""
+            />
+
+        <TextView
+            android:id="@+id/otp_helper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:text="helper text"
+            android:textSize="@dimen/_10ssp"
+            android:fontFamily="@font/poppins_semibold"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/otp_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:backgroundTint="#02406D"
+            android:text="Verifikasi OTP"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@id/acc_lin_input"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>

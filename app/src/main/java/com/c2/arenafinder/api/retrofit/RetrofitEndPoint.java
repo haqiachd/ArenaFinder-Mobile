@@ -1,6 +1,7 @@
 package com.c2.arenafinder.api.retrofit;
 
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.data.response.VerifyResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -59,5 +60,12 @@ public interface RetrofitEndPoint {
     Call<UsersResponse> uploadPhotoBase64(
             @Field("email") String email,
             @Field("photo") String photo);
+
+    @FormUrlEncoded
+    @POST("email/mail.php")
+    Call<VerifyResponse> sendEmail(
+            @Field("email") String email,
+            @Field("type") String type
+    );
 
 }

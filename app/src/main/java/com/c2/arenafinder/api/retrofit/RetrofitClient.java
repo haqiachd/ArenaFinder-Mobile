@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.data.response.VerifyResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,9 +20,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RetrofitClient {
 
-//    public static final String BASE_URL = "http://192.168.155.152/arenafinder-web/"; // local
+    public static final String BASE_URL = "http://192.168.155.152/arenafinder-web/"; // local
 
-    public static final String BASE_URL = "http://172.16.106.67/arenafinder-web/"; // wifi
+//    public static final String BASE_URL = "http://172.16.106.67/arenafinder-web/"; // wifi
 
     public static final String CONTROLLERS = BASE_URL + "controllers/mobile/";
 

@@ -17,6 +17,7 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 
@@ -86,11 +87,25 @@ public class ForgotPasswordFragment extends Fragment {
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                             if (response.body() != null && RetrofitClient.apakahSukses(response)){
 
-                                FragmentUtil.switchFragmentAccount(
-                                        requireActivity().getSupportFragmentManager(),
-                                        GantiSandiFragment.newInstance(inpEmail.getText().toString()),
-                                        false
-                                );
+                                RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), "forgotpass")
+                                                .enqueue(new Callback<VerifyResponse>() {
+                                                    @Override
+                                                    public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                                                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
+                                                            FragmentUtil.switchFragmentAccount(
+                                                                    requireActivity().getSupportFragmentManager(),
+                                                                    OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp()),
+                                                                    false);
+                                                        }else {
+                                                            Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                                                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
 
                             }else {
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
