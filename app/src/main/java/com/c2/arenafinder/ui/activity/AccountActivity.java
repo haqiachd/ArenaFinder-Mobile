@@ -1,10 +1,14 @@
 package com.c2.arenafinder.ui.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.account.SignInFragment;
 import com.c2.arenafinder.ui.fragment.account.SignUpFragmentFirst;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 
 public class AccountActivity extends AppCompatActivity {
@@ -28,4 +32,5 @@ public class AccountActivity extends AppCompatActivity {
             }
         }
     }
+
 }

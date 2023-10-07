@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
@@ -52,6 +54,17 @@ public class ArenaFinder {
         LogApp.info(context, LogTag.APPLICATION, "Aplikasi direstart");
     }
 
+    public static void closeApplication(@NonNull AppCompatActivity app){
+        app.finishAffinity();
+        System.exit(0);
+        LogApp.info(app, LogTag.APPLICATION, "Aplikasi ditutup");
+    }
+
+    public static void closeApplication(@NonNull FragmentActivity app){
+        app.finishAffinity();
+        System.exit(0);
+        LogApp.info(app, LogTag.APPLICATION, "Aplikasi ditutup");
+    }
 
     public static void showAlertDialog(
             Context context, String title, String message, boolean cancelable,

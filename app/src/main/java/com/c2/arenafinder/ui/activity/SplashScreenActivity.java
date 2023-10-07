@@ -50,6 +50,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 // Jika pengguna sudah masuk, buka MainActivity
                 LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
             } else {
                 // Jika pengguna belum masuk, buka WelcomeActivity
                 LogApp.info(this, LogTag.LIFEFCYLE, "Membuka WelcomeActivity");
@@ -57,6 +58,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         new Intent(this, EmptyActivity.class)
                                 .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
                 );
+                finish();
             }
 
             // Selesai, tutup SplashScreen saat ini

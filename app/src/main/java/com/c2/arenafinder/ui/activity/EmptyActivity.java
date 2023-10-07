@@ -1,12 +1,12 @@
 package com.c2.arenafinder.ui.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.empty.WelcomeFragment;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 
 public class EmptyActivity extends AppCompatActivity {
@@ -29,5 +29,22 @@ public class EmptyActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(getIntent().getStringExtra(FRAGMENT).equals(WELCOME)){
+            ArenaFinder.playVibrator(this, ArenaFinder.VIBRATOR_SHORT);
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.dia_title_inform)
+                    .setMessage(R.string.dia_msg_confirm_close)
+                    .setPositiveButton(R.string.dia_positive_ok, (dialog, which) -> ArenaFinder.closeApplication(EmptyActivity.this))
+                    .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> dialog.dismiss())
+                    .create().show();
+        }else{
+            super.onBackPressed();
+        }
+
     }
 }
