@@ -4,14 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/transparent"
     >
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cus_btn_acc_card"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_button_account"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_2sdp"
         android:background="@drawable/sel_button_account"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardMaxElevation="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/btn_acc_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,9 +30,10 @@
             >
 
             <ProgressBar
-                android:id="@+id/cus_btn_acc_prog"
+                android:id="@+id/cus_btn_acc_progress"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_6sdp"
                 android:indeterminate="false"
                 android:indeterminateTint="@color/white"
                 android:indeterminateTintMode="src_atop"
@@ -39,27 +44,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 
-            <Button
-                android:id="@+id/cus_btn_acc_butt"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cus_btn_acc_txt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_btn_acc"
-                android:fontFamily="@font/kanit_semibold"
+                android:layout_marginStart="@dimen/btn_acc_margin"
+                android:layout_marginEnd="@dimen/btn_acc_margin"
+                android:fontFamily="@font/kanit_regular"
                 android:text="@string/btn_custom_account"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_10ssp"
-                android:textAllCaps="false"
+                android:textSize="@dimen/_11ssp"
                 android:gravity="center"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

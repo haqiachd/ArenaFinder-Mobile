@@ -3,8 +3,8 @@
 
     <dimen name="acc_stroke_radius_input">@dimen/_8sdp</dimen>
 
-    <dimen name="width_button_account">@dimen/_210sdp</dimen>
-    <dimen name="height_button_account">@dimen/_36sdp</dimen>
-    <dimen name="textsize_button_account">@dimen/_15ssp</dimen>
+    <dimen name="btn_acc_width">@dimen/_210sdp</dimen>
+    <dimen name="btn_acc_height">@dimen/_36sdp</dimen>
+    <dimen name="btn_acc_corner">@dimen/_5sdp</dimen>
 
 </resources>

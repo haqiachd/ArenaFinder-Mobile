@@ -3,14 +3,21 @@
 
     <item android:state_enabled="false">
         <shape>
-            <corners android:radius="@dimen/_5sdp"/>
+            <corners android:radius="@dimen/btn_acc_corner"/>
             <solid android:color="@color/grey"/>
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:radius="@dimen/btn_acc_corner"/>
+            <solid android:color="#E602406D"/>
         </shape>
     </item>
 
     <item>
         <shape>
-            <corners android:radius="@dimen/_5sdp"/>
+            <corners android:radius="@dimen/btn_acc_corner"/>
             <solid android:color="@color/primary_color"/>
         </shape>
     </item>

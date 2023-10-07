@@ -134,9 +134,11 @@
 
             <include
                 android:id="@+id/btn_singin_test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
                 layout="@layout/custom_button_account"
                 app:layout_constraintTop_toBottomOf="@id/signin_btn_signin"
                 app:layout_constraintStart_toStartOf="parent"

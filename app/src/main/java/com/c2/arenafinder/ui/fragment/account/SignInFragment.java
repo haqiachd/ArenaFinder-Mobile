@@ -65,7 +65,7 @@ public class SignInFragment extends Fragment {
         txtLupaSandi = view.findViewById(R.id.signin_lupa_sandi);
         inpEmail = view.findViewById(R.id.signin_inp_email);
         inpPassword = view.findViewById(R.id.signin_inp_pass);
-        btnCustom = new ButtonAccountCustom(requireContext(), view, "Test aja bang");
+        btnCustom = new ButtonAccountCustom(requireContext(), view, "Masuk");
     }
 
     public SignInFragment() {}
@@ -102,8 +102,6 @@ public class SignInFragment extends Fragment {
         dataShared = new DataShared(requireContext());
 
         onClickGroups();
-
-        btnCustom.setStatus(ButtonAccountCustom.DISABLE);
     }
 
     @Override
@@ -151,7 +149,6 @@ public class SignInFragment extends Fragment {
     }
 
     private void onClickGroups(){
-
 
         txtLupaSandi.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
@@ -218,16 +215,15 @@ public class SignInFragment extends Fragment {
             FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFragmentFirst(), true);
         });
 
-        btnCustom.setOnClickListener(v -> {
+        btnCustom.getButton().setOnClickListener(v -> {
             btnCustom.setProgress(ButtonAccountCustom.RUN_PROGRESS);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(requireContext(), "Halo bang", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "cuk", Toast.LENGTH_SHORT).show();
                     btnCustom.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                 }
-            }, 2000L);
-
+            }, 3000L);
         });
 
     }
