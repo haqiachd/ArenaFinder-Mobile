@@ -1,28 +1,30 @@
+<br>
 <p align="center">
- <img src="images/logo-c2.png" alt="Logo Kelompok C2" width="195" height="155"></a>
+ <a href="https://www.youtube.com/watch?v=t9VWICGOD90&ab_channel=HITSRecords"><img src="images/logo-c2.png" alt="Logo Kelompok C2" width="195" height="155"></a>
 </p>
 
 <h3 align="center">ArenaFinder Mobile Application</h3>
 <p align = "center">:basketball: Aplikasi informasi pencarian tempat olahraga di daerah nganjuk. :basketball:</p>
 
+<!-- Project Shields -->
 <span align="center">
 
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Contributors][contributors-shield]][contributors-url]
-[![Last Commit][commit-shield]][commit-url]
-<!-- [![Issues][issues-shield]][issues-url] -->
+  [![Forks][forks-shield]][forks-url]
+  [![Stargazers][stars-shield]][stars-url]
+  [![Contributors][contributors-shield]][contributors-url]
+  [![Last Commit][commit-shield]][commit-url]
+  <!-- [![Issues][issues-shield]][issues-url] -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-[contributors-url]: https://github.com/haqiachd/ArenaFinder-Mobile/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-[forks-url]: https://github.com/haqiachd/ArenaFinder-Mobile/network/members
-[stars-shield]: https://img.shields.io/github/stars/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-[stars-url]: https://github.com/haqiachd/ArenaFinder-Mobile/stargazers
-[commit-shield]: https://img.shields.io/github/last-commit/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-[commit-url]: https://github.com/haqiachd/ArenaFinder-Mobile/commits
-[issues-shield]: https://img.shields.io/github/issues/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-[issues-url]: https://github.com/haqiachd/ArenaFinder-Mobile/issues
+  [contributors-shield]: https://img.shields.io/github/contributors/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+  [contributors-url]: https://github.com/haqiachd/ArenaFinder-Mobile/graphs/contributors
+  [forks-shield]: https://img.shields.io/github/forks/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+  [forks-url]: https://github.com/haqiachd/ArenaFinder-Mobile/network/members
+  [stars-shield]: https://img.shields.io/github/stars/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+  [stars-url]: https://github.com/haqiachd/ArenaFinder-Mobile/stargazers
+  [commit-shield]: https://img.shields.io/github/last-commit/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+  [commit-url]: https://github.com/haqiachd/ArenaFinder-Mobile/commits
+  [issues-shield]: https://img.shields.io/github/issues/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+  [issues-url]: https://github.com/haqiachd/ArenaFinder-Mobile/issues
 
 </span>
 
@@ -70,7 +72,6 @@
 ## Deskripsi Aplikasi <a name = "desc_project"></a>
 Aplikasi ini memberikan informasi lengkap tentang tempat-tempat olahraga yang tersedia, termasuk lokasi, fasilitas yang ditawarkan, jam operasional, dan ulasan dari pengguna lain. Anda dapat dengan mudah mencari tempat yang sesuai dengan preferensi Anda, mengakses informasi kontak, dan bahkan merencanakan kunjungan Anda.
 
-
 ## Screenshot Tampilan<a name = "ss_app"></a>
 
 #### Tampilan Welcome, SignIn SignUp
@@ -92,7 +93,4 @@ ini fitur 2
 - Widyasari Raisya Salsabila &nbsp; [[Github]](https://github.com/WidyaRaisyaSal17)
 
 ## Kontak Kami
-Jika Anda memiliki pertanyaan atau memerlukan bantuan, silakan hubungi kami melalui email di [kontak@domainanda.com](mailto:arenafinder.app@gmail.com).
-
-
-
+Jika Anda memiliki pertanyaan atau memerlukan bantuan, silakan hubungi kami melalui email di [arenafinder.app@gmail.com](mailto:arenafinder.app@gmail.com).
