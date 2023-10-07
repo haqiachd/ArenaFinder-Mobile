@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.data.model.UserModel;
+import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -55,6 +56,7 @@ public class SignInFragment extends Fragment {
     private ImageView btnGoogle;
     private TextView txtLupaSandi, btnSignUp;
     private TextInputEditText inpEmail, inpPassword;
+    private ButtonAccountCustom btnCustom;
 
     private void initViews(View view){
         btnSignIn = view.findViewById(R.id.signin_btn_signin);
@@ -63,6 +65,7 @@ public class SignInFragment extends Fragment {
         txtLupaSandi = view.findViewById(R.id.signin_lupa_sandi);
         inpEmail = view.findViewById(R.id.signin_inp_email);
         inpPassword = view.findViewById(R.id.signin_inp_pass);
+        btnCustom = new ButtonAccountCustom(requireContext(), view, "Test aja bang");
     }
 
     public SignInFragment() {}
@@ -99,6 +102,8 @@ public class SignInFragment extends Fragment {
         dataShared = new DataShared(requireContext());
 
         onClickGroups();
+
+        btnCustom.setStatus(ButtonAccountCustom.DISABLE);
     }
 
     @Override
@@ -211,6 +216,18 @@ public class SignInFragment extends Fragment {
 
         btnSignUp.setOnClickListener(v -> {
             FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFragmentFirst(), true);
+        });
+
+        btnCustom.setOnClickListener(v -> {
+            btnCustom.setProgress(ButtonAccountCustom.RUN_PROGRESS);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(requireContext(), "Halo bang", Toast.LENGTH_SHORT).show();
+                    btnCustom.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                }
+            }, 2000L);
+
         });
 
     }

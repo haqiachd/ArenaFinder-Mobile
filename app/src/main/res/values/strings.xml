@@ -7,6 +7,8 @@
     <string name="menu_referensi">Referensi</string>
     <string name="menu_profile">Profile</string>
 
+    <string name="btn_custom_account">This is Button</string>
+
     <string name="alt_app_logo">Logo C2</string>
 
     <string name="dia_positive_ok">OK</string>
