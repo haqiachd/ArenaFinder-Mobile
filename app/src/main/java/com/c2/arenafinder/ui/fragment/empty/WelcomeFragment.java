@@ -1,44 +1,43 @@
 package com.c2.arenafinder.ui.fragment.empty;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.ui.activity.AccountActivity;
+import com.c2.arenafinder.ui.fragment.account.SignInFragment;
+import com.c2.arenafinder.ui.fragment.account.SignUpFragmentFirst;
+import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.material.button.MaterialButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WelcomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WelcomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private MaterialButton btnSignIn, btnSignUp;
 
     public WelcomeFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WelcomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    private void initViews(View view){
+        btnSignIn = view.findViewById(R.id.wlc_btn_signin);
+        btnSignUp = view.findViewById(R.id.wlc_btn_signup);
+    }
+
     public static WelcomeFragment newInstance(String param1, String param2) {
         WelcomeFragment fragment = new WelcomeFragment();
         Bundle args = new Bundle();
@@ -62,5 +61,31 @@ public class WelcomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_welcome, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews(view);
+
+        onClickGroups();
+    }
+
+    private void onClickGroups(){
+
+        btnSignUp.setOnClickListener(v -> {
+            startActivity(new Intent(
+                    requireActivity(), AccountActivity.class
+            ).putExtra(AccountActivity.FRAGMENT, AccountActivity.SIGN_UP)
+            );
+        });
+
+        btnSignIn.setOnClickListener(v -> {
+            startActivity(new Intent(
+                    requireActivity(), AccountActivity.class
+            ).putExtra(AccountActivity.FRAGMENT, AccountActivity.SIGN_IN)
+            );
+        });
+
     }
 }

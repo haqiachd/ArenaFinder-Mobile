@@ -6,5 +6,6 @@
     <dimen name="btn_acc_width">@dimen/_210sdp</dimen>
     <dimen name="btn_acc_height">@dimen/_36sdp</dimen>
     <dimen name="btn_acc_corner">@dimen/_5sdp</dimen>
+    <dimen name="btn_acc_margin">@dimen/_8sdp</dimen>
 
 </resources>

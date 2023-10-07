@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.empty.WelcomeFragment">
+    android:background="@color/white"
+    tools:context=".ui.fragment.empty.WelcomeFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wlc_btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:text="Daftar Akun"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wlc_btn_signin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Login"
+            />
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -54,7 +54,7 @@
                 android:text="@string/btn_custom_account"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_12ssp"
                 android:gravity="center"
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
