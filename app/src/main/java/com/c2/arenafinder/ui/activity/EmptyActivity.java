@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.ui.fragment.empty.ServerNotFoundFragment;
 import com.c2.arenafinder.ui.fragment.empty.WelcomeFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
@@ -26,6 +27,7 @@ public class EmptyActivity extends AppCompatActivity {
                 break;
             }
             case SERVER_NOT_FOUND: {
+                FragmentUtil.switchFragmentEmpty(getSupportFragmentManager(), new ServerNotFoundFragment(), false);
                 break;
             }
         }

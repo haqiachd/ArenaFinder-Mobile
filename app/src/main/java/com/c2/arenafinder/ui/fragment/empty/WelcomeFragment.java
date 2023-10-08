@@ -2,21 +2,15 @@ package com.c2.arenafinder.ui.fragment.empty;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.activity.AccountActivity;
-import com.c2.arenafinder.ui.fragment.account.SignInFragment;
-import com.c2.arenafinder.ui.fragment.account.SignUpFragmentFirst;
-import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.button.MaterialButton;
 
 public class WelcomeFragment extends Fragment {

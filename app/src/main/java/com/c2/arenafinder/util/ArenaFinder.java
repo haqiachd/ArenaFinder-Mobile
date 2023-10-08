@@ -8,10 +8,8 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
@@ -22,9 +20,10 @@ import com.c2.arenafinder.data.local.LogTag;
 
 public class ArenaFinder {
 
-    public static int VIBRATOR_SHORT = 150;
-    public static int VIBRATOR_MEDIUM = 500;
-    public static int VIBRATOR_LONG = 1000;
+    public static final int VIBRATOR_SHORT = 150;
+    public static final int VIBRATOR_MEDIUM = 500;
+    public static final int VIBRATOR_LONG = 1000;
+    public static final int MILLIS_OF_REFRESHING = 1500;
 
     public static void playVibrator(@NonNull Context context, int millis){
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

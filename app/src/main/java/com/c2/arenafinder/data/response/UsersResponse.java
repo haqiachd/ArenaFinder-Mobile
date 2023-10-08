@@ -1,7 +1,5 @@
 package com.c2.arenafinder.data.response;
 
-import androidx.annotation.NonNull;
-
 import com.c2.arenafinder.data.model.UserModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

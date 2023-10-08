@@ -8,6 +8,7 @@
     <string name="menu_profile">Profile</string>
 
     <string name="btn_custom_account">This is Button</string>
+    <string name="txt_fsnf_server_desk">Tidak dapat terhubung dengan %1$s. Silakan segera hubungi pengembang untuk mengatasi masalah ini."</string>
 
     <string name="alt_app_logo">Logo C2</string>
 
@@ -30,9 +31,11 @@
     <string name="msg_otp_input">Masukan kode OTP.</string>
     <string name="suc_otp_valid">Kode OTP valid</string>
     <string name="suc_account_edited">Akun berhasil diedit</string>
+    <string name="err_server_not_found">Server tidak ditemukan</string>
     <string name="err_no_internet">Tidak ada koneksi Internet.</string>
     <string name="err_no_data_selected">Tidak ada data yang dipilih.</string>
     <string name="err_google_auth_connection">Tidak dapat terhubung dengan Google Auth.</string>
     <string name="err_google_auth_fatal">Fatal error Google Auth.</string>
     <string name="err_otp_invalid">Kote OTP tidak cocok</string>
+
 </resources>

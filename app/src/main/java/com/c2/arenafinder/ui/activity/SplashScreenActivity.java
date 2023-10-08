@@ -12,9 +12,16 @@ import android.widget.ImageView;
 import com.airbnb.lottie.LottieAnimationView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.response.ArenaFinderResponse;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
@@ -45,25 +52,51 @@ public class SplashScreenActivity extends AppCompatActivity {
         initViews();
         usersUtil = new UsersUtil(getApplicationContext());
 
-        new Handler().postDelayed(() -> {
-            if (usersUtil.isSignIn()) {
-                // Jika pengguna sudah masuk, buka MainActivity
-                LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-            } else {
-                // Jika pengguna belum masuk, buka WelcomeActivity
-                LogApp.info(this, LogTag.LIFEFCYLE, "Membuka WelcomeActivity");
-                startActivity(
-                        new Intent(this, EmptyActivity.class)
-                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+        new Handler().postDelayed(this::cekKoneksi, 2000L);
+
+    }
+
+    private void cekKoneksi(){
+
+        RetrofitClient.getInstance().cekKoneksi().enqueue(new Callback<ArenaFinderResponse>() {
+            @Override
+            public void onResponse(Call<ArenaFinderResponse> call, Response<ArenaFinderResponse> response) {
+
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
+                    if (usersUtil.isSignIn()) {
+                        // Jika pengguna sudah masuk, buka MainActivity
+                        LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
+                        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                    } else {
+                        // Jika pengguna belum masuk, buka WelcomeActivity
+                        LogApp.info(this, LogTag.LIFEFCYLE, "Membuka WelcomeActivity");
+                        startActivity(
+                                new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                        );
+                    }
+
+                    // Selesai, tutup SplashScreen saat ini
+                    finish();
+                }else{
+                    ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
+                    startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                            .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
+                    );
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArenaFinderResponse> call, Throwable t) {
+                t.printStackTrace();
+                ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
+                startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
                 );
                 finish();
             }
-
-            // Selesai, tutup SplashScreen saat ini
-            finish();
-        }, 3000L);
+        });
 
     }
 

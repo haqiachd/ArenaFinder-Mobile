@@ -1,20 +1,17 @@
 package com.c2.arenafinder.ui.activity;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.os.Bundle;
+
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.account.SignInFragment;
 import com.c2.arenafinder.ui.fragment.account.SignUpFragmentFirst;
-import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 
 public class AccountActivity extends AppCompatActivity {
 
     public static final String FRAGMENT = "fragment";
-    public static final String SIGN_UP = "signup", SIGN_IN = "signin";
+    public static final String SIGN_UP = "sign-up", SIGN_IN = "sign-in";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
