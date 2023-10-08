@@ -7,12 +7,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-
-import com.c2.arenafinder.data.response.UsersResponse;
-import com.c2.arenafinder.data.response.VerifyResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 
@@ -21,12 +19,13 @@ import java.util.concurrent.TimeUnit;
 public class RetrofitClient {
 
     public static final String BASE_URL = "http://192.168.155.152/arenafinder-web/"; // local
-
 //    public static final String BASE_URL = "http://172.16.106.67/arenafinder-web/"; // wifi
 
     public static final String CONTROLLERS = BASE_URL + "controllers/mobile/";
 
-    public static final String USER_PHOTO_URL = BASE_URL + "public/img/user-photo/";
+    public static final String PUBLIC_IMG = "public/img/";
+
+    public static final String USER_PHOTO_URL = BASE_URL + PUBLIC_IMG + "user-photo/";
 
     public static final String SUCCESSFUL_RESPONSE = "success";
 

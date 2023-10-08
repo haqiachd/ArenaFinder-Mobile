@@ -1,5 +1,6 @@
 package com.c2.arenafinder.api.retrofit;
 
+import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 
@@ -11,6 +12,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RetrofitEndPoint {
+
+    @GET("cek_koneksi.php")
+    Call<ArenaFinderResponse> cekKoneksi();
 
     @GET("users/cek_user.php")
     Call<UsersResponse> cekUser(
