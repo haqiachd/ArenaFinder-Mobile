@@ -56,6 +56,7 @@
         <li><a href="#fitur-2">Fitur 2</a></li>
         <li><a href="#fitur-3">Fitur 3</a></li>
         <li><a href="#fitur-4">Fitur 4</a></li>
+      </ul>
     </li>
    <li>
     <a href="#contributor">Contributor</a>
