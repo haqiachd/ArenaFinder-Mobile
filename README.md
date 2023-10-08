@@ -4,7 +4,7 @@
 </p>
 
 <h3 align="center">ArenaFinder Mobile Application</h3>
-<p align = "center">:basketball: Aplikasi informasi pencarian tempat olahraga di daerah nganjuk. :basketball:</p>
+<p align = "center">:basketball: Aplikasi pencarian informasi tempat olahraga di Kabupaten Nganjuk :basketball:</p>
 
 <!-- Project Shields -->
 <span align="center">
@@ -30,8 +30,10 @@
 
 <p align="center">
   <a href="https://drive.google.com/drive/folders/1c9xHuEOusnqJxNEYW4B3H-rG1FlXcvvt?usp=sharing" style="font-weight: bold;">ArenaFinder MySQL Database</a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;
   <a href="https://github.com/mahen-alim/ArenaFinder-Web" style="font-weight: bold;">ArenaFinder Website Repository</a>
+ &nbsp;&nbsp;
+  <a href="https://github.com/haqiachd/ArenaFinder-Mobile-RestApi" style="font-weight: bold;">ArenaFinder Mobile Rest API</a>
 </p>
 
 ---
@@ -52,7 +54,8 @@
       <ul>
         <li><a href="#fitur-1">Fitur 1</a></li>
         <li><a href="#fitur-2">Fitur 2</a></li>
-      </ul>
+        <li><a href="#fitur-3">Fitur 3</a></li>
+        <li><a href="#fitur-4">Fitur 4</a></li>
     </li>
    <li>
     <a href="#contributor">Contributor</a>
@@ -79,11 +82,17 @@ Aplikasi ini memberikan informasi lengkap tentang tempat-tempat olahraga yang te
 
 ## Fitur Aplikasi <a name = "fitur"></a>
 
-#### Fitur 1
+### Fitur 1
 ini fitur 1
 
 ### Fitur 2
 ini fitur 2
+
+### Fitur 3
+ini fitur 3
+
+### Fitur 4
+ini fitur 4
 
 ## Contributor
 - Achmad Baihaqi &nbsp; [[Github]](https://github.com/haqiachd)
