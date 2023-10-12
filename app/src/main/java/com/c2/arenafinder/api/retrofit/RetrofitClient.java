@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RetrofitClient {
 
-    public static final String BASE_URL = "http://192.168.155.152/arenafinder-web/"; // local
+    public static final String BASE_URL = "http://192.168.155.152/arenafinder/"; // local
 //    public static final String BASE_URL = "http://172.16.106.67/arenafinder-web/"; // wifi
 
     public static final String CONTROLLERS = BASE_URL + "controllers/mobile/";
