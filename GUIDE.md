@@ -1,4 +1,5 @@
 <br>
+<a name="nduwur-dewe"></a>
 <p align="center">
  <a href="https://www.youtube.com/watch?v=t9VWICGOD90&ab_channel=HITSRecords"><img src="images/logo-c2.png" alt="Logo Kelompok C2" width="195" height="155"></a>
 </p>
@@ -38,6 +39,8 @@ Pastikan juga Laptop atau Komputer Anda terhubung ke Internet.
 ### 1. Import MySQL Database di phpMyAdmin <a name = "satu"></a>
 Download database [ArenaFinder](https://drive.google.com/drive/folders/1c9xHuEOusnqJxNEYW4B3H-rG1FlXcvvt?usp=sharing) lalu aktifkan Apache dan MySQL pada ```XAMPP``` kemudian buka [phpMyAdmin](http://localhost/phpmyadmin/index.php) di browser, buat database baru dengan nama ```arenafinder``` dan  import file database _arenafinder.sql_ yang telah didownload, dan akhiri dengan menekan tombol ```Import```.
 
+<p align="right">(<a href="#nduwur-dewe">Kembali ke Atas</a>)</p>
+
 ### 2. Clone Rest-API Mobile ArenaFinder <a name = "dua"></a>
  - Buka directory ```htdocs``` pada XAMPP.
  - Buka Git Bash Anda.
@@ -52,6 +55,7 @@ Download database [ArenaFinder](https://drive.google.com/drive/folders/1c9xHuEOu
    ```
  - Ubah nama folder hasil clone github menjadi ```arenafinder```.
  - Selesai.
+<p align="right">(<a href="#nduwur-dewe">Kembali ke Atas</a>)</p>
 
 ### 3. Membuat Project di Android Studio <a name = "tiga"></a>
  - Buka Android Studio dan buat project baru.
@@ -69,6 +73,7 @@ Download database [ArenaFinder](https://drive.google.com/drive/folders/1c9xHuEOu
  - Buka project yang baru saja Anda buat di ```File Explorer```.
  - Pindahkan semua file dan directory yang ada di dalam folder ```cloning``` ke dalam folder project Anda.
  - Selesai
+<p align="right">(<a href="#nduwur-dewe">Kembali ke Atas</a>)</p>
 
 ### 4. Menjalankan ArenaFinder di Android Studio. <a name = "empat"></a>
  - Pastikan Apache dan MySQL pada XAMPP sudah aktif.
@@ -109,3 +114,4 @@ Download database [ArenaFinder](https://drive.google.com/drive/folders/1c9xHuEOu
     ```
  - Jalankan project dengan menekan tobol ```Run App``` atau dengan shortcut ```Shift + F10```.
  - Selesai.
+<p align="right">(<a href="#nduwur-dewe">Kembali ke Atas</a>)</p>
