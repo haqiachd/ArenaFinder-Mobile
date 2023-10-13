@@ -10,11 +10,14 @@
 <span align="center">
 
   [![Forks][forks-shield]][forks-url]
-  [![Stargazers][stars-shield]][stars-url]
+  [![Repo Size][repo-shield]][repo-url]
   [![Contributors][contributors-shield]][contributors-url]
   [![Last Commit][commit-shield]][commit-url]
+  <!-- [![Stargazers][stars-shield]][stars-url] -->
   <!-- [![Issues][issues-shield]][issues-url] -->
 
+  [repo-shield]: https://img.shields.io/github/repo-size/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+  [repo-url]: https://img.shields.io/github/repo-size/haqiachd/ArenaFinder-Mobile.svg
   [contributors-shield]: https://img.shields.io/github/contributors/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
   [contributors-url]: https://github.com/haqiachd/ArenaFinder-Mobile/graphs/contributors
   [forks-shield]: https://img.shields.io/github/forks/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
@@ -29,11 +32,13 @@
 </span>
 
 <p align="center">
-  <a href="https://drive.google.com/drive/folders/1c9xHuEOusnqJxNEYW4B3H-rG1FlXcvvt?usp=sharing" style="font-weight: bold;">ArenaFinder MySQL Database</a>
-  &nbsp;&nbsp;
-  <a href="https://github.com/mahen-alim/ArenaFinder-Web" style="font-weight: bold;">ArenaFinder Website Repository</a>
- &nbsp;&nbsp;
-  <a href="https://github.com/haqiachd/ArenaFinder-Mobile-RestApi" style="font-weight: bold;">ArenaFinder Mobile Rest API</a>
+<a href="https://drive.google.com/drive/folders/1c9xHuEOusnqJxNEYW4B3H-rG1FlXcvvt?usp=sharing" target="_blank" style="font-weight: bold;">MySQL Database</a>
+&nbsp;&nbsp;
+<a href="https://github.com/mahen-alim/ArenaFinder-Web" target="_blank" style="font-weight: bold;">Website Repository</a>
+&nbsp;&nbsp;
+<a href="https://github.com/haqiachd/ArenaFinder-Mobile-RestApi" target="_blank" style="font-weight: bold;">Mobile Rest API</a>
+&nbsp;&nbsp;
+<a href="https://github.com/haqiachd/ArenaFinder-Mobile/blob/main/GUIDE.md" target="_blank" style="font-weight: bold;">Cara Instalasi ArenaFinder</a>
 </p>
 
 ---
@@ -58,6 +63,7 @@
         <li><a href="#fitur-4">Fitur 4</a></li>
       </ul>
     </li>
+   <li><a href="#instalasi-aplikasi">Instalasi Aplikasi</a></li>
    <li>
     <a href="#contributor">Contributor</a>
       <ul>
@@ -94,6 +100,9 @@ ini fitur 3
 
 ### Fitur 4
 ini fitur 4
+
+## Instalasi Aplikasi
+Saat ini, aplikasi ArenaFinder berbasis mobile masih dalam tahap pengembangan dan belum tersedia di ```PlayStore```. Jika Anda tertarik untuk mencoba aplikasi mobile ArenaFinder, silakan mengikuti petunjuk yang terdapat dalam Panduan Pengguna yang ada dalam file <a href="https://github.com/haqiachd/ArenaFinder-Mobile/blob/main/GUIDE.md" target="_blank" style="font-weight: bold;">GUIDE.md</a>.
 
 ## Contributor
 - Achmad Baihaqi &nbsp; [[Github]](https://github.com/haqiachd)
