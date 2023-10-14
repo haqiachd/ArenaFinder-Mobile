@@ -73,6 +73,25 @@
                     app:otp=""
                     />
 
+                <com.mukeshsolanki.OtpView
+                    android:id="@+id/otp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="72dp"
+                    android:inputType="text"
+                    android:itemBackground="@color/white"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center"
+                    app:OtpHideLineWhenFilled="true"
+                    app:OtpItemCount="6"
+                    app:OtpItemSpacing="6dp"
+                    app:OtpLineColor="@color/azure"
+                    app:OtpState_filled="true"
+                    app:OtpViewType="rectangle"
+                    app:OtpItemRadius="@dimen/_5sdp"
+                    />
+
                 <TextView
                     android:id="@+id/votp_txt_helper"
                     android:layout_width="wrap_content"
