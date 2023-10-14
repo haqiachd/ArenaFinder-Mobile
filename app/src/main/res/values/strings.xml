@@ -7,6 +7,12 @@
     <string name="menu_referensi">Referensi</string>
     <string name="menu_profile">Profile</string>
 
+    <!-- Link -->
+    <string name="link_scheme">arenafinder.com</string>
+    <string name="link_host">kitten</string>
+    <string name="link_path_pref_signup">/account/sign-up</string>
+    <string name="link_path_pref_forgot">/account/forgot</string>
+
     <string name="btn_custom_account">This is Button</string>
     <string name="txt_fsnf_server_desk">Tidak dapat terhubung dengan %1$s. Silakan segera hubungi pengembang untuk mengatasi masalah ini."</string>
 

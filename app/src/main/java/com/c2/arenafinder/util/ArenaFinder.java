@@ -8,8 +8,10 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
@@ -65,6 +67,16 @@ public class ArenaFinder {
         LogApp.info(app, LogTag.APPLICATION, "Aplikasi ditutup");
     }
 
+    public static void VibratorToast(Context context, String msg, int toastLong, int vibratorLong){
+        playVibrator(context, vibratorLong);
+        Toast.makeText(context, msg, toastLong).show();
+        LogApp.info(context, LogTag.ON_VIBRATOR_TOAST, msg);
+    }
+
+    public static void VibratorToast(Context context, @StringRes int msg, int toastLong, int vibratorLong){
+        VibratorToast(context, context.getString(msg), toastLong, vibratorLong);
+    }
+
     public static void showAlertDialog(
             Context context, String title, String message, boolean cancelable,
             DialogInterface.OnClickListener positiveAction, DialogInterface.OnClickListener negativeAction
@@ -77,6 +89,10 @@ public class ArenaFinder {
                 .setNegativeButton(context.getString(R.string.dia_negative_cancel), negativeAction)
                 .create()
                 .show();
+
+    }
+
+    public static void showLoadingDialog(){
 
     }
 
