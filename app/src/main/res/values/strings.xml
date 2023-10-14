@@ -15,15 +15,29 @@
 
     <string name="btn_custom_account">This is Button</string>
     <string name="btn_sign_in">Masuk</string>
+    <string name="btn_sign_up">Daftar</string>
+    <string name="btn_next">Berikutnya</string>
+    <string name="btn_prev">Sebelumnya</string>
 
     <string name="txt_signin_title">Masuk Akun</string>
+    <string name="txt_signup1_title">Daftar Akun</string>
+    <string name="txt_signup2_title">Buat Kata Sandi</string>
     <string name="txt_signin_desc">Selamat datang kembali, silahkan masukan email / username dan kata sandi.</string>
+    <string name="txt_signup1_desc">Masukkan identitas yang diperlukan untuk membuat akun.</string>
+    <string name="txt_signup2_desc">Silakan buat kata sandi yang kuat dan konfirmasi dengan mengetikan ulang kata sandi.</string>
+    <string name="txt_input_username">Username</string>
+    <string name="txt_input_email">Alamat Email</string>
     <string name="txt_input_userid">Email atau Username</string>
     <string name="txt_input_password">Kata Sandi</string>
+    <string name="txt_input_konf_pass">Konfirmasi Kata Sandi</string>
+    <string name="txt_input_name">Nama Lengkap</string>
     <string name="txt_helper_default">Pesan error akan muncul disini</string>
     <string name="txt_login_with">Masuk dengan</string>
+    <string name="txt_register_with">Daftar dengan</string>
     <string name="txt_dont_have_account">Belum punya akun?</string>
+    <string name="txt_have_account">Sudah punya akun?</string>
     <string name="txt_register_here">Daftar Disini.</string>
+    <string name="txt_login_here">Masuk Disini.</string>
     <string name="txt_forgot_pass">Lupa Kata Sandi?</string>
     <string name="txt_fsnf_server_desk">Tidak dapat terhubung dengan %1$s. Silakan segera hubungi pengembang untuk mengatasi masalah ini."</string>
 
