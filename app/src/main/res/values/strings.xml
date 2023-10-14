@@ -19,17 +19,23 @@
     <string name="btn_next">Berikutnya</string>
     <string name="btn_prev">Sebelumnya</string>
     <string name="btn_send_otp">Kirim Kode OTP</string>
+    <string name="btn_ganti_password">Ganti Kata Sandi</string>
+    <string name="btn_kirim_ulang">Kirim Ulang OTP</string>
 
     <string name="txt_signin_title">Masuk Akun</string>
     <string name="txt_signup1_title">Daftar Akun</string>
     <string name="txt_signup2_title">Buat Kata Sandi</string>
     <string name="txt_forgot_title">Lupa Kata Sandi</string>
+    <string name="txt_ganti_password">Ganti Kata Sandi</string>
+    <string name="txt_otp_title">Verifikasi OTP</string>
     <string name="txt_signup_google_title">Daftar Akun</string>
     <string name="txt_signin_desc">Selamat datang kembali, silahkan masukan email / username dan kata sandi.</string>
     <string name="txt_signup1_desc">Masukkan identitas yang diperlukan untuk membuat akun.</string>
     <string name="txt_signup2_desc">Silakan buat kata sandi yang kuat dan konfirmasi dengan mengetikan ulang kata sandi.</string>
     <string name="txt_forgot_desc">Masukkan alamat email yang Anda gunakan saat mendaftar untuk memastikan identitas.</string>
     <string name="txt_sign_up_google_desc">Masukan username dan buatlah kata sandi yang kuat dan ketikan ulang kata sandi.</string>
+    <string name="txt_ganti_password_desc">Masukkan kata sandi yang baru, buatlah kata sandi yang rumit.</string>
+    <string name="txt_otp_desc">Masukkan kode OTP yang telah kami kirimkan ke alamat email Anda.</string>
     <string name="txt_input_username">Username</string>
     <string name="txt_input_email">Alamat Email</string>
     <string name="txt_input_userid">Email atau Username</string>

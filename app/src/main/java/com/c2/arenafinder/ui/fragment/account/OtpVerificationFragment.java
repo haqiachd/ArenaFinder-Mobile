@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.button.MaterialButton;
 
@@ -32,7 +33,7 @@ public class OtpVerificationFragment extends Fragment {
     private String otp;
     private String type;
 
-    private MaterialButton btnSend;
+    private ButtonAccountCustom btnSend;
     private TextView helperText;
     private OtpTextView inpOtp;
 
@@ -41,9 +42,9 @@ public class OtpVerificationFragment extends Fragment {
     }
 
     private void initViews(View view){
-        btnSend = view.findViewById(R.id.otp_button);
-        inpOtp = view.findViewById(R.id.otp_inp_otp);
-        helperText = view.findViewById(R.id.otp_helper);
+        btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_kirim_ulang);
+        inpOtp = view.findViewById(R.id.votp_inp_otp);
+        helperText = view.findViewById(R.id.votp_txt_helper);
     }
 
     public static OtpVerificationFragment newInstance(String email, String otp, String type) {

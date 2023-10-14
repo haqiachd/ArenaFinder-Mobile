@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.button.MaterialButton;
@@ -31,16 +32,17 @@ public class GantiSandiFragment extends Fragment {
 
     private String email;
 
-    private EditText inpPassword;
-    private MaterialButton btnSend;
+    private EditText inpPassword, inpKonf;
+    private ButtonAccountCustom btnChange;
 
     public GantiSandiFragment() {
         // Required empty public constructor
     }
 
     private void initViews(View view){
-        inpPassword = view.findViewById(R.id.chgpass_inp_password);
-        btnSend = view.findViewById(R.id.chgpass_next);
+        inpPassword = view.findViewById(R.id.chgpass_inp_pass);
+        inpKonf = view.findViewById(R.id.chgpass_inp_konf);
+        btnChange = new ButtonAccountCustom(requireContext(), view, R.string.btn_ganti_password);
     }
 
     public static GantiSandiFragment newInstance(String email) {
@@ -75,7 +77,7 @@ public class GantiSandiFragment extends Fragment {
 
     private void onClickGroups(){
 
-        btnSend.setOnClickListener(v -> {
+        btnChange.setOnClickLoadingListener(() -> {;
 
             RetrofitClient.getInstance().updatePassword(email, inpPassword.getText().toString())
                     .enqueue(new Callback<UsersResponse>() {
@@ -103,12 +105,14 @@ public class GantiSandiFragment extends Fragment {
                             }else {
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
+                            btnChange.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                         }
 
                         @Override
                         public void onFailure(Call<UsersResponse> call, Throwable t) {
                             ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                             Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            btnChange.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                         }
                     });
 

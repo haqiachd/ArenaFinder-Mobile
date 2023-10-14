@@ -8,60 +8,106 @@
     android:background="@color/white"
     >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:background="@color/background_light"
         >
 
-        <in.aabhasjindal.otptextview.OtpTextView
-            android:id="@+id/otp_inp_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_150sdp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/dimgray"
-            android:textColor="@color/black"
-            android:importantForAutofill="no"
-            app:layout_constraintTop_toTopOf="parent"
-            app:width="@dimen/_35sdp"
-            app:height="@dimen/_35sdp"
-            app:otp_text_size="@dimen/_24ssp"
-            app:bar_active_color="@color/azure"
-            app:bar_inactive_color="@color/dimgray"
-            app:bar_error_color="@color/vivid_orange"
-            app:bar_success_color="@color/jade_green"
-            app:bar_enabled="true"
-            app:bar_height="3dp"
-            app:length="6"
-            app:otp=""
-            />
-
-        <TextView
-            android:id="@+id/otp_helper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:layout_marginStart="@dimen/_35sdp"
-            android:text="helper text"
-            android:textSize="@dimen/_10ssp"
-            android:fontFamily="@font/poppins_semibold"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/otp_button"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_30sdp"
-            android:backgroundTint="#02406D"
-            android:text="Verifikasi OTP"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/_5sdp"
-            />
+            android:layout_height="wrap_content"
+            >
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/votp_linear_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/acc_linear_margin"
+                android:layout_marginEnd="@dimen/acc_linear_margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kanit_medium"
+                    android:text="@string/txt_otp_title"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/acc_title_textsize" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_desc_margin"
+                    android:alpha="0.9"
+                    android:fontFamily="@font/opensans_bold"
+                    android:text="@string/txt_otp_desc"
+                    android:textAlignment="center"
+                    android:textColor="@color/granite_grey"
+                    android:textSize="@dimen/acc_desc_textsize" />
+
+                <in.aabhasjindal.otptextview.OtpTextView
+                    android:id="@+id/votp_inp_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/dimgray"
+                    android:textColor="@color/black"
+                    android:importantForAutofill="no"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:width="@dimen/_35sdp"
+                    app:height="@dimen/_35sdp"
+                    app:otp_text_size="@dimen/_24ssp"
+                    app:bar_active_color="@color/azure"
+                    app:bar_inactive_color="@color/dimgray"
+                    app:bar_error_color="@color/vivid_orange"
+                    app:bar_success_color="@color/jade_green"
+                    app:bar_enabled="true"
+                    app:bar_height="3dp"
+                    app:length="6"
+                    app:otp=""
+                    />
+
+                <TextView
+                    android:id="@+id/votp_txt_helper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/acc_txt_helper_margin"
+                    android:alpha="0.9"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/txt_helper_default"
+                    android:textColor="@color/orangered"
+                    android:textSize="@dimen/_9sdp"
+                    tools:ignore="TextContrastCheck" />
+
+            </LinearLayout>
+
+            <include
+                android:id="@+id/votp_btn_signup"
+                layout="@layout/custom_button_account"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/acc_btn_size"
+                android:layout_marginStart="@dimen/acc_btn_margin_width"
+                android:layout_marginTop="@dimen/acc_btn_margin_top"
+                android:layout_marginEnd="@dimen/acc_btn_margin_width"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/votp_linear_input" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/acc_margin_bottom"
+                app:layout_constraintTop_toBottomOf="@id/votp_btn_signup"
+                tools:ignore="UselessLeaf" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </FrameLayout>

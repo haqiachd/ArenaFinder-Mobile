@@ -1,87 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.account.GantiSandiFragment"
-    android:background="@color/white"
-    >
+    android:background="@color/background_light"
+    tools:context=".ui.fragment.account.GantiSandiFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/_20ssp"
-        android:background="@color/white"
-        android:orientation="vertical"
+        android:background="@color/background_light"
         >
 
-        <com.google.android.material.textfield.TextInputLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="true"
-            app:endIconMode="password_toggle"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeWidth="@dimen/_2sdp"
-            app:boxStrokeColor="@color/dogerblue"
-            app:boxStrokeWidthFocused="@dimen/_2sdp"
-            app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-            app:boxCornerRadiusTopStart="@dimen/_20sdp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             >
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/chgpass_inp_password"
+            <LinearLayout
+                android:id="@+id/chgpass_linear_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Masukan Password"
-                android:inputType="textPassword"
-                android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/dogerblue"
-                android:textSize="@dimen/_11ssp"
-                />
+                android:layout_marginStart="@dimen/acc_linear_margin"
+                android:layout_marginEnd="@dimen/acc_linear_margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kanit_medium"
+                    android:text="@string/txt_ganti_password"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/acc_title_textsize" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintEnabled="true"
-            app:endIconMode="password_toggle"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeWidth="@dimen/_2sdp"
-            app:boxStrokeColor="@color/dogerblue"
-            app:boxStrokeWidthFocused="@dimen/_2sdp"
-            app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-            app:boxCornerRadiusTopStart="@dimen/_20sdp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_desc_margin"
+                    android:alpha="0.9"
+                    android:fontFamily="@font/opensans_bold"
+                    android:text="@string/txt_ganti_password_desc"
+                    android:textAlignment="center"
+                    android:textColor="@color/granite_grey"
+                    android:textSize="@dimen/acc_desc_textsize" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/chgpass_inp_konf"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_title_margintop"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/txt_input_password"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/_11ssp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/chgpass_inp_pass_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_margintop"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxStrokeColor="@color/stroke_input_account"
+                    app:boxStrokeWidth="@dimen/acc_input_stroke"
+                    app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/chgpass_inp_pass"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/acc_input_height"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/acc_input_textsize"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_title_margintop"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/txt_input_konf_pass"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/acc_input_title_textsize" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/chgpass_inp_konf_pass_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_margintop"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxStrokeColor="@color/stroke_input_account"
+                    app:boxStrokeWidth="@dimen/acc_input_stroke"
+                    app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/chgpass_inp_konf"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/acc_input_height"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/acc_input_textsize"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/chgpass_txt_helper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_txt_helper_margin"
+                    android:alpha="0.9"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/txt_helper_default"
+                    android:textColor="@color/orangered"
+                    android:textSize="@dimen/_9sdp"
+                    tools:ignore="TextContrastCheck" />
+
+            </LinearLayout>
+
+            <include
+                android:id="@+id/chgpass_btn_signup"
+                layout="@layout/custom_button_account"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Konfirmasi Password (nanti dulu)"
-                android:inputType="textPassword"
-                android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/dogerblue"
-                android:textSize="@dimen/_11ssp"
-                />
+                android:layout_height="@dimen/acc_btn_size"
+                android:layout_marginStart="@dimen/acc_btn_margin_width"
+                android:layout_marginTop="@dimen/acc_btn_margin_top"
+                android:layout_marginEnd="@dimen/acc_btn_margin_width"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chgpass_linear_input" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/acc_margin_bottom"
+                app:layout_constraintTop_toBottomOf="@id/chgpass_btn_signup"
+                tools:ignore="UselessLeaf" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/chgpass_next"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:text="Ganti Sandi"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/primary_color"
-            app:cornerRadius="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/signup_linear"
-            />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
