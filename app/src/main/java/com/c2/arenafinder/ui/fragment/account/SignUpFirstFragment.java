@@ -94,7 +94,7 @@ public class SignUpFirstFragment extends Fragment {
         });
 
         btnGoogle.setOnClickListener(v ->{
-            Toast.makeText(requireContext(), "Google", Toast.LENGTH_SHORT).show();
+            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpGoogle(), false);
         });
 
         btnLogin.setOnClickListener(v -> {

@@ -19,6 +19,7 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
+import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 
@@ -32,7 +33,7 @@ public class ForgotPasswordFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private EditText inpEmail;
-    private Button btnSend;
+    private ButtonAccountCustom btnSend;
 
     private String mParam1;
     private String mParam2;
@@ -42,8 +43,8 @@ public class ForgotPasswordFragment extends Fragment {
     }
 
     private void initViews(View view){
-        inpEmail = view.findViewById(R.id.forgot_email);
-        btnSend = view.findViewById(R.id.forgot_button);
+        inpEmail = view.findViewById(R.id.forgot_inp_email);
+        btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_send_otp);
     }
 
     public static ForgotPasswordFragment newInstance(String param1, String param2) {
@@ -81,7 +82,7 @@ public class ForgotPasswordFragment extends Fragment {
 
     public void onClickGroups(){
 
-        btnSend.setOnClickListener(v -> {
+        btnSend.setOnClickLoadingListener(() -> {
 
         RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), "forgotpass")
             .enqueue(new Callback<VerifyResponse>() {

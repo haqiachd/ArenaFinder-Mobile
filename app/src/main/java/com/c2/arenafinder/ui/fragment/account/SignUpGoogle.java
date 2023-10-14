@@ -23,6 +23,7 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
 
@@ -40,13 +41,14 @@ public class SignUpGoogle extends Fragment {
     private String email;
     private String fullName;
 
-    private EditText inpUsername, inpPassword;
-    private Button btnRegister;
+    private EditText inpUsername, inpPassword, inpkonf;
+    private ButtonAccountCustom btnRegister;
 
     private void initViews(View view){
-        this.inpUsername = view.findViewById(R.id.signupgo_inp_username);
-        this.inpPassword = view.findViewById(R.id.signupgo_inp_password);
-        this.btnRegister = view.findViewById(R.id.signupgo_register);
+        this.inpUsername = view.findViewById(R.id.signupg_inp_username);
+        this.inpPassword = view.findViewById(R.id.signupg_inp_pass);
+        this.inpkonf = view.findViewById(R.id.signupg_inp_konf);
+        this.btnRegister = new ButtonAccountCustom(requireContext(), view, R.string.btn_sign_up);
     }
 
     public SignUpGoogle() {
@@ -90,7 +92,7 @@ public class SignUpGoogle extends Fragment {
 
     private void onClickGroups(){
 
-        btnRegister.setOnClickListener(v -> {
+        btnRegister.setOnClickLoadingListener(() -> {;
 
             RetrofitClient.getInstance().registerGoogle(
                     inpUsername.getText().toString(), email,

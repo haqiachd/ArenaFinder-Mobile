@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_light"
     tools:context=".ui.fragment.account.SignUpGoogle"
     >
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/background_light"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,111 +21,180 @@
             >
 
             <LinearLayout
-                android:id="@+id/signup_linear"
+                android:id="@+id/signupg_linear_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/acc_linear_margin"
+                android:layout_marginEnd="@dimen/acc_linear_margin"
                 android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
+                    android:fontFamily="@font/kanit_medium"
+                    android:text="@string/txt_signup_google_title"
+                    android:textAlignment="center"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/acc_title_textsize" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_desc_margin"
+                    android:alpha="0.9"
+                    android:fontFamily="@font/opensans_bold"
+                    android:text="@string/txt_sign_up_google_desc"
+                    android:textAlignment="center"
+                    android:textColor="@color/granite_grey"
+                    android:textSize="@dimen/acc_desc_textsize" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_between"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/txt_input_username"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/_11ssp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signupg_inp_username_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_margintop"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxStrokeColor="@color/stroke_input_account"
+                    app:boxStrokeWidth="@dimen/acc_input_stroke"
+                    app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signupgo_inp_username"
+                        android:id="@+id/signupg_inp_username"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Masukan Username"
-                        android:inputType="text"
+                        android:layout_height="@dimen/acc_input_height"
                         android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/acc_input_textsize"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:endIconMode="password_toggle"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/acc_input_title_margintop"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/txt_input_password"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/_11ssp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signupg_inp_pass_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_margintop"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxStrokeColor="@color/stroke_input_account"
+                    app:boxStrokeWidth="@dimen/acc_input_stroke"
+                    app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signupgo_inp_password"
+                        android:id="@+id/signupg_inp_pass"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Masukan Password"
-                        android:inputType="text"
+                        android:layout_height="@dimen/acc_input_height"
                         android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/acc_input_textsize"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:endIconMode="password_toggle"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/acc_input_title_margintop"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/txt_input_konf_pass"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/acc_input_title_textsize" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signupg_inp_konf_pass_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_input_margintop"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxStrokeColor="@color/stroke_input_account"
+                    app:boxStrokeWidth="@dimen/acc_input_stroke"
+                    app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signupgo_inp_konf"
+                        android:id="@+id/signupg_inp_konf"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Konfirmasi Password"
-                        android:inputType="text"
+                        android:layout_height="@dimen/acc_input_height"
                         android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
+                        android:inputType="textPersonName"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/acc_input_textsize"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/signupg_txt_helper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_txt_helper_margin"
+                    android:alpha="0.9"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/txt_helper_default"
+                    android:textColor="@color/orangered"
+                    android:textSize="@dimen/_9sdp"
+                    tools:ignore="TextContrastCheck" />
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/signupgo_register"
+            <include
+                android:id="@+id/signupg_btn_signup"
+                layout="@layout/custom_button_account"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:text="Sign Up"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/primary_color"
-                app:cornerRadius="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@id/signup_linear"
-                />
+                android:layout_height="@dimen/acc_btn_size"
+                android:layout_marginStart="@dimen/acc_btn_margin_width"
+                android:layout_marginTop="@dimen/acc_btn_margin_top"
+                android:layout_marginEnd="@dimen/acc_btn_margin_width"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/signupg_linear_input" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/acc_margin_bottom"
+                app:layout_constraintTop_toBottomOf="@id/signupg_btn_signup"
+                tools:ignore="UselessLeaf" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
