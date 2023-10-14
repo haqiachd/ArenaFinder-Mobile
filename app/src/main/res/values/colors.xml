@@ -27,4 +27,5 @@
     <color name="dimgray">#696969</color>
     <color name="jade_green">#00A86B</color>
     <color name="butterfly_blue">#30A2FF</color>
+    <color name="stroke_input_account">#07ACF3</color>
 </resources>

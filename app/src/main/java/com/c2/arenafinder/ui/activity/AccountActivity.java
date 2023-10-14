@@ -1,9 +1,13 @@
 package com.c2.arenafinder.ui.activity;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.account.GantiSandiFragment;
@@ -16,10 +20,17 @@ public class AccountActivity extends AppCompatActivity {
     public static final String FRAGMENT = "fragment";
     public static final String SIGN_UP = "sign-up", SIGN_IN = "sign-in";
 
+    private ImageView btnBack;
+
+    private void initViews(){
+        btnBack = findViewById(R.id.acc_back);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        initViews();
 
         Uri data = getIntent().getData();
 
@@ -49,6 +60,21 @@ public class AccountActivity extends AppCompatActivity {
                 }
             }
         }
+
+        onClickGroups();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    private void onClickGroups(){
+
+        btnBack.setOnClickListener(v ->{
+            onBackPressed();
+        });
+
     }
 
 }

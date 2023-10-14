@@ -8,7 +8,7 @@
     tools:context=".ui.activity.AccountActivity"
     >
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:id="@+id/acc_appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
@@ -18,15 +18,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         >
 
-        <com.google.android.material.textview.MaterialTextView
+        <ImageView
             android:id="@+id/acc_back"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
-            android:drawableStart="@drawable/ic_acc_back"
+            android:background="@drawable/sel_btn_acc_back"
+            android:contentDescription="@string/alt_acc_back"
+            android:layout_gravity="center"
             />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/acc_frame_layout"

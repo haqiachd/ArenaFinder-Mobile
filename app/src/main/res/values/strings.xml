@@ -14,9 +14,22 @@
     <string name="link_path_pref_forgot">/account/forgot</string>
 
     <string name="btn_custom_account">This is Button</string>
+    <string name="btn_sign_in">Masuk</string>
+
+    <string name="txt_signin_title">Masuk Akun</string>
+    <string name="txt_signin_desc">Selamat datang kembali, silahkan masukan email / username dan kata sandi.</string>
+    <string name="txt_input_userid">Email atau Username</string>
+    <string name="txt_input_password">Kata Sandi</string>
+    <string name="txt_helper_default">Pesan error akan muncul disini</string>
+    <string name="txt_login_with">Masuk dengan</string>
+    <string name="txt_dont_have_account">Belum punya akun?</string>
+    <string name="txt_register_here">Daftar Disini.</string>
+    <string name="txt_forgot_pass">Lupa Kata Sandi?</string>
     <string name="txt_fsnf_server_desk">Tidak dapat terhubung dengan %1$s. Silakan segera hubungi pengembang untuk mengatasi masalah ini."</string>
 
     <string name="alt_app_logo">Logo C2</string>
+    <string name="alt_acc_back">Kembali</string>
+    <string name="alt_google_logo">Google</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_login">LOGIN</string>

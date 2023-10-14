@@ -1,18 +1,19 @@
 package com.c2.arenafinder.ui.fragment.account;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
-import android.os.Looper;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,9 +35,6 @@ import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
 
-import java.io.IOException;
-import java.util.Objects;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,23 +50,22 @@ public class SignInFragment extends Fragment {
     private GoogleUsers google;
     private DataShared dataShared;
 
-    private Button btnSignIn;
     private ImageView btnGoogle;
-    private TextView txtLupaSandi, btnSignUp;
+    private TextView btnForgot, btnSignUp;
     private TextInputEditText inpEmail, inpPassword;
     private ButtonAccountCustom btnCustom;
 
-    private void initViews(View view){
-        btnSignIn = view.findViewById(R.id.signin_btn_signin);
-        btnSignUp = view.findViewById(R.id.signin_register);
-        btnGoogle = view.findViewById(R.id.signin_google);
-        txtLupaSandi = view.findViewById(R.id.signin_lupa_sandi);
+    private void initViews(View view) {
+        btnSignUp = view.findViewById(R.id.signin_btn_register);
+        btnGoogle = view.findViewById(R.id.signin_btn_google);
+        btnForgot = view.findViewById(R.id.signin_btn_lupa_sandi);
         inpEmail = view.findViewById(R.id.signin_inp_email);
         inpPassword = view.findViewById(R.id.signin_inp_pass);
-        btnCustom = new ButtonAccountCustom(requireContext(), view, "Masuk");
+        btnCustom = new ButtonAccountCustom(requireContext(), view, R.string.btn_sign_in);
     }
 
-    public SignInFragment() {}
+    public SignInFragment() {
+    }
 
     public static SignInFragment newInstance(String param1, String param2) {
         SignInFragment fragment = new SignInFragment();
@@ -101,6 +98,19 @@ public class SignInFragment extends Fragment {
         initViews(view);
         dataShared = new DataShared(requireContext());
 
+        String btnRegisterTxt = getString(R.string.txt_register_here);
+        String btnLupaPasswordTxt = getString(R.string.txt_forgot_pass);
+
+        // set underline on txt signup
+        SpannableString spanSignUp = new SpannableString(btnRegisterTxt);
+        spanSignUp.setSpan(new UnderlineSpan(), 0, btnRegisterTxt.length(), 0);
+        btnSignUp.setText(spanSignUp);
+
+        // set underline on txt forgot pass
+        SpannableString spanForgot = new SpannableString(btnLupaPasswordTxt);
+        spanForgot.setSpan(new UnderlineSpan(), 0, btnLupaPasswordTxt.length(), 0);
+        btnForgot.setText(spanForgot);
+
         onClickGroups();
     }
 
@@ -110,9 +120,9 @@ public class SignInFragment extends Fragment {
 
         google.onActivityResult(requestCode, resultCode, data);
 
-        if (google.isAccountSelected()){
+        if (google.isAccountSelected()) {
 
-            if (google.getUserData().getPhotoUrl() != null){
+            if (google.getUserData().getPhotoUrl() != null) {
                 LogApp.info(requireContext(), String.valueOf(google.getUserData().getPhotoUrl()));
             }
 
@@ -121,7 +131,7 @@ public class SignInFragment extends Fragment {
                     .enqueue(new Callback<UsersResponse>() {
                         @Override
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                            if (response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                            if (response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                                 // saving data ke preferences
                                 UserModel data = response.body().getData();
                                 dataShared.setData(KEY.ACC_USERNAME, data.getUsername());
@@ -133,7 +143,7 @@ public class SignInFragment extends Fragment {
                                 // open main activity
                                 Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
-                            }else {
+                            } else {
                                 Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -148,26 +158,48 @@ public class SignInFragment extends Fragment {
         }
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
-        txtLupaSandi.setOnClickListener(v -> {
+        btnForgot.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.acc_frame_layout, new ForgotPasswordFragment())
                     .addToBackStack(null)
                     .commit();
         });
 
-        btnSignIn.setOnClickListener(v -> {
-            String email = inpEmail.getText().toString(),
-                   password = inpPassword.getText().toString();
+        btnGoogle.setOnClickListener(v -> {
+            LogApp.info(requireContext(), v, "Button Google diclick");
 
+            // jika terhubung internet
+            if (ArenaFinder.isInternetConnected(requireContext())) {
+                if (google == null) {
+                    google = new GoogleUsers(requireActivity());
+                } else {
+                    google.resetLastSignIn();
+                }
+                // membuka google sign-in intent
+                startActivityForResult(google.getIntent(), GoogleUsers.REQUEST_CODE);
+            } else {
+                LogApp.warn(requireContext(), LogTag.GOOGLE_SIGN, "no internet connection");
+                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                Toast.makeText(requireContext(), getString(R.string.err_no_internet), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnSignUp.setOnClickListener(v -> {
+            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFragmentFirst(), true);
+        });
+
+        btnCustom.setOnClickLoadingListener(() -> {
+            String email = inpEmail.getText().toString(),
+                    password = inpPassword.getText().toString();
 
             RetrofitEndPoint endPoint = RetrofitClient.getConnection().create(RetrofitEndPoint.class);
             Call<UsersResponse> responseCall = endPoint.login(email, password);
             responseCall.enqueue(new Callback<UsersResponse>() {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                    if (response.body().getStatus().equals("success")){
+                    if (response.body().getStatus().equals("success")) {
                         // saving data ke preferences
                         UserModel data = response.body().getData();
                         dataShared.setData(KEY.ACC_USERNAME, data.getUsername());
@@ -179,51 +211,19 @@ public class SignInFragment extends Fragment {
                         // open main activity
                         Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
-                    }else {
+                    } else {
                         Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                    btnCustom.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                 }
 
                 @Override
                 public void onFailure(Call<UsersResponse> call, Throwable t) {
                     Toast.makeText(SignInFragment.this.requireContext(), "Koneksi Failure", Toast.LENGTH_SHORT).show();
+                    btnCustom.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                 }
             });
 
-        });
-
-        btnGoogle.setOnClickListener(v -> {
-            LogApp.info(requireContext(), v, "Button Google diclick");
-
-            // jika terhubung internet
-            if (ArenaFinder.isInternetConnected(requireContext())){
-                if (google == null){
-                    google = new GoogleUsers(requireActivity());
-                }else {
-                    google.resetLastSignIn();
-                }
-                // membuka google sign-in intent
-                startActivityForResult(google.getIntent(), GoogleUsers.REQUEST_CODE);
-            }else {
-                LogApp.warn(requireContext(), LogTag.GOOGLE_SIGN, "no internet connection");
-                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                Toast.makeText(requireContext(), getString(R.string.err_no_internet), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnSignUp.setOnClickListener(v -> {
-            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFragmentFirst(), true);
-        });
-
-        btnCustom.getButton().setOnClickListener(v -> {
-            btnCustom.setProgress(ButtonAccountCustom.RUN_PROGRESS);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(requireContext(), "cuk", Toast.LENGTH_SHORT).show();
-                    btnCustom.setProgress(ButtonAccountCustom.KILL_PROGRESS);
-                }
-            }, 3000L);
         });
 
     }

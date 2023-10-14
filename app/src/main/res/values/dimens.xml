@@ -8,4 +8,22 @@
     <dimen name="btn_acc_corner">@dimen/_5sdp</dimen>
     <dimen name="btn_acc_margin">@dimen/_8sdp</dimen>
 
+    <dimen name="acc_linear_margin">@dimen/_20sdp</dimen>
+    <dimen name="acc_title_textsize">@dimen/_25ssp</dimen>
+    <dimen name="acc_desc_textsize">@dimen/_11ssp</dimen>
+    <dimen name="acc_desc_margin">@dimen/_5sdp</dimen>
+    <dimen name="acc_input_title_textsize">@dimen/_10ssp</dimen>
+    <dimen name="acc_input_title_margintop">@dimen/_10sdp</dimen>
+    <dimen name="acc_input_between">@dimen/_35sdp</dimen>
+    <dimen name="acc_input_margintop">@dimen/_5sdp</dimen>
+    <dimen name="acc_input_height">@dimen/_40sdp</dimen>
+    <dimen name="acc_input_textsize">@dimen/_11ssp</dimen>
+    <dimen name="acc_input_stroke">@dimen/_1sdp</dimen>
+    <dimen name="acc_input_stroke_focused">@dimen/_2sdp</dimen>
+    <dimen name="acc_txt_helper_margin">@dimen/_4sdp</dimen>
+    <dimen name="acc_btn_size">@dimen/_37sdp</dimen>
+    <dimen name="acc_btn_margin_width">@dimen/_30sdp</dimen>
+    <dimen name="acc_btn_margin_top">@dimen/_20sdp</dimen>
+    <dimen name="acc_margin_bottom">@dimen/_30sdp</dimen>
+
 </resources>
