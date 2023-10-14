@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import android.content.Context;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -106,6 +107,21 @@ public class ButtonAccountCustom extends View{
                 this.elevationVisibility(false);
                 break;
         }
+    }
+
+    public void setOnClickLoadingListener(OnClickLoadingListener view){
+
+        card.setOnClickListener(v -> {
+            setProgress(RUN_PROGRESS);
+            new Handler().postDelayed(
+                    view::onClick,
+                    500L
+            );
+        });
+    }
+
+    public interface OnClickLoadingListener {
+        void onClick();
     }
 
 }
