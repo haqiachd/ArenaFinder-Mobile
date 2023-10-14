@@ -37,6 +37,26 @@
     <string name="msg_otp_input">Masukan kode OTP.</string>
     <string name="suc_otp_valid">Kode OTP valid</string>
     <string name="suc_account_edited">Akun berhasil diedit</string>
+    <string name="suc_username_valid">Username valid</string>
+    <string name="suc_email_valid">Email valid</string>
+    <string name="suc_name_valid">Nama valid</string>
+    <string name="suc_password_valid">Password valid</string>
+
+    <string name="err_username_empty">Username tidak boleh kosong</string>
+    <string name="err_username_length">Panjang username harus diantara 4–20 karakter.</string>
+    <string name="err_username_symbols">Simbol yang diizinkan hanyalah . , - _</string>
+    <string name="err_email_empty">Email tidak boleh kosong</string>
+    <string name="err_email_invalid">Email tidak valid</string>
+    <string name="err_name_empty">Nama tidak boleh kosong</string>
+    <string name="err_name_length">Nama harus diantara 4–50 karakter</string>
+    <string name="err_name_numbers">Nama tidak boleh mengandung angka</string>
+    <string name="err_name_symbols">Simbol yang diizinkan hanyalah .,-\'</string>
+    <string name="err_password_empty">Password tidak boleh kosong</string>
+    <string name="err_password_length">Password harus diantara 8–30 karakter</string>
+    <string name="err_password_uppercase">Password harus mengadung huruf besar</string>
+    <string name="err_password_lowercase">Password harus mengandung huruf kecil</string>
+    <string name="err_password_number">Password harus mengandung angka</string>
+    <string name="err_password_symbol">Password harus mengandung simbol</string>
     <string name="err_server_not_found">Server tidak ditemukan</string>
     <string name="err_no_internet">Tidak ada koneksi Internet.</string>
     <string name="err_no_data_selected">Tidak ada data yang dipilih.</string>
