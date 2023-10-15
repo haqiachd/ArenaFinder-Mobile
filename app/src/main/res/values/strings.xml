@@ -21,6 +21,10 @@
     <string name="btn_send_otp">Kirim Kode OTP</string>
     <string name="btn_ganti_password">Ganti Kata Sandi</string>
     <string name="btn_kirim_ulang">Kirim Ulang OTP</string>
+    <string name="btn_wlc_register">Daftar</string>
+    <string name="btn_wlc_login">Masuk</string>
+    <string name="btn_pengguna_umum">Pengguna Umum</string>
+    <string name="btn_pegelola_lapangan">Pengelola Lapangan</string>
 
     <string name="txt_signin_title">Masuk Akun</string>
     <string name="txt_signup1_title">Daftar Akun</string>
@@ -57,10 +61,15 @@
     <string name="txt_login_here">Masuk Disini.</string>
     <string name="txt_forgot_pass">Lupa Kata Sandi?</string>
     <string name="txt_fsnf_server_desk">Tidak dapat terhubung dengan %1$s. Silakan segera hubungi pengembang untuk mengatasi masalah ini."</string>
+    <string name="txt_welcome_desc">Aktivitas penunjang kehidupan yang lebih sehat dan menyenangkan dan kegiatan yang meningkatkan kualitas hidup.</string>
+    <string name="txt_signup_type">Daftar Akun Sebagai</string>
+    <string name="txt_signup_type_desc">Pilih tipe akun, kamu mau daftar sebagai pengguna umum atau pengelola lapangan</string>
 
     <string name="alt_app_logo">Logo C2</string>
     <string name="alt_acc_back">Kembali</string>
     <string name="alt_google_logo">Google</string>
+    <string name="alt_welcome">Halaman Welcome</string>
+    <string name="alt_signup_type">Logo Orang</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_login">LOGIN</string>

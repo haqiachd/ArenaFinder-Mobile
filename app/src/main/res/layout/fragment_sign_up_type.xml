@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
-    tools:context=".ui.fragment.empty.WelcomeFragment">
+    tools:context=".ui.fragment.account.SignUpTypeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,49 +15,48 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/kanit_medium"
-                android:text="@string/app_name"
+                android:text="@string/txt_signup_type"
                 android:textAlignment="center"
                 android:textColor="@color/primary_color"
-                android:textSize="@dimen/_28sdp" />
+                android:textSize="@dimen/acc_title_textsize" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:fontFamily="@font/kanit_medium"
-                android:text="@string/txt_welcome_desc"
+                android:layout_marginStart="@dimen/acc_linear_margin"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/acc_linear_margin"
+                android:fontFamily="@font/opensans_bold"
+                android:text="@string/txt_signup_type_desc"
                 android:textAlignment="center"
-                android:textColor="@color/primary_color" />
+                android:textColor="@color/granite_grey"
+                android:textSize="@dimen/acc_desc_textsize" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_17sdp"
-                android:contentDescription="@string/alt_welcome"
-                android:src="@drawable/ic_welcome" />
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_300sdp"
+                android:layout_gravity="top"
+                android:layout_marginStart="@dimen/acc_linear_margin"
+                android:layout_marginEnd="@dimen/acc_linear_margin"
+                android:contentDescription="@string/alt_signup_type"
+                android:src="@drawable/ic_signup_type" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/wlc_btn_signup"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_32sdp"
+                android:layout_marginEnd="@dimen/_32sdp"
                 android:backgroundTint="@color/primary_color"
                 android:fontFamily="@font/kanit_medium"
-                android:text="@string/btn_wlc_register"
+                android:text="@string/btn_pengguna_umum"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_14sdp"
                 app:cornerRadius="@dimen/_5sdp" />
@@ -67,11 +66,11 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_32sdp"
                 android:fontFamily="@font/kanit_medium"
-                android:text="@string/btn_wlc_login"
+                android:text="@string/btn_pegelola_lapangan"
                 android:textAllCaps="false"
                 android:textColor="@color/primary_color"
                 android:textSize="@dimen/_14sdp"

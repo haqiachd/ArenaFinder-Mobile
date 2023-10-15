@@ -10,6 +10,7 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.account.OtpVerificationFragment;
 import com.c2.arenafinder.ui.fragment.account.SignInFragment;
 import com.c2.arenafinder.ui.fragment.account.SignUpFirstFragment;
+import com.c2.arenafinder.ui.fragment.account.SignUpTypeFragment;
 import com.c2.arenafinder.util.FragmentUtil;
 
 public class AccountActivity extends AppCompatActivity {
@@ -48,7 +49,7 @@ public class AccountActivity extends AppCompatActivity {
         else {
             switch (getIntent().getStringExtra(FRAGMENT)) {
                 case SIGN_UP: {
-                    FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new SignUpFirstFragment(), false);
+                    FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new SignUpTypeFragment(), false);
                     break;
                 }
                 case SIGN_IN: {
