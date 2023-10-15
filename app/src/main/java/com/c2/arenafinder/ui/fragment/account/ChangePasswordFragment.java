@@ -44,7 +44,7 @@ public class ChangePasswordFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
         btnChange = new ButtonAccountCustom(requireContext(), view, R.string.btn_ganti_password);
         inpPassword = view.findViewById(R.id.chgpass_inp_pass);
         inpKonf = view.findViewById(R.id.chgpass_inp_konf);
@@ -85,15 +85,15 @@ public class ChangePasswordFragment extends Fragment {
         onChangedGroups();
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
-        btnChange.setOnClickLoadingListener(() -> {;
+        btnChange.setOnClickLoadingListener(() -> {
 
             RetrofitClient.getInstance().updatePassword(email, inpPassword.getText().toString())
                     .enqueue(new Callback<UsersResponse>() {
                         @Override
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                            if (response.body() != null && RetrofitClient.apakahSukses(response)){
+                            if (response.body() != null && RetrofitClient.apakahSukses(response)) {
 
                                 new AlertDialog.Builder(requireContext())
                                         .setTitle(R.string.dia_title_inform)
@@ -112,7 +112,7 @@ public class ChangePasswordFragment extends Fragment {
                                         .create()
                                         .show();
 
-                            }else {
+                            } else {
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             btnChange.setProgress(ButtonAccountCustom.KILL_PROGRESS);
@@ -130,17 +130,19 @@ public class ChangePasswordFragment extends Fragment {
 
     }
 
-    private void onChangedGroups(){
+    private void onChangedGroups() {
 
         EditText[] inputs = {inpPassword, inpKonf};
 
-        for (EditText input : inputs){
+        for (EditText input : inputs) {
             input.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
 
                 @Override
                 public void afterTextChanged(Editable s) {

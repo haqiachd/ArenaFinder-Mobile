@@ -13,14 +13,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
@@ -49,7 +47,7 @@ public class ForgotPasswordFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
         btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_send_otp);
         inpEmail = view.findViewById(R.id.forgot_inp_email);
         txtHelper = view.findViewById(R.id.forgot_txt_helper);
@@ -90,72 +88,56 @@ public class ForgotPasswordFragment extends Fragment {
         onChangedGroups();
     }
 
-    public void onClickGroups(){
+    public void onClickGroups() {
 
         btnSend.setOnClickLoadingListener(() -> {
 
-        RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), "forgotpass")
-            .enqueue(new Callback<VerifyResponse>() {
-                @Override
-                public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
-                    if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
-                        new AlertDialog.Builder(requireContext())
-                                .setTitle(R.string.dia_title_inform)
-                                .setMessage(R.string.dia_msg_inform_forgot)
-                                .setPositiveButton(R.string.dia_positive_verify, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        FragmentUtil.switchFragmentAccount(
-                                                requireActivity().getSupportFragmentManager(),
-                                                OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp(), "forgotpass"),
-                                                false);
-                                    }
-                                })
-                                .create().show();
-                    }else {
-                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
+            RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), "forgotpass")
+                    .enqueue(new Callback<VerifyResponse>() {
+                        @Override
+                        public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                            if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
+                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                new AlertDialog.Builder(requireContext())
+                                        .setTitle(R.string.dia_title_inform)
+                                        .setMessage(R.string.dia_msg_inform_forgot)
+                                        .setCancelable(false)
+                                        .setPositiveButton(R.string.dia_positive_verify, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                FragmentUtil.switchFragmentAccount(
+                                                        requireActivity().getSupportFragmentManager(),
+                                                        OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp(), "forgotpass"),
+                                                        false);
+                                            }
+                                        })
+                                        .create().show();
+                            } else {
+                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                            btnSend.setStatus(ButtonAccountCustom.KILL_PROGRESS);
+                        }
 
-                @Override
-                public void onFailure(Call<VerifyResponse> call, Throwable t) {
-                    Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            btnSend.setStatus(ButtonAccountCustom.KILL_PROGRESS);
+                        }
+                    });
 
-//            RetrofitClient.getInstance().cekUser(inpEmail.getText().toString())
-//                    .enqueue(new Callback<UsersResponse>() {
-//                        @Override
-//                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-//                            if (response.body() != null && RetrofitClient.apakahSukses(response)){
-//
-//
-//                            }else {
-//                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<UsersResponse> call, Throwable t) {
-//                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-//                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
         });
 
     }
 
-    public void onChangedGroups(){
+    public void onChangedGroups() {
 
         inpEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override

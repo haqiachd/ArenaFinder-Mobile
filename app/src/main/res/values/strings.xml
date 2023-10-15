@@ -78,15 +78,17 @@
     <string name="dia_title_confirm">Konfirmasi</string>
     <string name="dia_title_inform">Informasi</string>
     <string name="dia_title_warning">Peringatan</string>
+    <string name="dia_title_register">Mendaftarkan Akun</string>
     <string name="dia_msg_confirm_logout">Apakah Kamu Ingin Logout?</string>
     <string name="dia_msg_confirm_close">Apakah kamu ingin keluar dari aplikasi.</string>
     <string name="dia_msg_otp_signup_suc">OTP yang kamu masukan valid, Silahkan login dengan akun kamu.</string>
     <string name="dia_msg_otp_forgot_suc">OTP yang kamu masukan valid, Silahkan mengganti password kamu.</string>
-    <string name="dia_msg_inform_signup">Daftar akun berhasil, Kamu akan menerima kode OTP untuk verifikasi akun kamu.</string>
+    <string name="dia_msg_inform_signup">Daftar akun berhasil, Cek email kamu untuk melakukan verifikasi kode OTP.</string>
     <string name="dia_msg_account_is_registered">Akun tersebut sudah terdaftar!</string>
     <string name="dia_msg_password_changed">Password berhasil diubah, Silahkan login dengan password yang baru.</string>
     <string name="dia_msg_inform_forgot">Kami telah mengirimkan kode OTP ke email kamu untuk melakukan verifikasi.</string>
-    <string name="dia_msg_signup_type">Kamu akan diarahkan ke halaman web jika akan mendaftar sebagai pengelola lapangan.</string>
+    <string name="dia_msg_signup_type">Kamu akan diarahkan ke halaman web jika mendaftar sebagai pengelola lapangan.</string>
+    <string name="dia_msg_loading">Tunggu sebentar…</string>
 
     <string name="suc_userid_valid">Email atau username valid</string>
     <string name="msg_otp_input">Masukan kode OTP.</string>

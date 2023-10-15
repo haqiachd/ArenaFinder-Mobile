@@ -1,18 +1,21 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +46,7 @@ public class SignUpGoogle extends Fragment {
     private UsersUtil usersUtil;
     private DataShared dataShared;
     private ValidatorUtil validator;
+
     private String email;
     private String fullName;
 
@@ -50,7 +54,7 @@ public class SignUpGoogle extends Fragment {
     private EditText inpUsername, inpPassword, inpkonf;
     private TextView txtHelper;
 
-    private void initViews(View view){
+    private void initViews(View view) {
         this.btnRegister = new ButtonAccountCustom(requireContext(), view, R.string.btn_sign_up);
         this.inpUsername = view.findViewById(R.id.signupg_inp_username);
         this.inpPassword = view.findViewById(R.id.signupg_inp_pass);
@@ -87,6 +91,7 @@ public class SignUpGoogle extends Fragment {
         return inflater.inflate(R.layout.fragment_sign_up_google, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -99,9 +104,9 @@ public class SignUpGoogle extends Fragment {
         onChangedGroups();
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
-        btnRegister.setOnClickLoadingListener(() -> {;
+        btnRegister.setOnClickLoadingListener(() -> {
 
             RetrofitClient.getInstance().registerGoogle(
                     inpUsername.getText().toString(), email,
@@ -109,7 +114,7 @@ public class SignUpGoogle extends Fragment {
             ).enqueue(new Callback<UsersResponse>() {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                    if (response.body() != null && RetrofitClient.apakahSukses(response)){
+                    if (response.body() != null && RetrofitClient.apakahSukses(response)) {
                         UserModel model = response.body().getData();
 
                         LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "email : " + model.getEmail());
@@ -121,11 +126,28 @@ public class SignUpGoogle extends Fragment {
                         dataShared.setData(KEY.ACC_LEVEL, model.getLevel());
                         dataShared.setData(KEY.ACC_PHOTO, model.getUserPhoto());
 
-                        startActivity(new Intent(requireActivity(), MainActivity.class));
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                new AlertDialog.Builder(requireContext())
+                                        .setTitle(R.string.dia_title_inform)
+                                        .setMessage("Daftar akun berhasil, Silahkan masuk kedalam aplikasi.")
+                                        .setCancelable(false)
+                                        .setPositiveButton("Buka Aplikasi", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                startActivity(new Intent(requireActivity(), MainActivity.class));
+                                            }
+                                        }).create().show();
+                            }
+                        });
 
-                    }else {
+                        btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
+
+                    } else {
                         ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                         Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
                     }
                 }
 
@@ -133,6 +155,7 @@ public class SignUpGoogle extends Fragment {
                 public void onFailure(Call<UsersResponse> call, Throwable t) {
                     ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                     Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
                 }
             });
 
@@ -140,17 +163,19 @@ public class SignUpGoogle extends Fragment {
 
     }
 
-    private void onChangedGroups(){
+    private void onChangedGroups() {
 
         EditText[] inputs = {inpUsername, inpPassword, inpkonf};
 
-        for (EditText input : inputs){
+        for (EditText input : inputs) {
             input.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
 
                 @Override
                 public void afterTextChanged(Editable s) {

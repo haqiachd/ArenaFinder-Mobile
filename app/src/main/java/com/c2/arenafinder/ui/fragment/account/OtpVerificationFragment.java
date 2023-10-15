@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.FragmentUtil;
 import com.otpview.OTPListener;
 import com.otpview.OTPTextView;
 
@@ -88,7 +89,7 @@ public class OtpVerificationFragment extends Fragment {
     private void onClickGroups(){
 
         btnSend.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Button di clik", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Nanti Dulu :v", Toast.LENGTH_SHORT).show();
         });
 
     }
@@ -105,7 +106,6 @@ public class OtpVerificationFragment extends Fragment {
             @Override
             public void onOTPComplete(@NonNull String otp) {
 
-                OtpVerificationFragment.this.otp = "123456";
                 if (otp.equals(OtpVerificationFragment.this.otp)){
                     helperText.setText(R.string.suc_otp_valid);
                     ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
@@ -116,45 +116,45 @@ public class OtpVerificationFragment extends Fragment {
                         }
                     });
 
-//                    switch (type){
-//                        case "signup" : {
-//                            new AlertDialog.Builder(requireContext())
-//                                    .setTitle(R.string.dia_title_inform)
-//                                    .setMessage(R.string.dia_msg_otp_signup_suc)
-//                                    .setCancelable(false)
-//                                    .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            FragmentUtil.switchFragmentAccount(
-//                                                    requireActivity().getSupportFragmentManager(),
-//                                                    new SignInFragment(),
-//                                                    false
-//                                            );
-//                                        }
-//                                    })
-//                                    .create().show();
-//
-//                            break;
-//                        }
-//                        case "forgotpass" : {
-//                            new AlertDialog.Builder(requireContext())
-//                                    .setTitle(R.string.dia_title_inform)
-//                                    .setMessage(R.string.dia_msg_otp_forgot_suc)
-//                                    .setCancelable(false)
-//                                    .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            FragmentUtil.switchFragmentAccount(
-//                                                    requireActivity().getSupportFragmentManager(),
-//                                                    GantiSandiFragment.newInstance(email),
-//                                                    false
-//                                            );
-//                                        }
-//                                    })
-//                                    .create().show();
-//                            break;
-//                        }
-//                    }
+                    switch (type){
+                        case "signup" : {
+                            new AlertDialog.Builder(requireContext())
+                                    .setTitle(R.string.dia_title_inform)
+                                    .setMessage(R.string.dia_msg_otp_signup_suc)
+                                    .setCancelable(false)
+                                    .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FragmentUtil.switchFragmentAccount(
+                                                    requireActivity().getSupportFragmentManager(),
+                                                    new SignInFragment(),
+                                                    false
+                                            );
+                                        }
+                                    })
+                                    .create().show();
+
+                            break;
+                        }
+                        case "forgotpass" : {
+                            new AlertDialog.Builder(requireContext())
+                                    .setTitle(R.string.dia_title_inform)
+                                    .setMessage(R.string.dia_msg_otp_forgot_suc)
+                                    .setCancelable(false)
+                                    .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FragmentUtil.switchFragmentAccount(
+                                                    requireActivity().getSupportFragmentManager(),
+                                                    ChangePasswordFragment.newInstance(email),
+                                                    false
+                                            );
+                                        }
+                                    })
+                                    .create().show();
+                            break;
+                        }
+                    }
 
                 }else{
                     helperText.setText(R.string.err_otp_invalid);

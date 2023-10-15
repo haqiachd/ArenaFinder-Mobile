@@ -77,9 +77,8 @@
                         style="@style/ThemeOverlay.Material3.TextInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
-                        android:autofillHints="emailAddress"
                         android:fontFamily="@font/poppins_semibold"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
                         android:textColor="@color/black"
                         android:textSize="@dimen/acc_input_textsize"
                         tools:ignore="SpeakableTextPresentCheck" />

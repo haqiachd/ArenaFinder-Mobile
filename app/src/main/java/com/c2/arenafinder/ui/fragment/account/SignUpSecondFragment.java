@@ -1,9 +1,11 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -16,20 +18,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.data.response.VerifyResponse;
+import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.ValidatorUtil;
 import com.google.android.material.button.MaterialButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SignUpSecondFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_USERNAME = "username";
+    private static final String ARG_EMAIL = "email";
+    private static final String ARG_NAME = "name";
 
     private ValidatorUtil validator;
 
-    private String mParam1;
-    private String mParam2;
+    private String username;
+    private String email;
+    private String name;
 
+    private AlertDialog loadingVerify;
     private MaterialButton btnPrev, btnSignUp;
     private EditText inpPassword, inpKonf;
     private TextView txtHelper;
@@ -38,7 +52,7 @@ public class SignUpSecondFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
         btnPrev = view.findViewById(R.id.signup2_btn_back);
         btnSignUp = view.findViewById(R.id.signup2_btn_signup);
         inpPassword = view.findViewById(R.id.signup2_inp_password);
@@ -46,11 +60,12 @@ public class SignUpSecondFragment extends Fragment {
         txtHelper = view.findViewById(R.id.signup2_txt_helper);
     }
 
-    public static SignUpSecondFragment newInstance(String param1, String param2) {
+    public static SignUpSecondFragment newInstance(String username, String email, String name) {
         SignUpSecondFragment fragment = new SignUpSecondFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_USERNAME, username);
+        args.putString(ARG_EMAIL, email);
+        args.putString(ARG_NAME, name);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,8 +74,9 @@ public class SignUpSecondFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString(ARG_USERNAME);
+            email = getArguments().getString(ARG_EMAIL);
+            name = getArguments().getString(ARG_NAME);
         }
     }
 
@@ -77,14 +93,85 @@ public class SignUpSecondFragment extends Fragment {
         initViews(view);
         validator = new ValidatorUtil(requireContext(), btnSignUp, txtHelper);
 
+        loadingVerify = new AlertDialog.Builder(requireContext())
+                .setView(getLayoutInflater().inflate(R.layout.dialog_loading, null))
+                .setTitle(R.string.dia_title_register)
+                .setCancelable(false).create();
+
         onClickGroups();
         onChangedGroups();
     }
 
-    private void onClickGroups(){
+    private void sendEmailVerify(){
 
-        btnSignUp.setOnClickListener(v ->{
-            Toast.makeText(requireContext(), "Register", Toast.LENGTH_SHORT).show();
+        RetrofitClient.getInstance().sendEmail(email, "signup")
+                .enqueue(new Callback<VerifyResponse>() {
+                    @Override
+                    public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
+                            loadingVerify.dismiss();
+                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                            new AlertDialog.Builder(requireContext())
+                                    .setTitle(R.string.dia_title_inform)
+                                    .setMessage(R.string.dia_msg_inform_signup)
+                                    .setCancelable(false)
+                                    .setPositiveButton(R.string.dia_positive_verify, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            FragmentUtil.switchFragmentAccount(
+                                                    requireActivity().getSupportFragmentManager(),
+                                                    OtpVerificationFragment.newInstance(email, response.body().getData().getOtp(), "signup"),
+                                                    false
+                                            );
+
+                                        }
+                                    })
+                                    .create()
+                                    .show();
+
+                        } else {
+                            assert response.body() != null;
+                            Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            loadingVerify.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                        Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        loadingVerify.dismiss();
+                    }
+                });
+    }
+
+    private void onClickGroups() {
+
+        btnSignUp.setOnClickListener(v -> {
+
+            loadingVerify.show();
+
+            RetrofitClient.getInstance().register(username, email, name, inpPassword.getText().toString())
+                    .enqueue(new Callback<UsersResponse>() {
+                        @Override
+                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                            if (RetrofitClient.apakahSukses(response)) {
+                                sendEmailVerify();
+                            } else {
+                                assert response.body() != null;
+                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                loadingVerify.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UsersResponse> call, Throwable t) {
+                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            loadingVerify.dismiss();
+                        }
+                    });
         });
 
         btnPrev.setOnClickListener(v -> {
@@ -93,17 +180,19 @@ public class SignUpSecondFragment extends Fragment {
 
     }
 
-    private void onChangedGroups(){
+    private void onChangedGroups() {
 
         EditText[] inputs = {inpPassword, inpKonf};
 
-        for (EditText input : inputs){
+        for (EditText input : inputs) {
             input.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
 
                 @Override
                 public void afterTextChanged(Editable s) {

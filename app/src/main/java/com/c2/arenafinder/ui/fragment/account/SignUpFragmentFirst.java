@@ -47,7 +47,7 @@ public class SignUpFragmentFirst extends Fragment {
     private MaterialButton btnSignUp;
     private ImageView btnGoogle;
 
-    private void initViews(View view){
+    private void initViews(View view) {
         inpUsername = view.findViewById(R.id.signup1_inp_username);
         inpEmail = view.findViewById(R.id.signup1_inp_email);
         inpName = view.findViewById(R.id.signup1_inp_name);
@@ -98,14 +98,14 @@ public class SignUpFragmentFirst extends Fragment {
 
         google.onActivityResult(requestCode, resultCode, data);
 
-        if(google.isAccountSelected()){
+        if (google.isAccountSelected()) {
 
             GoogleSignInAccount account = google.getUserData();
 
             RetrofitClient.getInstance().cekUser(account.getEmail()).enqueue(new Callback<UsersResponse>() {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                    if (response.body() != null && RetrofitClient.apakahSukses(response)){
+                    if (response.body() != null && RetrofitClient.apakahSukses(response)) {
                         ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                         new AlertDialog.Builder(requireContext())
                                 .setTitle(R.string.dia_title_warning)
@@ -115,7 +115,7 @@ public class SignUpFragmentFirst extends Fragment {
                                     dialog.dismiss();
                                 })
                                 .create().show();
-                    }else {
+                    } else {
                         FragmentUtil.switchFragmentAccount(
                                 requireActivity().getSupportFragmentManager(),
                                 SignUpGoogle.newInstance(google.getUserData().getEmail(), google.getUserData().getDisplayName()),
@@ -135,25 +135,25 @@ public class SignUpFragmentFirst extends Fragment {
         }
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
         btnSignUp.setOnClickListener(v -> {
             String username = inpUsername.getText().toString(),
-                   email = inpEmail.getText().toString(),
-                   fullName = inpName.getText().toString(),
-                   password = inpPassword.getText().toString();
+                    email = inpEmail.getText().toString(),
+                    fullName = inpName.getText().toString(),
+                    password = inpPassword.getText().toString();
 
             RetrofitClient.getInstance().register(username, email, fullName, password)
                     .enqueue(new Callback<UsersResponse>() {
                         @Override
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                            if(RetrofitClient.apakahSukses(response)){
+                            if (RetrofitClient.apakahSukses(response)) {
 
                                 RetrofitClient.getInstance().sendEmail(email, "signup")
                                         .enqueue(new Callback<VerifyResponse>() {
                                             @Override
                                             public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
-                                                if(response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
+                                                if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
 
                                                     new AlertDialog.Builder(requireContext())
                                                             .setTitle(R.string.dia_title_inform)
@@ -174,7 +174,7 @@ public class SignUpFragmentFirst extends Fragment {
                                                             .create()
                                                             .show();
 
-                                                }else {
+                                                } else {
                                                     assert response.body() != null;
                                                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
@@ -187,7 +187,7 @@ public class SignUpFragmentFirst extends Fragment {
                                             }
                                         });
 
-                            }else {
+                            } else {
                                 assert response.body() != null;
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -204,14 +204,14 @@ public class SignUpFragmentFirst extends Fragment {
         btnGoogle.setOnClickListener(v -> {
             LogApp.info(requireContext(), v, LogTag.ON_CLICK, "Button google di click");
 
-            if(ArenaFinder.isInternetConnected(requireContext())){
-                if(google == null){
+            if (ArenaFinder.isInternetConnected(requireContext())) {
+                if (google == null) {
                     google = new GoogleUsers(requireActivity());
-                }else {
+                } else {
                     google.resetLastSignIn();
                 }
                 startActivityForResult(google.getIntent(), GoogleUsers.REQUEST_CODE);
-            }else{
+            } else {
                 ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
                 Toast.makeText(requireContext(), getString(R.string.err_no_internet), Toast.LENGTH_SHORT).show();
             }
