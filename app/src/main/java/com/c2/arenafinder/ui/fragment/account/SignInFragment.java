@@ -187,7 +187,7 @@ public class SignInFragment extends Fragment {
         });
 
         btnSignUp.setOnClickListener(v -> {
-            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFirstFragment(), false);
+            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new OtpVerificationFragment(), false);
         });
 
         btnCustom.setOnClickLoadingListener(() -> {
