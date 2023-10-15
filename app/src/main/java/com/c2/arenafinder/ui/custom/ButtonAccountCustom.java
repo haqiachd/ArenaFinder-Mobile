@@ -43,7 +43,7 @@ public class ButtonAccountCustom extends View{
         this.txtBtnName = view.findViewById(R.id.cus_btn_acc_txt);
         this.progress = view.findViewById(R.id.cus_btn_acc_progress);
         this.setButtonName(btnName);
-        this.setStatus(ENABLE);
+        this.setStatus(DISABLE);
     }
 
     public ButtonAccountCustom(Context context, View view, @StringRes int idBtnName){

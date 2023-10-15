@@ -42,7 +42,13 @@
     <string name="txt_input_password">Kata Sandi</string>
     <string name="txt_input_konf_pass">Konfirmasi Kata Sandi</string>
     <string name="txt_input_name">Nama Lengkap</string>
-    <string name="txt_helper_default">Pesan error akan muncul disini</string>
+    <string name="txt_helper_default_1">Masukkan username atau email serta kata sandi.</string>
+    <string name="txt_helper_default_2">Masukan username dan kata sandi.</string>
+    <string name="txt_helper_default_3">Masukan identitas kamu.</string>
+    <string name="txt_helper_default_4">Masukan password dan konfirmasi</string>
+    <string name="txt_helper_default_5">Masukan kode OTP</string>
+    <string name="txt_helper_default_6">Masukan alamat email</string>
+    <string name="txt_helper_default_7">Masukan password baru</string>
     <string name="txt_login_with">Masuk dengan</string>
     <string name="txt_register_with">Daftar dengan</string>
     <string name="txt_dont_have_account">Belum punya akun?</string>

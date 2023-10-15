@@ -171,8 +171,8 @@
                     android:layout_marginTop="@dimen/acc_txt_helper_margin"
                     android:alpha="0.9"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/txt_helper_default"
-                    android:textColor="@color/orangered"
+                    android:text="@string/txt_helper_default_2"
+                    android:textColor="@color/azure"
                     android:textSize="@dimen/_9sdp"
                     tools:ignore="TextContrastCheck" />
 
