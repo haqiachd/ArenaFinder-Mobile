@@ -262,7 +262,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:alpha="0.9"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="@string/txt_dont_have_account"
+                    android:text="@string/txt_have_account"
                     android:textAlignment="textEnd"
                     android:textColor="#434F65"
                     android:textSize="@dimen/_11sdp" />

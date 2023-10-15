@@ -9,9 +9,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.ui.fragment.account.OtpVerificationFragment;
+import com.c2.arenafinder.ui.fragment.account.ChangePasswordFragment;
 import com.c2.arenafinder.ui.fragment.account.SignInFragment;
-import com.c2.arenafinder.ui.fragment.account.SignUpFirstFragment;
 import com.c2.arenafinder.ui.fragment.account.SignUpTypeFragment;
 import com.c2.arenafinder.util.FragmentUtil;
 
@@ -37,7 +36,6 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account);
         initViews();
 
-
         Uri data = getIntent().getData();
 
         // jika activity dibuka melalui link browser
@@ -48,7 +46,7 @@ public class AccountActivity extends AppCompatActivity {
                     break;
                 }
                 case "forgot": {
-                    FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new OtpVerificationFragment(), false);
+                    FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new ChangePasswordFragment(), false);
                     break;
                 }
             }
