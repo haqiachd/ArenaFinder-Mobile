@@ -29,6 +29,7 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.AccountActivity;
+import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
@@ -242,7 +243,9 @@ public class ProfileFragment extends Fragment {
                         usersUtil.signOut();
                         if (!usersUtil.isSignIn()) {
                             Toast.makeText(requireContext(), "Logout Sukses", Toast.LENGTH_SHORT).show();
-                            ArenaFinder.restartApplication(requireContext(), AccountActivity.class);
+                            startActivity(new Intent(requireActivity(), EmptyActivity.class)
+                                    .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                            );
                         }
                     },
                     (dialog, which) -> {}

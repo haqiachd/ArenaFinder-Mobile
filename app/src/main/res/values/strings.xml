@@ -86,6 +86,7 @@
     <string name="dia_msg_account_is_registered">Akun tersebut sudah terdaftar!</string>
     <string name="dia_msg_password_changed">Password berhasil diubah, Silahkan login dengan password yang baru.</string>
     <string name="dia_msg_inform_forgot">Kami telah mengirimkan kode OTP ke email kamu untuk melakukan verifikasi.</string>
+    <string name="dia_msg_signup_type">Kamu akan diarahkan ke halaman web jika akan mendaftar sebagai pengelola lapangan.</string>
 
     <string name="suc_userid_valid">Email atau username valid</string>
     <string name="msg_otp_input">Masukan kode OTP.</string>

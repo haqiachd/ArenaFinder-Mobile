@@ -49,7 +49,7 @@
                 android:src="@drawable/ic_signup_type" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/wlc_btn_signup"
+                android:id="@+id/signupt_btn_users"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"
                 android:layout_marginStart="@dimen/_32sdp"
@@ -62,7 +62,7 @@
                 app:cornerRadius="@dimen/_5sdp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/wlc_btn_signin"
+                android:id="@+id/signupt_btn_admin"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_47sdp"

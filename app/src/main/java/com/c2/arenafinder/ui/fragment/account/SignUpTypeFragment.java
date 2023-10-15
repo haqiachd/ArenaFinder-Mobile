@@ -1,9 +1,12 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,6 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.material.button.MaterialButton;
 
 public class SignUpTypeFragment extends Fragment {
 
@@ -21,8 +29,15 @@ public class SignUpTypeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private MaterialButton btnUser, btnAdmin;
+
     public SignUpTypeFragment() {
         // Required empty public constructor
+    }
+
+    private void initViews(View view){
+        btnAdmin = view.findViewById(R.id.signupt_btn_admin);
+        btnUser = view.findViewById(R.id.signupt_btn_users);
     }
 
     public static SignUpTypeFragment newInstance(String param1, String param2) {
@@ -53,5 +68,31 @@ public class SignUpTypeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initViews(view);
+
+        onClickGroups();
+    }
+
+    private void onClickGroups(){
+
+        btnAdmin.setOnClickListener(v -> {
+            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.dia_title_inform)
+                    .setMessage(R.string.dia_msg_signup_type)
+                    .setPositiveButton(R.string.btn_wlc_register, (dialog, which) -> {
+                        LogApp.info(requireContext(), LogTag.ON_DIALOG_POSITIVE, "membuka register admin pada web");
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=LgEfTUoiZpE&ab_channel=JKT48")));
+                    })
+                    .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+                    })
+                    .create().show();
+
+        });
+
+        btnUser.setOnClickListener(v -> {
+            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFirstFragment(), false);
+        });
+
     }
 }
