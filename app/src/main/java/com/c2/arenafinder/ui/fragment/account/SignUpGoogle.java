@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
@@ -26,6 +29,7 @@ import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
+import com.c2.arenafinder.util.ValidatorUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,17 +42,20 @@ public class SignUpGoogle extends Fragment {
 
     private UsersUtil usersUtil;
     private DataShared dataShared;
+    private ValidatorUtil validator;
     private String email;
     private String fullName;
 
-    private EditText inpUsername, inpPassword, inpkonf;
     private ButtonAccountCustom btnRegister;
+    private EditText inpUsername, inpPassword, inpkonf;
+    private TextView txtHelper;
 
     private void initViews(View view){
+        this.btnRegister = new ButtonAccountCustom(requireContext(), view, R.string.btn_sign_up);
         this.inpUsername = view.findViewById(R.id.signupg_inp_username);
         this.inpPassword = view.findViewById(R.id.signupg_inp_pass);
         this.inpkonf = view.findViewById(R.id.signupg_inp_konf);
-        this.btnRegister = new ButtonAccountCustom(requireContext(), view, R.string.btn_sign_up);
+        txtHelper = view.findViewById(R.id.signupg_txt_helper);
     }
 
     public SignUpGoogle() {
@@ -86,8 +93,10 @@ public class SignUpGoogle extends Fragment {
         initViews(view);
         usersUtil = new UsersUtil(requireContext());
         dataShared = new DataShared(requireContext());
+        validator = new ValidatorUtil(requireContext(), btnRegister, txtHelper);
 
         onClickGroups();
+        onChangedGroups();
     }
 
     private void onClickGroups(){
@@ -128,6 +137,27 @@ public class SignUpGoogle extends Fragment {
             });
 
         });
+
+    }
+
+    private void onChangedGroups(){
+
+        EditText[] inputs = {inpUsername, inpPassword, inpkonf};
+
+        for (EditText input : inputs){
+            input.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    validator.signupGoogleValidation(inpUsername.getText().toString(), inpPassword.getText().toString(), inpkonf.getText().toString());
+                }
+            });
+        }
 
     }
 

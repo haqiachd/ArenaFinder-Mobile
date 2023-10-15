@@ -8,11 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
@@ -22,6 +25,7 @@ import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.c2.arenafinder.util.ValidatorUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +36,11 @@ public class ForgotPasswordFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private ValidatorUtil validator;
+
     private EditText inpEmail;
     private ButtonAccountCustom btnSend;
+    private TextView txtHelper;
 
     private String mParam1;
     private String mParam2;
@@ -43,8 +50,9 @@ public class ForgotPasswordFragment extends Fragment {
     }
 
     private void initViews(View view){
-        inpEmail = view.findViewById(R.id.forgot_inp_email);
         btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_send_otp);
+        inpEmail = view.findViewById(R.id.forgot_inp_email);
+        txtHelper = view.findViewById(R.id.forgot_txt_helper);
     }
 
     public static ForgotPasswordFragment newInstance(String param1, String param2) {
@@ -76,8 +84,10 @@ public class ForgotPasswordFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        validator = new ValidatorUtil(requireContext(), btnSend, txtHelper);
 
         onClickGroups();
+        onChangedGroups();
     }
 
     public void onClickGroups(){
@@ -131,6 +141,27 @@ public class ForgotPasswordFragment extends Fragment {
 //                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
 //                        }
 //                    });
+        });
+
+    }
+
+    public void onChangedGroups(){
+
+        inpEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                validator.forgotPassValidation(inpEmail.getText().toString());
+            }
         });
 
     }

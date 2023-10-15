@@ -383,7 +383,7 @@
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_password"
+                        android:id="@+id/signup1_inp_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Masukan Password"
@@ -411,7 +411,7 @@
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_konf"
+                        android:id="@+id/signup1_inp_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Konfirmasi Password (nanti dulu)"

@@ -1,19 +1,20 @@
 package com.c2.arenafinder.ui.fragment.account;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.c2.arenafinder.util.ValidatorUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
 import com.c2.arenafinder.R;
@@ -49,11 +51,12 @@ public class SignInFragment extends Fragment {
 
     private GoogleUsers google;
     private DataShared dataShared;
+    private ValidatorUtil validator;
 
     private ImageView btnGoogle;
-    private TextView btnForgot, btnSignUp;
+    private TextView btnForgot, btnSignUp, txtHelper;
     private TextInputEditText inpEmail, inpPassword;
-    private ButtonAccountCustom btnCustom;
+    private ButtonAccountCustom btnLogin;
 
     private void initViews(View view) {
         btnSignUp = view.findViewById(R.id.signin_btn_register);
@@ -61,7 +64,8 @@ public class SignInFragment extends Fragment {
         btnForgot = view.findViewById(R.id.signin_btn_lupa_sandi);
         inpEmail = view.findViewById(R.id.signin_inp_email);
         inpPassword = view.findViewById(R.id.signin_inp_pass);
-        btnCustom = new ButtonAccountCustom(requireContext(), view, R.string.btn_sign_in);
+        txtHelper = view.findViewById(R.id.signin_txt_helper);
+        btnLogin = new ButtonAccountCustom(requireContext(), view, R.string.btn_sign_in);
     }
 
     public SignInFragment() {
@@ -96,7 +100,9 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+
         dataShared = new DataShared(requireContext());
+        validator = new ValidatorUtil(requireContext(), btnLogin, txtHelper);
 
         String btnRegisterTxt = getString(R.string.txt_register_here);
         String btnLupaPasswordTxt = getString(R.string.txt_forgot_pass);
@@ -112,6 +118,7 @@ public class SignInFragment extends Fragment {
         btnForgot.setText(spanForgot);
 
         onClickGroups();
+        onChangedListener();
     }
 
     @Override
@@ -187,10 +194,10 @@ public class SignInFragment extends Fragment {
         });
 
         btnSignUp.setOnClickListener(v -> {
-            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new OtpVerificationFragment(), false);
+            FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new ChangePasswordFragment(), false);
         });
 
-        btnCustom.setOnClickLoadingListener(() -> {
+        btnLogin.setOnClickLoadingListener(() -> {
             String email = inpEmail.getText().toString(),
                     password = inpPassword.getText().toString();
 
@@ -214,17 +221,39 @@ public class SignInFragment extends Fragment {
                     } else {
                         Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    btnCustom.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                    btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                 }
 
                 @Override
                 public void onFailure(Call<UsersResponse> call, Throwable t) {
                     Toast.makeText(SignInFragment.this.requireContext(), "Koneksi Failure", Toast.LENGTH_SHORT).show();
-                    btnCustom.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                    btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                 }
             });
 
         });
 
+    }
+
+    private void onChangedListener() {
+
+        EditText[] inputs = {inpEmail, inpPassword};
+
+        for (EditText input : inputs) {
+            input.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    validator.signinValidation(inpEmail.getText().toString(), inpPassword.getText().toString());
+                }
+            });
+        }
     }
 }

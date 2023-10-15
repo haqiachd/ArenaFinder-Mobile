@@ -78,14 +78,18 @@
     <string name="dia_msg_password_changed">Password berhasil diubah, Silahkan login dengan password yang baru.</string>
     <string name="dia_msg_inform_forgot">Kami telah mengirimkan kode OTP ke email kamu untuk melakukan verifikasi.</string>
 
+    <string name="suc_userid_valid">Email atau username valid</string>
     <string name="msg_otp_input">Masukan kode OTP.</string>
     <string name="suc_otp_valid">Kode OTP valid</string>
     <string name="suc_account_edited">Akun berhasil diedit</string>
     <string name="suc_username_valid">Username valid</string>
     <string name="suc_email_valid">Email valid</string>
     <string name="suc_name_valid">Nama valid</string>
-    <string name="suc_password_valid">Password valid</string>
+    <string name="suc_password_valid">Kata sandi valid</string>
+    <string name="suc_userdata_valid">Data akun valid</string>
+    <string name="suc_password_konf_valid">Konfirmasi kata sandi valid</string>
 
+    <string name="err_userid_invalid">Email atau username tidak valid</string>
     <string name="err_username_empty">Username tidak boleh kosong</string>
     <string name="err_username_length">Panjang username harus diantara 4–20 karakter.</string>
     <string name="err_username_symbols">Simbol yang diizinkan hanyalah . , - _</string>
@@ -101,6 +105,8 @@
     <string name="err_password_lowercase">Password harus mengandung huruf kecil</string>
     <string name="err_password_number">Password harus mengandung angka</string>
     <string name="err_password_symbol">Password harus mengandung simbol</string>
+    <string name="err_password_konf_empty">Konfirmasi tidak boleh kosong</string>
+    <string name="err_password_konf_invalid">Kata sandi tidak cocok</string>
     <string name="err_server_not_found">Server tidak ditemukan</string>
     <string name="err_no_internet">Tidak ada koneksi Internet.</string>
     <string name="err_no_data_selected">Tidak ada data yang dipilih.</string>

@@ -111,6 +111,7 @@
                     app:boxStrokeColor="@color/stroke_input_account"
                     app:boxStrokeWidth="@dimen/acc_input_stroke"
                     app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:endIconMode="password_toggle"
                     app:errorEnabled="false"
                     app:hintEnabled="false">
 
@@ -120,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
                         android:fontFamily="@font/poppins_semibold"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textPassword"
                         android:textColor="@color/black"
                         android:textSize="@dimen/acc_input_textsize"
                         tools:ignore="SpeakableTextPresentCheck" />
@@ -150,6 +151,7 @@
                     app:boxStrokeWidth="@dimen/acc_input_stroke"
                     app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
                     app:errorEnabled="false"
+                    app:endIconMode="password_toggle"
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -157,7 +159,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
                         android:fontFamily="@font/poppins_semibold"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:textColor="@color/black"
                         android:textSize="@dimen/acc_input_textsize"
                         tools:ignore="SpeakableTextPresentCheck" />

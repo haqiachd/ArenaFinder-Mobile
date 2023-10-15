@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +16,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.c2.arenafinder.util.ValidatorUtil;
 
 public class SignUpFirstFragment extends Fragment {
 
@@ -28,10 +30,12 @@ public class SignUpFirstFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private ValidatorUtil validator;
+
     private EditText inpUsername, inpEmail, inpName;
     private ButtonAccountCustom btnNext;
     private ImageView btnGoogle;
-    private TextView btnLogin;
+    private TextView btnLogin, txtHelper;
 
     public SignUpFirstFragment() {
         // Required empty public constructor
@@ -39,11 +43,12 @@ public class SignUpFirstFragment extends Fragment {
 
     private void initViews(View view){
         btnNext = new ButtonAccountCustom(requireContext(), view, R.string.btn_next);
-        inpUsername = view.findViewById(R.id.signup1_inp_password);
-        inpEmail = view.findViewById(R.id.signup1_inp_konf);
+        inpUsername = view.findViewById(R.id.signup1_inp_username);
+        inpEmail = view.findViewById(R.id.signup1_inp_email);
         inpName = view.findViewById(R.id.signup1_inp_name);
         btnGoogle = view.findViewById(R.id.signup1_btn_google);
         btnLogin = view.findViewById(R.id.signup1_btn_login);
+        txtHelper = view.findViewById(R.id.signup1_txt_helper);
     }
 
     public static SignUpFirstFragment newInstance(String param1, String param2) {
@@ -75,6 +80,7 @@ public class SignUpFirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        validator = new ValidatorUtil(requireContext(), btnNext, txtHelper);
 
         String btnLoginTxt = getString(R.string.txt_login_here);
 
@@ -84,6 +90,7 @@ public class SignUpFirstFragment extends Fragment {
         btnLogin.setText(spanLogin);
 
         onClickGroups();
+        onChangedGroups();
     }
 
     private void onClickGroups(){
@@ -101,5 +108,25 @@ public class SignUpFirstFragment extends Fragment {
             FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(), false);
         });
 
+    }
+
+    private void onChangedGroups(){
+
+        EditText[] inputs = {inpUsername, inpEmail, inpName};
+
+        for (EditText input : inputs){
+            input.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    validator.signupFirstValidation(inpUsername.getText().toString(), inpEmail.getText().toString(), inpName.getText().toString());
+                }
+            });
+        }
     }
 }

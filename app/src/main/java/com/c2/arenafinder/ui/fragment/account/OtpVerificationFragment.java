@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.otpview.OTPListener;
 import com.otpview.OTPTextView;
 
@@ -107,6 +108,7 @@ public class OtpVerificationFragment extends Fragment {
                 OtpVerificationFragment.this.otp = "123456";
                 if (otp.equals(OtpVerificationFragment.this.otp)){
                     helperText.setText(R.string.suc_otp_valid);
+                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
@@ -157,6 +159,7 @@ public class OtpVerificationFragment extends Fragment {
                 }else{
                     helperText.setText(R.string.err_otp_invalid);
                     helperText.setTextColor(ContextCompat.getColor(requireContext(), R.color.vivid_orange));
+                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {

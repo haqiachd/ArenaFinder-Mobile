@@ -60,7 +60,7 @@
                     android:textSize="@dimen/_11ssp" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signup1_inp_password_layout"
+                    android:id="@+id/signup1_inp_username_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_password"
+                        android:id="@+id/signup1_inp_username"
                         style="@style/ThemeOverlay.Material3.TextInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
@@ -98,7 +98,7 @@
                     android:textSize="@dimen/_11ssp" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signup1_inp_konf_layout"
+                    android:id="@+id/signup1_inp_email_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_konf"
+                        android:id="@+id/signup1_inp_email"
                         style="@style/ThemeOverlay.Material3.TextInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
@@ -136,7 +136,7 @@
                     android:textSize="@dimen/acc_input_title_textsize" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signup1_inp_pass_layout"
+                    android:id="@+id/signup1_inp_name_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

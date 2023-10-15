@@ -26,7 +26,6 @@ import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
@@ -52,7 +51,7 @@ public class SignUpFragmentFirst extends Fragment {
         inpUsername = view.findViewById(R.id.signup1_inp_username);
         inpEmail = view.findViewById(R.id.signup1_inp_email);
         inpName = view.findViewById(R.id.signup1_inp_name);
-        inpPassword = view.findViewById(R.id.signup1_inp_password);
+        inpPassword = view.findViewById(R.id.signup1_inp_username);
         btnSignUp = view.findViewById(R.id.signup1_next);
         btnGoogle = view.findViewById(R.id.signup_google);
     }

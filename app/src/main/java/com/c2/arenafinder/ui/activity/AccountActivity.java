@@ -1,16 +1,12 @@
 package com.c2.arenafinder.ui.activity;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.ui.fragment.account.GantiSandiFragment;
 import com.c2.arenafinder.ui.fragment.account.OtpVerificationFragment;
 import com.c2.arenafinder.ui.fragment.account.SignInFragment;
 import com.c2.arenafinder.ui.fragment.account.SignUpFirstFragment;
