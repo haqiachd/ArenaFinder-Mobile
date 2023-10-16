@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.ui.fragment.empty.AccountMessageFragment;
 import com.c2.arenafinder.ui.fragment.empty.ServerNotFoundFragment;
 import com.c2.arenafinder.ui.fragment.empty.WelcomeFragment;
@@ -14,6 +15,7 @@ import com.c2.arenafinder.util.FragmentUtil;
 public class EmptyActivity extends AppCompatActivity {
 
     public static final String FRAGMENT = "fragment";
+    public static final String FRAGMENT_MESSAGE = "fragment_msg";
     public static final String WELCOME = "wlc",
                                 SERVER_NOT_FOUND = "server_404",
                                 ACCOUNT_MESSAGE = "acc_message";
@@ -33,7 +35,13 @@ public class EmptyActivity extends AppCompatActivity {
                 break;
             }
             case ACCOUNT_MESSAGE: {
-                FragmentUtil.switchFragmentEmpty(getSupportFragmentManager(), AccountMessageFragment.newInstance(AccountMessageFragment.PASSWORD), false);
+                LogApp.info(this, "fragment -> " + getIntent().getStringExtra(FRAGMENT));
+                LogApp.info(this, "fragment message -> " + getIntent().getStringExtra(FRAGMENT_MESSAGE));
+                FragmentUtil.switchFragmentEmpty(
+                        getSupportFragmentManager(),
+                        AccountMessageFragment.newInstance(getIntent().getStringExtra(FRAGMENT_MESSAGE)),
+                        false
+                );
                 break;
             }
         }

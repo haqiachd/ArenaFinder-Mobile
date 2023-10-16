@@ -1,16 +1,12 @@
 package com.c2.arenafinder.ui.fragment.account;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -28,8 +24,10 @@ import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
+import com.c2.arenafinder.ui.fragment.empty.AccountMessageFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
 import com.c2.arenafinder.util.ValidatorUtil;
@@ -116,7 +114,6 @@ public class SignUpGoogle extends Fragment {
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                     if (response.body() != null && RetrofitClient.apakahSukses(response)) {
                         UserModel model = response.body().getData();
-
                         LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "email : " + model.getEmail());
 
                         dataShared.setData(KEY.ACC_USERNAME, model.getUsername());
@@ -126,21 +123,12 @@ public class SignUpGoogle extends Fragment {
                         dataShared.setData(KEY.ACC_LEVEL, model.getLevel());
                         dataShared.setData(KEY.ACC_PHOTO, model.getUserPhoto());
 
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                new AlertDialog.Builder(requireContext())
-                                        .setTitle(R.string.dia_title_inform)
-                                        .setMessage("Daftar akun berhasil, Silahkan masuk kedalam aplikasi.")
-                                        .setCancelable(false)
-                                        .setPositiveButton("Buka Aplikasi", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                startActivity(new Intent(requireActivity(), MainActivity.class));
-                                            }
-                                        }).create().show();
-                            }
-                        });
+                        startActivity(
+                                new Intent(requireActivity(), EmptyActivity.class)
+                                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.ACCOUNT_MESSAGE)
+                                        .putExtra(EmptyActivity.FRAGMENT_MESSAGE, AccountMessageFragment.SIGNUP)
+                        );
+                        requireActivity().finish();
 
                         btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
 

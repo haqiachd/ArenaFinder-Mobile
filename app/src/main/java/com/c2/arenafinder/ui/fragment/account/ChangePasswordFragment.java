@@ -1,11 +1,10 @@
 package com.c2.arenafinder.ui.fragment.account;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -20,7 +19,10 @@ import android.widget.Toast;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.ui.activity.AccountActivity;
+import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
+import com.c2.arenafinder.ui.fragment.empty.AccountMessageFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.ValidatorUtil;
@@ -95,22 +97,12 @@ public class ChangePasswordFragment extends Fragment {
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                             if (response.body() != null && RetrofitClient.apakahSukses(response)) {
 
-                                new AlertDialog.Builder(requireContext())
-                                        .setTitle(R.string.dia_title_inform)
-                                        .setMessage(R.string.dia_msg_password_changed)
-                                        .setCancelable(false)
-                                        .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                                FragmentUtil.switchFragmentAccount(
-                                                        requireActivity().getSupportFragmentManager(), new SignInFragment(), false
-                                                );
-
-                                            }
-                                        })
-                                        .create()
-                                        .show();
+                                startActivity(
+                                        new Intent(requireActivity(), EmptyActivity.class)
+                                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.ACCOUNT_MESSAGE)
+                                                .putExtra(EmptyActivity.FRAGMENT_MESSAGE, AccountMessageFragment.PASSWORD)
+                                );
+                                requireActivity().finish();
 
                             } else {
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

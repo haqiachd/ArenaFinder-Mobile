@@ -34,6 +34,8 @@ public class OtpVerificationFragment extends Fragment {
     private String otp;
     private String type;
 
+    private int totalSeconds;
+
     private ButtonAccountCustom btnSend;
     private TextView helperText;
     private OTPTextView inpOtp;
@@ -84,6 +86,29 @@ public class OtpVerificationFragment extends Fragment {
         inpOtp.requestFocus();
         onClickGroups();
         onListener();
+    }
+
+    private void updateButtonName(){
+
+    }
+
+    private void updateSecond() {
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (OtpVerificationFragment.this.totalSeconds > 0) {
+                    updateButtonName();
+                    OtpVerificationFragment.this.totalSeconds--;
+                    handler.postDelayed(this, 1000);
+                } else {
+                    btnSend.setStatus(ButtonAccountCustom.ENABLE);
+                    btnSend.setButtonName(getResources().getString(R.string.btn_send_otp));
+                }
+            }
+        };
+        handler.post(runnable);
     }
 
     private void onClickGroups(){
