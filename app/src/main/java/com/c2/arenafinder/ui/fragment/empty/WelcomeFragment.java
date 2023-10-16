@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.activity.AccountActivity;
+import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class WelcomeFragment extends Fragment {
@@ -61,6 +62,13 @@ public class WelcomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+
+        view.findViewById(R.id.wlc_test).setOnClickListener(v -> {
+            startActivity(new Intent(
+                    requireActivity(), EmptyActivity.class
+            ).putExtra(EmptyActivity.FRAGMENT, EmptyActivity.ACCOUNT_MESSAGE));
+            requireActivity().finish();
+        });
 
         onClickGroups();
     }

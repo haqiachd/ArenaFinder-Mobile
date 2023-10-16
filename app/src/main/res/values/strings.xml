@@ -25,6 +25,8 @@
     <string name="btn_wlc_login">Masuk</string>
     <string name="btn_pengguna_umum">Pengguna Umum</string>
     <string name="btn_pegelola_lapangan">Pengelola Lapangan</string>
+    <string name="btn_buka_app">Buka App</string>
+    <string name="btn_go_login">Masuk Akun</string>
 
     <string name="txt_signin_title">Masuk Akun</string>
     <string name="txt_signup1_title">Daftar Akun</string>
@@ -64,6 +66,10 @@
     <string name="txt_welcome_desc">Aktivitas penunjang kehidupan yang lebih sehat dan menyenangkan dan kegiatan yang meningkatkan kualitas hidup.</string>
     <string name="txt_signup_type">Daftar Akun Sebagai</string>
     <string name="txt_signup_type_desc">Pilih tipe akun, kamu mau daftar sebagai pengguna umum atau pengelola lapangan</string>
+    <string name="txt_accmsg_title_def">Pesan dari Account</string>
+    <string name="txt_accmsg_desc_def">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</string>
+    <string name="txt_accmsg_signup_desc">Daftar akun dengan Google berhasil, Silahkah tekan button \'Buka App\' untuk membuka beranda.</string>
+    <string name="txt_accmsg_chgpass_desc">Kata sandi berhasil diganti, Silahkan masuk kembali dengan kata sandi baru.</string>
 
     <string name="alt_app_logo">Logo C2</string>
     <string name="alt_acc_back">Kembali</string>
@@ -100,6 +106,8 @@
     <string name="suc_password_valid">Kata sandi valid</string>
     <string name="suc_userdata_valid">Data akun valid</string>
     <string name="suc_password_konf_valid">Konfirmasi kata sandi valid</string>
+    <string name="suc_signup_success">Daftar Akun Berhasil</string>
+    <string name="suc_chgpass_success">Kata Sandi Diganti</string>
 
     <string name="err_userid_invalid">Email atau username tidak valid</string>
     <string name="err_username_empty">Username tidak boleh kosong</string>

@@ -79,6 +79,18 @@
                 app:strokeColor="@color/primary_color"
                 app:strokeWidth="@dimen/_1sdp" />
 
+            <Button
+                android:id="@+id/wlc_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Test Fragment"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="false"
+                android:fontFamily="@font/kanit_medium"
+                android:backgroundTint="@color/azure"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/acc_margin_bottom"
