@@ -73,6 +73,12 @@ public interface RetrofitEndPoint {
             @Field("full_name") String fullName
     );
 
+    @GET("users/cek_userid.php")
+    Call<UsersResponse> cekUserId(
+            @Query("username") String username,
+            @Query("email") String email
+    );
+
     @FormUrlEncoded
     @POST("email/mail.php")
     Call<VerifyResponse> sendEmail(

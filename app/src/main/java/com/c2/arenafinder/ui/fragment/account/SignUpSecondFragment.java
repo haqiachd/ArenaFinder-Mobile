@@ -36,6 +36,7 @@ public class SignUpSecondFragment extends Fragment {
     private static final String ARG_USERNAME = "username";
     private static final String ARG_EMAIL = "email";
     private static final String ARG_NAME = "name";
+    private static String savedPassword, savedConfirm;
 
     private ValidatorUtil validator;
 
@@ -100,6 +101,32 @@ public class SignUpSecondFragment extends Fragment {
 
         onClickGroups();
         onChangedGroups();
+    }
+
+    public static void resetSavedPassword(){
+        savedPassword = null;
+        savedConfirm = null;
+    }
+
+    public boolean isSavedPassword(){
+        return savedPassword != null && savedConfirm != null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        savedPassword = inpPassword.getText().toString();
+        savedConfirm = inpKonf.getText().toString();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (isSavedPassword()){
+            inpPassword.setText(savedPassword);
+            inpKonf.setText(savedConfirm);
+        }
     }
 
     private void sendEmailVerify(){

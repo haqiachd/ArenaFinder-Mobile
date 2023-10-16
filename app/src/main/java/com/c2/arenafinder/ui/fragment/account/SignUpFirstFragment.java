@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -56,7 +57,7 @@ public class SignUpFirstFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
         btnNext = new ButtonAccountCustom(requireContext(), view, R.string.btn_next);
         inpUsername = view.findViewById(R.id.signup1_inp_username);
         inpEmail = view.findViewById(R.id.signup1_inp_email);
@@ -96,7 +97,11 @@ public class SignUpFirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
         validator = new ValidatorUtil(requireContext(), btnNext, txtHelper);
-        google = new GoogleUsers(requireActivity());
+        if (google != null){
+            google.resetLastSignIn();
+        }else {
+            google = new GoogleUsers(requireActivity());
+        }
 
         String btnLoginTxt = getString(R.string.txt_login_here);
 
@@ -107,6 +112,14 @@ public class SignUpFirstFragment extends Fragment {
 
         onClickGroups();
         onChangedGroups();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (google != null){
+            google.resetLastSignIn();
+        }
     }
 
     @Override
@@ -143,8 +156,7 @@ public class SignUpFirstFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<UsersResponse> call, @NonNull Throwable t) {
-                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
-                    Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_MEDIUM);
                 }
             });
 
@@ -152,15 +164,49 @@ public class SignUpFirstFragment extends Fragment {
         }
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
         btnNext.setOnClickLoadingListener(() -> {
-            FragmentUtil.switchFragmentAccount(
-                    requireActivity().getSupportFragmentManager(),
-                    SignUpSecondFragment.newInstance(inpUsername.getText().toString(), inpEmail.getText().toString(), inpName.getText().toString())
-                    , true
-            );
-            btnNext.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+
+            // reset input text color
+            inpUsername.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+            inpEmail.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+
+            RetrofitClient.getInstance().cekUserId(inpUsername.getText().toString(), inpEmail.getText().toString())
+                    .enqueue(new Callback<UsersResponse>() {
+                        @Override
+                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                            if (response.body() != null && RetrofitClient.apakahSukses(response)) {
+                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                String msg = response.body().getMessage();
+                                // set text helper msg and color
+                                txtHelper.setText(msg);
+                                txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
+                                // set text color input
+                                if (msg.contains("Username")) {
+                                    inpUsername.setTextColor(ContextCompat.getColor(requireContext(), R.color.imperial_red));
+                                } else if (msg.contains("Email")) {
+                                    inpEmail.setTextColor(ContextCompat.getColor(requireContext(), R.color.imperial_red));
+                                }
+                                // set button action
+                                btnNext.setStatus(ButtonAccountCustom.DISABLE);
+                                btnNext.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                            } else {
+                                FragmentUtil.switchFragmentAccount(
+                                        requireActivity().getSupportFragmentManager(),
+                                        SignUpSecondFragment.newInstance(inpUsername.getText().toString(), inpEmail.getText().toString(), inpName.getText().toString())
+                                        , true
+                                );
+                                btnNext.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UsersResponse> call, Throwable t) {
+                            ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_MEDIUM);
+                            btnNext.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                        }
+                    });
         });
 
         btnGoogle.setOnClickListener(v -> {
@@ -185,17 +231,22 @@ public class SignUpFirstFragment extends Fragment {
 
     }
 
-    private void onChangedGroups(){
+    private void onChangedGroups() {
 
         EditText[] inputs = {inpUsername, inpEmail, inpName};
 
-        for (EditText input : inputs){
+        for (EditText input : inputs) {
             input.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (input.getCurrentTextColor() == ContextCompat.getColor(requireContext(), R.color.imperial_red)) {
+                        input.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+                    }
+                }
 
                 @Override
                 public void afterTextChanged(Editable s) {
