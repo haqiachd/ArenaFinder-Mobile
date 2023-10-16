@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.airbnb.lottie.LottieAnimationView;
 
 import com.c2.arenafinder.R;
@@ -81,10 +83,17 @@ public class SplashScreenActivity extends AppCompatActivity {
                     finish();
                 }else{
                     ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
-                    startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
-                            .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
+//                    startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
+//                            .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
+//                    );
+//                    finish();
+
+                    // temp
+                    Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
+                    startActivity(
+                            new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                                    .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
                     );
-                    finish();
                 }
             }
 
@@ -92,10 +101,17 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void onFailure(Call<ArenaFinderResponse> call, Throwable t) {
                 t.printStackTrace();
                 ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
-                startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
-                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
+//                startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
+//                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
+//                );
+//                finish();
+
+                // temp
+                Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
+                startActivity(
+                        new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
                 );
-                finish();
             }
         });
 
