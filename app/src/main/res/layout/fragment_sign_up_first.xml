@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.account.SignUpFragmentFirst"
+    tools:context=".ui.fragment.account.SignUpFirstFragment"
     android:background="@color/white"
     >
 
@@ -20,7 +20,7 @@
             >
 
             <LinearLayout
-                android:id="@+id/signup_linear_input"
+                android:id="@+id/signup1_linear_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/acc_linear_margin"
@@ -60,7 +60,7 @@
                     android:textSize="@dimen/_11ssp" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signup_inp_password_layout"
+                    android:id="@+id/signup1_inp_username_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup_inp_password"
+                        android:id="@+id/signup1_inp_username"
                         style="@style/ThemeOverlay.Material3.TextInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
@@ -98,7 +98,7 @@
                     android:textSize="@dimen/_11ssp" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signup_inp_konf_layout"
+                    android:id="@+id/signup1_inp_email_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup_inp_konf"
+                        android:id="@+id/signup1_inp_email"
                         style="@style/ThemeOverlay.Material3.TextInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
@@ -136,7 +136,7 @@
                     android:textSize="@dimen/acc_input_title_textsize" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/signup_inp_pass_layout"
+                    android:id="@+id/signup1_inp_name_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup_inp_pass"
+                        android:id="@+id/signup1_inp_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/acc_input_height"
                         android:fontFamily="@font/poppins_semibold"
@@ -164,13 +164,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/signup_txt_helper"
+                    android:id="@+id/signup1_txt_helper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/acc_txt_helper_margin"
                     android:alpha="0.9"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/txt_helper_default_3"
+                    android:text="@string/txt_helper_default_4"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_9sdp"
                     tools:ignore="TextContrastCheck" />
@@ -178,7 +178,7 @@
             </LinearLayout>
 
             <include
-                android:id="@+id/signup_btn_masuk"
+                android:id="@+id/signup1_btn_masuk"
                 layout="@layout/custom_button_account"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/acc_btn_size"
@@ -187,19 +187,19 @@
                 android:layout_marginEnd="@dimen/acc_btn_margin_width"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signup_linear_input" />
+                app:layout_constraintTop_toBottomOf="@id/signup1_linear_input" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/signup_cons_masuk_dengan"
+                android:id="@+id/signup1_cons_masuk_dengan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signup_btn_masuk">
+                app:layout_constraintTop_toBottomOf="@id/signup1_btn_masuk">
 
                 <View
-                    android:id="@+id/signup_line_left"
+                    android:id="@+id/signup1_line_left"
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_1sdp"
                     android:background="#767F8F"
@@ -208,7 +208,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/signup_txt_daftar_dengan"
+                    android:id="@+id/signup1_txt_daftar_dengan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -218,11 +218,11 @@
                     android:text="@string/txt_register_with"
                     android:textColor="@color/granite_grey"
                     android:textSize="@dimen/_11sdp"
-                    app:layout_constraintStart_toEndOf="@id/signup_line_left"
+                    app:layout_constraintStart_toEndOf="@id/signup1_line_left"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
-                    android:id="@+id/signup_line_right"
+                    android:id="@+id/signup1_line_right"
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -230,12 +230,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintStart_toEndOf="@id/signup_txt_daftar_dengan"
+                    app:layout_constraintStart_toEndOf="@id/signup1_txt_daftar_dengan"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/signup_btn_google"
+                android:id="@+id/signup1_btn_google"
                 android:layout_width="@dimen/_33sdp"
                 android:layout_height="@dimen/_33sdp"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -243,31 +243,32 @@
                 android:src="@drawable/ic_logo_google"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signup_cons_masuk_dengan" />
+                app:layout_constraintTop_toBottomOf="@id/signup1_cons_masuk_dengan" />
 
             <LinearLayout
-                android:id="@+id/signup_linear_register"
+                android:id="@+id/signup1_linear_register"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/acc_margin_bottom"
+                android:gravity="top"
                 android:layout_marginTop="@dimen/_13sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signup_btn_google">
+                app:layout_constraintTop_toBottomOf="@id/signup1_btn_google">
 
                 <TextView
-                    android:id="@+id/signup_txt_login_question"
+                    android:id="@+id/signup1_txt_login_question"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:alpha="0.9"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="@string/txt_dont_have_account"
+                    android:text="@string/txt_have_account"
                     android:textAlignment="textEnd"
                     android:textColor="#434F65"
                     android:textSize="@dimen/_11sdp" />
 
                 <TextView
-                    android:id="@+id/signup_btn_login"
+                    android:id="@+id/signup1_btn_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_semibold"
@@ -276,181 +277,6 @@
                     android:textSize="@dimen/_11sdp" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/signup_linear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_18sdp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"
-                >
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Masukan Username"
-                        android:inputType="text"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Masukan Email"
-                        android:inputType="text"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Masukan Nama"
-                        android:inputType="text"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:endIconMode="password_toggle"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Masukan Password"
-                        android:inputType="text"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:endIconMode="password_toggle"
-                    app:hintEnabled="true"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeWidth="@dimen/_2sdp"
-                    app:boxStrokeColor="@color/dogerblue"
-                    app:boxStrokeWidthFocused="@dimen/_2sdp"
-                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup1_inp_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Konfirmasi Password (nanti dulu)"
-                        android:inputType="text"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/dogerblue"
-                        android:textSize="@dimen/_11ssp"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/signup1_next"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:text="Sign Up"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/primary_color"
-                app:cornerRadius="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@id/signup_linear"
-                android:visibility="gone"
-                />
-
-            <ImageView
-                android:id="@+id/signup_google"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:src="@drawable/ic_logo_google"
-                app:layout_constraintTop_toBottomOf="@id/signup1_next"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:visibility="gone"
-                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
