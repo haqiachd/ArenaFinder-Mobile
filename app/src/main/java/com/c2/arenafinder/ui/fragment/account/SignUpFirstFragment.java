@@ -41,6 +41,7 @@ public class SignUpFirstFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    protected static boolean switchToSecond;
 
     private String mParam1;
     private String mParam2;
@@ -96,7 +97,9 @@ public class SignUpFirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        switchToSecond = false;
         validator = new ValidatorUtil(requireContext(), btnNext, txtHelper);
+
         if (google != null){
             google.resetLastSignIn();
         }else {
@@ -115,8 +118,25 @@ public class SignUpFirstFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (!switchToSecond){
+            SignUpSecondFragment.resetSavedPassword();
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
+        switchToSecond = false;
+        if (google != null){
+            google.resetLastSignIn();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         if (google != null){
             google.resetLastSignIn();
         }
@@ -197,6 +217,7 @@ public class SignUpFirstFragment extends Fragment {
                                         SignUpSecondFragment.newInstance(inpUsername.getText().toString(), inpEmail.getText().toString(), inpName.getText().toString())
                                         , true
                                 );
+                                switchToSecond = true;
                                 btnNext.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                             }
                         }
@@ -226,6 +247,8 @@ public class SignUpFirstFragment extends Fragment {
         });
 
         btnLogin.setOnClickListener(v -> {
+            google.resetLastSignIn();
+            google = null;
             FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(), false);
         });
 

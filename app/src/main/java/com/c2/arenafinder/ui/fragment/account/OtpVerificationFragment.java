@@ -18,9 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.model.VerifyModel;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.c2.arenafinder.util.VerifyUtil;
 import com.otpview.OTPListener;
 import com.otpview.OTPTextView;
 
@@ -33,6 +35,8 @@ public class OtpVerificationFragment extends Fragment {
     private String email;
     private String otp;
     private String type;
+    private VerifyModel verifyModel;
+    private VerifyUtil verifyUtil;
 
     private int totalSeconds;
 
@@ -81,6 +85,7 @@ public class OtpVerificationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        verifyUtil = new VerifyUtil(requireContext());
 
         btnSend.setStatus(ButtonAccountCustom.DISABLE);
         inpOtp.requestFocus();

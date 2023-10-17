@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 
+import java.util.HashMap;
+
 public class DataShared {
 
     private final SharedPreferences sharedPrefs;
@@ -29,6 +31,18 @@ public class DataShared {
     public String getData(@NonNull KEY key){
         LogApp.info(this, LogTag.METHOD, "ambil data '"+key.name()+"' dari preferences");
         return this.sharedPrefs.getString(key.name(), null);
+    }
+
+    public HashMap<KEY, String> getData(@NonNull KEY... keys){
+        HashMap<KEY, String> data = new HashMap<>();
+        for (KEY key : keys){
+            if (contains(key)){
+                data.put(key, getData(key));
+            }else {
+                data.put(key, "null");
+            }
+        }
+        return data;
     }
 
     public void setData(@NonNull KEY key, @NonNull String value){
@@ -60,11 +74,11 @@ public class DataShared {
         ACC_CREATED,
         ACC_UPDATED,
         ACC_PHOTO,
-        ACC_OTP_EMAIL,
-        ACC_OTP_CODE,
-        ACC_OTP_MILLIS_EXPIRED,
-        ACC_OTP_RESENDING_MILLIS,
-        ACC_OTP_RESENDING_COUNT,
+        VERIFY_OTP_CODE,
+        VERIFY_START_MILLIS,
+        VERIFY_END_MILLIS,
+        VERIFY_TYPE,
+        VERIFY_DEVICE,
         IS_FIRST_TIME_INSTALL,
         APP_LANGUAGE,
     }
