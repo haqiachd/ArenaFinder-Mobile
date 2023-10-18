@@ -21,6 +21,7 @@
     <string name="btn_send_otp">Kirim Kode OTP</string>
     <string name="btn_ganti_password">Ganti Kata Sandi</string>
     <string name="btn_kirim_ulang">Kirim Ulang OTP</string>
+    <string name="btn_kirim_ulang_wait">Kirim Ulang (%1$s)</string>
     <string name="btn_wlc_register">Daftar</string>
     <string name="btn_wlc_login">Masuk</string>
     <string name="btn_pengguna_umum">Pengguna Umum</string>

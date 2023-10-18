@@ -1,25 +1,18 @@
 package com.c2.arenafinder.ui.activity;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.account.ChangePasswordFragment;
 import com.c2.arenafinder.ui.fragment.account.OtpVerificationFragment;
 import com.c2.arenafinder.ui.fragment.account.SignInFragment;
 import com.c2.arenafinder.ui.fragment.account.SignUpTypeFragment;
-import com.c2.arenafinder.util.ArenaFinder;
-import com.c2.arenafinder.util.DialogUtil;
 import com.c2.arenafinder.util.FragmentUtil;
 
 public class AccountActivity extends AppCompatActivity {
@@ -96,52 +89,52 @@ public class AccountActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        switch (IAM_IN){
-            case SIGN_IN: {
-                AlertDialog alertDialog = DialogUtil.showInformationDialog(
-                        this, "Test", "message",
-                        "ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.d("", "");
-                                ArenaFinder.playVibrator(AccountActivity.this, ArenaFinder.VIBRATOR_SHORT);
-                                Toast.makeText(AccountActivity.this, "oi", Toast.LENGTH_SHORT).show();
-                            }
-                        },
-                        "negative", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {}
-                        }
-                );
-                alertDialog.show();
-                break;
-            }
-            case OTP_VERIFY: {
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.dia_title_warning)
-                        .setMessage("This is Message")
-                        .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(AccountActivity.this, "back pressed", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton(R.string.dia_negative_cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        })
-                        .create().show();
-                break;
-            }
-            case CHANGE_PASS: {
-                // TODO : on back pressed action
-            }
-            default:{
-                super.onBackPressed();
-            }
-        }
+        super.onBackPressed();
+//        switch (IAM_IN){
+//            case SIGN_IN: {
+//                AlertDialog alertDialog = DialogUtil.showInformationDialog(
+//                        this, "Test", "message",
+//                        "ok", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Log.d("", "");
+//                                ArenaFinder.playVibrator(AccountActivity.this, ArenaFinder.VIBRATOR_SHORT);
+//                                Toast.makeText(AccountActivity.this, "oi", Toast.LENGTH_SHORT).show();
+//                            }
+//                        },
+//                        "negative", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {}
+//                        }
+//                );
+//                alertDialog.show();
+//                break;
+//            }
+//            case OTP_VERIFY: {
+//                new AlertDialog.Builder(this)
+//                        .setTitle(R.string.dia_title_warning)
+//                        .setMessage("This is Message")
+//                        .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(AccountActivity.this, "back pressed", Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .setNegativeButton(R.string.dia_negative_cancel, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        })
+//                        .create().show();
+//                break;
+//            }
+//            case CHANGE_PASS: {
+//                // TODO : on back pressed action
+//            }
+//            default:{
+//                super.onBackPressed();
+//            }
+//        }
 
     }
 

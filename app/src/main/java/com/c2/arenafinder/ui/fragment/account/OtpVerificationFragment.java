@@ -91,10 +91,27 @@ public class OtpVerificationFragment extends Fragment {
         inpOtp.requestFocus();
         onClickGroups();
         onListener();
+
+        VerifyModel model = new VerifyModel(
+                "123456",
+                System.currentTimeMillis(), System.currentTimeMillis() + 900_000,
+                "chagepas", "mobile", 1
+        );
+//
+        VerifyUtil verifyUtil = new VerifyUtil(requireContext());
+        verifyUtil.setOtp(model.getOtp());
+        verifyUtil.setStartMillis(model.getStartMillis());
+        verifyUtil.setEndMillis(model.getEndMillis());
+        verifyUtil.setType(model.getType());
+        verifyUtil.setDevice(model.getDevice());
+        verifyUtil.setResend(model.getResend());
+
+
+        btnSend.setButtonName(getString(R.string.btn_kirim_ulang_wait, "10 Menit"));
     }
 
     private void updateButtonName(){
-
+        // TODO : 2 -> 4 -> 6 -> 12
     }
 
     private void updateSecond() {

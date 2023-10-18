@@ -96,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == PERMISSION_REQUEST_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission was granted, you can proceed with your logic (e.g., open the gallery).
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkAndRequestStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted, request it.
-            Toast.makeText(this, "Request Permission", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Request Permission", Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
         }
     }

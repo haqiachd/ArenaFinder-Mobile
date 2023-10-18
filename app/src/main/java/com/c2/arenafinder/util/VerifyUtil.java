@@ -14,6 +14,8 @@ public class VerifyUtil {
 
     private static final String NULL = "null";
 
+    private static final int minutes = 60;;
+
     private final Context context;
 
     private final DataShared dataShared;
@@ -21,40 +23,6 @@ public class VerifyUtil {
     public VerifyUtil(Context context) {
         this.context = context;
         dataShared = new DataShared(context);
-    }
-
-    public boolean haveOtp() {
-        // cek semua key pada verify exist atau tidak dalam preferences
-        boolean have = dataShared.contains(KEY.VERIFY_OTP_CODE) && dataShared.contains(KEY.VERIFY_START_MILLIS) &&
-                dataShared.contains(KEY.VERIFY_END_MILLIS) && dataShared.contains(KEY.VERIFY_TYPE) &&
-                dataShared.contains(KEY.VERIFY_DEVICE);
-
-        // jika semua key exist
-        if (have) {
-            // mendapatkan semua data verify pada preferences
-            HashMap<KEY, String> hash = dataShared.getData(
-                    KEY.VERIFY_OTP_CODE, KEY.VERIFY_START_MILLIS, KEY.VERIFY_END_MILLIS, KEY.VERIFY_TYPE, KEY.VERIFY_DEVICE
-            );
-
-            // cek apakah data verify null atau tidak
-            for (KEY key : hash.keySet()) {
-                String data = hash.get(key);
-                if (data == null || data.isEmpty() || data.isBlank() || data.contains(NULL)) {
-                    return false;
-                }
-            }
-
-            // cek apakah otp masih berlaku atau tidak
-            try {
-                return Long.parseLong(Objects.requireNonNull(hash.get(KEY.VERIFY_END_MILLIS)))
-                        >
-                       System.currentTimeMillis();
-            } catch (Throwable t) {
-                LogApp.error(context, LogTag.METHOD, Objects.requireNonNull(t.getMessage()));
-            }
-
-        }
-        return false;
     }
 
     private String getData(KEY key) {
@@ -114,8 +82,87 @@ public class VerifyUtil {
         return getData(KEY.VERIFY_DEVICE);
     }
 
+    public void setResend(int type) {
+        dataShared.setData(KEY.VERIFY_RESEND, String.valueOf(type));
+    }
+
+    public int getResend() {
+        try{
+            return Integer.parseInt(getData(KEY.VERIFY_RESEND));
+        }catch (Throwable ex){
+            ex.printStackTrace();
+        }
+        return 1;
+    }
+
     public void setDevice(String device) {
         dataShared.setData(KEY.VERIFY_DEVICE, device);
+    }
+
+    public boolean haveOtp() {
+        // cek semua key pada verify exist atau tidak dalam preferences
+        boolean have = dataShared.contains(KEY.VERIFY_OTP_CODE) && dataShared.contains(KEY.VERIFY_START_MILLIS) &&
+                dataShared.contains(KEY.VERIFY_END_MILLIS) && dataShared.contains(KEY.VERIFY_TYPE) &&
+                dataShared.contains(KEY.VERIFY_DEVICE) && dataShared.contains(KEY.VERIFY_RESEND
+        );
+
+        // jika semua key exist
+        if (have) {
+            // mendapatkan semua data verify pada preferences
+            HashMap<KEY, String> hash = dataShared.getData(
+                    KEY.VERIFY_OTP_CODE, KEY.VERIFY_START_MILLIS, KEY.VERIFY_END_MILLIS,
+                    KEY.VERIFY_TYPE, KEY.VERIFY_DEVICE, KEY.VERIFY_RESEND
+            );
+
+            // cek apakah data verify null atau tidak
+            for (KEY key : hash.keySet()) {
+                String data = hash.get(key);
+                if (data == null || data.isEmpty() || data.isBlank() || data.contains(NULL)) {
+                    return false;
+                }
+            }
+
+            // cek apakah otp masih berlaku atau tidak
+            try {
+                return Long.parseLong(Objects.requireNonNull(hash.get(KEY.VERIFY_END_MILLIS)))
+                        >
+                        System.currentTimeMillis();
+            } catch (Throwable t) {
+                LogApp.error(context, LogTag.METHOD, Objects.requireNonNull(t.getMessage()));
+            }
+
+        }
+        return false;
+    }
+
+    // TODO : 2 -> 3 -> 5 -> 7 -> 9 -> 11
+    public int getWaitingMinutes(){
+        int resend = getResend();
+        if (resend <= 0){
+            return minutes;
+        }
+
+        switch (resend){
+            case 1 : {
+                return minutes * 2;
+            }
+            case 2 : {
+                return minutes  * 3;
+            }
+            case 3 : {
+                return minutes * 5;
+            }
+            case 4 : {
+                return minutes * 7;
+            }
+            case 5 : {
+                return minutes * 9;
+            }
+            default: {
+                return minutes * 11;
+            }
+
+        }
     }
 
 }

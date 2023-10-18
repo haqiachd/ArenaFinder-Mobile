@@ -10,11 +10,11 @@ public class VerifyModel {
 
     @Expose
     @SuppressWarnings("start_millis")
-    private int startMillis;
+    private long startMillis;
 
     @Expose
     @SuppressWarnings("end_millis")
-    private int endMillis;
+    private long endMillis;
 
     @Expose
     @SuppressWarnings("type")
@@ -24,10 +24,17 @@ public class VerifyModel {
     @SuppressWarnings("device")
     private String device;
 
-    public VerifyModel(String otp, int startMillis, int endMillis) {
+    @Expose
+    @SuppressWarnings("resend")
+    private int resend;
+
+    public VerifyModel(String otp, long startMillis, long endMillis, String type, String device, int resend) {
         this.otp = otp;
         this.startMillis = startMillis;
         this.endMillis = endMillis;
+        this.type = type;
+        this.device = device;
+        this.resend = resend;
     }
 
     public String getOtp() {
@@ -38,7 +45,7 @@ public class VerifyModel {
         this.otp = otp;
     }
 
-    public int getStartMillis() {
+    public long getStartMillis() {
         return startMillis;
     }
 
@@ -46,7 +53,7 @@ public class VerifyModel {
         this.startMillis = startMillis;
     }
 
-    public int getEndMillis() {
+    public long getEndMillis() {
         return endMillis;
     }
 
@@ -54,4 +61,27 @@ public class VerifyModel {
         this.endMillis = endMillis;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public int getResend() {
+        return resend;
+    }
+
+    public void setResend(int resend) {
+        this.resend = resend;
+    }
 }
