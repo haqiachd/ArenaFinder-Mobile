@@ -48,7 +48,7 @@ public class ForgotPasswordFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_send_otp);
+        btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_kirim_ulang);
         inpEmail = view.findViewById(R.id.forgot_inp_email);
         txtHelper = view.findViewById(R.id.forgot_txt_helper);
     }

@@ -6,11 +6,18 @@ import com.c2.arenafinder.data.local.DataShared;
 import com.c2.arenafinder.data.local.DataShared.KEY;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.VerifyModel;
 
 import java.util.HashMap;
 import java.util.Objects;
 
 public class VerifyUtil {
+
+    public static final String TYPE_SIGNUP = "signup";
+
+    public static final String TYPE_CHANGE = "forgot";
+
+    public static int _15_MINUTES = 900_000;
 
     private static final String NULL = "null";
 
@@ -20,9 +27,23 @@ public class VerifyUtil {
 
     private final DataShared dataShared;
 
-    public VerifyUtil(Context context) {
+    public VerifyUtil(Context context, VerifyModel model){
         this.context = context;
         dataShared = new DataShared(context);
+
+        if (model != null){
+            setOtp(model.getOtp());
+            setStartMillis(model.getStartMillis());
+            setEndMillis(model.getEndMillis());
+            setType(model.getType());
+            setDevice(model.getDevice());
+            setResend(model.getResend());
+            setResendMillis(model.getResendMillis());
+        }
+    }
+
+    public VerifyUtil(Context context) {
+        this(context, null);
     }
 
     private String getData(KEY key) {
@@ -82,6 +103,10 @@ public class VerifyUtil {
         return getData(KEY.VERIFY_DEVICE);
     }
 
+    public void setDevice(String device) {
+        dataShared.setData(KEY.VERIFY_DEVICE, device);
+    }
+
     public void setResend(int type) {
         dataShared.setData(KEY.VERIFY_RESEND, String.valueOf(type));
     }
@@ -95,9 +120,27 @@ public class VerifyUtil {
         return 1;
     }
 
-    public void setDevice(String device) {
-        dataShared.setData(KEY.VERIFY_DEVICE, device);
+    public long getResendMillis() {
+        try{
+            return Long.parseLong(getData(KEY.VERIFY_RESEND_MILLIS));
+        }catch (Throwable ex){
+            ex.printStackTrace();
+        }
+        return 1;
     }
+
+    public void setResendMillis(long resendMillis) {
+        dataShared.setData(KEY.VERIFY_RESEND_MILLIS, String.valueOf(resendMillis));
+    }
+
+    public long countResendMillis(){
+        return System.currentTimeMillis() + (60_000L * (getWaitingMinutes() / 60));
+    }
+
+    public int getResendSeconds(){
+        return (int)((getResendMillis() - System.currentTimeMillis()) / 1000);
+    }
+
 
     public boolean haveOtp() {
         // cek semua key pada verify exist atau tidak dalam preferences
@@ -159,7 +202,7 @@ public class VerifyUtil {
                 return minutes * 9;
             }
             default: {
-                return minutes * 11;
+                return minutes * resend * 2;
             }
 
         }

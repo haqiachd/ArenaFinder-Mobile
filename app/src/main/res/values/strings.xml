@@ -18,10 +18,9 @@
     <string name="btn_sign_up">Daftar</string>
     <string name="btn_next">Berikutnya</string>
     <string name="btn_prev">Sebelumnya</string>
-    <string name="btn_send_otp">Kirim Kode OTP</string>
-    <string name="btn_ganti_password">Ganti Kata Sandi</string>
     <string name="btn_kirim_ulang">Kirim Ulang OTP</string>
-    <string name="btn_kirim_ulang_wait">Kirim Ulang (%1$s)</string>
+    <string name="btn_kirim_ulang_wait">Kirim Ulang (%1$d %2$s)</string>
+    <string name="btn_ganti_password">Ganti Kata Sandi</string>
     <string name="btn_wlc_register">Daftar</string>
     <string name="btn_wlc_login">Masuk</string>
     <string name="btn_pengguna_umum">Pengguna Umum</string>
@@ -71,6 +70,8 @@
     <string name="txt_accmsg_desc_def">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</string>
     <string name="txt_accmsg_signup_desc">Daftar akun dengan Google berhasil, Silahkah tekan button \'Buka App\' untuk membuka beranda.</string>
     <string name="txt_accmsg_chgpass_desc">Kata sandi berhasil diganti, Silahkan masuk kembali dengan kata sandi baru.</string>
+    <string name="txt_second">Detik</string>
+    <string name="txt_minut">Menit</string>
 
     <string name="alt_app_logo">Logo C2</string>
     <string name="alt_acc_back">Kembali</string>

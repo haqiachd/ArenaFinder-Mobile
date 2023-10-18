@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtAppbar;
 
     private void initViews(){
-        txtAppbar = findViewById(R.id.main_appbar_title);
+        txtAppbar = findViewById(R.id.main_appbar_title_old);
         bottomNavigation = findViewById(R.id.bottomNav);
     }
 

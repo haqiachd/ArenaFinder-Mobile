@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.VerifyModel;
 import com.c2.arenafinder.ui.activity.AccountActivity;
 import com.c2.arenafinder.ui.activity.EmptyActivity;
+import com.c2.arenafinder.util.VerifyUtil;
 import com.google.android.material.button.MaterialButton;
 
 public class WelcomeFragment extends Fragment {
@@ -75,6 +79,19 @@ public class WelcomeFragment extends Fragment {
         });
 
         onClickGroups();
+
+        long currentMillis = System.currentTimeMillis();
+        VerifyUtil verifyUtil = new VerifyUtil(requireContext());
+        verifyUtil.setResend(1);
+        LogApp.error(this, LogTag.METHOD, "CURRENT");
+
+        VerifyModel model = new VerifyModel(
+                "123456",
+                currentMillis, currentMillis + VerifyUtil._15_MINUTES,
+                VerifyUtil.TYPE_CHANGE, "mobile", 1, verifyUtil.countResendMillis()
+        );
+
+        verifyUtil = new VerifyUtil(requireContext(), model);
     }
 
     private void onClickGroups(){

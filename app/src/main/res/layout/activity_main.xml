@@ -9,7 +9,7 @@
     >
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/main_appbar"
+        android:id="@+id/main_appbar_old"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@
             >
 
             <TextView
-                android:id="@+id/main_appbar_title"
+                android:id="@+id/main_appbar_title_old"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_18sdp"
@@ -38,11 +38,112 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/main_appbar_card"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/primary_color"
+                app:cardCornerRadius="@dimen/_50sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="@string/app_name"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/kanit_regular"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/main_appbar_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/main_appbar_card"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:cardCornerRadius="@dimen/_50sdp"
+                app:strokeColor="@color/primary_color"
+                app:strokeWidth="@dimen/_1sdp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:src="@drawable/ic_appbar_main_search"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Temukan Lapanganmu!!"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_11ssp"
+                        android:ellipsize="end"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/kanit_semibold"
+                        android:textColor="@color/primary_color"
+                        />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <ImageView
+                android:id="@+id/main_appbar_notif"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/ic_appbar_main_notif"
+                app:layout_constraintStart_toEndOf="@id/main_appbar_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         android:layout_marginBottom="@dimen/_55sdp"
         />
 

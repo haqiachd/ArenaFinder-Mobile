@@ -1,6 +1,7 @@
 package com.c2.arenafinder.data.model;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class VerifyModel {
 
@@ -28,13 +29,18 @@ public class VerifyModel {
     @SuppressWarnings("resend")
     private int resend;
 
-    public VerifyModel(String otp, long startMillis, long endMillis, String type, String device, int resend) {
+    @Expose
+    @SerializedName("resend_millis")
+    private long resendMillis;
+
+    public VerifyModel(String otp, long startMillis, long endMillis, String type, String device, int resend, long resendMillis) {
         this.otp = otp;
         this.startMillis = startMillis;
         this.endMillis = endMillis;
         this.type = type;
         this.device = device;
         this.resend = resend;
+        this.resendMillis = resendMillis;
     }
 
     public String getOtp() {
@@ -83,5 +89,13 @@ public class VerifyModel {
 
     public void setResend(int resend) {
         this.resend = resend;
+    }
+
+    public long getResendMillis() {
+        return resendMillis;
+    }
+
+    public void setResendMillis(long resendMillis) {
+        this.resendMillis = resendMillis;
     }
 }

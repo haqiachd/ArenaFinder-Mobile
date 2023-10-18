@@ -79,6 +79,7 @@ public class DataShared {
         VERIFY_END_MILLIS,
         VERIFY_TYPE,
         VERIFY_RESEND,
+        VERIFY_RESEND_MILLIS,
         VERIFY_DEVICE,
         IS_FIRST_TIME_INSTALL,
         APP_LANGUAGE,
