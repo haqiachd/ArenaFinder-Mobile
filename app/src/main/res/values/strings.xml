@@ -2,10 +2,10 @@
     <string name="app_name">ArenaFinder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_aktivitas">Aktivitas</string>
-    <string name="menu_referensi">Referensi</string>
-    <string name="menu_profile">Profile</string>
+    <string name="app_page_home">Beranda</string>
+    <string name="app_page_aktivitas">Aktivitas</string>
+    <string name="app_page_referensi">Referensi</string>
+    <string name="app_page_profile">Profile</string>
 
     <!-- Link -->
     <string name="link_scheme">arenafinder.com</string>
@@ -73,6 +73,10 @@
     <string name="txt_second">Detik</string>
     <string name="txt_minut">Menit</string>
 
+    <string name="alt_bottom_nav_home">Home Icon</string>
+    <string name="alt_bottom_nav_device">Device Icon</string>
+    <string name="alt_bottom_nav_laporan">Report Icon</string>
+    <string name="alt_bottom_nav_profile">Profile Icon</string>
     <string name="alt_app_logo">Logo C2</string>
     <string name="alt_acc_back">Kembali</string>
     <string name="alt_google_logo">Google</string>

@@ -9,7 +9,6 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -19,8 +18,6 @@ import com.c2.arenafinder.ui.fragment.main.HomeFragment;
 import com.c2.arenafinder.ui.fragment.main.ProfileFragment;
 import com.c2.arenafinder.ui.fragment.main.ReferensiFragment;
 import com.c2.arenafinder.util.FragmentUtil;
-
-import okio.Sink;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,22 +60,22 @@ public class MainActivity extends AppCompatActivity {
             switch (model.getId()) {
                 case 1: {
                     FragmentUtil.switchFragmentMain(MainActivity.this.getSupportFragmentManager(), new HomeFragment(), false);
-                    txtAppbar.setText(R.string.menu_home);
+                    txtAppbar.setText(R.string.app_page_home);
                     break;
                 }
                 case 2: {
                     FragmentUtil.switchFragmentMain(MainActivity.this.getSupportFragmentManager(), new AktivitasFragment(), false);
-                    txtAppbar.setText(R.string.menu_aktivitas);
+                    txtAppbar.setText(R.string.app_page_aktivitas);
                     break;
                 }
                 case 3: {
                     FragmentUtil.switchFragmentMain(MainActivity.this.getSupportFragmentManager(), new ReferensiFragment(), false);
-                    txtAppbar.setText(R.string.menu_referensi);
+                    txtAppbar.setText(R.string.app_page_referensi);
                     break;
                 }
                 case 4: {
                     FragmentUtil.switchFragmentMain(MainActivity.this.getSupportFragmentManager(), new ProfileFragment(), false);
-                    txtAppbar.setText(R.string.menu_profile);
+                    txtAppbar.setText(R.string.app_page_profile);
                     break;
                 }
 

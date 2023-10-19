@@ -33,4 +33,6 @@
     <color name="disabled_buton">#B5BBC6</color>
     <color name="electric_purple">#BF00FF</color>
     <color name="card_color_jenis">#4D6F9ADA</color>
+    <color name="greenhaze">#01A367</color>
+    <color name="bottom_nav_card_activated">#A6A1FF9F</color>
 </resources>

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="lebar_item">0dp</dimen>
+    <dimen name="navigation_height">@dimen/_50sdp</dimen>
+    <dimen name="nav_bottom_item_margin_top">@dimen/_3sdp</dimen>
+    <dimen name="nav_bottom_item_icon_height">@dimen/_20sdp</dimen>
+    <dimen name="jarak_antar_item">0dp</dimen>
+    <dimen name="textsize_bottom_nav">@dimen/_8ssp</dimen>
+
     <dimen name="acc_stroke_radius_input">@dimen/_8sdp</dimen>
 
     <dimen name="btn_acc_width">@dimen/_210sdp</dimen>
