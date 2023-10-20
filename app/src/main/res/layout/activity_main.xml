@@ -143,6 +143,313 @@
         app:mbn_defaultIconColor="@color/black"
         app:mbn_selectedIconColor="@color/dogerblue" />
 
+    <!--    <com.google.android.material.card.MaterialCardView-->
+    <!--        android:id="@+id/main_bottom_navigation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/navigation_height"-->
+    <!--        android:translationY="@dimen/_1sdp"-->
+    <!--        app:cardBackgroundColor="@color/white"-->
+    <!--        app:cardElevation="@dimen/_4sdp"-->
+    <!--        app:cardMaxElevation="@dimen/_5sdp"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent">-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="@dimen/_2sdp"-->
+    <!--            android:background="@drawable/gr_navigation"-->
+    <!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/bottom_nav_linear"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:layout_marginStart="@dimen/_10sdp"-->
+    <!--            android:layout_marginEnd="@dimen/_10sdp"-->
+    <!--            android:baselineAligned="false"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:id="@+id/btn_nav_home"-->
+    <!--                android:layout_width="@dimen/lebar_item"-->
+    <!--                android:layout_height="@dimen/_45sdp"-->
+    <!--                android:layout_marginTop="@dimen/nav_bottom_item_margin_top"-->
+    <!--                android:layout_weight="1">-->
+
+    <!--                <com.airbnb.lottie.LottieAnimationView-->
+    <!--                    android:id="@+id/btn_nav_home_anim"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="match_parent"-->
+    <!--                    android:visibility="invisible"-->
+    <!--                    app:lottie_autoPlay="true"-->
+    <!--                    app:lottie_colorFilter="@color/greenhaze"-->
+    <!--                    app:lottie_loop="true"-->
+    <!--                    app:lottie_rawRes="@raw/raw_navigation_loading" />-->
+
+    <!--                <com.google.android.material.card.MaterialCardView-->
+    <!--                    android:id="@+id/btn_nav_card_active"-->
+    <!--                    android:layout_width="@dimen/_50sdp"-->
+    <!--                    android:layout_height="@dimen/_23sdp"-->
+    <!--                    android:visibility="gone"-->
+    <!--                    app:cardBackgroundColor="@color/bottom_nav_card_activated"-->
+    <!--                    app:cardCornerRadius="@dimen/_30sdp"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_home_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--                    <ImageView-->
+    <!--                        android:id="@+id/btn_nav_home_icon_active"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="@dimen/nav_bottom_item_icon_height"-->
+    <!--                        android:layout_gravity="center"-->
+    <!--                        android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                        android:src="@drawable/ic_navigation_home_green"-->
+    <!--                        android:visibility="visible" />-->
+
+    <!--                </com.google.android.material.card.MaterialCardView>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/btn_nav_home_icon"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="@dimen/nav_bottom_item_icon_height"-->
+    <!--                    android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                    android:src="@drawable/ic_navigation_home_black"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_home_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/btn_nav_home_title"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="@font/poppins_semibold"-->
+    <!--                    android:text="@string/app_page_home"-->
+    <!--                    android:textAlignment="center"-->
+    <!--                    android:textColor="@color/granite_grey"-->
+    <!--                    android:textSize="@dimen/textsize_bottom_nav"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:id="@+id/btn_nav_aktivitas"-->
+    <!--                android:layout_width="@dimen/lebar_item"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:layout_marginTop="@dimen/nav_bottom_item_margin_top"-->
+    <!--                android:layout_weight="1">-->
+
+    <!--                <com.airbnb.lottie.LottieAnimationView-->
+    <!--                    android:id="@+id/btn_nav_aktivitas_anim"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="match_parent"-->
+    <!--                    android:visibility="invisible"-->
+    <!--                    app:lottie_autoPlay="true"-->
+    <!--                    app:lottie_colorFilter="@color/greenhaze"-->
+    <!--                    app:lottie_loop="true"-->
+    <!--                    app:lottie_rawRes="@raw/raw_navigation_loading" />-->
+
+    <!--                <com.google.android.material.card.MaterialCardView-->
+    <!--                    android:id="@+id/btn_nav_aktivitas_active"-->
+    <!--                    android:layout_width="@dimen/_50sdp"-->
+    <!--                    android:layout_height="@dimen/_23sdp"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:cardBackgroundColor="@color/bottom_nav_card_activated"-->
+    <!--                    app:cardCornerRadius="@dimen/_30sdp"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_aktivitas_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--                    <ImageView-->
+    <!--                        android:id="@+id/btn_nav_aktivitas_icon_active"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="@dimen/_16sdp"-->
+    <!--                        android:layout_gravity="center"-->
+    <!--                        android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                        android:src="@drawable/ic_navigation_aktivitas_blue"-->
+    <!--                        android:visibility="visible" />-->
+
+    <!--                </com.google.android.material.card.MaterialCardView>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/btn_nav_aktivitas_icon"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="@dimen/nav_bottom_item_icon_height"-->
+    <!--                    android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                    android:src="@drawable/ic_navigation_aktivitas_grey"-->
+    <!--                    android:visibility="gone"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_aktivitas_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/btn_nav_aktivitas_title"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="@font/poppins_semibold"-->
+    <!--                    android:text="@string/app_page_aktivitas"-->
+    <!--                    android:textAlignment="center"-->
+    <!--                    android:textColor="@color/primary_color"-->
+    <!--                    android:textSize="@dimen/textsize_bottom_nav"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:id="@+id/btn_nav_referensi"-->
+    <!--                android:layout_width="@dimen/lebar_item"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:layout_marginTop="@dimen/nav_bottom_item_margin_top"-->
+    <!--                android:layout_weight="1">-->
+
+    <!--                <com.airbnb.lottie.LottieAnimationView-->
+    <!--                    android:id="@+id/btn_nav_referensi_anim"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="match_parent"-->
+    <!--                    android:visibility="invisible"-->
+    <!--                    app:lottie_autoPlay="true"-->
+    <!--                    app:lottie_colorFilter="@color/greenhaze"-->
+    <!--                    app:lottie_loop="true"-->
+    <!--                    app:lottie_rawRes="@raw/raw_navigation_loading" />-->
+
+    <!--                <com.google.android.material.card.MaterialCardView-->
+    <!--                    android:id="@+id/btn_nav_referensi_active"-->
+    <!--                    android:layout_width="@dimen/_50sdp"-->
+    <!--                    android:layout_height="@dimen/_23sdp"-->
+    <!--                    android:layout_marginBottom="@dimen/_5sdp"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:cardBackgroundColor="@color/bottom_nav_card_activated"-->
+    <!--                    app:cardCornerRadius="@dimen/_30sdp"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_referensi_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--                    <ImageView-->
+    <!--                        android:id="@+id/btn_nav_referensi_icon_active"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="@dimen/nav_bottom_item_icon_height"-->
+    <!--                        android:layout_gravity="center"-->
+    <!--                        android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                        android:src="@drawable/ic_navigation_home_green"-->
+    <!--                        android:visibility="visible" />-->
+
+    <!--                </com.google.android.material.card.MaterialCardView>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/btn_nav_referensi_icon"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="@dimen/nav_bottom_item_icon_height"-->
+    <!--                    android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                    android:src="@drawable/ic_navigation_home_black"-->
+    <!--                    android:visibility="gone"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_referensi_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/btn_nav_referensi_title"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="@dimen/_15sdp"-->
+    <!--                    android:fontFamily="@font/poppins_semibold"-->
+    <!--                    android:text="@string/app_page_referensi"-->
+    <!--                    android:textAlignment="center"-->
+    <!--                    android:textColor="@color/granite_grey"-->
+    <!--                    android:textSize="@dimen/textsize_bottom_nav"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:id="@+id/btn_nav_profile"-->
+    <!--                android:layout_width="@dimen/lebar_item"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:layout_marginTop="@dimen/nav_bottom_item_margin_top"-->
+    <!--                android:layout_weight="1">-->
+
+    <!--                <com.airbnb.lottie.LottieAnimationView-->
+    <!--                    android:id="@+id/btn_nav_profile_anim"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="match_parent"-->
+    <!--                    android:visibility="invisible"-->
+    <!--                    app:lottie_autoPlay="true"-->
+    <!--                    app:lottie_colorFilter="@color/greenhaze"-->
+    <!--                    app:lottie_loop="true"-->
+    <!--                    app:lottie_rawRes="@raw/raw_navigation_loading" />-->
+
+    <!--                <com.google.android.material.card.MaterialCardView-->
+    <!--                    android:id="@+id/btn_nav_profile_active"-->
+    <!--                    android:layout_width="@dimen/_50sdp"-->
+    <!--                    android:layout_height="@dimen/_23sdp"-->
+    <!--                    android:visibility="gone"-->
+    <!--                    app:cardBackgroundColor="@color/bottom_nav_card_activated"-->
+    <!--                    app:cardCornerRadius="@dimen/_30sdp"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_profile_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--                    <ImageView-->
+    <!--                        android:id="@+id/btn_nav_profile_icon_active"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="@dimen/nav_bottom_item_icon_height"-->
+    <!--                        android:layout_gravity="center"-->
+    <!--                        android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                        android:src="@drawable/ic_navigation_home_green"-->
+    <!--                        android:visibility="visible" />-->
+
+    <!--                </com.google.android.material.card.MaterialCardView>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/btn_nav_profile_icon"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="@dimen/nav_bottom_item_icon_height"-->
+    <!--                    android:contentDescription="@string/alt_bottom_nav_home"-->
+    <!--                    android:src="@drawable/ic_navigation_home_black"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:layout_constraintBottom_toTopOf="@id/btn_nav_profile_title"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/btn_nav_profile_title"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="@font/poppins_semibold"-->
+    <!--                    android:text="@string/app_page_profile"-->
+    <!--                    android:textAlignment="center"-->
+    <!--                    android:textColor="@color/granite_grey"-->
+    <!--                    android:textSize="@dimen/textsize_bottom_nav"-->
+    <!--                    android:visibility="visible"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--        </LinearLayout>-->
+
+    <!--    </com.google.android.material.card.MaterialCardView>-->
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_bottom_navigation"
         android:layout_width="match_parent"
@@ -174,7 +481,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_nav_home"
                 android:layout_width="@dimen/lebar_item"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/nav_bottom_item_margin_top"
                 android:layout_weight="1">
 
@@ -187,29 +494,6 @@
                     app:lottie_colorFilter="@color/greenhaze"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/raw_navigation_loading" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btn_nav_card_active"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_23sdp"
-                    android:visibility="gone"
-                    app:cardBackgroundColor="@color/bottom_nav_card_activated"
-                    app:cardCornerRadius="@dimen/_30sdp"
-                    app:layout_constraintBottom_toTopOf="@id/btn_nav_home_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/btn_nav_home_icon_active"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/nav_bottom_item_icon_height"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/alt_bottom_nav_home"
-                        android:src="@drawable/ic_navigation_home_green"
-                        android:visibility="visible" />
-
-                </com.google.android.material.card.MaterialCardView>
 
                 <ImageView
                     android:id="@+id/btn_nav_home_icon"
@@ -230,12 +514,13 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/app_page_home"
                     android:textAlignment="center"
-                    android:textColor="@color/granite_grey"
+                    android:textColor="@color/dimgray"
                     android:textSize="@dimen/textsize_bottom_nav"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_nav_home_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -256,36 +541,13 @@
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/raw_navigation_loading" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btn_nav_aktivitas_active"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_23sdp"
-                    android:visibility="visible"
-                    app:cardBackgroundColor="@color/bottom_nav_card_activated"
-                    app:cardCornerRadius="@dimen/_30sdp"
-                    app:layout_constraintBottom_toTopOf="@id/btn_nav_aktivitas_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/btn_nav_aktivitas_icon_active"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_16sdp"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/alt_bottom_nav_home"
-                        android:src="@drawable/ic_navigation_aktivitas_blue"
-                        android:visibility="visible" />
-
-                </com.google.android.material.card.MaterialCardView>
-
                 <ImageView
                     android:id="@+id/btn_nav_aktivitas_icon"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/nav_bottom_item_icon_height"
                     android:contentDescription="@string/alt_bottom_nav_home"
-                    android:src="@drawable/ic_navigation_aktivitas_grey"
-                    android:visibility="gone"
+                    android:src="@drawable/ic_navigation_home_black"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/btn_nav_aktivitas_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -298,12 +560,13 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/app_page_aktivitas"
                     android:textAlignment="center"
-                    android:textColor="@color/primary_color"
+                    android:textColor="@color/dimgray"
                     android:textSize="@dimen/textsize_bottom_nav"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_nav_aktivitas_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -324,29 +587,6 @@
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/raw_navigation_loading" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btn_nav_referensi_active"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_23sdp"
-                    android:visibility="gone"
-                    app:cardBackgroundColor="@color/bottom_nav_card_activated"
-                    app:cardCornerRadius="@dimen/_30sdp"
-                    app:layout_constraintBottom_toTopOf="@id/btn_nav_referensi_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/btn_nav_referensi_icon_active"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/nav_bottom_item_icon_height"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/alt_bottom_nav_home"
-                        android:src="@drawable/ic_navigation_home_green"
-                        android:visibility="visible" />
-
-                </com.google.android.material.card.MaterialCardView>
-
                 <ImageView
                     android:id="@+id/btn_nav_referensi_icon"
                     android:layout_width="match_parent"
@@ -366,12 +606,13 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/app_page_referensi"
                     android:textAlignment="center"
-                    android:textColor="@color/granite_grey"
+                    android:textColor="@color/dimgray"
                     android:textSize="@dimen/textsize_bottom_nav"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_nav_referensi_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -392,29 +633,6 @@
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/raw_navigation_loading" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btn_nav_profile_active"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_23sdp"
-                    android:visibility="gone"
-                    app:cardBackgroundColor="@color/bottom_nav_card_activated"
-                    app:cardCornerRadius="@dimen/_30sdp"
-                    app:layout_constraintBottom_toTopOf="@id/btn_nav_profile_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/btn_nav_profile_icon_active"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/nav_bottom_item_icon_height"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/alt_bottom_nav_home"
-                        android:src="@drawable/ic_navigation_home_green"
-                        android:visibility="visible" />
-
-                </com.google.android.material.card.MaterialCardView>
-
                 <ImageView
                     android:id="@+id/btn_nav_profile_icon"
                     android:layout_width="match_parent"
@@ -434,17 +652,19 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/app_page_profile"
                     android:textAlignment="center"
-                    android:textColor="@color/granite_grey"
+                    android:textColor="@color/dimgray"
                     android:textSize="@dimen/textsize_bottom_nav"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_nav_profile_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="lebar_item">0dp</dimen>
-    <dimen name="navigation_height">@dimen/_50sdp</dimen>
+    <dimen name="navigation_height">@dimen/_45sdp</dimen>
     <dimen name="nav_bottom_item_margin_top">@dimen/_3sdp</dimen>
     <dimen name="nav_bottom_item_icon_height">@dimen/_20sdp</dimen>
     <dimen name="jarak_antar_item">0dp</dimen>
