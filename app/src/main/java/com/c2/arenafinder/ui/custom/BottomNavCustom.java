@@ -218,7 +218,7 @@ public class BottomNavCustom {
         itemProfileButton.setClickable(true);
     }
 
-    public void disabledClickable(int item){
+    public void setDisabledClickable(int item){
         activatedClickable();
         switch (item){
             case ITEM_HOME: {
