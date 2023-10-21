@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import android.os.Handler;
 import android.provider.MediaStore;
 
 import android.view.LayoutInflater;
@@ -106,6 +108,9 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+
+        new Handler().postDelayed(() -> MainActivity.bottomNav.closeProfile(), 1500);
+
         usersUtil = new UsersUtil(requireContext());
 
         txtUsername.setText(usersUtil.getUsername());
