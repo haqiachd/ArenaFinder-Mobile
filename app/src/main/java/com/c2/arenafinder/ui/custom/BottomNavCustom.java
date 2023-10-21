@@ -297,10 +297,10 @@ public class BottomNavCustom {
     }
 
     private void deactivatedItem() {
-        itemHomeImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_black));
-        itemAktivitasImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_black));
-        itemReferensiImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_black));
-        itemProfileImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_black));
+        itemHomeImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_deactivated));
+        itemAktivitasImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_aktivitas_deactivated));
+        itemReferensiImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_referensi_deactivated));
+        itemProfileImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_profile_deactivated));
 
         TextView[] texts = {itemHomeText, itemAktivitasText, itemReferensiText, itemProfileText};
 
@@ -313,22 +313,22 @@ public class BottomNavCustom {
         deactivatedItem();
         switch (item) {
             case ITEM_HOME: {
-                itemHomeImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_green));
+                itemHomeImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_active));
                 itemHomeText.setTextColor(ContextCompat.getColor(activity, R.color.black));
                 break;
             }
             case ITEM_AKTIVITAS: {
-                itemAktivitasImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_green));
+                itemAktivitasImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_aktivitas_active));
                 itemAktivitasText.setTextColor(ContextCompat.getColor(activity, R.color.black));
                 break;
             }
             case ITEM_REFERENSI: {
-                itemReferensiImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_green));
+                itemReferensiImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_referensi_active));
                 itemReferensiText.setTextColor(ContextCompat.getColor(activity, R.color.black));
                 break;
             }
             case ITEM_PROFILE: {
-                itemProfileImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_home_green));
+                itemProfileImage.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_navigation_profile_active));
                 itemProfileText.setTextColor(ContextCompat.getColor(activity, R.color.black));
                 break;
             }

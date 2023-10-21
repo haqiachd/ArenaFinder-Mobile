@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
                 if (currentScroll < 400){
                     MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
                 } else if (currentScroll < 800){
-                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_home);
+                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
                 } else if (currentScroll < 1300){
                     MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
                 }else {

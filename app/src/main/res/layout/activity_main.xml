@@ -7,35 +7,8 @@
     tools:context=".ui.activity.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/main_appbar_old"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/main_appbar_title_old"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:text="Menu"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_17ssp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/main_appbar_height"
         android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,8 +102,8 @@
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:layout_marginBottom="@dimen/_55sdp" />
+        android:layout_marginTop="@dimen/main_appbar_height"
+        android:layout_marginBottom="@dimen/_44sdp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_bottom_navigation"
@@ -171,18 +144,18 @@
                     android:id="@+id/btn_nav_home_anim"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_6sdp"
                     android:visibility="gone"
                     app:lottie_autoPlay="true"
-                    app:lottie_colorFilter="@color/greenhaze"
                     app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/raw_navigation_loading" />
+                    app:lottie_rawRes="@raw/raw_nav_bottom_loading" />
 
                 <ImageView
                     android:id="@+id/btn_nav_home_icon"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/nav_bottom_item_icon_height"
                     android:contentDescription="@string/alt_bottom_nav_home"
-                    android:src="@drawable/ic_navigation_home_black"
+                    android:src="@drawable/ic_navigation_home_deactivated"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/btn_nav_home_title"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -209,14 +182,13 @@
                     android:layout_width="@dimen/nav_bottom_icon_second_size"
                     android:layout_height="@dimen/nav_bottom_icon_second_size"
                     android:layout_marginBottom="@dimen/_3sdp"
-                    android:src="@drawable/ic_home"
-                    android:visibility="gone"
                     android:contentDescription="@string/alt_bottom_nav_icon_second"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_second_icon_def"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -231,18 +203,18 @@
                     android:id="@+id/btn_nav_aktivitas_anim"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="invisible"
+                    android:layout_margin="@dimen/_6sdp"
+                    android:visibility="gone"
                     app:lottie_autoPlay="true"
-                    app:lottie_colorFilter="@color/greenhaze"
                     app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/raw_navigation_loading" />
+                    app:lottie_rawRes="@raw/raw_nav_bottom_loading" />
 
                 <ImageView
                     android:id="@+id/btn_nav_aktivitas_icon"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/nav_bottom_item_icon_height"
                     android:contentDescription="@string/alt_bottom_nav_home"
-                    android:src="@drawable/ic_navigation_home_black"
+                    android:src="@drawable/ic_navigation_aktivitas_deactivated"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/btn_nav_aktivitas_title"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -269,14 +241,13 @@
                     android:layout_width="@dimen/nav_bottom_icon_second_size"
                     android:layout_height="@dimen/nav_bottom_icon_second_size"
                     android:layout_marginBottom="@dimen/_3sdp"
-                    android:src="@drawable/ic_home"
-                    android:visibility="gone"
                     android:contentDescription="@string/alt_bottom_nav_icon_second"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_second_icon_def"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -291,18 +262,18 @@
                     android:id="@+id/btn_nav_referensi_anim"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="invisible"
+                    android:layout_margin="@dimen/_6sdp"
+                    android:visibility="gone"
                     app:lottie_autoPlay="true"
-                    app:lottie_colorFilter="@color/greenhaze"
                     app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/raw_navigation_loading" />
+                    app:lottie_rawRes="@raw/raw_nav_bottom_loading" />
 
                 <ImageView
                     android:id="@+id/btn_nav_referensi_icon"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/nav_bottom_item_icon_height"
                     android:contentDescription="@string/alt_bottom_nav_home"
-                    android:src="@drawable/ic_navigation_home_black"
+                    android:src="@drawable/ic_navigation_referensi_deactivated"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/btn_nav_referensi_title"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -329,14 +300,13 @@
                     android:layout_width="@dimen/nav_bottom_icon_second_size"
                     android:layout_height="@dimen/nav_bottom_icon_second_size"
                     android:layout_marginBottom="@dimen/_3sdp"
-                    android:src="@drawable/ic_home"
-                    android:visibility="gone"
                     android:contentDescription="@string/alt_bottom_nav_icon_second"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_second_icon_def"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -351,18 +321,18 @@
                     android:id="@+id/btn_nav_profile_anim"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_6sdp"
                     android:visibility="invisible"
                     app:lottie_autoPlay="true"
-                    app:lottie_colorFilter="@color/greenhaze"
                     app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/raw_navigation_loading" />
+                    app:lottie_rawRes="@raw/raw_nav_bottom_loading" />
 
                 <ImageView
                     android:id="@+id/btn_nav_profile_icon"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/nav_bottom_item_icon_height"
                     android:contentDescription="@string/alt_bottom_nav_home"
-                    android:src="@drawable/ic_navigation_home_black"
+                    android:src="@drawable/ic_navigation_profile_deactivated"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/btn_nav_profile_title"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -389,14 +359,13 @@
                     android:layout_width="@dimen/nav_bottom_icon_second_size"
                     android:layout_height="@dimen/nav_bottom_icon_second_size"
                     android:layout_marginBottom="@dimen/_3sdp"
-                    android:src="@drawable/ic_home"
-                    android:visibility="gone"
                     android:contentDescription="@string/alt_bottom_nav_icon_second"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_second_icon_def"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

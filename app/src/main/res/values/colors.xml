@@ -35,4 +35,5 @@
     <color name="card_color_jenis">#4D6F9ADA</color>
     <color name="greenhaze">#01A367</color>
     <color name="bottom_nav_card_activated">#3300D9FF</color>
+    <color name="bottom_nav">@color/dimgray</color>
 </resources>

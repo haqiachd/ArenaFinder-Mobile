@@ -22,17 +22,13 @@ import com.c2.arenafinder.util.FragmentUtil;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static int MENU_HOME = 1, MENU_AKTIVITAS = 2, MENU_REFERENSI = 3, MENU_PROFILE = 4;
-
     private static final int PERMISSION_REQUEST_STORAGE = 2;
-
-    private TextView txtAppbar;
 
     @SuppressLint("StaticFieldLeak")
     public static BottomNavCustom bottomNav;
 
     private void initViews() {
-        txtAppbar = findViewById(R.id.main_appbar_title_old);
+
     }
 
     @Override
