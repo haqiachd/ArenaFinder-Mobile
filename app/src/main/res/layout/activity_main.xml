@@ -204,6 +204,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_nav_home_icon" />
 
+                <ImageView
+                    android:id="@+id/btn_nav_home_icon_second"
+                    android:layout_width="@dimen/nav_bottom_icon_second_size"
+                    android:layout_height="@dimen/nav_bottom_icon_second_size"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:src="@drawable/ic_home"
+                    android:visibility="gone"
+                    android:contentDescription="@string/alt_bottom_nav_icon_second"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -249,6 +263,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_nav_aktivitas_icon" />
+
+                <ImageView
+                    android:id="@+id/btn_nav_aktivitas_icon_second"
+                    android:layout_width="@dimen/nav_bottom_icon_second_size"
+                    android:layout_height="@dimen/nav_bottom_icon_second_size"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:src="@drawable/ic_home"
+                    android:visibility="gone"
+                    android:contentDescription="@string/alt_bottom_nav_icon_second"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -296,6 +324,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_nav_referensi_icon" />
 
+                <ImageView
+                    android:id="@+id/btn_nav_referensi_icon_second"
+                    android:layout_width="@dimen/nav_bottom_icon_second_size"
+                    android:layout_height="@dimen/nav_bottom_icon_second_size"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:src="@drawable/ic_home"
+                    android:visibility="gone"
+                    android:contentDescription="@string/alt_bottom_nav_icon_second"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -341,6 +383,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_nav_profile_icon" />
+
+                <ImageView
+                    android:id="@+id/btn_nav_profile_icon_second"
+                    android:layout_width="@dimen/nav_bottom_icon_second_size"
+                    android:layout_height="@dimen/nav_bottom_icon_second_size"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:src="@drawable/ic_home"
+                    android:visibility="gone"
+                    android:contentDescription="@string/alt_bottom_nav_icon_second"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

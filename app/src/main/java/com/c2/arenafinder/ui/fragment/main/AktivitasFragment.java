@@ -10,9 +10,11 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.custom.BottomNavCustom;
 
 public class AktivitasFragment extends Fragment {
 
@@ -55,6 +57,13 @@ public class AktivitasFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        new Handler().postDelayed(() -> MainActivity.bottomNav.closeAktivitas(), 1500);
+        MainActivity.bottomNav.setOnActionAktivitasOnFrame(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(requireContext(), "Aktivitas", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        new Handler().postDelayed(() -> MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_AKTIVITAS), 1500);
     }
 }

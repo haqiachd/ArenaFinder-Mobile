@@ -34,6 +34,7 @@ import com.c2.arenafinder.ui.activity.AccountActivity;
 import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
+import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;
@@ -109,7 +110,14 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
-        new Handler().postDelayed(() -> MainActivity.bottomNav.closeProfile(), 1500);
+        MainActivity.bottomNav.setOnActionProfileOnFrame(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(requireContext(), "Profile", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        new Handler().postDelayed(() -> MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_PROFILE), 1500);
 
         usersUtil = new UsersUtil(requireContext());
 
