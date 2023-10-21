@@ -13,15 +13,19 @@ import java.util.Objects;
 
 public class VerifyUtil {
 
-    public static final String TYPE_SIGNUP = "signup";
+    public static final String TYPE_SIGNUP = "SignUp";
 
-    public static final String TYPE_CHANGE = "forgot";
+    public static final String TYPE_FORGOT = "ForgotPass";
+
+    public static final String ACTION_NEW = "new";
+
+    public static final String ACTION_UPDATE = "update";
 
     public static int _15_MINUTES = 900_000;
 
     private static final String NULL = "null";
 
-    private static final int minutes = 60;;
+    private static final int minutes = 60;
 
     private final Context context;
 
@@ -32,13 +36,14 @@ public class VerifyUtil {
         dataShared = new DataShared(context);
 
         if (model != null){
+            setEmail(model.getEmail());
             setOtp(model.getOtp());
             setStartMillis(model.getStartMillis());
             setEndMillis(model.getEndMillis());
             setType(model.getType());
             setDevice(model.getDevice());
             setResend(model.getResend());
-            setResendMillis(model.getResendMillis());
+            setCreated(model.getCreated());
         }
     }
 
@@ -55,6 +60,14 @@ public class VerifyUtil {
             return NULL;
         }
         return NULL;
+    }
+
+    public String getEmail(){
+        return getData(KEY.VERIFY_EMAIL);
+    }
+
+    public void setEmail(String email){
+        dataShared.setData(KEY.VERIFY_EMAIL, email);
     }
 
     public String getOtp() {
@@ -120,39 +133,35 @@ public class VerifyUtil {
         return 1;
     }
 
-    public long getResendMillis() {
-        try{
-            return Long.parseLong(getData(KEY.VERIFY_RESEND_MILLIS));
-        }catch (Throwable ex){
-            ex.printStackTrace();
-        }
-        return 1;
-    }
-
-    public void setResendMillis(long resendMillis) {
-        dataShared.setData(KEY.VERIFY_RESEND_MILLIS, String.valueOf(resendMillis));
-    }
-
     public long countResendMillis(){
         return System.currentTimeMillis() + (60_000L * (getWaitingMinutes() / 60));
     }
 
     public int getResendSeconds(){
-        return (int)((getResendMillis() - System.currentTimeMillis()) / 1000);
+        return (int)((countResendMillis() - System.currentTimeMillis()) / 1000);
     }
 
+    public String getCreated(){
+        return getData(KEY.VERIFY_CREATED);
+    }
+
+    public void setCreated(String created){
+        dataShared.setData(KEY.VERIFY_CREATED, created);
+    }
 
     public boolean haveOtp() {
         // cek semua key pada verify exist atau tidak dalam preferences
-        boolean have = dataShared.contains(KEY.VERIFY_OTP_CODE) && dataShared.contains(KEY.VERIFY_START_MILLIS) &&
+        boolean have =
+                dataShared.contains(KEY.VERIFY_EMAIL) && dataShared.contains(KEY.VERIFY_CREATED) &&
+                dataShared.contains(KEY.VERIFY_OTP_CODE) && dataShared.contains(KEY.VERIFY_START_MILLIS) &&
                 dataShared.contains(KEY.VERIFY_END_MILLIS) && dataShared.contains(KEY.VERIFY_TYPE) &&
-                dataShared.contains(KEY.VERIFY_DEVICE) && dataShared.contains(KEY.VERIFY_RESEND
-        );
+                dataShared.contains(KEY.VERIFY_DEVICE) && dataShared.contains(KEY.VERIFY_RESEND);
 
         // jika semua key exist
         if (have) {
             // mendapatkan semua data verify pada preferences
             HashMap<KEY, String> hash = dataShared.getData(
+                    KEY.VERIFY_EMAIL, KEY.VERIFY_CREATED,
                     KEY.VERIFY_OTP_CODE, KEY.VERIFY_START_MILLIS, KEY.VERIFY_END_MILLIS,
                     KEY.VERIFY_TYPE, KEY.VERIFY_DEVICE, KEY.VERIFY_RESEND
             );
@@ -206,6 +215,10 @@ public class VerifyUtil {
             }
 
         }
+    }
+
+    public void removeOtp(){
+        // TODO : remove otp code from preferences
     }
 
 }

@@ -6,41 +6,54 @@ import com.google.gson.annotations.SerializedName;
 public class VerifyModel {
 
     @Expose
-    @SuppressWarnings("otp")
+    @SerializedName("email")
+    private String email;
+
+    @Expose
+    @SerializedName("otp")
     private String otp;
 
     @Expose
-    @SuppressWarnings("start_millis")
-    private long startMillis;
-
-    @Expose
-    @SuppressWarnings("end_millis")
-    private long endMillis;
-
-    @Expose
-    @SuppressWarnings("type")
+    @SerializedName("type")
     private String type;
 
     @Expose
-    @SuppressWarnings("device")
+    @SerializedName("start_millis")
+    private long startMillis;
+
+    @Expose
+    @SerializedName("end_millis")
+    private long endMillis;
+
+    @Expose
+    @SerializedName("device")
     private String device;
 
     @Expose
-    @SuppressWarnings("resend")
+    @SerializedName("resend")
     private int resend;
 
     @Expose
-    @SerializedName("resend_millis")
-    private long resendMillis;
+    @SerializedName("created_at")
+    private String created;
 
-    public VerifyModel(String otp, long startMillis, long endMillis, String type, String device, int resend, long resendMillis) {
+    public VerifyModel(String email, String otp, String type, long  startMillis, long  endMillis, String device, int resend, String created) {
+        this.email = email;
         this.otp = otp;
         this.startMillis = startMillis;
         this.endMillis = endMillis;
         this.type = type;
         this.device = device;
         this.resend = resend;
-        this.resendMillis = resendMillis;
+        this.created = created;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getOtp() {
@@ -55,7 +68,7 @@ public class VerifyModel {
         return startMillis;
     }
 
-    public void setStartMillis(int startMillis) {
+    public void setStartMillis(long startMillis) {
         this.startMillis = startMillis;
     }
 
@@ -63,7 +76,7 @@ public class VerifyModel {
         return endMillis;
     }
 
-    public void setEndMillis(int endMillis) {
+    public void setEndMillis(long endMillis) {
         this.endMillis = endMillis;
     }
 
@@ -91,11 +104,12 @@ public class VerifyModel {
         this.resend = resend;
     }
 
-    public long getResendMillis() {
-        return resendMillis;
+    public String getCreated() {
+        return created;
     }
 
-    public void setResendMillis(long resendMillis) {
-        this.resendMillis = resendMillis;
+    public void setCreated(String created) {
+        this.created = created;
     }
+
 }
