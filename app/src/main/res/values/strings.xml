@@ -72,6 +72,7 @@
     <string name="txt_accmsg_chgpass_desc">Kata sandi berhasil diganti, Silahkan masuk kembali dengan kata sandi baru.</string>
     <string name="txt_second">Detik</string>
     <string name="txt_minut">Menit</string>
+    <string name="txt_update_otp">Mengirimkan ulang kode OTP</string>
 
     <string name="alt_bottom_nav_home">Home Icon</string>
     <string name="alt_bottom_nav_device">Device Icon</string>
@@ -85,6 +86,7 @@
     <string name="alt_signup_type">Logo Orang</string>
 
     <string name="dia_positive_ok">OK</string>
+    <string name="dia_positive_ya">IYA</string>
     <string name="dia_positive_login">LOGIN</string>
     <string name="dia_positive_verify">VERIFIKASI</string>
     <string name="dia_negative_cancel">BATAL</string>
@@ -92,6 +94,7 @@
     <string name="dia_title_inform">Informasi</string>
     <string name="dia_title_warning">Peringatan</string>
     <string name="dia_title_register">Mendaftarkan Akun</string>
+    <string name="dia_positive_out">Keluar</string>
     <string name="dia_msg_confirm_logout">Apakah Kamu Ingin Logout?</string>
     <string name="dia_msg_confirm_close">Apakah kamu ingin keluar dari aplikasi.</string>
     <string name="dia_msg_otp_signup_suc">OTP yang kamu masukan valid, Silahkan login dengan akun kamu.</string>
@@ -102,9 +105,14 @@
     <string name="dia_msg_inform_forgot">Kami telah mengirimkan kode OTP ke email kamu untuk melakukan verifikasi.</string>
     <string name="dia_msg_signup_type">Kamu akan diarahkan ke halaman web jika mendaftar sebagai pengelola lapangan.</string>
     <string name="dia_msg_loading">Tunggu sebentar…</string>
+    <string name="dia_msg_otp_expired">Kode OTP telah kadaluarsa</string>
+    <string name="dia_msg_otp_updated">Kode OTP berhasil dikirimkan ulang, Silahkan cek email kamu.</string>
+    <string name="dia_msg_otp_canceled">Apakah kamu yakin ingin membatalkan verifikasi kode OTP?</string>
+    <string name="dia_msg_chgpass_canceled">Apakah kamu yakin ingin membatalkan ganti kata sandi.</string>
+    <string name="dia_msg_sgoogle_canceled">Apakah kamu yakin ingin membatalkan daftar akun Google.</string>
 
     <string name="suc_userid_valid">Email atau username valid</string>
-    <string name="msg_otp_input">Masukan kode OTP.</string>
+    <string name="msg_otp_input">Masukan kode OTP</string>
     <string name="suc_otp_valid">Kode OTP valid</string>
     <string name="suc_account_edited">Akun berhasil diedit</string>
     <string name="suc_username_valid">Username valid</string>

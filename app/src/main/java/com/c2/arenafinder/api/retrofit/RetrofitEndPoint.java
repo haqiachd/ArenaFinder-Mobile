@@ -83,7 +83,8 @@ public interface RetrofitEndPoint {
     @POST("email/mail.php")
     Call<VerifyResponse> sendEmail(
             @Field("email") String email,
-            @Field("type") String type
+            @Field("type") String type,
+            @Field("action") String action
     );
 
 }

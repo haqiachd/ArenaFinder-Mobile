@@ -1,10 +1,13 @@
 package com.c2.arenafinder.ui.fragment.account;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -82,6 +85,27 @@ public class ChangePasswordFragment extends Fragment {
         initViews(view);
 
         validator = new ValidatorUtil(requireContext(), btnChange, txtHelper);
+
+        // on back pressed action
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // show dialog confirm
+                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                new AlertDialog.Builder(requireContext())
+                        .setTitle(R.string.dia_title_confirm)
+                        .setMessage(R.string.dia_msg_chgpass_canceled)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.dia_positive_ya, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(),false);
+                            }
+                        })
+                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                        .create().show();
+            }
+        });
 
         onClickGroups();
         onChangedGroups();

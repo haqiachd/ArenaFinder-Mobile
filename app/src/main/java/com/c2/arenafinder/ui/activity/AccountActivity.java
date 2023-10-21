@@ -87,57 +87,6 @@ public class AccountActivity extends AppCompatActivity {
         onClickGroups();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-//        switch (IAM_IN){
-//            case SIGN_IN: {
-//                AlertDialog alertDialog = DialogUtil.showInformationDialog(
-//                        this, "Test", "message",
-//                        "ok", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Log.d("", "");
-//                                ArenaFinder.playVibrator(AccountActivity.this, ArenaFinder.VIBRATOR_SHORT);
-//                                Toast.makeText(AccountActivity.this, "oi", Toast.LENGTH_SHORT).show();
-//                            }
-//                        },
-//                        "negative", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {}
-//                        }
-//                );
-//                alertDialog.show();
-//                break;
-//            }
-//            case OTP_VERIFY: {
-//                new AlertDialog.Builder(this)
-//                        .setTitle(R.string.dia_title_warning)
-//                        .setMessage("This is Message")
-//                        .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(AccountActivity.this, "back pressed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-//                        .setNegativeButton(R.string.dia_negative_cancel, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                            }
-//                        })
-//                        .create().show();
-//                break;
-//            }
-//            case CHANGE_PASS: {
-//                // TODO : on back pressed action
-//            }
-//            default:{
-//                super.onBackPressed();
-//            }
-//        }
-
-    }
-
     private void onClickGroups() {
 
         btnBack.setOnClickListener(v -> {
