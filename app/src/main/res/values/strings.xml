@@ -77,6 +77,7 @@
     <string name="alt_bottom_nav_device">Device Icon</string>
     <string name="alt_bottom_nav_laporan">Report Icon</string>
     <string name="alt_bottom_nav_profile">Profile Icon</string>
+    <string name="alt_bottom_nav_icon_second">Icon 2</string>
     <string name="alt_app_logo">Logo C2</string>
     <string name="alt_acc_back">Kembali</string>
     <string name="alt_google_logo">Google</string>

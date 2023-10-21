@@ -42,30 +42,28 @@ public class MainActivity extends AppCompatActivity {
         initViews();
 
         bottomNav = new BottomNavCustom(this);
+        bottomNav.playAnimation(BottomNavCustom.ITEM_HOME);
         bottomNav.setActivatedItem(BottomNavCustom.ITEM_HOME);
-        bottomNav.setDisabledClickable(BottomNavCustom.ITEM_HOME);
+        bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
+
         bottomNav.setOnItemClickListener(new BottomNavCustom.OnItemListener() {
             @Override
             public void itemHome() {
-                bottomNav.setDisabledClickable(BottomNavCustom.ITEM_HOME);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new HomeFragment(), false);
             }
 
             @Override
             public void itemAktivitas() {
-                bottomNav.setDisabledClickable(BottomNavCustom.ITEM_AKTIVITAS);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new AktivitasFragment(), false);
             }
 
             @Override
             public void itemReferensi() {
-                bottomNav.setDisabledClickable(BottomNavCustom.ITEM_REFERENSI);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ReferensiFragment(), false);
             }
 
             @Override
             public void itemProfile() {
-                bottomNav.setDisabledClickable(BottomNavCustom.ITEM_PROFILE);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ProfileFragment(), false);
             }
         });
