@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -19,8 +20,22 @@ import com.c2.arenafinder.R;
  */
 public class BottomNavCustom {
 
+    // parent activity
     private final AppCompatActivity activity;
 
+    // second icon visibility
+    private boolean isHomeSecond = false;
+    private boolean isAktivitasSecond = false;
+    private boolean isReferensiSecond = false;
+    private boolean isProfileSecond = false;
+
+    // button action status
+    private boolean isHomeOnFrame = false;
+    private boolean isAktivitasOnFrame = false;
+    private boolean isReferensiOnFrame = false;
+    private boolean isProfileOnFrame = false;
+
+    // item code
     public static final int ITEM_HOME = 1;
     public static final int ITEM_AKTIVITAS = 2;
     public static final int ITEM_REFERENSI = 3;
@@ -31,24 +46,28 @@ public class BottomNavCustom {
     private final LottieAnimationView itemHomeLottie;
     private final ImageView itemHomeImage;
     private final TextView itemHomeText;
+    private final ImageView itemHomeImageSecond;
 
     // item aktivitas
     private final ConstraintLayout itemAktivitasButton;
     private final LottieAnimationView itemAktivitasLottie;
     private final ImageView itemAktivitasImage;
     private final TextView itemAktivitasText;
+    private final ImageView itemAktivitasImageSecond;
 
     // item referensi
     private final ConstraintLayout itemReferensiButton;
     private final LottieAnimationView itemReferensiLottie;
     private final ImageView itemReferensiImage;
     private final TextView itemReferensiText;
+    private final ImageView itemReferensiImageSecond;
 
     // item profile
     private final ConstraintLayout itemProfileButton;
     private final LottieAnimationView itemProfileLottie;
     private final ImageView itemProfileImage;
     private final TextView itemProfileText;
+    private final ImageView itemProfileImageSecond;
 
     // handlers
     private final Handler handlerHome = new Handler();
@@ -56,24 +75,38 @@ public class BottomNavCustom {
     private final Handler handlerReferensi = new Handler();
     private final Handler handlerProfile = new Handler();
 
+    // runnable for the action when on frame
+    private Runnable actionHomeOnFrame = null;
+    private Runnable actionAktivitasOnFrame = null;
+    private Runnable actionReferensiOnFrame = null;
+    private Runnable actionProfileOnFrame = null;
+
     private final Runnable actionHome = () -> {
+        hideAllSecondIcon();
         playAnimation(ITEM_HOME);
         setActivatedItem(ITEM_HOME);
+        setDeactivatedOnFrame(ITEM_HOME);
     };
 
     private final Runnable actionAktivitas = () -> {
+        hideAllSecondIcon();
         playAnimation(ITEM_AKTIVITAS);
         setActivatedItem(ITEM_AKTIVITAS);
+        setDeactivatedOnFrame(ITEM_AKTIVITAS);
     };
 
     private final Runnable actionReferensi = () -> {
+        hideAllSecondIcon();
         playAnimation(ITEM_REFERENSI);
         setActivatedItem(ITEM_REFERENSI);
+        setDeactivatedOnFrame(ITEM_REFERENSI);
     };
 
     private final Runnable actionProfile = () -> {
+        hideAllSecondIcon();
         playAnimation(ITEM_PROFILE);
         setActivatedItem(ITEM_PROFILE);
+        setDeactivatedOnFrame(ITEM_PROFILE);
     };
 
     public BottomNavCustom(AppCompatActivity view) {
@@ -84,28 +117,33 @@ public class BottomNavCustom {
         itemHomeLottie = view.findViewById(R.id.btn_nav_home_anim);
         itemHomeImage = view.findViewById(R.id.btn_nav_home_icon);
         itemHomeText = view.findViewById(R.id.btn_nav_home_title);
+        itemHomeImageSecond = view.findViewById(R.id.btn_nav_home_icon_second);
 
         // initialize item aktivitas
         itemAktivitasButton = view.findViewById(R.id.btn_nav_aktivitas);
         itemAktivitasLottie = view.findViewById(R.id.btn_nav_aktivitas_anim);
         itemAktivitasImage = view.findViewById(R.id.btn_nav_aktivitas_icon);
         itemAktivitasText = view.findViewById(R.id.btn_nav_aktivitas_title);
+        itemAktivitasImageSecond = view.findViewById(R.id.btn_nav_aktivitas_icon_second);
 
         // initialize item referensi
         itemReferensiButton = view.findViewById(R.id.btn_nav_referensi);
         itemReferensiLottie = view.findViewById(R.id.btn_nav_referensi_anim);
         itemReferensiImage = view.findViewById(R.id.btn_nav_referensi_icon);
         itemReferensiText = view.findViewById(R.id.btn_nav_referensi_title);
+        itemReferensiImageSecond = view.findViewById(R.id.btn_nav_referensi_icon_second);
 
         // initialize item profile
         itemProfileButton = view.findViewById(R.id.btn_nav_profile);
         itemProfileLottie = view.findViewById(R.id.btn_nav_profile_anim);
         itemProfileImage = view.findViewById(R.id.btn_nav_profile_icon);
         itemProfileText = view.findViewById(R.id.btn_nav_profile_title);
+        itemProfileImageSecond = view.findViewById(R.id.btn_nav_profile_icon_second);
     }
 
-    private void playAnim(LottieAnimationView lottie, ImageView image, TextView text) {
+    private void playAnim(LottieAnimationView lottie, ImageView image, TextView text, ImageView imageSecond) {
         image.setVisibility(View.INVISIBLE);
+        imageSecond.setVisibility(View.INVISIBLE);
         text.setVisibility(View.INVISIBLE);
         lottie.setVisibility(View.VISIBLE);
         lottie.playAnimation();
@@ -114,62 +152,148 @@ public class BottomNavCustom {
     public void playAnimation(int item) {
         switch (item) {
             case ITEM_HOME:
-                playAnim(itemHomeLottie, itemHomeImage, itemHomeText);
+                playAnim(itemHomeLottie, itemHomeImage, itemHomeText, itemHomeImageSecond);
                 break;
             case ITEM_AKTIVITAS:
-                playAnim(itemAktivitasLottie, itemAktivitasImage, itemAktivitasText);
+                playAnim(itemAktivitasLottie, itemAktivitasImage, itemAktivitasText, itemAktivitasImageSecond);
                 break;
             case ITEM_REFERENSI:
-                playAnim(itemReferensiLottie, itemReferensiImage, itemReferensiText);
+                playAnim(itemReferensiLottie, itemReferensiImage, itemReferensiText, itemReferensiImageSecond);
                 break;
             case ITEM_PROFILE:
-                playAnim(itemProfileLottie, itemProfileImage, itemProfileText);
+                playAnim(itemProfileLottie, itemProfileImage, itemProfileText, itemProfileImageSecond);
                 break;
         }
     }
 
-    private void closeAnim(LottieAnimationView lottie, ImageView image, TextView text) {
+    private void closeAnim(LottieAnimationView lottie, ImageView image, TextView text, ImageView imageSec, boolean secondVisibility) {
         lottie.cancelAnimation();
         lottie.setVisibility(View.INVISIBLE);
-        image.setVisibility(View.VISIBLE);
-        text.setVisibility(View.VISIBLE);
+        if (secondVisibility) {
+            imageSec.setVisibility(View.VISIBLE);
+            image.setVisibility(View.INVISIBLE);
+            text.setVisibility(View.INVISIBLE);
+        } else {
+            imageSec.setVisibility(View.INVISIBLE);
+            image.setVisibility(View.VISIBLE);
+            text.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void closeAnimation(int item) {
         switch (item) {
             case ITEM_HOME:
-                closeAnim(itemHomeLottie, itemHomeImage, itemHomeText);
+                closeAnim(itemHomeLottie, itemHomeImage, itemHomeText, itemHomeImageSecond, isHomeSecond);
+                handlerHome.removeCallbacks(actionHome);
                 break;
             case ITEM_AKTIVITAS:
-                closeAnim(itemAktivitasLottie, itemAktivitasImage, itemAktivitasText);
+                closeAnim(itemAktivitasLottie, itemAktivitasImage, itemAktivitasText, itemAktivitasImageSecond, isAktivitasSecond);
+                handlerAktivitas.removeCallbacks(actionAktivitas);
                 break;
             case ITEM_REFERENSI:
-                closeAnim(itemReferensiLottie, itemReferensiImage, itemReferensiText);
+                closeAnim(itemReferensiLottie, itemReferensiImage, itemReferensiText, itemReferensiImageSecond, isReferensiSecond);
+                handlerReferensi.removeCallbacks(actionReferensi);
                 break;
             case ITEM_PROFILE:
-                closeAnim(itemProfileLottie, itemProfileImage, itemProfileText);
+                closeAnim(itemProfileLottie, itemProfileImage, itemProfileText, itemProfileImageSecond, isProfileSecond);
+                handlerAktivitas.removeCallbacks(actionProfile);
                 break;
         }
     }
 
-    public void closeHome() {
-        closeAnimation(ITEM_HOME);
-        handlerHome.removeCallbacks(actionHome);
+    private void closeAllAnimation(int elseItem) {
+        int[] items = {ITEM_HOME, ITEM_AKTIVITAS, ITEM_REFERENSI, ITEM_PROFILE};
+
+        for (int item : items) {
+            if (item != elseItem) {
+                closeAnimation(item);
+            }
+        }
     }
 
-    public void closeAktivitas() {
-        closeAnimation(ITEM_AKTIVITAS);
-        handlerAktivitas.removeCallbacks(actionAktivitas);
+    private void showSecondIcon(ImageView imageView, @DrawableRes int drawable) {
+        imageView.setVisibility(View.VISIBLE);
+        imageView.setImageDrawable(ContextCompat.getDrawable(activity, drawable));
     }
 
-    public void closeReferensi() {
-        closeAnimation(ITEM_REFERENSI);
-        handlerReferensi.removeCallbacks(actionReferensi);
+    public void showSecondIcon(int item, @DrawableRes int drawable) {
+        switch (item) {
+            case ITEM_HOME: {
+                isHomeSecond = true;
+                showSecondIcon(itemHomeImageSecond, drawable);
+                itemHomeImage.setVisibility(View.INVISIBLE);
+                itemHomeText.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case ITEM_AKTIVITAS: {
+                isAktivitasSecond = true;
+                showSecondIcon(itemAktivitasImageSecond, drawable);
+                itemAktivitasImage.setVisibility(View.INVISIBLE);
+                itemAktivitasText.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case ITEM_REFERENSI: {
+                isReferensiSecond = true;
+                showSecondIcon(itemReferensiImageSecond, drawable);
+                itemReferensiImage.setVisibility(View.INVISIBLE);
+                itemReferensiText.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case ITEM_PROFILE: {
+                isProfileSecond = true;
+                showSecondIcon(itemProfileImageSecond, drawable);
+                itemProfileImage.setVisibility(View.INVISIBLE);
+                itemProfileText.setVisibility(View.INVISIBLE);
+                break;
+            }
+
+        }
     }
 
-    public void closeProfile() {
-        closeAnimation(ITEM_PROFILE);
-        handlerAktivitas.removeCallbacks(actionProfile);
+    private void hideSecondIcon(ImageView imageView) {
+        imageView.setVisibility(View.INVISIBLE);
+    }
+
+    public void hideSecondIcon(int item) {
+        switch (item) {
+            case ITEM_HOME: {
+                isHomeSecond = false;
+                hideSecondIcon(itemHomeImageSecond);
+                itemHomeImage.setVisibility(View.VISIBLE);
+                itemHomeText.setVisibility(View.VISIBLE);
+                break;
+            }
+            case ITEM_AKTIVITAS: {
+                isAktivitasSecond = false;
+                hideSecondIcon(itemAktivitasImageSecond);
+                itemAktivitasImage.setVisibility(View.VISIBLE);
+                itemAktivitasText.setVisibility(View.VISIBLE);
+                break;
+            }
+            case ITEM_REFERENSI: {
+                isReferensiSecond = false;
+                hideSecondIcon(itemReferensiImageSecond);
+                itemReferensiImage.setVisibility(View.VISIBLE);
+                itemReferensiText.setVisibility(View.VISIBLE);
+                break;
+            }
+            case ITEM_PROFILE: {
+                isProfileSecond = false;
+                hideSecondIcon(itemProfileImageSecond);
+                itemProfileImage.setVisibility(View.VISIBLE);
+                itemProfileText.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
+    }
+
+    private void hideAllSecondIcon() {
+        int[] images = {ITEM_HOME, ITEM_AKTIVITAS, ITEM_REFERENSI, ITEM_PROFILE};
+
+        for (int image : images) {
+            hideSecondIcon(image);
+        }
     }
 
     private void deactivatedItem() {
@@ -211,30 +335,30 @@ public class BottomNavCustom {
         }
     }
 
-    private void activatedClickable(){
-        itemHomeButton.setClickable(true);
-        itemAktivitasButton.setClickable(true);
-        itemReferensiButton.setClickable(true);
-        itemProfileButton.setClickable(true);
+    private void activatedOnFrame() {
+        isHomeOnFrame = true;
+        isAktivitasOnFrame = true;
+        isReferensiOnFrame = true;
+        isProfileOnFrame = true;
     }
 
-    public void setDisabledClickable(int item){
-        activatedClickable();
-        switch (item){
+    public void setDeactivatedOnFrame(int item) {
+        activatedOnFrame();
+        switch (item) {
             case ITEM_HOME: {
-                itemHomeButton.setClickable(false);
+                isHomeOnFrame = false;
                 break;
             }
             case ITEM_AKTIVITAS: {
-                itemAktivitasButton.setClickable(false);
+                isAktivitasOnFrame = false;
                 break;
             }
             case ITEM_REFERENSI: {
-                itemReferensiButton.setClickable(false);
+                isReferensiOnFrame = false;
                 break;
             }
             case ITEM_PROFILE: {
-                itemProfileButton.setClickable(false);
+                isProfileOnFrame = false;
                 break;
             }
         }
@@ -242,38 +366,74 @@ public class BottomNavCustom {
 
     public void setOnItemClickListener(OnItemListener itemListener) {
 
+        // action when item home clicked
         itemHomeButton.setOnClickListener(v -> {
-            closeAktivitas();
-            closeReferensi();
-            closeProfile();
-            itemListener.itemHome();
-            handlerHome.post(actionHome);
+            if (isHomeOnFrame){
+                closeAllAnimation(ITEM_HOME);
+                itemListener.itemHome();
+                handlerHome.post(actionHome);
+            }else {
+                if (actionHomeOnFrame != null){
+                    actionHomeOnFrame.run();
+                }
+            }
         });
 
+        // action when item aktivitas clicked
         itemAktivitasButton.setOnClickListener(v -> {
-            closeHome();
-            closeReferensi();
-            closeProfile();
-            itemListener.itemAktivitas();
-            handlerAktivitas.post(actionAktivitas);
+            if (isAktivitasOnFrame){
+                closeAllAnimation(ITEM_AKTIVITAS);
+                itemListener.itemAktivitas();
+                handlerAktivitas.post(actionAktivitas);
+            }else {
+                if (actionAktivitasOnFrame != null){
+                    actionAktivitasOnFrame.run();
+                }
+            }
         });
 
+        // action when item referensi clicked
         itemReferensiButton.setOnClickListener(v -> {
-            closeHome();
-            closeAktivitas();
-            closeProfile();
-            itemListener.itemReferensi();
-            handlerReferensi.post(actionReferensi);
+            if (isReferensiOnFrame){
+                closeAllAnimation(ITEM_REFERENSI);
+                itemListener.itemReferensi();
+                handlerReferensi.post(actionReferensi);
+            }else {
+                if (actionReferensiOnFrame != null){
+                    actionReferensiOnFrame.run();
+                }
+            }
         });
 
+        // action when item profile clicked
         itemProfileButton.setOnClickListener(v -> {
-            closeHome();
-            closeAktivitas();
-            closeReferensi();
-            itemListener.itemProfile();
-            handlerProfile.post(actionProfile);
+            if (isProfileOnFrame){
+                closeAllAnimation(ITEM_PROFILE);
+                itemListener.itemProfile();
+                handlerProfile.post(actionProfile);
+            }else {
+                if (actionProfileOnFrame != null){
+                    actionProfileOnFrame.run();
+                }
+            }
         });
 
+    }
+
+    public void setOnActionHomeOnFrame(Runnable runnable){
+        this.actionHomeOnFrame = runnable;
+    }
+
+    public void setOnActionAktivitasOnFrame(Runnable runnable){
+        this.actionAktivitasOnFrame = runnable;
+    }
+
+    public void setOnActionReferensiOnFrame(Runnable runnable){
+        this.actionReferensiOnFrame = runnable;
+    }
+
+    public void setOnActionProfileOnFrame(Runnable runnable){
+        this.actionProfileOnFrame = runnable;
     }
 
     public interface OnItemListener {
@@ -287,4 +447,3 @@ public class BottomNavCustom {
     }
 
 }
-
