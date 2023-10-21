@@ -19,11 +19,13 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.model.VerifyModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.ValidatorUtil;
+import com.c2.arenafinder.util.VerifyUtil;
 import com.google.android.material.button.MaterialButton;
 
 import retrofit2.Call;
@@ -131,12 +133,16 @@ public class SignUpSecondFragment extends Fragment {
 
     private void sendEmailVerify(){
 
-        RetrofitClient.getInstance().sendEmail(email, "signup")
+        RetrofitClient.getInstance().sendEmail(email, VerifyUtil.TYPE_SIGNUP, VerifyUtil.ACTION_NEW)
                 .enqueue(new Callback<VerifyResponse>() {
                     @Override
                     public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
                         if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
                             loadingVerify.dismiss();
+                            // save otp data
+                            new VerifyUtil(requireContext(), response.body().getData());
+
+                            // show dialog
                             ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                             new AlertDialog.Builder(requireContext())
                                     .setTitle(R.string.dia_title_inform)
@@ -148,8 +154,7 @@ public class SignUpSecondFragment extends Fragment {
 
                                             FragmentUtil.switchFragmentAccount(
                                                     requireActivity().getSupportFragmentManager(),
-                                                    OtpVerificationFragment.newInstance(email, response.body().getData().getOtp(), "signup"),
-                                                    false
+                                                    new OtpVerificationFragment(), false
                                             );
 
                                         }

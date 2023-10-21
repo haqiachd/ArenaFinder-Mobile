@@ -1,8 +1,10 @@
 package com.c2.arenafinder.ui.fragment.account;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -18,9 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
-import com.c2.arenafinder.data.model.VerifyModel;
+import com.c2.arenafinder.data.response.VerifyResponse;
+import com.c2.arenafinder.ui.activity.EmptyActivity;
+import com.c2.arenafinder.ui.activity.SplashScreenActivity;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
@@ -28,17 +33,16 @@ import com.c2.arenafinder.util.VerifyUtil;
 import com.otpview.OTPListener;
 import com.otpview.OTPTextView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class OtpVerificationFragment extends Fragment {
 
     private static final String ARG_EMAIL = "email";
     private static final String ARG_OTP = "otp";
     private static final String ARG_TYPE = "type";
 
-    private String email, otp, type, device;
-    private long startMillis, endMillis;
-    private int resend;
-
-    private VerifyModel verifyModel;
     private VerifyUtil verifyUtil;
 
     private int totalSeconds;
@@ -51,7 +55,7 @@ public class OtpVerificationFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
         btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_kirim_ulang);
         inpOtp = view.findViewById(R.id.votp_inp_otp);
         helperText = view.findViewById(R.id.votp_txt_helper);
@@ -70,11 +74,6 @@ public class OtpVerificationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            email = getArguments().getString(ARG_EMAIL);
-            otp = getArguments().getString(ARG_OTP);
-            type = getArguments().getString(ARG_TYPE);
-        }
     }
 
     @Override
@@ -95,36 +94,59 @@ public class OtpVerificationFragment extends Fragment {
         verifyUtil = new VerifyUtil(requireContext());
 
         // cek apakah ada otp yang aktif atau tidak
-        if (verifyUtil.haveOtp()){
+        if (verifyUtil.haveOtp()) {
             // hitung detik untuk mengetahui berapa lama user dapat menekan tombol resend
             totalSeconds = verifyUtil.getResendSeconds();
-            LogApp.error(this, LogTag.METHOD, "total second : " + totalSeconds);
+            LogApp.info(this, LogTag.METHOD, "total second : " + totalSeconds);
             updateSecond();
-        }else {
+        } else {
             // jika tidak ada
             ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
             new AlertDialog.Builder(requireContext())
                     .setTitle(R.string.dia_title_warning)
-                    .setMessage("Kode OTP telah kadaluarsa")
+                    .setMessage(R.string.dia_msg_otp_expired)
                     .setCancelable(false)
-                    .setPositiveButton("Keluar", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.dia_positive_out, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            ArenaFinder.restartApplication(requireContext(), SplashScreenActivity.class);
                         }
                     })
                     .create().show();
         }
 
+        // on back pressed action
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // show dialog confirmation
+                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                new AlertDialog.Builder(requireContext())
+                        .setTitle(R.string.dia_title_confirm)
+                        .setMessage(R.string.dia_msg_otp_canceled)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.dia_positive_ya, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // stop loading
+                                totalSeconds = 0;
+                                startActivity(new Intent(requireContext(), EmptyActivity.class).putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME));
+                            }
+                        })
+                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                        .create().show();
+            }
+        });
+
         onClickGroups();
         onListener();
     }
 
-    private void updateButtonName(){
+    private void updateButtonName() {
         int minutes = totalSeconds / 60;
-        if (totalSeconds > 59){
+        if (totalSeconds > 59) {
             btnSend.setButtonName(getString(R.string.btn_kirim_ulang_wait, minutes, getString(R.string.txt_minut)));
-        }else {
+        } else {
             btnSend.setButtonName(getString(R.string.btn_kirim_ulang_wait, totalSeconds, getString(R.string.txt_second)));
         }
     }
@@ -149,32 +171,57 @@ public class OtpVerificationFragment extends Fragment {
         handler.post(runnable);
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
         btnSend.setOnClickLoadingListener(new ButtonAccountCustom.OnClickLoadingListener() {
             @Override
             public void onClick() {
-                Toast.makeText(requireContext(), "Resend", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.txt_update_otp, Toast.LENGTH_SHORT).show();
 
-                verifyUtil.setOtp("234902");
-                verifyUtil.setType("forgot");
-                verifyUtil.setDevice("mobile");
-                verifyUtil.setStartMillis(System.currentTimeMillis());
-                verifyUtil.setEndMillis(System.currentTimeMillis() + 900_000);
-                verifyUtil.setResend(verifyUtil.getResend() + 1);
-                totalSeconds = verifyUtil.getWaitingMinutes();
+                RetrofitClient.getInstance().sendEmail(verifyUtil.getEmail(), verifyUtil.getType(), VerifyUtil.ACTION_UPDATE)
+                        .enqueue(new Callback<VerifyResponse>() {
+                            @Override
+                            public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                                    // save data ke preferences
+                                    new VerifyUtil(requireContext(), response.body().getData());
 
-                btnSend.setStatus(ButtonAccountCustom.DISABLE);
+                                    // show dialog
+                                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                    new AlertDialog.Builder(requireContext())
+                                            .setTitle(R.string.dia_title_inform)
+                                            .setMessage(R.string.dia_msg_otp_updated)
+                                            .setCancelable(false)
+                                            .setPositiveButton(R.string.dia_positive_ok, (dialog, which) -> {
+                                            })
+                                            .create().show();
 
-                updateSecond();
+                                    btnSend.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                                    btnSend.setStatus(ButtonAccountCustom.DISABLE);
 
-                btnSend.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                                    // hitung detik untuk mengetahui berapa lama user dapat menekan tombol resend
+                                    totalSeconds = verifyUtil.getResendSeconds();
+                                    LogApp.info(this, LogTag.METHOD, "total second : " + totalSeconds);
+                                    updateSecond();
+
+                                } else {
+                                    ArenaFinder.VibratorToast(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
+                                    btnSend.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                                ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
+                                btnSend.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                            }
+                        });
             }
         });
 
     }
 
-    private void onListener(){
+    private void onListener() {
 
         inpOtp.setOtpListener(new OTPListener() {
             @Override
@@ -186,8 +233,9 @@ public class OtpVerificationFragment extends Fragment {
             @Override
             public void onOTPComplete(@NonNull String otp) {
 
-                if (otp.equals(OtpVerificationFragment.this.otp)){
+                if (otp.equals(verifyUtil.getOtp())) {
                     helperText.setText(R.string.suc_otp_valid);
+                    // show success info
                     ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
@@ -196,8 +244,11 @@ public class OtpVerificationFragment extends Fragment {
                         }
                     });
 
-                    switch (type){
-                        case "signup" : {
+                    // stop loading button
+                    totalSeconds = 0;
+
+                    switch (verifyUtil.getType()) {
+                        case "SignUp": {
                             new AlertDialog.Builder(requireContext())
                                     .setTitle(R.string.dia_title_inform)
                                     .setMessage(R.string.dia_msg_otp_signup_suc)
@@ -205,6 +256,7 @@ public class OtpVerificationFragment extends Fragment {
                                     .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            // buka fragment login
                                             FragmentUtil.switchFragmentAccount(
                                                     requireActivity().getSupportFragmentManager(),
                                                     new SignInFragment(),
@@ -216,7 +268,7 @@ public class OtpVerificationFragment extends Fragment {
 
                             break;
                         }
-                        case "forgotpass" : {
+                        case "ForgotPass": {
                             new AlertDialog.Builder(requireContext())
                                     .setTitle(R.string.dia_title_inform)
                                     .setMessage(R.string.dia_msg_otp_forgot_suc)
@@ -224,9 +276,10 @@ public class OtpVerificationFragment extends Fragment {
                                     .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            // buka fragment ganti sandi
                                             FragmentUtil.switchFragmentAccount(
                                                     requireActivity().getSupportFragmentManager(),
-                                                    ChangePasswordFragment.newInstance(email),
+                                                    ChangePasswordFragment.newInstance(verifyUtil.getEmail()),
                                                     false
                                             );
                                         }
@@ -236,7 +289,7 @@ public class OtpVerificationFragment extends Fragment {
                         }
                     }
 
-                }else{
+                } else {
                     helperText.setText(R.string.err_otp_invalid);
                     helperText.setTextColor(ContextCompat.getColor(requireContext(), R.color.vivid_orange));
                     ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);

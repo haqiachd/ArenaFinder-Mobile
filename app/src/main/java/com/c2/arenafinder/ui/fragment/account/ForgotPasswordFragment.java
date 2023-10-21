@@ -19,11 +19,15 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.VerifyModel;
 import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.ValidatorUtil;
+import com.c2.arenafinder.util.VerifyUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -92,11 +96,15 @@ public class ForgotPasswordFragment extends Fragment {
 
         btnSend.setOnClickLoadingListener(() -> {
 
-            RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), "forgotpass")
+            RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), VerifyUtil.TYPE_FORGOT, VerifyUtil.ACTION_NEW)
                     .enqueue(new Callback<VerifyResponse>() {
                         @Override
                         public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
-                            if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
+                            if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                                // save data ke preferences
+                                new VerifyUtil(requireContext(), response.body().getData());
+
+                                // show dialog
                                 ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                                 new AlertDialog.Builder(requireContext())
                                         .setTitle(R.string.dia_title_inform)
@@ -107,20 +115,20 @@ public class ForgotPasswordFragment extends Fragment {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 FragmentUtil.switchFragmentAccount(
                                                         requireActivity().getSupportFragmentManager(),
-                                                        OtpVerificationFragment.newInstance(inpEmail.getText().toString(), response.body().getData().getOtp(), "forgotpass"),
-                                                        false);
+                                                        new OtpVerificationFragment(), false
+                                                );
                                             }
                                         })
                                         .create().show();
                             } else {
-                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                ArenaFinder.VibratorToast(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
                             }
                             btnSend.setStatus(ButtonAccountCustom.KILL_PROGRESS);
                         }
 
                         @Override
                         public void onFailure(Call<VerifyResponse> call, Throwable t) {
-                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
                             btnSend.setStatus(ButtonAccountCustom.KILL_PROGRESS);
                         }
                     });
