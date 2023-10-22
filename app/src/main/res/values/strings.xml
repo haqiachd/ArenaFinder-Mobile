@@ -18,6 +18,7 @@
     <string name="btn_sign_up">Daftar</string>
     <string name="btn_next">Berikutnya</string>
     <string name="btn_prev">Sebelumnya</string>
+    <string name="btn_forgot_pass">Kirim Kode OTP</string>
     <string name="btn_kirim_ulang">Kirim Ulang OTP</string>
     <string name="btn_kirim_ulang_wait">Kirim Ulang (%1$d %2$s)</string>
     <string name="btn_ganti_password">Ganti Kata Sandi</string>
@@ -94,6 +95,7 @@
     <string name="dia_title_inform">Informasi</string>
     <string name="dia_title_warning">Peringatan</string>
     <string name="dia_title_register">Mendaftarkan Akun</string>
+    <string name="dia_title_verificaton">Memverifikasi Akun</string>
     <string name="dia_positive_out">Keluar</string>
     <string name="dia_msg_confirm_logout">Apakah Kamu Ingin Logout?</string>
     <string name="dia_msg_confirm_close">Apakah kamu ingin keluar dari aplikasi.</string>
@@ -127,9 +129,11 @@
     <string name="err_userid_invalid">Email atau username tidak valid</string>
     <string name="err_username_empty">Username tidak boleh kosong</string>
     <string name="err_username_length">Panjang username harus diantara 4–20 karakter.</string>
+    <string name="err_username_white_case">Username tidak boleh mengandung spasi</string>
     <string name="err_username_symbols">Simbol yang diizinkan hanyalah . , - _</string>
     <string name="err_email_empty">Email tidak boleh kosong</string>
     <string name="err_email_invalid">Email tidak valid</string>
+    <string name="err_email_to_length">Email tidak boleh melebihi 100 karakter</string>
     <string name="err_name_empty">Nama tidak boleh kosong</string>
     <string name="err_name_length">Nama harus diantara 4–50 karakter</string>
     <string name="err_name_numbers">Nama tidak boleh mengandung angka</string>

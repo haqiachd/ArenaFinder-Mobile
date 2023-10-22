@@ -218,7 +218,14 @@ public class VerifyUtil {
     }
 
     public void removeOtp(){
-        // TODO : remove otp code from preferences
+        dataShared.setNullData(KEY.VERIFY_OTP_CODE);
+        dataShared.setNullData(KEY.VERIFY_EMAIL);
+        dataShared.setNullData(KEY.VERIFY_START_MILLIS);
+        dataShared.setNullData(KEY.VERIFY_END_MILLIS);
+        dataShared.setNullData(KEY.VERIFY_RESEND);
+        dataShared.setNullData(KEY.VERIFY_TYPE);
+        dataShared.setNullData(KEY.VERIFY_DEVICE);
+        dataShared.setNullData(KEY.VERIFY_CREATED);
     }
 
 }

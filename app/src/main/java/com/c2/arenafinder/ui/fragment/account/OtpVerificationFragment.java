@@ -50,6 +50,7 @@ public class OtpVerificationFragment extends Fragment {
     private ButtonAccountCustom btnSend;
     private TextView helperText;
     private OTPTextView inpOtp;
+    private AlertDialog loadingVerify;
 
     public OtpVerificationFragment() {
         // Required empty public constructor
@@ -88,6 +89,11 @@ public class OtpVerificationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
         inpOtp.requestFocus();
+
+        loadingVerify = new AlertDialog.Builder(requireContext())
+                .setView(getLayoutInflater().inflate(R.layout.dialog_loading, null))
+                .setTitle(R.string.dia_title_verificaton)
+                .setCancelable(false).create();
 
         // initialize verify util for getting data from preferences
         LogApp.info(requireContext(), LogTag.LIFEFCYLE, "Initialize verify util");
@@ -140,6 +146,53 @@ public class OtpVerificationFragment extends Fragment {
 
         onClickGroups();
         onListener();
+    }
+
+    private void updateVerify(){
+        loadingVerify.show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RetrofitClient.getInstance().updateVerify(verifyUtil.getEmail()).enqueue(new Callback<VerifyResponse>() {
+                    @Override
+                    public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                            loadingVerify.dismiss();
+                            verifyUtil.removeOtp();
+                            // show dialog information
+                            new AlertDialog.Builder(requireContext())
+                                    .setTitle(R.string.dia_title_inform)
+                                    .setMessage(R.string.dia_msg_otp_signup_suc)
+                                    .setCancelable(false)
+                                    .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            verifyUtil.removeOtp();
+                                            // buka fragment login
+                                            FragmentUtil.switchFragmentAccount(
+                                                    requireActivity().getSupportFragmentManager(),
+                                                    new SignInFragment(),
+                                                    false
+                                            );
+                                        }
+                                    })
+                                    .create().show();
+                        }else {
+                            ArenaFinder.VibratorToast(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
+                        }
+                        btnSend.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                    }
+
+                    @Override
+                    public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                        loadingVerify.dismiss();
+                        ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
+                        btnSend.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                    }
+                });
+            }
+        }, 1500L);
     }
 
     private void updateButtonName() {
@@ -249,23 +302,7 @@ public class OtpVerificationFragment extends Fragment {
 
                     switch (verifyUtil.getType()) {
                         case "SignUp": {
-                            new AlertDialog.Builder(requireContext())
-                                    .setTitle(R.string.dia_title_inform)
-                                    .setMessage(R.string.dia_msg_otp_signup_suc)
-                                    .setCancelable(false)
-                                    .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            // buka fragment login
-                                            FragmentUtil.switchFragmentAccount(
-                                                    requireActivity().getSupportFragmentManager(),
-                                                    new SignInFragment(),
-                                                    false
-                                            );
-                                        }
-                                    })
-                                    .create().show();
-
+                            updateVerify();
                             break;
                         }
                         case "ForgotPass": {
@@ -276,6 +313,7 @@ public class OtpVerificationFragment extends Fragment {
                                     .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            verifyUtil.removeOtp();
                                             // buka fragment ganti sandi
                                             FragmentUtil.switchFragmentAccount(
                                                     requireActivity().getSupportFragmentManager(),

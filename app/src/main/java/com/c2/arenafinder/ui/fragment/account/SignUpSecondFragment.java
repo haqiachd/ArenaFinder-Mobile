@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -164,7 +165,10 @@ public class SignUpSecondFragment extends Fragment {
 
                         } else {
                             assert response.body() != null;
-                            Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                            txtHelper.setText(response.body().getMessage());
+                            txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
+                            Toast.makeText(SignUpSecondFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             loadingVerify.dismiss();
                         }
                     }
@@ -190,6 +194,7 @@ public class SignUpSecondFragment extends Fragment {
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                             if (RetrofitClient.apakahSukses(response)) {
                                 sendEmailVerify();
+                                resetSavedPassword();
                             } else {
                                 assert response.body() != null;
                                 Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

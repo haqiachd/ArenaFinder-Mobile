@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.c2.arenafinder.util.UsersUtil;
 import com.c2.arenafinder.util.ValidatorUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -138,14 +140,9 @@ public class SignInFragment extends Fragment {
                     .enqueue(new Callback<UsersResponse>() {
                         @Override
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                            if (response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                            if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                                 // saving data ke preferences
-                                UserModel data = response.body().getData();
-                                dataShared.setData(KEY.ACC_USERNAME, data.getUsername());
-                                dataShared.setData(KEY.ACC_EMAIL, data.getEmail());
-                                dataShared.setData(KEY.ACC_FULL_NAME, data.getNama());
-                                dataShared.setData(KEY.ACC_LEVEL, data.getLevel());
-                                dataShared.setData(KEY.ACC_PHOTO, data.getUserPhoto());
+                                new UsersUtil(requireContext(), response.body().getData());
 
                                 // open main activity
                                 Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
@@ -206,19 +203,17 @@ public class SignInFragment extends Fragment {
             responseCall.enqueue(new Callback<UsersResponse>() {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                    if (response.body().getStatus().equals("success")) {
+                    if (response.body() != null && response.body().getStatus().equals("success")) {
                         // saving data ke preferences
-                        UserModel data = response.body().getData();
-                        dataShared.setData(KEY.ACC_USERNAME, data.getUsername());
-                        dataShared.setData(KEY.ACC_EMAIL, data.getEmail());
-                        dataShared.setData(KEY.ACC_FULL_NAME, data.getNama());
-                        dataShared.setData(KEY.ACC_LEVEL, data.getLevel());
-                        dataShared.setData(KEY.ACC_PHOTO, data.getUserPhoto());
+                        new UsersUtil(requireContext(), response.body().getData());
 
                         // open main activity
                         Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
                     } else {
+                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                        txtHelper.setText(response.body().getMessage());
+                        txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
                         Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                     btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
@@ -226,7 +221,8 @@ public class SignInFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<UsersResponse> call, Throwable t) {
-                    Toast.makeText(SignInFragment.this.requireContext(), "Koneksi Failure", Toast.LENGTH_SHORT).show();
+                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
+                    Toast.makeText(SignInFragment.this.requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                 }
             });

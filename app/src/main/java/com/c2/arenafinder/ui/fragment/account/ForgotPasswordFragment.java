@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -52,7 +53,7 @@ public class ForgotPasswordFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_kirim_ulang);
+        btnSend = new ButtonAccountCustom(requireContext(), view, R.string.btn_forgot_pass);
         inpEmail = view.findViewById(R.id.forgot_inp_email);
         txtHelper = view.findViewById(R.id.forgot_txt_helper);
     }
@@ -121,7 +122,10 @@ public class ForgotPasswordFragment extends Fragment {
                                         })
                                         .create().show();
                             } else {
-                                ArenaFinder.VibratorToast(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
+                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                txtHelper.setText(response.body().getMessage());
+                                txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
+                                Toast.makeText(ForgotPasswordFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             btnSend.setStatus(ButtonAccountCustom.KILL_PROGRESS);
                         }

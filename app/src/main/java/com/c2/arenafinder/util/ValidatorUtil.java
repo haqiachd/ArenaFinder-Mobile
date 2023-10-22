@@ -69,6 +69,11 @@ public class ValidatorUtil {
             return false;
         }
 
+        if (username.contains(" ")){
+            message = R.string.err_username_white_case;
+            return false;
+        }
+
         // karakter yang diizinkan adalah huruf, angka, '.', ',', '-', dan '_'.
         String allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-_";
 
@@ -93,6 +98,12 @@ public class ValidatorUtil {
         // cek email null atau tidak
         if (isNull(email)) {
             message = R.string.err_email_empty;
+            return false;
+        }
+
+        // panjang username harus kurang dari 100
+        if (email.length() > 100){
+            message = R.string.err_email_to_length;
             return false;
         }
 

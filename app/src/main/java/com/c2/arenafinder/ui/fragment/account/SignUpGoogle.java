@@ -8,6 +8,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -144,15 +145,9 @@ public class SignUpGoogle extends Fragment {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
                     if (response.body() != null && RetrofitClient.apakahSukses(response)) {
-                        UserModel model = response.body().getData();
-                        LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "email : " + model.getEmail());
 
-                        dataShared.setData(KEY.ACC_USERNAME, model.getUsername());
-                        dataShared.setData(KEY.ACC_EMAIL, model.getEmail());
-                        dataShared.setData(KEY.ACC_FULL_NAME, model.getNama());
-                        dataShared.setData(KEY.ACC_PASSWORD, model.getPassword());
-                        dataShared.setData(KEY.ACC_LEVEL, model.getLevel());
-                        dataShared.setData(KEY.ACC_PHOTO, model.getUserPhoto());
+                        // saving data ke preferences
+                        new UsersUtil(requireContext(), response.body().getData());
 
                         startActivity(
                                 new Intent(requireActivity(), EmptyActivity.class)
@@ -161,13 +156,14 @@ public class SignUpGoogle extends Fragment {
                         );
                         requireActivity().finish();
 
-                        btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
-
                     } else {
                         ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
+                        txtHelper.setText(response.body().getMessage());
+                        txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
+                        Toast.makeText(SignUpGoogle.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
+
+                    btnRegister.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                 }
 
                 @Override

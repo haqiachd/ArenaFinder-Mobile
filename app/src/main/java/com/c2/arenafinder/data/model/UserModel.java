@@ -7,7 +7,7 @@ public class UserModel {
 
     @Expose
     @SerializedName("id_users")
-    private String idUser;
+    private int idUser;
     @Expose
     @SerializedName("username")
     private String username;
@@ -29,8 +29,11 @@ public class UserModel {
     @Expose
     @SerializedName("user_photo")
     private String userPhoto;
+    @Expose
+    @SerializedName("created_at")
+    private String createdAt;
 
-    public UserModel(String idUser, String username, String email, String nama, String password, String level, String isVerified, String userPhoto) {
+    public UserModel(int idUser, String username, String email, String nama, String password, String level, String isVerified, String userPhoto, String createdAt) {
         this.idUser = idUser;
         this.username = username;
         this.email = email;
@@ -39,13 +42,14 @@ public class UserModel {
         this.level = level;
         this.isVerified = isVerified;
         this.userPhoto = userPhoto;
+        this.createdAt = createdAt;
     }
 
-    public String getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
@@ -89,11 +93,11 @@ public class UserModel {
         this.level = level;
     }
 
-    public String getIsVerified() {
+    public String getVerified() {
         return isVerified;
     }
 
-    public void setIsVerified(String isVerified) {
+    public void setVerified(String isVerified) {
         this.isVerified = isVerified;
     }
 
@@ -103,5 +107,13 @@ public class UserModel {
 
     public void setUserPhoto(String userPhoto) {
         this.userPhoto = userPhoto;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

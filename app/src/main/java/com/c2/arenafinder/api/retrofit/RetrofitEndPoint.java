@@ -21,10 +21,16 @@ public interface RetrofitEndPoint {
             @Query("email") String email
     );
 
+    @GET("users/cek_userid.php")
+    Call<UsersResponse> cekUserID(
+            @Query("username") String username,
+            @Query("email") String email
+    );
+
     @FormUrlEncoded
     @POST("users/login.php")
     Call<UsersResponse> login (
-            @Field("email") String email,
+            @Field("userid") String userid,
             @Field("password") String password
     );
 
@@ -85,6 +91,12 @@ public interface RetrofitEndPoint {
             @Field("email") String email,
             @Field("type") String type,
             @Field("action") String action
+    );
+
+    @FormUrlEncoded
+    @POST("email/update_verify.php")
+    Call<VerifyResponse> updateVerify(
+            @Field("email") String email
     );
 
 }

@@ -8,6 +8,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -129,7 +130,10 @@ public class ChangePasswordFragment extends Fragment {
                                 requireActivity().finish();
 
                             } else {
-                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                txtHelper.setText(response.body().getMessage());
+                                txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
+                                Toast.makeText(ChangePasswordFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             btnChange.setProgress(ButtonAccountCustom.KILL_PROGRESS);
                         }
