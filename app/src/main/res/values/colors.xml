@@ -37,6 +37,6 @@
     <color name="bottom_nav_card_activated">#3300D9FF</color>
     <color name="bottom_nav">@color/dimgray</color>
     <color name="stroke_card_venue">#1A696969</color>
-    <color name="button_semua_background">#4D56DF64</color>
+    <color name="button_semua_background">#334CF15E</color>
     <color name="button_semua_textcolor">#08522E</color>
 </resources>

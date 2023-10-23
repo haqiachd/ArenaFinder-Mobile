@@ -41,7 +41,7 @@
     <dimen name="home_menu_margin">@dimen/_5sdp</dimen>
 
     <dimen name="layout_card_margin_start">@dimen/_14sdp</dimen>
-    <dimen name="layout_card_title_textsize">@dimen/_16ssp</dimen>
+    <dimen name="layout_card_title_textsize">@dimen/_14ssp</dimen>
     <dimen name="layout_card_desc_margin_top">@dimen/_1sdp</dimen>
     <dimen name="layout_card_desc_textsize">@dimen/_9sdp</dimen>
     <dimen name="layout_card_button_height">@dimen/_30sdp</dimen>
@@ -49,8 +49,17 @@
     <dimen name="layout_card_button_textsize">@dimen/_10ssp</dimen>
     <dimen name="layout_card_button_radius">@dimen/_50sdp</dimen>
 
+    <dimen name="layout_button_all_size">@dimen/_35sdp</dimen>
+    <dimen name="layout_button_all_margin_start">@dimen/_10sdp</dimen>
+    <dimen name="layout_button_all_margin_end">@dimen/_25sdp</dimen>
+    <dimen name="layout_button_all_corner">@dimen/_50sdp</dimen>
+    <dimen name="layout_button_all_elevation">@dimen/_1sdp</dimen>
+    <dimen name="layout_button_all_stroke">@dimen/_1sdp</dimen>
+    <dimen name="layout_button_all_image">@dimen/_20sdp</dimen>
+
     <dimen name="card_venue_height">@dimen/_175sdp</dimen>
     <dimen name="card_venue_width">@dimen/_118sdp</dimen>
+    <dimen name="card_venue_width_java">@dimen/_128sdp</dimen>
     <dimen name="card_venue_margin_width">@dimen/_5sdp</dimen>
     <dimen name="card_venue_elevation">@dimen/_3sdp</dimen>
     <dimen name="card_venue_corner">@dimen/_14sdp</dimen>
