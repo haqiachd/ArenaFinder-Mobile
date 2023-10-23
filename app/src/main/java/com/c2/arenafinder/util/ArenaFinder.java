@@ -8,13 +8,17 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.DimenRes;
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
@@ -77,6 +81,20 @@ public class ArenaFinder {
         VibratorToast(context, context.getString(msg), toastLong, vibratorLong);
     }
 
+    public static void setRecyclerWidthByItem(
+            Context context, RecyclerView recyclerView,
+            int itemCount, @DimenRes int itemWidth
+    ){
+        int totalItemWidth = 0;
+        for (int i = 0; i < itemCount; i++) {
+            totalItemWidth += context.getResources().getDimensionPixelOffset(itemWidth);
+        }
+
+        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+        layoutParams.width = totalItemWidth;
+        recyclerView.setLayoutParams(layoutParams);
+    }
+
     public static void showAlertDialog(
             Context context, String title, String message, boolean cancelable,
             DialogInterface.OnClickListener positiveAction, DialogInterface.OnClickListener negativeAction
@@ -89,10 +107,6 @@ public class ArenaFinder {
                 .setNegativeButton(context.getString(R.string.dia_negative_cancel), negativeAction)
                 .create()
                 .show();
-
-    }
-
-    public static void showLoadingDialog(){
 
     }
 
