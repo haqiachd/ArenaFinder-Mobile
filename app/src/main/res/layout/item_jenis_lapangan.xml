@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ijl_card"
     android:layout_width="@dimen/_65sdp"
     android:layout_height="@dimen/_85sdp"
     android:layout_marginStart="@dimen/_8sdp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/card_color_jenis"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="@dimen/_10sdp"
-    app:strokeWidth="1dp"
     app:strokeColor="@color/white"
-    >
+    app:strokeWidth="1dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_jenis_lapangan_all"
+            android:id="@+id/ijl_image"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            />
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:contentDescription="@string/alt_jenis_lapangan"
+            android:src="@drawable/ic_lapangan_all" />
 
         <TextView
+            android:id="@+id/ijl_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/kanit_medium"
             android:text="Semua"
-            android:textSize="@dimen/_10sdp"
             android:textAlignment="center"
             android:textColor="@color/primary_color"
-            android:fontFamily="@font/kanit_medium"
-            android:layout_marginBottom="@dimen/_8sdp"
-            />
+            android:textSize="@dimen/_10sdp" />
 
     </RelativeLayout>
 
