@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.UsersUtil;
@@ -32,7 +31,6 @@ import com.c2.arenafinder.api.google.GoogleUsers;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
 import com.c2.arenafinder.data.local.DataShared;
-import com.c2.arenafinder.data.local.DataShared.KEY;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.UsersResponse;

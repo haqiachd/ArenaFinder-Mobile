@@ -60,63 +60,63 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void cekKoneksi(){
 
-        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+//        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
 //
 //        return;
 
-//        RetrofitClient.getInstance().cekKoneksi().enqueue(new Callback<ArenaFinderResponse>() {
-//            @Override
-//            public void onResponse(Call<ArenaFinderResponse> call, Response<ArenaFinderResponse> response) {
-//
-//                if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
-//                    if (usersUtil.isSignIn()) {
-//                        // Jika pengguna sudah masuk, buka MainActivity
-//                        LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
-//                        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-//                    } else {
-//                        // Jika pengguna belum masuk, buka WelcomeActivity
-//                        LogApp.info(this, LogTag.LIFEFCYLE, "Membuka WelcomeActivity");
-//                        startActivity(
-//                                new Intent(SplashScreenActivity.this, EmptyActivity.class)
-//                                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
-//                        );
-//                    }
-//
-//                    // Selesai, tutup SplashScreen saat ini
-//                    finish();
-//                }else{
-//                    ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
-////                    startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
-////                            .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
-////                    );
-////                    finish();
-//
-//                    // temp
-//                    Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
-//                    startActivity(
-//                            new Intent(SplashScreenActivity.this, EmptyActivity.class)
-//                                    .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+        RetrofitClient.getInstance().cekKoneksi().enqueue(new Callback<ArenaFinderResponse>() {
+            @Override
+            public void onResponse(Call<ArenaFinderResponse> call, Response<ArenaFinderResponse> response) {
+
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")){
+                    if (usersUtil.isSignIn()) {
+                        // Jika pengguna sudah masuk, buka MainActivity
+                        LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
+                        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                    } else {
+                        // Jika pengguna belum masuk, buka WelcomeActivity
+                        LogApp.info(this, LogTag.LIFEFCYLE, "Membuka WelcomeActivity");
+                        startActivity(
+                                new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                        );
+                    }
+
+                    // Selesai, tutup SplashScreen saat ini
+                    finish();
+                }else{
+                    ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
+//                    startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
+//                            .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
 //                    );
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArenaFinderResponse> call, Throwable t) {
-//                t.printStackTrace();
-//                ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
-////                startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
-////                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
-////                );
-////                finish();
-//
-//                // temp
-//                Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
-//                startActivity(
-//                        new Intent(SplashScreenActivity.this, EmptyActivity.class)
-//                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+//                    finish();
+
+                    // temp
+                    Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
+                    startActivity(
+                            new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                                    .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                    );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArenaFinderResponse> call, Throwable t) {
+                t.printStackTrace();
+                ArenaFinder.playVibrator(getApplicationContext(), ArenaFinder.VIBRATOR_LONG);
+//                startActivity(new Intent(SplashScreenActivity.this, EmptyActivity.class)
+//                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.SERVER_NOT_FOUND)
 //                );
-//            }
-//        });
+//                finish();
+
+                // temp
+                Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
+                startActivity(
+                        new Intent(SplashScreenActivity.this, EmptyActivity.class)
+                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                );
+            }
+        });
 
     }
 

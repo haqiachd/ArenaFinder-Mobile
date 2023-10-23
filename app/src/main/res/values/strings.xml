@@ -86,6 +86,13 @@
     <string name="txt_aktivitas_seru_desc">Jelajahi Aktivitas Seru untuk Mengusir Rasa Bosan!</string>
     <string name="txt_terdekat">Dekat Lokasimu</string>
     <string name="txt_terdekat_desc">Cari Tempat Olahraga Terdekat di Sekitarmu!</string>
+    <string name="txt_def_venue">Blessing Futsal</string>
+    <string name="txt_def_ratting">5.0</string>
+    <string name="txt_def_home_kosong">Mulai dari Rp. 50.000</string>
+
+    <string name="txt_venue_status_disewakan">Disewakan</string>
+
+    <string name="txt_olahraga_futsal">Futsal</string>
 
     <string name="alt_bottom_nav_home">Home Icon</string>
     <string name="alt_bottom_nav_device">Device Icon</string>
@@ -103,6 +110,8 @@
     <string name="alt_menu_3">Keranjang</string>
     <string name="alt_menu_4">Booking</string>
     <string name="alt_jenis_lapangan">Jenis Lapangan</string>
+    <string name="alt_ratting">Ratting</string>
+    <string name="alt_card_venue">Gambar Venue</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_ya">IYA</string>

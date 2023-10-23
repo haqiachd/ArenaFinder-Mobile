@@ -49,8 +49,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_13ssp"
                 android:gravity="center"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
@@ -65,68 +64,26 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginTop="@dimen/_5ssp"
+                        android:orientation="vertical"
                         tools:ignore="UseCompoundDrawables">
-                        
+
                         <ImageView
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
                             android:layout_marginBottom="@dimen/_4sdp"
-                            android:src="@drawable/ic_home_menu_1"
                             android:contentDescription="@string/alt_menu_1"
-                            android:layout_gravity="center"
-                            />
+                            android:src="@drawable/ic_home_menu_1" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/kanit_regular"
-                            android:textSize="@dimen/_10ssp"
-                            android:textAlignment="center"
-                            android:textColor="@color/primary_color"
                             android:text="@string/txt_menu_kegiatan_lapangan"
-                            />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/home_menu_height"
-                    android:layout_marginStart="@dimen/home_menu_margin"
-                    android:layout_marginEnd="@dimen/home_menu_margin"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="@dimen/home_menu_corner"
-                    app:cardElevation="@dimen/home_menu_elevation"
-                    app:strokeColor="@color/dimgray">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/_5ssp"
-                        tools:ignore="UseCompoundDrawables">
-
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:src="@drawable/ic_home_menu_2"
-                            android:contentDescription="@string/alt_menu_2"
-                            android:layout_gravity="center"
-                            />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/kanit_regular"
-                            android:textSize="@dimen/_10ssp"
                             android:textAlignment="center"
                             android:textColor="@color/primary_color"
-                            android:text="@string/txt_menu_aktivitas_komunitas"
-                            />
+                            android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
 
@@ -140,35 +97,71 @@
                     android:layout_weight="1"
                     app:cardCornerRadius="@dimen/home_menu_corner"
                     app:cardElevation="@dimen/home_menu_elevation"
-                    app:cardBackgroundColor="@color/primary_color"
                     app:strokeColor="@color/dimgray">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginTop="@dimen/_5ssp"
+                        android:orientation="vertical"
                         tools:ignore="UseCompoundDrawables">
 
                         <ImageView
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:layout_marginStart="@dimen/_4sdp"
-                            android:src="@drawable/ic_home_menu_3"
-                            android:contentDescription="@string/alt_menu_3"
                             android:layout_gravity="center"
-                            />
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:contentDescription="@string/alt_menu_2"
+                            android:src="@drawable/ic_home_menu_2" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/kanit_regular"
-                            android:textSize="@dimen/_10ssp"
+                            android:text="@string/txt_menu_aktivitas_komunitas"
+                            android:textAlignment="center"
+                            android:textColor="@color/primary_color"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/home_menu_height"
+                    android:layout_marginStart="@dimen/home_menu_margin"
+                    android:layout_marginEnd="@dimen/home_menu_margin"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/primary_color"
+                    app:cardCornerRadius="@dimen/home_menu_corner"
+                    app:cardElevation="@dimen/home_menu_elevation"
+                    app:strokeColor="@color/dimgray">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5ssp"
+                        android:orientation="vertical"
+                        tools:ignore="UseCompoundDrawables">
+
+                        <ImageView
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:contentDescription="@string/alt_menu_3"
+                            android:src="@drawable/ic_home_menu_3" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/kanit_regular"
+                            android:text="@string/txt_menu_status_pesanan"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:text="@string/txt_menu_status_pesanan"
-                            />
+                            android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
 
@@ -187,28 +180,26 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_marginTop="@dimen/_5ssp"
+                        android:orientation="vertical"
                         tools:ignore="UseCompoundDrawables">
 
                         <ImageView
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:src="@drawable/ic_home_menu_4"
-                            android:contentDescription="@string/alt_menu_4"
                             android:layout_gravity="center"
-                            />
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:contentDescription="@string/alt_menu_4"
+                            android:src="@drawable/ic_home_menu_4" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/kanit_regular"
-                            android:textSize="@dimen/_10ssp"
+                            android:text="@string/txt_pesan_lapangan"
                             android:textAlignment="center"
                             android:textColor="@color/primary_color"
-                            android:text="@string/txt_pesan_lapangan"
-                            />
+                            android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
 
@@ -239,33 +230,31 @@
                     android:layout_height="@dimen/_90sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/txt_jenis_lapangan"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_jenis_lapangan"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_jenis_lapangan"
+                    tools:listitem="@layout/item_jenis_lapangan" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/txt_sedang_kosong"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_14sdp"
+                        android:layout_marginStart="@dimen/layout_card_margin_start"
                         android:fontFamily="@font/kanit_medium"
                         android:text="@string/txt_sedang_kosong"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_16ssp"
+                        android:textSize="@dimen/layout_card_title_textsize"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -273,58 +262,54 @@
                         android:id="@+id/txt_sedang_kosong_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_14sdp"
-                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/layout_card_margin_start"
+                        android:layout_marginTop="@dimen/layout_card_desc_margin_top"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/txt_sedang_kosnog_desc"
                         android:textColor="@color/dimgray"
-                        android:textSize="@dimen/_9ssp"
+                        android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_sedang_kosong"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/txt_sedang_kosong" />
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginEnd="@dimen/_13sdp"
-                        android:text="@string/btn_lihat_semua"
-                        android:textColor="#08522E"
-                        android:textSize="@dimen/_10sdp"
+                        android:layout_height="@dimen/layout_card_button_height"
+                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
+                        android:backgroundTint="@color/button_semua_background"
                         android:fontFamily="@font/roboto_bold"
+                        android:text="@string/btn_lihat_semua"
                         android:textAllCaps="false"
-                        app:cornerRadius="@dimen/_50sdp"
-                        android:backgroundTint="#4D56DF64"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColor="@color/button_semua_textcolor"
+                        android:textSize="@dimen/layout_card_button_textsize"
+                        app:cornerRadius="@dimen/layout_card_button_radius"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/mho_recycler_sedang_kosong"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_170sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_height="@dimen/_180sdp"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:orientation="horizontal"
-                    tools:listitem="@layout/item_home_sedang_kosong"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    />
+                    tools:listitem="@layout/item_home_sedang_kosong" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="@dimen/_10sdp"
-                >
+                android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/txt_aktivitas"
                         android:layout_width="wrap_content"
@@ -348,24 +333,22 @@
                         android:textColor="@color/dimgray"
                         android:textSize="@dimen/_9ssp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_aktivitas"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/txt_aktivitas" />
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginEnd="@dimen/_13sdp"
+                        android:backgroundTint="#4D56DF64"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/btn_lihat_semua"
+                        android:textAllCaps="false"
                         android:textColor="#08522E"
                         android:textSize="@dimen/_10sdp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textAllCaps="false"
                         app:cornerRadius="@dimen/_50sdp"
-                        android:backgroundTint="#4D56DF64"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -373,12 +356,11 @@
                     android:id="@+id/mho_recycler_aktivitas"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_170sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginStart="@dimen/_8sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:orientation="horizontal"
-                    tools:listitem="@layout/item_home_aktivitas"
-                    />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_home_aktivitas" />
 
             </LinearLayout>
 
@@ -386,13 +368,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/txt_terdekat"
                         android:layout_width="wrap_content"
@@ -416,24 +397,22 @@
                         android:textColor="@color/dimgray"
                         android:textSize="@dimen/_9ssp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_terdekat"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/txt_terdekat" />
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginEnd="@dimen/_13sdp"
+                        android:backgroundTint="#4D56DF64"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/btn_lihat_semua"
+                        android:textAllCaps="false"
                         android:textColor="#08522E"
                         android:textSize="@dimen/_10sdp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:textAllCaps="false"
                         app:cornerRadius="@dimen/_50sdp"
-                        android:backgroundTint="#4D56DF64"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -441,16 +420,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_180sdp"
                     android:layout_margin="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_10sdp"
                     android:elevation="0dp"
-                    >
+                    app:cardCornerRadius="@dimen/_10sdp">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_home_map_test"
                         android:scaleType="centerCrop"
-                        />
+                        android:src="@drawable/ic_home_map_test" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -458,7 +435,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20sdp"/>
+                android:layout_height="@dimen/_20sdp" />
 
         </LinearLayout>
 

@@ -30,7 +30,6 @@ import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
-import com.c2.arenafinder.ui.activity.AccountActivity;
 import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;

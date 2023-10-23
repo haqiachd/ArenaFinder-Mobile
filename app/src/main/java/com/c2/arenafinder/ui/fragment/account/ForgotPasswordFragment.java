@@ -20,9 +20,6 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.local.LogApp;
-import com.c2.arenafinder.data.local.LogTag;
-import com.c2.arenafinder.data.model.VerifyModel;
 import com.c2.arenafinder.data.response.VerifyResponse;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.util.ArenaFinder;
