@@ -27,6 +27,7 @@
     <string name="btn_pengguna_umum">Pengguna Umum</string>
     <string name="btn_pegelola_lapangan">Pengelola Lapangan</string>
     <string name="btn_buka_app">Buka App</string>
+    <string name="btn_lihat_semua">Semua</string>
     <string name="btn_go_login">Masuk Akun</string>
 
     <string name="txt_signin_title">Masuk Akun</string>
@@ -74,6 +75,17 @@
     <string name="txt_second">Detik</string>
     <string name="txt_minut">Menit</string>
     <string name="txt_update_otp">Mengirimkan ulang kode OTP</string>
+    <string name="txt_jenis_lapangan">Jenis Lapangan</string>
+    <string name="txt_menu_kegiatan_lapangan">Kegiatan</string>
+    <string name="txt_menu_aktivitas_komunitas">Komunitas</string>
+    <string name="txt_menu_status_pesanan">Keranjang</string>
+    <string name="txt_pesan_lapangan">Booking</string>
+    <string name="txt_sedang_kosong">Sedang Kosong</string>
+    <string name="txt_sedang_kosnog_desc">Lihat Tempat Olahraga yang sedang Kosong</string>
+    <string name="txt_aktivitas_seru">Aktivitas Seru</string>
+    <string name="txt_aktivitas_seru_desc">Jelajahi Aktivitas Seru untuk Mengusir Rasa Bosan!</string>
+    <string name="txt_terdekat">Dekat Lokasimu</string>
+    <string name="txt_terdekat_desc">Cari Tempat Olahraga Terdekat di Sekitarmu!</string>
 
     <string name="alt_bottom_nav_home">Home Icon</string>
     <string name="alt_bottom_nav_device">Device Icon</string>
@@ -85,6 +97,12 @@
     <string name="alt_google_logo">Google</string>
     <string name="alt_welcome">Halaman Welcome</string>
     <string name="alt_signup_type">Logo Orang</string>
+    <string name="alt_gambar">Gambar</string>
+    <string name="alt_menu_1">Kegiatan</string>
+    <string name="alt_menu_2">Komunitas</string>
+    <string name="alt_menu_3">Keranjang</string>
+    <string name="alt_menu_4">Booking</string>
+    <string name="alt_jenis_lapangan">Jenis Lapangan</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_ya">IYA</string>

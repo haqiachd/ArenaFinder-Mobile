@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -17,8 +18,16 @@ import android.widget.ScrollView;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.AktivitasSeruModel;
+import com.c2.arenafinder.data.model.JenisLapanganModel;
+import com.c2.arenafinder.data.model.SedangKosongModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.adapter.AktivitasSeruAdapter;
+import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
+import com.c2.arenafinder.ui.adapter.SedangKosongAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
@@ -31,7 +40,16 @@ public class HomeFragment extends Fragment {
     private int prevScroll = 0;
     private boolean isShown = false;
 
+    private ArrayList<JenisLapanganModel> lapanganModels;
+    private ArrayList<SedangKosongModel> kosongModels;
+    private ArrayList<AktivitasSeruModel> aktivitasModels;
+
+    private JenisLapanganAdapter lapanganAdapter;
+    private SedangKosongAdapter kosongAdapter;
+    private AktivitasSeruAdapter aktivitasAdapter;
+
     private ScrollView scrollView;
+    private RecyclerView jenisLapangan, kosongRecycler, aktivitasRecycler;
 
     private boolean scrollable = false;
 
@@ -41,6 +59,9 @@ public class HomeFragment extends Fragment {
 
     public void initViews(View view){
         scrollView = view.findViewById(R.id.mho_scroll);
+        jenisLapangan = view.findViewById(R.id.home_recycler_jenis);
+        kosongRecycler = view.findViewById(R.id.mho_recycler_sedang_kosong);
+        aktivitasRecycler = view.findViewById(R.id.mho_recycler_aktivitas);
     }
 
     public static HomeFragment newInstance(String param1, String param2) {
@@ -67,6 +88,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -99,9 +122,9 @@ public class HomeFragment extends Fragment {
 
                 if (currentScroll < 400){
                     MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
-                } else if (currentScroll < 800){
+                } else if (currentScroll < 700){
                     MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
-                } else if (currentScroll < 1300){
+                } else if (currentScroll < 2100){
                     MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
                 }else {
                     MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
@@ -113,7 +136,47 @@ public class HomeFragment extends Fragment {
         new Handler().postDelayed(() -> {
             MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_HOME);
             scrollable = true;
-        }, 4500);
+            adapterLapangan();
+            sedangKosong();
+            aktivitasAdapter();
+        }, 1500);
+
+
+    }
+
+    private void adapterLapangan(){
+        lapanganModels = new ArrayList<>();
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_badminton, "Bulu Tangkis"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
+
+        lapanganAdapter = new JenisLapanganAdapter(lapanganModels);
+        jenisLapangan.setAdapter(lapanganAdapter);
+    }
+
+    private void sedangKosong(){
+        kosongModels = new ArrayList<>();
+        kosongModels.add(new SedangKosongModel());
+        kosongModels.add(new SedangKosongModel());
+        kosongModels.add(new SedangKosongModel());
+        kosongModels.add(new SedangKosongModel());
+
+        kosongAdapter = new SedangKosongAdapter(kosongModels);
+        kosongRecycler.setAdapter(kosongAdapter);
+
+    }
+
+    private void aktivitasAdapter(){
+        aktivitasModels = new ArrayList<>();
+        aktivitasModels.add(new AktivitasSeruModel());
+        aktivitasModels.add(new AktivitasSeruModel());
+        aktivitasModels.add(new AktivitasSeruModel());
+
+        aktivitasAdapter = new AktivitasSeruAdapter(aktivitasModels);
+        aktivitasRecycler.setAdapter(aktivitasAdapter);
+
     }
 
 }
