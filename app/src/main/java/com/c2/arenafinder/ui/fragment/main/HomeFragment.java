@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
@@ -13,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
@@ -26,6 +29,7 @@ import com.c2.arenafinder.ui.adapter.AktivitasSeruAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.SedangKosongAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
@@ -57,7 +61,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public void initViews(View view){
+    public void initViews(View view) {
         scrollView = view.findViewById(R.id.mho_scroll);
         jenisLapangan = view.findViewById(R.id.home_recycler_jenis);
         kosongRecycler = view.findViewById(R.id.mho_recycler_sedang_kosong);
@@ -83,12 +87,10 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
-
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -110,7 +112,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        scrollView.setOnTouchListener((v, event) ->{
+        scrollView.setOnTouchListener((v, event) -> {
             LogApp.info(requireContext(), LogTag.LIFEFCYLE, "ScrollView Listener");
             return !scrollable;
         });
@@ -120,13 +122,13 @@ public class HomeFragment extends Fragment {
             public void onScrollChanged() {
                 int currentScroll = scrollView.getScrollY();
 
-                if (currentScroll < 400){
+                if (currentScroll < 400) {
                     MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
-                } else if (currentScroll < 700){
+                } else if (currentScroll < 700) {
                     MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
-                } else if (currentScroll < 2100){
+                } else if (currentScroll < 2100) {
                     MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
-                }else {
+                } else {
                     MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
                 }
 
@@ -144,7 +146,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void adapterLapangan(){
+    private void adapterLapangan() {
         lapanganModels = new ArrayList<>();
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
@@ -156,19 +158,25 @@ public class HomeFragment extends Fragment {
         jenisLapangan.setAdapter(lapanganAdapter);
     }
 
-    private void sedangKosong(){
+    private void sedangKosong() {
         kosongModels = new ArrayList<>();
         kosongModels.add(new SedangKosongModel());
         kosongModels.add(new SedangKosongModel());
         kosongModels.add(new SedangKosongModel());
         kosongModels.add(new SedangKosongModel());
+        kosongModels.add(new SedangKosongModel());
+        kosongModels.add(new SedangKosongModel());
+        Toast.makeText(requireContext(), "ITEM : " + kosongModels.size(), Toast.LENGTH_SHORT).show();
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         kosongAdapter = new SedangKosongAdapter(kosongModels);
+        kosongRecycler.setLayoutManager(layoutManager);
         kosongRecycler.setAdapter(kosongAdapter);
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), kosongRecycler, kosongModels.size(), R.dimen.card_venue_width_java);
 
     }
 
-    private void aktivitasAdapter(){
+    private void aktivitasAdapter() {
         aktivitasModels = new ArrayList<>();
         aktivitasModels.add(new AktivitasSeruModel());
         aktivitasModels.add(new AktivitasSeruModel());
