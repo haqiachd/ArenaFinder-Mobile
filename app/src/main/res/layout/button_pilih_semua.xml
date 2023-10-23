@@ -1,0 +1,21 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/btn_semua"
+    android:layout_width="@dimen/layout_button_all_size"
+    android:layout_height="@dimen/layout_button_all_size"
+    android:layout_gravity="center_vertical"
+    android:layout_marginStart="@dimen/layout_button_all_margin_start"
+    android:layout_marginEnd="@dimen/layout_button_all_margin_end"
+    app:cardCornerRadius="@dimen/layout_button_all_corner"
+    app:cardElevation="@dimen/layout_button_all_elevation"
+    app:strokeColor="@color/stroke_card_venue"
+    app:strokeWidth="@dimen/layout_button_all_stroke">
+
+    <ImageView
+        android:layout_width="@dimen/layout_button_all_image"
+        android:layout_height="@dimen/layout_button_all_image"
+        android:layout_gravity="center"
+        android:contentDescription="@string/alt_semua"
+        android:src="@drawable/ic_btn_pilih_semua" />
+
+</com.google.android.material.card.MaterialCardView>
