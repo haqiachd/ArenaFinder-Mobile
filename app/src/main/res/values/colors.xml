@@ -41,9 +41,12 @@
     <color name="stroke_card_venue">#1A696969</color>
     <color name="button_semua_background">#334CF15E</color>
     <color name="button_semua_textcolor">#08522E</color>
+    <color name="venue_status_berbayar_bg">#1AFF2400</color>
     <color name="venue_status_berbayar">@color/scarlet</color>
-    <color name="venus_status_disewakan_bg">#1ADA28D6</color>
+    <color name="venue_status_disewakan_bg">#1ADA28D6</color>
     <color name="venue_status_disewakan">@color/whero_purple</color>
+    <color name="venue_status_gratis_bg">#1A007FFF</color>
     <color name="venue_status_gratis">@color/azure</color>
+    <color name="venue_status_bervariasi_bg">#1AA52A2A</color>
     <color name="venue_status_bervariasi">@color/brown</color>
 </resources>
