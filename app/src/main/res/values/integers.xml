@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="max_lines_venue_title">2</integer>
+    <integer name="max_lines_venue_sport">1</integer>
+
+</resources>
