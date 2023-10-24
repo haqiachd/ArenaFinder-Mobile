@@ -307,7 +307,7 @@
                             android:layout_marginTop="@dimen/_8sdp"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_home_sedang_kosong" />
+                            tools:listitem="@layout/item_venue_first" />
 
                             <include
                                 android:layout_width="@dimen/layout_button_all_size"

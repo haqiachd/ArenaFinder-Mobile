@@ -16,16 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.model.SedangKosongModel;
+import com.c2.arenafinder.data.model.VenueFirstModel;
 
 import java.util.ArrayList;
 
-public class SedangKosongAdapter extends RecyclerView.Adapter<SedangKosongAdapter.ViewHolder> {
+public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.ViewHolder> {
 
     private final Context context;
-    private final ArrayList<SedangKosongModel> models;
+    private final ArrayList<VenueFirstModel> models;
 
-    public SedangKosongAdapter(Context context, ArrayList<SedangKosongModel> models){
+    public VenueFirstAdapter(Context context, ArrayList<VenueFirstModel> models){
         this.context = context;
         this.models = models;
     }
@@ -35,14 +35,14 @@ public class SedangKosongAdapter extends RecyclerView.Adapter<SedangKosongAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_home_sedang_kosong, parent, false)
+                        .inflate(R.layout.item_venue_first, parent, false)
         );
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get data
-        SedangKosongModel kosongModel = models.get(position);
+        VenueFirstModel kosongModel = models.get(position);
 
         // show data
         holder.txtNama.setText(kosongModel.getVenueName());

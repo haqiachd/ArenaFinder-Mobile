@@ -1,6 +1,6 @@
 package com.c2.arenafinder.data.model;
 
-public class SedangKosongModel {
+public class VenueFirstModel {
 
     public String venueImage;
 
@@ -14,7 +14,7 @@ public class SedangKosongModel {
 
     public String venueDesc;
 
-    public SedangKosongModel(String venueImage, String venueName, String venueSport, float venueRatting, String venueStatus, String venueDesc) {
+    public VenueFirstModel(String venueImage, String venueName, String venueSport, float venueRatting, String venueStatus, String venueDesc) {
         this.venueImage = venueImage;
         this.venueName = venueName;
         this.venueSport = venueSport;

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
@@ -16,18 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasSeruModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
-import com.c2.arenafinder.data.model.SedangKosongModel;
+import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasSeruAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
-import com.c2.arenafinder.ui.adapter.SedangKosongAdapter;
+import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 
@@ -45,11 +43,11 @@ public class HomeFragment extends Fragment {
     private boolean isShown = false;
 
     private ArrayList<JenisLapanganModel> lapanganModels;
-    private ArrayList<SedangKosongModel> kosongModels;
+    private ArrayList<VenueFirstModel> kosongModels;
     private ArrayList<AktivitasSeruModel> aktivitasModels;
 
     private JenisLapanganAdapter lapanganAdapter;
-    private SedangKosongAdapter kosongAdapter;
+    private VenueFirstAdapter kosongAdapter;
     private AktivitasSeruAdapter aktivitasAdapter;
 
     private ScrollView scrollView;
@@ -160,28 +158,28 @@ public class HomeFragment extends Fragment {
 
     private void sedangKosong() {
         kosongModels = new ArrayList<>();
-        kosongModels.add(new SedangKosongModel(
+        kosongModels.add(new VenueFirstModel(
                 "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
                 "Disewakan", "Rp. 275.000 / Sesi"
         ));
-        kosongModels.add(new SedangKosongModel(
+        kosongModels.add(new VenueFirstModel(
                 "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
                 "Gratis" ,"Tidak perlu bayar"
         ));
-        kosongModels.add(new SedangKosongModel(
+        kosongModels.add(new VenueFirstModel(
                 "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.7F,
                 "Disewakan",  "Rp. 90.000 / Sesi"
         ));
-        kosongModels.add(new SedangKosongModel(
+        kosongModels.add(new VenueFirstModel(
                 "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
                 "Berbayar",  "Mulai dari Rp. 50.000"
         ));
-        kosongModels.add(new SedangKosongModel(
+        kosongModels.add(new VenueFirstModel(
                 "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
                 "Bervariasi",  "Harga Bervariasi"
         ));
 
-        kosongAdapter = new SedangKosongAdapter(requireContext(), kosongModels);
+        kosongAdapter = new VenueFirstAdapter(requireContext(), kosongModels);
         kosongRecycler.setAdapter(kosongAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), kosongRecycler, kosongModels.size(), R.dimen.card_venue_width_java);
