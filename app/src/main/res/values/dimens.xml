@@ -57,7 +57,7 @@
     <dimen name="layout_button_all_stroke">@dimen/_1sdp</dimen>
     <dimen name="layout_button_all_image">@dimen/_20sdp</dimen>
 
-    <dimen name="card_venue_height">@dimen/_175sdp</dimen>
+    <dimen name="card_venue_height">@dimen/_185sdp</dimen>
     <dimen name="card_venue_width">@dimen/_118sdp</dimen>
     <dimen name="card_venue_width_java">@dimen/_128sdp</dimen>
     <dimen name="card_venue_margin_width">@dimen/_5sdp</dimen>
@@ -65,14 +65,18 @@
     <dimen name="card_venue_corner">@dimen/_14sdp</dimen>
     <dimen name="card_venue_stroke">@dimen/_1sdp</dimen>
     <dimen name="card_venue_image_height">@dimen/_80sdp</dimen>
-    <dimen name="card_venue_info_margin_width">@dimen/_5sdp</dimen>
+    <dimen name="card_venue_image_corner">@dimen/_11sdp</dimen>
+    <dimen name="card_venue_image_elevation">1dp</dimen>
+    <dimen name="card_venue_info_margin_width">@dimen/_6sdp</dimen>
     <dimen name="card_venue_info_margin_top">@dimen/_8sdp</dimen>
     <dimen name="card_venue_info_title_textsize">@dimen/_13ssp</dimen>
     <dimen name="card_venue_info_sport_textsize">@dimen/_12ssp</dimen>
-    <dimen name="card_venue_desc_margin_width">@dimen/_7sdp</dimen>
-    <dimen name="card_venue_desc_ratting_size">@dimen/_15sdp</dimen>
+    <dimen name="card_venue_desc_margin_width">@dimen/_8sdp</dimen>
+    <dimen name="card_venue_desc_margin_bottom">@dimen/_5sdp</dimen>
+    <dimen name="card_venue_desc_ratting_size">@dimen/_14sdp</dimen>
+    <dimen name="card_venue_desc_ratting_margin">@dimen/_3sdp</dimen>
     <dimen name="card_venue_desc_top_textview">@dimen/_10ssp</dimen>
-    <dimen name="card_vdnue_desc_bottom_margin_top">@dimen/_2sdp</dimen>
+    <dimen name="card_vdnue_desc_bottom_margin_top">@dimen/_3sdp</dimen>
     <dimen name="card_venue_desc_bottom_textview">@dimen/_8ssp</dimen>
 
     <dimen name="card_activity_width">@dimen/_195sdp</dimen>
