@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <corners android:radius="@dimen/bg_venue_radius" />
+    <padding
+        android:left="@dimen/bg_venue_padding"
+        android:right="@dimen/bg_venue_padding" />
+    <solid android:color="@color/venue_status_disewakan_bg" />
+
+</shape>
