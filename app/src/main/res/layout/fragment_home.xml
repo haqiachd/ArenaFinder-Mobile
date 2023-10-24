@@ -302,7 +302,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mho_recycler_sedang_kosong"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_180sdp"
+                            android:layout_height="@dimen/_190sdp"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:orientation="horizontal"

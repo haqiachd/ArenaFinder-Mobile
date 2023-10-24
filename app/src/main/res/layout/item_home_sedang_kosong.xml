@@ -21,7 +21,8 @@
             android:id="@+id/ihsk_image_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_venue_image_height"
-            android:background="@drawable/bg_venue_card_image"
+            app:cardCornerRadius="@dimen/card_venue_image_corner"
+            app:cardElevation="@dimen/card_venue_image_elevation"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -32,7 +33,6 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_venue_card_1"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -48,7 +48,9 @@
                 android:id="@+id/ihsk_venue_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/kanit_medium"
+                android:maxLines="@integer/max_lines_venue_title"
                 android:text="@string/txt_def_venue"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_venue_info_title_textsize" />
@@ -57,7 +59,9 @@
                 android:id="@+id/ihsk_venue_sport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/kanit_medium"
+                android:maxLines="@integer/max_lines_venue_sport"
                 android:text="@string/txt_olahraga_futsal"
                 android:textColor="@color/dimgray"
                 android:textSize="@dimen/card_venue_info_sport_textsize" />
@@ -69,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/card_venue_desc_margin_width"
             android:layout_marginEnd="@dimen/card_venue_desc_margin_width"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/card_venue_desc_margin_bottom"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
@@ -85,22 +89,22 @@
                 android:id="@+id/ihsk_ratting_value"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/card_venue_desc_ratting_size"
-                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/card_venue_desc_ratting_margin"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/txt_def_ratting"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_venue_desc_top_textview"
                 app:layout_constraintStart_toEndOf="@id/ihsk_ratting_icon"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/ihsk_venue_status"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/card_venue_desc_ratting_size"
+                android:background="@color/venus_status_disewakan_bg"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/txt_venue_status_disewakan"
-                android:textColor="#DA28D6"
+                android:textColor="@color/venue_status_disewakan"
                 android:textSize="@dimen/card_venue_desc_top_textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

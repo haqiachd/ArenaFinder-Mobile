@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -135,14 +135,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        new Handler().postDelayed(() -> {
+        sedangKosong();
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_HOME);
             scrollable = true;
             adapterLapangan();
-            sedangKosong();
             aktivitasAdapter();
         }, 1500);
-
 
     }
 
@@ -156,6 +155,7 @@ public class HomeFragment extends Fragment {
 
         lapanganAdapter = new JenisLapanganAdapter(lapanganModels);
         jenisLapangan.setAdapter(lapanganAdapter);
+
     }
 
     private void sedangKosong() {
@@ -166,12 +166,10 @@ public class HomeFragment extends Fragment {
         kosongModels.add(new SedangKosongModel());
         kosongModels.add(new SedangKosongModel());
         kosongModels.add(new SedangKosongModel());
-        Toast.makeText(requireContext(), "ITEM : " + kosongModels.size(), Toast.LENGTH_SHORT).show();
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         kosongAdapter = new SedangKosongAdapter(kosongModels);
-        kosongRecycler.setLayoutManager(layoutManager);
         kosongRecycler.setAdapter(kosongAdapter);
+
         ArenaFinder.setRecyclerWidthByItem(requireContext(), kosongRecycler, kosongModels.size(), R.dimen.card_venue_width_java);
 
     }
