@@ -160,14 +160,28 @@ public class HomeFragment extends Fragment {
 
     private void sedangKosong() {
         kosongModels = new ArrayList<>();
-        kosongModels.add(new SedangKosongModel());
-        kosongModels.add(new SedangKosongModel());
-        kosongModels.add(new SedangKosongModel());
-        kosongModels.add(new SedangKosongModel());
-        kosongModels.add(new SedangKosongModel());
-        kosongModels.add(new SedangKosongModel());
+        kosongModels.add(new SedangKosongModel(
+                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                "Disewakan", "Rp. 275.000 / Sesi"
+        ));
+        kosongModels.add(new SedangKosongModel(
+                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                "Gratis" ,"Tidak perlu bayar"
+        ));
+        kosongModels.add(new SedangKosongModel(
+                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.7F,
+                "Disewakan",  "Rp. 90.000 / Sesi"
+        ));
+        kosongModels.add(new SedangKosongModel(
+                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                "Berbayar",  "Mulai dari Rp. 50.000"
+        ));
+        kosongModels.add(new SedangKosongModel(
+                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                "Bervariasi",  "Harga Bervariasi"
+        ));
 
-        kosongAdapter = new SedangKosongAdapter(kosongModels);
+        kosongAdapter = new SedangKosongAdapter(requireContext(), kosongModels);
         kosongRecycler.setAdapter(kosongAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), kosongRecycler, kosongModels.size(), R.dimen.card_venue_width_java);

@@ -92,7 +92,7 @@
                 android:layout_marginStart="@dimen/card_venue_desc_ratting_margin"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/txt_def_ratting"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor_ratting"
                 android:textSize="@dimen/card_venue_desc_top_textview"
                 app:layout_constraintStart_toEndOf="@id/ihsk_ratting_icon"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -101,7 +101,7 @@
                 android:id="@+id/ihsk_venue_status"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/card_venue_desc_ratting_size"
-                android:background="@color/venus_status_disewakan_bg"
+                android:background="@drawable/bg_venue_status_disewakan"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/txt_venue_status_disewakan"
                 android:textColor="@color/venue_status_disewakan"
@@ -110,15 +110,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/ihsk_venue_desc"
-                android:layout_width="wrap_content"
+                android:id="@+id/ihsk_venue_desc_second"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_vdnue_desc_bottom_margin_top"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:ellipsize="start"
                 android:fontFamily="@font/opensans_semibold"
+                android:maxLines="@integer/max_lines_venue_desc"
                 android:text="@string/txt_def_home_kosong"
-                android:textColor="@color/dimgray"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
                 android:textSize="@dimen/card_venue_desc_bottom_textview"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ihsk_ratting_icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
