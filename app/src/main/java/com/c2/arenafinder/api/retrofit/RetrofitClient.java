@@ -23,9 +23,11 @@ public class RetrofitClient {
 
     public static final String CONTROLLERS = BASE_URL + "controllers/mobile/";
 
-    public static final String PUBLIC_IMG = "public/img/";
+    public static final String PUBLIC_IMG =  BASE_URL + "public/img/";
 
-    public static final String USER_PHOTO_URL = BASE_URL + PUBLIC_IMG + "user-photo/";
+    public static final String USER_PHOTO_URL = PUBLIC_IMG + "user-photo/";
+
+    public static final String VENUE_IMG_URL = PUBLIC_IMG + "venues/";
 
     public static final String SUCCESSFUL_RESPONSE = "success";
 
