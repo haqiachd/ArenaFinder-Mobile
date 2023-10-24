@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,18 @@ import com.google.android.material.card.MaterialCardView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdapter.ViewHolder>{
 
+    private final Context context;
     private final ArrayList<JenisLapanganModel> models;
 
-    public JenisLapanganAdapter(ArrayList<JenisLapanganModel> models){
+    public JenisLapanganAdapter(Context context, ArrayList<JenisLapanganModel> models){
+        this.context = context;
         this.models = models;
     }
 
@@ -38,7 +42,7 @@ public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         JenisLapanganModel model = models.get(position);
         holder.txtNamaLapangan.setText(model.getNamaLapangan());
-        holder.setIconLapangan(model.getIconDrawable());
+        holder.iconLapangan.setImageDrawable(ContextCompat.getDrawable(context, model.getIconDrawable()));
     }
 
     @Override
@@ -62,11 +66,6 @@ public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdap
             this.txtNamaLapangan = view.findViewById(R.id.ijl_title);
         }
 
-        public void setIconLapangan(@DrawableRes int icon){
-            Glide.with(view)
-                    .load(icon)
-                    .into(iconLapangan);
-        }
 
     }
 }
