@@ -29,6 +29,8 @@ public class RetrofitClient {
 
     public static final String VENUE_IMG_URL = PUBLIC_IMG + "venues/";
 
+    public static final String AKTIVITAS_URL = PUBLIC_IMG + "aktivitas/";
+
     public static final String SUCCESSFUL_RESPONSE = "success";
 
     @NonNull
