@@ -1,186 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.fragment.main.ProfileFragment"
-    >
+    tools:context=".ui.fragment.main.ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/mpr_img_photo"
-                android:layout_width="@dimen/_120sdp"
-                android:layout_height="@dimen/_120sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:src="@drawable/ic_profile"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="@id/mpr_img_photo"
-                app:layout_constraintStart_toEndOf="@id/mpr_img_photo"
-                app:layout_constraintBottom_toBottomOf="@id/mpr_img_photo"
-                >
-
-                <TextView
-                    android:id="@+id/mpr_choose_pp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Choose"
-                    android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/primary_color"
-                    android:visibility="gone"
-                    />
-
-                <TextView
-                    android:id="@+id/mpr_upload_pp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Upload"
-                    android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/primary_color"
-                    android:visibility="gone"
-                    />
-
-                <TextView
-                    android:id="@+id/mpr_test"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Edit Akun"
-                    android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/primary_color"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mpr_linear"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/mpr_img_photo"
-                >
+                android:layout_height="wrap_content">
 
-                <TextView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mpr_img_photo"
+                    android:layout_width="@dimen/_155sdp"
+                    android:layout_height="@dimen/_155sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/ic_profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@id/mpr_img_photo"
+                    app:layout_constraintStart_toEndOf="@id/mpr_img_photo"
+                    app:layout_constraintTop_toTopOf="@id/mpr_img_photo">
+
+                    <TextView
+                        android:id="@+id/mpr_choose_pp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Choose"
+                        android:textColor="@color/primary_color"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/mpr_upload_pp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Upload"
+                        android:textColor="@color/primary_color"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/mpr_test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Edit Akun"
+                        android:textColor="@color/primary_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mpr_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Username : "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    />
+                    android:layout_margin="@dimen/_15sdp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/mpr_img_photo">
 
-                <TextView
-                    android:id="@+id/mpr_txt_username"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Username : "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <TextView
+                        android:id="@+id/mpr_txt_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Username : "
+                        android:textColor="@color/granite_grey"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Email : "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <TextView
+                        android:id="@+id/mpr_txt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Email : "
+                        android:textColor="@color/granite_grey"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Full Name : "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <TextView
+                        android:id="@+id/mpr_txt_nama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Full Name : "
+                        android:textColor="@color/granite_grey"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Level : "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <TextView
+                        android:id="@+id/mpr_txt_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Level : "
+                        android:textColor="@color/granite_grey"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mpr_btn_logout"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:backgroundTint="@color/scarlet"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Username : "
-                    android:textColor="@color/granite_grey"
-                    android:textSize="@dimen/_13ssp"
-                    />
+                    android:text="Logout"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mpr_linear" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Email : "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/mpr_txt_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Email : "
-                    android:textColor="@color/granite_grey"
-                    android:textSize="@dimen/_13ssp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Full Name : "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    />
-
-                <TextView
-                    android:id="@+id/mpr_txt_nama"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Full Name : "
-                    android:textColor="@color/granite_grey"
-                    android:textSize="@dimen/_13ssp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Level : "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    />
-
-                <TextView
-                    android:id="@+id/mpr_txt_level"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Level : "
-                    android:textColor="@color/granite_grey"
-                    android:textSize="@dimen/_13ssp"
-                    />
-
-            </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/mpr_btn_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:backgroundTint="@color/scarlet"
-                android:text="Logout"
-                android:textAllCaps="false"
-                android:fontFamily="@font/poppins_semibold"
-                app:layout_constraintTop_toBottomOf="@id/mpr_linear"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 

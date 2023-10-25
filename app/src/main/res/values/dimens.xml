@@ -60,8 +60,12 @@
     <dimen name="bg_venue_radius">@dimen/_5sdp</dimen>
     <dimen name="bg_venue_padding">@dimen/_6sdp</dimen>
 
+    <dimen name="recycler_venue_margin_top">@dimen/_10sdp</dimen>
+    <dimen name="recycler_venue_margin_start">@dimen/_8sdp</dimen>
+
     <dimen name="card_venue_height">@dimen/_200sdp</dimen>
     <dimen name="card_venue_width">@dimen/_127sdp</dimen>
+    <dimen name="card_venue_recycler_height">@dimen/_202sdp</dimen>
     <dimen name="card_venue_width_java">@dimen/_139sdp</dimen>
     <dimen name="card_venue_margin_width">@dimen/_6sdp</dimen>
     <dimen name="card_venue_elevation">@dimen/_3sdp</dimen>

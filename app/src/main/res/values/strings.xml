@@ -83,12 +83,16 @@
     <string name="txt_sedang_kosong">Sedang Kosong</string>
     <string name="txt_sedang_kosnog_desc">Lihat Tempat Olahraga yang sedang Kosong</string>
     <string name="txt_aktivitas_seru">Aktivitas Seru</string>
-    <string name="txt_aktivitas_seru_desc">Jelajahi Aktivitas Seru untuk Mengusir Rasa Bosan!</string>
+    <string name="txt_aktivitas_seru_desc">Aktivitas Seru untuk Mengusir Rasa Bosan!</string>
     <string name="txt_terdekat">Dekat Lokasimu</string>
     <string name="txt_terdekat_desc">Cari Tempat Olahraga Terdekat di Sekitarmu!</string>
     <string name="txt_def_venue">Lapangan Tembarak Kertosono</string>
     <string name="txt_def_ratting">5.0</string>
     <string name="txt_def_home_kosong">Mulai Rp. 50.000</string>
+    <string name="txt_venue_baru">Baru Ditambahkan</string>
+    <string name="txt_venue_baru_desc">Tempat Olahraga Baru di ArenaFinder</string>
+    <string name="txt_buat_kamu">Rekomendasi Untukmu</string>
+    <string name="txt_buat_kamu_desc">Rekomendasi Tempat Olahraga Untukmu</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
 
@@ -113,6 +117,7 @@
     <string name="alt_ratting">Ratting</string>
     <string name="alt_card_venue">Gambar Venue</string>
     <string name="alt_semua">Semua</string>
+    <string name="alt_aktivitas">Gambar Aktivitas</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_ya">IYA</string>
