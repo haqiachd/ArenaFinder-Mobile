@@ -54,7 +54,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         initViews();
         usersUtil = new UsersUtil(getApplicationContext());
 
-        new Handler().postDelayed(this::cekKoneksi, 2000L);
+        new Handler().postDelayed(this::cekKoneksi, 900L);
 
     }
 
