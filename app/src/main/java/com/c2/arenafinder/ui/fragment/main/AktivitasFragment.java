@@ -14,14 +14,18 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.model.AktivitasFirstModel;
 import com.c2.arenafinder.data.model.AktivitasThirdModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.AktivitasThirdAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AktivitasFragment extends Fragment {
 
@@ -31,7 +35,7 @@ public class AktivitasFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView jenisLapangan, semuaAktivitasRecycler;
+    private RecyclerView jenisLapangan, aktivitasBaru, aktivitasKosong, semuaAktivitasRecycler;
     private JenisLapanganAdapter jenisLapanganAdapter;
 
     public AktivitasFragment() {
@@ -41,6 +45,8 @@ public class AktivitasFragment extends Fragment {
     public void initViews(View view) {
         jenisLapangan = view.findViewById(R.id.mak_recycler_jenis);
         semuaAktivitasRecycler = view.findViewById(R.id.mak_recycler_semua);
+        aktivitasBaru = view.findViewById(R.id.mak_recycler_aktivitas_baru);
+        aktivitasKosong = view.findViewById(R.id.mak_recycler_aktivitas_kosong);
     }
 
     public static AktivitasFragment newInstance(String param1, String param2) {
@@ -82,6 +88,8 @@ public class AktivitasFragment extends Fragment {
 
         adapterLapangan();
         adapterSemuaAktivitas();
+        adapterBaru();
+        adapterKosong();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -102,6 +110,34 @@ public class AktivitasFragment extends Fragment {
         JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels);
         jenisLapangan.setAdapter(lapanganAdapter);
 
+    }
+
+    private void adapterBaru(){
+        ArrayList<AktivitasFirstModel> models = new ArrayList<>();
+        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno"));
+        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang"));
+        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal"));
+        models.add(new AktivitasFirstModel("test/aktivitas-5.jpg", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang"));
+
+        aktivitasBaru.setAdapter(new AktivitasFirstAdapter(models));
+
+        Collections.shuffle(models);
+
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaru, models.size(), R.dimen.card_activity_width_java);
+    }
+
+    private void adapterKosong(){
+        ArrayList<AktivitasFirstModel> models = new ArrayList<>();
+        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno"));
+        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang"));
+        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal"));
+        models.add(new AktivitasFirstModel("test/aktivitas-5.jpg", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang"));
+
+        aktivitasKosong.setAdapter(new AktivitasFirstAdapter(models));
+
+        Collections.shuffle(models);
+
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasKosong, models.size(), R.dimen.card_activity_width_java);
     }
 
     private void adapterSemuaAktivitas() {

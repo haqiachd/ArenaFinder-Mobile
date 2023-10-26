@@ -50,4 +50,5 @@
     <color name="venue_status_bervariasi_bg">#1AA52A2A</color>
     <color name="venue_status_bervariasi">@color/brown</color>
     <color name="textcolor_ratting">#272729</color>
+    <color name="mint_green">#A1FF9F</color>
 </resources>

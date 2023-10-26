@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Fragment Title-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
@@ -53,6 +54,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Recycler Jenis Lapangan-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
@@ -117,6 +119,7 @@
 
             </LinearLayout>
 
+            <!-- Recycler Aktivitas Baru-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,7 +131,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/mho_txt_aktivitas_kosong"
+                        android:id="@+id/mak_txt_aktivitas_baru"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/layout_card_margin_start"
@@ -140,7 +143,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/mho_txt_aktivitas_baru_kosong"
+                        android:id="@+id/mak_txt_aktivitas_baru_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/layout_card_margin_start"
@@ -150,7 +153,7 @@
                         android:textColor="@color/dimgray"
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/mho_txt_aktivitas_kosong" />
+                        app:layout_constraintTop_toBottomOf="@id/mak_txt_aktivitas_baru" />
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
@@ -181,7 +184,7 @@
                         android:orientation="horizontal">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/mho_recycler_aktivitas_kosong"
+                            android:id="@+id/mak_recycler_aktivitas_baru"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/card_venue_recycler_height"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
@@ -191,13 +194,12 @@
                             tools:listitem="@layout/item_aktivitas_first" />
 
                         <include
+                            layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end"
-                            layout="@layout/button_pilih_semua"
                             android:layout_gravity="center_vertical"
-                            />
+                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
 
                     </LinearLayout>
 
@@ -205,6 +207,7 @@
 
             </LinearLayout>
 
+            <!-- Recycler Aktivitas Kosong -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -216,7 +219,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/mho_txt_aktivitas_baru"
+                        android:id="@+id/mak_txt_aktivitas_kosong"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/layout_card_margin_start"
@@ -228,17 +231,17 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/mho_txt_aktivitas_baru_desc"
+                        android:id="@+id/mak_txt_aktivitas_kosong_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/layout_card_margin_start"
                         android:layout_marginTop="@dimen/layout_card_desc_margin_top"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@string/txt_aktivitas_seru_desc"
+                        android:text="@string/txt_aktivitas_kosong_desc"
                         android:textColor="@color/dimgray"
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/mho_txt_aktivitas_baru" />
+                        app:layout_constraintTop_toBottomOf="@id/mak_txt_aktivitas_kosong" />
 
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
@@ -269,7 +272,7 @@
                         android:orientation="horizontal">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/mho_recycler_aktivitas_seru"
+                            android:id="@+id/mak_recycler_aktivitas_kosong"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/card_venue_recycler_height"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
@@ -279,13 +282,12 @@
                             tools:listitem="@layout/item_aktivitas_first" />
 
                         <include
+                            layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end"
-                            layout="@layout/button_pilih_semua"
                             android:layout_gravity="center_vertical"
-                            />
+                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
 
                     </LinearLayout>
 
@@ -293,6 +295,7 @@
 
             </LinearLayout>
 
+            <!-- Recycler Semua Aktivitas-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

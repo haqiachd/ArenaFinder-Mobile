@@ -6,6 +6,9 @@
     <string name="app_page_aktivitas">Aktivitas</string>
     <string name="app_page_referensi">Referensi</string>
     <string name="app_page_profile">Profile</string>
+    <string name="app_appbar_home">Ayo Olahraga!!</string>
+    <string name="app_appbar_aktivitas">Cari Aktivitas Seru!!</string>
+    <string name="app_appbar_referensi">Temukan Lapanganmu!!</string>
 
     <!-- Link -->
     <string name="link_scheme">arenafinder.com</string>
@@ -76,6 +79,7 @@
     <string name="txt_minut">Menit</string>
     <string name="txt_update_otp">Mengirimkan ulang kode OTP</string>
     <string name="txt_jenis_lapangan">Jenis Lapangan</string>
+    <string name="txt_jenis_lapangan_desc">Pilih Jenis Olahraga Favoritmu</string>
     <string name="txt_menu_kegiatan_lapangan">Kegiatan</string>
     <string name="txt_menu_aktivitas_komunitas">Komunitas</string>
     <string name="txt_menu_status_pesanan">Keranjang</string>
@@ -94,11 +98,30 @@
     <string name="txt_buat_kamu">Rekomendasi Untukmu</string>
     <string name="txt_buat_kamu_desc">Rekomendasi Tempat Olahraga Untukmu</string>
     <string name="txt_aktivitas_kelompok_def">Latihan Bersama Sepak Bola TIF Polije Nganjuk</string>
+    <string name="txt_referensi_title">Referensi Tempat Olahraga</string>
+    <string name="txt_filter">Filter</string>
+    <string name="txt_ratting_tertinggi">Ratting Tertinggi</string>
+    <string name="txt_ratting_tertinggi_desc">Tempat Olahraga Dengan Ratting Tertinggi</string>
+    <string name="txt_gratis">Gratis</string>
+    <string name="txt_gratis_desc">Tempat Olahraga Gratis</string>
+    <string name="txt_berbayar">Berbayar</string>
+    <string name="txt_berbayar_desc">Tempat Olahraga Berbayar</string>
+    <string name="txt_disewakan">Disewakan</string>
+    <string name="txt_disewakan_desc">Tempat Olahraga Disewakan</string>
+    <string name="txt_fragment_aktivitas">Aktivitas Penunjang Hidup</string>
+    <string name="txt_semua_aktivitas">Semua Aktivitas</string>
+    <string name="txt_semua_aktivitas_desc">Lihat Semua Aktivitas Olahraga</string>
+    <string name="txt_aktivitas_baru">Aktivitas Baru</string>
+    <string name="txt_aktivitas_baru_desc">Lihat Aktivitas Baru Pada ArenaFinder</string>
+    <string name="txt_aktivitas_kosong">Aktivitas Kosong</string>
+    <string name="txt_aktivitas_kosong_desc">Lihat Aktivitas Olahraga yang Kosong</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
 
     <string name="txt_olahraga_futsal">Futsal</string>
 
+    <string name="alt_appbar_search">Cari data</string>
+    <string name="alt_appbar_notif">Notifikasi</string>
     <string name="alt_bottom_nav_home">Home Icon</string>
     <string name="alt_bottom_nav_device">Device Icon</string>
     <string name="alt_bottom_nav_laporan">Report Icon</string>

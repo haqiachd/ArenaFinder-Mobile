@@ -9,6 +9,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.c2.arenafinder.R;
@@ -18,6 +21,7 @@ import com.c2.arenafinder.ui.fragment.main.ProfileFragment;
 import com.c2.arenafinder.ui.fragment.main.ReferensiFragment;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.material.card.MaterialCardView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,8 +31,15 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     public static BottomNavCustom bottomNav;
 
-    private void initViews() {
+    private TextView txtAppName, txtSearchTitle;
+    private MaterialCardView cardSearch;
+    private ImageView imgNotif;
 
+    private void initViews() {
+        txtAppName = findViewById(R.id.main_appbar_appname);
+        txtSearchTitle = findViewById(R.id.main_appbar_search_txt);
+        cardSearch = findViewById(R.id.main_appbar_search);
+        imgNotif = findViewById(R.id.main_appbar_notif);
     }
 
     @Override
@@ -36,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+
+        String appname = getString(R.string.app_name);
+        SpannableString spannableString = new SpannableString(appname);
+        spannableString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.mint_green)), 5, appname.length(), 0 );
+        txtAppName.setText(spannableString);
 
         bottomNav = new BottomNavCustom(this);
         bottomNav.playAnimation(BottomNavCustom.ITEM_HOME);
@@ -45,16 +61,19 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnItemClickListener(new BottomNavCustom.OnItemListener() {
             @Override
             public void itemHome() {
+                txtSearchTitle.setText(R.string.app_appbar_home);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new HomeFragment(), false);
             }
 
             @Override
             public void itemAktivitas() {
+                txtSearchTitle.setText(R.string.app_appbar_aktivitas);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new AktivitasFragment(), false);
             }
 
             @Override
             public void itemReferensi() {
+                txtSearchTitle.setText(R.string.app_appbar_referensi);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ReferensiFragment(), false);
             }
 

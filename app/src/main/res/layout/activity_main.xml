@@ -30,6 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/main_appbar_appname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -44,12 +45,14 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/main_appbar_search"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 app:cardCornerRadius="@dimen/_50sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/main_appbar_card"
+                app:layout_constraintEnd_toStartOf="@id/main_appbar_notif"
                 app:layout_constraintTop_toTopOf="parent"
                 app:strokeColor="@color/primary_color"
                 app:strokeWidth="@dimen/_1sdp">
@@ -58,24 +61,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp">
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:contentDescription="@string/alt_appbar_search"
                         android:src="@drawable/ic_appbar_main_search" />
 
                     <TextView
+                        android:id="@+id/main_appbar_search_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:ellipsize="end"
+                        android:maxLines="1"
                         android:fontFamily="@font/kanit_semibold"
-                        android:text="Temukan Lapanganmu!!"
+                        android:text="@string/app_appbar_home"
                         android:textColor="@color/primary_color"
                         android:textSize="@dimen/_11ssp" />
 
@@ -89,6 +97,7 @@
                 android:layout_height="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:src="@drawable/ic_appbar_main_notif"
+                android:contentDescription="@string/alt_appbar_notif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/main_appbar_search"
