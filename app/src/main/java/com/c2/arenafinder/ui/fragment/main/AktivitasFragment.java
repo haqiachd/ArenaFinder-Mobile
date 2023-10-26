@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -13,8 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+
+import java.util.ArrayList;
 
 public class AktivitasFragment extends Fragment {
 
@@ -24,8 +29,15 @@ public class AktivitasFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private RecyclerView jenisLapangan;
+    private JenisLapanganAdapter jenisLapanganAdapter;
+
     public AktivitasFragment() {
         // Required empty public constructor
+    }
+
+    public void initViews(View view){
+        jenisLapangan = view.findViewById(R.id.mak_recycler_jenis);
     }
 
     public static AktivitasFragment newInstance(String param1, String param2) {
@@ -56,6 +68,7 @@ public class AktivitasFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initViews(view);
 
         MainActivity.bottomNav.setOnActionAktivitasOnFrame(new Runnable() {
             @Override
@@ -64,6 +77,26 @@ public class AktivitasFragment extends Fragment {
             }
         });
 
-        new Handler().postDelayed(() -> MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_AKTIVITAS), 1500);
+                adapterLapangan();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_AKTIVITAS);
+            }
+
+        }, 1500);
+    }
+
+    private void adapterLapangan() {
+        ArrayList<JenisLapanganModel> lapanganModels = new ArrayList<>();
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_badminton, "Bulu Tangkis"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
+
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels);
+        jenisLapangan.setAdapter(lapanganAdapter);
+
     }
 }
