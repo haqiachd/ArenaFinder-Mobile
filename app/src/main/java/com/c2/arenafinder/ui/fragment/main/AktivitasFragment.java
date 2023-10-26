@@ -14,8 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.model.AktivitasThirdModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.adapter.AktivitasThirdAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 
@@ -29,15 +31,16 @@ public class AktivitasFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView jenisLapangan;
+    private RecyclerView jenisLapangan, semuaAktivitasRecycler;
     private JenisLapanganAdapter jenisLapanganAdapter;
 
     public AktivitasFragment() {
         // Required empty public constructor
     }
 
-    public void initViews(View view){
+    public void initViews(View view) {
         jenisLapangan = view.findViewById(R.id.mak_recycler_jenis);
+        semuaAktivitasRecycler = view.findViewById(R.id.mak_recycler_semua);
     }
 
     public static AktivitasFragment newInstance(String param1, String param2) {
@@ -77,7 +80,8 @@ public class AktivitasFragment extends Fragment {
             }
         });
 
-                adapterLapangan();
+        adapterLapangan();
+        adapterSemuaAktivitas();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -97,6 +101,32 @@ public class AktivitasFragment extends Fragment {
 
         JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels);
         jenisLapangan.setAdapter(lapanganAdapter);
+
+    }
+
+    private void adapterSemuaAktivitas() {
+        ArrayList<AktivitasThirdModel> models = new ArrayList<>();
+
+        models.add(
+                new AktivitasThirdModel("test/aktivitas-1.png", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang", "-", "-")
+        );
+        models.add(
+                new AktivitasThirdModel("test/aktivitas-2.png", "Latihan Bersama Bulu Tangkis Klub \"Rajawali\" Nganjuk", "GOR Bung Karno", "-", "-")
+        );
+        models.add(
+                new AktivitasThirdModel("test/aktivitas-3.jpg", "Turnamen Futsal Pelajar SMP Negeri 2 Nganjuk", "Blessing Futasl", "-", "-")
+        );
+        models.add(
+                new AktivitasThirdModel("test/aktivitas-5.jpg", "Turnamen Bulu Tangkis Kota Nganjuk", "GOR Bulutangkis Bhayangkara", "-", "-")
+        );
+        models.add(
+                new AktivitasThirdModel("test/aktivitas-6.jpg", "Pelatihan Renang Kelompok Muda Kura-Kura", "Stadion Anjuk Ladang", "-", "-")
+        );
+        models.add(
+                new AktivitasThirdModel("test/aktivitas-7.jpg", "Kompetisi Lari Jarak Jauh Perkumpulan Lari Cepat", "Kolam Renang Sumber Laut", "-", "-")
+        );
+
+        semuaAktivitasRecycler.setAdapter(new AktivitasThirdAdapter(models));
 
     }
 }

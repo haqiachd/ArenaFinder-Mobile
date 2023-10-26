@@ -7,7 +7,7 @@
     android:background="@color/background_light"
     tools:context=".ui.fragment.main.AktivitasFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -117,8 +117,70 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/mak_txt_ratting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/layout_card_margin_start"
+                        android:fontFamily="@font/kanit_medium"
+                        android:text="@string/txt_aktivitas_seru"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/layout_card_title_textsize"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/mak_txt_ratting_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/layout_card_margin_start"
+                        android:layout_marginTop="@dimen/layout_card_desc_margin_top"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/txt_semua_aktivitas_desc"
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/layout_card_desc_textsize"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mak_txt_ratting" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/layout_card_button_height"
+                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
+                        android:backgroundTint="@color/button_semua_background"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/btn_lihat_semua"
+                        android:textAllCaps="false"
+                        android:textColor="@color/button_semua_textcolor"
+                        android:textSize="@dimen/layout_card_button_textsize"
+                        app:cornerRadius="@dimen/layout_card_button_radius"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mak_recycler_semua"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/recycler_venue_margin_top"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_aktivitas_thrid" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
