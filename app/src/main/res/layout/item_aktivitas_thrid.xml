@@ -5,8 +5,11 @@
     android:layout_height="@dimen/_230sdp"
     android:layout_marginStart="@dimen/_15sdp"
     android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
     android:layout_marginEnd="@dimen/_15sdp"
-    app:cardCornerRadius="@dimen/_20sdp">
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:strokeColor="@color/stroke_card_venue"
+    app:strokeWidth="@dimen/card_venue_stroke">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -49,7 +52,7 @@
                 android:fontFamily="@font/kanit_medium"
                 android:text="@string/txt_aktivitas_kelompok_def"
                 android:textColor="@color/primary_color"
-                android:textSize="@dimen/_13sdp" />
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/iat_aktivitas_venue"
