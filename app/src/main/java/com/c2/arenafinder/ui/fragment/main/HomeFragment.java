@@ -29,15 +29,18 @@ import com.c2.arenafinder.data.model.AktivitasFirstModel;
 import com.c2.arenafinder.data.model.HomeInfoModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
+import com.c2.arenafinder.data.model.VenueSecondModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.HomeInfoAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
+import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class HomeFragment extends Fragment {
@@ -62,6 +65,9 @@ public class HomeFragment extends Fragment {
     private VenueFirstAdapter buatKamuAdapter;
     private AktivitasFirstAdapter aktivitasAdapter;
     private VenueFirstAdapter venueTerdekatAdapter;
+
+    private ArrayList<VenueSecondModel> secondModels;
+    private VenueSecondAdapter secondAdapter;
 
     ArrayList<HomeInfoModel> homeInfoModels;
 
@@ -133,6 +139,7 @@ public class HomeFragment extends Fragment {
         aktivitasAdapter();
         venueTerdekatData();
         adapterLapangan();
+        showSecond();
         LogApp.info(requireContext(), "test 2");
 
 
@@ -185,6 +192,44 @@ public class HomeFragment extends Fragment {
 
         LogApp.info(requireContext(), "test 6");
         pagerAction();
+
+    }
+
+    private void showSecond(){
+
+        secondModels = new ArrayList<>();
+        secondModels.add(new VenueSecondModel(
+                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                "Disewakan", "4 Slot Kosong", "Rp. 275.000 / Sesi"
+        ));
+        secondModels.add(new VenueSecondModel(
+                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                "Gratis", "Tidak Perlu Bayar", "Tidak perlu bayar"
+        ));
+        secondModels.add(new VenueSecondModel(
+                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                "Disewakan",  "12 Slot Kosong", "Rp. 90.000 / Sesi"
+        ));
+        secondModels.add(new VenueSecondModel(
+                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                "Berbayar", "Buka Jam 07:00-23:00", "Mulai dari Rp. 50.000"
+        ));
+        secondModels.add(new VenueSecondModel(
+                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                "Bervariasi", "Harga Bervariasi", "Harga Bervariasi"
+        ));
+        secondModels.add(new VenueSecondModel(
+                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                "Gratis", "Hari Ini Buka", "Tidak perlu bayar"
+        ));
+
+        Collections.shuffle(secondModels);
+
+        secondAdapter = new VenueSecondAdapter(requireContext(), secondModels);
+
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, secondModels.size(), R.dimen.card_venue_second_width_java);
+
+        buatKamuRecycler.setAdapter(secondAdapter);
 
     }
 

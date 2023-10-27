@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Home Info-->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mho_top"
                 android:layout_width="match_parent"
@@ -62,7 +63,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="center"
-                            android:text="N/A"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11ssp" />
 
@@ -72,8 +73,8 @@
                         android:id="@+id/mho_dots"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="@dimen/_3sdp"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -82,6 +83,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Home Menu -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp"
@@ -247,6 +249,7 @@
 
             </LinearLayout>
 
+            <!-- Jenis Lapangan -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
@@ -277,6 +280,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Venue Baru -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -363,6 +367,7 @@
 
             </LinearLayout>
 
+            <!-- Venue Rekomendasi-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -429,12 +434,12 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mho_recycler_venue_baru"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_recycler_height"
+                            android:layout_height="@dimen/_208sdp"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
                             android:layout_marginTop="@dimen/recycler_venue_margin_top"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_venue_first" />
+                            tools:listitem="@layout/item_venue_second" />
 
                         <include
                             layout="@layout/button_pilih_semua"
@@ -450,6 +455,7 @@
 
             </LinearLayout>
 
+            <!-- Aktivitas Seru -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -537,6 +543,7 @@
 
             </LinearLayout>
 
+            <!-- Venue Terdekat-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -644,8 +651,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20sdp" />
-
+                android:layout_height="@dimen/_20sdp"
+                tools:ignore="UselessLeaf" />
         </LinearLayout>
 
 
