@@ -17,30 +17,70 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mho_top"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="@dimen/_165sdp"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
+                android:elevation="0dp"
+                app:cardCornerRadius="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.cardview.widget.CardView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_165sdp"
-                    android:layout_marginStart="@dimen/_13sdp"
-                    android:layout_marginTop="@dimen/_13sdp"
-                    android:layout_marginEnd="@dimen/_13sdp"
-                    app:cardCornerRadius="@dimen/_13sdp">
+                    android:layout_height="match_parent">
 
-                    <ImageView
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/mho_top_education"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="@string/alt_gambar"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_home_viewpager_test" />
+                        android:background="@color/primary_color"
+                        android:nestedScrollingEnabled="true"
+                        android:visibility="visible" />
 
-                </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/mho_top_edu_card"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:alpha="0.9"
+                        android:backgroundTint="@color/white"
+                        android:elevation="@dimen/_1sdp"
+                        app:cardCornerRadius="@dimen/_50sdp"
+                        app:cardMaxElevation="@dimen/_5sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
 
+                        <TextView
+                            android:id="@+id/mho_top_edu_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center"
+                            android:text="N/A"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp" />
 
-            </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:id="@+id/mho_dots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -309,14 +349,13 @@
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/item_venue_first" />
 
-                            <include
-                                android:layout_width="@dimen/layout_button_all_size"
-                                android:layout_height="@dimen/layout_button_all_size"
-                                android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                                android:layout_marginEnd="@dimen/layout_button_all_margin_end"
-                                layout="@layout/button_pilih_semua"
-                                android:layout_gravity="center_vertical"
-                                />
+                        <include
+                            layout="@layout/button_pilih_semua"
+                            android:layout_width="@dimen/layout_button_all_size"
+                            android:layout_height="@dimen/layout_button_all_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
 
                     </LinearLayout>
 
@@ -398,13 +437,12 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end"
-                            layout="@layout/button_pilih_semua"
                             android:layout_gravity="center_vertical"
-                            />
+                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
 
                     </LinearLayout>
 
@@ -486,13 +524,12 @@
                             tools:listitem="@layout/item_aktivitas_first" />
 
                         <include
+                            layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end"
-                            layout="@layout/button_pilih_semua"
                             android:layout_gravity="center_vertical"
-                            />
+                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
 
                     </LinearLayout>
 
@@ -555,27 +592,25 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_170sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    >
+                    app:cardCornerRadius="@dimen/_10sdp">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_home_map_test"
-                        android:scaleType="centerCrop"
                         android:contentDescription="@string/alt_bottom_nav_profile"
-                        />
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_home_map_test" />
 
                 </androidx.cardview.widget.CardView>
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:nestedScrollingEnabled="true"
                     android:scrollbars="none">
 
                     <LinearLayout
@@ -594,13 +629,12 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end"
-                            layout="@layout/button_pilih_semua"
                             android:layout_gravity="center_vertical"
-                            />
+                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
 
                     </LinearLayout>
 

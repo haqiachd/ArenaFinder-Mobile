@@ -1,12 +1,16 @@
 package com.c2.arenafinder.ui.fragment.main;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -14,16 +18,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasFirstModel;
+import com.c2.arenafinder.data.model.HomeInfoModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
+import com.c2.arenafinder.ui.adapter.HomeInfoAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
@@ -47,12 +55,18 @@ public class HomeFragment extends Fragment {
     private ArrayList<VenueFirstModel> buatKamuModels;
     private ArrayList<AktivitasFirstModel> aktivitasModels;
     private ArrayList<VenueFirstModel> venueTerdekat;
+    private ArrayList<TextView> dots;
 
     private JenisLapanganAdapter lapanganAdapter;
     private VenueFirstAdapter venueBaruAdapter;
     private VenueFirstAdapter buatKamuAdapter;
     private AktivitasFirstAdapter aktivitasAdapter;
     private VenueFirstAdapter venueTerdekatAdapter;
+
+    ArrayList<HomeInfoModel> homeInfoModels;
+
+    private ViewPager2 homeInfoPager;
+    private LinearLayout homeDots;
 
     private ScrollView scrollView;
     private RecyclerView jenisLapangan, venueBaruRecycler, buatKamuRecycler, aktivitasRecycler, venueTerdekatRecycler;
@@ -70,6 +84,8 @@ public class HomeFragment extends Fragment {
         buatKamuRecycler = view.findViewById(R.id.mho_recycler_venue_baru);
         aktivitasRecycler = view.findViewById(R.id.mho_recycler_aktivitas_seru);
         venueTerdekatRecycler = view.findViewById(R.id.mho_recycler_venue_terdekat);
+        homeInfoPager = view.findViewById(R.id.mho_top_education);
+        homeDots = view.findViewById(R.id.mho_dots);
     }
 
     public static HomeFragment newInstance(String param1, String param2) {
@@ -103,7 +119,7 @@ public class HomeFragment extends Fragment {
 //        MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_HOME);
 //    }
 
-        @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         LogApp.info(requireContext(), "first");
@@ -160,6 +176,7 @@ public class HomeFragment extends Fragment {
         });
 
         LogApp.info(requireContext(), "test 5");
+        showPager();
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_HOME);
@@ -167,6 +184,59 @@ public class HomeFragment extends Fragment {
         }, 100);
 
         LogApp.info(requireContext(), "test 6");
+        pagerAction();
+
+    }
+
+    private void showPager() {
+        homeInfoModels = new ArrayList<>();
+        homeInfoModels.add(new HomeInfoModel("test/ic_home_viewpager_test.png", ""));
+        homeInfoModels.add(new HomeInfoModel("test/venue-1.png", ""));
+        homeInfoModels.add(new HomeInfoModel("test/venue-2.png", ""));
+        homeInfoModels.add(new HomeInfoModel("test/venue-3.png", ""));
+        HomeInfoAdapter infoAdapter = new HomeInfoAdapter(homeInfoModels);
+
+        homeInfoPager.setAdapter(infoAdapter);
+        dots = new ArrayList<>();
+        addDotsTextView();
+    }
+
+    private void addDotsTextView() {
+        Typeface typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold);
+        // add dots sesuai jumlah gambar
+        for (int i = 0; i < homeInfoModels.size(); i++){
+            dots.add(new TextView(requireActivity()));
+            dots.get(i).setText("•");
+            dots.get(i).setTextSize(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._10sdp));
+            dots.get(i).setTypeface(typeface);
+            dots.get(i).setPadding(0, 0, 3, 0);
+            homeDots.addView(dots.get(i));
+        }
+    }
+
+    private void setSelectedColor(int posisi){
+        for (int i = 0; i < dots.size(); i++){
+            if (i == posisi){
+                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.whero_purple));
+            }else {
+                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.gray));
+            }
+        }
+    }
+
+    private void changePosisi(int posisi){
+        homeInfoPager.setCurrentItem(posisi);
+        setSelectedColor(posisi);
+    }
+
+    private void pagerAction(){
+
+        homeInfoPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                changePosisi(position);
+            }
+        });
 
     }
 
