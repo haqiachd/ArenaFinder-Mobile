@@ -122,7 +122,7 @@ public class AktivitasFragment extends Fragment {
 
         Collections.shuffle(models);
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaru, models.size(), R.dimen.card_activity_width_java);
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaru, models.size(), R.dimen.card_activity_first_width_java);
     }
 
     private void adapterKosong(){
@@ -135,32 +135,34 @@ public class AktivitasFragment extends Fragment {
 
         Collections.shuffle(models);
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasKosong, models.size(), R.dimen.card_activity_width_java);
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasKosong, models.size(), R.dimen.card_activity_first_width_java);
     }
 
     private void adapterSemuaAktivitas() {
         ArrayList<AktivitasThirdModel> models = new ArrayList<>();
 
         models.add(
-                new AktivitasThirdModel("test/aktivitas-1.png", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang", "-", "-")
+                new AktivitasThirdModel("test/aktivitas-1.png", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang", 2, 10, "30 Oktober 2023", "07:00 - 08:00", 12000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-2.png", "Latihan Bersama Bulu Tangkis Klub \"Rajawali\" Nganjuk", "GOR Bung Karno", "-", "-")
+                new AktivitasThirdModel("test/aktivitas-2.png", "Latihan Bersama Bulu Tangkis Klub \"Rajawali\" Nganjuk", "GOR Bung Karno", 5, 26, "01 November 2023", "20:00 - 22:00", 24000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-3.jpg", "Turnamen Futsal Pelajar SMP Negeri 2 Nganjuk", "Blessing Futasl", "-", "-")
+                new AktivitasThirdModel("test/aktivitas-3.jpg", "Turnamen Futsal Pelajar SMP Negeri 2 Nganjuk", "Blessing Futasl", 7, 13, "01 November 2023", "17:00 - 18:00", 30000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-5.jpg", "Turnamen Bulu Tangkis Kota Nganjuk", "GOR Bulutangkis Bhayangkara", "-", "-")
+                new AktivitasThirdModel("test/aktivitas-5.jpg", "Turnamen Bulu Tangkis Kota Nganjuk", "GOR Bulutangkis Bhayangkara", 12, 14, "02 November 2023", "10:00 - 18:00", 10000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-6.jpg", "Pelatihan Renang Kelompok Muda Kura-Kura", "Stadion Anjuk Ladang", "-", "-")
+                new AktivitasThirdModel("test/aktivitas-6.jpg", "Pelatihan Renang Kelompok Muda Kura-Kura", "Stadion Anjuk Ladang", 9, 13, "10 November 2023", "12:00 - 15:30", 15000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-7.jpg", "Kompetisi Lari Jarak Jauh Perkumpulan Lari Cepat", "Kolam Renang Sumber Laut", "-", "-")
+                new AktivitasThirdModel("test/aktivitas-7.jpg", "Kompetisi Lari Jarak Jauh Perkumpulan Lari Cepat", "Kolam Renang Sumber Laut", 9, 15, "03 November 2023", "12:00 - 16:00", 10000)
         );
 
-        semuaAktivitasRecycler.setAdapter(new AktivitasThirdAdapter(models));
+        Collections.shuffle(models);
+
+        semuaAktivitasRecycler.setAdapter(new AktivitasThirdAdapter(requireContext(), models));
 
     }
 }

@@ -8,16 +8,25 @@ public class AktivitasThirdModel {
 
     private String venue;
 
-    private String jadwal;
+    private String tanggal;
 
-    private String anggota;
+    private String time;
 
-    public AktivitasThirdModel(String aktivitasImage, String name, String venue, String jadwal, String anggota) {
+    private int anggota;
+
+    private int anggotaMax;
+
+    private int price;
+
+    public AktivitasThirdModel(String aktivitasImage, String name, String venue, int anggota, int anggotaMax, String tanggal, String time, int price) {
         this.image = aktivitasImage;
         this.name = name;
         this.venue = venue;
-        this.jadwal = jadwal;
+        this.tanggal = tanggal;
+        this.time = time;
         this.anggota = anggota;
+        this.anggotaMax = anggotaMax;
+        this.price = price;
     }
 
 
@@ -45,19 +54,39 @@ public class AktivitasThirdModel {
         this.name = name;
     }
 
-    public String getJadwal() {
-        return jadwal;
+    public String getTanggal() {
+        return tanggal;
     }
 
-    public void setJadwal(String jadwal) {
-        this.jadwal = jadwal;
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
-    public String getAnggota() {
+    public int getAnggota() {
         return anggota;
     }
 
-    public void setAnggota(String anggota) {
+    public int getAnggotaMax(){
+        return anggotaMax;
+    }
+
+    public void setAnggota(int anggota) {
         this.anggota = anggota;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

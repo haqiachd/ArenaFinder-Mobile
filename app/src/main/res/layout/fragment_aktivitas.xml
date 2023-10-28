@@ -186,7 +186,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mak_recycler_aktivitas_baru"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_recycler_height"
+                            android:layout_height="@dimen/card_activity_first_height_recycler"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
                             android:layout_marginTop="@dimen/recycler_venue_margin_top"
                             android:orientation="horizontal"
@@ -274,7 +274,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mak_recycler_aktivitas_kosong"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_recycler_height"
+                            android:layout_height="@dimen/card_activity_first_height_recycler"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
                             android:layout_marginTop="@dimen/recycler_venue_margin_top"
                             android:orientation="horizontal"

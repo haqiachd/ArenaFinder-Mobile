@@ -89,6 +89,7 @@
     <dimen name="card_activity_width">@dimen/_195sdp</dimen>
     <dimen name="card_activity_width_java">@dimen/_203sdp</dimen>
     <dimen name="card_activity_first_width_java">@dimen/_252sdp</dimen>
+    <dimen name="card_activity_first_height_recycler">@dimen/_210sdp</dimen>
     <dimen name="card_venue_second_width_java">@dimen/_232sdp</dimen>
     <dimen name="card_venue_third_width_java">@dimen/_197sdp</dimen>
 

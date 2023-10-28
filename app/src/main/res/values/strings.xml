@@ -119,6 +119,9 @@
     <string name="txt_aktivitas_anggota">12/30 Anggota</string>
     <string name="txt_aktivitas_tgl">10 Oktober 2023</string>
     <string name="txt_aktivitas_anggota_value">%1$d/%2$d Anggota</string>
+    <string name="txt_aktivitas_price">Rp. 15.0000 / Orang</string>
+    <string name="txt_aktivitas_time">07:00 – 10:20</string>
+    <string name="txt_aktivitas_price_value">Rp. %1$s / Orang</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
 
