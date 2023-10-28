@@ -13,17 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.model.AktivitasThirdModel;
+import com.c2.arenafinder.data.model.AktivitasSecondModel;
 
 import java.util.ArrayList;
 
-public class AktivitasThirdAdapter extends RecyclerView.Adapter<AktivitasThirdAdapter.ViewHolder> {
+public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecondAdapter.ViewHolder> {
 
     private final Context context;
 
-    private final ArrayList<AktivitasThirdModel> models;
+    private final ArrayList<AktivitasSecondModel> models;
 
-    public AktivitasThirdAdapter(Context context, ArrayList<AktivitasThirdModel> models){
+    public AktivitasSecondAdapter(Context context, ArrayList<AktivitasSecondModel> models){
         this.context = context;
         this.models = models;
     }
@@ -33,13 +33,13 @@ public class AktivitasThirdAdapter extends RecyclerView.Adapter<AktivitasThirdAd
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_aktivitas_thrid, parent, false)
+                        .inflate(R.layout.item_aktivitas_second, parent, false)
         );
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        AktivitasThirdModel model = models.get(position);
+        AktivitasSecondModel model = models.get(position);
 
         holder.setImage(model.getImage());
         holder.txtNamaAktivitas.setText(model.getName());
@@ -68,13 +68,13 @@ public class AktivitasThirdAdapter extends RecyclerView.Adapter<AktivitasThirdAd
             super(view);
             this.view = view;
 
-            this.imgAktivitas = view.findViewById(R.id.iat_aktivitas_image);
-            this.txtNamaAktivitas = view.findViewById(R.id.iat_aktivitas_name);
-            this.txtVenueAktivitas = view.findViewById(R.id.iat_aktivitas_venue);
-            this.txtAnggotaAktivitas = view.findViewById(R.id.iat_aktivitas_member);
-            this.txtTanggalAktivitas = view.findViewById(R.id.iat_aktivitas_tgl);
-            this.txtTimeAktivitas = view.findViewById(R.id.iat_aktivitas_time);
-            this.txtHargaAktivitas = view.findViewById(R.id.iat_aktivitas_price_value);
+            this.imgAktivitas = view.findViewById(R.id.ias_aktivitas_image);
+            this.txtNamaAktivitas = view.findViewById(R.id.ias_aktivitas_name);
+            this.txtVenueAktivitas = view.findViewById(R.id.ias_aktivitas_venue);
+            this.txtAnggotaAktivitas = view.findViewById(R.id.ias_aktivitas_member);
+            this.txtTanggalAktivitas = view.findViewById(R.id.ias_aktivitas_tgl);
+            this.txtTimeAktivitas = view.findViewById(R.id.ias_aktivitas_time);
+            this.txtHargaAktivitas = view.findViewById(R.id.ias_aktivitas_price_value);
         }
 
         private void setImage(String uri){

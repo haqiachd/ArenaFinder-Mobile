@@ -354,7 +354,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/recycler_venue_margin_top"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_aktivitas_thrid" />
+                    tools:listitem="@layout/item_aktivitas_second" />
 
             </LinearLayout>
 

@@ -1,6 +1,6 @@
 package com.c2.arenafinder.data.model;
 
-public class AktivitasThirdModel {
+public class AktivitasSecondModel {
 
     private String image;
 
@@ -18,7 +18,7 @@ public class AktivitasThirdModel {
 
     private int price;
 
-    public AktivitasThirdModel(String aktivitasImage, String name, String venue, int anggota, int anggotaMax, String tanggal, String time, int price) {
+    public AktivitasSecondModel(String aktivitasImage, String name, String venue, int anggota, int anggotaMax, String tanggal, String time, int price) {
         this.image = aktivitasImage;
         this.name = name;
         this.venue = venue;

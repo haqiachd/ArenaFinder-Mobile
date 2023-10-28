@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.model.AktivitasFirstModel;
-import com.c2.arenafinder.data.model.AktivitasThirdModel;
+import com.c2.arenafinder.data.model.AktivitasSecondModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
-import com.c2.arenafinder.ui.adapter.AktivitasThirdAdapter;
+import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
@@ -139,30 +139,30 @@ public class AktivitasFragment extends Fragment {
     }
 
     private void adapterSemuaAktivitas() {
-        ArrayList<AktivitasThirdModel> models = new ArrayList<>();
+        ArrayList<AktivitasSecondModel> models = new ArrayList<>();
 
         models.add(
-                new AktivitasThirdModel("test/aktivitas-1.png", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang", 2, 10, "30 Oktober 2023", "07:00 - 08:00", 12000)
+                new AktivitasSecondModel("test/aktivitas-1.png", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang", 2, 10, "30 Oktober 2023", "07:00 - 08:00", 12000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-2.png", "Latihan Bersama Bulu Tangkis Klub \"Rajawali\" Nganjuk", "GOR Bung Karno", 5, 26, "01 November 2023", "20:00 - 22:00", 24000)
+                new AktivitasSecondModel("test/aktivitas-2.png", "Latihan Bersama Bulu Tangkis Klub \"Rajawali\" Nganjuk", "GOR Bung Karno", 5, 26, "01 November 2023", "20:00 - 22:00", 24000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-3.jpg", "Turnamen Futsal Pelajar SMP Negeri 2 Nganjuk", "Blessing Futasl", 7, 13, "01 November 2023", "17:00 - 18:00", 30000)
+                new AktivitasSecondModel("test/aktivitas-3.jpg", "Turnamen Futsal Pelajar SMP Negeri 2 Nganjuk", "Blessing Futasl", 7, 13, "01 November 2023", "17:00 - 18:00", 30000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-5.jpg", "Turnamen Bulu Tangkis Kota Nganjuk", "GOR Bulutangkis Bhayangkara", 12, 14, "02 November 2023", "10:00 - 18:00", 10000)
+                new AktivitasSecondModel("test/aktivitas-5.jpg", "Turnamen Bulu Tangkis Kota Nganjuk", "GOR Bulutangkis Bhayangkara", 12, 14, "02 November 2023", "10:00 - 18:00", 10000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-6.jpg", "Pelatihan Renang Kelompok Muda Kura-Kura", "Stadion Anjuk Ladang", 9, 13, "10 November 2023", "12:00 - 15:30", 15000)
+                new AktivitasSecondModel("test/aktivitas-6.jpg", "Pelatihan Renang Kelompok Muda Kura-Kura", "Stadion Anjuk Ladang", 9, 13, "10 November 2023", "12:00 - 15:30", 15000)
         );
         models.add(
-                new AktivitasThirdModel("test/aktivitas-7.jpg", "Kompetisi Lari Jarak Jauh Perkumpulan Lari Cepat", "Kolam Renang Sumber Laut", 9, 15, "03 November 2023", "12:00 - 16:00", 10000)
+                new AktivitasSecondModel("test/aktivitas-7.jpg", "Kompetisi Lari Jarak Jauh Perkumpulan Lari Cepat", "Kolam Renang Sumber Laut", 9, 15, "03 November 2023", "12:00 - 16:00", 10000)
         );
 
         Collections.shuffle(models);
 
-        semuaAktivitasRecycler.setAdapter(new AktivitasThirdAdapter(requireContext(), models));
+        semuaAktivitasRecycler.setAdapter(new AktivitasSecondAdapter(requireContext(), models));
 
     }
 }
