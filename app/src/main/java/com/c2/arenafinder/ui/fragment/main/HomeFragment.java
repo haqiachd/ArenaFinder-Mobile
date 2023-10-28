@@ -30,12 +30,14 @@ import com.c2.arenafinder.data.model.HomeInfoModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.data.model.VenueSecondModel;
+import com.c2.arenafinder.data.model.VenueThirdModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.HomeInfoAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
+import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 
@@ -137,9 +139,10 @@ public class HomeFragment extends Fragment {
         veneuBaruData();
         buatkamuData();
         aktivitasAdapter();
-        venueTerdekatData();
         adapterLapangan();
         showSecond();
+        venueTerdekatData();
+        venueTerdekatDataNew();
         LogApp.info(requireContext(), "test 2");
 
 
@@ -412,6 +415,40 @@ public class HomeFragment extends Fragment {
         venueTerdekatRecycler.setAdapter(venueTerdekatAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, venueBaruModels.size(), R.dimen.card_venue_width_java);
+    }
+
+    private void venueTerdekatDataNew() {
+        ArrayList<VenueThirdModel> models = new ArrayList<>();
+        models.add(new VenueThirdModel(
+                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                "Berbayar", "Mulai dari Rp. 50.000"
+        ));
+        models.add(new VenueThirdModel(
+                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                "Gratis", "Tidak perlu bayar"
+        ));
+        models.add(new VenueThirdModel(
+                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                "Disewakan", "Rp. 90.000 / Sesi"
+        ));
+        models.add(new VenueThirdModel(
+                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                "Bervariasi", "Harga Bervariasi"
+        ));
+        models.add(new VenueThirdModel(
+                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                "Disewakan", "Rp. 275.000 / Sesi"
+        ));
+        models.add(new VenueThirdModel(
+                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                "Gratis", "Tidak perlu bayar"
+        ));
+
+
+        VenueThirdAdapter thirdAdapter = new VenueThirdAdapter(requireContext(), models);
+        venueTerdekatRecycler.setAdapter(thirdAdapter);
+
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
     }
 
 }
