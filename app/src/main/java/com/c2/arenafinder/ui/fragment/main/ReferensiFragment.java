@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.fragment.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,12 +21,14 @@ import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.data.model.VenueSecondModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
+import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
@@ -188,7 +191,18 @@ public class ReferensiFragment extends Fragment {
 
         Collections.shuffle(venueKosongModels);
 
-        VenueSecondAdapter venueKosongAdapter = new VenueSecondAdapter(requireContext(), venueKosongModels);
+        VenueSecondAdapter venueKosongAdapter = new VenueSecondAdapter(requireContext(), venueKosongModels, new AdapterActionListener() {
+            @Override
+            public void onClickListener(int position) {
+                Toast.makeText(requireContext(), venueKosongModels.get(position).getVenueName(), Toast.LENGTH_SHORT).show();
+                startActivity(
+                        new Intent(requireActivity(), DetailedActivity.class)
+                                .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                .putExtra(DetailedActivity.ID, venueKosongModels.get(position).getVenueName())
+                );
+            }
+        });
+
         buatKamuRecycler.setAdapter(venueKosongAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, venueKosongModels.size(), R.dimen.card_venue_second_width_java);

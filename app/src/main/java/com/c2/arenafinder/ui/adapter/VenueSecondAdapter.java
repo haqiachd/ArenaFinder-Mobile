@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.VenueSecondModel;
+import com.c2.arenafinder.util.AdapterActionListener;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -26,9 +27,12 @@ public class VenueSecondAdapter extends RecyclerView.Adapter<VenueSecondAdapter.
 
     private final ArrayList<VenueSecondModel> models;
 
-    public VenueSecondAdapter(Context context, ArrayList<VenueSecondModel> models){
+    private final AdapterActionListener listener;
+
+    public VenueSecondAdapter(Context context, ArrayList<VenueSecondModel> models, AdapterActionListener listener){
         this.context = context;
         this.models = models;
+        this.listener = listener;
     }
 
     @NonNull
@@ -71,6 +75,13 @@ public class VenueSecondAdapter extends RecyclerView.Adapter<VenueSecondAdapter.
                 holder.setStatusColor(context, R.drawable.bg_venue_status_variasi, R.color.venue_status_bervariasi);
                 break;
             }
+        }
+
+        // action listener
+        if (holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+            holder.itemView.setOnClickListener(v -> {
+                listener.onClickListener(position);
+            });
         }
 
     }

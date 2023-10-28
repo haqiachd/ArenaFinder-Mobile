@@ -39,6 +39,7 @@ import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
@@ -175,9 +176,9 @@ public class HomeFragment extends Fragment {
                 if (currentScroll < 400) {
                     MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
                 } else if (currentScroll < 700) {
-                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
+//                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
                 } else if (currentScroll < 2100) {
-                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
+//                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
                 } else {
                     MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
                 }
@@ -228,7 +229,12 @@ public class HomeFragment extends Fragment {
 
         Collections.shuffle(secondModels);
 
-        secondAdapter = new VenueSecondAdapter(requireContext(), secondModels);
+        secondAdapter = new VenueSecondAdapter(requireContext(), secondModels, new AdapterActionListener() {
+            @Override
+            public void onClickListener(int position) {
+                AdapterActionListener.super.onClickListener(position);
+            }
+        });
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, secondModels.size(), R.dimen.card_venue_second_width_java);
 
