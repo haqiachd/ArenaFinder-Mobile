@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,12 @@ import java.util.ArrayList;
 
 public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAdapter.ViewHolder> {
 
+    private final Context context;
+
     private final ArrayList<AktivitasFirstModel> models;
 
-    public AktivitasFirstAdapter(ArrayList<AktivitasFirstModel> models){
+    public AktivitasFirstAdapter(Context context, ArrayList<AktivitasFirstModel> models){
+        this.context = context;
         this.models = models;
     }
 
@@ -42,6 +46,8 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
         // show data
         holder.txtNama.setText(aktivitasModel.getAktivitasName());
         holder.txtVenue.setText(aktivitasModel.getAktivitasVenue());
+        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, aktivitasModel.getAktivitasAnggota(), aktivitasModel.getAktivitasAnggotaMax()));
+        holder.txtTanggal.setText(aktivitasModel.getAktivitasTanggal());
         holder.setAktivitasImage(aktivitasModel.getAktivitasImage());
 
     }
@@ -57,7 +63,7 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
 
         private final ImageView aktivitasImage;
 
-        private final TextView txtNama, txtVenue;
+        private final TextView txtNama, txtVenue, txtAnggota, txtTanggal;
 
         public ViewHolder(View view){
             super(view);
@@ -66,6 +72,8 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
             aktivitasImage = view.findViewById(R.id.iaf_aktivitas_image);
             txtNama = view.findViewById(R.id.iaf_aktivitas_name);
             txtVenue = view.findViewById(R.id.iaf_aktivitas_venue);
+            txtAnggota = view.findViewById(R.id.iaf_aktivitas_member);
+            txtTanggal = view.findViewById(R.id.iaf_aktivitas_tgl);
         }
 
         public void setAktivitasImage(String url){
