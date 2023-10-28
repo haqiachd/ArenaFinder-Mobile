@@ -114,12 +114,11 @@ public class AktivitasFragment extends Fragment {
 
     private void adapterBaru(){
         ArrayList<AktivitasFirstModel> models = new ArrayList<>();
-        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno"));
-        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang"));
-        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal"));
-        models.add(new AktivitasFirstModel("test/aktivitas-5.jpg", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang"));
+        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno", 3, 10, "30 Oktober 2023"));
+        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang", 4, 12, "29 Oktober 2023"));
+        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
 
-        aktivitasBaru.setAdapter(new AktivitasFirstAdapter(models));
+        aktivitasBaru.setAdapter(new AktivitasFirstAdapter(requireContext(), models));
 
         Collections.shuffle(models);
 
@@ -128,12 +127,11 @@ public class AktivitasFragment extends Fragment {
 
     private void adapterKosong(){
         ArrayList<AktivitasFirstModel> models = new ArrayList<>();
-        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno"));
-        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang"));
-        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal"));
-        models.add(new AktivitasFirstModel("test/aktivitas-5.jpg", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang"));
+        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno", 3, 10, "30 Oktober 2023"));
+        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang ", 4, 12, "29 Oktober 2023"));
+        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
 
-        aktivitasKosong.setAdapter(new AktivitasFirstAdapter(models));
+        aktivitasKosong.setAdapter(new AktivitasFirstAdapter(requireContext(), models));
 
         Collections.shuffle(models);
 

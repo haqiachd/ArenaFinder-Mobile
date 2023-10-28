@@ -372,14 +372,16 @@ public class HomeFragment extends Fragment {
 
     private void aktivitasAdapter() {
         aktivitasModels = new ArrayList<>();
-        aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno"));
-        aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang"));
-        aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal"));
+        aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno", 3, 10, "30 Oktober 2023"));
+        aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang", 4, 12, "29 Oktober 2023"));
+        aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
 
-        aktivitasAdapter = new AktivitasFirstAdapter(aktivitasModels);
+        aktivitasAdapter = new AktivitasFirstAdapter(requireContext(), aktivitasModels);
         aktivitasRecycler.setAdapter(aktivitasAdapter);
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasRecycler, aktivitasModels.size(), com.intuit.sdp.R.dimen._208sdp);
+        Collections.shuffle(aktivitasModels);
+
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasRecycler, aktivitasModels.size(), R.dimen.card_activity_first_width_java);
 
     }
 

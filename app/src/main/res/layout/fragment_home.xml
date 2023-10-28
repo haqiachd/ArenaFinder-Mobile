@@ -522,7 +522,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mho_recycler_aktivitas_seru"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_recycler_height"
+                            android:layout_height="@dimen/_210sdp"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
                             android:layout_marginTop="@dimen/recycler_venue_margin_top"
                             android:orientation="horizontal"
@@ -654,7 +654,6 @@
                 android:layout_height="@dimen/_20sdp"
                 tools:ignore="UselessLeaf" />
         </LinearLayout>
-
 
     </ScrollView>
 

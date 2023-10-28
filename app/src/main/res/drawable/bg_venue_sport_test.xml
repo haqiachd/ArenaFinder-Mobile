@@ -6,6 +6,6 @@
     <padding
         android:left="@dimen/bg_venue_padding"
         android:right="@dimen/bg_venue_padding" />
-    <solid android:color="#1A696969" />
+    <solid android:color="#1F696969" />
 
 </shape>

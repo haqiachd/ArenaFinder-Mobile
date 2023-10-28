@@ -115,6 +115,10 @@
     <string name="txt_aktivitas_baru_desc">Lihat Aktivitas Baru Pada ArenaFinder</string>
     <string name="txt_aktivitas_kosong">Aktivitas Kosong</string>
     <string name="txt_aktivitas_kosong_desc">Lihat Aktivitas Olahraga yang Kosong</string>
+    <string name="txt_aktiitas_def">Latihan Bersama Badminton TIF Polije Nganjuk</string>
+    <string name="txt_aktivitas_anggota">12/30 Anggota</string>
+    <string name="txt_aktivitas_tgl">10 Oktober 2023</string>
+    <string name="txt_aktivitas_anggota_value">%1$d/%2$d Anggota</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
 
