@@ -73,6 +73,8 @@
     <dimen name="card_venue_stroke">@dimen/_1sdp</dimen>
     <dimen name="card_venue_image_height">@dimen/_87sdp</dimen>
     <dimen name="card_venue_image_corner">@dimen/_11sdp</dimen>
+    <dimen name="card_venue_image_corner_second">@dimen/_6sdp</dimen>
+    <dimen name="card_venue_image_corner_third">@dimen/_6sdp</dimen>
     <dimen name="card_venue_image_elevation">1dp</dimen>
     <dimen name="card_venue_info_margin_width">@dimen/_6sdp</dimen>
     <dimen name="card_venue_info_margin_top">@dimen/_8sdp</dimen>
@@ -91,6 +93,8 @@
     <dimen name="card_activity_first_width_java">@dimen/_252sdp</dimen>
     <dimen name="card_activity_first_height_recycler">@dimen/_210sdp</dimen>
     <dimen name="card_venue_second_width_java">@dimen/_232sdp</dimen>
+    <dimen name="card_venue_second_height">@dimen/_208sdp</dimen>
     <dimen name="card_venue_third_width_java">@dimen/_197sdp</dimen>
+    <dimen name="card_venue_third_height">@dimen/_200sdp</dimen>
 
 </resources>

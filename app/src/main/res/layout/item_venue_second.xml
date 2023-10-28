@@ -8,7 +8,7 @@
     android:elevation="@dimen/card_venue_elevation"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="@dimen/card_venue_corner"
+    app:cardCornerRadius="@dimen/_8sdp"
     app:strokeColor="@color/stroke_card_venue"
     app:strokeWidth="@dimen/card_venue_stroke">
 
@@ -21,7 +21,7 @@
             android:id="@+id/ivs_image_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_95sdp"
-            app:cardCornerRadius="@dimen/card_venue_image_corner"
+            app:cardCornerRadius="@dimen/card_venue_image_corner_second"
             app:cardElevation="@dimen/card_venue_image_elevation"
             app:layout_constraintTop_toTopOf="parent">
 
