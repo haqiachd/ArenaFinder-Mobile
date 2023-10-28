@@ -122,6 +122,7 @@
     <string name="txt_aktivitas_price">Rp. 15.0000 / Orang</string>
     <string name="txt_aktivitas_time">07:00 – 10:20</string>
     <string name="txt_aktivitas_price_value">Rp. %1$s / Orang</string>
+    <string name="txt_no_ratting">N/A</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
 

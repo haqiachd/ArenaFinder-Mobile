@@ -18,9 +18,13 @@ import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
+import com.c2.arenafinder.data.model.VenueSecondModel;
+import com.c2.arenafinder.data.model.VenueThirdModel;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
+import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
+import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 
@@ -36,19 +40,6 @@ public class ReferensiFragment extends Fragment {
     venueGratisRecycler, venueBerbayarRecycler, venueDisewakanRecycler;
 
     private ArrayList<VenueFirstModel> venueRattingModels;
-    private ArrayList<VenueFirstModel> venueKosongModels;
-    private ArrayList<VenueFirstModel> venueTerdekatModels;
-    private ArrayList<VenueFirstModel> venueGratisModels;
-    private ArrayList<VenueFirstModel> venueBerbayarModels;
-    private ArrayList<VenueFirstModel> venueDisewakanModels;
-
-    private VenueFirstAdapter venueRattingAdapter;
-    private VenueFirstAdapter venueKosongAdapter;
-    private VenueFirstAdapter venueTerdekatAdapter;
-    private VenueFirstAdapter venueGratisAdapter;
-    private VenueFirstAdapter venueBerbayarAdapter;
-    private VenueFirstAdapter venueDisewakanAdapter;
-
 
     private String mParam1;
     private String mParam2;
@@ -136,33 +127,31 @@ public class ReferensiFragment extends Fragment {
     private void venueRattingData() {
         venueRattingModels = new ArrayList<>();
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Disewakan", "Rp. 275.000 / Sesi"
+                "test/venue-2.png", "Blessing Futsal", "Futsal", 5.0F,
+                "Disewakan", "1.2 Rb Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Gratis", "Tidak perlu bayar"
+                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.9F,
+                "Gratis", "932 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
                 "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "Rp. 90.000 / Sesi"
+                "Disewakan", "802 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Berbayar", "Mulai dari Rp. 50.000"
+                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.8F,
+                "Berbayar", "311 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
                 "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Bervariasi", "Harga Bervariasi"
+                "Bervariasi", "120 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
                 "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Gratis", "Tidak perlu bayar"
+                "Gratis", "83 Ulasan"
         ));
 
-        Collections.shuffle(venueRattingModels);
-
-        venueRattingAdapter = new VenueFirstAdapter(requireContext(), venueRattingModels);
+        VenueFirstAdapter venueRattingAdapter = new VenueFirstAdapter(requireContext(), venueRattingModels);
         venueBaruRecycler.setAdapter(venueRattingAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, venueRattingModels.size(), R.dimen.card_venue_width_java);
@@ -170,78 +159,78 @@ public class ReferensiFragment extends Fragment {
     }
 
     private void venueKosongData() {
-        venueKosongModels = new ArrayList<>();
-        venueKosongModels.add(new VenueFirstModel(
+        ArrayList<VenueSecondModel> venueKosongModels = new ArrayList<>();
+        venueKosongModels.add(new VenueSecondModel(
                 "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "Rp. 90.000 / Sesi"
+                "Disewakan", "12 Slot Kosong", "Rp. 90.000 / Sesi"
         ));
-        venueKosongModels.add(new VenueFirstModel(
+        venueKosongModels.add(new VenueSecondModel(
                 "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Disewakan", "Rp. 275.000 / Sesi"
+                "Disewakan","9 Slot Kosong", "Rp. 275.000 / Sesi"
         ));
-        venueKosongModels.add(new VenueFirstModel(
+        venueKosongModels.add(new VenueSecondModel(
                 "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Bervariasi", "Harga Bervariasi"
+                "Disewakan", "10 Slot Kosong","Harga Bervariasi"
         ));
 
-        venueKosongModels.add(new VenueFirstModel(
+        venueKosongModels.add(new VenueSecondModel(
                 "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Gratis", "Tidak perlu bayar"
+                "Disewakan", "21 Slot Kosong","Tidak perlu bayar"
         ));
-        venueKosongModels.add(new VenueFirstModel(
+        venueKosongModels.add(new VenueSecondModel(
                 "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Gratis", "Tidak perlu bayar"
+                "Disewakan", "7 Slot Kosong","Tidak perlu bayar"
         ));
-        venueKosongModels.add(new VenueFirstModel(
+        venueKosongModels.add(new VenueSecondModel(
                 "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Berbayar", "Mulai dari Rp. 50.000"
+                "Disewakan", "9 Slot Kosong","Mulai dari Rp. 50.000"
         ));
 
         Collections.shuffle(venueKosongModels);
 
-        venueKosongAdapter = new VenueFirstAdapter(requireContext(), venueKosongModels);
+        VenueSecondAdapter venueKosongAdapter = new VenueSecondAdapter(requireContext(), venueKosongModels);
         buatKamuRecycler.setAdapter(venueKosongAdapter);
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, venueKosongModels.size(), R.dimen.card_venue_width_java);
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, venueKosongModels.size(), R.dimen.card_venue_second_width_java);
     }
 
     private void venueTerdekatData() {
-        venueTerdekatModels = new ArrayList<>();
-        venueTerdekatModels.add(new VenueFirstModel(
+        ArrayList<VenueThirdModel> venueTerdekatModels = new ArrayList<>();
+        venueTerdekatModels.add(new VenueThirdModel(
                 "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Berbayar", "Mulai dari Rp. 50.000"
+                "Berbayar", "Jarak 1.8 Km - 5 Min"
         ));
-        venueTerdekatModels.add(new VenueFirstModel(
+        venueTerdekatModels.add(new VenueThirdModel(
                 "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Gratis", "Tidak perlu bayar"
+                "Gratis", "Jarak 2.2 Km - 7 Min"
         ));
-        venueTerdekatModels.add(new VenueFirstModel(
+        venueTerdekatModels.add(new VenueThirdModel(
                 "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "Rp. 90.000 / Sesi"
+                "Disewakan", "Jarak 3.8 Km - 10 Min"
         ));
-        venueTerdekatModels.add(new VenueFirstModel(
+        venueTerdekatModels.add(new VenueThirdModel(
                 "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Bervariasi", "Harga Bervariasi"
+                "Bervariasi", "Jarak 5.7 Km - 12 Min"
         ));
-        venueTerdekatModels.add(new VenueFirstModel(
+        venueTerdekatModels.add(new VenueThirdModel(
                 "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Disewakan", "Rp. 275.000 / Sesi"
+                "Disewakan", "Jarak 12 Km - 15 Min"
         ));
-        venueTerdekatModels.add(new VenueFirstModel(
+        venueTerdekatModels.add(new VenueThirdModel(
                 "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Gratis", "Tidak perlu bayar"
+                "Gratis", "Jarak 14 Km - 17 Min"
         ));
 
         Collections.shuffle(venueTerdekatModels);
 
-        venueTerdekatAdapter = new VenueFirstAdapter(requireContext(), venueRattingModels);
+        VenueThirdAdapter venueTerdekatAdapter = new VenueThirdAdapter(requireContext(), venueTerdekatModels);
         venueTerdekatRecycler.setAdapter(venueTerdekatAdapter);
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, venueRattingModels.size(), R.dimen.card_venue_width_java);
+        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, venueRattingModels.size(), R.dimen.card_venue_third_width_java);
     }
 
     private void venueGratisData(){
-        venueGratisModels = new ArrayList<>();
+        ArrayList<VenueFirstModel> venueGratisModels = new ArrayList<>();
 
         venueGratisModels.add(new VenueFirstModel(
                 "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
@@ -270,14 +259,14 @@ public class ReferensiFragment extends Fragment {
 
         Collections.shuffle(venueGratisModels);
 
-        venueGratisAdapter = new VenueFirstAdapter(requireContext(), venueGratisModels);
+        VenueFirstAdapter venueGratisAdapter = new VenueFirstAdapter(requireContext(), venueGratisModels);
         venueGratisRecycler.setAdapter(venueGratisAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), venueGratisRecycler, venueGratisModels.size(), R.dimen.card_venue_width_java);
     }
 
     private void venueBerbayarData(){
-        venueBerbayarModels = new ArrayList<>();
+        ArrayList<VenueFirstModel> venueBerbayarModels = new ArrayList<>();
 
         venueBerbayarModels.add(new VenueFirstModel(
                 "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
@@ -306,14 +295,14 @@ public class ReferensiFragment extends Fragment {
 
         Collections.shuffle(venueBerbayarModels);
 
-        venueBerbayarAdapter = new VenueFirstAdapter(requireContext(), venueBerbayarModels);
+        VenueFirstAdapter venueBerbayarAdapter = new VenueFirstAdapter(requireContext(), venueBerbayarModels);
         venueBerbayarRecycler.setAdapter(venueBerbayarAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBerbayarRecycler, venueBerbayarModels.size(), R.dimen.card_venue_width_java);
     }
 
     private void venueDisewakanData(){
-        venueDisewakanModels = new ArrayList<>();
+        ArrayList<VenueFirstModel> venueDisewakanModels = new ArrayList<>();
 
         venueDisewakanModels.add(new VenueFirstModel(
                 "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
@@ -342,7 +331,7 @@ public class ReferensiFragment extends Fragment {
 
         Collections.shuffle(venueDisewakanModels);
 
-        venueDisewakanAdapter = new VenueFirstAdapter(requireContext(), venueDisewakanModels);
+        VenueFirstAdapter venueDisewakanAdapter = new VenueFirstAdapter(requireContext(), venueDisewakanModels);
         venueDisewakanRecycler.setAdapter(venueDisewakanAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), venueDisewakanRecycler, venueDisewakanModels.size(), R.dimen.card_venue_width_java);

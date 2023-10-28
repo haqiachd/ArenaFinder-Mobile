@@ -270,12 +270,12 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mre_recycler_venue_kosong"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_recycler_height"
+                            android:layout_height="@dimen/card_venue_second_height"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
                             android:layout_marginTop="@dimen/recycler_venue_margin_top"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_venue_first" />
+                            tools:listitem="@layout/item_venue_second" />
 
                         <include
                             layout="@layout/button_pilih_semua"
@@ -463,7 +463,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mre_recycler_venue_terdekat"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_recycler_height"
+                            android:layout_height="@dimen/card_venue_third_height"
                             android:layout_marginStart="@dimen/recycler_venue_margin_start"
                             android:layout_marginTop="@dimen/recycler_venue_margin_top"
                             android:orientation="horizontal"
