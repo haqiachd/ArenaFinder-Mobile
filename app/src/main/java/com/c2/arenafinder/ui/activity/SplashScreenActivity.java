@@ -93,10 +93,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                     // temp
                     Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
-                    startActivity(
-                            new Intent(SplashScreenActivity.this, EmptyActivity.class)
-                                    .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
-                    );
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 }
             }
 
@@ -111,10 +108,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 // temp
                 Toast.makeText(SplashScreenActivity.this, "Server tidak ditemukan!", Toast.LENGTH_SHORT).show();
-                startActivity(
-                        new Intent(SplashScreenActivity.this, EmptyActivity.class)
-                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
-                );
+                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
             }
         });
 

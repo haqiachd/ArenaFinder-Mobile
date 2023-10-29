@@ -1,6 +1,7 @@
 package com.c2.arenafinder.ui.fragment.main;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -31,6 +32,7 @@ import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.data.model.VenueSecondModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
+import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.HomeInfoAdapter;
@@ -232,7 +234,11 @@ public class HomeFragment extends Fragment {
         secondAdapter = new VenueSecondAdapter(requireContext(), secondModels, new AdapterActionListener() {
             @Override
             public void onClickListener(int position) {
-                AdapterActionListener.super.onClickListener(position);
+                startActivity(
+                        new Intent(requireActivity(), DetailedActivity.class)
+                                .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                .putExtra(DetailedActivity.ID, secondModels.get(position).getVenueName())
+                );
             }
         });
 
