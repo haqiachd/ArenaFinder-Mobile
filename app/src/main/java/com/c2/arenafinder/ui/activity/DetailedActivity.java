@@ -1,8 +1,11 @@
 package com.c2.arenafinder.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.detailed.ActivityDetailedFragment;
@@ -22,6 +25,10 @@ public class DetailedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getDecorView().post(() -> new Thread(() -> runOnUiThread(() -> {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_LAYOUT_FLAGS);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        })).start());
         setContentView(R.layout.activity_detailed);
 
         String idSelected = getIntent().getStringExtra(ID);
