@@ -97,4 +97,8 @@
     <dimen name="card_venue_third_width_java">@dimen/_197sdp</dimen>
     <dimen name="card_venue_third_height">@dimen/_200sdp</dimen>
 
+    <dimen name="detailed_dots_size">@dimen/_5sdp</dimen>
+    <dimen name="detailed_dots_marin">@dimen/_4sdp</dimen>
+    <dimen name="detailed_margin_width">@dimen/_16sdp</dimen>
+
 </resources>

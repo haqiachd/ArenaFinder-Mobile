@@ -50,7 +50,8 @@ public class VenueDetailedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = view.findViewById(R.id.venue_text);
+        TextView textView = view.findViewById(R.id.dvd_venue_name);
         textView.setText(id);
+
     }
 }

@@ -1,20 +1,582 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_light"
     tools:context=".ui.fragment.detailed.VenueDetailedFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/venue_text"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="VENUE FRAGMENT"
-        android:layout_gravity="center"
-        android:fontFamily="@font/roboto_regular"
-        android:textColor="@color/azure"
-        android:textSize="@dimen/_20sdp"
-        />
+        android:background="@color/background_light"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_190sdp"
+            android:background="@color/azure">
+
+            <ImageView
+                android:id="@+id/dvd_image_test"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_venue_test_2" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/dvd_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/dvd_back"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/bg_detailed_back"
+                android:contentDescription="@string/alt_detailed_kembali"
+                android:elevation="0dp"
+                android:src="@drawable/ic_detailed_back"
+                app:cardCornerRadius="@dimen/_50ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/dvd_vertical_menu"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/bg_detailed_back"
+                android:contentDescription="@string/alt_detailed_kembali"
+                android:elevation="0dp"
+                android:src="@drawable/ic_detailed_vertical_menu"
+                app:cardCornerRadius="@dimen/_50ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dvd_photo_value"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_11sdp"
+                android:background="@drawable/bg_detailed_photo_value"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:text="@string/txt_no_ratting"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/dvd_photo_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/dvd_photo_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/dvd_photo_value">
+
+                <TextView
+                    android:layout_width="@dimen/detailed_dots_size"
+                    android:layout_height="@dimen/detailed_dots_size"
+                    android:layout_marginStart="@dimen/detailed_dots_marin"
+                    android:background="@drawable/bg_dots_detailed_active" />
+
+                <TextView
+                    android:layout_width="@dimen/detailed_dots_size"
+                    android:layout_height="@dimen/detailed_dots_size"
+                    android:layout_marginStart="@dimen/detailed_dots_marin"
+                    android:background="@drawable/bg_dots_detailed" />
+
+                <TextView
+                    android:layout_width="@dimen/detailed_dots_size"
+                    android:layout_height="@dimen/detailed_dots_size"
+                    android:layout_marginStart="@dimen/detailed_dots_marin"
+                    android:background="@drawable/bg_dots_detailed" />
+
+                <TextView
+                    android:layout_width="@dimen/detailed_dots_size"
+                    android:layout_height="@dimen/detailed_dots_size"
+                    android:layout_marginStart="@dimen/detailed_dots_marin"
+                    android:background="@drawable/bg_dots_detailed" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dvd_venue_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/kanit_semibold"
+                android:maxLines="3"
+                android:text="@string/txt_def_venue"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_17ssp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_3sdp">
+
+                <ImageView
+                    android:id="@+id/dvd_top_ratting_ic"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:contentDescription="@string/alt_ratting"
+                    android:src="@drawable/ic_ratting_start"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/dvd_top_ratting_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:gravity="center_vertical"
+                    android:text="@string/txt_ratting_def"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dvd_top_ratting_ic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/dvd_top_view_ic"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:contentDescription="@string/alt_ratting"
+                    android:src="@drawable/ic_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dvd_top_ratting_val"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/dvd_top_view_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/dvd_top_view_ic"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:gravity="center_vertical"
+                    android:text="@string/txt_view_def"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dvd_top_view_ic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/dvd_top_shared_ic"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:contentDescription="@string/alt_ratting"
+                    android:src="@drawable/ic_shared"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dvd_top_view_val"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/dvd_shared_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/dvd_top_view_ic"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:gravity="center_vertical"
+                    android:text="@string/txt_shared_def"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dvd_top_shared_ic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:rowCount="5">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    tools:ignore="UseCompoundDrawables,UselessParent">
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/alt_sport_icon"
+                        android:src="@drawable/ic_sport_football" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Sepak Bola\t -"
+                        android:textColor="#F2000000"
+                        android:textSize="@dimen/_11ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables,UselessParent">
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/alt_sport_icon"
+                        android:src="@drawable/ic_sport_badminton" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Bulu Tangkis"
+                        android:textColor="#F2000000"
+                        android:textSize="@dimen/_11ssp" />
+
+                </LinearLayout>
+
+            </GridLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def_double"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Jenis Lapangan"
+                android:textColor="#E6000000"
+                android:textSize="@dimen/_15ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:strokeColor="@color/dimgray"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:contentDescription="@string/alt_sport_icon"
+                        android:src="@drawable/ic_sport_football" />
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_37sdp"
+                        android:background="@color/dimgray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_46sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center_vertical"
+                        android:text="Sepak Bola"
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/_12sdp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:strokeColor="@color/dimgray"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:contentDescription="@string/alt_sport_icon"
+                        android:src="@drawable/ic_upper" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_28sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center_vertical"
+                        android:text="1 Lapangan Tersedia"
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/_12sdp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Jam Operasional"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow android:layout_marginBottom="@dimen/_5sdp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="Senin"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="06:00-07:00"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13sdp" />
+                    </TableRow>
+
+
+                </TableLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Fasilitas"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Lokasi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Kontak Pengelola"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Review Tempat"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Aktivitas Lapangan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

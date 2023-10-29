@@ -123,6 +123,11 @@
     <string name="txt_aktivitas_time">07:00 – 10:20</string>
     <string name="txt_aktivitas_price_value">Rp. %1$s / Orang</string>
     <string name="txt_no_ratting">N/A</string>
+    <string name="txt_lorem_deksripsi_def">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</string>
+    <string name="txt_lorem_deksripsi_def_double">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</string>
+    <string name="txt_ratting_def">4.8</string>
+    <string name="txt_view_def">32 x Dilihat</string>
+    <string name="txt_shared_def">4 x Dibagikan</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
 
@@ -150,6 +155,8 @@
     <string name="alt_card_venue">Gambar Venue</string>
     <string name="alt_semua">Semua</string>
     <string name="alt_aktivitas">Gambar Aktivitas</string>
+    <string name="alt_detailed_kembali">Kembali</string>
+    <string name="alt_sport_icon">Sport</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_ya">IYA</string>
