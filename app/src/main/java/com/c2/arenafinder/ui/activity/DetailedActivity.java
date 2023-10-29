@@ -9,8 +9,10 @@ import android.view.View;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.detailed.ActivityDetailedFragment;
+import com.c2.arenafinder.ui.fragment.detailed.BookingVenueFragment;
 import com.c2.arenafinder.ui.fragment.detailed.VenueDetailedFragment;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.material.button.MaterialButton;
 
 public class DetailedActivity extends AppCompatActivity {
 
@@ -49,6 +51,11 @@ public class DetailedActivity extends AppCompatActivity {
                 break;
             }
         }
+
+        MaterialButton button = findViewById(R.id.detailed_booking_btn);
+        button.setOnClickListener(v -> {
+            FragmentUtil.switchFragmentDetailed(this.getSupportFragmentManager(), BookingVenueFragment.newInstance(idSelected), true);
+        });
     }
 
     @Override

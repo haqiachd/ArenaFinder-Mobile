@@ -66,6 +66,7 @@
             app:layout_constraintTop_toTopOf="@id/detailed_harga" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/detailed_booking_btn"
             android:layout_width="@dimen/_90ssp"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_5sdp"
