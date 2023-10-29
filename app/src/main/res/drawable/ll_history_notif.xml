@@ -1,0 +1,16 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="#D9D9D9" /> <!-- Background color -->
+            <corners android:radius="10dp" /> <!-- Adjust the radius as per your requirement -->
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid android:color="#488FE2" /> <!-- Progress color -->
+                <corners android:radius="10dp" /> <!-- Adjust the radius as per your requirement -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>
