@@ -9,10 +9,77 @@
     <FrameLayout
         android:id="@+id/detailed_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/_30sdp"
-        >
+        android:layout_height="match_parent" />
 
-    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/detailed_line_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#80696969"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/detailed_mulai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Mulai dari"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toTopOf="@id/detailed_harga"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailed_line_top" />
+
+        <TextView
+            android:id="@+id/detailed_harga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Rp. 75.000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/detailed_mulai"
+            app:layout_constraintTop_toBottomOf="@id/detailed_mulai" />
+
+        <TextView
+            android:id="@+id/detailed_sesi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="/ Sesi"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/detailed_harga"
+            app:layout_constraintStart_toEndOf="@id/detailed_harga"
+            app:layout_constraintTop_toTopOf="@id/detailed_harga" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="@dimen/_90ssp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_13sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:backgroundTint="@color/primary_color"
+            android:text="Booking"
+            app:cornerRadius="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
