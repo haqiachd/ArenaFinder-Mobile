@@ -52,4 +52,7 @@
     <color name="textcolor_ratting">#272729</color>
     <color name="mint_green">#A1FF9F</color>
     <color name="detailed_textcolor">@color/dimgray</color>
+    <color name="booking_card_stroke">#4D0B0B2D</color>
+    <color name="booking_textsize_color">#CC02406D</color>
+
 </resources>

@@ -112,4 +112,14 @@
     <dimen name="detailed_star_prog_textsize">@dimen/_11ssp</dimen>
     <dimen name="detailed_star_textview_width">@dimen/_7sdp</dimen>
 
+    <dimen name="booking_jadwal_radius">@dimen/_5sdp</dimen>
+    <dimen name="booking_jadwal_height">@dimen/_34sdp</dimen>
+    <dimen name="booking_jadwal_margin_bottom">@dimen/_8sdp</dimen>
+    <dimen name="booking_jadwal_stroke">@dimen/_1sdp</dimen>
+    <dimen name="booking_jadwal_textsize">@dimen/_12ssp</dimen>
+    <dimen name="booking_jadwal_textsize_marginstart">@dimen/_10ssp</dimen>
+    <dimen name="booking_jadwal_textsize_marginend">@dimen/_7ssp</dimen>
+    <dimen name="booking_jadwal_image_size">@dimen/_18sdp</dimen>
+    <dimen name="booking_jadwal_image_marginend">@dimen/_10ssp</dimen>
+
 </resources>
