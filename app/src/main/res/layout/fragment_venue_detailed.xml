@@ -13,6 +13,7 @@
         android:background="@color/background_light"
         android:orientation="vertical">
 
+        <!-- Top Layout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_190sdp"
@@ -22,6 +23,7 @@
                 android:id="@+id/dvd_image_test"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/alt_card_venue"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_venue_test_2" />
 
@@ -115,6 +117,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- Venue Description -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,6 +137,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_17ssp" />
 
+            <!-- Venue Ratting, View and Shared-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_20sdp"
@@ -217,6 +221,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Venue Sport-->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -269,11 +274,11 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_16sdp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/_4sdp"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Bulu Tangkis"
+                        android:text="@string/txt_olahraga_badminton"
                         android:textColor="#F2000000"
                         android:textSize="@dimen/_11ssp" />
 
@@ -292,99 +297,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detailed_margin_width"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:layout_marginEnd="@dimen/detailed_margin_width"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kanit_semibold"
-                android:text="Jenis Lapangan"
-                android:textColor="#E6000000"
-                android:textSize="@dimen/_15ssp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    app:cardCornerRadius="@dimen/_5sdp"
-                    app:strokeColor="@color/dimgray"
-                    app:strokeWidth="@dimen/_1sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:contentDescription="@string/alt_sport_icon"
-                        android:src="@drawable/ic_sport_football" />
-
-                    <View
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="@dimen/_18sdp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_37sdp"
-                        android:background="@color/dimgray" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_46sdp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:gravity="center_vertical"
-                        android:text="Sepak Bola"
-                        android:textColor="@color/dimgray"
-                        android:textSize="@dimen/_12sdp" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:visibility="gone"
-                    app:cardCornerRadius="@dimen/_5sdp"
-                    app:strokeColor="@color/dimgray"
-                    app:strokeWidth="@dimen/_1sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_18sdp"
-                        android:layout_height="@dimen/_18sdp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:contentDescription="@string/alt_sport_icon"
-                        android:src="@drawable/ic_upper" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_28sdp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:gravity="center_vertical"
-                        android:text="1 Lapangan Tersedia"
-                        android:textColor="@color/dimgray"
-                        android:textSize="@dimen/_12sdp" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
+        <!-- Venue Jam Buka-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -401,128 +314,390 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp" />
 
-
-            <com.google.android.material.card.MaterialCardView
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_25sdp">
+
+                <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:text="Senin"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:text="12:00 - 23:00"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:text="Selasa"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:text="12:00 - 23:00"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:text="Rabu"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:text="12:00 - 23:00"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:text="Kamis"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:text="12:00 - 23:00"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:text="Jumat"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:text="12:00 - 23:00"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:text="Sabtu"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:text="06:00 - 23:00"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="start"
+                        android:text="Minggu"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="end"
+                        android:text="06:00 - 23:00"
+                        android:textColor="@color/detailed_textcolor"
+                        android:textSize="@dimen/detailed_operasional_textsize" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        <!-- Venue Fasilitas-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Fasilitas Tempat"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_9sdp"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50ssp"
+                        app:cardCornerRadius="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/alt_card_venue"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_def_kantin"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:maxLines="2"
+                        android:text="Kantin"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50ssp"
+                        app:cardCornerRadius="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/alt_card_venue"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_def_parkir"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:maxLines="2"
+                        android:text="Parkir Mobil Motor"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50ssp"
+                        app:cardCornerRadius="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/alt_card_venue"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_def_musholla"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:maxLines="2"
+                        android:text="Musholla"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Lihat Semua"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_10sdp"
+                app:cornerRadius="@dimen/_5sdp"
+                app:strokeColor="@color/azure"
+                app:strokeWidth="@dimen/_1sdp" />
+
+        </LinearLayout>
+
+        <!-- Venue Lokasi-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Lokasi Tempat"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Jl. Barito, Begadung Barat, Begadung, Kec. Nganjuk, Kabupaten Nganjuk, Jawa Timur 64412"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_145sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp">
+                android:layout_marginEnd="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
 
-                <TableLayout
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/alt_bottom_nav_profile"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_home_map_test" />
 
-                    <TableRow android:layout_marginBottom="@dimen/_5sdp">
+            </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_bold"
-                            android:gravity="start"
-                            android:text="Senin"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_13sdp" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_bold"
-                            android:gravity="end"
-                            android:text="06:00-07:00"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_13sdp" />
-                    </TableRow>
-
-
-                </TableLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Petunjuk Arah"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_10sdp"
+                app:cornerRadius="@dimen/_5sdp"
+                app:strokeColor="@color/azure"
+                app:strokeWidth="@dimen/_1sdp" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detailed_margin_width"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:layout_marginEnd="@dimen/detailed_margin_width"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kanit_semibold"
-                android:text="Fasilitas"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/txt_lorem_deksripsi_def"
-                android:textColor="@color/dimgray"
-                android:textSize="@dimen/_11ssp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detailed_margin_width"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:layout_marginEnd="@dimen/detailed_margin_width"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kanit_semibold"
-                android:text="Lokasi"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/txt_lorem_deksripsi_def"
-                android:textColor="@color/dimgray"
-                android:textSize="@dimen/_11ssp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detailed_margin_width"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:layout_marginEnd="@dimen/detailed_margin_width"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kanit_semibold"
-                android:text="Kontak Pengelola"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/txt_lorem_deksripsi_def"
-                android:textColor="@color/dimgray"
-                android:textSize="@dimen/_11ssp" />
-
-        </LinearLayout>
-
+        <!-- Venue Ratting-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -539,17 +714,733 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp" />
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_110sdp"
+                android:layout_marginTop="@dimen/_3sdp">
+
+                <LinearLayout
+                    android:id="@+id/dvd_ratting_value"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_ratting_def"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_22sdp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/detailed_star_size"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/detailed_star_margin"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_ratting_start" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/detailed_star_margin"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_ratting_start" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/detailed_star_margin"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_ratting_start" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/detailed_star_margin"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_ratting_start" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:src="@drawable/ic_review_star_orange_half" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="120 Ulasan"
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/dvd_ratting_line"
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:layout_marginBottom="@dimen/_14sdp"
+                    android:background="#B3696969"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dvd_ratting_value" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dvd_ratting_line"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/dvd_txt_ratting_5"
+                        android:layout_width="@dimen/detailed_star_textview_width"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_ratting_5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/detailed_star_prog_textsize"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_5" />
+
+                    <ProgressBar
+                        android:id="@+id/dvd_prog_ratting_5"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/detailed_star_prog_height"
+                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                        android:progress="69"
+                        android:progressDrawable="@drawable/ll_history_notif"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_5"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dvd_txt_ratting_4"
+                        android:layout_width="@dimen/detailed_star_textview_width"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_ratting_4"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/detailed_star_prog_textsize"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_4" />
+
+                    <ProgressBar
+                        android:id="@+id/dvd_prog_ratting_4"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/detailed_star_prog_height"
+                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                        android:progress="37"
+                        android:progressDrawable="@drawable/ll_history_notif"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_5"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_5" />
+
+                    <TextView
+                        android:id="@+id/dvd_txt_ratting_3"
+                        android:layout_width="@dimen/detailed_star_textview_width"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_ratting_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/detailed_star_prog_textsize"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_3" />
+
+                    <ProgressBar
+                        android:id="@+id/dvd_prog_ratting_3"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/detailed_star_prog_height"
+                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                        android:progress="18"
+                        android:progressDrawable="@drawable/ll_history_notif"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_3"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_4" />
+
+                    <TextView
+                        android:id="@+id/dvd_txt_ratting_2"
+                        android:layout_width="@dimen/detailed_star_textview_width"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_ratting_2"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/detailed_star_prog_textsize"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_2" />
+
+                    <ProgressBar
+                        android:id="@+id/dvd_prog_ratting_2"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/detailed_star_prog_height"
+                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                        android:progress="7"
+                        android:progressDrawable="@drawable/ll_history_notif"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_2"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_3" />
+
+                    <TextView
+                        android:id="@+id/dvd_txt_ratting_1"
+                        android:layout_width="@dimen/detailed_star_textview_width"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_ratting_1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/detailed_star_prog_textsize"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_1" />
+
+                    <ProgressBar
+                        android:id="@+id/dvd_prog_ratting_1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/detailed_star_prog_height"
+                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                        android:progress="13"
+                        android:progressDrawable="@drawable/ll_history_notif"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_1"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="@string/txt_lorem_deksripsi_def"
-                android:textColor="@color/dimgray"
-                android:textSize="@dimen/_11ssp" />
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7ssp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/dvd_review_photo"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:src="@drawable/img_dani"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dvd_review_fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="@dimen/_11sdp"
+                        android:text="Syamaidzar Adani Syah"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/dvd_review_photo"
+                        app:layout_constraintTop_toTopOf="@id/dvd_review_photo"
+                        app:layout_constraintBottom_toTopOf="@id/dvd_review_username"
+                        />
+
+                    <TextView
+                        android:id="@+id/dvd_review_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:textSize="@dimen/_10ssp"
+                        android:text="\@syam_gimank"
+                        android:textColor="@color/dimgray"
+                        app:layout_constraintStart_toEndOf="@id/dvd_review_photo"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_fullname"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo"
+                         />
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/ic_menu_vertical_2"
+                        app:layout_constraintTop_toTopOf="@id/dvd_review_photo"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/dvd_review_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/detailed_review_star_size"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_1sdp"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_photo"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="- 23 Oktober 2023"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_9ssp"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/dvd_review_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/txt_lorem_deksripsi_def"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/dimgray"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_value"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="#2E696969"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_comment"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7ssp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/dvd_review_photo2"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:src="@drawable/img_pram"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dvd_review_fullname2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="@dimen/_11sdp"
+                        android:text="Pramudya Putra P"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/dvd_review_photo2"
+                        app:layout_constraintTop_toTopOf="@id/dvd_review_photo2"
+                        app:layout_constraintBottom_toTopOf="@id/dvd_review_username2"
+                        />
+
+                    <TextView
+                        android:id="@+id/dvd_review_username2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:textSize="@dimen/_10ssp"
+                        android:text="\@pramguy"
+                        android:textColor="@color/dimgray"
+                        app:layout_constraintStart_toEndOf="@id/dvd_review_photo2"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_fullname2"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo2"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/ic_menu_vertical_2"
+                        app:layout_constraintTop_toTopOf="@id/dvd_review_photo2"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo2"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/dvd_review_value2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/detailed_review_star_size"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_1sdp"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_photo2"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="- 23 Oktober 2023"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_9ssp"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/dvd_review_comment2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/txt_lorem_deksripsi_def"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/dimgray"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_value2"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="#2E696969"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_comment2"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7ssp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/dvd_review_photo3"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:src="@drawable/img_alka"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dvd_review_fullname3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="@dimen/_11sdp"
+                        android:text="Afrizal Wahyu Alkautsar"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/dvd_review_photo3"
+                        app:layout_constraintTop_toTopOf="@id/dvd_review_photo3"
+                        app:layout_constraintBottom_toTopOf="@id/dvd_review_username3"
+                        />
+
+                    <TextView
+                        android:id="@+id/dvd_review_username3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:textSize="@dimen/_10ssp"
+                        android:text="\@alka2023"
+                        android:textColor="@color/dimgray"
+                        app:layout_constraintStart_toEndOf="@id/dvd_review_photo3"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_fullname3"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo3"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/ic_menu_vertical_2"
+                        app:layout_constraintTop_toTopOf="@id/dvd_review_photo3"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo3"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/dvd_review_value3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/detailed_review_star_size"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/_1sdp"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_photo3"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <ImageView
+                            android:layout_width="@dimen/detailed_review_star_size"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
+                            android:src="@drawable/ic_review_star_yellow" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:text="- 23 Oktober 2023"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_9ssp"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/dvd_review_comment3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/txt_lorem_deksripsi_def"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_10ssp"
+                        android:textColor="@color/dimgray"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_value3"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="#2E696969"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_review_comment3"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Lihat Semua Ulasan"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_10sdp"
+                    app:cornerRadius="@dimen/_5sdp"
+                    app:strokeColor="@color/azure"
+                    app:strokeWidth="@dimen/_1sdp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
+        <!-- Venue Kontak Pengelola-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Kontak Pengelola"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7ssp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/dvd_contact_photo"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:src="@drawable/img_haqi"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dvd_contact_fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="@dimen/_11sdp"
+                        android:text="Achmad Baihaqi"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/dvd_contact_photo"
+                        app:layout_constraintTop_toTopOf="@id/dvd_contact_photo"
+                        app:layout_constraintBottom_toTopOf="@id/dvd_contact_username"
+                        />
+
+                    <TextView
+                        android:id="@+id/dvd_contact_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:textSize="@dimen/_10ssp"
+                        android:text="+62 856-5586-4624"
+                        android:textColor="@color/dimgray"
+                        app:layout_constraintStart_toEndOf="@id/dvd_contact_photo"
+                        app:layout_constraintTop_toBottomOf="@id/dvd_contact_fullname"
+                        app:layout_constraintBottom_toBottomOf="@id/dvd_contact_photo"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/ic_whatsapp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Venue Aktivitas-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -563,6 +1454,34 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/kanit_semibold"
                 android:text="Aktivitas Lapangan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/txt_lorem_deksripsi_def"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+        <!-- Venue Aktivitas-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detailed_margin_width"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:layout_marginEnd="@dimen/detailed_margin_width"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Lapangat Terkait"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp" />
 

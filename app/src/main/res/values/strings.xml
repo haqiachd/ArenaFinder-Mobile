@@ -130,8 +130,28 @@
     <string name="txt_shared_def">4 x Dibagikan</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
+    <string name="txt_venue_status_gratis">Gratis</string>
+    <string name="txt_venue_status_berbayar">Berbayar</string>
+    <string name="txt_venue_status_bervariasi">Bervariasi</string>
+    <string name="txt_venue_status_izin">Harus Izin</string>
 
     <string name="txt_olahraga_futsal">Futsal</string>
+    <string name="txt_olahraga_badminton">Bulu Tangkis</string>
+    <string name="txt_olahraga_football">Sepak Bola</string>
+    <string name="txt_olahraga_basket">Bola Basket</string>
+    <string name="txt_olahraga_voli">Bola Voli</string>
+    <string name="txt_olahraga_tenis">Tenis Lapangan</string>
+    <string name="txt_olahraga_atletik">Atletik</string>
+    <string name="txt_olahraga_fitness">Fitness</string>
+    <string name="txt_olahraga_renang">Renang</string>
+    <string name="txt_olahraga_silat">Pencak Silat</string>
+
+    <string name="txt_ratting_5">5</string>
+    <string name="txt_ratting_4">4</string>
+    <string name="txt_ratting_3">3</string>
+    <string name="txt_ratting_2">2</string>
+    <string name="txt_ratting_1">1</string>
+
 
     <string name="alt_appbar_search">Cari data</string>
     <string name="alt_appbar_notif">Notifikasi</string>

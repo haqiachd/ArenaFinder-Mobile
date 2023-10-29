@@ -100,5 +100,16 @@
     <dimen name="detailed_dots_size">@dimen/_5sdp</dimen>
     <dimen name="detailed_dots_marin">@dimen/_4sdp</dimen>
     <dimen name="detailed_margin_width">@dimen/_16sdp</dimen>
+    <dimen name="detailed_operasional_textsize">@dimen/_12ssp</dimen>
+    <dimen name="detailed_operasional_margin_bottom">@dimen/_5sdp</dimen>
+    <dimen name="detailed_star_size">@dimen/_13sdp</dimen>
+    <dimen name="detailed_review_star_size">@dimen/_12sdp</dimen>
+    <dimen name="detailed_star_margin">@dimen/_1sdp</dimen>
+    <dimen name="detailed_star_prog_margin_start">@dimen/_10ssp</dimen>
+    <dimen name="detailed_star_prog_height">@dimen/_6sdp</dimen>
+    <dimen name="detailed_star_prog_margin_top">@dimen/_10ssp</dimen>
+    <dimen name="detailed_star_prog_margin_end">@dimen/_20ssp</dimen>
+    <dimen name="detailed_star_prog_textsize">@dimen/_11ssp</dimen>
+    <dimen name="detailed_star_textview_width">@dimen/_7sdp</dimen>
 
 </resources>
