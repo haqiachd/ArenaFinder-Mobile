@@ -53,6 +53,9 @@
     <color name="mint_green">#A1FF9F</color>
     <color name="detailed_textcolor">@color/dimgray</color>
     <color name="booking_card_stroke">#4D0B0B2D</color>
+    <color name="booking_card_stroke_selected">#5BB4F4</color>
+    <color name="booking_card_background_selected">#F8FCFD</color>
     <color name="booking_textsize_color">#CC02406D</color>
+    <color name="booking_textsize_color_textsize">#3CA1EA</color>
 
 </resources>

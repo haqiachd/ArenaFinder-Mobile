@@ -9,17 +9,73 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_60ssp"
+            android:background="@color/background_light">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_42sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    app:strokeColor="#66696969"
+                    app:strokeWidth="@dimen/_1sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="Kam"
+                            android:textSize="@dimen/_9ssp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
+                            android:text="30 Nov"
+                            android:textSize="@dimen/_10ssp"
+                            android:textColor="@color/azure" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:elevation="@dimen/_30sdp"
             app:cardCornerRadius="@dimen/_20sdp"
-            app:strokeColor="#1A696969"
+            app:strokeColor="#33696969"
             app:strokeWidth="@dimen/_1sdp">
 
             <LinearLayout
@@ -113,22 +169,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/booking_jadwal_height"
                         android:layout_marginBottom="@dimen/booking_jadwal_margin_bottom"
+                        android:backgroundTint="@color/booking_card_background_selected"
                         app:cardCornerRadius="@dimen/booking_jadwal_radius"
-                        app:strokeColor="#5BB4F4"
-                        android:backgroundTint="#F8FCFD"
-                        app:strokeWidth="@dimen/_2sdp">
+                        app:strokeColor="@color/booking_card_stroke_selected"
+                        app:strokeWidth="@dimen/booking_jadwal_stroke_selected">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/booking_jadwal_textsize_marginstart"
                                 android:fontFamily="@font/roboto_bold"
                                 android:text="06:00 - 07:00"
-                                android:textColor="#3CA1EA"
+                                android:textColor="@color/booking_textsize_color_textsize"
                                 android:textSize="@dimen/booking_jadwal_textsize"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +196,7 @@
                                 android:layout_marginEnd="@dimen/booking_jadwal_textsize_marginend"
                                 android:fontFamily="@font/roboto_bold"
                                 android:text="Rp. 75.000"
-                                android:textColor="#3CA1EA"
+                                android:textColor="@color/booking_textsize_color_textsize"
                                 android:textSize="@dimen/booking_jadwal_textsize"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/img_check"
@@ -370,6 +426,10 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp" />
 
     </LinearLayout>
 

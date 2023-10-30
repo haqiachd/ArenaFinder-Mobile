@@ -116,6 +116,7 @@
     <dimen name="booking_jadwal_height">@dimen/_34sdp</dimen>
     <dimen name="booking_jadwal_margin_bottom">@dimen/_8sdp</dimen>
     <dimen name="booking_jadwal_stroke">@dimen/_1sdp</dimen>
+    <dimen name="booking_jadwal_stroke_selected">@dimen/_2sdp</dimen>
     <dimen name="booking_jadwal_textsize">@dimen/_12ssp</dimen>
     <dimen name="booking_jadwal_textsize_marginstart">@dimen/_10ssp</dimen>
     <dimen name="booking_jadwal_textsize_marginend">@dimen/_7ssp</dimen>
