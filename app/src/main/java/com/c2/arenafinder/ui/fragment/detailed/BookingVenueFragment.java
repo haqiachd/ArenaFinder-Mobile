@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.util.ArenaFinder;
 
 public class BookingVenueFragment extends Fragment {
 
@@ -49,6 +50,8 @@ public class BookingVenueFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, R.color.white, true);
 
     }
 }

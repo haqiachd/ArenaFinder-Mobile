@@ -56,7 +56,6 @@ public class DetailedActivity extends AppCompatActivity {
 
         MaterialButton button = findViewById(R.id.detailed_booking_btn);
         button.setOnClickListener(v -> {
-            ArenaFinder.setStatusBarColor(this, ArenaFinder.WHITE_STATUS_BAR, R.color.white, true);
             FragmentUtil.switchFragmentDetailed(
                     this.getSupportFragmentManager(), BookingVenueFragment.newInstance(idSelected), true
             );
