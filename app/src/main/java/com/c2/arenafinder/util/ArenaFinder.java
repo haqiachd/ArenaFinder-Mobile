@@ -1,22 +1,29 @@
 package com.c2.arenafinder.util;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
 import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +37,8 @@ public class ArenaFinder {
     public static final int VIBRATOR_MEDIUM = 500;
     public static final int VIBRATOR_LONG = 1000;
     public static final int MILLIS_OF_REFRESHING = 1500;
+    public static final int TRANSPARENT_STATUS_BAR = 1_1;
+    public static final int WHITE_STATUS_BAR = 6_0_9;
 
     public static void playVibrator(@NonNull Context context, int millis){
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -108,6 +117,44 @@ public class ArenaFinder {
                 .create()
                 .show();
 
+    }
+
+    @SuppressLint("Deprecated")
+    public static void setStatusBarColor(Activity activity, int status, @ColorRes int color, boolean isLightStatusBar) {
+        // Set window flags for transparent status bar
+        activity.getWindow().getDecorView().post(new Runnable() {
+            @Override
+            public void run() {
+                switch (status) {
+                    case TRANSPARENT_STATUS_BAR:
+                        activity.getWindow().getDecorView().setSystemUiVisibility(
+                                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        );
+                        activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+                        break;
+                    case WHITE_STATUS_BAR:
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, color));
+                            if (isLightStatusBar){
+                                activity.getWindow().getDecorView().setSystemUiVisibility(
+                                        View.SYSTEM_UI_FLAG_VISIBLE
+                                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                                );
+                            }else {
+                                activity.getWindow().getDecorView().setSystemUiVisibility(
+                                        View.SYSTEM_UI_FLAG_VISIBLE
+                                );
+                            }
+
+                        } else {
+                            activity.getWindow().getDecorView().setSystemUiVisibility(
+                                    View.SYSTEM_UI_FLAG_VISIBLE);
+                        }
+                        break;
+                }
+            }
+        });
     }
 
 
