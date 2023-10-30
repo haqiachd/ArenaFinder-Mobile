@@ -3,7 +3,9 @@ package com.c2.arenafinder.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,7 +13,9 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.detailed.ActivityDetailedFragment;
 import com.c2.arenafinder.ui.fragment.detailed.BookingVenueFragment;
 import com.c2.arenafinder.ui.fragment.detailed.VenueDetailedFragment;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 
 public class DetailedActivity extends AppCompatActivity {
@@ -27,16 +31,13 @@ public class DetailedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().post(() -> new Thread(() -> runOnUiThread(() -> {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        })).start());
         setContentView(R.layout.activity_detailed);
 
         String idSelected = getIntent().getStringExtra(ID);
 
-        switch (getIntent().getStringExtra(FRAGMENT)){
+        switch (getIntent().getStringExtra(FRAGMENT)) {
             case VENUE: {
+                ArenaFinder.setStatusBarColor(this, ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, true);
                 FragmentUtil.switchFragmentDetailed(
                         this.getSupportFragmentManager(),
                         VenueDetailedFragment.newInstance(idSelected), true
@@ -44,6 +45,7 @@ public class DetailedActivity extends AppCompatActivity {
                 break;
             }
             case ACTIVITY: {
+                ArenaFinder.setStatusBarColor(this, ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.white, true);
                 FragmentUtil.switchFragmentDetailed(
                         this.getSupportFragmentManager(),
                         ActivityDetailedFragment.newInstance(idSelected), true
@@ -54,7 +56,10 @@ public class DetailedActivity extends AppCompatActivity {
 
         MaterialButton button = findViewById(R.id.detailed_booking_btn);
         button.setOnClickListener(v -> {
-            FragmentUtil.switchFragmentDetailed(this.getSupportFragmentManager(), BookingVenueFragment.newInstance(idSelected), true);
+            ArenaFinder.setStatusBarColor(this, ArenaFinder.WHITE_STATUS_BAR, R.color.white, true);
+            FragmentUtil.switchFragmentDetailed(
+                    this.getSupportFragmentManager(), BookingVenueFragment.newInstance(idSelected), true
+            );
         });
     }
 
@@ -63,4 +68,6 @@ public class DetailedActivity extends AppCompatActivity {
         super.onBackPressed();
         super.onBackPressed();
     }
+
+
 }
