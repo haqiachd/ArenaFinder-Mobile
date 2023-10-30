@@ -76,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_7ssp"
                     android:background="@color/background_light"
+                    android:nestedScrollingEnabled="true"
                     android:scrollbars="none"
                     app:layout_constraintEnd_toStartOf="@id/date"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,9 +93,9 @@
                             android:layout_height="@dimen/booking_date_height"
                             android:layout_marginStart="@dimen/booking_date_margin_width"
                             android:layout_marginEnd="@dimen/booking_date_margin_width"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="@color/azure"
                             app:cardCornerRadius="@dimen/booking_date_corner"
-                            app:strokeColor="@color/booking_date_stroke"
+                            app:strokeColor="@color/azure"
                             app:strokeWidth="@dimen/booking_date_stroke">
 
                             <LinearLayout
@@ -110,7 +111,7 @@
                                     android:fontFamily="@font/poppins_semibold"
                                     android:gravity="center"
                                     android:text="Kam"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/booking_date_day_textsize" />
 
                                 <TextView
@@ -120,7 +121,7 @@
                                     android:fontFamily="@font/poppins_semibold"
                                     android:gravity="center"
                                     android:text="30 Nov"
-                                    android:textColor="@color/azure"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/booking_date_date_texsize" />
 
                             </LinearLayout>
@@ -420,7 +421,9 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp">
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        >
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/bko_lapangan_img"
@@ -584,11 +587,11 @@
                                     android:textColor="@color/booking_textsize_color"
                                     android:textSize="@dimen/booking_jadwal_textsize"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@id/img_check2"
+                                    app:layout_constraintEnd_toStartOf="@id/ijp_icon_select"
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <ImageView
-                                    android:id="@+id/img_check2"
+                                    android:id="@+id/ijp_icon_select"
                                     android:layout_width="@dimen/booking_jadwal_image_size"
                                     android:layout_height="@dimen/booking_jadwal_image_size"
                                     android:layout_marginEnd="@dimen/booking_jadwal_image_marginend"

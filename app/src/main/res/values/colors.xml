@@ -59,5 +59,11 @@
     <color name="booking_textsize_color">#CC02406D</color>
     <color name="booking_textsize_color_textsize">#3CA1EA</color>
     <color name="booking_date_stroke">#66696969</color>
+    <color name="booking_date_card_white">@color/white</color>
+    <color name="booking_date_card_selected">@color/azure</color>
+    <color name="booking_date_day_textcolor">@color/black</color>
+    <color name="booking_date_day_textcolor_selected">@color/white</color>
+    <color name="booking_date_date_textcolor">@color/azure</color>
+    <color name="booking_date_date_textcolor_selected">@color/white</color>
 
 </resources>

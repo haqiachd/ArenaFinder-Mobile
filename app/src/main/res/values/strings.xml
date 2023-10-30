@@ -179,7 +179,9 @@
     <string name="alt_sport_icon">Sport</string>
     <string name="alt_checked">Cek</string>
     <string name="alt_collapse_olahraga">Collapse</string>
+    <string name="alt_expanded_olahraga">Expanded</string>
     <string name="alt_date_picker">Date Picker</string>
+    <string name="alt_lapangan_image">Lapangan</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_ya">IYA</string>

@@ -26,7 +26,10 @@ public class VenueDetailedFragment extends Fragment {
 
     private String id;
 
+    private ViewTreeObserver.OnScrollChangedListener listener;
+
     private AppBarLayout appBarLayout;
+
     private ScrollView scrollView;
 
     public VenueDetailedFragment() {
@@ -61,7 +64,6 @@ public class VenueDetailedFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_venue_detailed, container, false);
     }
 
-    private boolean isAppBarVisible = false;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class VenueDetailedFragment extends Fragment {
         textView.setText(id);
         textView1.setText(id);
 
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+        listener = new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
                 int currentScroll = scrollView.getScrollY();
@@ -87,8 +89,20 @@ public class VenueDetailedFragment extends Fragment {
                 }
 
             }
-        });
+        };
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
     }
 }
