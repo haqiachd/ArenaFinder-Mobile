@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/booking_jadwal_height"
+    android:layout_marginBottom="@dimen/booking_jadwal_margin_bottom"
+    app:cardCornerRadius="@dimen/booking_jadwal_radius"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    app:strokeColor="@color/booking_card_stroke"
+    app:strokeWidth="@dimen/booking_jadwal_stroke">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/ijp_session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/booking_jadwal_textsize_marginstart"
+            android:fontFamily="@font/roboto_bold"
+            android:text="07:00 - 08:00"
+            android:textColor="@color/booking_textsize_color"
+            android:textSize="@dimen/booking_jadwal_textsize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ijp_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/booking_jadwal_textsize_marginend"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Rp. 75.000"
+            android:textColor="@color/booking_textsize_color"
+            android:textSize="@dimen/booking_jadwal_textsize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ijp_icon_select"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ijp_icon_select"
+            android:layout_width="@dimen/booking_jadwal_image_size"
+            android:layout_height="@dimen/booking_jadwal_image_size"
+            android:layout_marginEnd="@dimen/booking_jadwal_image_marginend"
+            android:contentDescription="@string/alt_checked"
+            android:src="@drawable/ic_booking_unchecked"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

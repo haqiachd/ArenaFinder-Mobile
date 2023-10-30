@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<com.google.android.material.card.MaterialCardView android:layout_width="@dimen/booking_date_width"
+    android:layout_height="@dimen/booking_date_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/booking_date_margin_width"
+    android:layout_marginEnd="@dimen/booking_date_margin_width"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="@dimen/booking_date_corner"
+    app:strokeColor="@color/booking_date_stroke"
+    app:strokeWidth="@dimen/booking_date_stroke"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/idp_dayname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/booking_date_day_top"
+            android:layout_marginBottom="@dimen/booking_date_day_bottom"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="Kam"
+            android:textColor="@color/black"
+            android:textSize="@dimen/booking_date_day_textsize" />
+
+        <TextView
+            android:id="@+id/idp_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/booking_date_date_bottom"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="30 Nov"
+            android:textColor="@color/azure"
+            android:textSize="@dimen/booking_date_date_texsize" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

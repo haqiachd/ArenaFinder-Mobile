@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/_10sdp"
     android:layout_marginTop="@dimen/_8sdp"
     android:layout_marginEnd="@dimen/_10sdp"
     android:elevation="@dimen/_30sdp"
     app:cardCornerRadius="@dimen/_20sdp"
     app:strokeColor="#33696969"
-    app:strokeWidth="@dimen/_1sdp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:strokeWidth="@dimen/_1sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,10 +20,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/bko_lapangan_img"
+                android:id="@+id/ivb_lapangan_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -36,13 +38,14 @@
                 <ImageView
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_50sdp"
+                    android:contentDescription="@string/alt_lapangan_image"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_venue_test_2" />
 
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/bko_lapangan_name"
+                android:id="@+id/ivb_lapangan_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_9sdp"
@@ -51,12 +54,12 @@
                 android:text="Lapangan 1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
-                app:layout_constraintBottom_toTopOf="@id/bko_lapangan_slot"
-                app:layout_constraintStart_toEndOf="@id/bko_lapangan_img"
-                app:layout_constraintTop_toTopOf="@id/bko_lapangan_img" />
+                app:layout_constraintBottom_toTopOf="@id/ivb_lapangan_slot"
+                app:layout_constraintStart_toEndOf="@id/ivb_lapangan_img"
+                app:layout_constraintTop_toTopOf="@id/ivb_lapangan_img" />
 
             <TextView
-                android:id="@+id/bko_lapangan_slot"
+                android:id="@+id/ivb_lapangan_slot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -64,14 +67,16 @@
                 android:text="2 slot kosong"
                 android:textColor="@color/azure"
                 android:textSize="@dimen/_9ssp"
-                app:layout_constraintBottom_toBottomOf="@id/bko_lapangan_img"
-                app:layout_constraintStart_toStartOf="@id/bko_lapangan_name"
-                app:layout_constraintTop_toBottomOf="@id/bko_lapangan_name" />
+                app:layout_constraintBottom_toBottomOf="@id/ivb_lapangan_img"
+                app:layout_constraintStart_toStartOf="@id/ivb_lapangan_name"
+                app:layout_constraintTop_toBottomOf="@id/ivb_lapangan_name" />
 
             <ImageView
+                android:id="@+id/ivb_card_status"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:contentDescription="@string/alt_expanded_olahraga"
                 android:src="@drawable/ic_arrow_expanded"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,282 +84,23 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/bko_lapangan_img">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Pilih Jadwal yang Tersedia"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Pilih Jadwal yang Tersedia"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/booking_jadwal_height"
-                android:layout_marginBottom="@dimen/booking_jadwal_margin_bottom"
-                android:backgroundTint="@color/booking_card_background_selected"
-                app:cardCornerRadius="@dimen/booking_jadwal_radius"
-                app:strokeColor="@color/booking_card_stroke_selected"
-                app:strokeWidth="@dimen/booking_jadwal_stroke_selected">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/booking_jadwal_textsize_marginstart"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="06:00 - 07:00"
-                        android:textColor="@color/booking_textsize_color_textsize"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/booking_jadwal_textsize_marginend"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Rp. 75.000"
-                        android:textColor="@color/booking_textsize_color_textsize"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/img_check"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/img_check"
-                        android:layout_width="@dimen/booking_jadwal_image_size"
-                        android:layout_height="@dimen/booking_jadwal_image_size"
-                        android:layout_marginEnd="@dimen/booking_jadwal_image_marginend"
-                        android:contentDescription="@string/alt_checked"
-                        android:src="@drawable/ic_booking_checked"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/booking_jadwal_height"
-                android:layout_marginBottom="@dimen/booking_jadwal_margin_bottom"
-                app:cardCornerRadius="@dimen/booking_jadwal_radius"
-                app:strokeColor="@color/booking_card_stroke"
-                app:strokeWidth="@dimen/booking_jadwal_stroke">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/booking_jadwal_textsize_marginstart"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="07:00 - 08:00"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/booking_jadwal_textsize_marginend"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Rp. 75.000"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/img_check2"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/img_check2"
-                        android:layout_width="@dimen/booking_jadwal_image_size"
-                        android:layout_height="@dimen/booking_jadwal_image_size"
-                        android:layout_marginEnd="@dimen/booking_jadwal_image_marginend"
-                        android:contentDescription="@string/alt_checked"
-                        android:src="@drawable/ic_booking_unchecked"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/booking_jadwal_height"
-                android:layout_marginBottom="@dimen/booking_jadwal_margin_bottom"
-                app:cardCornerRadius="@dimen/booking_jadwal_radius"
-                app:strokeColor="@color/booking_card_stroke"
-                app:strokeWidth="@dimen/booking_jadwal_stroke">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/booking_jadwal_textsize_marginstart"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="08:00 - 09:00"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/booking_jadwal_textsize_marginend"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Rp. 75.000"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/img_check3"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/img_check3"
-                        android:layout_width="@dimen/booking_jadwal_image_size"
-                        android:layout_height="@dimen/booking_jadwal_image_size"
-                        android:layout_marginEnd="@dimen/booking_jadwal_image_marginend"
-                        android:contentDescription="@string/alt_checked"
-                        android:src="@drawable/ic_booking_unchecked"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/booking_jadwal_height"
-                android:layout_marginBottom="@dimen/booking_jadwal_margin_bottom"
-                app:cardCornerRadius="@dimen/booking_jadwal_radius"
-                app:strokeColor="@color/booking_card_stroke"
-                app:strokeWidth="@dimen/booking_jadwal_stroke">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/booking_jadwal_textsize_marginstart"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="09:00 - 10:00"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/booking_jadwal_textsize_marginend"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Rp. 75.000"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/img_check4"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/img_check4"
-                        android:layout_width="@dimen/booking_jadwal_image_size"
-                        android:layout_height="@dimen/booking_jadwal_image_size"
-                        android:layout_marginEnd="@dimen/booking_jadwal_image_marginend"
-                        android:contentDescription="@string/alt_checked"
-                        android:src="@drawable/ic_booking_unchecked"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/booking_jadwal_height"
-                android:layout_marginBottom="@dimen/booking_jadwal_margin_bottom"
-                app:cardCornerRadius="@dimen/booking_jadwal_radius"
-                app:strokeColor="@color/booking_card_stroke"
-                app:strokeWidth="@dimen/booking_jadwal_stroke">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/booking_jadwal_textsize_marginstart"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="10:00 - 11:00"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/booking_jadwal_textsize_marginend"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Rp. 75.000"
-                        android:textColor="@color/booking_textsize_color"
-                        android:textSize="@dimen/booking_jadwal_textsize"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/img_check5"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/img_check5"
-                        android:layout_width="@dimen/booking_jadwal_image_size"
-                        android:layout_height="@dimen/booking_jadwal_image_size"
-                        android:layout_marginEnd="@dimen/booking_jadwal_image_marginend"
-                        android:contentDescription="@string/alt_checked"
-                        android:src="@drawable/ic_booking_unchecked"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ivb_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_jadwal_picker" />
 
     </LinearLayout>
 
