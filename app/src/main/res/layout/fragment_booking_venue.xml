@@ -12,60 +12,341 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_60ssp"
-            android:background="@color/background_light">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical">
+            <HorizontalScrollView
+                android:id="@+id/date_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5ssp"
+                android:background="@color/background_light"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toStartOf="@id/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_42sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10ssp"
-                    android:backgroundTint="@color/white"
-                    app:cardCornerRadius="@dimen/_8sdp"
-                    app:strokeColor="#66696969"
-                    app:strokeWidth="@dimen/_1sdp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/booking_date_width"
+                        android:layout_height="@dimen/booking_date_height"
+                        android:layout_marginStart="@dimen/booking_date_margin_width"
+                        android:layout_marginEnd="@dimen/booking_date_margin_width"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="@dimen/booking_date_corner"
+                        app:strokeColor="@color/booking_date_stroke"
+                        app:strokeWidth="@dimen/booking_date_stroke">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/booking_date_day_top"
+                                android:layout_marginBottom="@dimen/booking_date_day_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Kam"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/booking_date_day_textsize" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/booking_date_date_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="30 Nov"
+                                android:textColor="@color/azure"
+                                android:textSize="@dimen/booking_date_date_texsize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/booking_date_width"
+                        android:layout_height="@dimen/booking_date_height"
+                        android:layout_marginStart="@dimen/booking_date_margin_width"
+                        android:layout_marginEnd="@dimen/booking_date_margin_width"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="@dimen/booking_date_corner"
+                        app:strokeColor="@color/booking_date_stroke"
+                        app:strokeWidth="@dimen/booking_date_stroke">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/booking_date_day_top"
+                                android:layout_marginBottom="@dimen/booking_date_day_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Kam"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/booking_date_day_textsize" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/booking_date_date_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="30 Nov"
+                                android:textColor="@color/azure"
+                                android:textSize="@dimen/booking_date_date_texsize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/booking_date_width"
+                        android:layout_height="@dimen/booking_date_height"
+                        android:layout_marginStart="@dimen/booking_date_margin_width"
+                        android:layout_marginEnd="@dimen/booking_date_margin_width"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="@dimen/booking_date_corner"
+                        app:strokeColor="@color/booking_date_stroke"
+                        app:strokeWidth="@dimen/booking_date_stroke">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/booking_date_day_top"
+                                android:layout_marginBottom="@dimen/booking_date_day_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Kam"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/booking_date_day_textsize" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/booking_date_date_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="30 Nov"
+                                android:textColor="@color/azure"
+                                android:textSize="@dimen/booking_date_date_texsize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/booking_date_width"
+                        android:layout_height="@dimen/booking_date_height"
+                        android:layout_marginStart="@dimen/booking_date_margin_width"
+                        android:layout_marginEnd="@dimen/booking_date_margin_width"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="@dimen/booking_date_corner"
+                        app:strokeColor="@color/booking_date_stroke"
+                        app:strokeWidth="@dimen/booking_date_stroke">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/booking_date_day_top"
+                                android:layout_marginBottom="@dimen/booking_date_day_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Kam"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/booking_date_day_textsize" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/booking_date_date_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="30 Nov"
+                                android:textColor="@color/azure"
+                                android:textSize="@dimen/booking_date_date_texsize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/booking_date_width"
+                        android:layout_height="@dimen/booking_date_height"
+                        android:layout_marginStart="@dimen/booking_date_margin_width"
+                        android:layout_marginEnd="@dimen/booking_date_margin_width"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="@dimen/booking_date_corner"
+                        app:strokeColor="@color/booking_date_stroke"
+                        app:strokeWidth="@dimen/booking_date_stroke">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/booking_date_day_top"
+                                android:layout_marginBottom="@dimen/booking_date_day_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Kam"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/booking_date_day_textsize" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/booking_date_date_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="30 Nov"
+                                android:textColor="@color/azure"
+                                android:textSize="@dimen/booking_date_date_texsize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/booking_date_width"
+                        android:layout_height="@dimen/booking_date_height"
+                        android:layout_marginStart="@dimen/booking_date_margin_width"
+                        android:layout_marginEnd="@dimen/booking_date_margin_width"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="@dimen/booking_date_corner"
+                        app:strokeColor="@color/booking_date_stroke"
+                        app:strokeWidth="@dimen/booking_date_stroke">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/booking_date_day_top"
+                                android:layout_marginBottom="@dimen/booking_date_day_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Kam"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/booking_date_day_textsize" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/booking_date_date_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="30 Nov"
+                                android:textColor="@color/azure"
+                                android:textSize="@dimen/booking_date_date_texsize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="@dimen/booking_date_width"
+                        android:layout_height="@dimen/booking_date_height"
+                        android:layout_marginStart="@dimen/booking_date_margin_width"
+                        android:layout_marginEnd="@dimen/booking_date_margin_width"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="@dimen/booking_date_corner"
+                        app:strokeColor="@color/booking_date_stroke"
+                        app:strokeWidth="@dimen/booking_date_stroke">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/booking_date_day_top"
+                                android:layout_marginBottom="@dimen/booking_date_day_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Kam"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/booking_date_day_textsize" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/booking_date_date_bottom"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="30 Nov"
+                                android:textColor="@color/azure"
+                                android:textSize="@dimen/booking_date_date_texsize" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        >
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="match_parent" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:gravity="center"
-                            android:text="Kam"
-                            android:textSize="@dimen/_9ssp"
-                            android:textColor="@color/black" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/_5sdp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:gravity="center"
-                            android:text="30 Nov"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/azure" />
+            </HorizontalScrollView>
 
-                    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/date"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                </com.google.android.material.card.MaterialCardView>
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:background="#80696969"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/ic_date_picker" />
 
             </LinearLayout>
 
-        </HorizontalScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

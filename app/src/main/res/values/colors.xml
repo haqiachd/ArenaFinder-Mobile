@@ -57,5 +57,6 @@
     <color name="booking_card_background_selected">#F8FCFD</color>
     <color name="booking_textsize_color">#CC02406D</color>
     <color name="booking_textsize_color_textsize">#3CA1EA</color>
+    <color name="booking_date_stroke">#66696969</color>
 
 </resources>

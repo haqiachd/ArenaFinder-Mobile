@@ -123,4 +123,15 @@
     <dimen name="booking_jadwal_image_size">@dimen/_18sdp</dimen>
     <dimen name="booking_jadwal_image_marginend">@dimen/_10ssp</dimen>
 
+    <dimen name="booking_date_width">@dimen/_48sdp</dimen>
+    <dimen name="booking_date_height">@dimen/_38sdp</dimen>
+    <dimen name="booking_date_margin_width">@dimen/_4sdp</dimen>
+    <dimen name="booking_date_corner">@dimen/_8sdp</dimen>
+    <dimen name="booking_date_stroke">@dimen/_1sdp</dimen>
+    <dimen name="booking_date_day_top">@dimen/_5sdp</dimen>
+    <dimen name="booking_date_day_bottom">@dimen/_1sdp</dimen>
+    <dimen name="booking_date_day_textsize">@dimen/_8ssp</dimen>
+    <dimen name="booking_date_date_bottom">@dimen/_5sdp</dimen>
+    <dimen name="booking_date_date_texsize">@dimen/_9ssp</dimen>
+
 </resources>
