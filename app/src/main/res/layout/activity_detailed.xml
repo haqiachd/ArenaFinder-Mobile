@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/detailed_mulai"
+            android:id="@+id/dtld_nav_txt_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_17sdp"
@@ -35,12 +35,12 @@
             android:text="Mulai dari"
             android:textColor="@color/dimgray"
             android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toTopOf="@id/detailed_harga"
+            app:layout_constraintBottom_toTopOf="@id/dtld_nav_txt_data"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detailed_line_top" />
 
         <TextView
-            android:id="@+id/detailed_harga"
+            android:id="@+id/dtld_nav_txt_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_20sdp"
@@ -49,11 +49,11 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_13sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/detailed_mulai"
-            app:layout_constraintTop_toBottomOf="@id/detailed_mulai" />
+            app:layout_constraintStart_toStartOf="@id/dtld_nav_txt_top"
+            app:layout_constraintTop_toBottomOf="@id/dtld_nav_txt_top" />
 
         <TextView
-            android:id="@+id/detailed_sesi"
+            android:id="@+id/dtld_nav_txt_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -61,12 +61,12 @@
             android:text="/ Sesi"
             android:textColor="@color/dimgray"
             android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toBottomOf="@id/detailed_harga"
-            app:layout_constraintStart_toEndOf="@id/detailed_harga"
-            app:layout_constraintTop_toTopOf="@id/detailed_harga" />
+            app:layout_constraintBottom_toBottomOf="@id/dtld_nav_txt_data"
+            app:layout_constraintStart_toEndOf="@id/dtld_nav_txt_data"
+            app:layout_constraintTop_toTopOf="@id/dtld_nav_txt_data" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/detailed_booking_btn"
+            android:id="@+id/dtld_nav_button"
             android:layout_width="@dimen/_90ssp"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_5sdp"

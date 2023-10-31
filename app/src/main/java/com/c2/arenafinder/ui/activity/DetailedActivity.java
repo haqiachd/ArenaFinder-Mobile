@@ -1,13 +1,9 @@
 package com.c2.arenafinder.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.fragment.detailed.ActivityDetailedFragment;
@@ -15,7 +11,6 @@ import com.c2.arenafinder.ui.fragment.detailed.BookingVenueFragment;
 import com.c2.arenafinder.ui.fragment.detailed.VenueDetailedFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 
 public class DetailedActivity extends AppCompatActivity {
@@ -28,12 +23,21 @@ public class DetailedActivity extends AppCompatActivity {
     public static final String VENUE = "venue";
     public static final String ACTIVITY = "activity";
 
+    private String idSelected;
+
+    private MaterialButton button;
+
+    private void initViews(){
+        button = findViewById(R.id.dtld_nav_button);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
+        initViews();
 
-        String idSelected = getIntent().getStringExtra(ID);
+         idSelected = getIntent().getStringExtra(ID);
 
         switch (getIntent().getStringExtra(FRAGMENT)) {
             case VENUE: {
@@ -54,19 +58,30 @@ public class DetailedActivity extends AppCompatActivity {
             }
         }
 
-        MaterialButton button = findViewById(R.id.detailed_booking_btn);
         button.setOnClickListener(v -> {
-            FragmentUtil.switchFragmentDetailed(
-                    this.getSupportFragmentManager(), BookingVenueFragment.newInstance(idSelected), true
-            );
+            switch (getSupportFragmentManager().getBackStackEntryCount()){
+                case 1 : {
+                    FragmentUtil.switchFragmentDetailed(
+                            this.getSupportFragmentManager(), BookingVenueFragment.newInstance(idSelected), true
+                    );
+                    break;
+                }
+                case 2 : {
+                    Toast.makeText(this, "YOU", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+            }
         });
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        super.onBackPressed();
+
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+            super.onBackPressed();
+            super.onBackPressed();
+        }else {
+            super.onBackPressed();
+        }
     }
-
-
 }

@@ -2,9 +2,11 @@ package com.c2.arenafinder.ui.fragment.detailed;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;

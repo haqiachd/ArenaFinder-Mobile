@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,8 +14,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.ui.activity.MainActivity;
-import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -98,6 +95,7 @@ public class VenueDetailedFragment extends Fragment {
     public void onResume() {
         super.onResume();
         scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
+        ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
     }
 
     @Override
