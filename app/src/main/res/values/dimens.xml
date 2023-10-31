@@ -134,4 +134,7 @@
     <dimen name="booking_date_date_bottom">@dimen/_5sdp</dimen>
     <dimen name="booking_date_date_texsize">@dimen/_9ssp</dimen>
 
+    <dimen name="sheet_corner">@dimen/_33sdp</dimen>
+    <dimen name="sheet_padding">@dimen/_19sdp</dimen>
+
 </resources>

@@ -182,6 +182,7 @@
     <string name="alt_expanded_olahraga">Expanded</string>
     <string name="alt_date_picker">Date Picker</string>
     <string name="alt_lapangan_image">Lapangan</string>
+    <string name="alt_bottom_sheet_line_indicator">line indicator</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_ya">IYA</string>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <solid android:color="@color/white"/>
+
+    <corners
+        android:topLeftRadius="@dimen/sheet_corner"
+        android:topRightRadius="@dimen/sheet_corner"
+        />
+
+    <padding
+        android:left="@dimen/sheet_padding"
+        android:right="@dimen/sheet_padding"
+        android:top="@dimen/sheet_padding"
+        android:bottom="@dimen/sheet_padding"
+        />
+
+</shape>
