@@ -8,12 +8,15 @@ public class JadwalPickerModel {
 
     private int price;
 
+    private boolean isBooked;
+
     private boolean selected;
 
-    public JadwalPickerModel(int idJadwal, String session, int price, boolean selected) {
+    public JadwalPickerModel(int idJadwal, String session, int price, boolean isBooked, boolean selected) {
         this.idJadwal = idJadwal;
         this.session = session;
         this.price = price;
+        this.isBooked = isBooked;
         this.selected = selected;
     }
 
@@ -45,7 +48,16 @@ public class JadwalPickerModel {
         return selected;
     }
 
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
+    }
+
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
 }

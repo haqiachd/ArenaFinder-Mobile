@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/_10sdp"
-    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_4sdp"
     android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
     android:elevation="@dimen/_30sdp"
     app:cardCornerRadius="@dimen/_20sdp"
     app:strokeColor="#33696969"
@@ -84,23 +85,33 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/ivb_jadwal_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="Pilih Jadwal yang Tersedia"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp" />
+            android:visibility="gone"
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ivb_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_jadwal_picker" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Pilih Jadwal yang Tersedia"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ivb_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_jadwal_picker" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

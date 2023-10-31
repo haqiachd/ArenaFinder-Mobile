@@ -55,16 +55,16 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_55sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:background="@color/background_light"
         tools:context=".ui.fragment.detailed.BookingVenueFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_55sdp"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,6 +76,7 @@
                     android:id="@+id/fbv_recycler_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_7ssp"
                     android:orientation="horizontal"
@@ -92,7 +93,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintBottom_toBottomOf="@id/fbv_recycler_date"
+                    app:layout_constraintTop_toTopOf="@id/fbv_recycler_date"
+                    >
 
                     <View
                         android:layout_width="@dimen/_1sdp"
@@ -117,19 +120,18 @@
                 android:id="@+id/fbv_recycler_lapangan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
                 tools:listitem="@layout/item_venue_booking"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="@dimen/_70sdp"
                 tools:ignore="UselessLeaf" />
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

@@ -8,10 +8,13 @@ public class DatePickerModel {
 
     private String dateMonth;
 
-    public DatePickerModel(String date, String dayName, String dateMonth) {
+    private boolean clicked;
+
+    public DatePickerModel(String date, String dayName, String dateMonth, boolean clicked) {
         this.date = date;
         this.dayName = dayName;
         this.dateMonth = dateMonth;
+        this.clicked = clicked;
     }
 
     public String getDate() {
@@ -36,5 +39,13 @@ public class DatePickerModel {
 
     public void setDateMonth(String dateMonth) {
         this.dateMonth = dateMonth;
+    }
+
+    public boolean isClicked() {
+        return clicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        this.clicked = clicked;
     }
 }

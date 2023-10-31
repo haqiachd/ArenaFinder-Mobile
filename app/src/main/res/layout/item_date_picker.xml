@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView android:layout_width="@dimen/booking_date_width"
-    android:layout_height="@dimen/booking_date_height"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/idp_card"
+    android:layout_width="@dimen/booking_date_width"
+    android:layout_height="@dimen/booking_date_height"
     android:layout_marginStart="@dimen/booking_date_margin_width"
     android:layout_marginEnd="@dimen/booking_date_margin_width"
-    android:backgroundTint="@color/white"
+    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="@dimen/booking_date_corner"
     app:strokeColor="@color/booking_date_stroke"
-    app:strokeWidth="@dimen/booking_date_stroke"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:strokeWidth="@dimen/booking_date_stroke">
 
     <LinearLayout
         android:layout_width="match_parent"
