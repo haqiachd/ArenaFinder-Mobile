@@ -1,0 +1,135 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_7ssp"
+    android:layout_marginEnd="@dimen/_5sdp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivr_review_photo"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:src="@drawable/img_dani"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ivr_review_fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Syamaidzar Adani Syah"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11sdp"
+        app:layout_constraintBottom_toTopOf="@id/ivr_review_username"
+        app:layout_constraintStart_toEndOf="@id/ivr_review_photo"
+        app:layout_constraintTop_toTopOf="@id/ivr_review_photo" />
+
+    <TextView
+        android:id="@+id/ivr_review_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:fontFamily="@font/opensans_semibold"
+        android:text="\@syam_gimank"
+        android:textColor="@color/dimgray"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@id/ivr_review_photo"
+        app:layout_constraintStart_toEndOf="@id/ivr_review_photo"
+        app:layout_constraintTop_toBottomOf="@id/ivr_review_fullname" />
+
+    <ImageView
+        android:id="@+id/ivr_vertical_menu"
+        android:layout_width="@dimen/_16sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:contentDescription="@string/alt_vertical_menu"
+        android:src="@drawable/ic_menu_vertical_2"
+        app:layout_constraintBottom_toBottomOf="@id/ivr_review_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivr_review_photo" />
+
+    <LinearLayout
+        android:id="@+id/ivr_review_value"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/detailed_review_star_size"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivr_review_photo">
+
+        <ImageView
+            android:id="@+id/ivr_ratting_1"
+            android:layout_width="@dimen/detailed_review_star_size"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/detailed_star_margin"
+            android:contentDescription="@string/txt_ratting_1"
+            android:src="@drawable/ic_review_star_yellow_empty" />
+
+        <ImageView
+            android:id="@+id/ivr_ratting_2"
+            android:layout_width="@dimen/detailed_review_star_size"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/detailed_star_margin"
+            android:contentDescription="@string/txt_ratting_2"
+            android:src="@drawable/ic_review_star_yellow_empty" />
+
+        <ImageView
+            android:id="@+id/ivr_ratting_3"
+            android:layout_width="@dimen/detailed_review_star_size"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/detailed_star_margin"
+            android:contentDescription="@string/txt_ratting_3"
+            android:src="@drawable/ic_review_star_yellow_empty" />
+
+        <ImageView
+            android:id="@+id/ivr_ratting_4"
+            android:layout_width="@dimen/detailed_review_star_size"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/detailed_star_margin"
+            android:contentDescription="@string/txt_ratting_4"
+            android:src="@drawable/ic_review_star_yellow_empty" />
+
+        <ImageView
+            android:id="@+id/ivr_ratting_5"
+            android:layout_width="@dimen/detailed_review_star_size"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/detailed_star_margin"
+            android:contentDescription="@string/txt_ratting_5"
+            android:src="@drawable/ic_review_star_yellow_empty" />
+
+        <TextView
+            android:id="@+id/ivr_ratting_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="- 23 Oktober 2023"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9ssp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ivr_review_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/txt_lorem_deksripsi_def"
+        android:textColor="@color/dimgray"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintTop_toBottomOf="@id/ivr_review_value" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="#2E696969"
+        app:layout_constraintTop_toBottomOf="@id/ivr_review_comment" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
