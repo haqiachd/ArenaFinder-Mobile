@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
@@ -23,7 +24,9 @@ import com.c2.arenafinder.ui.adapter.JadwalPickerAdapter;
 import com.c2.arenafinder.ui.adapter.VenueBookingAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.google.android.material.button.MaterialButton;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +37,8 @@ public class BookingVenueFragment extends Fragment {
     private static final String ARG_ID = "id";
 
     private String id;
+
+    private VenueBookingAdapter venueBookingAdapter;
 
     private RecyclerView recyclerDate, recyclerVenue;
 
@@ -79,6 +84,7 @@ public class BookingVenueFragment extends Fragment {
 
         showDatePicker();
         showBookingVenue();
+        updateBottomNav(0);
     }
 
     private void showDatePicker() {
@@ -119,9 +125,18 @@ public class BookingVenueFragment extends Fragment {
     private void showBookingVenue(){
 
         ArrayList<JadwalPickerModel> pickerModels = new ArrayList<>();
-        pickerModels.add(new JadwalPickerModel(1, "07:00 - 08:000", 75000, false,false));
-        pickerModels.add(new JadwalPickerModel(1, "07:00 - 08:000", 75000, false,false));
-        pickerModels.add(new JadwalPickerModel(1, "07:00 - 08:000", 75000, false,false));
+        pickerModels.add(new JadwalPickerModel(1, "07:00 - 08:00", 75000, false,false));
+        pickerModels.add(new JadwalPickerModel(1, "08:00 - 09:00", 75000, false,false));
+        pickerModels.add(new JadwalPickerModel(1, "09:00 - 10:00", 75000, false,false));
+        pickerModels.add(new JadwalPickerModel(1, "10:00 - 11:00", 75000, false,false));
+        pickerModels.add(new JadwalPickerModel(1, "11:00 - 12:00", 75000, false,false));
+        pickerModels.add(new JadwalPickerModel(1, "12:00 - 13:00", 75000, false,false));
+
+        ArrayList<JadwalPickerModel> pickerModels1 = new ArrayList<>();
+        pickerModels1.add(new JadwalPickerModel(1, "10:00 - 11:00", 75000, false,false));
+        pickerModels1.add(new JadwalPickerModel(1, "11:00 - 12:00", 75000, false,false));
+        pickerModels1.add(new JadwalPickerModel(1, "12:00 - 13:00", 75000, false,false));
+
 
         ArrayList<VenueBookingModel> bookingModels = new ArrayList<>();
 
@@ -129,17 +144,38 @@ public class BookingVenueFragment extends Fragment {
                 1, "", "Lapangan 1", "11 Slot Kosong", pickerModels
 
         ));
-        bookingModels.add(new VenueBookingModel(
-                2, "", "Lapangan 2", "12 Slot Kosong", pickerModels
+//        bookingModels.add(new VenueBookingModel(
+//                2, "", "Lapangan 2", "12 Slot Kosong", pickerModels1
+//
+//        ));
 
-        ));
-
-        recyclerVenue.setAdapter(new VenueBookingAdapter(requireContext(), bookingModels, new AdapterActionListener() {
+        this.venueBookingAdapter = new VenueBookingAdapter(requireContext(), bookingModels, new AdapterActionListener() {
             @Override
             public void onClickListener(int position) {
-
+                updateBottomNav(venueBookingAdapter.getSelectedItem());
             }
-        }));
+        });
+
+        recyclerVenue.setAdapter(venueBookingAdapter);
 
     }
+
+    private void updateBottomNav(int item){
+        if (getActivity() != null){
+            TextView txtTop, txtData, txtRight;
+            MaterialButton button;
+            txtTop = getActivity().findViewById(R.id.dtld_nav_txt_top);
+            txtRight = getActivity().findViewById(R.id.dtld_nav_txt_right);
+            txtData = getActivity().findViewById(R.id.dtld_nav_txt_data);
+            button = getActivity().findViewById(R.id.dtld_nav_button);
+
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
+
+            txtTop.setText("Total Harga");
+            txtRight.setText(" dari " + item + " Jadwal");
+            txtData.setText("Rp. " + (decimalFormat.format(75_000 * item)));
+            button.setText("PESAN");
+        }
+    }
+
 }

@@ -104,6 +104,7 @@ public class SignInFragment extends Fragment {
         dataShared = new DataShared(requireContext());
         validator = new ValidatorUtil(requireContext(), btnLogin, txtHelper);
 
+
         String btnRegisterTxt = getString(R.string.txt_register_here);
         String btnLupaPasswordTxt = getString(R.string.txt_forgot_pass);
 

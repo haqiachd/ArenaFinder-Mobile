@@ -130,27 +130,27 @@ public class ReferensiFragment extends Fragment {
     private void venueRattingData() {
         venueRattingModels = new ArrayList<>();
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 5.0F,
+                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 5.0F,
                 "Disewakan", "1.2 Rb Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.9F,
+                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.9F,
                 "Gratis", "932 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
                 "Disewakan", "802 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.8F,
+                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.8F,
                 "Berbayar", "311 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
                 "Bervariasi", "120 Ulasan"
         ));
         venueRattingModels.add(new VenueFirstModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
                 "Gratis", "83 Ulasan"
         ));
 
@@ -247,27 +247,27 @@ public class ReferensiFragment extends Fragment {
         ArrayList<VenueFirstModel> venueGratisModels = new ArrayList<>();
 
         venueGratisModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
                 "Gratis", "Mulai dari Rp. 50.000"
         ));
         venueGratisModels.add(new VenueFirstModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
                 "Gratis", "Tidak perlu bayar"
         ));
         venueGratisModels.add(new VenueFirstModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
                 "Gratis", "Rp. 90.000 / Sesi"
         ));
         venueGratisModels.add(new VenueFirstModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
                 "Gratis", "Harga Bervariasi"
         ));
         venueGratisModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
                 "Gratis", "Rp. 275.000 / Sesi"
         ));
         venueGratisModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
                 "Gratis", "Tidak perlu bayar"
         ));
 
@@ -283,27 +283,27 @@ public class ReferensiFragment extends Fragment {
         ArrayList<VenueFirstModel> venueBerbayarModels = new ArrayList<>();
 
         venueBerbayarModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
                 "Berbayar", "Mulai dari Rp. 50.000"
         ));
         venueBerbayarModels.add(new VenueFirstModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
                 "Berbayar", "Tidak perlu bayar"
         ));
         venueBerbayarModels.add(new VenueFirstModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
                 "Berbayar", "Rp. 90.000 / Sesi"
         ));
         venueBerbayarModels.add(new VenueFirstModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
                 "Berbayar", "Harga Bervariasi"
         ));
         venueBerbayarModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
                 "Berbayar", "Rp. 275.000 / Sesi"
         ));
         venueBerbayarModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
                 "Berbayar", "Tidak perlu bayar"
         ));
 
@@ -319,27 +319,27 @@ public class ReferensiFragment extends Fragment {
         ArrayList<VenueFirstModel> venueDisewakanModels = new ArrayList<>();
 
         venueDisewakanModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
                 "Disewakan", "Mulai dari Rp. 50.000"
         ));
         venueDisewakanModels.add(new VenueFirstModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
                 "Disewakan", "Tidak perlu bayar"
         ));
         venueDisewakanModels.add(new VenueFirstModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
                 "Disewakan", "Rp. 90.000 / Sesi"
         ));
         venueDisewakanModels.add(new VenueFirstModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                1, "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
                 "Disewakan", "Harga Bervariasi"
         ));
         venueDisewakanModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
                 "Disewakan", "Rp. 275.000 / Sesi"
         ));
         venueDisewakanModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
                 "Disewakan", "Tidak perlu bayar"
         ));
 

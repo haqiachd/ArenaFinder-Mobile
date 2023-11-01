@@ -4,20 +4,24 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.model.JadwalPickerModel;
 import com.c2.arenafinder.data.model.VenueBookingModel;
 import com.c2.arenafinder.util.AdapterActionListener;
 
 import java.util.ArrayList;
 
-import kotlin.jvm.internal.Lambda;
 
-public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapter.ViewHolder>{
+public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapter.ViewHolder> {
 
     private final Context context;
 
@@ -25,7 +29,9 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
 
     private final AdapterActionListener listener;
 
-    public VenueBookingAdapter(Context context, ArrayList<VenueBookingModel> models, AdapterActionListener listener){
+    private JadwalPickerAdapter jadwalPickerAdapter;
+
+    public VenueBookingAdapter(Context context, ArrayList<VenueBookingModel> models, AdapterActionListener listener) {
         this.context = context;
         this.models = models;
         this.listener = listener;
@@ -48,12 +54,26 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         holder.txtNamaLapangan.setText(bookingModel.getLapanganName());
         holder.txtSlotKosong.setText(bookingModel.getTotalSlot());
 
-        holder.recyclerJadwal.setAdapter(new JadwalPickerAdapter(context, bookingModel.getJadwal(), new AdapterActionListener() {
-            @Override
-            public void onClickListener(int position) {
-                AdapterActionListener.super.onClickListener(position);
-            }
-        }));
+        if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+            holder.lapanganLayout.setOnClickListener(v -> {
+                if (holder.jadwalPickerLayout.getVisibility() == View.VISIBLE) {
+                    holder.jadwalPickerLayout.setVisibility(View.GONE);
+                    holder.imgStatus.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_expanded));
+                } else {
+                    holder.jadwalPickerLayout.setVisibility(View.VISIBLE);
+                    holder.imgStatus.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_collapse));
+                }
+            });
+
+            jadwalPickerAdapter = new JadwalPickerAdapter(context, models.get(position).getJadwal(), new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    listener.onClickListener(position);
+                }
+            });
+
+            holder.recyclerJadwal.setAdapter(jadwalPickerAdapter);
+        }
 
     }
 
@@ -62,18 +82,33 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         return models != null ? models.size() : 0;
     }
 
+    public int getSelectedItem() {
+        return jadwalPickerAdapter.getSelectedItem();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView txtNamaLapangan, txtSlotKosong;
+        private final ConstraintLayout lapanganLayout;
 
-        private RecyclerView recyclerJadwal;
+        private final LinearLayout jadwalPickerLayout;
+
+        private final TextView txtNamaLapangan, txtSlotKosong;
+
+        private final ImageView imgStatus;
+
+        private final RecyclerView recyclerJadwal;
 
         public ViewHolder(View view) {
             super(view);
 
+            lapanganLayout = view.findViewById(R.id.ivb_lapangan_layout);
+            jadwalPickerLayout = view.findViewById(R.id.ivb_jadwal_picker);
             txtNamaLapangan = view.findViewById(R.id.ivb_lapangan_name);
             txtSlotKosong = view.findViewById(R.id.ivb_lapangan_slot);
             recyclerJadwal = view.findViewById(R.id.ivb_recycler);
+            imgStatus = view.findViewById(R.id.ivb_card_status);
+
+
         }
 
     }

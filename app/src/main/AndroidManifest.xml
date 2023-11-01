@@ -21,7 +21,9 @@
         tools:targetApi="34">
         <activity
             android:name=".ui.activity.DetailedActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

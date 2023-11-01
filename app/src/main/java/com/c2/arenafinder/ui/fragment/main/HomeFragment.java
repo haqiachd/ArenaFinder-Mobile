@@ -22,8 +22,11 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasFirstModel;
@@ -32,6 +35,8 @@ import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.data.model.VenueSecondModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
+import com.c2.arenafinder.data.response.ArenaFinderResponse;
+import com.c2.arenafinder.data.response.VenueResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
@@ -46,6 +51,10 @@ import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
@@ -315,64 +324,57 @@ public class HomeFragment extends Fragment {
 
     private void veneuBaruData() {
         venueBaruModels = new ArrayList<>();
-        venueBaruModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Disewakan", "Rp. 275.000 / Sesi"
-        ));
-        venueBaruModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Gratis", "Tidak perlu bayar"
-        ));
-        venueBaruModels.add(new VenueFirstModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "Rp. 90.000 / Sesi"
-        ));
-        venueBaruModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Berbayar", "Mulai dari Rp. 50.000"
-        ));
-        venueBaruModels.add(new VenueFirstModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Bervariasi", "Harga Bervariasi"
-        ));
-        venueBaruModels.add(new VenueFirstModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Gratis", "Tidak perlu bayar"
-        ));
 
-        venueBaruAdapter = new VenueFirstAdapter(requireContext(), venueBaruModels);
-        venueBaruRecycler.setAdapter(venueBaruAdapter);
+        RetrofitClient.getInstance().getVenueBaru().enqueue(new Callback<VenueResponse>() {
+            @Override
+            public void onResponse(Call<VenueResponse> call, Response<VenueResponse> response) {
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                    venueBaruModels = response.body().getData();
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, venueBaruModels.size(), R.dimen.card_venue_width_java);
-        LogApp.error(requireContext(), LogTag.LIFEFCYLE, "venue baru");
+                    venueBaruAdapter = new VenueFirstAdapter(requireContext(), venueBaruModels);
+                    venueBaruRecycler.setAdapter(venueBaruAdapter);
+
+                    ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, venueBaruModels.size(), R.dimen.card_venue_width_java);
+                    LogApp.error(requireContext(), LogTag.LIFEFCYLE, "venue baru");
+                }else {
+                    Toast.makeText(requireContext(), "Gagal -> " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VenueResponse> call, Throwable t) {
+                Toast.makeText(requireContext(), "Error -> " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
     private void buatkamuData() {
         buatKamuModels = new ArrayList<>();
         buatKamuModels.add(new VenueFirstModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
                 "Disewakan", "Rp. 90.000 / Sesi"
         ));
         buatKamuModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
                 "Disewakan", "Rp. 275.000 / Sesi"
         ));
         buatKamuModels.add(new VenueFirstModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
                 "Bervariasi", "Harga Bervariasi"
         ));
 
         buatKamuModels.add(new VenueFirstModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
                 "Gratis", "Tidak perlu bayar"
         ));
         buatKamuModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
                 "Gratis", "Tidak perlu bayar"
         ));
         buatKamuModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
                 "Berbayar", "Mulai dari Rp. 50.000"
         ));
 
@@ -400,27 +402,27 @@ public class HomeFragment extends Fragment {
     private void venueTerdekatData() {
         venueBaruModels = new ArrayList<>();
         venueBaruModels.add(new VenueFirstModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
+                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
                 "Berbayar", "Mulai dari Rp. 50.000"
         ));
         venueBaruModels.add(new VenueFirstModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
+                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
                 "Gratis", "Tidak perlu bayar"
         ));
         venueBaruModels.add(new VenueFirstModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
+                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
                 "Disewakan", "Rp. 90.000 / Sesi"
         ));
         venueBaruModels.add(new VenueFirstModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
+                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
                 "Bervariasi", "Harga Bervariasi"
         ));
         venueBaruModels.add(new VenueFirstModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
+                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
                 "Disewakan", "Rp. 275.000 / Sesi"
         ));
         venueBaruModels.add(new VenueFirstModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
+                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
                 "Gratis", "Tidak perlu bayar"
         ));
 

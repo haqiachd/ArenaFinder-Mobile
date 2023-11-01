@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.button.MaterialButton;
 
 public class VenueDetailedFragment extends Fragment {
 
@@ -88,7 +89,7 @@ public class VenueDetailedFragment extends Fragment {
             }
         };
 
-
+        updateBottomNav();
     }
 
     @Override
@@ -96,6 +97,7 @@ public class VenueDetailedFragment extends Fragment {
         super.onResume();
         scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
         ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
+        updateBottomNav();
     }
 
     @Override
@@ -103,4 +105,23 @@ public class VenueDetailedFragment extends Fragment {
         super.onPause();
         scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
     }
+
+
+    private void updateBottomNav(){
+        if (getActivity() != null){
+            TextView txtTop, txtData, txtRight;
+            MaterialButton button;
+            txtTop = getActivity().findViewById(R.id.dtld_nav_txt_top);
+            txtRight = getActivity().findViewById(R.id.dtld_nav_txt_right);
+            txtData = getActivity().findViewById(R.id.dtld_nav_txt_data);
+            button = getActivity().findViewById(R.id.dtld_nav_button);
+
+            txtTop.setText("Mulai dari");
+            txtRight.setText(" / Sesi");
+            txtData.setText("Rp. 75.000");
+            button.setText("BOOKING");
+        }
+    }
+
+
 }
