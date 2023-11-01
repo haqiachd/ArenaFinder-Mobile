@@ -1,19 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_bottom_sheet">
+
 
     <ImageView
         android:id="@+id/sca_line_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_sheet_line_indicator"
         android:contentDescription="@string/alt_bottom_sheet_line_indicator"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_sheet_line_indicator"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scp_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/txt_pilih_metode_bayar"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintTop_toBottomOf="@id/sca_line_indicator" />
+
+
+    <LinearLayout
+        android:id="@+id/scp_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/scp_title">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:strokeColor="@color/azure"
+            app:strokeWidth="@dimen/_2sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/cod_icon"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/ic_money"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center_vertical"
+                    android:text="Bayar ditempat"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintStart_toEndOf="@id/cod_icon" />
+
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/ic_indicator_selected"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/scp_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="#4D696969"
+        app:layout_constraintTop_toBottomOf="@id/scp_method" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/scp_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/btn_custom_account"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_12ssp"
+        app:cornerRadius="@dimen/_10sdp"
+        android:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scp_line"
+        app:strokeColor="@color/primary_color"
+        app:strokeWidth="@dimen/_2sdp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
