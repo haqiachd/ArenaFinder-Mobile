@@ -128,6 +128,8 @@
     <string name="txt_ratting_def">4.8</string>
     <string name="txt_view_def">32 x Dilihat</string>
     <string name="txt_shared_def">4 x Dibagikan</string>
+    <string name="txt_pilih_metode_bayar">Pilih Metode Pembayaran</string>
+    <string name="txt_review_username">\@ %1$s</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
     <string name="txt_venue_status_gratis">Gratis</string>
@@ -183,6 +185,8 @@
     <string name="alt_date_picker">Date Picker</string>
     <string name="alt_lapangan_image">Lapangan</string>
     <string name="alt_bottom_sheet_line_indicator">line indicator</string>
+    <string name="alt_vertical_menu">Vertical Menu</string>
+    <string name="alt_whatsapp">WA</string>
 
     <string name="dia_positive_ok">OK</string>
     <string name="dia_positive_ya">IYA</string>

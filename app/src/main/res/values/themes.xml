@@ -23,4 +23,18 @@
         <item name="android:navigationBarColor">@color/biru_gelap</item>
     </style>
 
+    <!--  animasi bottom sheet dialog   -->
+    <style name="BottomSheetAnim">
+        <item name="android:windowEnterAnimation">@anim/anim_sheet_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/anim_sheet_out_bottom</item>
+    </style>
+
+    <style name="BottomSheetTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="backgroundTint">@color/transparent</item>
+    </style>
+
 </resources>
