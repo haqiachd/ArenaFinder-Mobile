@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.ParseException;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -30,6 +31,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ArenaFinder {
 
@@ -88,6 +93,19 @@ public class ArenaFinder {
 
     public static void VibratorToast(Context context, @StringRes int msg, int toastLong, int vibratorLong){
         VibratorToast(context, context.getString(msg), toastLong, vibratorLong);
+    }
+
+    public static String convertToDate(@NonNull String date){
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        try {
+            Date inputDate = inputDateFormat.parse(date);
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("id"));
+            assert inputDate != null;
+            return outputDateFormat.format(inputDate);
+        } catch (ParseException | java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return inputDateFormat.toString();
     }
 
     public static void setRecyclerWidthByItem(
