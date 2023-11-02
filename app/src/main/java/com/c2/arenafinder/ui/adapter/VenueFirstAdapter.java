@@ -16,18 +16,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
+import com.c2.arenafinder.util.AdapterActionListener;
 
 import java.util.ArrayList;
 
 public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.ViewHolder> {
 
     private final Context context;
-    private final ArrayList<VenueFirstModel> models;
 
-    public VenueFirstAdapter(Context context, ArrayList<VenueFirstModel> models){
+    private final ArrayList<ReferensiModel> models;
+
+    private final AdapterActionListener listener;
+
+    public VenueFirstAdapter(Context context, ArrayList<ReferensiModel> models, AdapterActionListener listener){
         this.context = context;
         this.models = models;
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,18 +50,17 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get data
-        VenueFirstModel kosongModel = models.get(position);
+        ReferensiModel kosongModel = models.get(position);
 
         // show data
         holder.txtNama.setText(kosongModel.getVenueName());
-        holder.txtSport.setText(kosongModel.getVenueSport());
-        holder.txtRatting.setText(String.valueOf(kosongModel.getVenueRatting()));
-        holder.txtStatus.setText(kosongModel.getVenueStatus());
-        holder.txtDesc.setText(kosongModel.getVenueDesc());
-        holder.setImage(kosongModel.getVenueImage());
+        holder.txtSport.setText(kosongModel.getSport());
+        holder.txtRatting.setText(String.valueOf(kosongModel.getRating()));
+        holder.txtStatus.setText(kosongModel.getStatus());
+        holder.setImage(kosongModel.getVenuePhoto());
 
         // change status venue color
-        switch (kosongModel.getVenueStatus().toLowerCase()){
+        switch (kosongModel.getStatus().toLowerCase()){
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
                 break;
@@ -71,6 +78,14 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
                 break;
             }
         }
+
+        if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+            holder.itemView.setOnClickListener(v -> {
+                LogApp.info(context, LogTag.ON_CLICK, "adapter clicked on -> " + holder.getAdapterPosition());
+                listener.onClickListener(holder.getAdapterPosition());
+            });
+        }
+
     }
 
     @Override

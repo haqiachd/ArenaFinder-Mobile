@@ -16,7 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
+import com.c2.arenafinder.util.AdapterActionListener;
 
 import java.util.ArrayList;
 
@@ -24,11 +28,14 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
 
     private final Context context;
 
-    private final ArrayList<VenueThirdModel> models;
+    private final ArrayList<ReferensiModel> models;
 
-    public VenueThirdAdapter(Context context, ArrayList<VenueThirdModel> models){
+    private final AdapterActionListener listener;
+
+    public VenueThirdAdapter(Context context, ArrayList<ReferensiModel> models, AdapterActionListener listener){
         this.context = context;
         this.models = models;
+        this.listener = listener;
     }
 
     @NonNull
@@ -43,18 +50,17 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        VenueThirdModel model = models.get(position);
+        ReferensiModel model = models.get(position);
 
         holder.txtNama.setText(model.getVenueName());
-        holder.txtStatus.setText(model.getVenueStatus());
-        holder.txtSport.setText(model.getVenueSport());
-        holder.txtRatting.setText(String.valueOf(model.getVenueRatting()));
-        holder.txtDesc.setText(model.getVenueDesc());
+        holder.txtStatus.setText(model.getStatus());
+        holder.txtSport.setText(model.getSport());
+        holder.txtRatting.setText(String.valueOf(model.getRating()));
 
-        holder.setImage(model.getVenueImage());
+        holder.setImage(model.getVenuePhoto());
 
         // change status venue color
-        switch (model.getVenueStatus().toLowerCase()){
+        switch (model.getStatus().toLowerCase()){
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
                 break;
@@ -71,6 +77,14 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
                 holder.setStatusColor(context, R.drawable.bg_venue_status_variasi, R.color.venue_status_bervariasi);
                 break;
             }
+        }
+
+        // action listener
+        if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+            holder.itemView.setOnClickListener(v -> {
+                LogApp.info(context, LogTag.ON_CLICK, "adapter clicked on -> " + holder.getAdapterPosition());
+                listener.onClickListener(position);
+            });
         }
 
     }
