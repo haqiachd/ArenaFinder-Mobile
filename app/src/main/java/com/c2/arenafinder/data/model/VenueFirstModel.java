@@ -22,7 +22,7 @@ public class VenueFirstModel {
     public String venueSport;
 
     @Expose
-    @SerializedName("ratting")
+    @SerializedName("rating")
     public float venueRatting;
 
     @Expose

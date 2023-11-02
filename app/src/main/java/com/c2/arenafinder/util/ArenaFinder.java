@@ -18,12 +18,10 @@ import android.widget.Toast;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
-import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;

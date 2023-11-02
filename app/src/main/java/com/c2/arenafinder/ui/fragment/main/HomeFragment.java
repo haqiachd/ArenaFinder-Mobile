@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.api.retrofit.RetrofitEndPoint;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasFirstModel;
@@ -35,7 +34,6 @@ import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.data.model.VenueSecondModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
-import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.VenueResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;

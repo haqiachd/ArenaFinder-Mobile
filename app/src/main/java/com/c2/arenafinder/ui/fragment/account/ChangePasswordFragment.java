@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.response.UsersResponse;
-import com.c2.arenafinder.ui.activity.AccountActivity;
 import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.custom.ButtonAccountCustom;
 import com.c2.arenafinder.ui.fragment.empty.AccountMessageFragment;

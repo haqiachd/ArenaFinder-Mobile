@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.google.android.material.card.MaterialCardView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;

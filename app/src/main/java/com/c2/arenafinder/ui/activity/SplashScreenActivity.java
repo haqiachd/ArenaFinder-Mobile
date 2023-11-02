@@ -1,6 +1,5 @@
 package com.c2.arenafinder.ui.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import android.annotation.SuppressLint;
@@ -8,8 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -20,13 +17,9 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
-import com.c2.arenafinder.data.model.NotifResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.util.ArenaFinder;
-import com.c2.arenafinder.util.MyFirebaseMessagingService;
 import com.c2.arenafinder.util.UsersUtil;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

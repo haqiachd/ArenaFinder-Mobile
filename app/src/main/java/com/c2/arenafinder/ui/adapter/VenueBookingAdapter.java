@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.data.model.JadwalPickerModel;
 import com.c2.arenafinder.data.model.VenueBookingModel;
 import com.c2.arenafinder.util.AdapterActionListener;
 

@@ -2,11 +2,9 @@ package com.c2.arenafinder.ui.fragment.detailed;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleObserver;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -20,7 +18,6 @@ import com.c2.arenafinder.data.model.DatePickerModel;
 import com.c2.arenafinder.data.model.JadwalPickerModel;
 import com.c2.arenafinder.data.model.VenueBookingModel;
 import com.c2.arenafinder.ui.adapter.DatePickerAdapter;
-import com.c2.arenafinder.ui.adapter.JadwalPickerAdapter;
 import com.c2.arenafinder.ui.adapter.VenueBookingAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
