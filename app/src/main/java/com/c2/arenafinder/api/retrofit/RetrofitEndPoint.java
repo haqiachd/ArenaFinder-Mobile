@@ -3,7 +3,7 @@ package com.c2.arenafinder.api.retrofit;
 import com.c2.arenafinder.data.model.NotifResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
-import com.c2.arenafinder.data.response.VenueResponse;
+import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 
 import retrofit2.Call;
@@ -108,5 +108,8 @@ public interface RetrofitEndPoint {
     );
 
     @GET("feature/venue_baru.php")
-    Call<VenueResponse> getVenueBaru();
+    Call<ReferensiResponse> getVenueBaru();
+
+    @GET("page/referensi.php")
+    Call<ReferensiResponse> referensiPage();
 }
