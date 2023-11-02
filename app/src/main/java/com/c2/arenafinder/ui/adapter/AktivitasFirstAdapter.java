@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.AktivitasFirstModel;
+import com.c2.arenafinder.data.model.AktivitasModel;
+import com.c2.arenafinder.util.AdapterActionListener;
 
 import java.util.ArrayList;
 
@@ -21,11 +23,14 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
 
     private final Context context;
 
-    private final ArrayList<AktivitasFirstModel> models;
+    private final ArrayList<AktivitasModel> models;
 
-    public AktivitasFirstAdapter(Context context, ArrayList<AktivitasFirstModel> models){
+    private final AdapterActionListener listener;
+
+    public AktivitasFirstAdapter(Context context, ArrayList<AktivitasModel> models, AdapterActionListener listener){
         this.context = context;
         this.models = models;
+        this.listener = listener;
     }
 
     @NonNull
@@ -41,14 +46,14 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         // get data
-        AktivitasFirstModel aktivitasModel = models.get(position);
+        AktivitasModel aktivitasModel = models.get(position);
 
         // show data
-        holder.txtNama.setText(aktivitasModel.getAktivitasName());
-        holder.txtVenue.setText(aktivitasModel.getAktivitasVenue());
-        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, aktivitasModel.getAktivitasAnggota(), aktivitasModel.getAktivitasAnggotaMax()));
-        holder.txtTanggal.setText(aktivitasModel.getAktivitasTanggal());
-        holder.setAktivitasImage(aktivitasModel.getAktivitasImage());
+        holder.txtNama.setText(aktivitasModel.getNamaAktivitas());
+        holder.txtVenue.setText(aktivitasModel.getVenueName());
+        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, aktivitasModel.getJumlahMember(), aktivitasModel.getMaxMember()));
+        holder.txtTanggal.setText(aktivitasModel.getDate());
+        holder.setAktivitasImage(aktivitasModel.getPhoto());
 
     }
 

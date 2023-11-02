@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -29,11 +30,14 @@ import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasFirstModel;
+import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.HomeInfoModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
+import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.data.model.VenueSecondModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
+import com.c2.arenafinder.data.response.BerandaResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
@@ -64,6 +68,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     private int prevScroll = 0;
     private boolean isShown = false;
+
+    private LinearLayout venueBaruLayout, venueRekomendasiLayout, aktivitasLayout, venueLokasiLayout;
 
     private ArrayList<JenisLapanganModel> lapanganModels;
     private ArrayList<VenueFirstModel> venueBaruModels;
@@ -96,6 +102,11 @@ public class HomeFragment extends Fragment {
     }
 
     public void initViews(View view) {
+        venueBaruLayout = view.findViewById(R.id.mho_venue_baru_layout);
+        venueRekomendasiLayout = view.findViewById(R.id.mho_venue_rekomendasi_layout);
+        aktivitasLayout = view.findViewById(R.id.mho_aktivitas_layout);
+        venueLokasiLayout = view.findViewById(R.id.mho_venue_lokasi_layout);
+
         scrollView = view.findViewById(R.id.mho_scroll);
         jenisLapangan = view.findViewById(R.id.home_recycler_jenis);
         venueBaruRecycler = view.findViewById(R.id.mho_recycler_sedang_kosong);
@@ -145,14 +156,16 @@ public class HomeFragment extends Fragment {
         initViews(view);
         MainActivity.bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
 
+        fetchData();
+
         LogApp.info(requireContext(), "test 1");
-        veneuBaruData();
-        buatkamuData();
-        aktivitasAdapter();
+//        veneuBaruData();
+//        buatkamuData();
+//        aktivitasAdapter();
         adapterLapangan();
-        showSecond();
-        venueTerdekatData();
-        venueTerdekatDataNew();
+//        showSecond();
+//        venueTerdekatData();
+//        venueTerdekatDataNew();
         LogApp.info(requireContext(), "test 2");
 
 
@@ -307,6 +320,127 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void fetchData(){
+
+        RetrofitClient.getInstance().homePage().enqueue(new Callback<BerandaResponse>() {
+            @Override
+            public void onResponse(Call<BerandaResponse> call, Response<BerandaResponse> response) {
+
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                    LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
+                    BerandaResponse.Data data = response.body().getData();
+
+                    // get data models
+                    ArrayList<ReferensiModel> venueBaru = data.getVenueBaru();
+                    ArrayList<ReferensiModel> venueRekomendasi = data.getVenueRekomendasi();
+                    ArrayList<AktivitasModel> aktivitasBaru = data.getAktivitasSeru();
+                    ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
+
+                    if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0){
+                        Toast.makeText(requireContext(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+                    }else {
+                        // show recyclerview
+                        showVenueBaru(venueBaru);
+                        showVenueRekomendasi(venueRekomendasi);
+                        showAktivitasSeru(aktivitasBaru);
+                        showVenueLokasi(venueLokasi);
+                    }
+
+                }else {
+                    Toast.makeText(requireContext(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BerandaResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+    private void showVenueBaru(ArrayList<ReferensiModel> models){
+
+        if (models.size() <= 0) {
+            venueBaruLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueBaruRecycler.setAdapter(new VenueFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, models.size(), R.dimen.card_venue_width_java);
+        }
+
+    }
+
+    private void showVenueRekomendasi(ArrayList<ReferensiModel> models){
+
+        if (models.size() <= 0) {
+            venueRekomendasiLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            buatKamuRecycler.setAdapter(new VenueSecondAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, models.size(), R.dimen.card_venue_second_width_java);
+        }
+
+    }
+
+    private void showAktivitasSeru(ArrayList<AktivitasModel> models){
+
+        if (models.size() <= 0){
+            aktivitasLayout.setVisibility(View.GONE);
+        }else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            aktivitasRecycler.setAdapter(new AktivitasFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasRecycler, models.size(), R.dimen.card_activity_first_width_java);
+        }
+
+    }
+
+    private void showVenueLokasi(ArrayList<ReferensiModel> models){
+
+        if (models.size() <= 0) {
+            venueLokasiLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+        }
+
+    }
+
+
     private void adapterLapangan() {
         lapanganModels = new ArrayList<>();
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
@@ -393,7 +527,7 @@ public class HomeFragment extends Fragment {
         aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang", 4, 12, "29 Oktober 2023"));
         aktivitasModels.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
 
-        aktivitasAdapter = new AktivitasFirstAdapter(requireContext(), aktivitasModels);
+        aktivitasAdapter = new AktivitasFirstAdapter(requireContext(), null, null);
         aktivitasRecycler.setAdapter(aktivitasAdapter);
 
         Collections.shuffle(aktivitasModels);

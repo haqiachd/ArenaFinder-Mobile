@@ -1,7 +1,10 @@
 package com.c2.arenafinder.api.retrofit;
 
+import android.window.BackEvent;
+
 import com.c2.arenafinder.data.model.NotifResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
+import com.c2.arenafinder.data.response.BerandaResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
@@ -109,6 +112,9 @@ public interface RetrofitEndPoint {
 
     @GET("feature/venue_baru.php")
     Call<ReferensiResponse> getVenueBaru();
+
+    @GET("page/dashboard.php")
+    Call<BerandaResponse> homePage();
 
     @GET("page/referensi.php")
     Call<ReferensiResponse> referensiPage();

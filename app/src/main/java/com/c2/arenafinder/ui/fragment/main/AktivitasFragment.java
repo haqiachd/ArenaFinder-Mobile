@@ -118,7 +118,7 @@ public class AktivitasFragment extends Fragment {
         models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang", 4, 12, "29 Oktober 2023"));
         models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
 
-        aktivitasBaru.setAdapter(new AktivitasFirstAdapter(requireContext(), models));
+        aktivitasBaru.setAdapter(new AktivitasFirstAdapter(requireContext(), null, null));
 
         Collections.shuffle(models);
 
@@ -131,7 +131,7 @@ public class AktivitasFragment extends Fragment {
         models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang ", 4, 12, "29 Oktober 2023"));
         models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
 
-        aktivitasKosong.setAdapter(new AktivitasFirstAdapter(requireContext(), models));
+        aktivitasKosong.setAdapter(new AktivitasFirstAdapter(requireContext(), null, null));
 
         Collections.shuffle(models);
 
