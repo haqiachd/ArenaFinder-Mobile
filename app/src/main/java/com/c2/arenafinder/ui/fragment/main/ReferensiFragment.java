@@ -1,26 +1,29 @@
 package com.c2.arenafinder.ui.fragment.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
+import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
-import com.c2.arenafinder.data.model.VenueSecondModel;
-import com.c2.arenafinder.data.model.VenueThirdModel;
+import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
@@ -32,17 +35,22 @@ import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReferensiFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private RecyclerView jenisLapangan, venueBaruRecycler, buatKamuRecycler, venueTerdekatRecycler,
-    venueGratisRecycler, venueBerbayarRecycler, venueDisewakanRecycler;
+    private SwipeRefreshLayout refreshLayout;
 
-    private ArrayList<VenueFirstModel> venueRattingModels;
+    private LinearLayout topRattingLayout, venueKosongLayout, venueLokasiLayout, venueGratisLayout, venueBebayarLayout, venueDisewakanLayout;
+
+    private RecyclerView jenisLapangan, venueRattingRecycler, venueKosongRecycler, venueTerdekatRecycler,
+            venueGratisRecycler, venueBerbayarRecycler, venueDisewakanRecycler;
 
     private String mParam1;
     private String mParam2;
@@ -51,10 +59,18 @@ public class ReferensiFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
+        refreshLayout = view.findViewById(R.id.mre_refresh_layout);
+        topRattingLayout = view.findViewById(R.id.mre_top_ratting_layout);
+        venueKosongLayout = view.findViewById(R.id.mre_venue_kosong_layout);
+        venueLokasiLayout = view.findViewById(R.id.mre_venue_lokasi_layout);
+        venueGratisLayout = view.findViewById(R.id.mre_venue_gratis_layout);
+        venueBebayarLayout = view.findViewById(R.id.mre_venue_berbayar_layout);
+        venueDisewakanLayout = view.findViewById(R.id.mre_venue_disewakan_layout);
+
         jenisLapangan = view.findViewById(R.id.mre_recycler_jenis);
-        venueBaruRecycler = view.findViewById(R.id.mre_recycler_ratting);
-        buatKamuRecycler = view.findViewById(R.id.mre_recycler_venue_kosong);
+        venueRattingRecycler = view.findViewById(R.id.mre_recycler_ratting);
+        venueKosongRecycler = view.findViewById(R.id.mre_recycler_venue_kosong);
         venueTerdekatRecycler = view.findViewById(R.id.mre_recycler_venue_terdekat);
         venueGratisRecycler = view.findViewById(R.id.mre_recycler_venue_gratis);
         venueBerbayarRecycler = view.findViewById(R.id.mre_recycler_venue_berbayar);
@@ -89,8 +105,22 @@ public class ReferensiFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initViews(view);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fetchData();
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 1500L);
+            }
+        });
+
+        fetchData();
 
         MainActivity.bottomNav.setOnActionReferensiOnFrame(new Runnable() {
             @Override
@@ -102,14 +132,8 @@ public class ReferensiFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_REFERENSI);
                 adapterLapangan();
-                venueRattingData();
-                venueKosongData();
-                venueTerdekatData();
-                venueGratisData();
-                venueBerbayarData();
-                venueDisewakanData();
+                MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_REFERENSI);
             }
         }, 1000L);
     }
@@ -127,227 +151,167 @@ public class ReferensiFragment extends Fragment {
 
     }
 
-    private void venueRattingData() {
-        venueRattingModels = new ArrayList<>();
-        venueRattingModels.add(new VenueFirstModel(
-                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 5.0F,
-                "Disewakan", "1.2 Rb Ulasan"
-        ));
-        venueRattingModels.add(new VenueFirstModel(
-                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.9F,
-                "Gratis", "932 Ulasan"
-        ));
-        venueRattingModels.add(new VenueFirstModel(
-                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "802 Ulasan"
-        ));
-        venueRattingModels.add(new VenueFirstModel(
-                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.8F,
-                "Berbayar", "311 Ulasan"
-        ));
-        venueRattingModels.add(new VenueFirstModel(
-                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Bervariasi", "120 Ulasan"
-        ));
-        venueRattingModels.add(new VenueFirstModel(
-                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Gratis", "83 Ulasan"
-        ));
+    private void fetchData() {
 
-        VenueFirstAdapter venueRattingAdapter = new VenueFirstAdapter(requireContext(), venueRattingModels);
-        venueBaruRecycler.setAdapter(venueRattingAdapter);
-
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, venueRattingModels.size(), R.dimen.card_venue_width_java);
-        LogApp.error(requireContext(), LogTag.LIFEFCYLE, "venue baru");
-    }
-
-    private void venueKosongData() {
-        ArrayList<VenueSecondModel> venueKosongModels = new ArrayList<>();
-        venueKosongModels.add(new VenueSecondModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "12 Slot Kosong", "Rp. 90.000 / Sesi"
-        ));
-        venueKosongModels.add(new VenueSecondModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Disewakan","9 Slot Kosong", "Rp. 275.000 / Sesi"
-        ));
-        venueKosongModels.add(new VenueSecondModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Disewakan", "10 Slot Kosong","Harga Bervariasi"
-        ));
-
-        venueKosongModels.add(new VenueSecondModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Disewakan", "21 Slot Kosong","Tidak perlu bayar"
-        ));
-        venueKosongModels.add(new VenueSecondModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Disewakan", "7 Slot Kosong","Tidak perlu bayar"
-        ));
-        venueKosongModels.add(new VenueSecondModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Disewakan", "9 Slot Kosong","Mulai dari Rp. 50.000"
-        ));
-
-        Collections.shuffle(venueKosongModels);
-
-        VenueSecondAdapter venueKosongAdapter = new VenueSecondAdapter(requireContext(), venueKosongModels, new AdapterActionListener() {
+        RetrofitClient.getInstance().referensiPage().enqueue(new Callback<ReferensiResponse>() {
             @Override
-            public void onClickListener(int position) {
-                Toast.makeText(requireContext(), venueKosongModels.get(position).getVenueName(), Toast.LENGTH_SHORT).show();
-                startActivity(
-                        new Intent(requireActivity(), DetailedActivity.class)
-                                .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                .putExtra(DetailedActivity.ID, venueKosongModels.get(position).getVenueName())
-                );
+            public void onResponse(Call<ReferensiResponse> call, Response<ReferensiResponse> response) {
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+
+                    LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "ON SUCCESS");
+                    ReferensiResponse.Data data = response.body().getData();
+
+                    // get data models
+                    ArrayList<ReferensiModel> topRating = data.getTopRatting();
+                    ArrayList<ReferensiModel> venueKosong = data.getVenueKosong();
+                    ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
+                    ArrayList<ReferensiModel> venueGratis = data.getVenueGratis();
+                    ArrayList<ReferensiModel> venueBerbayar = data.getVenueBerbayar();
+                    ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
+
+                    if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
+                        Toast.makeText(requireContext(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+                    }else {
+                        // show referensi recyclerview
+                        showVenueTopRatting(topRating);
+                        showVenueKosong(venueKosong);
+                        showVenueLokasi(venueLokasi);
+                        showVenueGratis(venueGratis);
+                        showVenueBerbayar(venueBerbayar);
+                        showVenueDisewakan(venueDisewakan);
+                    }
+
+                } else {
+                    Toast.makeText(requireContext(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReferensiResponse> call, Throwable t) {
+                t.printStackTrace();
             }
         });
 
-        buatKamuRecycler.setAdapter(venueKosongAdapter);
-
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, venueKosongModels.size(), R.dimen.card_venue_second_width_java);
     }
 
-    private void venueTerdekatData() {
-        ArrayList<VenueThirdModel> venueTerdekatModels = new ArrayList<>();
-        venueTerdekatModels.add(new VenueThirdModel(
-                "test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Berbayar", "Jarak 1.8 Km - 5 Min"
-        ));
-        venueTerdekatModels.add(new VenueThirdModel(
-                "test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Gratis", "Jarak 2.2 Km - 7 Min"
-        ));
-        venueTerdekatModels.add(new VenueThirdModel(
-                "test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "Jarak 3.8 Km - 10 Min"
-        ));
-        venueTerdekatModels.add(new VenueThirdModel(
-                "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Bervariasi", "Jarak 5.7 Km - 12 Min"
-        ));
-        venueTerdekatModels.add(new VenueThirdModel(
-                "test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Disewakan", "Jarak 12 Km - 15 Min"
-        ));
-        venueTerdekatModels.add(new VenueThirdModel(
-                "test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Gratis", "Jarak 14 Km - 17 Min"
-        ));
+    private void showVenueTopRatting(ArrayList<ReferensiModel> models) {
 
-        Collections.shuffle(venueTerdekatModels);
+        if (models.size() <= 0) {
+            topRattingLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueRattingRecycler.setAdapter(new VenueFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
 
-        VenueThirdAdapter venueTerdekatAdapter = new VenueThirdAdapter(requireContext(), venueTerdekatModels);
-        venueTerdekatRecycler.setAdapter(venueTerdekatAdapter);
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueRattingRecycler, models.size(), R.dimen.card_venue_width_java);
+        }
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, venueRattingModels.size(), R.dimen.card_venue_third_width_java);
     }
 
-    private void venueGratisData(){
-        ArrayList<VenueFirstModel> venueGratisModels = new ArrayList<>();
+    private void showVenueKosong(ArrayList<ReferensiModel> models) {
 
-        venueGratisModels.add(new VenueFirstModel(
-                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Gratis", "Mulai dari Rp. 50.000"
-        ));
-        venueGratisModels.add(new VenueFirstModel(
-                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Gratis", "Tidak perlu bayar"
-        ));
-        venueGratisModels.add(new VenueFirstModel(
-                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Gratis", "Rp. 90.000 / Sesi"
-        ));
-        venueGratisModels.add(new VenueFirstModel(
-                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Gratis", "Harga Bervariasi"
-        ));
-        venueGratisModels.add(new VenueFirstModel(
-                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Gratis", "Rp. 275.000 / Sesi"
-        ));
-        venueGratisModels.add(new VenueFirstModel(
-                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Gratis", "Tidak perlu bayar"
-        ));
+        if (models.size() <= 0) {
+            venueKosongLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueKosongRecycler.setAdapter(new VenueSecondAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
 
-        Collections.shuffle(venueGratisModels);
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueKosongRecycler, models.size(), R.dimen.card_venue_second_width_java);
+        }
 
-        VenueFirstAdapter venueGratisAdapter = new VenueFirstAdapter(requireContext(), venueGratisModels);
-        venueGratisRecycler.setAdapter(venueGratisAdapter);
-
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueGratisRecycler, venueGratisModels.size(), R.dimen.card_venue_width_java);
     }
 
-    private void venueBerbayarData(){
-        ArrayList<VenueFirstModel> venueBerbayarModels = new ArrayList<>();
+    private void showVenueLokasi(ArrayList<ReferensiModel> models) {
 
-        venueBerbayarModels.add(new VenueFirstModel(
-                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Berbayar", "Mulai dari Rp. 50.000"
-        ));
-        venueBerbayarModels.add(new VenueFirstModel(
-                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Berbayar", "Tidak perlu bayar"
-        ));
-        venueBerbayarModels.add(new VenueFirstModel(
-                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Berbayar", "Rp. 90.000 / Sesi"
-        ));
-        venueBerbayarModels.add(new VenueFirstModel(
-                1,"test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Berbayar", "Harga Bervariasi"
-        ));
-        venueBerbayarModels.add(new VenueFirstModel(
-                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Berbayar", "Rp. 275.000 / Sesi"
-        ));
-        venueBerbayarModels.add(new VenueFirstModel(
-                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Berbayar", "Tidak perlu bayar"
-        ));
+        if (models.size() <= 0) {
+            venueLokasiLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
 
-        Collections.shuffle(venueBerbayarModels);
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+        }
 
-        VenueFirstAdapter venueBerbayarAdapter = new VenueFirstAdapter(requireContext(), venueBerbayarModels);
-        venueBerbayarRecycler.setAdapter(venueBerbayarAdapter);
-
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBerbayarRecycler, venueBerbayarModels.size(), R.dimen.card_venue_width_java);
     }
 
-    private void venueDisewakanData(){
-        ArrayList<VenueFirstModel> venueDisewakanModels = new ArrayList<>();
+    private void showVenueGratis(ArrayList<ReferensiModel> models) {
 
-        venueDisewakanModels.add(new VenueFirstModel(
-                1,"test/venue-3.png", "Lapangan Basket Alun-Alun Nganjuk", "Bola Basket", 4.7F,
-                "Disewakan", "Mulai dari Rp. 50.000"
-        ));
-        venueDisewakanModels.add(new VenueFirstModel(
-                1,"test/venue-7.jpg", "Lapangan Baron", "Sepak Bola", 4.6F,
-                "Disewakan", "Tidak perlu bayar"
-        ));
-        venueDisewakanModels.add(new VenueFirstModel(
-                1,"test/venue-4.png", "GOR Bhayangkara", "Bulu Tangkis", 4.9F,
-                "Disewakan", "Rp. 90.000 / Sesi"
-        ));
-        venueDisewakanModels.add(new VenueFirstModel(
-                1, "test/venue-5.png", "Stadion Anjuk Ladang Nganjuk", "4 Jenis Olahraga", 4.6F,
-                "Disewakan", "Harga Bervariasi"
-        ));
-        venueDisewakanModels.add(new VenueFirstModel(
-                1,"test/venue-2.png", "Blessing Futsal", "Futsal", 4.9F,
-                "Disewakan", "Rp. 275.000 / Sesi"
-        ));
-        venueDisewakanModels.add(new VenueFirstModel(
-                1,"test/venue-1.png", "Lapangan Tembarak Kertosono", "Sepak Bola", 4.8F,
-                "Disewakan", "Tidak perlu bayar"
-        ));
+        if (models.size() <= 0) {
+            venueGratisLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueGratisRecycler.setAdapter(new VenueFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
 
-        Collections.shuffle(venueDisewakanModels);
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueGratisRecycler, models.size(), R.dimen.card_venue_width_java);
+        }
 
-        VenueFirstAdapter venueDisewakanAdapter = new VenueFirstAdapter(requireContext(), venueDisewakanModels);
-        venueDisewakanRecycler.setAdapter(venueDisewakanAdapter);
-
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), venueDisewakanRecycler, venueDisewakanModels.size(), R.dimen.card_venue_width_java);
     }
+
+    private void showVenueBerbayar(ArrayList<ReferensiModel> models) {
+
+        if (models.size() <= 0) {
+            venueBebayarLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueBerbayarRecycler.setAdapter(new VenueFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBerbayarRecycler, models.size(), R.dimen.card_venue_width_java);
+        }
+
+    }
+
+    private void showVenueDisewakan(ArrayList<ReferensiModel> models) {
+
+        if (models.size() <= 0) {
+            venueDisewakanLayout.setVisibility(View.GONE);
+        } else {
+            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+            venueDisewakanRecycler.setAdapter(new VenueFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueDisewakanRecycler, models.size(), R.dimen.card_venue_width_java);
+        }
+
+    }
+
 }

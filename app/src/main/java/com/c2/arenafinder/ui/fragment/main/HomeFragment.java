@@ -34,7 +34,7 @@ import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.data.model.VenueSecondModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
-import com.c2.arenafinder.data.response.VenueResponse;
+import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
@@ -238,7 +238,7 @@ public class HomeFragment extends Fragment {
 
         Collections.shuffle(secondModels);
 
-        secondAdapter = new VenueSecondAdapter(requireContext(), secondModels, new AdapterActionListener() {
+        secondAdapter = new VenueSecondAdapter(requireContext(), null, new AdapterActionListener() {
             @Override
             public void onClickListener(int position) {
                 startActivity(
@@ -323,27 +323,27 @@ public class HomeFragment extends Fragment {
     private void veneuBaruData() {
         venueBaruModels = new ArrayList<>();
 
-        RetrofitClient.getInstance().getVenueBaru().enqueue(new Callback<VenueResponse>() {
-            @Override
-            public void onResponse(Call<VenueResponse> call, Response<VenueResponse> response) {
-                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
-                    venueBaruModels = response.body().getData();
-
-                    venueBaruAdapter = new VenueFirstAdapter(requireContext(), venueBaruModels);
-                    venueBaruRecycler.setAdapter(venueBaruAdapter);
-
-                    ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, venueBaruModels.size(), R.dimen.card_venue_width_java);
-                    LogApp.error(requireContext(), LogTag.LIFEFCYLE, "venue baru");
-                }else {
-                    Toast.makeText(requireContext(), "Gagal -> " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<VenueResponse> call, Throwable t) {
-                Toast.makeText(requireContext(), "Error -> " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        RetrofitClient.getInstance().getVenueBaru().enqueue(new Callback<ReferensiResponse>() {
+//            @Override
+//            public void onResponse(Call<ReferensiResponse> call, Response<ReferensiResponse> response) {
+//                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+//                    venueBaruModels = response.body().getData();
+//
+//                    venueBaruAdapter = new VenueFirstAdapter(requireContext(), venueBaruModels);
+//                    venueBaruRecycler.setAdapter(venueBaruAdapter);
+//
+//                    ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, venueBaruModels.size(), R.dimen.card_venue_width_java);
+//                    LogApp.error(requireContext(), LogTag.LIFEFCYLE, "venue baru");
+//                }else {
+//                    Toast.makeText(requireContext(), "Gagal -> " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ReferensiResponse> call, Throwable t) {
+//                Toast.makeText(requireContext(), "Error -> " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
     }
@@ -376,7 +376,12 @@ public class HomeFragment extends Fragment {
                 "Berbayar", "Mulai dari Rp. 50.000"
         ));
 
-        buatKamuAdapter = new VenueFirstAdapter(requireContext(), buatKamuModels);
+        buatKamuAdapter = new VenueFirstAdapter(requireContext(), null, new AdapterActionListener() {
+            @Override
+            public void onClickListener(int position) {
+                AdapterActionListener.super.onClickListener(position);
+            }
+        });
         buatKamuRecycler.setAdapter(buatKamuAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, buatKamuModels.size(), R.dimen.card_venue_width_java);
@@ -425,7 +430,12 @@ public class HomeFragment extends Fragment {
         ));
 
 
-        venueTerdekatAdapter = new VenueFirstAdapter(requireContext(), venueBaruModels);
+        venueTerdekatAdapter = new VenueFirstAdapter(requireContext(), null, new AdapterActionListener() {
+            @Override
+            public void onClickListener(int position) {
+                AdapterActionListener.super.onClickListener(position);
+            }
+        });
         venueTerdekatRecycler.setAdapter(venueTerdekatAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, venueBaruModels.size(), R.dimen.card_venue_width_java);
@@ -459,7 +469,7 @@ public class HomeFragment extends Fragment {
         ));
 
 
-        VenueThirdAdapter thirdAdapter = new VenueThirdAdapter(requireContext(), models);
+        VenueThirdAdapter thirdAdapter = new VenueThirdAdapter(requireContext(), null, null);
         venueTerdekatRecycler.setAdapter(thirdAdapter);
 
         ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
