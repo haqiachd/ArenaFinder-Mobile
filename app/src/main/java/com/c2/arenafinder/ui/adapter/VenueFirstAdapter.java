@@ -21,10 +21,13 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueFirstModel;
 import com.c2.arenafinder.util.AdapterActionListener;
+import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
 public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.ViewHolder> {
+
+    public static final int DEFAULT = 1, RATTING = 2,  SLOT = 6;
 
     private final Context context;
 
@@ -32,10 +35,13 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
 
     private final AdapterActionListener listener;
 
-    public VenueFirstAdapter(Context context, ArrayList<ReferensiModel> models, AdapterActionListener listener){
+    private final int status;
+
+    public VenueFirstAdapter(Context context, ArrayList<ReferensiModel> models, AdapterActionListener listener, int status){
         this.context = context;
         this.models = models;
         this.listener = listener;
+        this.status = status;
     }
 
     @NonNull
@@ -50,31 +56,51 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get data
-        ReferensiModel kosongModel = models.get(position);
+        ReferensiModel model = models.get(position);
 
         // show data
-        holder.txtNama.setText(kosongModel.getVenueName());
-        holder.txtSport.setText(kosongModel.getSport());
-        holder.txtRatting.setText(String.valueOf(kosongModel.getRating()));
-        holder.txtStatus.setText(kosongModel.getStatus());
-        holder.setImage(kosongModel.getVenuePhoto());
+        holder.txtNama.setText(model.getVenueName());
+        holder.txtSport.setText(model.getSport());
+        holder.txtStatus.setText(model.getStatus());
+        holder.setImage(model.getVenuePhoto());
+
+        if (model.getRating() <= 0.0){
+            holder.txtRatting.setText(R.string.txt_ratting_na);
+        }else {
+            holder.txtRatting.setText(String.valueOf(model.getRating()));
+        }
 
         // change status venue color
-        switch (kosongModel.getStatus().toLowerCase()){
+        switch (model.getStatus().toLowerCase()){
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
+                holder.txtDesc.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
                 break;
             }
             case "gratis" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_gratis, R.color.venue_status_gratis);
+                holder.txtDesc.setText(R.string.txt_gratis_v);
                 break;
             }
             case "berbayar" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_berbayar, R.color.venue_status_berbayar);
+                holder.txtDesc.setText(context.getString(R.string.txt_berbayar_val, ArenaFinder.toMoneyCase(model.getHarga())));
                 break;
             }
             case "bervariasi" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_variasi, R.color.venue_status_bervariasi);
+                holder.txtDesc.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
+                break;
+            }
+
+        }
+
+        switch (status){
+            case RATTING: {
+                holder.txtDesc.setText(context.getString(R.string.txt_ulasan, String.valueOf(model.getTotalReview())));
+                break;
+            }
+            case SLOT : {
                 break;
             }
         }

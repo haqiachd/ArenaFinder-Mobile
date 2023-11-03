@@ -21,6 +21,7 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueThirdModel;
 import com.c2.arenafinder.util.AdapterActionListener;
+import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,15 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
         holder.txtNama.setText(model.getVenueName());
         holder.txtStatus.setText(model.getStatus());
         holder.txtSport.setText(model.getSport());
-        holder.txtRatting.setText(String.valueOf(model.getRating()));
+
+        if (model.getRating() <= 0.0){
+            holder.txtRatting.setText(R.string.txt_ratting_na);
+            holder.txtReview.setVisibility(View.GONE);
+        }else {
+            holder.txtRatting.setText(String.valueOf(model.getRating()));
+            holder.txtReview.setText(context.getString(R.string.txt_ulasan_2, String.valueOf(model.getTotalReview())));
+        }
+
 
         holder.setImage(model.getVenuePhoto());
 
@@ -63,14 +72,17 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
         switch (model.getStatus().toLowerCase()){
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
+                holder.txtDesc.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
                 break;
             }
             case "gratis" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_gratis, R.color.venue_status_gratis);
+                holder.txtDesc.setText(context.getString(R.string.txt_gratis_v));
                 break;
             }
             case "berbayar" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_berbayar, R.color.venue_status_berbayar);
+                holder.txtDesc.setText(context.getString(R.string.txt_berbayar_val, ArenaFinder.toMoneyCase(model.getHarga())));
                 break;
             }
             case "bervariasi" : {
@@ -100,7 +112,7 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
 
         private final ImageView imgVenue;
 
-        private final TextView txtNama, txtSport, txtRatting, txtStatus, txtDesc;
+        private final TextView txtNama, txtSport, txtRatting, txtReview, txtStatus, txtDesc;
 
         public ViewHolder(View view){
             super(view);
@@ -111,6 +123,7 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
             txtNama = view.findViewById(R.id.ivt_venue_name);
             txtSport = view.findViewById(R.id.ivt_venue_sport);
             txtRatting = view.findViewById(R.id.ivt_ratting_value);
+            txtReview = view.findViewById(R.id.ivt_ratting_ulasan);
             txtStatus = view.findViewById(R.id.ivt_venue_status);
             txtDesc = view.findViewById(R.id.ivt_venue_desc_second);
         }

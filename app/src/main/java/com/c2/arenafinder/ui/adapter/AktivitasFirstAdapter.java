@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.model.AktivitasFirstModel;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.util.AdapterActionListener;
+import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
@@ -52,8 +54,17 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
         holder.txtNama.setText(aktivitasModel.getNamaAktivitas());
         holder.txtVenue.setText(aktivitasModel.getVenueName());
         holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, aktivitasModel.getJumlahMember(), aktivitasModel.getMaxMember()));
-        holder.txtTanggal.setText(aktivitasModel.getDate());
+        holder.txtTanggal.setText(ArenaFinder.convertToDate(aktivitasModel.getDate()));
         holder.setAktivitasImage(aktivitasModel.getPhoto());
+
+        if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+
+            holder.itemView.setOnClickListener(v -> {
+                LogApp.info(context, LogTag.ON_CLICK, "on click" + holder.getAdapterPosition());
+                listener.onClickListener(holder.getAdapterPosition());
+            });
+
+        }
 
     }
 

@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.AktivitasSecondModel;
+import com.c2.arenafinder.util.AdapterActionListener;
+import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
@@ -21,11 +24,14 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
 
     private final Context context;
 
-    private final ArrayList<AktivitasSecondModel> models;
+    private final ArrayList<AktivitasModel> models;
 
-    public AktivitasSecondAdapter(Context context, ArrayList<AktivitasSecondModel> models){
+    private AdapterActionListener listener;
+
+    public AktivitasSecondAdapter(Context context, ArrayList<AktivitasModel> models, AdapterActionListener listener){
         this.context = context;
         this.models = models;
+        this.listener = listener;
     }
 
     @NonNull
@@ -39,15 +45,23 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        AktivitasSecondModel model = models.get(position);
+        AktivitasModel model = models.get(position);
 
-        holder.setImage(model.getImage());
-        holder.txtNamaAktivitas.setText(model.getName());
-        holder.txtVenueAktivitas.setText(model.getVenue());
-        holder.txtAnggotaAktivitas.setText(context.getString(R.string.txt_aktivitas_anggota_value, model.getAnggota(), model.getAnggotaMax()));
-        holder.txtTanggalAktivitas.setText(model.getTanggal());
-        holder.txtTimeAktivitas.setText(model.getTime());
+        holder.setImage(model.getPhoto());
+        holder.txtNamaAktivitas.setText(model.getNamaAktivitas());
+        holder.txtVenueAktivitas.setText(model.getVenueName());
+        holder.txtAnggotaAktivitas.setText(context.getString(R.string.txt_aktivitas_anggota_value, model.getJumlahMember(), model.getMaxMember()));
+        holder.txtTanggalAktivitas.setText(ArenaFinder.convertToDate(model.getDate()));
+        holder.txtTimeAktivitas.setText(context.getString(R.string.txt_aktivitas_jam, model.getStartHour(), model.getEndHour()));
         holder.txtHargaAktivitas.setText(context.getString(R.string.txt_aktivitas_price_value, String.valueOf(model.getPrice())));
+
+        if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+
+            holder.itemView.setOnClickListener(v -> {
+                listener.onClickListener(holder.getAdapterPosition());
+            });
+
+        }
 
     }
 

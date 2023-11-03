@@ -14,6 +14,7 @@ import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.util.AdapterActionListener;
+import com.c2.arenafinder.util.ArenaFinder;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -57,18 +58,30 @@ public class VenueSecondAdapter extends RecyclerView.Adapter<VenueSecondAdapter.
 
         holder.setImage(model.getVenuePhoto());
 
+        if (model.getRating() <= 0.0){
+            holder.txtRatting.setText(R.string.txt_ratting_na);
+        }else {
+            holder.txtRatting.setText(String.valueOf(model.getRating()));
+        }
+
         // change status venue color
         switch (model.getStatus().toLowerCase()){
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
+                holder.txtDescFirst.setText("1 Slot Kosong");
+                holder.txtDescSecond.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
                 break;
             }
             case "gratis" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_gratis, R.color.venue_status_gratis);
+                holder.txtDescSecond.setText(R.string.txt_gratis_v);
+                holder.txtDescFirst.setText("");
                 break;
             }
             case "berbayar" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_berbayar, R.color.venue_status_berbayar);
+                holder.txtDescSecond.setText("");
+                holder.txtDescFirst.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHarga())));
                 break;
             }
             case "bervariasi" : {
@@ -81,7 +94,7 @@ public class VenueSecondAdapter extends RecyclerView.Adapter<VenueSecondAdapter.
         if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
             holder.itemView.setOnClickListener(v -> {
                 LogApp.info(context, LogTag.ON_CLICK, "adapter clicked on -> " + holder.getAdapterPosition());
-                listener.onClickListener(position);
+                listener.onClickListener(holder.getAdapterPosition());
             });
         }
 
