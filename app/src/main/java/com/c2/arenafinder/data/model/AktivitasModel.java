@@ -10,7 +10,7 @@ public class AktivitasModel {
     private int idAktvitias;
 
     @Expose
-    @SerializedName("nama_aktivitas")
+    @SerializedName("venue_name")
     private String venueName;
 
     @Expose
@@ -18,7 +18,7 @@ public class AktivitasModel {
     private String date;
 
     @Expose
-    @SerializedName("venue_name")
+    @SerializedName("nama_aktivitas")
     private String namaAktivitas;
 
     @Expose

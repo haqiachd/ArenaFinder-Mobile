@@ -130,6 +130,11 @@
     <string name="txt_shared_def">4 x Dibagikan</string>
     <string name="txt_pilih_metode_bayar">Pilih Metode Pembayaran</string>
     <string name="txt_review_username">\@ %1$s</string>
+    <string name="txt_ulasan">%1$s Ulasan</string>
+    <string name="txt_berbayar_val">Harga Rp. %1$s</string>
+    <string name="txt_gratis_v">Tidak perlu bayar</string>
+    <string name="txt_disewakan_v">Rp. %1$s / Sesi</string>
+    <string name="txt_ulasan_2">(%1$s Ulasan)</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
     <string name="txt_venue_status_gratis">Gratis</string>
@@ -147,12 +152,14 @@
     <string name="txt_olahraga_fitness">Fitness</string>
     <string name="txt_olahraga_renang">Renang</string>
     <string name="txt_olahraga_silat">Pencak Silat</string>
+    <string name="txt_aktivitas_jam">%1$s - %2$s</string>
 
     <string name="txt_ratting_5">5</string>
     <string name="txt_ratting_4">4</string>
     <string name="txt_ratting_3">3</string>
     <string name="txt_ratting_2">2</string>
     <string name="txt_ratting_1">1</string>
+    <string name="txt_ratting_na">NA</string>
 
 
     <string name="alt_appbar_search">Cari data</string>

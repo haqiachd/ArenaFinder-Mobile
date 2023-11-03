@@ -30,6 +30,7 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -173,5 +174,8 @@ public class ArenaFinder {
         });
     }
 
+    public static String toMoneyCase(int price){
+        return new DecimalFormat("#,###.00").format(price);
+    }
 
 }
