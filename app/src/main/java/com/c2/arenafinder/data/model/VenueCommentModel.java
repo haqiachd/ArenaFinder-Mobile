@@ -1,22 +1,39 @@
 package com.c2.arenafinder.data.model;
 
-public class VenueReviewModel {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class VenueCommentModel {
+
+    @Expose
+    @SerializedName("id_review")
     private int idReview;
 
+    @Expose
+    @SerializedName("user_photo")
     private String photoProfile;
 
+    @Expose
+    @SerializedName("username")
     private String username;
 
+    @Expose
+    @SerializedName("full_name")
     private String fullName;
 
+    @Expose
+    @SerializedName("rating")
     private int ratting;
 
+    @Expose
+    @SerializedName("comment")
     private String comment;
 
+    @Expose
+    @SerializedName("date")
     private String date;
 
-    public VenueReviewModel(int idReview, String  photoProfile, String username, String fullName, int ratting, String comment, String date) {
+    public VenueCommentModel(int idReview, String  photoProfile, String username, String fullName, int ratting, String comment, String date) {
         this.idReview = idReview;
         this.username = username;
         this.fullName = fullName;

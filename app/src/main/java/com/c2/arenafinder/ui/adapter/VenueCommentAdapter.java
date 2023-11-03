@@ -14,21 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.model.VenueReviewModel;
+import com.c2.arenafinder.data.model.VenueCommentModel;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
-public class VenueReviewAdapter extends RecyclerView.Adapter<VenueReviewAdapter.ViewHolder> {
+public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapter.ViewHolder> {
 
     private final Context context;
 
-    private final ArrayList<VenueReviewModel> models;
+    private final ArrayList<VenueCommentModel> models;
 
     private final AdapterActionListener listener;
 
-    public VenueReviewAdapter(Context context, ArrayList<VenueReviewModel> models, AdapterActionListener listener){
+    public VenueCommentAdapter(Context context, ArrayList<VenueCommentModel> models, AdapterActionListener listener){
         this.context = context;
         this.models = models;
         this.listener = listener;
@@ -39,14 +39,14 @@ public class VenueReviewAdapter extends RecyclerView.Adapter<VenueReviewAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_venue_review, parent, false)
+                        .inflate(R.layout.item_venue_comment, parent, false)
         );
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        VenueReviewModel reviewModel = models.get(position);
+        VenueCommentModel reviewModel = models.get(position);
 
         holder.txtUsername.setText(context.getString(R.string.txt_review_username, reviewModel.getUsername()));
         holder.txtFullName.setText(reviewModel.getFullName());
