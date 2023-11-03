@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.fragment.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -183,14 +184,26 @@ public class ReferensiFragment extends Fragment {
 
                 } else {
                     Toast.makeText(requireContext(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    handlerNullData();
                 }
             }
 
             @Override
             public void onFailure(Call<ReferensiResponse> call, Throwable t) {
-                t.printStackTrace();
+                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                handlerNullData();
             }
         });
+
+    }
+
+    private void handlerNullData(){
+        venueLokasiLayout.setVisibility(View.GONE);
+        venueKosongLayout.setVisibility(View.GONE);
+        venueDisewakanLayout.setVisibility(View.GONE);
+        venueGratisLayout.setVisibility(View.GONE);
+        venueBebayarLayout.setVisibility(View.GONE);
+        topRattingLayout.setVisibility(View.GONE);
 
     }
 
@@ -204,9 +217,13 @@ public class ReferensiFragment extends Fragment {
                     requireContext(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
-                    // TODO : action
+                    startActivity(
+                            new Intent(requireActivity(), DetailedActivity.class)
+                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                    );
                 }
-            }
+            }, VenueFirstAdapter.RATTING
             ));
 
             ArenaFinder.setRecyclerWidthByItem(requireContext(), venueRattingRecycler, models.size(), R.dimen.card_venue_width_java);
@@ -224,7 +241,11 @@ public class ReferensiFragment extends Fragment {
                     requireContext(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
-                    // TODO : action
+                    startActivity(
+                            new Intent(requireActivity(), DetailedActivity.class)
+                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                    );
                 }
             }
             ));
@@ -244,7 +265,11 @@ public class ReferensiFragment extends Fragment {
                     requireContext(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
-                    // TODO : action
+                    startActivity(
+                            new Intent(requireActivity(), DetailedActivity.class)
+                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                    );
                 }
             }
             ));
@@ -264,9 +289,13 @@ public class ReferensiFragment extends Fragment {
                     requireContext(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
-                    // TODO : action
+                    startActivity(
+                            new Intent(requireActivity(), DetailedActivity.class)
+                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                    );
                 }
-            }
+            }, VenueFirstAdapter.DEFAULT
             ));
 
             ArenaFinder.setRecyclerWidthByItem(requireContext(), venueGratisRecycler, models.size(), R.dimen.card_venue_width_java);
@@ -284,9 +313,13 @@ public class ReferensiFragment extends Fragment {
                     requireContext(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
-                    // TODO : action
+                    startActivity(
+                            new Intent(requireActivity(), DetailedActivity.class)
+                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                    );
                 }
-            }
+            }, VenueFirstAdapter.DEFAULT
             ));
 
             ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBerbayarRecycler, models.size(), R.dimen.card_venue_width_java);
@@ -304,9 +337,13 @@ public class ReferensiFragment extends Fragment {
                     requireContext(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
-                    // TODO : action
+                    startActivity(
+                            new Intent(requireActivity(), DetailedActivity.class)
+                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                    );
                 }
-            }
+            }, VenueFirstAdapter.SLOT
             ));
 
             ArenaFinder.setRecyclerWidthByItem(requireContext(), venueDisewakanRecycler, models.size(), R.dimen.card_venue_width_java);

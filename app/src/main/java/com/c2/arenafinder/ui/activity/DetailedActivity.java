@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.ui.fragment.detailed.ActivityDetailedFragment;
 import com.c2.arenafinder.ui.fragment.detailed.BookingVenueFragment;
 import com.c2.arenafinder.ui.fragment.detailed.VenueDetailedFragment;
@@ -49,9 +50,16 @@ public class DetailedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed);
         initViews();
 
-         idSelected = getIntent().getStringExtra(ID);
+        idSelected = getIntent().getStringExtra(ID);
+        LogApp.info(this, "ID SELECTED -> " + idSelected);
 
-        switch (getIntent().getStringExtra(FRAGMENT)) {
+        String selectedFragment = getIntent().getStringExtra(FRAGMENT);
+
+        if (selectedFragment == null){
+            selectedFragment  += "";
+        }
+
+        switch (selectedFragment) {
             case VENUE: {
                 ArenaFinder.setStatusBarColor(this, ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, true);
                 FragmentUtil.switchFragmentDetailed(

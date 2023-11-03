@@ -11,21 +11,29 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.data.model.AktivitasFirstModel;
-import com.c2.arenafinder.data.model.AktivitasSecondModel;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
+import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AktivitasFragment extends Fragment {
 
@@ -35,18 +43,21 @@ public class AktivitasFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView jenisLapangan, aktivitasBaru, aktivitasKosong, semuaAktivitasRecycler;
-    private JenisLapanganAdapter jenisLapanganAdapter;
+    private LinearLayout aktivitasBaruLayout, aktivitasKosongLayout, semuaAktivitasLayout;
+    private RecyclerView jenisLapangan, aktivitasBaruRecycler, aktivitasKosongRecycler, semuaAktivitasRecycler;
 
     public AktivitasFragment() {
         // Required empty public constructor
     }
 
     public void initViews(View view) {
+        aktivitasBaruLayout = view.findViewById(R.id.mak_aktivitas_baru_layout);
+        aktivitasKosongLayout = view.findViewById(R.id.mak_aktivitas_kosong_layout);
+        semuaAktivitasLayout = view.findViewById(R.id.mak_semua_aktivitas_layout);
         jenisLapangan = view.findViewById(R.id.mak_recycler_jenis);
         semuaAktivitasRecycler = view.findViewById(R.id.mak_recycler_semua);
-        aktivitasBaru = view.findViewById(R.id.mak_recycler_aktivitas_baru);
-        aktivitasKosong = view.findViewById(R.id.mak_recycler_aktivitas_kosong);
+        aktivitasBaruRecycler = view.findViewById(R.id.mak_recycler_aktivitas_baru);
+        aktivitasKosongRecycler = view.findViewById(R.id.mak_recycler_aktivitas_kosong);
     }
 
     public static AktivitasFragment newInstance(String param1, String param2) {
@@ -86,10 +97,9 @@ public class AktivitasFragment extends Fragment {
             }
         });
 
+        fetchData();
+
         adapterLapangan();
-        adapterSemuaAktivitas();
-        adapterBaru();
-        adapterKosong();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -112,57 +122,107 @@ public class AktivitasFragment extends Fragment {
 
     }
 
-    private void adapterBaru(){
-        ArrayList<AktivitasFirstModel> models = new ArrayList<>();
-        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno", 3, 10, "30 Oktober 2023"));
-        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang", 4, 12, "29 Oktober 2023"));
-        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
+    private void fetchData(){
 
-        aktivitasBaru.setAdapter(new AktivitasFirstAdapter(requireContext(), null, null));
+        RetrofitClient.getInstance().aktivitasPage().enqueue(new Callback<AktivitasResponse>() {
+            @Override
+            public void onResponse(Call<AktivitasResponse> call, Response<AktivitasResponse> response) {
 
-        Collections.shuffle(models);
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaru, models.size(), R.dimen.card_activity_first_width_java);
-    }
+                    LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
+                    AktivitasResponse.Data data = response.body().getData();
 
-    private void adapterKosong(){
-        ArrayList<AktivitasFirstModel> models = new ArrayList<>();
-        models.add(new AktivitasFirstModel("test/aktivitas-2.png", "Latihan Bersama Bulutangkis TIF Nganjuk", "GOR Bung Karno", 3, 10, "30 Oktober 2023"));
-        models.add(new AktivitasFirstModel("test/aktivitas-1.png", "Kejuaraan Sepak Bola Tingkat Kabupaten Nganjuk", "Stadion Anjuk Ladang ", 4, 12, "29 Oktober 2023"));
-        models.add(new AktivitasFirstModel("test/aktivitas-3.jpg", "Main Bareng Olahraga Futsal", "Blessing Futsal", 12, 20, "28 Oktober 2023"));
+                    // get data model
+                    ArrayList<AktivitasModel> aktivitasBaru = data.getAktivitasBaru();
+                    ArrayList<AktivitasModel> akivitasKosong = data.getAktivitasKosong();
+                    ArrayList<AktivitasModel> semuaAktivitas = data.getSemuaAktivitas();
 
-        aktivitasKosong.setAdapter(new AktivitasFirstAdapter(requireContext(), null, null));
+                    if (aktivitasBaru.size() == 0 && akivitasKosong.size() == 0&& semuaAktivitas.size() == 0){
+                        handlerNullData();
+                    }else {
 
-        Collections.shuffle(models);
+                        // show recycler data
+                        showAktivitasBaru(aktivitasBaru);
+                        showAktivitasKosong(akivitasKosong);
+                        showSemuaAktivitasyList(semuaAktivitas);
+                    }
 
-        ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasKosong, models.size(), R.dimen.card_activity_first_width_java);
-    }
+                }else {
+                    handlerNullData();
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
 
-    private void adapterSemuaAktivitas() {
-        ArrayList<AktivitasSecondModel> models = new ArrayList<>();
+            }
 
-        models.add(
-                new AktivitasSecondModel("test/aktivitas-1.png", "Latihan Bersama Sepak Bola TIF Polije Nganjuk", "Stadion Anjuk Ladang", 2, 10, "30 Oktober 2023", "07:00 - 08:00", 12000)
-        );
-        models.add(
-                new AktivitasSecondModel("test/aktivitas-2.png", "Latihan Bersama Bulu Tangkis Klub \"Rajawali\" Nganjuk", "GOR Bung Karno", 5, 26, "01 November 2023", "20:00 - 22:00", 24000)
-        );
-        models.add(
-                new AktivitasSecondModel("test/aktivitas-3.jpg", "Turnamen Futsal Pelajar SMP Negeri 2 Nganjuk", "Blessing Futasl", 7, 13, "01 November 2023", "17:00 - 18:00", 30000)
-        );
-        models.add(
-                new AktivitasSecondModel("test/aktivitas-5.jpg", "Turnamen Bulu Tangkis Kota Nganjuk", "GOR Bulutangkis Bhayangkara", 12, 14, "02 November 2023", "10:00 - 18:00", 10000)
-        );
-        models.add(
-                new AktivitasSecondModel("test/aktivitas-6.jpg", "Pelatihan Renang Kelompok Muda Kura-Kura", "Stadion Anjuk Ladang", 9, 13, "10 November 2023", "12:00 - 15:30", 15000)
-        );
-        models.add(
-                new AktivitasSecondModel("test/aktivitas-7.jpg", "Kompetisi Lari Jarak Jauh Perkumpulan Lari Cepat", "Kolam Renang Sumber Laut", 9, 15, "03 November 2023", "12:00 - 16:00", 10000)
-        );
-
-        Collections.shuffle(models);
-
-        semuaAktivitasRecycler.setAdapter(new AktivitasSecondAdapter(requireContext(), models));
+            @Override
+            public void onFailure(Call<AktivitasResponse> call, Throwable t) {
+                handlerNullData();
+                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_MEDIUM);
+            }
+        });
 
     }
+
+    private void handlerNullData(){
+        aktivitasKosongLayout.setVisibility(View.GONE);
+        aktivitasBaruLayout.setVisibility(View.GONE);
+        semuaAktivitasLayout.setVisibility(View.GONE);
+    }
+
+    private void showAktivitasBaru(ArrayList<AktivitasModel> models){
+
+        if (models.size() == 0){
+            aktivitasKosongLayout.setVisibility(View.GONE);
+        }else {
+            aktivitasBaruRecycler.setAdapter(new AktivitasFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+        }
+
+    }
+
+    private void showAktivitasKosong(ArrayList<AktivitasModel> models){
+
+        if (models.size() == 0){
+            aktivitasKosongLayout.setVisibility(View.GONE);
+        }else {
+            aktivitasKosongRecycler.setAdapter(new AktivitasFirstAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+
+            ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+        }
+
+    }
+
+    private void showSemuaAktivitasyList(ArrayList<AktivitasModel> models){
+
+        if (models.size() == 0){
+            semuaAktivitasLayout.setVisibility(View.GONE);
+        }else {
+            semuaAktivitasRecycler.setAdapter(new AktivitasSecondAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    // TODO : action
+                }
+            }
+            ));
+        }
+
+    }
+
 }

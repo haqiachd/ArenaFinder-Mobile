@@ -121,6 +121,7 @@
 
             <!-- Recycler Aktivitas Baru-->
             <LinearLayout
+                android:id="@+id/mak_aktivitas_baru_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -209,6 +210,7 @@
 
             <!-- Recycler Aktivitas Kosong -->
             <LinearLayout
+                android:id="@+id/mak_aktivitas_kosong_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -297,6 +299,7 @@
 
             <!-- Recycler Semua Aktivitas-->
             <LinearLayout
+                android:id="@+id/mak_semua_aktivitas_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
