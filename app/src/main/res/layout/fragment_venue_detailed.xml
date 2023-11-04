@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/fvd_back"
+                android:id="@+id/fvd_back_appbar"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_marginStart="@dimen/_13sdp"
@@ -31,18 +31,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/fvd_nama_lapangan"
+                android:id="@+id/fvd_nama_lapangan_appbar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_6ssp"
                 android:fontFamily="@font/kanit_semibold"
                 android:gravity="center_vertical"
-                android:text="Jenis Olahraga"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toStartOf="@id/fvd_vertical_menu_appbar"
-                app:layout_constraintStart_toEndOf="@id/fvd_back" />
+                app:layout_constraintStart_toEndOf="@id/fvd_back_appbar" />
 
             <ImageView
                 android:id="@+id/fvd_vertical_menu_appbar"
@@ -80,20 +79,21 @@
                 android:background="@color/azure">
 
                 <ImageView
-                    android:id="@+id/dvd_image_test"
+                    android:id="@+id/fvd_image_test"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/alt_card_venue"
                     android:scaleType="centerCrop"
+                    android:visibility="gone"
                     android:src="@drawable/ic_venue_test_2" />
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/dvd_viewpager"
+                    android:id="@+id/fvd_viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
                 <ImageView
-                    android:id="@+id/dvd_back"
+                    android:id="@+id/fvd_back"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_15sdp"
@@ -107,7 +107,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/dvd_vertical_menu"
+                    android:id="@+id/fvd_vertical_menu"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_30sdp"
@@ -121,7 +121,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/dvd_photo_value"
+                    android:id="@+id/fvd_photo_value"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_18sdp"
                     android:layout_marginStart="@dimen/_15sdp"
@@ -139,15 +139,15 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/dvd_photo_dots"
+                    android:id="@+id/fvd_photo_dots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="@id/dvd_photo_value"
+                    app:layout_constraintBottom_toBottomOf="@id/fvd_photo_value"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/dvd_photo_value">
+                    app:layout_constraintTop_toTopOf="@id/fvd_photo_value">
 
                     <TextView
                         android:layout_width="@dimen/detailed_dots_size"
@@ -187,7 +187,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/dvd_venue_name"
+                    android:id="@+id/fvd_venue_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -204,7 +204,7 @@
                     android:layout_marginTop="@dimen/_3sdp">
 
                     <ImageView
-                        android:id="@+id/dvd_top_ratting_ic"
+                        android:id="@+id/fvd_top_ratting_ic"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:contentDescription="@string/alt_ratting"
@@ -214,7 +214,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/dvd_top_ratting_val"
+                        android:id="@+id/fvd_top_ratting_val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
@@ -224,25 +224,25 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dvd_top_ratting_ic"
+                        app:layout_constraintStart_toEndOf="@id/fvd_top_ratting_ic"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/dvd_top_view_ic"
+                        android:id="@+id/fvd_top_view_ic"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:contentDescription="@string/alt_ratting"
                         android:src="@drawable/ic_view"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dvd_top_ratting_val"
+                        app:layout_constraintStart_toEndOf="@id/fvd_top_ratting_val"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/dvd_top_view_val"
+                        android:id="@+id/fvd_top_view_val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/dvd_top_view_ic"
+                        android:layout_alignEnd="@id/fvd_top_view_ic"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:fontFamily="@font/opensans_semibold"
                         android:gravity="center_vertical"
@@ -250,25 +250,25 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dvd_top_view_ic"
+                        app:layout_constraintStart_toEndOf="@id/fvd_top_view_ic"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/dvd_top_shared_ic"
+                        android:id="@+id/fvd_top_shared_ic"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:contentDescription="@string/alt_ratting"
                         android:src="@drawable/ic_shared"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dvd_top_view_val"
+                        app:layout_constraintStart_toEndOf="@id/fvd_top_view_val"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/dvd_shared_val"
+                        android:id="@+id/fvd_shared_val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/dvd_top_view_ic"
+                        android:layout_alignEnd="@id/fvd_top_view_ic"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:fontFamily="@font/opensans_semibold"
                         android:gravity="center_vertical"
@@ -276,7 +276,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dvd_top_shared_ic"
+                        app:layout_constraintStart_toEndOf="@id/fvd_top_shared_ic"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -296,36 +296,10 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:orientation="horizontal"
-                        android:visibility="gone"
                         tools:ignore="UseCompoundDrawables,UselessParent">
 
                         <ImageView
-                            android:layout_width="@dimen/_16sdp"
-                            android:layout_height="@dimen/_16sdp"
-                            android:layout_gravity="center_vertical"
-                            android:contentDescription="@string/alt_sport_icon"
-                            android:src="@drawable/ic_sport_football" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_16sdp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_4sdp"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Sepak Bola\t -"
-                            android:textColor="#F2000000"
-                            android:textSize="@dimen/_11ssp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:orientation="horizontal"
-                        tools:ignore="UseCompoundDrawables,UselessParent">
-
-                        <ImageView
+                            android:id="@+id/fvd_top_sport_icon"
                             android:layout_width="@dimen/_16sdp"
                             android:layout_height="@dimen/_16sdp"
                             android:layout_gravity="center_vertical"
@@ -333,6 +307,7 @@
                             android:src="@drawable/ic_sport_badminton" />
 
                         <TextView
+                            android:id="@+id/fvd_top_sport_val"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -347,6 +322,7 @@
                 </GridLayout>
 
                 <TextView
+                    android:id="@+id/fvd_venue_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
@@ -370,11 +346,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
-                    android:text="Jam Operasional"
+                    android:text="@string/txt_jam_operasional_t"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
                 <TableLayout
+                    android:id="@+id/fvd_table_operasional"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_22sdp"
@@ -388,16 +365,17 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="start"
-                            android:text="Senin"
+                            android:text="@string/dino_senin"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
 
                         <TextView
+                            android:id="@+id/fvd_senin"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="end"
-                            android:text="12:00 - 23:00"
+                            android:text="@string/def_jam"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
                     </TableRow>
@@ -409,16 +387,17 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="start"
-                            android:text="Selasa"
+                            android:text="@string/dino_selasa"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
 
                         <TextView
+                            android:id="@+id/fvd_selasa"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="end"
-                            android:text="12:00 - 23:00"
+                            android:text="@string/def_jam"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
                     </TableRow>
@@ -430,16 +409,17 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="start"
-                            android:text="Rabu"
+                            android:text="@string/dino_rabu"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
 
                         <TextView
+                            android:id="@+id/fvd_rabu"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="end"
-                            android:text="12:00 - 23:00"
+                            android:text="@string/def_jam"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
                     </TableRow>
@@ -451,16 +431,17 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="start"
-                            android:text="Kamis"
+                            android:text="@string/dino_kamis"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
 
                         <TextView
+                            android:id="@+id/fvd_kamis"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="end"
-                            android:text="12:00 - 23:00"
+                            android:text="@string/def_jam"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
                     </TableRow>
@@ -472,16 +453,17 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="start"
-                            android:text="Jumat"
+                            android:text="@string/dino_jumat"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
 
                         <TextView
+                            android:id="@+id/fvd_jumat"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="end"
-                            android:text="12:00 - 23:00"
+                            android:text="@string/def_jam"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
                     </TableRow>
@@ -493,16 +475,17 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="start"
-                            android:text="Sabtu"
+                            android:text="@string/dino_sabtu"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
 
                         <TextView
+                            android:id="@+id/fvd_sabtu"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="end"
-                            android:text="06:00 - 23:00"
+                            android:text="@string/def_jam"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
                     </TableRow>
@@ -514,16 +497,17 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="start"
-                            android:text="Minggu"
+                            android:text="@string/dino_minggu"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
 
                         <TextView
+                            android:id="@+id/fvd_minggu"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="end"
-                            android:text="06:00 - 23:00"
+                            android:text="@string/def_jam"
                             android:textColor="@color/detailed_textcolor"
                             android:textSize="@dimen/detailed_operasional_textsize" />
                     </TableRow>
@@ -545,11 +529,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
-                    android:text="Fasilitas Tempat"
+                    android:text="@string/txt_fasilitas_tempat"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
                 <TextView
+                    android:id="@+id/fvd_venue_fasilitas_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -558,136 +543,26 @@
                     android:textColor="@color/dimgray"
                     android:textSize="@dimen/_11ssp" />
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fvd_recyler_fasilitas"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_9sdp"
-                    android:baselineAligned="false">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50ssp"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:contentDescription="@string/alt_card_venue"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_def_kantin"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:maxLines="2"
-                            android:text="Kantin"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50ssp"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:contentDescription="@string/alt_card_venue"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_def_parkir"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:maxLines="2"
-                            android:text="Parkir Mobil Motor"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_80sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50ssp"
-                            app:cardCornerRadius="@dimen/_8sdp"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:contentDescription="@string/alt_card_venue"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_def_musholla"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </androidx.cardview.widget.CardView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:maxLines="2"
-                            android:text="Musholla"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:layout_height="@dimen/_81sdp"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="@dimen/_9ssp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_fasilitas_tempat" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fvd_show_fasilitas"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Lihat Semua"
+                    android:text="@string/btn_lihat_semua_vd"
                     android:textAllCaps="false"
                     android:textSize="@dimen/_10sdp"
                     app:cornerRadius="@dimen/_5sdp"
@@ -709,17 +584,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
-                    android:text="Lokasi Tempat"
+                    android:text="@string/txt_lokasi"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
                 <TextView
+                    android:id="@+id/fvd_lokasi_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Jl. Barito, Begadung Barat, Begadung, Kec. Nganjuk, Kabupaten Nganjuk, Jawa Timur 64412"
+                    android:text="@string/def_alamat_d_venue"
                     android:textColor="@color/dimgray"
                     android:textSize="@dimen/_11ssp" />
 
@@ -741,6 +617,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fvd_show_map"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
@@ -748,7 +625,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Petunjuk Arah"
+                    android:text="@string/txt_petunjuk_arah"
                     android:textAllCaps="false"
                     android:textSize="@dimen/_10sdp"
                     app:cornerRadius="@dimen/_5sdp"
@@ -770,7 +647,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
-                    android:text="Review Tempat"
+                    android:text="@string/txt_review_tempat"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
@@ -780,7 +657,7 @@
                     android:layout_marginTop="@dimen/_3sdp">
 
                     <LinearLayout
-                        android:id="@+id/dvd_ratting_value"
+                        android:id="@+id/fvd_ratting_left"
                         android:layout_width="@dimen/_90sdp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -789,6 +666,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:id="@+id/fvd_ratting_val"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -803,56 +681,67 @@
                             android:layout_gravity="center_horizontal">
 
                             <ImageView
+                                android:id="@+id/fvd_star_1"
                                 android:layout_width="@dimen/detailed_star_size"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/detailed_star_margin"
                                 android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_ratting_start" />
+                                android:contentDescription="@string/txt_ratting_1"
+                                android:src="@drawable/ic_ratting_orange_grey" />
 
                             <ImageView
+                                android:id="@+id/fvd_star_2"
                                 android:layout_width="@dimen/detailed_star_size"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/detailed_star_margin"
                                 android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_ratting_start" />
+                                android:contentDescription="@string/txt_ratting_2"
+                                android:src="@drawable/ic_ratting_orange_grey" />
 
                             <ImageView
+                                android:id="@+id/fvd_star_3"
                                 android:layout_width="@dimen/detailed_star_size"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/detailed_star_margin"
                                 android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_ratting_start" />
+                                android:contentDescription="@string/txt_ratting_3"
+                                android:src="@drawable/ic_ratting_orange_grey" />
 
                             <ImageView
+                                android:id="@+id/fvd_star_4"
                                 android:layout_width="@dimen/detailed_star_size"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/detailed_star_margin"
                                 android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_ratting_start" />
+                                android:contentDescription="@string/txt_ratting_4"
+                                android:src="@drawable/ic_ratting_orange_grey" />
 
                             <ImageView
+                                android:id="@+id/fvd_star_5"
                                 android:layout_width="@dimen/detailed_star_size"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/_2sdp"
                                 android:layout_marginEnd="@dimen/_2sdp"
-                                android:src="@drawable/ic_review_star_orange_half" />
+                                android:contentDescription="@string/txt_ratting_5"
+                                android:src="@drawable/ic_ratting_orange_grey" />
 
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/fvd_total_review"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="120 Ulasan"
+                            android:text="@string/def_ttl_review"
                             android:textColor="@color/dimgray"
                             android:textSize="@dimen/_10sdp" />
 
                     </LinearLayout>
 
                     <View
-                        android:id="@+id/dvd_ratting_line"
+                        android:id="@+id/fvd_ratting_line"
                         android:layout_width="@dimen/_1sdp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_7sdp"
@@ -860,32 +749,33 @@
                         android:layout_marginBottom="@dimen/_14sdp"
                         android:background="#B3696969"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dvd_ratting_value"
+                        app:layout_constraintStart_toEndOf="@id/fvd_ratting_left"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fbv_prog_layout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/dvd_ratting_line"
+                        app:layout_constraintStart_toEndOf="@id/fvd_ratting_line"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:id="@+id/dvd_txt_ratting_5"
+                            android:id="@+id/fvd_txt_ratting_5"
                             android:layout_width="@dimen/detailed_star_textview_width"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
                             android:text="@string/txt_ratting_5"
                             android:textColor="@color/black"
                             android:textSize="@dimen/detailed_star_prog_textsize"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_5"
+                            app:layout_constraintBottom_toBottomOf="@id/fvd_prog_ratting_5"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_5" />
+                            app:layout_constraintTop_toTopOf="@id/fvd_prog_ratting_5" />
 
                         <ProgressBar
-                            android:id="@+id/dvd_prog_ratting_5"
+                            android:id="@+id/fvd_prog_ratting_5"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/detailed_star_prog_height"
@@ -895,23 +785,23 @@
                             android:progress="69"
                             android:progressDrawable="@drawable/ll_history_notif"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_5"
+                            app:layout_constraintStart_toEndOf="@id/fvd_txt_ratting_5"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/dvd_txt_ratting_4"
+                            android:id="@+id/fvd_txt_ratting_4"
                             android:layout_width="@dimen/detailed_star_textview_width"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
                             android:text="@string/txt_ratting_4"
                             android:textColor="@color/black"
                             android:textSize="@dimen/detailed_star_prog_textsize"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_4"
+                            app:layout_constraintBottom_toBottomOf="@id/fvd_prog_ratting_4"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_4" />
+                            app:layout_constraintTop_toTopOf="@id/fvd_prog_ratting_4" />
 
                         <ProgressBar
-                            android:id="@+id/dvd_prog_ratting_4"
+                            android:id="@+id/fvd_prog_ratting_4"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/detailed_star_prog_height"
@@ -921,23 +811,23 @@
                             android:progress="37"
                             android:progressDrawable="@drawable/ll_history_notif"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_5"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_5" />
+                            app:layout_constraintStart_toEndOf="@id/fvd_txt_ratting_5"
+                            app:layout_constraintTop_toBottomOf="@id/fvd_prog_ratting_5" />
 
                         <TextView
-                            android:id="@+id/dvd_txt_ratting_3"
+                            android:id="@+id/fvd_txt_ratting_3"
                             android:layout_width="@dimen/detailed_star_textview_width"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
                             android:text="@string/txt_ratting_3"
                             android:textColor="@color/black"
                             android:textSize="@dimen/detailed_star_prog_textsize"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_3"
+                            app:layout_constraintBottom_toBottomOf="@id/fvd_prog_ratting_3"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_3" />
+                            app:layout_constraintTop_toTopOf="@id/fvd_prog_ratting_3" />
 
                         <ProgressBar
-                            android:id="@+id/dvd_prog_ratting_3"
+                            android:id="@+id/fvd_prog_ratting_3"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/detailed_star_prog_height"
@@ -947,23 +837,23 @@
                             android:progress="18"
                             android:progressDrawable="@drawable/ll_history_notif"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_3"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_4" />
+                            app:layout_constraintStart_toEndOf="@id/fvd_txt_ratting_3"
+                            app:layout_constraintTop_toBottomOf="@id/fvd_prog_ratting_4" />
 
                         <TextView
-                            android:id="@+id/dvd_txt_ratting_2"
+                            android:id="@+id/fvd_txt_ratting_2"
                             android:layout_width="@dimen/detailed_star_textview_width"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
                             android:text="@string/txt_ratting_2"
                             android:textColor="@color/black"
                             android:textSize="@dimen/detailed_star_prog_textsize"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_2"
+                            app:layout_constraintBottom_toBottomOf="@id/fvd_prog_ratting_2"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_2" />
+                            app:layout_constraintTop_toTopOf="@id/fvd_prog_ratting_2" />
 
                         <ProgressBar
-                            android:id="@+id/dvd_prog_ratting_2"
+                            android:id="@+id/fvd_prog_ratting_2"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/detailed_star_prog_height"
@@ -973,23 +863,23 @@
                             android:progress="7"
                             android:progressDrawable="@drawable/ll_history_notif"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_2"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_3" />
+                            app:layout_constraintStart_toEndOf="@id/fvd_txt_ratting_2"
+                            app:layout_constraintTop_toBottomOf="@id/fvd_prog_ratting_3" />
 
                         <TextView
-                            android:id="@+id/dvd_txt_ratting_1"
+                            android:id="@+id/fvd_txt_ratting_1"
                             android:layout_width="@dimen/detailed_star_textview_width"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
                             android:text="@string/txt_ratting_1"
                             android:textColor="@color/black"
                             android:textSize="@dimen/detailed_star_prog_textsize"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_prog_ratting_1"
+                            app:layout_constraintBottom_toBottomOf="@id/fvd_prog_ratting_1"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_prog_ratting_1" />
+                            app:layout_constraintTop_toTopOf="@id/fvd_prog_ratting_1" />
 
                         <ProgressBar
-                            android:id="@+id/dvd_prog_ratting_1"
+                            android:id="@+id/fvd_prog_ratting_1"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/detailed_star_prog_height"
@@ -999,410 +889,37 @@
                             android:progress="13"
                             android:progressDrawable="@drawable/ll_history_notif"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/dvd_txt_ratting_1"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_prog_ratting_2" />
+                            app:layout_constraintStart_toEndOf="@id/fvd_txt_ratting_1"
+                            app:layout_constraintTop_toBottomOf="@id/fvd_prog_ratting_2" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/dvd_recycler_review"
+                    android:id="@+id/fvd_recycler_review"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_venue_comment"
                     tools:itemCount="3"
-                    />
+                    tools:listitem="@layout/item_venue_comment" />
 
-                <LinearLayout
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fvd_btn_semua_comment"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_7ssp"
-                        android:layout_marginEnd="@dimen/_5sdp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/dvd_review_photo"
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_35sdp"
-                            android:src="@drawable/img_dani"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/dvd_review_fullname"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="Syamaidzar Adani Syah"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
-                            app:layout_constraintBottom_toTopOf="@id/dvd_review_username"
-                            app:layout_constraintStart_toEndOf="@id/dvd_review_photo"
-                            app:layout_constraintTop_toTopOf="@id/dvd_review_photo" />
-
-                        <TextView
-                            android:id="@+id/dvd_review_username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="\@syam_gimank"
-                            android:textColor="@color/dimgray"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo"
-                            app:layout_constraintStart_toEndOf="@id/dvd_review_photo"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_fullname" />
-
-                        <ImageView
-                            android:layout_width="@dimen/_16sdp"
-                            android:layout_height="@dimen/_16sdp"
-                            android:src="@drawable/ic_menu_vertical_2"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_review_photo" />
-
-                        <LinearLayout
-                            android:id="@+id/dvd_review_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/detailed_review_star_size"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginStart="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_photo">
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/poppins_regular"
-                                android:text="- 23 Oktober 2023"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9ssp" />
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/dvd_review_comment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="@string/txt_lorem_deksripsi_def"
-                            android:textColor="@color/dimgray"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_value" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:background="#2E696969"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_comment" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_7ssp"
-                        android:layout_marginEnd="@dimen/_5sdp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/dvd_review_photo2"
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_35sdp"
-                            android:src="@drawable/img_pram"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/dvd_review_fullname2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="Pramudya Putra P"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
-                            app:layout_constraintBottom_toTopOf="@id/dvd_review_username2"
-                            app:layout_constraintStart_toEndOf="@id/dvd_review_photo2"
-                            app:layout_constraintTop_toTopOf="@id/dvd_review_photo2" />
-
-                        <TextView
-                            android:id="@+id/dvd_review_username2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="\@pramguy"
-                            android:textColor="@color/dimgray"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo2"
-                            app:layout_constraintStart_toEndOf="@id/dvd_review_photo2"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_fullname2" />
-
-                        <ImageView
-                            android:layout_width="@dimen/_16sdp"
-                            android:layout_height="@dimen/_16sdp"
-                            android:src="@drawable/ic_menu_vertical_2"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo2"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_review_photo2" />
-
-                        <LinearLayout
-                            android:id="@+id/dvd_review_value2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/detailed_review_star_size"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginStart="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_photo2">
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/poppins_regular"
-                                android:text="- 23 Oktober 2023"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9ssp" />
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/dvd_review_comment2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="@string/txt_lorem_deksripsi_def"
-                            android:textColor="@color/dimgray"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_value2" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:background="#2E696969"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_comment2" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_7ssp"
-                        android:layout_marginEnd="@dimen/_5sdp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/dvd_review_photo3"
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_35sdp"
-                            android:src="@drawable/img_alka"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/dvd_review_fullname3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="Afrizal Wahyu Alkautsar"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
-                            app:layout_constraintBottom_toTopOf="@id/dvd_review_username3"
-                            app:layout_constraintStart_toEndOf="@id/dvd_review_photo3"
-                            app:layout_constraintTop_toTopOf="@id/dvd_review_photo3" />
-
-                        <TextView
-                            android:id="@+id/dvd_review_username3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="\@alka2023"
-                            android:textColor="@color/dimgray"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo3"
-                            app:layout_constraintStart_toEndOf="@id/dvd_review_photo3"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_fullname3" />
-
-                        <ImageView
-                            android:layout_width="@dimen/_16sdp"
-                            android:layout_height="@dimen/_16sdp"
-                            android:src="@drawable/ic_menu_vertical_2"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_review_photo3"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/dvd_review_photo3" />
-
-                        <LinearLayout
-                            android:id="@+id/dvd_review_value3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/detailed_review_star_size"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginStart="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_photo3">
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <ImageView
-                                android:layout_width="@dimen/detailed_review_star_size"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/detailed_star_margin"
-                                android:src="@drawable/ic_review_star_yellow" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:fontFamily="@font/poppins_regular"
-                                android:text="- 23 Oktober 2023"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9ssp" />
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/dvd_review_comment3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="@string/txt_lorem_deksripsi_def"
-                            android:textColor="@color/dimgray"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_value3" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:background="#2E696969"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_review_comment3" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="Lihat Semua Ulasan"
-                        android:textAllCaps="false"
-                        android:textSize="@dimen/_10sdp"
-                        app:cornerRadius="@dimen/_5sdp"
-                        app:strokeColor="@color/azure"
-                        app:strokeWidth="@dimen/_1sdp" />
-
-                </LinearLayout>
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/btn_lihat_semua_vd"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_10sdp"
+                    app:cornerRadius="@dimen/_5sdp"
+                    app:strokeColor="@color/azure"
+                    app:strokeWidth="@dimen/_1sdp" />
 
             </LinearLayout>
 
@@ -1419,75 +936,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
-                    android:text="Kontak Pengelola"
+                    android:text="@string/txt_kontak_pengelola"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fvd_contact_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_7ssp"
-                        android:layout_marginEnd="@dimen/_5sdp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/dvd_contact_photo"
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_35sdp"
-                            android:src="@drawable/img_haqi"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/dvd_contact_fullname"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="Achmad Baihaqi"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
-                            app:layout_constraintBottom_toTopOf="@id/dvd_contact_username"
-                            app:layout_constraintStart_toEndOf="@id/dvd_contact_photo"
-                            app:layout_constraintTop_toTopOf="@id/dvd_contact_photo" />
-
-                        <TextView
-                            android:id="@+id/dvd_contact_username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="+62 856-5586-4624"
-                            android:textColor="@color/dimgray"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintBottom_toBottomOf="@id/dvd_contact_photo"
-                            app:layout_constraintStart_toEndOf="@id/dvd_contact_photo"
-                            app:layout_constraintTop_toBottomOf="@id/dvd_contact_fullname" />
-
-                        <ImageView
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:src="@drawable/ic_whatsapp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
+                    android:nestedScrollingEnabled="true"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_venue_contact"
+                    tools:itemCount="2"
+                    />
 
             </LinearLayout>
 
             <!-- Venue Aktivitas-->
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/detailed_margin_width"
@@ -1499,7 +966,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
-                    android:text="Aktivitas Lapangan"
+                    android:text="@string/txt_aktivitas_lapangan"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
@@ -1516,6 +983,7 @@
 
             <!-- Venue Aktivitas-->
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/detailed_margin_width"
@@ -1527,7 +995,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
-                    android:text="Lapangat Terkait"
+                    android:text="@string/txt_lapangat_terkait"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
@@ -1544,7 +1012,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_60ssp" />
+                android:layout_height="@dimen/_70ssp"
+                tools:ignore="UselessLeaf" />
 
         </LinearLayout>
 

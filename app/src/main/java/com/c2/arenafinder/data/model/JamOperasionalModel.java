@@ -6,31 +6,96 @@ import com.google.gson.annotations.SerializedName;
 public class JamOperasionalModel {
 
     @Expose
-    @SerializedName("opened")
-    private String startHour;
+    @SerializedName("Senin")
+    private DayOperasionalModel senin;
 
     @Expose
-    @SerializedName("closed")
-    private String endHour;
+    @SerializedName("Selasa")
+    private DayOperasionalModel selasa;
 
-    public JamOperasionalModel(String startHour, String endHour) {
-        this.startHour = startHour;
-        this.endHour = endHour;
+    @Expose
+    @SerializedName("Rabu")
+    private DayOperasionalModel rabu;
+
+    @Expose
+    @SerializedName("Kamis")
+    private DayOperasionalModel kamis;
+
+    @Expose
+    @SerializedName("Jumat")
+    private DayOperasionalModel jumat;
+
+    @Expose
+    @SerializedName("Sabtu")
+    private DayOperasionalModel sabtu;
+
+    @Expose
+    @SerializedName("Minggu")
+    private DayOperasionalModel minggu;
+
+    public JamOperasionalModel(DayOperasionalModel senin, DayOperasionalModel selasa, DayOperasionalModel rabu, DayOperasionalModel kamis, DayOperasionalModel jumat, DayOperasionalModel sabtu, DayOperasionalModel minggu) {
+        this.senin = senin;
+        this.selasa = selasa;
+        this.rabu = rabu;
+        this.kamis = kamis;
+        this.jumat = jumat;
+        this.sabtu = sabtu;
+        this.minggu = minggu;
     }
 
-    public String getStartHour() {
-        return startHour;
+    public DayOperasionalModel getSenin() {
+        return senin;
     }
 
-    public void setStartHour(String startHour) {
-        this.startHour = startHour;
+    public void setSenin(DayOperasionalModel senin) {
+        this.senin = senin;
     }
 
-    public String getEndHour() {
-        return endHour;
+    public DayOperasionalModel getSelasa() {
+        return selasa;
     }
 
-    public void setEndHour(String endHour) {
-        this.endHour = endHour;
+    public void setSelasa(DayOperasionalModel selasa) {
+        this.selasa = selasa;
+    }
+
+    public DayOperasionalModel getRabu() {
+        return rabu;
+    }
+
+    public void setRabu(DayOperasionalModel rabu) {
+        this.rabu = rabu;
+    }
+
+    public DayOperasionalModel getKamis() {
+        return kamis;
+    }
+
+    public void setKamis(DayOperasionalModel kamis) {
+        this.kamis = kamis;
+    }
+
+    public DayOperasionalModel getJumat() {
+        return jumat;
+    }
+
+    public void setJumat(DayOperasionalModel jumat) {
+        this.jumat = jumat;
+    }
+
+    public DayOperasionalModel getSabtu() {
+        return sabtu;
+    }
+
+    public void setSabtu(DayOperasionalModel sabtu) {
+        this.sabtu = sabtu;
+    }
+
+    public DayOperasionalModel getMinggu() {
+        return minggu;
+    }
+
+    public void setMinggu(DayOperasionalModel minggu) {
+        this.minggu = minggu;
     }
 }

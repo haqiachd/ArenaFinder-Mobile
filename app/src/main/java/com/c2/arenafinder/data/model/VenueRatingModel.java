@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName;
 public class VenueRatingModel {
 
     @Expose
+    @SerializedName("rating")
+    private String rating;
+
+    @Expose
     @SerializedName("rating_1")
     private String rating1;
 
@@ -26,55 +30,73 @@ public class VenueRatingModel {
     private String rating5;
 
     @Expose
-    @SerializedName("total_Review")
+    @SerializedName("total_review")
     private String totalReview;
 
+
+    public VenueRatingModel(String rating, String rating1, String rating2, String rating3, String rating4, String rating5, String totalReview) {
+        this.rating = rating;
+        this.rating1 = rating1;
+        this.rating2 = rating2;
+        this.rating3 = rating3;
+        this.rating4 = rating4;
+        this.rating5 = rating5;
+        this.totalReview = totalReview;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getRating1() {
         return rating1;
     }
 
-    public void setRating1(String value) {
-        this.rating1 = value;
-    }
-
-    public String getTotalReview() {
-        return totalReview;
-    }
-
-    public void setTotalReview(String value) {
-        this.totalReview = value;
-    }
-
-    public String getRating5() {
-        return rating5;
-    }
-
-    public void setRating5(String value) {
-        this.rating5 = value;
-    }
-
-    public String getRating4() {
-        return rating4;
-    }
-
-    public void setRating4(String value) {
-        this.rating4 = value;
-    }
-
-    public String getRating3() {
-        return rating3;
-    }
-
-    public void setRating3(String value) {
-        this.rating3 = value;
+    public void setRating1(String rating1) {
+        this.rating1 = rating1;
     }
 
     public String getRating2() {
         return rating2;
     }
 
-    public void setRating2(String value) {
-        this.rating2 = value;
+    public void setRating2(String rating2) {
+        this.rating2 = rating2;
+    }
+
+    public String getRating3() {
+        return rating3;
+    }
+
+    public void setRating3(String rating3) {
+        this.rating3 = rating3;
+    }
+
+    public String getRating4() {
+        return rating4;
+    }
+
+    public void setRating4(String rating4) {
+        this.rating4 = rating4;
+    }
+
+    public String getRating5() {
+        return rating5;
+    }
+
+    public void setRating5(String rating5) {
+        this.rating5 = rating5;
+    }
+
+    public String getTotalReview() {
+        return totalReview;
+    }
+
+    public void setTotalReview(String totalReview) {
+        this.totalReview = totalReview;
     }
 }

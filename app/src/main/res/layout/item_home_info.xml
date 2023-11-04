@@ -7,6 +7,7 @@
         android:id="@+id/ihi_image"
         android:layout_width="match_parent"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/alt_lapangan_image"
         android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -10,6 +10,8 @@ import com.c2.arenafinder.data.model.VenueRatingModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class VenueDetailedResponse {
 
     @Expose
@@ -65,11 +67,11 @@ public class VenueDetailedResponse {
 
         @Expose
         @SerializedName("contact")
-        private VenueContactModel contact;
+        private ArrayList<VenueContactModel> contact;
 
         @Expose
         @SerializedName("fasilitas")
-        private FasilitasModel fasilitas;
+        private ArrayList<FasilitasModel> fasilitas;
 
         @Expose
         @SerializedName("rating")
@@ -77,13 +79,12 @@ public class VenueDetailedResponse {
 
         @Expose
         @SerializedName("comment")
-        private VenueCommentModel comment;
+        private ArrayList<VenueCommentModel> comment;
 
         @Expose
         @SerializedName("photos")
-        private VenuePhotos photo;
-
-        public Data(VenueDetailedModel venue, JamOperasionalModel jamOperasional, VenueContactModel contact, FasilitasModel fasilitas, VenueRatingModel rating, VenueCommentModel comment, VenuePhotos photo) {
+        private ArrayList<VenuePhotos> photo;
+        public Data(VenueDetailedModel venue, JamOperasionalModel jamOperasional, ArrayList<VenueContactModel> contact, ArrayList<FasilitasModel> fasilitas, VenueRatingModel rating, ArrayList<VenueCommentModel> comment, ArrayList<VenuePhotos> photo) {
             this.venue = venue;
             this.jamOperasional = jamOperasional;
             this.contact = contact;
@@ -109,19 +110,19 @@ public class VenueDetailedResponse {
             this.jamOperasional = jamOperasional;
         }
 
-        public VenueContactModel getContact() {
+        public ArrayList<VenueContactModel> getContact() {
             return contact;
         }
 
-        public void setContact(VenueContactModel contact) {
+        public void setContact(ArrayList<VenueContactModel> contact) {
             this.contact = contact;
         }
 
-        public FasilitasModel getFasilitas() {
+        public ArrayList<FasilitasModel> getFasilitas() {
             return fasilitas;
         }
 
-        public void setFasilitas(FasilitasModel fasilitas) {
+        public void setFasilitas(ArrayList<FasilitasModel> fasilitas) {
             this.fasilitas = fasilitas;
         }
 
@@ -133,19 +134,19 @@ public class VenueDetailedResponse {
             this.rating = rating;
         }
 
-        public VenueCommentModel getComment() {
+        public ArrayList<VenueCommentModel> getComment() {
             return comment;
         }
 
-        public void setComment(VenueCommentModel comment) {
+        public void setComment(ArrayList<VenueCommentModel> comment) {
             this.comment = comment;
         }
 
-        public VenuePhotos getPhoto() {
+        public ArrayList<VenuePhotos> getPhoto() {
             return photo;
         }
 
-        public void setPhoto(VenuePhotos photo) {
+        public void setPhoto(ArrayList<VenuePhotos> photo) {
             this.photo = photo;
         }
     }
