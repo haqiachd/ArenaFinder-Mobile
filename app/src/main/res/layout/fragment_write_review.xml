@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    tools:context=".ui.fragment.detailed.WriteReviewFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fwr_my_ratting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/kanit_semibold"
+            android:text="@string/txt_tuliskan_ratting"
+            android:textColor="@color/biru_gelap"
+            android:textSize="@dimen/_19ssp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/txt_desc_write_ratting"
+            android:textColor="@color/granite_grey"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/fwr_rating_1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_weight="1"
+                android:contentDescription="@string/alt_give_ratting"
+                android:src="@drawable/ic_star_kosong" />
+
+            <ImageView
+                android:id="@+id/fwr_rating_2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_weight="1"
+                android:contentDescription="@string/alt_give_ratting"
+                android:src="@drawable/ic_star_kosong" />
+
+            <ImageView
+                android:id="@+id/fwr_rating_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_weight="1"
+                android:contentDescription="@string/alt_give_ratting"
+                android:src="@drawable/ic_star_kosong" />
+
+            <ImageView
+                android:id="@+id/fwr_rating_4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_weight="1"
+                android:contentDescription="@string/alt_give_ratting"
+                android:src="@drawable/ic_star_kosong" />
+
+            <ImageView
+                android:id="@+id/fwr_rating_5"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_weight="1"
+                android:contentDescription="@string/alt_give_ratting"
+                android:src="@drawable/ic_star_kosong" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fwr_input_comment_lay"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_13sdp"
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+            app:boxCornerRadiusTopStart="@dimen/_5sdp"
+            app:boxStrokeColor="@color/biru_gelap"
+            app:boxStrokeWidth="@dimen/_2sdp"
+            app:counterEnabled="true"
+            app:counterMaxLength="300"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fwr_input_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="top"
+                android:hint="@string/hint_commentar"
+                android:inputType="textMultiLine"
+                android:minHeight="@dimen/_120sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fwr_btn_posting"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/fwr_posting"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12ssp"
+            app:strokeColor="@color/azure"
+            app:strokeWidth="@dimen/_2sdp" />
+
+    </LinearLayout>
+
+</ScrollView>
