@@ -43,6 +43,7 @@ import com.c2.arenafinder.ui.adapter.VenueFasilitasAdapter;
 import com.c2.arenafinder.ui.adapter.VenuePhotoAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 
@@ -213,7 +214,9 @@ public class VenueDetailedFragment extends Fragment {
         });
 
         btnReview.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Button Review", Toast.LENGTH_SHORT).show();
+            FragmentUtil.switchFragmentDetailed(
+                    requireActivity().getSupportFragmentManager(), VenueReviewFragment.newInstance(id), true
+            );
         });
 
         btnFasilitas.setOnClickListener(v -> {
@@ -380,7 +383,7 @@ public class VenueDetailedFragment extends Fragment {
                     new VenueCommentAdapter(requireContext(), models, new AdapterActionListener() {
                         @Override
                         public void onClickListener(int position) {
-                            Toast.makeText(requireContext(), models.get(position).getFullName(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(requireContext(), models.get(position).getFullName(), Toast.LENGTH_SHORT).show();
                         }
                     })
             );
@@ -390,8 +393,6 @@ public class VenueDetailedFragment extends Fragment {
     }
 
     private void showContact(ArrayList<VenueContactModel> model) {
-
-        Toast.makeText(requireContext(), "" + model.get(0).getFullName(), Toast.LENGTH_LONG).show();
 
         contactRecycler.setAdapter(
                 new VenueContactAdapter(requireContext(), model, new AdapterActionListener() {

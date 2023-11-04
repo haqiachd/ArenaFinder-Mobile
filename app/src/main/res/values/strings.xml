@@ -290,5 +290,15 @@
     <string name="txt_kontak_pengelola">Kontak Pengelola</string>
     <string name="txt_aktivitas_lapangan">Aktivitas Lapangan</string>
     <string name="txt_lapangat_terkait">Lapangat Terkait</string>
+    <string name="txt_edit_ulasan">Edit Ulasan</string>
+    <string name="txt_review_kamu">Review Kamu</string>
+    <string name="txt_semua_ulasan">Semua Ulasan</string>
+    <string name="txt_give_your_ratting">Berikan ulasan kamu disini.</string>
+    <string name="txt_tulis_ulasan">Tulis Ulasan</string>
+    <string name="alt_give_ratting">give ratting</string>
+    <string name="txt_tuliskan_ratting">Tuliskan Ulasan</string>
+    <string name="txt_desc_write_ratting">Ulasan bersifat publik serta menyertakan info akun dan perangat Anda.</string>
+    <string name="hint_commentar">Masukan Komentar Kamu</string>
+    <string name="fwr_posting">Posting</string>
 
 </resources>

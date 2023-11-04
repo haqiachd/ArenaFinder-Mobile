@@ -113,7 +113,7 @@ public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapte
         }
 
         private void showRatings(Context context, int ratting){
-            for (int i = 1; i < ratting; i++){
+            for (int i = 0; i < ratting; i++){
                 imgRattings[i].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_review_star_yellow));
             }
         }

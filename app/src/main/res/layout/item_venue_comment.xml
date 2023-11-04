@@ -121,7 +121,7 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/txt_lorem_deksripsi_def"
-        android:textColor="@color/dimgray"
+        android:textColor="@color/biru_gelap"
         android:textSize="@dimen/_10ssp"
         app:layout_constraintTop_toBottomOf="@id/ivr_review_value" />
 
