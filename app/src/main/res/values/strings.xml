@@ -135,6 +135,8 @@
     <string name="txt_gratis_v">Tidak perlu bayar</string>
     <string name="txt_disewakan_v">Rp. %1$s / Sesi</string>
     <string name="txt_ulasan_2">(%1$s Ulasan)</string>
+    <string name="txt_no_reviws">Belum ada ulasan</string>
+    <string name="btn_give_rat">Beri ulasan pertama</string>
 
     <string name="txt_venue_status_disewakan">Disewakan</string>
     <string name="txt_venue_status_gratis">Gratis</string>
@@ -153,6 +155,13 @@
     <string name="txt_olahraga_renang">Renang</string>
     <string name="txt_olahraga_silat">Pencak Silat</string>
     <string name="txt_aktivitas_jam">%1$s - %2$s</string>
+    <string name="txt_total_views">%1$d x Dilihat</string>
+    <string name="txt_total_shared">%1$d x Dibagikan</string>
+    <string name="def_jam">12:00 – 23:00</string>
+    <string name="txt_jam_operasional">%1$s – %2$s</string>
+    <string name="txt_tutup">Tutup</string>
+    <string name="txt_ulasan_val">%1$s Ulasan</string>
+    <string name="txt_ratting_is_0">Belum ada ulasan</string>
 
     <string name="txt_ratting_5">5</string>
     <string name="txt_ratting_4">4</string>
@@ -160,6 +169,14 @@
     <string name="txt_ratting_2">2</string>
     <string name="txt_ratting_1">1</string>
     <string name="txt_ratting_na">NA</string>
+
+    <string name="dino_senin">Senin</string>
+    <string name="dino_selasa">Selasa</string>
+    <string name="dino_rabu">Rabu</string>
+    <string name="dino_kamis">Kamis</string>
+    <string name="dino_jumat">Jumat</string>
+    <string name="dino_sabtu">Sabtu</string>
+    <string name="dino_minggu">Minggu</string>
 
 
     <string name="alt_appbar_search">Cari data</string>
@@ -261,5 +278,17 @@
     <string name="err_google_auth_connection">Tidak dapat terhubung dengan Google Auth.</string>
     <string name="err_google_auth_fatal">Fatal error Google Auth.</string>
     <string name="err_otp_invalid">Kote OTP tidak cocok</string>
+    <string name="txt_jam_operasional_t">Jam Operasional</string>
+    <string name="txt_fasilitas_tempat">Fasilitas Tempat</string>
+    <string name="txt_nama_fasilitas">Nama Fasilitas</string>
+    <string name="txt_petunjuk_arah">Petunjuk Arah</string>
+    <string name="def_alamat_d_venue">Jl. Barito, Begadung Barat, Begadung, Kec. Nganjuk, Kabupaten Nganjuk, Jawa Timur 64412</string>
+    <string name="txt_lokasi">Lokasi Tempat</string>
+    <string name="btn_lihat_semua_vd">Lihat Semua</string>
+    <string name="txt_review_tempat">Review Tempat</string>
+    <string name="def_ttl_review">120 Ulasan</string>
+    <string name="txt_kontak_pengelola">Kontak Pengelola</string>
+    <string name="txt_aktivitas_lapangan">Aktivitas Lapangan</string>
+    <string name="txt_lapangat_terkait">Lapangat Terkait</string>
 
 </resources>

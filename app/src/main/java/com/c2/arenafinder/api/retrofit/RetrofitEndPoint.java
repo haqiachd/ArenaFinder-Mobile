@@ -8,6 +8,7 @@ import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.BerandaResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
+import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 
 import retrofit2.Call;
@@ -15,6 +16,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface RetrofitEndPoint {
@@ -122,4 +124,9 @@ public interface RetrofitEndPoint {
 
     @GET("page/referensi.php")
     Call<ReferensiResponse> referensiPage();
+
+    @GET("feature/venues/venue_detailed.php")
+    Call<VenueDetailedResponse> venueDetailed(
+            @Query("id_venue") String idVenue
+    );
 }

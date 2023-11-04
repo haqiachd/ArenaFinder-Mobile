@@ -31,6 +31,8 @@ public class RetrofitClient {
 
     public static final String AKTIVITAS_URL = PUBLIC_IMG + "aktivitas/";
 
+    public static final String FASILITAS_URL = PUBLIC_IMG + "fasilitas/";
+
     public static final String SUCCESSFUL_RESPONSE = "success";
 
     @NonNull
