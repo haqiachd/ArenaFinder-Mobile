@@ -54,6 +54,10 @@ public class VenueReviewsResponse {
     public static class Data{
 
         @Expose
+        @SerializedName("my_comment")
+        private VenueCommentModel myComment;
+
+        @Expose
         @SerializedName("venue_review")
         private VenueRatingModel rating;
 
@@ -61,7 +65,8 @@ public class VenueReviewsResponse {
         @SerializedName("venue_comment")
         private ArrayList<VenueCommentModel> comment;
 
-        public Data(VenueRatingModel rating, ArrayList<VenueCommentModel> comment) {
+        public Data(VenueCommentModel myComment, VenueRatingModel rating, ArrayList<VenueCommentModel> comment) {
+            this.myComment = myComment;
             this.rating = rating;
             this.comment = comment;
         }
@@ -80,6 +85,14 @@ public class VenueReviewsResponse {
 
         public void setComment(ArrayList<VenueCommentModel> comment) {
             this.comment = comment;
+        }
+
+        public VenueCommentModel getMyComment() {
+            return myComment;
+        }
+
+        public void setMyComment(VenueCommentModel myComment) {
+            this.myComment = myComment;
         }
     }
 }

@@ -2,16 +2,22 @@ package com.c2.arenafinder.ui.fragment.detailed;
 
 import android.os.Bundle;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +31,7 @@ import com.c2.arenafinder.data.model.VenueRatingModel;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.ui.adapter.VenueCommentAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.UsersUtil;
 
@@ -38,13 +45,21 @@ public class VenueReviewFragment extends Fragment {
 
     private static final String ARG_ID = "id_venue";
 
+    private UsersUtil usersUtil;
+
     private String id;
 
     private RecyclerView commentRecycler;
 
-    private TextView txtRatting, txtReviews, txtWriteReview;
+    private ConstraintLayout myCommentLayout;
+
+    private LinearLayout writeLayout;
+
+    private TextView txtRatting, txtReviews, txtWriteReview, txtMyRatting, txtMyComment, txtMyDate,
+            txtEditMy;
 
     private ImageView star1, star2, star3, star4, star5,
+            gStar1, gStar2, gStar3, gStar4, gStar5,
             mStar1, mStar2, mStar3, mStar4, mStar5;
 
     private ProgressBar prog1, prog2, prog3, prog4, prog5;
@@ -54,9 +69,15 @@ public class VenueReviewFragment extends Fragment {
     }
 
     private void initViews(View view) {
+        writeLayout = view.findViewById(R.id.fvr_write_comment_layout);
+        myCommentLayout = view.findViewById(R.id.fvr_mycomment_layout);
         commentRecycler = view.findViewById(R.id.fvr_recycler_review);
         txtRatting = view.findViewById(R.id.fvr_ratting_val);
         txtReviews = view.findViewById(R.id.fvr_total_review);
+        txtMyRatting = view.findViewById(R.id.fvr_my_ratting);
+        txtMyComment = view.findViewById(R.id.fvr_review_comment);
+        txtMyDate = view.findViewById(R.id.fvr_ratting_date);
+        txtEditMy = view.findViewById(R.id.fvr_edit_ulasan);
 
         prog1 = view.findViewById(R.id.fvr_prog_ratting_1);
         prog2 = view.findViewById(R.id.fvr_prog_ratting_2);
@@ -70,11 +91,17 @@ public class VenueReviewFragment extends Fragment {
         star4 = view.findViewById(R.id.fvr_star_4);
         star5 = view.findViewById(R.id.fvr_star_5);
 
-        mStar1 = view.findViewById(R.id.fvr_rating_1);
-        mStar2 = view.findViewById(R.id.fvr_rating_2);
-        mStar3 = view.findViewById(R.id.fvr_rating_3);
-        mStar4 = view.findViewById(R.id.fvr_rating_4);
-        mStar5 = view.findViewById(R.id.fvr_rating_5);
+        gStar1 = view.findViewById(R.id.fvr_grating_1);
+        gStar2 = view.findViewById(R.id.fvr_grating_2);
+        gStar3 = view.findViewById(R.id.fvr_grating_3);
+        gStar4 = view.findViewById(R.id.fvr_grating_4);
+        gStar5 = view.findViewById(R.id.fvr_grating_5);
+
+        mStar1 = view.findViewById(R.id.fvr_mratting_1);
+        mStar2 = view.findViewById(R.id.fvr_mratting_2);
+        mStar3 = view.findViewById(R.id.fvr_mratting_3);
+        mStar4 = view.findViewById(R.id.fvr_mratting_4);
+        mStar5 = view.findViewById(R.id.fvr_mratting_5);
 
         txtWriteReview = view.findViewById(R.id.fvr_tambah_ulasan);
     }
@@ -106,6 +133,7 @@ public class VenueReviewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        usersUtil = new UsersUtil(requireContext());
 
         fetchData();
         onClickGroups();
@@ -123,8 +151,14 @@ public class VenueReviewFragment extends Fragment {
                             VenueReviewsResponse.Data data = response.body().getData();
 
                             // show data
-                            showRatting(data.getRating());
-                            showComment(data.getComment());
+                            try {
+                                showMyComment(data.getMyComment());
+                                showRatting(data.getRating());
+                                showComment(data.getComment());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(requireContext(), "Gagal menampilkan data", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -140,23 +174,63 @@ public class VenueReviewFragment extends Fragment {
 
     private void onClickGroups() {
 
-        ImageView[] myRattins = {mStar1, mStar2, mStar3, mStar4, mStar5};
+        ImageView[] myRattins = {gStar1, gStar2, gStar3, gStar4, gStar5};
 
         for (int i = 0; i < myRattins.length; i++) {
             int index = i;
             myRattins[i].setOnClickListener(v -> {
-                FragmentUtil.switchFragmentDetailed(
-                        requireActivity().getSupportFragmentManager(),
-                        WriteReviewFragment.newInstance(id, index),
-                        true
-                );
+                showRattingStar(myRattins, index + 1, R.drawable.ic_ratting_start);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        FragmentUtil.switchFragmentDetailed(
+                                requireActivity().getSupportFragmentManager(),
+                                WriteReviewFragment.newInstance(id, usersUtil.getId(), index, ""),
+                                true
+                        );
+                    }
+                }, 500L);
             });
         }
 
         txtWriteReview.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "RATTING", Toast.LENGTH_SHORT).show();
+            FragmentUtil.switchFragmentDetailed(
+                    requireActivity().getSupportFragmentManager(),
+                    WriteReviewFragment.newInstance(id, usersUtil.getId(), 0, ""),
+                    true
+            );
         });
 
+
+    }
+
+    private void showMyComment(VenueCommentModel model) throws NumberFormatException, NullPointerException {
+
+        if (model.getIdReview() > 0) {
+            writeLayout.setVisibility(View.GONE);
+            myCommentLayout.setVisibility(View.VISIBLE);
+            showRattingStar(
+                    new ImageView[]{mStar1, mStar2, mStar3, mStar4, mStar5},
+                    model.getRatting(),
+                    R.drawable.ic_review_star_yellow
+            );
+            txtMyComment.setText(model.getComment());
+            txtMyDate.setText(ArenaFinder.convertToDate(model.getDate()));
+            txtMyRatting.setText(R.string.txt_review_kamu);
+
+            txtEditMy.setOnClickListener(v -> {
+                FragmentUtil.switchFragmentDetailed(
+                        requireActivity().getSupportFragmentManager(),
+                        WriteReviewFragment.newInstance(id, usersUtil.getId(), model.getRatting(), model.getComment()),
+                        true
+                );
+            });
+
+        } else {
+            writeLayout.setVisibility(View.VISIBLE);
+            myCommentLayout.setVisibility(View.GONE);
+            txtMyRatting.setText(R.string.txt_tuliskan_ratting);
+        }
     }
 
     private void showComment(ArrayList<VenueCommentModel> models) {
@@ -183,7 +257,14 @@ public class VenueReviewFragment extends Fragment {
 
     }
 
-    private void showRatting(VenueRatingModel model) {
+    private void showRattingStar(ImageView[] ratings, int rating, @DrawableRes int ratingIcon) {
+
+        for (int i = 0; i < rating; i++) {
+            ratings[i].setImageDrawable(ContextCompat.getDrawable(requireContext(), ratingIcon));
+        }
+    }
+
+    private void showRatting(VenueRatingModel model) throws NumberFormatException, NullPointerException {
 
         ProgressBar[] progressBars = {prog1, prog2, prog3, prog4, prog5};
         ImageView[] stars = {star1, star2, star3, star4, star5};
@@ -207,9 +288,9 @@ public class VenueReviewFragment extends Fragment {
                 progressBars[i].setProgress(Integer.parseInt(values[i]));
                 progressBars[i].setMax(Integer.parseInt(model.getTotalReview()));
             } catch (Exception e) {
-                e.printStackTrace();
                 progressBars[i].setMax(0);
                 progressBars[i].setProgress(0);
+                throw new NumberFormatException("error konversi ke float");
             }
         }
 

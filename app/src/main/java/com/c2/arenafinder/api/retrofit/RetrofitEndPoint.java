@@ -1,5 +1,17 @@
 package com.c2.arenafinder.api.retrofit;
 
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+
+import com.c2.arenafinder.data.model.EditCommentModel;
 import com.c2.arenafinder.data.model.NotifResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
@@ -10,13 +22,6 @@ import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 
-import okhttp3.MultipartBody;
-import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface RetrofitEndPoint {
 
@@ -129,10 +134,21 @@ public interface RetrofitEndPoint {
             @Query("id_venue") String idVenue
     );
 
-    @GET("feature/venues/venue_reviews.php")
+    @GET("feature/venues/reviews/venue_reviews.php")
     Call<VenueReviewsResponse> venueComment(
             @Query("id_user") String idUser,
             @Query("id_venue") String idVenue
+    );
+
+    @PUT("feature/venues/reviews/edit_comment.php")
+    Call<VenueReviewsResponse> editComment(
+            @Body EditCommentModel model
+    );
+
+    @DELETE("feature/venues/reviews/delete_comment.php")
+    Call<VenueReviewsResponse> deleteComment(
+            @Path("id_venue") String idVenue,
+            @Path("id_users") String idUsers
     );
 
 }
