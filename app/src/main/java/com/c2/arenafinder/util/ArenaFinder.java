@@ -178,4 +178,9 @@ public class ArenaFinder {
         return new DecimalFormat("#,###.00").format(price);
     }
 
+    public static String oneComa(float number) {
+        return String.valueOf(((int) (number * 10)) / 10.0);
+    }
+
+
 }

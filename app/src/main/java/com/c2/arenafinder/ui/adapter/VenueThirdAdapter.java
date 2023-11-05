@@ -61,7 +61,7 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
             holder.txtRatting.setText(R.string.txt_ratting_na);
             holder.txtReview.setVisibility(View.GONE);
         }else {
-            holder.txtRatting.setText(String.valueOf(model.getRating()));
+            holder.txtRatting.setText(ArenaFinder.oneComa(model.getRating()));
             holder.txtReview.setText(context.getString(R.string.txt_ulasan_2, String.valueOf(model.getTotalReview())));
         }
 

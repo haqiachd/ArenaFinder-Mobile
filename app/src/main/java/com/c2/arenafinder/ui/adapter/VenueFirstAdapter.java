@@ -67,7 +67,7 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
         if (model.getRating() <= 0.0){
             holder.txtRatting.setText(R.string.txt_ratting_na);
         }else {
-            holder.txtRatting.setText(String.valueOf(model.getRating()));
+            holder.txtRatting.setText(ArenaFinder.oneComa(model.getRating()));
         }
 
         // change status venue color

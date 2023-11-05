@@ -2,13 +2,12 @@ package com.c2.arenafinder.api.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 import com.c2.arenafinder.data.model.EditCommentModel;
@@ -21,7 +20,6 @@ import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
-
 
 public interface RetrofitEndPoint {
 
@@ -145,10 +143,10 @@ public interface RetrofitEndPoint {
             @Body EditCommentModel model
     );
 
-    @DELETE("feature/venues/reviews/delete_comment.php")
+    @HTTP(method = "DELETE", path = "feature/venues/reviews/delete_comment.php", hasBody = true)
+//    @DELETE("feature/venues/reviews/delete_comment.php")
     Call<VenueReviewsResponse> deleteComment(
-            @Path("id_venue") String idVenue,
-            @Path("id_users") String idUsers
+            @Body EditCommentModel model
     );
 
 }

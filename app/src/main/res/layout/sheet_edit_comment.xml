@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet">
+
+    <ImageView
+        android:id="@+id/sca_line_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/alt_bottom_sheet_line_indicator"
+        android:src="@drawable/ic_sheet_line_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sec_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Ulasan Tempat"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintTop_toBottomOf="@id/sca_line_indicator" />
+
+    <TextView
+        android:id="@+id/sec_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Tambahkan ulasan kamu mengenai tempat olahraga ini."
+        android:textColor="@color/dimgray"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/sec_title" />
+
+    <View
+        android:id="@+id/sec_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@color/dimgray"
+        android:backgroundTint="@color/dimgray"
+        app:layout_constraintTop_toBottomOf="@id/sec_desc" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/sec_line">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/sec_btn_edit"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:strokeColor="@color/jade_green"
+            app:strokeWidth="@dimen/_2sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center_vertical"
+                android:text="Edit Ulasan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/sec_btn_hapus"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:strokeColor="@color/red"
+            app:strokeWidth="@dimen/_2sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center_vertical"
+                android:text="Hapus Ulasan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cod_icon" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

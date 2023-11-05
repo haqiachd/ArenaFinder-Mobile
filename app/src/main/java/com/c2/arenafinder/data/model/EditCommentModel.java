@@ -1,6 +1,5 @@
 package com.c2.arenafinder.data.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class EditCommentModel {
@@ -16,6 +15,11 @@ public class EditCommentModel {
 
     @SerializedName("comment")
     private String comment;
+
+    public EditCommentModel(String idVenue, String idUsers){
+        this.idVenue = idVenue;
+        this.idUsers = idUsers;
+    }
 
     public EditCommentModel(String idVenue, String idUsers, String star, String comment) {
         this.idVenue = idVenue;

@@ -1,5 +1,7 @@
 package com.c2.arenafinder.ui.fragment.detailed;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.DrawableRes;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,7 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.EditCommentModel;
 import com.c2.arenafinder.data.model.VenueCommentModel;
 import com.c2.arenafinder.data.model.VenueRatingModel;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
@@ -34,6 +38,7 @@ import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.UsersUtil;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -185,7 +190,7 @@ public class VenueReviewFragment extends Fragment {
                     public void run() {
                         FragmentUtil.switchFragmentDetailed(
                                 requireActivity().getSupportFragmentManager(),
-                                WriteReviewFragment.newInstance(id, usersUtil.getId(), index, ""),
+                                WriteReviewFragment.newInstance(id, usersUtil.getId(), index + 1, ""),
                                 true
                         );
                     }
@@ -194,6 +199,7 @@ public class VenueReviewFragment extends Fragment {
         }
 
         txtWriteReview.setOnClickListener(v -> {
+
             FragmentUtil.switchFragmentDetailed(
                     requireActivity().getSupportFragmentManager(),
                     WriteReviewFragment.newInstance(id, usersUtil.getId(), 0, ""),
@@ -219,11 +225,51 @@ public class VenueReviewFragment extends Fragment {
             txtMyRatting.setText(R.string.txt_review_kamu);
 
             txtEditMy.setOnClickListener(v -> {
-                FragmentUtil.switchFragmentDetailed(
-                        requireActivity().getSupportFragmentManager(),
-                        WriteReviewFragment.newInstance(id, usersUtil.getId(), model.getRatting(), model.getComment()),
-                        true
-                );
+                BottomSheetDialog sheet = new BottomSheetDialog(requireContext(), R.style.BottomSheetTheme);
+                View sheetInflater = getLayoutInflater().inflate(R.layout.sheet_edit_comment, null);
+                sheet.setContentView(sheetInflater);
+
+                sheetInflater.findViewById(R.id.sec_btn_edit).setOnClickListener(dani -> {
+                    FragmentUtil.switchFragmentDetailed(
+                            requireActivity().getSupportFragmentManager(),
+                            WriteReviewFragment.newInstance(id, usersUtil.getId(), model.getRatting(), model.getComment()),
+                            true
+                    );
+                    sheet.dismiss();
+                });
+
+                sheetInflater.findViewById(R.id.sec_btn_hapus).setOnClickListener(mudi -> {
+
+                    RetrofitClient.getInstance().deleteComment(new EditCommentModel(id, usersUtil.getId()))
+                            .enqueue(new Callback<VenueReviewsResponse>() {
+                                @Override
+                                public void onResponse(Call<VenueReviewsResponse> call, Response<VenueReviewsResponse> response) {
+
+                                    if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                                        sheet.dismiss();
+                                        fetchData();
+                                    } else {
+                                        sheet.dismiss();
+                                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<VenueReviewsResponse> call, Throwable t) {
+                                    sheet.dismiss();
+                                    Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+                });
+
+                sheet.show();
+                sheet.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                sheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                sheet.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnim;
+                sheet.getWindow().setGravity(Gravity.BOTTOM);
+
             });
 
         } else {
