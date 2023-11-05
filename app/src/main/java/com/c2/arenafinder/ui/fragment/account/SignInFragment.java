@@ -37,6 +37,8 @@ import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.util.ArenaFinder;
 
+import java.util.UUID;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -135,7 +137,7 @@ public class SignInFragment extends Fragment {
             }
 
             RetrofitEndPoint endPoint = RetrofitClient.getInstance();
-            endPoint.loginGoogle(google.getUserData().getEmail())
+            endPoint.loginGoogle(google.getUserData().getEmail(), UUID.randomUUID().toString())
                     .enqueue(new Callback<UsersResponse>() {
                         @Override
                         public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
@@ -198,7 +200,7 @@ public class SignInFragment extends Fragment {
                     password = inpPassword.getText().toString();
 
             RetrofitEndPoint endPoint = RetrofitClient.getConnection().create(RetrofitEndPoint.class);
-            Call<UsersResponse> responseCall = endPoint.login(email, password);
+            Call<UsersResponse> responseCall = endPoint.login(email, password, UUID.randomUUID().toString());
             responseCall.enqueue(new Callback<UsersResponse>() {
                 @Override
                 public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {

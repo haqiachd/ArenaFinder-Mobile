@@ -68,6 +68,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mho_menu_alur"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/home_menu_height"
                     android:layout_marginStart="@dimen/home_menu_margin"
@@ -106,6 +107,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mho_menu_komunitas"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/home_menu_height"
                     android:layout_marginStart="@dimen/home_menu_margin"
@@ -144,6 +146,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mho_menu_trolley"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/home_menu_height"
                     android:layout_marginStart="@dimen/home_menu_margin"
@@ -184,6 +187,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mho_menu_booking"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/home_menu_height"
                     android:layout_marginStart="@dimen/home_menu_margin"

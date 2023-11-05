@@ -41,13 +41,15 @@ public interface RetrofitEndPoint {
     @POST("users/login.php")
     Call<UsersResponse> login(
             @Field("userid") String userid,
-            @Field("password") String password
+            @Field("password") String password,
+            @Field("device_token") String token
     );
 
     @FormUrlEncoded
     @POST("users/login_google.php")
     Call<UsersResponse> loginGoogle(
-            @Field("email") String email
+            @Field("email") String email,
+            @Field("device_token") String token
     );
 
     @FormUrlEncoded
