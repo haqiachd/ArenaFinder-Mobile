@@ -112,6 +112,7 @@
     <string name="txt_semua_aktivitas">Semua Aktivitas</string>
     <string name="txt_semua_aktivitas_desc">Lihat Semua Aktivitas Olahraga</string>
     <string name="txt_aktivitas_baru">Aktivitas Baru</string>
+    <string name="txt_aktivitas_semua">Aktivitas Semua</string>
     <string name="txt_aktivitas_baru_desc">Lihat Aktivitas Baru Pada ArenaFinder</string>
     <string name="txt_aktivitas_kosong">Aktivitas Kosong</string>
     <string name="txt_aktivitas_kosong_desc">Lihat Aktivitas Olahraga yang Kosong</string>

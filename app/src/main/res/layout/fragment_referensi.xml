@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- layout top-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
@@ -54,6 +55,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Jenis Lapangan-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
@@ -118,6 +120,7 @@
 
             </LinearLayout>
 
+            <!-- Ratting tertinggi -->
             <LinearLayout
                 android:id="@+id/mre_top_ratting_layout"
                 android:layout_width="match_parent"
@@ -153,21 +156,6 @@
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mre_txt_ratting" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -206,11 +194,12 @@
 
             </LinearLayout>
 
+            <!-- Venue Kosong-->
             <LinearLayout
                 android:id="@+id/mre_venue_kosong_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -241,21 +230,6 @@
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mre_txt_venue_kosong" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -294,11 +268,12 @@
 
             </LinearLayout>
 
+            <!-- Venue Lokasi-->
             <LinearLayout
                 android:id="@+id/mre_venue_lokasi_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -330,21 +305,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mre_txt_venue_terdekat" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.cardview.widget.CardView
@@ -367,7 +327,7 @@
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:nestedScrollingEnabled="true"
                     android:scrollbars="none">
 
@@ -400,11 +360,12 @@
 
             </LinearLayout>
 
+            <!-- Venue Gratis-->
             <LinearLayout
                 android:id="@+id/mre_venue_gratis_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -435,21 +396,6 @@
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mre_txt_venue_gratis" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -488,11 +434,12 @@
 
             </LinearLayout>
 
+            <!-- Venue Berbayar-->
             <LinearLayout
                 android:id="@+id/mre_venue_berbayar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -523,21 +470,6 @@
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mre_txt_venue_berbayar" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -576,11 +508,12 @@
 
             </LinearLayout>
 
+            <!-- Venue Disewakan-->
             <LinearLayout
                 android:id="@+id/mre_venue_disewakan_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -611,21 +544,6 @@
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mre_txt_venue_disewakan" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

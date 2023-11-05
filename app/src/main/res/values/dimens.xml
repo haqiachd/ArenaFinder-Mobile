@@ -35,7 +35,7 @@
     <dimen name="acc_btn_margin_top">@dimen/_20sdp</dimen>
     <dimen name="acc_margin_bottom">@dimen/_30sdp</dimen>
 
-    <dimen name="home_menu_height">@dimen/_55sdp</dimen>
+    <dimen name="home_menu_height">@dimen/_58sdp</dimen>
     <dimen name="home_menu_corner">@dimen/_5sdp</dimen>
     <dimen name="home_menu_elevation">@dimen/_4sdp</dimen>
     <dimen name="home_menu_margin">@dimen/_5sdp</dimen>

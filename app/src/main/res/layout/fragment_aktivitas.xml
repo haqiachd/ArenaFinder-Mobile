@@ -156,21 +156,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mak_txt_aktivitas_baru" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <HorizontalScrollView
@@ -245,21 +230,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mak_txt_aktivitas_kosong" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <HorizontalScrollView
@@ -315,7 +285,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/layout_card_margin_start"
                         android:fontFamily="@font/kanit_medium"
-                        android:text="@string/txt_aktivitas_seru"
+                        android:text="@string/txt_aktivitas_semua"
                         android:textColor="@color/black"
                         android:textSize="@dimen/layout_card_title_textsize"
                         app:layout_constraintStart_toStartOf="parent"
