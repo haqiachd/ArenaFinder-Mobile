@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.AktivitasModel;
-import com.c2.arenafinder.data.model.AktivitasSecondModel;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 
