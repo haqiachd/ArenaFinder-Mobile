@@ -37,6 +37,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mre_btn_filter"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -181,6 +182,7 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            android:id="@+id/mre_vall_ratting"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -255,6 +257,7 @@
                             tools:listitem="@layout/item_venue_second" />
 
                         <include
+                            android:id="@+id/mre_vall_kosong"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -347,6 +350,7 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            android:id="@+id/mre_vall_lokasi"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -421,6 +425,7 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            android:id="@+id/mre_vall_gratis"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -495,6 +500,7 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            android:id="@+id/mre_vall_berbayar"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -569,6 +575,7 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            android:id="@+id/mre_vall_disewakan"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"

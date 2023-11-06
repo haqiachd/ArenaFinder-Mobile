@@ -137,4 +137,9 @@
     <dimen name="sheet_corner">@dimen/_33sdp</dimen>
     <dimen name="sheet_padding">@dimen/_19sdp</dimen>
 
+    <dimen name="profile_list_height">@dimen/_30sdp</dimen>
+    <dimen name="profile_list_margin_top">@dimen/_5sdp</dimen>
+    <dimen name="profile_list_title">@dimen/_13ssp</dimen>
+    <dimen name="profile_list_title_margin_start">@dimen/_20sdp</dimen>
+
 </resources>

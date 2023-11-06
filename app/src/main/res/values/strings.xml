@@ -301,5 +301,19 @@
     <string name="txt_desc_write_ratting">Ulasan bersifat publik serta menyertakan info akun dan perangat Anda.</string>
     <string name="hint_commentar">Masukan Komentar Kamu</string>
     <string name="fwr_posting">Posting</string>
+    <string name="alt_listview_profile">profile</string>
+    <string name="item_1">ITEM 1</string>
+
+    <string name="txt_mpr_def_nama">Lorem Ipsum</string>
+    <string name="txt_mpr_def_email">loremipsum@polije.ac.id</string>
+    <string name="txt_mpr_tentang_akun">Tentang AKun</string>
+    <string name="txt_mpr_tentang_app">Tentang Aplikasi</string>
+    <string name="item_mpr_edit_account">Edit AKun</string>
+    <string name="item_mpr_verify_status">Status Verifikasi</string>
+    <string name="item_mpr_change_pass">Ganti Password</string>
+    <string name="item_mpr_logout">Keluar</string>
+    <string name="item_mpr_info_app">Info Aplikasi</string>
+    <string name="item_mpr_beri_ratting">Beri Ratting</string>
+    <string name="item_mpr_lang_app">Ganti Bahasa</string>
 
 </resources>

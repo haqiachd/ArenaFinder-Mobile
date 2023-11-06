@@ -318,6 +318,7 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            android:id="@+id/mho_vall_baru"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -392,6 +393,7 @@
                             tools:listitem="@layout/item_venue_second" />
 
                         <include
+                            android:id="@+id/mho_vall_rekomendasi"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -466,6 +468,7 @@
                             tools:listitem="@layout/item_aktivitas_first" />
 
                         <include
+                            android:id="@+id/mho_vall_aktivitas"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -558,6 +561,7 @@
                             tools:listitem="@layout/item_venue_first" />
 
                         <include
+                            android:id="@+id/mho_vall_lokasi"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"

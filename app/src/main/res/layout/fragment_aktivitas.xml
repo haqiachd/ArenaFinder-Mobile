@@ -2,6 +2,7 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mak_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
@@ -36,6 +37,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mak_btn_filter"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -180,6 +182,7 @@
                             tools:listitem="@layout/item_aktivitas_first" />
 
                         <include
+                            android:id="@+id/mak_vall_baru"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -254,6 +257,7 @@
                             tools:listitem="@layout/item_aktivitas_first" />
 
                         <include
+                            android:id="@+id/mak_vall_kosong"
                             layout="@layout/button_pilih_semua"
                             android:layout_width="@dimen/layout_button_all_size"
                             android:layout_height="@dimen/layout_button_all_size"
@@ -303,21 +307,6 @@
                         android:textSize="@dimen/layout_card_desc_textsize"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mak_txt_ratting" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_card_button_height"
-                        android:layout_marginEnd="@dimen/layout_card_button_margin_end"
-                        android:backgroundTint="@color/button_semua_background"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/btn_lihat_semua"
-                        android:textAllCaps="false"
-                        android:textColor="@color/button_semua_textcolor"
-                        android:textSize="@dimen/layout_card_button_textsize"
-                        app:cornerRadius="@dimen/layout_card_button_radius"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
