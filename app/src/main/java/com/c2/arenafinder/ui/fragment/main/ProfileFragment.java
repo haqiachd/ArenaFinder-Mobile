@@ -19,7 +19,9 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,17 +30,20 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.ProfileMenuModel;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
+import com.c2.arenafinder.ui.adapter.ItemProfileAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -62,17 +67,16 @@ public class ProfileFragment extends Fragment {
     private Button btnLogout;
     private TextView txtUsername, txtEmail, txtName, txtLevel, btnChoose, btnUpload, btnEdit;
     private CircleImageView imgPhoto;
+    private ListView listAkun, listAbout;
 
     private void initViews(View view){
-        btnLogout = view.findViewById(R.id.mpr_btn_logout);
-        txtUsername = view.findViewById(R.id.mpr_txt_username);
-        txtEmail = view.findViewById(R.id.mpr_txt_email);
-        txtName = view.findViewById(R.id.mpr_txt_nama);
-        txtLevel = view.findViewById(R.id.mpr_txt_level);
-        btnChoose = view.findViewById(R.id.mpr_choose_pp);
+        txtEmail = view.findViewById(R.id.mpr_email);
+        txtName = view.findViewById(R.id.mpr_nama);
         btnUpload = view.findViewById(R.id.mpr_upload_pp);
-        btnEdit = view.findViewById(R.id.mpr_test);
-        imgPhoto = view.findViewById(R.id.mpr_img_photo);
+        imgPhoto = view.findViewById(R.id.mpr_user_photo);
+
+        listAkun = view.findViewById(R.id.mpr_list_tentang_akun);
+        listAbout = view.findViewById(R.id.mpr_list_tentang_app);
     }
 
     public ProfileFragment() {
@@ -120,32 +124,111 @@ public class ProfileFragment extends Fragment {
 
         usersUtil = new UsersUtil(requireContext());
 
-        txtUsername.setText(usersUtil.getUsername());
+//        txtUsername.setText(usersUtil.getUsername());
         txtEmail.setText(usersUtil.getEmail());
         txtName.setText(usersUtil.getFullName());
-        txtLevel.setText(usersUtil.getLevel());
+//        txtLevel.setText(usersUtil.getLevel());
 
         Glide.with(requireActivity())
                 .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
                 .placeholder(R.drawable.ic_profile)
                 .into(imgPhoto);
 
-        onClickGroups();
+//        onClickGroups();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        txtUsername.setText(usersUtil.getUsername());
+//        txtUsername.setText(usersUtil.getUsername());
         txtEmail.setText(usersUtil.getEmail());
         txtName.setText(usersUtil.getFullName());
-        txtLevel.setText(usersUtil.getLevel());
+//        txtLevel.setText(usersUtil.getLevel());
 
         Glide.with(requireActivity())
                 .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
                 .placeholder(R.drawable.ic_profile)
                 .into(imgPhoto);
+
+        showListAkun();
+        showListAbout();
+    }
+
+    private void showListAkun(){
+
+        ArrayList<ProfileMenuModel> listItem = new ArrayList<>();
+        listItem.add(new ProfileMenuModel(R.drawable.ic_listview_profile_akun_editakun, R.string.item_mpr_edit_account, ItemProfileAdapter.DEFAULT_END_ICON));
+        listItem.add(new ProfileMenuModel(R.drawable.ic_listview_profile_akun_verifyemail, R.string.item_mpr_verify_status, R.drawable.ic_listview_profile_verified));
+        listItem.add(new ProfileMenuModel(R.drawable.ic_listview_profile_akun_changepass, R.string.item_mpr_change_pass, ItemProfileAdapter.DEFAULT_END_ICON));
+        listItem.add(new ProfileMenuModel(R.drawable.ic_listview_profile_akun_logout, R.string.item_mpr_logout, ItemProfileAdapter.DEFAULT_END_ICON));
+
+        listAkun.setAdapter(new ItemProfileAdapter(requireContext(), R.layout.item_profile, listItem));
+
+        listAkun.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0 :
+                    case 1 :
+                    case 2 : {
+                        Toast.makeText(requireContext(), listItem.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case 3 : {
+                        LogApp.info(requireContext(), LogTag.ON_CLICK, "Logout Account");
+                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                        // konfirmasi logout
+                        ArenaFinder.showAlertDialog(
+                                requireContext(), getString(R.string.dia_title_confirm), getString(R.string.dia_msg_confirm_logout),
+                                false,
+                                (dialog, which) -> {
+                                    usersUtil.signOut();
+                                    if (!usersUtil.isSignIn()) {
+                                        Toast.makeText(requireContext(), "Logout Sukses", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(requireActivity(), EmptyActivity.class)
+                                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                                        );
+                                    }
+                                },
+                                (dialog, which) -> {}
+                        );
+                        break;
+                    }
+                }
+            }
+        });
+
+    }
+
+    private void showListAbout(){
+
+        ArrayList<ProfileMenuModel> listItems = new ArrayList<>();
+
+        listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_infoapp, R.string.item_mpr_info_app, ItemProfileAdapter.DEFAULT_END_ICON));
+        listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_giverate, R.string.item_mpr_beri_ratting, ItemProfileAdapter.DEFAULT_END_ICON));
+        listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_language, R.string.item_mpr_lang_app, ItemProfileAdapter.DEFAULT_END_ICON));
+
+        listAbout.setAdapter(new ItemProfileAdapter(requireContext(), R.layout.item_profile, listItems));
+
+        listAbout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (position){
+                    case 0 :
+                    case 1 :
+                    case 2 : {
+                        Toast.makeText(requireContext(), listItems.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + position);
+                }
+
+            }
+        });
+
     }
 
     private void choosePhoto() {

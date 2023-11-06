@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
@@ -35,6 +36,7 @@ import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.response.BerandaResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.HomeInfoAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
@@ -44,6 +46,7 @@ import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
@@ -67,16 +70,31 @@ public class HomeFragment extends Fragment {
     private ViewPager2 homeInfoPager;
     private ScrollView scrollView;
 
+    private SwipeRefreshLayout refreshLayout;
+
+    private View btnVallBaru, btnVallRekomendasi, btnVallAktivitas, btnVallLokasi;
+
+    private MaterialCardView menuAlur, menuKomunitas, menuTrolley, menuBooking;
+
     private LinearLayout homeDots, venueBaruLayout, venueRekomendasiLayout, aktivitasLayout, venueLokasiLayout;
+
     private RecyclerView jenisLapangan, venueBaruRecycler, buatKamuRecycler, aktivitasRecycler, venueTerdekatRecycler;
 
     private boolean scrollable = false;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
     public void initViews(View view) {
+
+        refreshLayout = view.findViewById(R.id.mho_swipe);
+        menuAlur = view.findViewById(R.id.mho_menu_alur);
+        menuKomunitas = view.findViewById(R.id.mho_menu_komunitas);
+        menuTrolley = view.findViewById(R.id.mho_menu_trolley);
+        menuBooking = view.findViewById(R.id.mho_menu_booking);
+
+        btnVallBaru = view.findViewById(R.id.mho_vall_baru);
+        btnVallRekomendasi = view.findViewById(R.id.mho_vall_rekomendasi);
+        btnVallAktivitas = view.findViewById(R.id.mho_vall_aktivitas);
+        btnVallLokasi = view.findViewById(R.id.mho_vall_lokasi);
+
         venueBaruLayout = view.findViewById(R.id.mho_venue_baru_layout);
         venueRekomendasiLayout = view.findViewById(R.id.mho_venue_rekomendasi_layout);
         aktivitasLayout = view.findViewById(R.id.mho_aktivitas_layout);
@@ -123,10 +141,25 @@ public class HomeFragment extends Fragment {
         LogApp.info(requireContext(), "first");
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fetchData();
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 1500L);
+            }
+        });
+
         MainActivity.bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
 
         fetchData();
         adapterLapangan();
+        onClickGroups();
 
         MainActivity.bottomNav.setOnActionHomeOnFrame(new Runnable() {
             @Override
@@ -171,6 +204,63 @@ public class HomeFragment extends Fragment {
         }, 100);
 
         pagerAction();
+
+    }
+
+    private void onClickGroups() {
+
+        menuAlur.setOnClickListener(v -> {
+            Toast.makeText(requireContext(), "Alur", Toast.LENGTH_SHORT).show();
+        });
+
+        menuKomunitas.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireContext(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_COMMUNITY)
+            );
+        });
+
+        menuTrolley.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireContext(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_TROLLEY)
+            );
+        });
+
+        menuBooking.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireContext(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_BOOKING)
+            );
+        });
+
+        btnVallBaru.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallRekomendasi.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallAktivitas.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallLokasi.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
 
     }
 

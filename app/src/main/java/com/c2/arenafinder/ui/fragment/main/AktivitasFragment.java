@@ -1,19 +1,23 @@
 package com.c2.arenafinder.ui.fragment.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.airbnb.lottie.L;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
@@ -22,12 +26,15 @@ import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -43,7 +50,14 @@ public class AktivitasFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private SwipeRefreshLayout refreshLayout;
+
+    private View btnVallBaru, btnVallKosong;
+
+    private MaterialButton btnFilter;
+
     private LinearLayout aktivitasBaruLayout, aktivitasKosongLayout, semuaAktivitasLayout;
+
     private RecyclerView jenisLapangan, aktivitasBaruRecycler, aktivitasKosongRecycler, semuaAktivitasRecycler;
 
     public AktivitasFragment() {
@@ -51,6 +65,11 @@ public class AktivitasFragment extends Fragment {
     }
 
     public void initViews(View view) {
+        refreshLayout = view.findViewById(R.id.mak_refresh);
+        btnVallBaru = view.findViewById(R.id.mak_vall_baru);
+        btnVallKosong = view.findViewById(R.id.mak_vall_kosong);
+        btnFilter = view.findViewById(R.id.mak_btn_filter);
+
         aktivitasBaruLayout = view.findViewById(R.id.mak_aktivitas_baru_layout);
         aktivitasKosongLayout = view.findViewById(R.id.mak_aktivitas_kosong_layout);
         semuaAktivitasLayout = view.findViewById(R.id.mak_semua_aktivitas_layout);
@@ -90,6 +109,19 @@ public class AktivitasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fetchData();
+                        refreshLayout.setRefreshing(false);
+                    }
+                }, 1500L);
+            }
+        });
+
         MainActivity.bottomNav.setOnActionAktivitasOnFrame(new Runnable() {
             @Override
             public void run() {
@@ -98,8 +130,9 @@ public class AktivitasFragment extends Fragment {
         });
 
         fetchData();
-
         adapterLapangan();
+        onClickGroups();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -107,6 +140,28 @@ public class AktivitasFragment extends Fragment {
             }
 
         }, 1500);
+    }
+
+    private void onClickGroups(){
+
+        btnFilter.setOnClickListener(v -> {
+            Toast.makeText(requireContext(), "Filter", Toast.LENGTH_SHORT).show();
+        });
+
+        btnVallBaru.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireContext(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallKosong.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireContext(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
     }
 
     private void adapterLapangan() {

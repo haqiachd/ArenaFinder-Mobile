@@ -1,12 +1,14 @@
 package com.c2.arenafinder.ui.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -20,9 +22,9 @@ import com.c2.arenafinder.ui.fragment.main.HomeFragment;
 import com.c2.arenafinder.ui.fragment.main.ProfileFragment;
 import com.c2.arenafinder.ui.fragment.main.ReferensiFragment;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.card.MaterialCardView;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         String appname = getString(R.string.app_name);
         SpannableString spannableString = new SpannableString(appname);
-        spannableString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.mint_green)), 5, appname.length(), 0 );
+        spannableString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.mint_green)), 5, appname.length(), 0);
         txtAppName.setText(spannableString);
 
         bottomNav = new BottomNavCustom(this);
@@ -112,4 +114,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.dia_title_warning)
+                .setMessage(R.string.dia_msg_confirm_close)
+                .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.super.onBackPressed();
+                        ArenaFinder.closeApplication(MainActivity.this);
+                    }
+                })
+                .setNegativeButton(R.string.dia_negative_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .create().show();
+
+    }
 }

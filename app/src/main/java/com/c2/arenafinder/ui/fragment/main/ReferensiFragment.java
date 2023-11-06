@@ -26,6 +26,7 @@ import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
@@ -33,6 +34,7 @@ import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,10 @@ public class ReferensiFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private SwipeRefreshLayout refreshLayout;
+
+    private MaterialButton btnFilter;
+
+    private View btnVallRatting, btnVallKosong, btnValLokasi, btnVallGratis, btnVallBerbayar, btnVallDisewakan;
 
     private LinearLayout topRattingLayout, venueKosongLayout, venueLokasiLayout, venueGratisLayout, venueBebayarLayout, venueDisewakanLayout;
 
@@ -67,6 +73,7 @@ public class ReferensiFragment extends Fragment {
         venueGratisLayout = view.findViewById(R.id.mre_venue_gratis_layout);
         venueBebayarLayout = view.findViewById(R.id.mre_venue_berbayar_layout);
         venueDisewakanLayout = view.findViewById(R.id.mre_venue_disewakan_layout);
+        btnFilter = view.findViewById(R.id.mre_btn_filter);
 
         jenisLapangan = view.findViewById(R.id.mre_recycler_jenis);
         venueRattingRecycler = view.findViewById(R.id.mre_recycler_ratting);
@@ -75,6 +82,13 @@ public class ReferensiFragment extends Fragment {
         venueGratisRecycler = view.findViewById(R.id.mre_recycler_venue_gratis);
         venueBerbayarRecycler = view.findViewById(R.id.mre_recycler_venue_berbayar);
         venueDisewakanRecycler = view.findViewById(R.id.mre_recycler_venue_disewakan);
+
+        btnVallRatting = view.findViewById(R.id.mre_vall_ratting);
+        btnVallKosong = view.findViewById(R.id.mre_vall_kosong);
+        btnValLokasi = view.findViewById(R.id.mre_vall_lokasi);
+        btnVallGratis = view.findViewById(R.id.mre_vall_gratis);
+        btnVallBerbayar = view.findViewById(R.id.mre_vall_berbayar);
+        btnVallDisewakan = view.findViewById(R.id.mre_vall_disewakan);
     }
 
     public static ReferensiFragment newInstance(String param1, String param2) {
@@ -136,6 +150,58 @@ public class ReferensiFragment extends Fragment {
                 MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_REFERENSI);
             }
         }, 1000L);
+
+        onClickGroups();
+    }
+
+    private void onClickGroups(){
+
+        btnFilter.setOnClickListener(v -> {
+            Toast.makeText(requireContext(), "Filter", Toast.LENGTH_SHORT).show();
+        });
+
+        btnVallRatting.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallKosong.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnValLokasi.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallGratis.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallBerbayar.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
+        btnVallDisewakan.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+            );
+        });
+
     }
 
     private void adapterLapangan() {
