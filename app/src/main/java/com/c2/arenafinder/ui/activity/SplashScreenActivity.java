@@ -20,6 +20,7 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
+import com.google.firebase.FirebaseApp;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,6 +52,9 @@ public class SplashScreenActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.biru_gelap));
         })).start());
         setContentView(R.layout.activity_splash_screen);
+
+//        FirebaseApp.initializeApp(this.getApplicationContext());
+
         initViews();
         usersUtil = new UsersUtil(getApplicationContext());
 

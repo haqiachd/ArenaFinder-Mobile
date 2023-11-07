@@ -1,6 +1,7 @@
 package com.c2.arenafinder.ui.fragment.detailed;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -72,9 +74,10 @@ public class VenueDetailedFragment extends Fragment {
     private ProgressBar prog1, prog2, prog3, prog4, prog5;
     private ViewPager2 viewPagerPhoto;
 
+    private ArrayList<TextView> dots = new ArrayList<>();
     private ScrollView scrollView;
     private ImageView btnBack, btnVertical;
-    private LinearLayout dots;
+    private LinearLayout venueDots;
 
     private TextView txtPhotoValue, txtTopRating, txtTopViews, txtTopShared, txtTopSport, txtVenueName, txtVenueDesc,
             txtSenin, txtSelasa, txtRabu, txtKamis, txtJumat, txtSabtu, txtMinggu, txtFasilitas, txtAlamat, txtRatting, txtReviews;
@@ -106,7 +109,7 @@ public class VenueDetailedFragment extends Fragment {
         star4 = view.findViewById(R.id.fvd_star_4);
         star5 = view.findViewById(R.id.fvd_star_5);
 
-        dots = view.findViewById(R.id.fvd_photo_dots);
+        venueDots = view.findViewById(R.id.fvd_photo_dots);
         scrollView = view.findViewById(R.id.fvd_scroll);
         btnBack = view.findViewById(R.id.fvd_back);
         btnVertical = view.findViewById(R.id.fvd_vertical_menu);
@@ -190,6 +193,7 @@ public class VenueDetailedFragment extends Fragment {
         updateBottomNav();
         fetchData(id);
         onClickGroups();
+        pagerAction();
     }
 
     @Override
@@ -204,6 +208,8 @@ public class VenueDetailedFragment extends Fragment {
     public void onPause() {
         super.onPause();
         scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
+        venueDots.removeAllViews();
+        dots = new ArrayList<>();
     }
 
     private void onClickGroups() {
@@ -237,6 +243,48 @@ public class VenueDetailedFragment extends Fragment {
 
         btnBackAppbar.setOnClickListener(v -> {
             requireActivity().onBackPressed();
+        });
+
+    }
+
+    private void addDotsTextView(int size) {
+        Typeface typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold);
+        // add dots sesuai jumlah gambar
+        for (int i = 0; i < size; i++) {
+            dots.add(new TextView(requireActivity()));
+            dots.get(i).setText("•");
+            dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+            dots.get(i).setTextSize(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp));
+            dots.get(i).setTypeface(typeface);
+            dots.get(i).setPadding(0, 0, 3, 0);
+            venueDots.addView(dots.get(i));
+        }
+        txtPhotoValue.setText("1 / "+ (size - 1));
+    }
+
+    private void setSelectedColor(int posisi) {
+        for (int i = 0; i < dots.size(); i++) {
+            if (i == posisi) {
+                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.scarlet));
+            } else {
+                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+            }
+        }
+    }
+
+    private void changePosisi(int posisi) {
+        viewPagerPhoto.setCurrentItem(posisi);
+        setSelectedColor(posisi);
+    }
+
+    private void pagerAction() {
+
+        viewPagerPhoto.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                changePosisi(position);
+                txtPhotoValue.setText((position + 1) + " / "+ dots.size());
+            }
         });
 
     }
@@ -275,9 +323,13 @@ public class VenueDetailedFragment extends Fragment {
 
     private void showPhotos(ArrayList<VenuePhotos> venuePhotos) {
 
-        viewPagerPhoto.setAdapter(
-                new VenuePhotoAdapter(venuePhotos)
-        );
+        if (venuePhotos.size() > 0) {
+            viewPagerPhoto.setAdapter(
+                    new VenuePhotoAdapter(venuePhotos)
+            );
+
+            addDotsTextView(venuePhotos.size());
+        }
 
     }
 

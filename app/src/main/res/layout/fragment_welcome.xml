@@ -87,6 +87,7 @@
                 android:text="Test Fragment"
                 android:layout_gravity="center_horizontal"
                 android:textAllCaps="false"
+                android:visibility="gone"
                 android:fontFamily="@font/kanit_medium"
                 android:backgroundTint="@color/azure"
                 />

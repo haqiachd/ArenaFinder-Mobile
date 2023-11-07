@@ -7,472 +7,500 @@
     android:backgroundTint="@color/white"
     tools:context=".ui.fragment.detailed.VenueReviewFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/white">
+        android:orientation="vertical"
+        >
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detailed_margin_width"
-            android:layout_marginTop="@dimen/_13sdp"
-            android:layout_marginEnd="@dimen/detailed_margin_width"
-            android:orientation="vertical">
+            android:layout_height="@dimen/_45sdp"
+            android:background="@color/white"
+            >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Ulasan Pengguna"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_110sdp"
-                android:layout_marginTop="@dimen/_3sdp">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detailed_margin_width"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/detailed_margin_width"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/fvr_ratting_left"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/fvr_ratting_val"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/txt_ratting_def"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_22sdp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_110sdp"
+                    android:layout_marginTop="@dimen/_3sdp">
 
                     <LinearLayout
+                        android:id="@+id/fvr_ratting_left"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/fvr_ratting_val"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/txt_ratting_def"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_22sdp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/detailed_star_size"
+                            android:layout_gravity="center_horizontal">
+
+                            <ImageView
+                                android:id="@+id/fvr_star_1"
+                                android:layout_width="@dimen/detailed_star_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/detailed_star_margin"
+                                android:layout_marginEnd="@dimen/detailed_star_margin"
+                                android:contentDescription="@string/txt_ratting_1"
+                                android:src="@drawable/ic_ratting_orange_grey" />
+
+                            <ImageView
+                                android:id="@+id/fvr_star_2"
+                                android:layout_width="@dimen/detailed_star_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/detailed_star_margin"
+                                android:layout_marginEnd="@dimen/detailed_star_margin"
+                                android:contentDescription="@string/txt_ratting_2"
+                                android:src="@drawable/ic_ratting_orange_grey" />
+
+                            <ImageView
+                                android:id="@+id/fvr_star_3"
+                                android:layout_width="@dimen/detailed_star_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/detailed_star_margin"
+                                android:layout_marginEnd="@dimen/detailed_star_margin"
+                                android:contentDescription="@string/txt_ratting_3"
+                                android:src="@drawable/ic_ratting_orange_grey" />
+
+                            <ImageView
+                                android:id="@+id/fvr_star_4"
+                                android:layout_width="@dimen/detailed_star_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/detailed_star_margin"
+                                android:layout_marginEnd="@dimen/detailed_star_margin"
+                                android:contentDescription="@string/txt_ratting_4"
+                                android:src="@drawable/ic_ratting_orange_grey" />
+
+                            <ImageView
+                                android:id="@+id/fvr_star_5"
+                                android:layout_width="@dimen/detailed_star_size"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:contentDescription="@string/txt_ratting_5"
+                                android:src="@drawable/ic_ratting_orange_grey" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/fvr_total_review"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/def_ttl_review"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/_10sdp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/fvr_ratting_line"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginTop="@dimen/_14sdp"
+                        android:layout_marginBottom="@dimen/_14sdp"
+                        android:background="#B3696969"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fvr_ratting_left"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/fbv_prog_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fvr_ratting_line"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/fvr_txt_ratting_5"
+                            android:layout_width="@dimen/detailed_star_textview_width"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/txt_ratting_5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/detailed_star_prog_textsize"
+                            app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_5" />
+
+                        <ProgressBar
+                            android:id="@+id/fvr_prog_ratting_5"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/detailed_star_prog_height"
+                            android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                            android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                            android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                            android:progress="69"
+                            android:progressDrawable="@drawable/ll_history_notif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_5"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/fvr_txt_ratting_4"
+                            android:layout_width="@dimen/detailed_star_textview_width"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/txt_ratting_4"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/detailed_star_prog_textsize"
+                            app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_4" />
+
+                        <ProgressBar
+                            android:id="@+id/fvr_prog_ratting_4"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/detailed_star_prog_height"
+                            android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                            android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                            android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                            android:progress="37"
+                            android:progressDrawable="@drawable/ll_history_notif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_5"
+                            app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_5" />
+
+                        <TextView
+                            android:id="@+id/fvr_txt_ratting_3"
+                            android:layout_width="@dimen/detailed_star_textview_width"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/txt_ratting_3"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/detailed_star_prog_textsize"
+                            app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_3" />
+
+                        <ProgressBar
+                            android:id="@+id/fvr_prog_ratting_3"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/detailed_star_prog_height"
+                            android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                            android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                            android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                            android:progress="18"
+                            android:progressDrawable="@drawable/ll_history_notif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_3"
+                            app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_4" />
+
+                        <TextView
+                            android:id="@+id/fvr_txt_ratting_2"
+                            android:layout_width="@dimen/detailed_star_textview_width"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/txt_ratting_2"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/detailed_star_prog_textsize"
+                            app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_2" />
+
+                        <ProgressBar
+                            android:id="@+id/fvr_prog_ratting_2"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/detailed_star_prog_height"
+                            android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                            android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                            android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                            android:progress="7"
+                            android:progressDrawable="@drawable/ll_history_notif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_2"
+                            app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_3" />
+
+                        <TextView
+                            android:id="@+id/fvr_txt_ratting_1"
+                            android:layout_width="@dimen/detailed_star_textview_width"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="@string/txt_ratting_1"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/detailed_star_prog_textsize"
+                            app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_1" />
+
+                        <ProgressBar
+                            android:id="@+id/fvr_prog_ratting_1"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/detailed_star_prog_height"
+                            android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
+                            android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
+                            android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
+                            android:progress="13"
+                            android:progressDrawable="@drawable/ll_history_notif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_1"
+                            app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/fvr_my_ratting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/kanit_semibold"
+                    android:text="@string/txt_review_kamu"
+                    android:textColor="@color/biru_gelap"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fvr_mycomment_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:id="@+id/fvr_review_value"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/detailed_star_size"
-                        android:layout_gravity="center_horizontal">
+                        android:layout_height="@dimen/detailed_review_star_size"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/_1sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/fvr_star_1"
-                            android:layout_width="@dimen/detailed_star_size"
+                            android:id="@+id/fvr_mratting_1"
+                            android:layout_width="@dimen/detailed_review_star_size"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/detailed_star_margin"
                             android:layout_marginEnd="@dimen/detailed_star_margin"
                             android:contentDescription="@string/txt_ratting_1"
-                            android:src="@drawable/ic_ratting_orange_grey" />
+                            android:src="@drawable/ic_review_star_yellow_empty" />
 
                         <ImageView
-                            android:id="@+id/fvr_star_2"
-                            android:layout_width="@dimen/detailed_star_size"
+                            android:id="@+id/fvr_mratting_2"
+                            android:layout_width="@dimen/detailed_review_star_size"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/detailed_star_margin"
                             android:layout_marginEnd="@dimen/detailed_star_margin"
                             android:contentDescription="@string/txt_ratting_2"
-                            android:src="@drawable/ic_ratting_orange_grey" />
+                            android:src="@drawable/ic_review_star_yellow_empty" />
 
                         <ImageView
-                            android:id="@+id/fvr_star_3"
-                            android:layout_width="@dimen/detailed_star_size"
+                            android:id="@+id/fvr_mratting_3"
+                            android:layout_width="@dimen/detailed_review_star_size"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/detailed_star_margin"
                             android:layout_marginEnd="@dimen/detailed_star_margin"
                             android:contentDescription="@string/txt_ratting_3"
-                            android:src="@drawable/ic_ratting_orange_grey" />
+                            android:src="@drawable/ic_review_star_yellow_empty" />
 
                         <ImageView
-                            android:id="@+id/fvr_star_4"
-                            android:layout_width="@dimen/detailed_star_size"
+                            android:id="@+id/fvr_mratting_4"
+                            android:layout_width="@dimen/detailed_review_star_size"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/detailed_star_margin"
                             android:layout_marginEnd="@dimen/detailed_star_margin"
                             android:contentDescription="@string/txt_ratting_4"
-                            android:src="@drawable/ic_ratting_orange_grey" />
+                            android:src="@drawable/ic_review_star_yellow_empty" />
 
                         <ImageView
-                            android:id="@+id/fvr_star_5"
-                            android:layout_width="@dimen/detailed_star_size"
+                            android:id="@+id/fvr_mratting_5"
+                            android:layout_width="@dimen/detailed_review_star_size"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_2sdp"
-                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:layout_marginEnd="@dimen/detailed_star_margin"
                             android:contentDescription="@string/txt_ratting_5"
-                            android:src="@drawable/ic_ratting_orange_grey" />
+                            android:src="@drawable/ic_review_star_yellow_empty" />
+
+                        <TextView
+                            android:id="@+id/fvr_ratting_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="- 23 Oktober 2023"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp" />
 
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/fvr_total_review"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/fvr_review_comment"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/def_ttl_review"
-                        android:textColor="@color/dimgray"
-                        android:textSize="@dimen/_10sdp" />
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/fvr_ratting_line"
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:layout_marginTop="@dimen/_14sdp"
-                    android:layout_marginBottom="@dimen/_14sdp"
-                    android:background="#B3696969"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/fvr_ratting_left"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/fbv_prog_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/fvr_ratting_line"
-                    app:layout_constraintTop_toTopOf="parent">
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/txt_lorem_deksripsi_def"
+                        android:textColor="@color/biru_gelap"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fvr_review_value" />
 
                     <TextView
-                        android:id="@+id/fvr_txt_ratting_5"
-                        android:layout_width="@dimen/detailed_star_textview_width"
+                        android:id="@+id/fvr_edit_ulasan"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/txt_ratting_5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/detailed_star_prog_textsize"
-                        app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_5" />
-
-                    <ProgressBar
-                        android:id="@+id/fvr_prog_ratting_5"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/detailed_star_prog_height"
-                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
-                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
-                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
-                        android:progress="69"
-                        android:progressDrawable="@drawable/ll_history_notif"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_5"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/fvr_txt_ratting_4"
-                        android:layout_width="@dimen/detailed_star_textview_width"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/txt_ratting_4"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/detailed_star_prog_textsize"
-                        app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_4"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_4" />
-
-                    <ProgressBar
-                        android:id="@+id/fvr_prog_ratting_4"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/detailed_star_prog_height"
-                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
-                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
-                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
-                        android:progress="37"
-                        android:progressDrawable="@drawable/ll_history_notif"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_5"
-                        app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_5" />
-
-                    <TextView
-                        android:id="@+id/fvr_txt_ratting_3"
-                        android:layout_width="@dimen/detailed_star_textview_width"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/txt_ratting_3"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/detailed_star_prog_textsize"
-                        app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_3" />
-
-                    <ProgressBar
-                        android:id="@+id/fvr_prog_ratting_3"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/detailed_star_prog_height"
-                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
-                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
-                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
-                        android:progress="18"
-                        android:progressDrawable="@drawable/ll_history_notif"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_3"
-                        app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_4" />
-
-                    <TextView
-                        android:id="@+id/fvr_txt_ratting_2"
-                        android:layout_width="@dimen/detailed_star_textview_width"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/txt_ratting_2"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/detailed_star_prog_textsize"
-                        app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_2" />
-
-                    <ProgressBar
-                        android:id="@+id/fvr_prog_ratting_2"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/detailed_star_prog_height"
-                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
-                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
-                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
-                        android:progress="7"
-                        android:progressDrawable="@drawable/ll_history_notif"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_2"
-                        app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_3" />
-
-                    <TextView
-                        android:id="@+id/fvr_txt_ratting_1"
-                        android:layout_width="@dimen/detailed_star_textview_width"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/txt_ratting_1"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/detailed_star_prog_textsize"
-                        app:layout_constraintBottom_toBottomOf="@id/fvr_prog_ratting_1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/fvr_prog_ratting_1" />
-
-                    <ProgressBar
-                        android:id="@+id/fvr_prog_ratting_1"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/detailed_star_prog_height"
-                        android:layout_marginStart="@dimen/detailed_star_prog_margin_start"
-                        android:layout_marginTop="@dimen/detailed_star_prog_margin_top"
-                        android:layout_marginEnd="@dimen/detailed_star_prog_margin_end"
-                        android:progress="13"
-                        android:progressDrawable="@drawable/ll_history_notif"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/fvr_txt_ratting_1"
-                        app:layout_constraintTop_toBottomOf="@id/fvr_prog_ratting_2" />
+                        android:text="@string/txt_edit_ulasan"
+                        android:textColor="@color/azure"
+                        app:layout_constraintTop_toBottomOf="@id/fvr_review_comment" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/fvr_my_ratting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/kanit_semibold"
-                android:text="@string/txt_review_kamu"
-                android:textColor="@color/biru_gelap"
-                android:textSize="@dimen/_14ssp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fvr_mycomment_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible">
-
                 <LinearLayout
-                    android:id="@+id/fvr_review_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/detailed_review_star_size"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginStart="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/fvr_mratting_1"
-                        android:layout_width="@dimen/detailed_review_star_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/detailed_star_margin"
-                        android:contentDescription="@string/txt_ratting_1"
-                        android:src="@drawable/ic_review_star_yellow_empty" />
-
-                    <ImageView
-                        android:id="@+id/fvr_mratting_2"
-                        android:layout_width="@dimen/detailed_review_star_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/detailed_star_margin"
-                        android:contentDescription="@string/txt_ratting_2"
-                        android:src="@drawable/ic_review_star_yellow_empty" />
-
-                    <ImageView
-                        android:id="@+id/fvr_mratting_3"
-                        android:layout_width="@dimen/detailed_review_star_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/detailed_star_margin"
-                        android:contentDescription="@string/txt_ratting_3"
-                        android:src="@drawable/ic_review_star_yellow_empty" />
-
-                    <ImageView
-                        android:id="@+id/fvr_mratting_4"
-                        android:layout_width="@dimen/detailed_review_star_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/detailed_star_margin"
-                        android:contentDescription="@string/txt_ratting_4"
-                        android:src="@drawable/ic_review_star_yellow_empty" />
-
-                    <ImageView
-                        android:id="@+id/fvr_mratting_5"
-                        android:layout_width="@dimen/detailed_review_star_size"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/detailed_star_margin"
-                        android:contentDescription="@string/txt_ratting_5"
-                        android:src="@drawable/ic_review_star_yellow_empty" />
+                    android:id="@+id/fvr_write_comment_layout"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/fvr_ratting_date"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="- 23 Oktober 2023"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_9ssp" />
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/txt_give_your_ratting"
+                        android:textColor="@color/granite_grey"
+                        android:textSize="@dimen/_10sdp"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/fvr_grating_1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/alt_give_ratting"
+                            android:src="@drawable/ic_star_kosong" />
+
+                        <ImageView
+                            android:id="@+id/fvr_grating_2"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/alt_give_ratting"
+                            android:src="@drawable/ic_star_kosong" />
+
+                        <ImageView
+                            android:id="@+id/fvr_grating_3"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/alt_give_ratting"
+                            android:src="@drawable/ic_star_kosong" />
+
+                        <ImageView
+                            android:id="@+id/fvr_grating_4"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/alt_give_ratting"
+                            android:src="@drawable/ic_star_kosong" />
+
+                        <ImageView
+                            android:id="@+id/fvr_grating_5"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/alt_give_ratting"
+                            android:src="@drawable/ic_star_kosong" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/fvr_tambah_ulasan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_tulis_ulasan"
+                        android:textColor="@color/azure" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/fvr_review_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/txt_lorem_deksripsi_def"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/kanit_semibold"
+                    android:text="@string/txt_semua_ulasan"
                     android:textColor="@color/biru_gelap"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/fvr_review_value" />
+                    android:textSize="@dimen/_14ssp" />
 
-                <TextView
-                    android:id="@+id/fvr_edit_ulasan"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fvr_recycler_review"
                     android:layout_width="match_parent"
+                    android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/txt_edit_ulasan"
-                    android:textColor="@color/azure"
-                    app:layout_constraintTop_toBottomOf="@id/fvr_review_comment" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/fvr_write_comment_layout"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:fontFamily="@font/inter_semibold"
-                    android:text="@string/txt_give_your_ratting"
-                    android:textColor="@color/granite_grey"
-                    android:textSize="@dimen/_10sdp"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_venue_comment" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/fvr_grating_1"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/alt_give_ratting"
-                        android:src="@drawable/ic_star_kosong" />
-
-                    <ImageView
-                        android:id="@+id/fvr_grating_2"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/alt_give_ratting"
-                        android:src="@drawable/ic_star_kosong" />
-
-                    <ImageView
-                        android:id="@+id/fvr_grating_3"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/alt_give_ratting"
-                        android:src="@drawable/ic_star_kosong" />
-
-                    <ImageView
-                        android:id="@+id/fvr_grating_4"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/alt_give_ratting"
-                        android:src="@drawable/ic_star_kosong" />
-
-                    <ImageView
-                        android:id="@+id/fvr_grating_5"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/alt_give_ratting"
-                        android:src="@drawable/ic_star_kosong" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/fvr_tambah_ulasan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/txt_tulis_ulasan"
-                    android:textColor="@color/azure" />
+                    android:layout_height="@dimen/_50sdp"
+                    tools:ignore="UselessLeaf" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:fontFamily="@font/kanit_semibold"
-                android:text="@string/txt_semua_ulasan"
-                android:textColor="@color/biru_gelap"
-                android:textSize="@dimen/_14ssp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fvr_recycler_review"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_venue_comment" />
+        </androidx.core.widget.NestedScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                tools:ignore="UselessLeaf" />
-
-        </LinearLayout>
-
-
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

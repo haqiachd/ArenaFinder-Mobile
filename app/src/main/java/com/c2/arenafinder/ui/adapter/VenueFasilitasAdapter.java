@@ -67,7 +67,7 @@ public class VenueFasilitasAdapter extends RecyclerView.Adapter<VenueFasilitasAd
 
         private void showFasilitasImage(Context context, String imgUrl){
             Glide.with(context)
-                    .load(RetrofitClient.USER_PHOTO_URL)
+                    .load(RetrofitClient.FASILITAS_URL + imgUrl)
                     .centerCrop()
                     .placeholder(R.drawable.ic_profile)
                     .into(imgFasilitas);

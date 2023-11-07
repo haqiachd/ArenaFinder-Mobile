@@ -122,7 +122,7 @@
 
                 <TextView
                     android:id="@+id/fvd_photo_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_18sdp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_11sdp"
@@ -134,7 +134,7 @@
                     android:text="@string/txt_no_ratting"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_9sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -149,29 +149,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/fvd_photo_value">
 
-                    <TextView
-                        android:layout_width="@dimen/detailed_dots_size"
-                        android:layout_height="@dimen/detailed_dots_size"
-                        android:layout_marginStart="@dimen/detailed_dots_marin"
-                        android:background="@drawable/bg_dots_detailed_active" />
-
-                    <TextView
-                        android:layout_width="@dimen/detailed_dots_size"
-                        android:layout_height="@dimen/detailed_dots_size"
-                        android:layout_marginStart="@dimen/detailed_dots_marin"
-                        android:background="@drawable/bg_dots_detailed" />
-
-                    <TextView
-                        android:layout_width="@dimen/detailed_dots_size"
-                        android:layout_height="@dimen/detailed_dots_size"
-                        android:layout_marginStart="@dimen/detailed_dots_marin"
-                        android:background="@drawable/bg_dots_detailed" />
-
-                    <TextView
-                        android:layout_width="@dimen/detailed_dots_size"
-                        android:layout_height="@dimen/detailed_dots_size"
-                        android:layout_marginStart="@dimen/detailed_dots_marin"
-                        android:background="@drawable/bg_dots_detailed" />
 
                 </LinearLayout>
 
@@ -551,7 +528,7 @@
                     android:layout_marginTop="@dimen/_9ssp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="3"
-                    tools:itemCount="1"
+                    tools:itemCount="3"
                     tools:listitem="@layout/item_fasilitas_tempat" />
 
                 <com.google.android.material.button.MaterialButton
