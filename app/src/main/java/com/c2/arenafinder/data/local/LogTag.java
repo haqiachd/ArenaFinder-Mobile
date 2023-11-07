@@ -12,6 +12,7 @@ public enum LogTag {
     OTP_CODE,
     GOOGLE_SIGN,
     PRINT_INFO,
+    ON_NOTIFICATION,
     ON_WHEN,
     ON_CONDITIONAL,
     ON_THREAD,

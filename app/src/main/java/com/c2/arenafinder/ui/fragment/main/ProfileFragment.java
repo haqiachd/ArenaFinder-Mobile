@@ -169,7 +169,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
-                    case 0 :
+                    case 0 : {
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.EDIT_ACCOUNT)
+                        );
+                        break;
+                    }
                     case 1 :
                     case 2 : {
                         Toast.makeText(requireContext(), listItem.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();

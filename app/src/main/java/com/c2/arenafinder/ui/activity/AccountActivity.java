@@ -14,6 +14,7 @@ import com.c2.arenafinder.ui.fragment.account.OtpVerificationFragment;
 import com.c2.arenafinder.ui.fragment.account.SignInFragment;
 import com.c2.arenafinder.ui.fragment.account.SignUpTypeFragment;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.google.firebase.FirebaseApp;
 
 public class AccountActivity extends AppCompatActivity {
 
