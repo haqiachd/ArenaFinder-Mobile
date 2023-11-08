@@ -467,7 +467,17 @@ public class HomeFragment extends Fragment {
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
 
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels);
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels,
+                new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
+                        );
+                    }
+                }
+        );
         jenisLapangan.setAdapter(lapanganAdapter);
 
     }

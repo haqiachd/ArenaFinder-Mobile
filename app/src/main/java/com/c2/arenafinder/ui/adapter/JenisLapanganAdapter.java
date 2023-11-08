@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
+import com.c2.arenafinder.util.AdapterActionListener;
 import com.google.android.material.card.MaterialCardView;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,15 @@ import java.util.ArrayList;
 public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdapter.ViewHolder>{
 
     private final Context context;
+
     private final ArrayList<JenisLapanganModel> models;
 
-    public JenisLapanganAdapter(Context context, ArrayList<JenisLapanganModel> models){
+    private AdapterActionListener listener;
+
+    public JenisLapanganAdapter(Context context, ArrayList<JenisLapanganModel> models, AdapterActionListener listener){
         this.context = context;
         this.models = models;
+        this.listener = listener;
     }
 
     @NonNull
@@ -41,6 +46,12 @@ public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdap
         JenisLapanganModel model = models.get(position);
         holder.txtNamaLapangan.setText(model.getNamaLapangan());
         holder.iconLapangan.setImageDrawable(ContextCompat.getDrawable(context, model.getIconDrawable()));
+
+        if (holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+            holder.itemView.setOnClickListener(v -> {
+                listener.onClickListener(position);
+            });
+        }
     }
 
     @Override
