@@ -32,6 +32,7 @@ import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.button.MaterialButton;
@@ -212,7 +213,19 @@ public class ReferensiFragment extends Fragment {
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
 
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels);
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels,
+                new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
+                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(SportTypeFragment.TYPE_VENUE))
+                                        .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
+                        );
+                    }
+                }
+        );
         jenisLapangan.setAdapter(lapanganAdapter);
 
     }
