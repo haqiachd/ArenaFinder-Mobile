@@ -101,7 +101,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_2sdp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="@string/btn_custom_account"
+        android:text="Booking Lapangan"
         android:textAllCaps="false"
         android:textSize="@dimen/_12ssp"
         app:cornerRadius="@dimen/_10sdp"
