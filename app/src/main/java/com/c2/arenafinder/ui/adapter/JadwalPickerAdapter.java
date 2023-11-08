@@ -24,6 +24,8 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
 
     private final ArrayList<JadwalPickerModel> models;
 
+    private final ArrayList<JadwalPickerModel> pick = new ArrayList<>();
+
     private final AdapterActionListener listener;
 
     private int selectedItem = 0;
@@ -49,7 +51,18 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
         JadwalPickerModel pickerModel = models.get(position);
 
         holder.txtPrice.setText("Rp. " + pickerModel.getPrice());
+        holder.txtPrice.setVisibility(View.GONE);
+        holder.txtBooked.setText(String.valueOf(pickerModel.isBooked()));
         holder.txtSession.setText(pickerModel.getSession());
+
+        if (pickerModel.isBooked()){
+            holder.txtPrice.setVisibility(View.GONE);
+            holder.txtBooked.setText("Di Booking");
+            holder.txtBooked.setVisibility(View.VISIBLE);
+        }else {
+            holder.txtPrice.setVisibility(View.VISIBLE);
+            holder.txtBooked.setVisibility(View.GONE);
+        }
 
         if (pickerModel.isSelected()) {
             holder.setSelectedItem(context);
@@ -60,15 +73,19 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
             holder.itemView.setOnClickListener(v -> {
                 JadwalPickerModel model = models.get(holder.getAdapterPosition());
-                if (model.isSelected()) {
-                    selectedItem--;
-                } else {
-                    selectedItem++;
+                if (!model.isBooked()){
+                    if (model.isSelected()) {
+                        pick.remove(model);
+                        selectedItem--;
+                    } else {
+                        pick.add(model);
+                        selectedItem++;
+                    }
+                    model.setSelected(!model.isSelected());
+                    models.set(holder.getAdapterPosition(), model);
+                    notifyItemChanged(holder.getAdapterPosition());
+                    listener.onClickListener(position);
                 }
-                model.setSelected(!model.isSelected());
-                models.set(holder.getAdapterPosition(), model);
-                notifyItemChanged(holder.getAdapterPosition());
-                listener.onClickListener(position);
             });
         }
 
@@ -76,6 +93,10 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
 
     public int getSelectedItem(){
         return selectedItem;
+    }
+
+    public ArrayList<JadwalPickerModel> getPick(){
+        return pick;
     }
 
     @Override
@@ -87,7 +108,7 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
 
         private final MaterialCardView layout;
 
-        private final TextView txtSession, txtPrice;
+        private final TextView txtSession, txtPrice, txtBooked;
 
         private final ImageView imgSelect;
 
@@ -98,6 +119,7 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
             txtPrice = view.findViewById(R.id.ijp_price);
             txtSession = view.findViewById(R.id.ijp_session);
             imgSelect = view.findViewById(R.id.ijp_icon_select);
+            txtBooked = view.findViewById(R.id.ijp_booked);
         }
 
         private void setSelectedItem(Context context) {
