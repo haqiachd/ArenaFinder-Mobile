@@ -142,7 +142,7 @@ public class AktivitasFragment extends Fragment {
         }, 1500);
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
         btnFilter.setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Filter", Toast.LENGTH_SHORT).show();
@@ -172,18 +172,27 @@ public class AktivitasFragment extends Fragment {
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
 
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels);
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels,
+                new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
+                        );
+                    }
+                });
         jenisLapangan.setAdapter(lapanganAdapter);
 
     }
 
-    private void fetchData(){
+    private void fetchData() {
 
         RetrofitClient.getInstance().aktivitasPage().enqueue(new Callback<AktivitasResponse>() {
             @Override
             public void onResponse(Call<AktivitasResponse> call, Response<AktivitasResponse> response) {
 
-                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
 
                     LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
                     AktivitasResponse.Data data = response.body().getData();
@@ -193,9 +202,9 @@ public class AktivitasFragment extends Fragment {
                     ArrayList<AktivitasModel> akivitasKosong = data.getAktivitasKosong();
                     ArrayList<AktivitasModel> semuaAktivitas = data.getSemuaAktivitas();
 
-                    if (aktivitasBaru.size() == 0 && akivitasKosong.size() == 0&& semuaAktivitas.size() == 0){
+                    if (aktivitasBaru.size() == 0 && akivitasKosong.size() == 0 && semuaAktivitas.size() == 0) {
                         handlerNullData();
-                    }else {
+                    } else {
 
                         // show recycler data
                         showAktivitasBaru(aktivitasBaru);
@@ -203,7 +212,7 @@ public class AktivitasFragment extends Fragment {
                         showSemuaAktivitasyList(semuaAktivitas);
                     }
 
-                }else {
+                } else {
                     handlerNullData();
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -213,23 +222,24 @@ public class AktivitasFragment extends Fragment {
             @Override
             public void onFailure(Call<AktivitasResponse> call, Throwable t) {
                 handlerNullData();
-                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_MEDIUM);
+                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_MEDIUM);
             }
         });
 
     }
 
-    private void handlerNullData(){
+    private void handlerNullData() {
         aktivitasKosongLayout.setVisibility(View.GONE);
         aktivitasBaruLayout.setVisibility(View.GONE);
         semuaAktivitasLayout.setVisibility(View.GONE);
     }
 
-    private void showAktivitasBaru(ArrayList<AktivitasModel> models){
+    private void showAktivitasBaru(ArrayList<AktivitasModel> models) {
 
-        if (models.size() == 0){
+        if (models.size() == 0) {
             aktivitasKosongLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             aktivitasBaruRecycler.setAdapter(new AktivitasFirstAdapter(
                     requireContext(), models, new AdapterActionListener() {
                 @Override
@@ -244,11 +254,11 @@ public class AktivitasFragment extends Fragment {
 
     }
 
-    private void showAktivitasKosong(ArrayList<AktivitasModel> models){
+    private void showAktivitasKosong(ArrayList<AktivitasModel> models) {
 
-        if (models.size() == 0){
+        if (models.size() == 0) {
             aktivitasKosongLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             aktivitasKosongRecycler.setAdapter(new AktivitasFirstAdapter(
                     requireContext(), models, new AdapterActionListener() {
                 @Override
@@ -263,11 +273,11 @@ public class AktivitasFragment extends Fragment {
 
     }
 
-    private void showSemuaAktivitasyList(ArrayList<AktivitasModel> models){
+    private void showSemuaAktivitasyList(ArrayList<AktivitasModel> models) {
 
-        if (models.size() == 0){
+        if (models.size() == 0) {
             semuaAktivitasLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             semuaAktivitasRecycler.setAdapter(new AktivitasSecondAdapter(
                     requireContext(), models, new AdapterActionListener() {
                 @Override

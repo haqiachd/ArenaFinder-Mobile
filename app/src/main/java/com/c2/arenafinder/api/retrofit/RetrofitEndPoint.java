@@ -15,8 +15,10 @@ import com.c2.arenafinder.data.model.NotifResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.BerandaResponse;
+import com.c2.arenafinder.data.response.CreateBookingResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
+import com.c2.arenafinder.data.response.VenueBookingResponse;
 import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
@@ -150,5 +152,30 @@ public interface RetrofitEndPoint {
     Call<VenueReviewsResponse> deleteComment(
             @Body EditCommentModel model
     );
+
+    @GET("feature/venues/booking/get_jadwal.php")
+    Call<VenueBookingResponse> getJadwal(
+            @Query("id_venue") String idVenue,
+            @Query("id_lapangan") String idLapnangan,
+            @Query("date") String date
+    );
+
+    @FormUrlEncoded
+    @POST("feature/venues/booking/new_booking.php")
+    Call<CreateBookingResponse> createBooking(
+            @Field("id_venue") String idVenue,
+            @Field("email") String email,
+            @Field("total_price") String totalPrice
+    );
+
+
+    @FormUrlEncoded
+    @POST("feature/venues/booking/booking_detail.php")
+    Call<CreateBookingResponse> bookingDetail(
+            @Field("id_booking") String idVenue,
+            @Field("date") String date,
+            @Field("id_price") String idPrice
+    );
+
 
 }
