@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.SubMainActivity"
     android:background="@color/white"
-    >
+    tools:context=".ui.activity.SubMainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/sub_appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/sub_back"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:src="@drawable/ic_acc_back"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/biru_gelap"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="@id/sub_back"
+                app:layout_constraintStart_toEndOf="@id/sub_back"
+                app:layout_constraintTop_toTopOf="@id/sub_back" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -40,7 +48,6 @@
         android:id="@+id/sub_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_40sdp"
-        />
+        android:layout_marginTop="@dimen/_40sdp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
