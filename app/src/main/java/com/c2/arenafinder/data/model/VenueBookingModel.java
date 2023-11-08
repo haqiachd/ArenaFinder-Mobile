@@ -1,17 +1,30 @@
 package com.c2.arenafinder.data.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class VenueBookingModel {
 
+    @Expose
+    @SerializedName("id_lapangan")
     private int idLapangan;
 
+    @Expose
+    @SerializedName("lapanan_img")
     private String lapanganImg;
 
+    @Expose
+    @SerializedName("lapnangan_name")
     private String lapanganName;
 
+    @Expose
+    @SerializedName("total_slot")
     private String totalSlot;
 
+    @Expose
+    @SerializedName("jadwal")
     private ArrayList<JadwalPickerModel> jadwal;
 
     public VenueBookingModel(int idLapangan, String lapanganImg, String lapanganName, String totalSlot, ArrayList<JadwalPickerModel> jadwal) {

@@ -450,7 +450,11 @@ public class VenueDetailedFragment extends Fragment {
                 new VenueContactAdapter(requireContext(), model, new AdapterActionListener() {
                     @Override
                     public void onClickListener(int position) {
-                        Toast.makeText(requireContext(), "PHONE -> " + model.get(position).getNoHp(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(requireContext(), "PHONE -> " + model.get(position).getNoHp(), Toast.LENGTH_SHORT).show();
+                        var whatsappUri = Uri.parse("https://wa.me/"+model.get(position).getNoHp().substring(1));
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW, whatsappUri);
+                        startActivity(intent);
                     }
                 })
         );

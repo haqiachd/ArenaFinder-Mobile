@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.model.JadwalPickerModel;
 import com.c2.arenafinder.data.model.VenueBookingModel;
 import com.c2.arenafinder.util.AdapterActionListener;
 
@@ -53,6 +54,7 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         holder.txtNamaLapangan.setText(bookingModel.getLapanganName());
         holder.txtSlotKosong.setText(bookingModel.getTotalSlot());
 
+
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
             holder.lapanganLayout.setOnClickListener(v -> {
                 if (holder.jadwalPickerLayout.getVisibility() == View.VISIBLE) {
@@ -83,6 +85,10 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
 
     public int getSelectedItem() {
         return jadwalPickerAdapter.getSelectedItem();
+    }
+
+    public ArrayList<JadwalPickerModel> getPicker(){
+        return jadwalPickerAdapter.getPick();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
