@@ -1,7 +1,4 @@
-package com.c2.arenafinder.util;
-
-import android.content.Intent;
-import android.net.Uri;
+package com.c2.arenafinder.api.google;
 
 import androidx.annotation.NonNull;
 

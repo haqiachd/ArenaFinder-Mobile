@@ -20,6 +20,7 @@ import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.data.response.VenueBookingResponse;
 import com.c2.arenafinder.data.response.VenueDetailedResponse;
+import com.c2.arenafinder.data.response.VenueExtendedResponse;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 
@@ -130,6 +131,11 @@ public interface RetrofitEndPoint {
 
     @GET("page/referensi.php")
     Call<ReferensiResponse> referensiPage();
+
+    @GET("page/sub/sport_type_venue.php")
+    Call<VenueExtendedResponse> sportType(
+            @Query("sport") String sport
+    );
 
     @GET("feature/venues/venue_detailed.php")
     Call<VenueDetailedResponse> venueDetailed(
