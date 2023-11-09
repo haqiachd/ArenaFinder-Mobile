@@ -5,13 +5,28 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.model.VenueExtendedModel;
+import com.c2.arenafinder.data.response.ReferensiResponse;
+import com.c2.arenafinder.data.response.VenueExtendedResponse;
+import com.c2.arenafinder.ui.adapter.VenueExtendedAdapter;
+import com.c2.arenafinder.util.AdapterActionListener;
+import com.c2.arenafinder.util.ArenaFinder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SportTypeFragment extends Fragment {
 
@@ -20,12 +35,17 @@ public class SportTypeFragment extends Fragment {
     private static final String ARG_ACTION = "action";
     private static final String ARG_SPORT = "sport";
 
-    // TODO: Rename and change types of parameters
     private int action;
     private String sport;
 
+    private RecyclerView venueRecycler;
+
     public SportTypeFragment() {
         // Required empty public constructor
+    }
+
+    private void initViews(View view) {
+        venueRecycler = view.findViewById(R.id.fst_recycler_sport);
     }
 
     public static SportTypeFragment newInstance(int action, String sport) {
@@ -56,15 +76,53 @@ public class SportTypeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initViews(view);
         superAppbar();
+
+        fetchDataVenue();
     }
 
-    private void superAppbar(){
-        if (getActivity() != null){
+    private void fetchDataVenue() {
+
+        RetrofitClient.getInstance().sportType(sport).enqueue(new Callback<VenueExtendedResponse>() {
+            @Override
+            public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
+
+                    var extended = response.body().getData();
+
+                    if (extended.size() > 0) {
+                        venueRecycler.setAdapter(
+                                new VenueExtendedAdapter(
+                                        requireContext(), extended, new AdapterActionListener() {
+                                    @Override
+                                    public void onClickListener(int position) {
+                                       Toast.makeText(requireContext(), "ID -> " + extended.get(position).getidVenue(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                )
+                        );
+                    }
+
+                } else {
+                    ArenaFinder.VibratorToast(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
+                ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_MEDIUM);
+            }
+        });
+
+    }
+
+    private void superAppbar() {
+        if (getActivity() != null) {
 
             TextView textView = getActivity().findViewById(R.id.sub_title);
             textView.setText(sport);
+
 
         }
     }

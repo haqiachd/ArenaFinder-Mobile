@@ -31,6 +31,7 @@ import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
+import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
@@ -179,6 +180,8 @@ public class AktivitasFragment extends Fragment {
                         startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
+                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(SportTypeFragment.TYPE_ACTIVITY))
+                                        .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
                         );
                     }
                 });

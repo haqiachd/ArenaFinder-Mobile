@@ -265,9 +265,9 @@ public class BookingVenueFragment extends Fragment {
             txtData.setText("Rp. " + (decimalFormat.format(75_000 * item)));
 
             button.setOnClickListener(v -> {
-                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                BottomSheetDialog sheet = new BottomSheetDialog(requireContext(), R.style.BottomSheetTheme);
-                View sheetInflater = getLayoutInflater().inflate(R.layout.sheet_choose_payment, null);
+                ArenaFinder.playVibrator(getActivity(), ArenaFinder.VIBRATOR_SHORT);
+                BottomSheetDialog sheet = new BottomSheetDialog(getActivity(), R.style.BottomSheetTheme);
+                View sheetInflater = getActivity().getLayoutInflater().inflate(R.layout.sheet_choose_payment, null);
                 sheet.setContentView(sheetInflater);
 
                 sheetInflater.findViewById(R.id.scp_button).setOnClickListener(view -> {

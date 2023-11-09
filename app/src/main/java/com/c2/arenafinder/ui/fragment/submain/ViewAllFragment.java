@@ -12,6 +12,9 @@ import com.c2.arenafinder.R;
 
 public class ViewAllFragment extends Fragment {
 
+    public static final int VENUE_BARU = 1, VENUE_REKOMENDASI = 2, AKTIVITAS_SERU = 3, VENUE_LOKASI = 4,
+                            AKTIVITAS_BARU = 5, AKTIVITAS_KOSONG = 6, AKTIVITAS_SEMUA = 7;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 

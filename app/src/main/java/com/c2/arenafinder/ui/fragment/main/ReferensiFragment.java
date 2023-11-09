@@ -220,7 +220,7 @@ public class ReferensiFragment extends Fragment {
                         startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
-                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(SportTypeFragment.TYPE_VENUE))
+                                        .putExtra(SubMainActivity.SPORT_ACTION, SportTypeFragment.TYPE_VENUE)
                                         .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
                         );
                     }
