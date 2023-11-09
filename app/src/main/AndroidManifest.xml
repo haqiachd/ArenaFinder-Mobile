@@ -20,9 +20,9 @@
         android:theme="@style/Theme.ArenaFinder"
         tools:targetApi="34">
 
-        <service android:name=".util.MyFirebaseMessagingService"
+        <service android:name=".api.google.MyFirebaseMessagingService"
             android:exported="true"
-            >
+            android:permission="TODO">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

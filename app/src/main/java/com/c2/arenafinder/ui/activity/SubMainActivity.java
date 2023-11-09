@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.ui.fragment.submain.EditAccountFragment;
 import com.c2.arenafinder.ui.fragment.submain.MenuBookingFragment;
 import com.c2.arenafinder.ui.fragment.submain.MenuCommunityFragment;
@@ -17,6 +18,7 @@ import com.c2.arenafinder.ui.fragment.submain.NotificationsFragment;
 import com.c2.arenafinder.ui.fragment.submain.SearchWorldFragment;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -83,11 +85,15 @@ public class SubMainActivity extends AppCompatActivity {
                 break;
             }
             case SPORT_TYPE: {
+                // get action and data
                 String action = getIntent().getStringExtra(SPORT_ACTION),
                         data = getIntent().getStringExtra(SPORT_DATA);
                 LogApp.info(this, LogTag.LIFEFCYLE, "ACTION --> " + action);
                 LogApp.info(this, LogTag.LIFEFCYLE, "DATA   --> " + data);
+
+                // cek action and data
                 if (action != null && data != null){
+                    // open sport type fragment with action and data
                     FragmentUtil.switchFragmentSubMain(
                             getSupportFragmentManager(),
                             SportTypeFragment.newInstance(Integer.parseInt(action), data),

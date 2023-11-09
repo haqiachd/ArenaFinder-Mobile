@@ -315,5 +315,13 @@
     <string name="item_mpr_info_app">Info Aplikasi</string>
     <string name="item_mpr_beri_ratting">Beri Ratting</string>
     <string name="item_mpr_lang_app">Ganti Bahasa</string>
+    <string name="txt_sport_type">Gambar Olahraga</string>
+    <string name="sub_main_activity">Sub Main Activity</string>
+
+    <string-array name="jenis_olahraga">
+        <item>@string/txt_olahraga_football</item>
+        <item>@string/txt_olahraga_badminton</item>
+        <item>@string/txt_olahraga_futsal</item>
+    </string-array>
 
 </resources>
