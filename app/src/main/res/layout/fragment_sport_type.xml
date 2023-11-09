@@ -1,41 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.fragment.submain.SportTypeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:backgroundTint="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/fst_image"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_180sdp"
+                android:layout_height="@dimen/_170sdp"
+                android:contentDescription="@string/txt_sport_type"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_type_football"
-                />
+                android:src="@drawable/ic_type_football" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fst_sport"
+                android:id="@+id/fst_recycler_sport"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_venue_type"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
+                tools:listitem="@layout/item_venue_extended" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

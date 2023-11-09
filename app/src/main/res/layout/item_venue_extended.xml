@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_205sdp"
-    android:layout_marginStart="@dimen/_10sdp"
-    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_margin="@dimen/_10sdp"
     android:elevation="@dimen/card_venue_elevation"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/white"
@@ -18,7 +17,7 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/ivt_image_layout"
+            android:id="@+id/ive_image_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_95sdp"
             app:cardCornerRadius="@dimen/card_venue_image_corner_second"
@@ -26,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/ivt_venue_image"
+                android:id="@+id/ive_venue_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/alt_card_venue"
@@ -42,10 +41,10 @@
             android:layout_marginTop="@dimen/card_venue_info_margin_top"
             android:layout_marginEnd="@dimen/_10sdp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/ivt_image_layout">
+            app:layout_constraintTop_toBottomOf="@id/ive_image_layout">
 
             <TextView
-                android:id="@+id/ivt_venue_name"
+                android:id="@+id/ive_venue_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -56,7 +55,7 @@
                 android:textSize="@dimen/card_venue_info_title_textsize" />
 
             <TextView
-                android:id="@+id/ivt_venue_sport"
+                android:id="@+id/ive_venue_sport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -77,7 +76,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
-                android:id="@+id/ivt_ratting_icon"
+                android:id="@+id/ive_ratting_icon"
                 android:layout_width="@dimen/card_venue_desc_ratting_size"
                 android:layout_height="@dimen/card_venue_desc_ratting_size"
                 android:contentDescription="@string/alt_ratting"
@@ -86,7 +85,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/ivt_ratting_value"
+                android:id="@+id/ive_ratting_value"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/card_venue_desc_ratting_size"
                 android:layout_marginStart="@dimen/card_venue_desc_ratting_margin"
@@ -94,11 +93,11 @@
                 android:text="@string/txt_def_ratting"
                 android:textColor="@color/textcolor_ratting"
                 android:textSize="@dimen/card_venue_desc_top_textview"
-                app:layout_constraintStart_toEndOf="@id/ivt_ratting_icon"
+                app:layout_constraintStart_toEndOf="@id/ive_ratting_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/ivt_venue_status"
+                android:id="@+id/ive_venue_status"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/card_venue_desc_ratting_size"
                 android:background="@drawable/bg_venue_status_disewakan"
@@ -110,7 +109,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/ivt_venue_desc_first"
+                android:id="@+id/ive_venue_desc_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_vdnue_desc_bottom_margin_top"
@@ -123,10 +122,10 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_venue_desc_bottom_textview"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivt_ratting_icon" />
+                app:layout_constraintTop_toBottomOf="@id/ive_ratting_icon" />
 
             <TextView
-                android:id="@+id/ivt_venue_desc_second"
+                android:id="@+id/ive_venue_desc_second"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_vdnue_desc_bottom_margin_top"
@@ -139,7 +138,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_venue_desc_bottom_textview"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivt_ratting_icon" />
+                app:layout_constraintTop_toBottomOf="@id/ive_ratting_icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
