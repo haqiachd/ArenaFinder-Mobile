@@ -110,41 +110,41 @@ public class SearchWorldFragment extends Fragment {
                     InputMethodManager inputMethodManager = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                    if (Objects.requireNonNull(inputEditText.getText()).toString().isBlank() && inputEditText.getText().toString().isEmpty()) {
+                    if (!Objects.requireNonNull(inputEditText.getText()).toString().isEmpty() && !inputEditText.getText().toString().isBlank()) {
 
-                    }
+                        RetrofitClient.getInstance().searchVenue(inputEditText.getText().toString())
+                                .enqueue(new Callback<VenueExtendedResponse>() {
 
-                    RetrofitClient.getInstance().searchVenue(inputEditText.getText().toString())
-                            .enqueue(new Callback<VenueExtendedResponse>() {
-                                @Override
-                                public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
+                                    public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
 
-                                    if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
 
-                                        ArrayList<VenueExtendedModel> models = response.body().getData();
+                                            ArrayList<VenueExtendedModel> models = response.body().getData();
 
-                                        recyclerView.setAdapter(new VenueExtendedAdapter(
-                                                requireContext(), models, new AdapterActionListener() {
-                                            @Override
-                                            public void onClickListener(int position) {
-                                                startActivity(new Intent(requireActivity(), DetailedActivity.class)
-                                                        .putExtra(DetailedActivity.ID, models.get(position).getidVenue())
-                                                );
+                                            recyclerView.setAdapter(new VenueExtendedAdapter(
+                                                    requireContext(), models, new AdapterActionListener() {
+                                                @Override
+                                                public void onClickListener(int position) {
+                                                    startActivity(new Intent(requireActivity(), DetailedActivity.class)
+                                                            .putExtra(DetailedActivity.ID, models.get(position).getidVenue())
+                                                    );
+                                                }
                                             }
-                                        }
-                                        ));
+                                            ));
 
-                                    } else {
-                                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+
                                     }
 
-                                }
+                                    @Override
+                                    public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
+                                        Toast.makeText(requireContext(), "Error -> " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-                                @Override
-                                public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
-                                    Toast.makeText(requireContext(), "Error -> " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    }
 
                     return true;
                 }
