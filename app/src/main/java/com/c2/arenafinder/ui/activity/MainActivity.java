@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -88,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         checkAndRequestStoragePermission();
 
         FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new HomeFragment(), false);
+
+        onClickGroups();
     }
 
 
@@ -133,6 +136,24 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .create().show();
+
+    }
+
+    private void onClickGroups(){
+
+        cardSearch.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(MainActivity.this, SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
+            );
+        });
+
+        imgNotif.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(MainActivity.this, SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.NOTIFICATIONS)
+            );
+        });
 
     }
 }

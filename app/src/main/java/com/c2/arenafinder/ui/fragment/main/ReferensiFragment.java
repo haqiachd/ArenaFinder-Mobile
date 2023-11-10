@@ -33,6 +33,7 @@ import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
+import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.button.MaterialButton;
@@ -155,23 +156,25 @@ public class ReferensiFragment extends Fragment {
         onClickGroups();
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
         btnFilter.setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Filter", Toast.LENGTH_SHORT).show();
         });
 
-        btnVallRatting.setOnClickListener(v -> {
-            startActivity(
-                    new Intent(requireActivity(), SubMainActivity.class)
-                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
-            );
-        });
+        btnVallRatting.setOnClickListener(v ->
+                startActivity(
+                        new Intent(requireActivity(), SubMainActivity.class)
+                                .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                                .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_RATING)
+                )
+        );
 
         btnVallKosong.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_KOSONG)
             );
         });
 
@@ -179,6 +182,7 @@ public class ReferensiFragment extends Fragment {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_LOKASI)
             );
         });
 
@@ -186,6 +190,7 @@ public class ReferensiFragment extends Fragment {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_GRATIS)
             );
         });
 
@@ -193,6 +198,7 @@ public class ReferensiFragment extends Fragment {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_BERBAYAR)
             );
         });
 
@@ -200,6 +206,7 @@ public class ReferensiFragment extends Fragment {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_DISEWAKAN)
             );
         });
 
@@ -250,7 +257,7 @@ public class ReferensiFragment extends Fragment {
 
                     if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
                         Toast.makeText(requireContext(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         // show referensi recyclerview
                         showVenueTopRatting(topRating);
                         showVenueKosong(venueKosong);
@@ -275,7 +282,7 @@ public class ReferensiFragment extends Fragment {
 
     }
 
-    private void handlerNullData(){
+    private void handlerNullData() {
         venueLokasiLayout.setVisibility(View.GONE);
         venueKosongLayout.setVisibility(View.GONE);
         venueDisewakanLayout.setVisibility(View.GONE);

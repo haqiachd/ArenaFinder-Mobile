@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -120,8 +121,10 @@ public class SportTypeFragment extends Fragment {
     private void superAppbar() {
         if (getActivity() != null) {
 
+            LinearLayout layout = getActivity().findViewById(R.id.sub_linear);
             TextView textView = getActivity().findViewById(R.id.sub_title);
             textView.setText(sport);
+            layout.setVisibility(View.VISIBLE);
 
 
         }
