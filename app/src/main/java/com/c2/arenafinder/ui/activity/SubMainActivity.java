@@ -1,6 +1,8 @@
 package com.c2.arenafinder.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -92,14 +94,14 @@ public class SubMainActivity extends AppCompatActivity {
                 LogApp.info(this, LogTag.LIFEFCYLE, "DATA   --> " + data);
 
                 // cek action and data
-                if (action != null && data != null){
+                if (action != null && data != null) {
                     // open sport type fragment with action and data
                     FragmentUtil.switchFragmentSubMain(
                             getSupportFragmentManager(),
                             SportTypeFragment.newInstance(Integer.parseInt(action), data),
                             false
                     );
-                }else {
+                } else {
                     FragmentUtil.switchFragmentSubMain(
                             getSupportFragmentManager(), new SportTypeFragment(), false
                     );
@@ -108,13 +110,49 @@ public class SubMainActivity extends AppCompatActivity {
             }
             case VIEW_ALL: {
                 FragmentUtil.switchFragmentSubMain(
-                        getSupportFragmentManager(), new ViewAllFragment(), false
+                        getSupportFragmentManager(),
+                        ViewAllFragment.newInstance(getIntent().getIntExtra(SPORT_ACTION, 0)),
+                        false
                 );
                 break;
             }
         }
 
         onClickGroups();
+    }
+
+    private void showFragmentByActionAndData(Runnable whenSuccess, Runnable whenError) {
+        // get action and data
+        String action = getIntent().getStringExtra(SPORT_ACTION),
+                data = getIntent().getStringExtra(SPORT_DATA);
+
+        LogApp.info(this, LogTag.LIFEFCYLE, "ACTION --> " + action);
+        LogApp.info(this, LogTag.LIFEFCYLE, "DATA   --> " + data);
+
+        // cek action and data
+        if (action != null && data != null) {
+            // open fragment with action and data
+            whenSuccess.run();
+        } else {
+            whenError.run();
+        }
+    }
+
+    private void showFragmentByAction(Runnable whenSuccess, Runnable whenError) {
+        // get action and data
+        int action = getIntent().getIntExtra(SPORT_ACTION, 0);
+
+        LogApp.info(this, LogTag.LIFEFCYLE, "ACTION --> " + action);
+
+        // cek action
+        if (action > 0) {
+            // open new fragment
+            LogApp.info(this, LogTag.LIFEFCYLE, "Replace fragment sub main with instance");
+            whenSuccess.run();
+        } else {
+            LogApp.info(this, LogTag.LIFEFCYLE, "Replace fragment sub main");
+            whenError.run();
+        }
     }
 
     private void onClickGroups() {
