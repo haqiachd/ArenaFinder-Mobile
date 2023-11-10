@@ -132,9 +132,38 @@ public interface RetrofitEndPoint {
     @GET("page/referensi.php")
     Call<ReferensiResponse> referensiPage();
 
-    @GET("page/sub/sport_type_venue.php")
+    @GET("page/sub/type/sport_type_venue.php")
     Call<VenueExtendedResponse> sportType(
             @Query("sport") String sport
+    );
+
+    @GET("page/sub/all/allv_rating.php")
+    Call<VenueExtendedResponse> getAllRating();
+
+    @GET("page/sub/all/allv_kosong.php")
+    Call<VenueExtendedResponse> getAllKosong();
+
+    @GET("page/sub/all/allv_lokasi.php")
+    Call<VenueExtendedResponse> getAllLokasi();
+
+    @GET("page/sub/all/allv_gratis.php")
+    Call<VenueExtendedResponse> getAllGratis();
+
+    @GET("page/sub/all/allv_berbayar.php")
+    Call<VenueExtendedResponse> getAllBebayar();
+
+    @GET("page/sub/all/allv_disewakan.php")
+    Call<VenueExtendedResponse> getAllDisewakan();
+
+    @GET("page/sub/all/allv_baru.php")
+    Call<VenueExtendedResponse> getAllBaru();
+
+    @GET("page/sub/all/allv_rekomendasi.php")
+    Call<VenueExtendedResponse> getAllRekomendasi();
+
+    @GET("page/sub/search/allv_search.php")
+    Call<VenueExtendedResponse> searchVenue(
+            @Query("name") String name
     );
 
     @GET("feature/venues/venue_detailed.php")

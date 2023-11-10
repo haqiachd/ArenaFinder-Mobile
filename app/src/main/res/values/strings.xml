@@ -318,6 +318,17 @@
     <string name="txt_sport_type">Gambar Olahraga</string>
     <string name="sub_main_activity">Sub Main Activity</string>
 
+    <string name="sub_venue_baru">Baru Ditambahkan</string>
+    <string name="sub_venue_rekomendasi">Rekomendasi Untukmu</string>
+    <string name="sub_venue_lokasi">Dekat Lokasimu</string>
+    <string name="sub_venue_rating">Ratting Tertinggi</string>
+    <string name="sub_venue_kosong">Sedang Kosong</string>
+    <string name="sub_venue_gratis">Gratis</string>
+    <string name="sub_venue_berbayar">Berbayar</string>
+    <string name="sub_venue_disewakan">Disewakan</string>
+
+    <string name="hint_search_world">Cari Tempat Olahraga</string>
+
     <string-array name="jenis_olahraga">
         <item>@string/txt_olahraga_football</item>
         <item>@string/txt_olahraga_badminton</item>
