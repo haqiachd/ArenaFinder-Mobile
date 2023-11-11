@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_STORAGE = 2;
 
-    @SuppressLint("StaticFieldLeak")
-    public static BottomNavCustom bottomNav;
+    public BottomNavCustom bottomNav;
 
     private TextView txtAppName, txtSearchTitle;
     private MaterialCardView cardSearch;
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         txtAppName.setText(spannableString);
 
         bottomNav = new BottomNavCustom(this);
-        bottomNav.playAnimation(BottomNavCustom.ITEM_HOME);
+//        bottomNav.playAnimation(BottomNavCustom.ITEM_HOME);
         bottomNav.setActivatedItem(BottomNavCustom.ITEM_HOME);
         bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
 

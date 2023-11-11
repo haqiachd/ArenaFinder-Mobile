@@ -53,6 +53,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         })).start());
         setContentView(R.layout.activity_splash_screen);
 
+
 //        FirebaseApp.initializeApp(this.getApplicationContext());
 
         initViews();

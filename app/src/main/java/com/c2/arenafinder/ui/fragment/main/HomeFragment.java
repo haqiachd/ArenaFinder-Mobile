@@ -1,6 +1,7 @@
 package com.c2.arenafinder.ui.fragment.main;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -122,12 +123,19 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        LogApp.info(this, LogTag.LIFEFCYLE, "onAttach() Called");
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        LogApp.info(this, LogTag.LIFEFCYLE, "onCreated() Called");
     }
 
     @Override
@@ -140,9 +148,11 @@ public class HomeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        LogApp.info(requireContext(), "first");
+        LogApp.info(requireActivity(), "first");
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+
+        LogApp.info(this, LogTag.LIFEFCYLE, "onViewCreated() Called");
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -157,81 +167,90 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        MainActivity.bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
+//        MainActivity.bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
+//
 
-        fetchData();
-        adapterLapangan();
-        onClickGroups();
+//
+//        MainActivity.bottomNav.setOnActionHomeOnFrame(new Runnable() {
+//            @Override
+//            public void run() {
+//                scrollView.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        scrollView.smoothScrollTo(0, 0); // Mengatur posisi ke atas (0, 0)
+//                    }
+//                });
+//            }
+//        });
+//
+//        scrollView.setOnTouchListener((v, event) -> {
+//            LogApp.info(requireActivity(), LogTag.LIFEFCYLE, "ScrollView Listener");
+//            return !scrollable;
+//        });
+//
+//        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+//            @Override
+//            public void onScrollChanged() {
+//                int currentScroll = scrollView.getScrollY();
+//
+//                if (currentScroll < 400) {
+//                    MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
+//                } else if (currentScroll < 700) {
+////                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
+//                } else if (currentScroll < 2100) {
+////                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
+//                } else {
+//                    MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
+//                }
+//
+//            }
+//        });
+//
 
-        MainActivity.bottomNav.setOnActionHomeOnFrame(new Runnable() {
-            @Override
-            public void run() {
-                scrollView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scrollView.smoothScrollTo(0, 0); // Mengatur posisi ke atas (0, 0)
-                    }
-                });
-            }
-        });
+//
+//        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+//            MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_HOME);
+//            scrollable = true;
+//        }, 100);
 
-        scrollView.setOnTouchListener((v, event) -> {
-            LogApp.info(requireContext(), LogTag.LIFEFCYLE, "ScrollView Listener");
-            return !scrollable;
-        });
+        if (isAdded()){
+            fetchData();
+            adapterLapangan();
+            onClickGroups();
+            showPager();
+            pagerAction();
+        }
 
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                int currentScroll = scrollView.getScrollY();
+    }
 
-                if (currentScroll < 400) {
-                    MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
-                } else if (currentScroll < 700) {
-//                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
-                } else if (currentScroll < 2100) {
-//                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
-                } else {
-                    MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
-                }
-
-            }
-        });
-
-        showPager();
-
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_HOME);
-            scrollable = true;
-        }, 100);
-
-        pagerAction();
-
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void onClickGroups() {
 
         menuAlur.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Alur", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Alur", Toast.LENGTH_SHORT).show();
         });
 
         menuKomunitas.setOnClickListener(v -> {
             startActivity(
-                    new Intent(requireContext(), SubMainActivity.class)
+                    new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_COMMUNITY)
             );
         });
 
         menuTrolley.setOnClickListener(v -> {
             startActivity(
-                    new Intent(requireContext(), SubMainActivity.class)
+                    new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_TROLLEY)
             );
         });
 
         menuBooking.setOnClickListener(v -> {
             startActivity(
-                    new Intent(requireContext(), SubMainActivity.class)
+                    new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_BOOKING)
             );
         });
@@ -283,7 +302,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void addDotsTextView() {
-        Typeface typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold);
+        Typeface typeface = ResourcesCompat.getFont(requireActivity(), R.font.roboto_bold);
         // add dots sesuai jumlah gambar
         for (int i = 0; i < homeInfoModels.size(); i++){
             dots.add(new TextView(requireActivity()));
@@ -298,9 +317,9 @@ public class HomeFragment extends Fragment {
     private void setSelectedColor(int posisi){
         for (int i = 0; i < dots.size(); i++){
             if (i == posisi){
-                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.whero_purple));
+                dots.get(i).setTextColor(ContextCompat.getColor(requireActivity(), R.color.whero_purple));
             }else {
-                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.gray));
+                dots.get(i).setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray));
             }
         }
     }
@@ -328,7 +347,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<BerandaResponse> call, Response<BerandaResponse> response) {
 
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
-                    LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
+                    LogApp.info(this, LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
                     BerandaResponse.Data data = response.body().getData();
 
                     // get data models
@@ -338,7 +357,7 @@ public class HomeFragment extends Fragment {
                     ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
 
                     if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0){
-                        Toast.makeText(requireContext(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
                     }else {
                         // show recyclerview
                         showVenueBaru(venueBaru);
@@ -348,7 +367,7 @@ public class HomeFragment extends Fragment {
                     }
 
                 }else {
-                    Toast.makeText(requireContext(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     handlerNullData();
                 }
 
@@ -356,7 +375,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<BerandaResponse> call, Throwable t) {
-                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 handlerNullData();
             }
         });
@@ -376,9 +395,9 @@ public class HomeFragment extends Fragment {
         if (models.size() <= 0) {
             venueBaruLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueBaruRecycler.setAdapter(new VenueFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    this.requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -390,7 +409,7 @@ public class HomeFragment extends Fragment {
             }, VenueFirstAdapter.DEFAULT
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, models.size(), R.dimen.card_venue_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueBaruRecycler, models.size(), R.dimen.card_venue_width_java);
         }
 
     }
@@ -400,9 +419,9 @@ public class HomeFragment extends Fragment {
         if (models.size() <= 0) {
             venueRekomendasiLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             buatKamuRecycler.setAdapter(new VenueSecondAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -414,7 +433,7 @@ public class HomeFragment extends Fragment {
             }
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, models.size(), R.dimen.card_venue_second_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), buatKamuRecycler, models.size(), R.dimen.card_venue_second_width_java);
         }
 
     }
@@ -424,9 +443,9 @@ public class HomeFragment extends Fragment {
         if (models.size() <= 0){
             aktivitasLayout.setVisibility(View.GONE);
         }else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             aktivitasRecycler.setAdapter(new AktivitasFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     // TODO : action
@@ -434,7 +453,7 @@ public class HomeFragment extends Fragment {
             }
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasRecycler, models.size(), R.dimen.card_activity_first_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasRecycler, models.size(), R.dimen.card_activity_first_width_java);
         }
 
     }
@@ -444,9 +463,9 @@ public class HomeFragment extends Fragment {
         if (models.size() <= 0) {
             venueLokasiLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
+//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -458,7 +477,7 @@ public class HomeFragment extends Fragment {
             }
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
         }
 
     }
@@ -472,7 +491,7 @@ public class HomeFragment extends Fragment {
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
 
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels,
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
                 new AdapterActionListener() {
                     @Override
                     public void onClickListener(int position) {

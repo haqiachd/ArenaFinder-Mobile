@@ -83,28 +83,28 @@ public class BottomNavCustom {
 
     private final Runnable actionHome = () -> {
         hideAllSecondIcon();
-        playAnimation(ITEM_HOME);
+//        playAnimation(ITEM_HOME);
         setActivatedItem(ITEM_HOME);
         setDeactivatedOnFrame(ITEM_HOME);
     };
 
     private final Runnable actionAktivitas = () -> {
         hideAllSecondIcon();
-        playAnimation(ITEM_AKTIVITAS);
+//        playAnimation(ITEM_AKTIVITAS);
         setActivatedItem(ITEM_AKTIVITAS);
         setDeactivatedOnFrame(ITEM_AKTIVITAS);
     };
 
     private final Runnable actionReferensi = () -> {
         hideAllSecondIcon();
-        playAnimation(ITEM_REFERENSI);
+//        playAnimation(ITEM_REFERENSI);
         setActivatedItem(ITEM_REFERENSI);
         setDeactivatedOnFrame(ITEM_REFERENSI);
     };
 
     private final Runnable actionProfile = () -> {
         hideAllSecondIcon();
-        playAnimation(ITEM_PROFILE);
+//        playAnimation(ITEM_PROFILE);
         setActivatedItem(ITEM_PROFILE);
         setDeactivatedOnFrame(ITEM_PROFILE);
     };

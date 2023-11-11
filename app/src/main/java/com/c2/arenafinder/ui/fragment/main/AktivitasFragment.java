@@ -123,42 +123,35 @@ public class AktivitasFragment extends Fragment {
             }
         });
 
-        MainActivity.bottomNav.setOnActionAktivitasOnFrame(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(requireContext(), "Aktivitas", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (isAdded()){
+            fetchData();
+            adapterLapangan();
+            onClickGroups();
+        }
 
-        fetchData();
-        adapterLapangan();
-        onClickGroups();
+    }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_AKTIVITAS);
-            }
-
-        }, 1500);
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void onClickGroups() {
 
         btnFilter.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Filter", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Filter", Toast.LENGTH_SHORT).show();
         });
 
         btnVallBaru.setOnClickListener(v -> {
             startActivity(
-                    new Intent(requireContext(), SubMainActivity.class)
+                    new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
             );
         });
 
         btnVallKosong.setOnClickListener(v -> {
             startActivity(
-                    new Intent(requireContext(), SubMainActivity.class)
+                    new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
             );
         });
@@ -173,7 +166,7 @@ public class AktivitasFragment extends Fragment {
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
 
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels,
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
                 new AdapterActionListener() {
                     @Override
                     public void onClickListener(int position) {
@@ -197,7 +190,7 @@ public class AktivitasFragment extends Fragment {
 
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
 
-                    LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
+                    LogApp.info(this, LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
                     AktivitasResponse.Data data = response.body().getData();
 
                     // get data model
@@ -217,7 +210,7 @@ public class AktivitasFragment extends Fragment {
 
                 } else {
                     handlerNullData();
-                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -225,8 +218,8 @@ public class AktivitasFragment extends Fragment {
             @Override
             public void onFailure(Call<AktivitasResponse> call, Throwable t) {
                 handlerNullData();
-                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_MEDIUM);
+                Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                ArenaFinder.VibratorToast(requireActivity(), t.getMessage(), Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_MEDIUM);
             }
         });
 
@@ -244,7 +237,7 @@ public class AktivitasFragment extends Fragment {
             aktivitasKosongLayout.setVisibility(View.GONE);
         } else {
             aktivitasBaruRecycler.setAdapter(new AktivitasFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     // TODO : action
@@ -252,7 +245,7 @@ public class AktivitasFragment extends Fragment {
             }
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
         }
 
     }
@@ -263,7 +256,7 @@ public class AktivitasFragment extends Fragment {
             aktivitasKosongLayout.setVisibility(View.GONE);
         } else {
             aktivitasKosongRecycler.setAdapter(new AktivitasFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     // TODO : action
@@ -271,7 +264,7 @@ public class AktivitasFragment extends Fragment {
             }
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
         }
 
     }
@@ -282,7 +275,7 @@ public class AktivitasFragment extends Fragment {
             semuaAktivitasLayout.setVisibility(View.GONE);
         } else {
             semuaAktivitasRecycler.setAdapter(new AktivitasSecondAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     // TODO : action

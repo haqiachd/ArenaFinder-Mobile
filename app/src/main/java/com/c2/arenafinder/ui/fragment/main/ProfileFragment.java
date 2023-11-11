@@ -113,16 +113,7 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
-        MainActivity.bottomNav.setOnActionProfileOnFrame(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(requireContext(), "Profile", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        new Handler().postDelayed(() -> MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_PROFILE), 1500);
-
-        usersUtil = new UsersUtil(requireContext());
+        usersUtil = new UsersUtil(requireActivity());
 
 //        txtUsername.setText(usersUtil.getUsername());
         txtEmail.setText(usersUtil.getEmail());
@@ -155,6 +146,7 @@ public class ProfileFragment extends Fragment {
         showListAbout();
     }
 
+
     private void showListAkun(){
 
         ArrayList<ProfileMenuModel> listItem = new ArrayList<>();
@@ -163,7 +155,7 @@ public class ProfileFragment extends Fragment {
         listItem.add(new ProfileMenuModel(R.drawable.ic_listview_profile_akun_changepass, R.string.item_mpr_change_pass, ItemProfileAdapter.DEFAULT_END_ICON));
         listItem.add(new ProfileMenuModel(R.drawable.ic_listview_profile_akun_logout, R.string.item_mpr_logout, ItemProfileAdapter.DEFAULT_END_ICON));
 
-        listAkun.setAdapter(new ItemProfileAdapter(requireContext(), R.layout.item_profile, listItem));
+        listAkun.setAdapter(new ItemProfileAdapter(requireActivity(), R.layout.item_profile, listItem));
 
         listAkun.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -178,20 +170,20 @@ public class ProfileFragment extends Fragment {
                     }
                     case 1 :
                     case 2 : {
-                        Toast.makeText(requireContext(), listItem.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), listItem.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case 3 : {
-                        LogApp.info(requireContext(), LogTag.ON_CLICK, "Logout Account");
-                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                        LogApp.info(requireActivity(), LogTag.ON_CLICK, "Logout Account");
+                        ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
                         // konfirmasi logout
                         ArenaFinder.showAlertDialog(
-                                requireContext(), getString(R.string.dia_title_confirm), getString(R.string.dia_msg_confirm_logout),
+                                requireActivity(), getString(R.string.dia_title_confirm), getString(R.string.dia_msg_confirm_logout),
                                 false,
                                 (dialog, which) -> {
                                     usersUtil.signOut();
                                     if (!usersUtil.isSignIn()) {
-                                        Toast.makeText(requireContext(), "Logout Sukses", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(requireActivity(), "Logout Sukses", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(requireActivity(), EmptyActivity.class)
                                                 .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
                                         );
@@ -215,7 +207,7 @@ public class ProfileFragment extends Fragment {
         listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_giverate, R.string.item_mpr_beri_ratting, ItemProfileAdapter.DEFAULT_END_ICON));
         listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_language, R.string.item_mpr_lang_app, ItemProfileAdapter.DEFAULT_END_ICON));
 
-        listAbout.setAdapter(new ItemProfileAdapter(requireContext(), R.layout.item_profile, listItems));
+        listAbout.setAdapter(new ItemProfileAdapter(requireActivity(), R.layout.item_profile, listItems));
 
         listAbout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -225,7 +217,7 @@ public class ProfileFragment extends Fragment {
                     case 0 :
                     case 1 :
                     case 2 : {
-                        Toast.makeText(requireContext(), listItems.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), listItems.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
                         break;
                     }
                     default:
@@ -271,15 +263,15 @@ public class ProfileFragment extends Fragment {
                     UserModel model = response.body().getData();
                     usersUtil.setUserPhoto(model.getUserPhoto());
 
-                    Glide.with(requireContext())
+                    Glide.with(requireActivity())
                             .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
                             .placeholder(R.drawable.ic_profile)
                             .into(imgPhoto);
 
-                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }else {
-                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
+                    Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -323,7 +315,7 @@ public class ProfileFragment extends Fragment {
             if(data != null) {
                 uri = data.getData();
 
-                Glide.with(requireContext())
+                Glide.with(requireActivity())
                         .load(uri)
                         .placeholder(R.drawable.ic_profile)
                         .into(imgPhoto);
@@ -334,16 +326,16 @@ public class ProfileFragment extends Fragment {
     private void onClickGroups(){
 
         btnLogout.setOnClickListener(v -> {
-            LogApp.info(requireContext(), LogTag.ON_CLICK, "Logout Account");
-            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+            LogApp.info(requireActivity(), LogTag.ON_CLICK, "Logout Account");
+            ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
             // konfirmasi logout
             ArenaFinder.showAlertDialog(
-                    requireContext(), getString(R.string.dia_title_confirm), getString(R.string.dia_msg_confirm_logout),
+                    requireActivity(), getString(R.string.dia_title_confirm), getString(R.string.dia_msg_confirm_logout),
                     false,
                     (dialog, which) -> {
                         usersUtil.signOut();
                         if (!usersUtil.isSignIn()) {
-                            Toast.makeText(requireContext(), "Logout Sukses", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireActivity(), "Logout Sukses", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(requireActivity(), EmptyActivity.class)
                                     .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
                             );
@@ -354,7 +346,7 @@ public class ProfileFragment extends Fragment {
         });
 
         btnChoose.setOnClickListener(v -> {
-            LogApp.info(requireContext(), LogTag.ON_CLICK, "Button Choose Diclik");
+            LogApp.info(requireActivity(), LogTag.ON_CLICK, "Button Choose Diclik");
             choosePhoto();
         });
 
@@ -377,7 +369,7 @@ public class ProfileFragment extends Fragment {
         btnEdit.setOnClickListener(v -> {
 
             startActivity(
-                    new Intent(requireContext(), SubMainActivity.class)
+                    new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.EDIT_ACCOUNT)
             );
 

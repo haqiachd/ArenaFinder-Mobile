@@ -136,30 +136,23 @@ public class ReferensiFragment extends Fragment {
             }
         });
 
-        fetchData();
+        if (isAdded()){
+            fetchData();
+            adapterLapangan();
+            onClickGroups();
+        }
 
-        MainActivity.bottomNav.setOnActionReferensiOnFrame(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(requireContext(), "Referensi", Toast.LENGTH_SHORT).show();
-            }
-        });
+    }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapterLapangan();
-                MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_REFERENSI);
-            }
-        }, 1000L);
-
-        onClickGroups();
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void onClickGroups() {
 
         btnFilter.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Filter", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Filter", Toast.LENGTH_SHORT).show();
         });
 
         btnVallRatting.setOnClickListener(v ->
@@ -220,7 +213,7 @@ public class ReferensiFragment extends Fragment {
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
 
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireContext(), lapanganModels,
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
                 new AdapterActionListener() {
                     @Override
                     public void onClickListener(int position) {
@@ -244,7 +237,7 @@ public class ReferensiFragment extends Fragment {
             public void onResponse(Call<ReferensiResponse> call, Response<ReferensiResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
 
-                    LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "ON SUCCESS");
+                    LogApp.info(this, LogTag.RETROFIT_ON_RESPONSE, "ON SUCCESS");
                     ReferensiResponse.Data data = response.body().getData();
 
                     // get data models
@@ -256,7 +249,7 @@ public class ReferensiFragment extends Fragment {
                     ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
 
                     if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
-                        Toast.makeText(requireContext(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
                     } else {
                         // show referensi recyclerview
                         showVenueTopRatting(topRating);
@@ -268,14 +261,14 @@ public class ReferensiFragment extends Fragment {
                     }
 
                 } else {
-                    Toast.makeText(requireContext(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     handlerNullData();
                 }
             }
 
             @Override
             public void onFailure(Call<ReferensiResponse> call, Throwable t) {
-                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 handlerNullData();
             }
         });
@@ -299,7 +292,7 @@ public class ReferensiFragment extends Fragment {
         } else {
             LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueRattingRecycler.setAdapter(new VenueFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -311,7 +304,7 @@ public class ReferensiFragment extends Fragment {
             }, VenueFirstAdapter.RATTING
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueRattingRecycler, models.size(), R.dimen.card_venue_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueRattingRecycler, models.size(), R.dimen.card_venue_width_java);
         }
 
     }
@@ -323,7 +316,7 @@ public class ReferensiFragment extends Fragment {
         } else {
             LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueKosongRecycler.setAdapter(new VenueSecondAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -335,7 +328,7 @@ public class ReferensiFragment extends Fragment {
             }
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueKosongRecycler, models.size(), R.dimen.card_venue_second_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueKosongRecycler, models.size(), R.dimen.card_venue_second_width_java);
         }
 
     }
@@ -347,7 +340,7 @@ public class ReferensiFragment extends Fragment {
         } else {
             LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -359,7 +352,7 @@ public class ReferensiFragment extends Fragment {
             }
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
         }
 
     }
@@ -371,7 +364,7 @@ public class ReferensiFragment extends Fragment {
         } else {
             LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueGratisRecycler.setAdapter(new VenueFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -383,7 +376,7 @@ public class ReferensiFragment extends Fragment {
             }, VenueFirstAdapter.DEFAULT
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueGratisRecycler, models.size(), R.dimen.card_venue_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueGratisRecycler, models.size(), R.dimen.card_venue_width_java);
         }
 
     }
@@ -395,7 +388,7 @@ public class ReferensiFragment extends Fragment {
         } else {
             LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueBerbayarRecycler.setAdapter(new VenueFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -407,7 +400,7 @@ public class ReferensiFragment extends Fragment {
             }, VenueFirstAdapter.DEFAULT
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBerbayarRecycler, models.size(), R.dimen.card_venue_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueBerbayarRecycler, models.size(), R.dimen.card_venue_width_java);
         }
 
     }
@@ -419,7 +412,7 @@ public class ReferensiFragment extends Fragment {
         } else {
             LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
             venueDisewakanRecycler.setAdapter(new VenueFirstAdapter(
-                    requireContext(), models, new AdapterActionListener() {
+                    requireActivity(), models, new AdapterActionListener() {
                 @Override
                 public void onClickListener(int position) {
                     startActivity(
@@ -431,7 +424,7 @@ public class ReferensiFragment extends Fragment {
             }, VenueFirstAdapter.SLOT
             ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireContext(), venueDisewakanRecycler, models.size(), R.dimen.card_venue_width_java);
+            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueDisewakanRecycler, models.size(), R.dimen.card_venue_width_java);
         }
 
     }

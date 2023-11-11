@@ -7,19 +7,25 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
 
 public class FragmentUtil {
 
     private static void switchFragment(
             @NonNull FragmentManager fragmentManager, Fragment fragment, @IdRes int frameLayout, boolean backStack
     ){
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (backStack){
-            transaction.replace(frameLayout, fragment)
-                    .addToBackStack(null)
-                    .commit();
+        if (fragment != null){
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (backStack){
+                transaction.replace(frameLayout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }else {
+                transaction.replace(frameLayout, fragment).commit();
+            }
         }else {
-            transaction.replace(frameLayout, fragment).commit();
+            LogApp.error("OBJECT", LogTag.LIFEFCYLE,"ERROR FRAGMENT NO ATTACHED ON ACTIVITY");
         }
     }
 
