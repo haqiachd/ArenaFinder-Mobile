@@ -31,7 +31,6 @@ import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
-import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
@@ -136,7 +135,7 @@ public class ReferensiFragment extends Fragment {
             }
         });
 
-        if (isAdded()){
+        if (isAdded()) {
             fetchData();
             adapterLapangan();
             onClickGroups();
@@ -249,7 +248,8 @@ public class ReferensiFragment extends Fragment {
                     ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
 
                     if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
-                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+                        handlerNullData();
                     } else {
                         // show referensi recyclerview
                         showVenueTopRatting(topRating);
@@ -275,6 +275,33 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    private void nullAdapter() {
+//        venueRattingRecycler.setAdapter(null);
+//        venueTerdekatRecycler.setAdapter(null);
+//        venueBerbayarRecycler.setAdapter(null);
+//        venueGratisRecycler.setAdapter(null);
+//        venueDisewakanRecycler.setAdapter(null);
+//        venueKosongRecycler.setAdapter(null);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        nullAdapter();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        nullAdapter();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        nullAdapter();
+    }
+
     private void handlerNullData() {
         venueLokasiLayout.setVisibility(View.GONE);
         venueKosongLayout.setVisibility(View.GONE);
@@ -290,21 +317,24 @@ public class ReferensiFragment extends Fragment {
         if (models.size() <= 0) {
             topRattingLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueRattingRecycler.setAdapter(new VenueFirstAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
-                }
-            }, VenueFirstAdapter.RATTING
-            ));
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue rating -> " + models.size());
+                venueRattingRecycler.setAdapter(new VenueFirstAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
+                }, VenueFirstAdapter.RATTING
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueRattingRecycler, models.size(), R.dimen.card_venue_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueRattingRecycler, models.size(), R.dimen.card_venue_width_java);
+            }
+
         }
 
     }
@@ -314,21 +344,23 @@ public class ReferensiFragment extends Fragment {
         if (models.size() <= 0) {
             venueKosongLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueKosongRecycler.setAdapter(new VenueSecondAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue kosong -> " + models.size());
+                venueKosongRecycler.setAdapter(new VenueSecondAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
                 }
-            }
-            ));
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueKosongRecycler, models.size(), R.dimen.card_venue_second_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), venueKosongRecycler, models.size(), R.dimen.card_venue_second_width_java);
+            }
         }
 
     }
@@ -338,21 +370,23 @@ public class ReferensiFragment extends Fragment {
         if (models.size() <= 0) {
             venueLokasiLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue lokasi -> " + models.size());
+                venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
                 }
-            }
-            ));
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+            }
         }
 
     }
@@ -362,21 +396,23 @@ public class ReferensiFragment extends Fragment {
         if (models.size() <= 0) {
             venueGratisLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueGratisRecycler.setAdapter(new VenueFirstAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
-                }
-            }, VenueFirstAdapter.DEFAULT
-            ));
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue gratis -> " + models.size());
+                venueGratisRecycler.setAdapter(new VenueFirstAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
+                }, VenueFirstAdapter.DEFAULT
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueGratisRecycler, models.size(), R.dimen.card_venue_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), venueGratisRecycler, models.size(), R.dimen.card_venue_width_java);
+            }
         }
 
     }
@@ -386,21 +422,23 @@ public class ReferensiFragment extends Fragment {
         if (models.size() <= 0) {
             venueBebayarLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueBerbayarRecycler.setAdapter(new VenueFirstAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
-                }
-            }, VenueFirstAdapter.DEFAULT
-            ));
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue berbayar -> " + models.size());
+                venueBerbayarRecycler.setAdapter(new VenueFirstAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
+                }, VenueFirstAdapter.DEFAULT
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueBerbayarRecycler, models.size(), R.dimen.card_venue_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueBerbayarRecycler, models.size(), R.dimen.card_venue_width_java);
+            }
         }
 
     }
@@ -410,21 +448,24 @@ public class ReferensiFragment extends Fragment {
         if (models.size() <= 0) {
             venueDisewakanLayout.setVisibility(View.GONE);
         } else {
-            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueDisewakanRecycler.setAdapter(new VenueFirstAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
-                }
-            }, VenueFirstAdapter.SLOT
-            ));
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue disewa -> " + models.size());
+                venueDisewakanRecycler.setAdapter(new VenueFirstAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
+                }, VenueFirstAdapter.SLOT
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueDisewakanRecycler, models.size(), R.dimen.card_venue_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), venueDisewakanRecycler, models.size(), R.dimen.card_venue_width_java);
+            }
+
         }
 
     }

@@ -123,7 +123,7 @@ public class AktivitasFragment extends Fragment {
             }
         });
 
-        if (isAdded()){
+        if (isAdded()) {
             fetchData();
             adapterLapangan();
             onClickGroups();
@@ -234,18 +234,21 @@ public class AktivitasFragment extends Fragment {
     private void showAktivitasBaru(ArrayList<AktivitasModel> models) {
 
         if (models.size() == 0) {
-            aktivitasKosongLayout.setVisibility(View.GONE);
+            aktivitasBaruLayout.setVisibility(View.GONE);
         } else {
-            aktivitasBaruRecycler.setAdapter(new AktivitasFirstAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    // TODO : action
+            if (isAdded()) {
+                LogApp.info(requireContext(), "aktivitas baru size -> " + models.size());
+                aktivitasBaruRecycler.setAdapter(new AktivitasFirstAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        // TODO : action
+                    }
                 }
-            }
-            ));
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+            }
         }
 
     }
@@ -255,16 +258,19 @@ public class AktivitasFragment extends Fragment {
         if (models.size() == 0) {
             aktivitasKosongLayout.setVisibility(View.GONE);
         } else {
-            aktivitasKosongRecycler.setAdapter(new AktivitasFirstAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    // TODO : action
+            if (isAdded()) {
+                LogApp.info(requireContext(), "aktivitas kosong size -> " + models.size());
+                aktivitasKosongRecycler.setAdapter(new AktivitasFirstAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        // TODO : action
+                    }
                 }
-            }
-            ));
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasBaruRecycler, models.size(), R.dimen.card_activity_first_width_java);
+            }
         }
 
     }
@@ -274,14 +280,17 @@ public class AktivitasFragment extends Fragment {
         if (models.size() == 0) {
             semuaAktivitasLayout.setVisibility(View.GONE);
         } else {
-            semuaAktivitasRecycler.setAdapter(new AktivitasSecondAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    // TODO : action
+            if (isAdded()) {
+                LogApp.info(requireContext(), "semua aktivitas size -> " + models.size());
+                semuaAktivitasRecycler.setAdapter(new AktivitasSecondAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        // TODO : action
+                    }
                 }
+                ));
             }
-            ));
         }
 
     }

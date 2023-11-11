@@ -37,7 +37,6 @@ import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.ItemProfileAdapter;
-import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;

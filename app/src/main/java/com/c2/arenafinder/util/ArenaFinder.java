@@ -111,14 +111,14 @@ public class ArenaFinder {
             Context context, RecyclerView recyclerView,
             int itemCount, @DimenRes int itemWidth
     ){
-//        int totalItemWidth = 0;
-//        for (int i = 0; i < itemCount; i++) {
-//            totalItemWidth += context.getResources().getDimensionPixelOffset(itemWidth);
-//        }
-//
-//        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
-//        layoutParams.width = totalItemWidth;
-//        recyclerView.setLayoutParams(layoutParams);
+        int totalItemWidth = 0;
+        for (int i = 0; i < itemCount; i++) {
+            totalItemWidth += context.getResources().getDimensionPixelOffset(itemWidth);
+        }
+
+        ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
+        layoutParams.width = totalItemWidth;
+        recyclerView.setLayoutParams(layoutParams);
     }
 
     public static void showAlertDialog(

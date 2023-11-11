@@ -3,6 +3,7 @@ package com.c2.arenafinder.ui.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -22,7 +23,6 @@ import com.c2.arenafinder.ui.fragment.main.AktivitasFragment;
 import com.c2.arenafinder.ui.fragment.main.HomeFragment;
 import com.c2.arenafinder.ui.fragment.main.ProfileFragment;
 import com.c2.arenafinder.ui.fragment.main.ReferensiFragment;
-import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.card.MaterialCardView;
@@ -31,17 +31,22 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_STORAGE = 2;
 
-    public BottomNavCustom bottomNav;
-
     private TextView txtAppName, txtSearchTitle;
     private MaterialCardView cardSearch;
     private ImageView imgNotif;
+
+    private ConstraintLayout btnHome, btnAktivitas, btnReferensi, btnProfile;
 
     private void initViews() {
         txtAppName = findViewById(R.id.main_appbar_appname);
         txtSearchTitle = findViewById(R.id.main_appbar_search_txt);
         cardSearch = findViewById(R.id.main_appbar_search);
         imgNotif = findViewById(R.id.main_appbar_notif);
+
+        btnHome = findViewById(R.id.btn_nav_home);
+        btnAktivitas = findViewById(R.id.btn_nav_aktivitas);
+        btnReferensi = findViewById(R.id.btn_nav_referensi);
+        btnProfile = findViewById(R.id.btn_nav_profile);
     }
 
     @Override
@@ -55,35 +60,54 @@ public class MainActivity extends AppCompatActivity {
         spannableString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.mint_green)), 5, appname.length(), 0);
         txtAppName.setText(spannableString);
 
-        bottomNav = new BottomNavCustom(this);
-//        bottomNav.playAnimation(BottomNavCustom.ITEM_HOME);
-        bottomNav.setActivatedItem(BottomNavCustom.ITEM_HOME);
-        bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
-
-        bottomNav.setOnItemClickListener(new BottomNavCustom.OnItemListener() {
-            @Override
-            public void itemHome() {
+        btnHome.setOnClickListener(v -> {
                 txtSearchTitle.setText(R.string.app_appbar_home);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new HomeFragment(), false);
-            }
+        });
 
-            @Override
-            public void itemAktivitas() {
+        btnAktivitas.setOnClickListener(v -> {
                 txtSearchTitle.setText(R.string.app_appbar_aktivitas);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new AktivitasFragment(), false);
-            }
+        });
 
-            @Override
-            public void itemReferensi() {
+        btnReferensi.setOnClickListener(v -> {
                 txtSearchTitle.setText(R.string.app_appbar_referensi);
                 FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ReferensiFragment(), false);
-            }
-
-            @Override
-            public void itemProfile() {
-                FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ProfileFragment(), false);
-            }
         });
+
+        btnProfile.setOnClickListener(v -> {
+                FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ProfileFragment(), false);
+        });
+
+//        bottomNav = new BottomNavCustom(this);
+//        bottomNav.playAnimation(BottomNavCustom.ITEM_HOME);
+//        bottomNav.setActivatedItem(BottomNavCustom.ITEM_HOME);
+//        bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
+
+//        bottomNav.setOnItemClickListener(new BottomNavCustom.OnItemListener() {
+//            @Override
+//            public void itemHome() {
+//                txtSearchTitle.setText(R.string.app_appbar_home);
+//                FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new HomeFragment(), false);
+//            }
+//
+//            @Override
+//            public void itemAktivitas() {
+//                txtSearchTitle.setText(R.string.app_appbar_aktivitas);
+//                FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new AktivitasFragment(), false);
+//            }
+//
+//            @Override
+//            public void itemReferensi() {
+//                txtSearchTitle.setText(R.string.app_appbar_referensi);
+//                FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ReferensiFragment(), false);
+//            }
+//
+//            @Override
+//            public void itemProfile() {
+//                FragmentUtil.switchFragmentMain(getSupportFragmentManager(), new ProfileFragment(), false);
+//            }
+//        });
 
         checkAndRequestStoragePermission();
 

@@ -44,7 +44,6 @@ import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
-import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
@@ -213,9 +212,9 @@ public class HomeFragment extends Fragment {
 //            scrollable = true;
 //        }, 100);
 
-        if (isAdded()){
+        adapterLapangan();
+        if (isAdded()) {
             fetchData();
-            adapterLapangan();
             onClickGroups();
             showPager();
             pagerAction();
@@ -304,7 +303,7 @@ public class HomeFragment extends Fragment {
     private void addDotsTextView() {
         Typeface typeface = ResourcesCompat.getFont(requireActivity(), R.font.roboto_bold);
         // add dots sesuai jumlah gambar
-        for (int i = 0; i < homeInfoModels.size(); i++){
+        for (int i = 0; i < homeInfoModels.size(); i++) {
             dots.add(new TextView(requireActivity()));
             dots.get(i).setText("•");
             dots.get(i).setTextSize(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._10sdp));
@@ -314,22 +313,22 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void setSelectedColor(int posisi){
-        for (int i = 0; i < dots.size(); i++){
-            if (i == posisi){
+    private void setSelectedColor(int posisi) {
+        for (int i = 0; i < dots.size(); i++) {
+            if (i == posisi) {
                 dots.get(i).setTextColor(ContextCompat.getColor(requireActivity(), R.color.whero_purple));
-            }else {
+            } else {
                 dots.get(i).setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray));
             }
         }
     }
 
-    private void changePosisi(int posisi){
+    private void changePosisi(int posisi) {
         homeInfoPager.setCurrentItem(posisi);
         setSelectedColor(posisi);
     }
 
-    private void pagerAction(){
+    private void pagerAction() {
 
         homeInfoPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -340,13 +339,13 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void fetchData(){
+    private void fetchData() {
 
         RetrofitClient.getInstance().homePage().enqueue(new Callback<BerandaResponse>() {
             @Override
             public void onResponse(Call<BerandaResponse> call, Response<BerandaResponse> response) {
 
-                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     LogApp.info(this, LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
                     BerandaResponse.Data data = response.body().getData();
 
@@ -356,9 +355,9 @@ public class HomeFragment extends Fragment {
                     ArrayList<AktivitasModel> aktivitasBaru = data.getAktivitasSeru();
                     ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
 
-                    if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0){
-                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
-                    }else {
+                    if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0) {
+                        handlerNullData();
+                    } else {
                         // show recyclerview
                         showVenueBaru(venueBaru);
                         showVenueRekomendasi(venueRekomendasi);
@@ -366,7 +365,7 @@ public class HomeFragment extends Fragment {
                         showVenueLokasi(venueLokasi);
                     }
 
-                }else {
+                } else {
                     Toast.makeText(requireActivity(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     handlerNullData();
                 }
@@ -382,7 +381,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void handlerNullData(){
+    private void handlerNullData() {
         venueBaruLayout.setVisibility(View.GONE);
         aktivitasLayout.setVisibility(View.GONE);
         venueRekomendasiLayout.setVisibility(View.GONE);
@@ -390,101 +389,108 @@ public class HomeFragment extends Fragment {
         venueLokasiLayout.setVisibility(View.GONE);
     }
 
-    private void showVenueBaru(ArrayList<ReferensiModel> models){
+    private void showVenueBaru(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
             venueBaruLayout.setVisibility(View.GONE);
         } else {
-//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueBaruRecycler.setAdapter(new VenueFirstAdapter(
-                    this.requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
-                }
-            }, VenueFirstAdapter.DEFAULT
-            ));
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue baru -> " + models.size());
+                venueBaruRecycler.setAdapter(new VenueFirstAdapter(
+                        this.requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
+                }, VenueFirstAdapter.DEFAULT
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueBaruRecycler, models.size(), R.dimen.card_venue_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, models.size(), R.dimen.card_venue_width_java);
+            }
         }
 
     }
 
-    private void showVenueRekomendasi(ArrayList<ReferensiModel> models){
+    private void showVenueRekomendasi(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
             venueRekomendasiLayout.setVisibility(View.GONE);
         } else {
-//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            buatKamuRecycler.setAdapter(new VenueSecondAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue rekomendasi " + models.size());
+                buatKamuRecycler.setAdapter(new VenueSecondAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
                 }
+                ));
+
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), buatKamuRecycler, models.size(), R.dimen.card_venue_second_width_java);
             }
-            ));
-
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), buatKamuRecycler, models.size(), R.dimen.card_venue_second_width_java);
         }
-
     }
 
-    private void showAktivitasSeru(ArrayList<AktivitasModel> models){
+    private void showAktivitasSeru(ArrayList<AktivitasModel> models) {
 
-        if (models.size() <= 0){
+        if (models.size() <= 0) {
             aktivitasLayout.setVisibility(View.GONE);
-        }else {
-//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            aktivitasRecycler.setAdapter(new AktivitasFirstAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    // TODO : action
+        } else {
+            if (isAdded()) {
+                LogApp.error(requireContext(), LogTag.LIFEFCYLE, "DATA -> " + models.size());
+                aktivitasRecycler.setAdapter(new AktivitasFirstAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        // TODO : action
+                    }
                 }
-            }
-            ));
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), aktivitasRecycler, models.size(), R.dimen.card_activity_first_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), aktivitasRecycler, models.size(), R.dimen.card_activity_first_width_java);
+            }
         }
 
     }
 
-    private void showVenueLokasi(ArrayList<ReferensiModel> models){
+    private void showVenueLokasi(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
             venueLokasiLayout.setVisibility(View.GONE);
         } else {
-//            LogApp.error(this, LogTag.LIFEFCYLE, "DATA -> " + models.size());
-            venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
-                    requireActivity(), models, new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    startActivity(
-                            new Intent(requireActivity(), DetailedActivity.class)
-                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
-                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
-                    );
+            if (isAdded()) {
+                LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue lokasi " + models.size());
+                venueTerdekatRecycler.setAdapter(new VenueThirdAdapter(
+                        requireContext(), models, new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidVenue()))
+                        );
+                    }
                 }
-            }
-            ));
+                ));
 
-            ArenaFinder.setRecyclerWidthByItem(requireActivity(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+                ArenaFinder.setRecyclerWidthByItem(requireContext(), venueTerdekatRecycler, models.size(), R.dimen.card_venue_third_width_java);
+            }
         }
 
     }
 
 
     private void adapterLapangan() {
-        ArrayList<JenisLapanganModel>lapanganModels = new ArrayList<>();
+        ArrayList<JenisLapanganModel> lapanganModels = new ArrayList<>();
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_badminton, "Bulu Tangkis"));
