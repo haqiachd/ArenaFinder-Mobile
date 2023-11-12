@@ -136,6 +136,7 @@ public class ReferensiFragment extends Fragment {
         });
 
         if (isAdded()) {
+            LogApp.info(requireContext(), "PREPARING LOAD DATA TO SERVER");
             fetchData();
             adapterLapangan();
             onClickGroups();

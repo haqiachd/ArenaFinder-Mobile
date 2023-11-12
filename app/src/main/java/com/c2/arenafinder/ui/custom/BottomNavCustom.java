@@ -12,6 +12,11 @@ import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.ui.fragment.main.AktivitasFragment;
+import com.c2.arenafinder.ui.fragment.main.HomeFragment;
+import com.c2.arenafinder.ui.fragment.main.ProfileFragment;
+import com.c2.arenafinder.ui.fragment.main.ReferensiFragment;
+import com.c2.arenafinder.util.FragmentUtil;
 
 /**
  * Bottom navigation custom
@@ -21,7 +26,7 @@ import com.c2.arenafinder.R;
 public class BottomNavCustom {
 
     // parent activity
-    private final AppCompatActivity activity;
+    private AppCompatActivity activity;
 
     // second icon visibility
     private boolean isHomeSecond = false;
@@ -69,6 +74,8 @@ public class BottomNavCustom {
     private final TextView itemProfileText;
     private final ImageView itemProfileImageSecond;
 
+    private TextView txtSearchTitle;
+
     // handlers
     private final Handler handlerHome = new Handler();
     private final Handler handlerAktivitas = new Handler();
@@ -83,30 +90,38 @@ public class BottomNavCustom {
 
     private final Runnable actionHome = () -> {
         hideAllSecondIcon();
-//        playAnimation(ITEM_HOME);
+        playAnimation(ITEM_HOME);
         setActivatedItem(ITEM_HOME);
         setDeactivatedOnFrame(ITEM_HOME);
+        FragmentUtil.switchFragmentMain(activity.getSupportFragmentManager(), new HomeFragment(), false);
+        txtSearchTitle.setText(R.string.app_appbar_home);
     };
 
     private final Runnable actionAktivitas = () -> {
         hideAllSecondIcon();
-//        playAnimation(ITEM_AKTIVITAS);
+        playAnimation(ITEM_AKTIVITAS);
         setActivatedItem(ITEM_AKTIVITAS);
         setDeactivatedOnFrame(ITEM_AKTIVITAS);
+        FragmentUtil.switchFragmentMain(activity.getSupportFragmentManager(), new AktivitasFragment(), false);
+        txtSearchTitle.setText(R.string.app_appbar_aktivitas);
     };
 
     private final Runnable actionReferensi = () -> {
         hideAllSecondIcon();
-//        playAnimation(ITEM_REFERENSI);
+        playAnimation(ITEM_REFERENSI);
         setActivatedItem(ITEM_REFERENSI);
         setDeactivatedOnFrame(ITEM_REFERENSI);
+        FragmentUtil.switchFragmentMain(activity.getSupportFragmentManager(), new ReferensiFragment(), false);
+        txtSearchTitle.setText(R.string.app_appbar_referensi);
     };
 
     private final Runnable actionProfile = () -> {
         hideAllSecondIcon();
-//        playAnimation(ITEM_PROFILE);
+        playAnimation(ITEM_PROFILE);
         setActivatedItem(ITEM_PROFILE);
         setDeactivatedOnFrame(ITEM_PROFILE);
+        FragmentUtil.switchFragmentMain(activity.getSupportFragmentManager(), new ProfileFragment(), false);
+        txtSearchTitle.setText(R.string.app_appbar_referensi);
     };
 
     public BottomNavCustom(AppCompatActivity view) {
@@ -139,14 +154,16 @@ public class BottomNavCustom {
         itemProfileImage = view.findViewById(R.id.btn_nav_profile_icon);
         itemProfileText = view.findViewById(R.id.btn_nav_profile_title);
         itemProfileImageSecond = view.findViewById(R.id.btn_nav_profile_icon_second);
+
+        txtSearchTitle = view.findViewById(R.id.main_appbar_search_txt);
     }
 
     private void playAnim(LottieAnimationView lottie, ImageView image, TextView text, ImageView imageSecond) {
-        image.setVisibility(View.INVISIBLE);
-        imageSecond.setVisibility(View.INVISIBLE);
-        text.setVisibility(View.INVISIBLE);
-        lottie.setVisibility(View.VISIBLE);
-        lottie.playAnimation();
+//        image.setVisibility(View.INVISIBLE);
+//        imageSecond.setVisibility(View.INVISIBLE);
+//        text.setVisibility(View.INVISIBLE);
+//        lottie.setVisibility(View.VISIBLE);
+//        lottie.playAnimation();
     }
 
     public void playAnimation(int item) {

@@ -111,6 +111,7 @@ public class ArenaFinder {
             Context context, RecyclerView recyclerView,
             int itemCount, @DimenRes int itemWidth
     ){
+//        LogApp.info(context, LogTag.LIFEFCYLE, "prepare showing recyclerview");
         int totalItemWidth = 0;
         for (int i = 0; i < itemCount; i++) {
             totalItemWidth += context.getResources().getDimensionPixelOffset(itemWidth);
@@ -119,6 +120,7 @@ public class ArenaFinder {
         ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
         layoutParams.width = totalItemWidth;
         recyclerView.setLayoutParams(layoutParams);
+//        LogApp.info(context, LogTag.LIFEFCYLE, "successfully showing recyclerview");
     }
 
     public static void showAlertDialog(
