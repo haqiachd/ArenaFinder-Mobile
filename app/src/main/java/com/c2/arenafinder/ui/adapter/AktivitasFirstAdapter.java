@@ -53,7 +53,8 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
         // show data
         holder.txtNama.setText(aktivitasModel.getNamaAktivitas());
         holder.txtVenue.setText(aktivitasModel.getVenueName());
-        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, aktivitasModel.getJumlahMember(), aktivitasModel.getMaxMember()));
+//        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, aktivitasModel.getJumlahMember(), aktivitasModel.getMaxMember()));
+        holder.txtAnggota.setText("" + aktivitasModel.getJumlahMember() + " Anggota");
         holder.txtTanggal.setText(ArenaFinder.convertToDate(aktivitasModel.getDate()));
         holder.setAktivitasImage(aktivitasModel.getPhoto());
 
