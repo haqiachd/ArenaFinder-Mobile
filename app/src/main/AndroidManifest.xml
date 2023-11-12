@@ -19,8 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArenaFinder"
         tools:targetApi="34">
-
-        <service android:name=".api.google.MyFirebaseMessagingService"
+        <service
+            android:name=".api.google.MyFirebaseMessagingService"
             android:exported="true"
             android:permission="TODO">
             <intent-filter>
@@ -31,8 +31,7 @@
         <activity
             android:name=".ui.activity.DetailedActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
