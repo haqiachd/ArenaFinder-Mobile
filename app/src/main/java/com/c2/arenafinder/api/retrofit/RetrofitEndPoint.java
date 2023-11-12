@@ -11,7 +11,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 import com.c2.arenafinder.data.model.EditCommentModel;
-import com.c2.arenafinder.data.model.NotifResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.BerandaResponse;
@@ -112,12 +111,6 @@ public interface RetrofitEndPoint {
     @POST("email/update_verify.php")
     Call<VerifyResponse> updateVerify(
             @Field("email") String email
-    );
-
-    @FormUrlEncoded
-    @POST("notif2.php")
-    Call<NotifResponse> notif(
-            @Field("device_token") String email
     );
 
     @GET("feature/venue_baru.php")

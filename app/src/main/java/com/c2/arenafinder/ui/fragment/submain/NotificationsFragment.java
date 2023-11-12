@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.model.NotificationModel;
@@ -75,6 +77,16 @@ public class NotificationsFragment extends Fragment {
                 models
         ));
 
+        getAppbar();
 
+    }
+
+    private void getAppbar(){
+        if (getActivity() != null){
+            LinearLayout linearLayout = getActivity().findViewById(R.id.sub_linear);
+            linearLayout.setVisibility(View.VISIBLE);
+            TextView txtTitle = getActivity().findViewById(R.id.sub_title);
+            txtTitle.setText(R.string.txt_menu_notif);
+        }
     }
 }

@@ -454,7 +454,11 @@ public class HomeFragment extends Fragment {
                         requireContext(), models, new AdapterActionListener() {
                     @Override
                     public void onClickListener(int position) {
-                        // TODO : action
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.ACTIVITY)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidAktvitias()))
+                        );
                     }
                 }
                 ));

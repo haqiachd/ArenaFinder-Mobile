@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -50,7 +51,10 @@ public class ActivityDetailedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        TextView textView = view.findViewById(R.id.act_text);
-//        textView.setText(id);
+
+        if (getActivity() != null){
+            ConstraintLayout bot = getActivity().findViewById(R.id.detailed_bottom_nav);
+            bot.setVisibility(View.GONE);
+        }
     }
 }

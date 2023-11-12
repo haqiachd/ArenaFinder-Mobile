@@ -348,5 +348,6 @@
     <string name="txt_jam_main">Jam Main</string>
     <string name="txt_status_anggota">Status Anggota</string>
     <string name="txt_harga">Harga</string>
+    <string name="txt_menu_notif">Notifikasi</string>
 
 </resources>

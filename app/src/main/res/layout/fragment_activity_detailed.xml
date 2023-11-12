@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.fragment.detailed.VenueDetailedFragment">
+    tools:context=".ui.fragment.detailed.ActivityDetailedFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/fad_appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:background="@color/primary_color"
+        app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +63,9 @@
     <ScrollView
         android:id="@+id/fad_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/fad_appbar"
+        app:layout_constraintBottom_toTopOf="@id/fad_bottom_nav"
         android:background="@color/background_light"
         android:backgroundTint="@color/white">
 
@@ -482,5 +485,63 @@
 
     </ScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fad_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-</LinearLayout>
+        <View
+            android:id="@+id/detailed_line_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#80696969"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dtld_nav_txt_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Harga"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toTopOf="@id/dtld_nav_txt_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailed_line_top" />
+
+        <TextView
+            android:id="@+id/dtld_nav_txt_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Rp. 75.000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/dtld_nav_txt_top"
+            app:layout_constraintTop_toBottomOf="@id/dtld_nav_txt_top" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dtld_nav_button"
+            android:layout_width="@dimen/_90ssp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_13sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:backgroundTint="@color/primary_color"
+            android:text="GABUNG"
+            app:cornerRadius="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -194,6 +194,7 @@ public class VenueDetailedFragment extends Fragment {
         fetchData(id);
         onClickGroups();
         pagerAction();
+
     }
 
     @Override

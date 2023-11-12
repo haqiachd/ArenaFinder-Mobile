@@ -13,6 +13,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detailed_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:background="@color/background_light"
