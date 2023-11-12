@@ -157,7 +157,7 @@ public class AktivitasFragment extends Fragment {
 
     private void adapterLapangan() {
         ArrayList<JenisLapanganModel> lapanganModels = new ArrayList<>();
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
+//        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_badminton, "Bulu Tangkis"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
