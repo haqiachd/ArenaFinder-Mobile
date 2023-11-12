@@ -349,5 +349,8 @@
     <string name="txt_status_anggota">Status Anggota</string>
     <string name="txt_harga">Harga</string>
     <string name="txt_menu_notif">Notifikasi</string>
+    <string name="txt_payment_method">Payment Method</string>
+    <string name="txt_total_jadwal">Total Jadwal</string>
+    <string name="txt_tanggal">Tanggal</string>
 
 </resources>
