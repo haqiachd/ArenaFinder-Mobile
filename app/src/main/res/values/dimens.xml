@@ -145,4 +145,12 @@
     <dimen name="device_input_margin">@dimen/_10sdp</dimen>
     <dimen name="device_input_radius">@dimen/_50sdp</dimen>
 
+
+    <dimen name="notif_list_height">@dimen/_60sdp</dimen>
+    <dimen name="notif_list_margin">@dimen/_10sdp</dimen>
+    <dimen name="notif_list_radius">@dimen/_10sdp</dimen>
+    <dimen name="notif_list_elevation">@dimen/_1sdp</dimen>
+    <dimen name="notif_list_max_elevation">@dimen/_10sdp</dimen>
+    <dimen name="notif_list_stroke">@dimen/_1sdp</dimen>
+
 </resources>

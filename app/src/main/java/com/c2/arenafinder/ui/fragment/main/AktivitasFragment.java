@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.airbnb.lottie.L;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
@@ -25,14 +24,12 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.response.AktivitasResponse;
-import com.c2.arenafinder.ui.activity.MainActivity;
+import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
-import com.c2.arenafinder.ui.custom.BottomNavCustom;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
-import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.button.MaterialButton;
@@ -286,7 +283,11 @@ public class AktivitasFragment extends Fragment {
                         requireContext(), models, new AdapterActionListener() {
                     @Override
                     public void onClickListener(int position) {
-                        // TODO : action
+                        startActivity(
+                                new Intent(requireActivity(), DetailedActivity.class)
+                                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.ACTIVITY)
+                                        .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidAktvitias()))
+                        );
                     }
                 }
                 ));

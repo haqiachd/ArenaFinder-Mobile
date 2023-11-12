@@ -80,9 +80,9 @@
     <string name="txt_update_otp">Mengirimkan ulang kode OTP</string>
     <string name="txt_jenis_lapangan">Jenis Lapangan</string>
     <string name="txt_jenis_lapangan_desc">Pilih Jenis Olahraga Favoritmu</string>
-    <string name="txt_menu_kegiatan_lapangan">Kegiatan</string>
+    <string name="txt_menu_kegiatan_lapangan">Alur Pesan</string>
     <string name="txt_menu_aktivitas_komunitas">Komunitas</string>
-    <string name="txt_menu_status_pesanan">Keranjang</string>
+    <string name="txt_menu_status_pesanan">Informasi</string>
     <string name="txt_pesan_lapangan">Booking</string>
     <string name="txt_sedang_kosong">Sedang Kosong</string>
     <string name="txt_sedang_kosnog_desc">Lihat Tempat Olahraga yang sedang Kosong</string>
@@ -328,6 +328,8 @@
     <string name="sub_venue_disewakan">Disewakan</string>
 
     <string name="hint_search_world">Cari Tempat Olahraga</string>
+
+    <string name="alt_list_notif_logo">logo notif</string>
 
     <string-array name="jenis_olahraga">
         <item>@string/txt_olahraga_football</item>

@@ -65,5 +65,6 @@
     <color name="booking_date_day_textcolor_selected">@color/white</color>
     <color name="booking_date_date_textcolor">@color/azure</color>
     <color name="booking_date_date_textcolor_selected">@color/white</color>
+    <color name="device_bgtint_card_logo">#D9E1E9</color>
 
 </resources>

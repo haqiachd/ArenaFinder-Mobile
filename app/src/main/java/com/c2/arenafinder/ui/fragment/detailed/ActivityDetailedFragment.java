@@ -50,7 +50,7 @@ public class ActivityDetailedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = view.findViewById(R.id.act_text);
-        textView.setText(id);
+//        TextView textView = view.findViewById(R.id.act_text);
+//        textView.setText(id);
     }
 }

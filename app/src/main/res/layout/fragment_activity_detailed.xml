@@ -1,20 +1,561 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.detailed.ActivityDetailedFragment">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.fragment.detailed.VenueDetailedFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/act_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VENUE FRAGMENT"
-        android:layout_gravity="center"
-        android:fontFamily="@font/roboto_regular"
-        android:textColor="@color/azure"
-        android:textSize="@dimen/_20sdp"
-        />
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/fad_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@color/primary_color"
+        android:visibility="gone">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/fad_back_appbar"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:contentDescription="@string/alt_acc_back"
+                android:src="@drawable/ic_arrow_back_detailed_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fad_nama_lapangan_appbar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_6ssp"
+                android:fontFamily="@font/kanit_semibold"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toStartOf="@id/fad_vertical_menu_appbar"
+                app:layout_constraintStart_toEndOf="@id/fad_back_appbar" />
+
+            <ImageView
+                android:id="@+id/fad_vertical_menu_appbar"
+                android:layout_width="@dimen/_18ssp"
+                android:layout_height="@dimen/_18ssp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:contentDescription="@string/alt_collapse_olahraga"
+                android:src="@drawable/ic_detailed_vertical_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/fad_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_light"
+        android:backgroundTint="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_light"
+            android:orientation="vertical">
+
+            <!-- Top Layout -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_190sdp"
+                android:background="@color/azure">
+
+                <ImageView
+                    android:id="@+id/fad_image_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/alt_card_venue"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_venue_test_2" />
+
+                <ImageView
+                    android:id="@+id/fad_back"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/bg_detailed_back"
+                    android:contentDescription="@string/alt_detailed_kembali"
+                    android:elevation="0dp"
+                    android:src="@drawable/ic_detailed_back"
+                    app:cardCornerRadius="@dimen/_50ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/fad_vertical_menu"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/bg_detailed_back"
+                    android:contentDescription="@string/alt_detailed_kembali"
+                    android:elevation="0dp"
+                    android:src="@drawable/ic_detailed_vertical_menu"
+                    app:cardCornerRadius="@dimen/_50ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Venue Description -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detailed_margin_width"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginEnd="@dimen/detailed_margin_width"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fad_venue_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/kanit_semibold"
+                    android:maxLines="3"
+                    android:text="@string/txt_def_venue"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_17ssp" />
+
+                <!-- Venue Ratting, View and Shared-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_3sdp">
+
+                    <ImageView
+                        android:id="@+id/fad_top_ratting_ic"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:contentDescription="@string/alt_ratting"
+                        android:src="@drawable/ic_ratting_start"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fad_top_ratting_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:gravity="center_vertical"
+                        android:text="@string/txt_ratting_def"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fad_top_ratting_ic"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/fad_top_view_ic"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:contentDescription="@string/alt_ratting"
+                        android:src="@drawable/ic_view"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fad_top_ratting_val"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fad_top_view_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@id/fad_top_view_ic"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:gravity="center_vertical"
+                        android:text="@string/txt_view_def"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fad_top_view_ic"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/fad_top_shared_ic"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:contentDescription="@string/alt_ratting"
+                        android:src="@drawable/ic_shared"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fad_top_view_val"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fad_shared_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@id/fad_top_view_ic"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:gravity="center_vertical"
+                        android:text="@string/txt_shared_def"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/fad_top_shared_ic"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Venue Sport-->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:columnCount="2"
+                    android:orientation="horizontal"
+                    android:rowCount="5">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables,UselessParent">
+
+                        <ImageView
+                            android:id="@+id/fad_top_sport_icon"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:layout_gravity="center_vertical"
+                            android:contentDescription="@string/alt_sport_icon"
+                            android:src="@drawable/ic_sport_badminton" />
+
+                        <TextView
+                            android:id="@+id/fad_top_sport_val"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="@string/txt_olahraga_badminton"
+                            android:textColor="#F2000000"
+                            android:textSize="@dimen/_11ssp" />
+
+                    </LinearLayout>
+
+                </GridLayout>
+
+                <TextView
+                    android:id="@+id/fad_venue_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="@string/txt_lorem_deksripsi_def_double"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/_11ssp" />
+
+            </LinearLayout>
+
+            <!-- Venue Jam Buka-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detailed_margin_width"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/detailed_margin_width"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kanit_semibold"
+                    android:text="@string/txt_jam_operasional_t"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp" />
+
+                <TableLayout
+                    android:id="@+id/fad_table_operasional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_22sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_25sdp">
+
+                    <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="@string/dino_senin"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+
+                        <TextView
+                            android:id="@+id/fad_senin"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="@string/def_jam"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="@string/dino_selasa"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+
+                        <TextView
+                            android:id="@+id/fad_selasa"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="@string/def_jam"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="@string/dino_rabu"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+
+                        <TextView
+                            android:id="@+id/fad_rabu"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="@string/def_jam"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="@string/dino_kamis"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+
+                        <TextView
+                            android:id="@+id/fad_kamis"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="@string/def_jam"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="@string/dino_jumat"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+
+                        <TextView
+                            android:id="@+id/fad_jumat"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="@string/def_jam"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="@string/dino_sabtu"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+
+                        <TextView
+                            android:id="@+id/fad_sabtu"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="@string/def_jam"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginBottom="@dimen/detailed_operasional_margin_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="start"
+                            android:text="@string/dino_minggu"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+
+                        <TextView
+                            android:id="@+id/fad_minggu"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="end"
+                            android:text="@string/def_jam"
+                            android:textColor="@color/detailed_textcolor"
+                            android:textSize="@dimen/detailed_operasional_textsize" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+            <!-- Venue Lokasi-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detailed_margin_width"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/detailed_margin_width"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kanit_semibold"
+                    android:text="@string/txt_lokasi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp" />
+
+                <TextView
+                    android:id="@+id/fad_lokasi_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="@string/def_alamat_d_venue"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/_11ssp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_145sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/alt_bottom_nav_profile"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_home_map_test" />
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fad_show_map"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/txt_petunjuk_arah"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_10sdp"
+                    app:cornerRadius="@dimen/_5sdp"
+                    app:strokeColor="@color/azure"
+                    app:strokeWidth="@dimen/_1sdp" />
+
+            </LinearLayout>
+
+            <!-- Venue Kontak Pengelola-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detailed_margin_width"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/detailed_margin_width"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kanit_semibold"
+                    android:text="@string/txt_kontak_pengelola"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fad_contact_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="true"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_venue_contact"
+                    tools:itemCount="2"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70ssp"
+                tools:ignore="UselessLeaf" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
