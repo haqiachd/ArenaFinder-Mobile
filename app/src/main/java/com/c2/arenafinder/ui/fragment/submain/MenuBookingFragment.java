@@ -10,12 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.ui.adapter.ViewPagerAdapter;
-import com.c2.arenafinder.ui.fragment.detailed.ActivityDetailedFragment;
-import com.c2.arenafinder.ui.fragment.detailed.VenueDetailedFragment;
+import com.c2.arenafinder.ui.adapter.BookingTabAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class MenuBookingFragment extends Fragment {
@@ -65,7 +62,7 @@ public class MenuBookingFragment extends Fragment {
 
         initViews(view);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity().getSupportFragmentManager());
+        BookingTabAdapter adapter = new BookingTabAdapter(requireActivity().getSupportFragmentManager());
 
         adapter.addFragment(new TabDipesanFragment(), "Di pesan");
         adapter.addFragment(new TabDisetujuiFragment(), "Di setujui");
