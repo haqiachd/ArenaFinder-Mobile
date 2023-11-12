@@ -230,7 +230,10 @@ public class HomeFragment extends Fragment {
     private void onClickGroups() {
 
         menuAlur.setOnClickListener(v -> {
-            Toast.makeText(requireActivity(), "Alur", Toast.LENGTH_SHORT).show();
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_ALUR)
+            );
         });
 
         menuKomunitas.setOnClickListener(v -> {

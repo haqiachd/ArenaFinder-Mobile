@@ -82,7 +82,8 @@
     <string name="txt_jenis_lapangan_desc">Pilih Jenis Olahraga Favoritmu</string>
     <string name="txt_menu_kegiatan_lapangan">Alur Pesan</string>
     <string name="txt_menu_aktivitas_komunitas">Komunitas</string>
-    <string name="txt_menu_status_pesanan">Informasi</string>
+    <string name="txt_menu_alur_pesan">Alur Pemesanan</string>
+    <string name="txt_menu_informasi">Informasi</string>
     <string name="txt_pesan_lapangan">Booking</string>
     <string name="txt_sedang_kosong">Sedang Kosong</string>
     <string name="txt_sedang_kosnog_desc">Lihat Tempat Olahraga yang sedang Kosong</string>
@@ -339,5 +340,13 @@
     <string name="title_activity_booking">BookingActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="def_mem_act">12 Anggota Bergabung</string>
+    <string name="txt_lokasi_aktivitas">Lokasi Aktivitas</string>
+    <string name="txt_anggota_bergabung">Anggota Bergabung</string>
+    <string name="txt_informasi_aktivitas">Informasi Aktivitas</string>
+    <string name="txt_tanggal_mulai">Tanggal Mulai</string>
+    <string name="txt_jam_main">Jam Main</string>
+    <string name="txt_status_anggota">Status Anggota</string>
+    <string name="txt_harga">Harga</string>
 
 </resources>

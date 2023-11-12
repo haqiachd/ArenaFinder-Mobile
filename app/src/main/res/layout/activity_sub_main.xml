@@ -98,6 +98,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:contentDescription="@string/alt_checked"
+                    android:visibility="gone"
                     android:src="@drawable/ic_expanded_jenis_olahraga" />
 
             </LinearLayout>

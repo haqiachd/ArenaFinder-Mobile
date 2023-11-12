@@ -2,11 +2,15 @@ package com.c2.arenafinder.ui.fragment.submain;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 
@@ -45,5 +49,23 @@ public class MenuCommunityFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_menu_komunitas, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getAppbar();
+    }
+
+    private void getAppbar(){
+        if (getActivity() != null){
+
+            LinearLayout linearLayout = getActivity().findViewById(R.id.sub_linear);
+            TextView txtTitle = getActivity().findViewById(R.id.sub_title);
+            txtTitle.setText(R.string.txt_menu_aktivitas_komunitas);
+            linearLayout.setVisibility(View.VISIBLE);
+
+        }
     }
 }

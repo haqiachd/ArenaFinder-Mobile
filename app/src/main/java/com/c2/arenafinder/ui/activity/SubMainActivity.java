@@ -1,8 +1,6 @@
 package com.c2.arenafinder.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -11,16 +9,15 @@ import android.widget.TextView;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
-import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.ui.fragment.submain.EditAccountFragment;
+import com.c2.arenafinder.ui.fragment.submain.MenuAlurPemesanan;
 import com.c2.arenafinder.ui.fragment.submain.MenuBookingFragment;
 import com.c2.arenafinder.ui.fragment.submain.MenuCommunityFragment;
-import com.c2.arenafinder.ui.fragment.submain.MenuTrolleyFragment;
+import com.c2.arenafinder.ui.fragment.submain.MenuInformasiFragment;
 import com.c2.arenafinder.ui.fragment.submain.NotificationsFragment;
 import com.c2.arenafinder.ui.fragment.submain.SearchWorldFragment;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
-import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -28,7 +25,7 @@ public class SubMainActivity extends AppCompatActivity {
 
     public static final String FRAGMENT = "fragment", SPORT_ACTION = "sport_type", SPORT_DATA = "sport_data";
 
-    public static final String EDIT_ACCOUNT = "edit_acc", MENU_BOOKING = "booking", MENU_COMMUNITY = "community",
+    public static final String EDIT_ACCOUNT = "edit_acc", MENU_ALUR = "alur", MENU_BOOKING = "booking", MENU_COMMUNITY = "community",
             MENU_TROLLEY = "trolley", NOTIFICATIONS = "notif", SEARCH_WORLD = "search",
             SPORT_TYPE = "sport", VIEW_ALL = "view";
 
@@ -56,6 +53,12 @@ public class SubMainActivity extends AppCompatActivity {
                 );
                 break;
             }
+            case MENU_ALUR: {
+                FragmentUtil.switchFragmentSubMain(
+                        getSupportFragmentManager(), new MenuAlurPemesanan(), false
+                );
+                break;
+            }
             case MENU_BOOKING: {
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(), new MenuBookingFragment(), false
@@ -70,7 +73,7 @@ public class SubMainActivity extends AppCompatActivity {
             }
             case MENU_TROLLEY: {
                 FragmentUtil.switchFragmentSubMain(
-                        getSupportFragmentManager(), new MenuTrolleyFragment(), false
+                        getSupportFragmentManager(), new MenuInformasiFragment(), false
                 );
                 break;
             }

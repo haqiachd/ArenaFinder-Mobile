@@ -177,7 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/kanit_regular"
-                            android:text="@string/txt_menu_status_pesanan"
+                            android:text="@string/txt_menu_informasi"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_10ssp" />

@@ -10,6 +10,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.adapter.BookingTabAdapter;
@@ -78,5 +80,16 @@ public class MenuBookingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getAppbar();
+    }
+
+    private void getAppbar(){
+        if (getActivity() != null){
+            LinearLayout linearLayout = getActivity().findViewById(R.id.sub_linear);
+            linearLayout.setVisibility(View.VISIBLE);
+            TextView txtTitle = getActivity().findViewById(R.id.sub_title);
+            txtTitle.setText(R.string.txt_pesan_lapangan);
+        }
     }
 }

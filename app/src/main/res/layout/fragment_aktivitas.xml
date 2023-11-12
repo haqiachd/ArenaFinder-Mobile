@@ -21,7 +21,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_11sdp"
+                android:layout_marginStart="@dimen/layout_card_margin_start"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_11sdp">
 
@@ -47,6 +47,7 @@
                     android:text="@string/txt_filter"
                     android:textAllCaps="false"
                     android:textColor="@color/primary_color"
+                    android:visibility="gone"
                     app:cornerRadius="@dimen/_5sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +61,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
-                android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout

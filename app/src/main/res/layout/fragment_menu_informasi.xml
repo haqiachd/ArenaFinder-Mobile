@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.submain.MenuTrolleyFragment">
+    tools:context=".ui.fragment.submain.MenuInformasiFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:fontFamily="@font/roboto_bold"
         android:gravity="center"
-        android:text="Menu Trolley"
+        android:text="Menu Informasi"
         android:textColor="@color/azure"
         android:textSize="@dimen/_22sdp"
         />
