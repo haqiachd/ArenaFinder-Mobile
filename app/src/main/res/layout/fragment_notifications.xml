@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.submain.NotificationsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:id="@+id/fno_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:text="Notifications"
-        android:textColor="@color/azure"
-        android:textSize="@dimen/_22sdp"
-        />
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_notification" />
 
 </FrameLayout>

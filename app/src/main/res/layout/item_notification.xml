@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/notif_list_height"
+    android:layout_marginStart="@dimen/notif_list_margin"
+    android:layout_marginEnd="@dimen/notif_list_margin"
+    android:layout_marginBottom="@dimen/_6sdp"
+    app:cardCornerRadius="@dimen/notif_list_radius"
+    app:cardElevation="@dimen/notif_list_elevation"
+    app:cardMaxElevation="@dimen/notif_list_max_elevation"
+    app:strokeColor="@color/stroke_card_venue"
+    app:strokeWidth="@dimen/notif_list_stroke">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ino_content_logo"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ino_content_logo_card"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:backgroundTint="@color/device_bgtint_card_logo"
+                app:cardCornerRadius="@dimen/_50sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ino_icon"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/alt_list_notif_logo"
+                    android:src="@drawable/ic_notif_acc" />
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/ino_content_jenis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ino_content_volume"
+            app:layout_constraintStart_toEndOf="@id/ino_content_logo"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/ino_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_marginBottom="@dimen/_1sdp"
+                android:maxLines="1"
+                android:text="Pesanan Diterima"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp" />
+
+            <TextView
+                android:id="@+id/ino_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/opensans_bold"
+                android:maxLines="2"
+                android:text="Pesanan anda pada 2023-10-10 telah diterima"
+                android:textColor="@color/butterfly_blue"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ino_content_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/ino_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="2023-10-10"
+                android:textColor="@color/primary_color"
+                android:textSize="@dimen/_9sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
