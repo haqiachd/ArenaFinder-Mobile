@@ -2,18 +2,29 @@ package com.c2.arenafinder.ui.fragment.submain;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.ui.adapter.ViewPagerAdapter;
+import com.c2.arenafinder.ui.fragment.detailed.ActivityDetailedFragment;
+import com.c2.arenafinder.ui.fragment.detailed.VenueDetailedFragment;
+import com.google.android.material.tabs.TabLayout;
 
 public class MenuBookingFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private TabLayout tabLayuot;
+    private ViewPager viewPager;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -21,6 +32,11 @@ public class MenuBookingFragment extends Fragment {
 
     public MenuBookingFragment() {
         // Required empty public constructor
+    }
+
+    private void initViews(View view) {
+        tabLayuot = view.findViewById(R.id.fmb_tab);
+        viewPager = view.findViewById(R.id.fmb_viewpager);
     }
 
     public static MenuBookingFragment newInstance(String param1, String param2) {
@@ -45,6 +61,25 @@ public class MenuBookingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_booking, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu_booking, container, false);
+
+        initViews(view);
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity().getSupportFragmentManager());
+
+        adapter.addFragment(new TabDipesanFragment(), "Di pesan");
+        adapter.addFragment(new TabDisetujuiFragment(), "Di setujui");
+        adapter.addFragment(new TabDitolakFragment(), "Di tolak");
+
+        // Tambahkan fragment-fragment lainnya
+        viewPager.setAdapter(adapter);
+        tabLayuot.setupWithViewPager(viewPager);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }

@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.fragment.submain.MenuBookingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/fmb_tab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:text="Menu Booking"
-        android:textColor="@color/azure"
-        android:textSize="@dimen/_22sdp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white">
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/fmb_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         />
 
-</FrameLayout>
+</LinearLayout>
