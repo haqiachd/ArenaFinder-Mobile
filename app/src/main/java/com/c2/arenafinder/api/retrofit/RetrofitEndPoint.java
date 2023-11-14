@@ -17,6 +17,7 @@ import com.c2.arenafinder.data.model.StatusPesananModel;
 import com.c2.arenafinder.data.response.AktivitasDetailedResponse;
 import com.c2.arenafinder.data.response.AktivitasMemberResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
+import com.c2.arenafinder.data.response.AktivitasStatusResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.BerandaResponse;
 import com.c2.arenafinder.data.response.CreateBookingResponse;
@@ -233,6 +234,12 @@ public interface RetrofitEndPoint {
 //    @DELETE("feature/activities/activity_leave.php")
     Call<AktivitasMemberResponse> leaveActivity(
             @Body AktivitasMemberModel model
+    );
+
+    @GET("feature/activities/activity_status.php")
+    Call<AktivitasStatusResponse> statusActivity(
+      @Query("email") String email,
+      @Query("status") String status
     );
 
 }

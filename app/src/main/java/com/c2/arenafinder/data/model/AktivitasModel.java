@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class AktivitasModel {
 
+    public static final String STATUS_ONGOING = "ongoing", STATUS_FINISHED = "finished";
+
     @Expose
     @SerializedName("id_aktivitas")
     private int idAktvitias;

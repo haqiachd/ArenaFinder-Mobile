@@ -372,5 +372,6 @@
     <string name="btn_status_anggota_val">: %1$s</string>
     <string name="btn_aktivitas_gabung">GABUNG</string>
     <string name="btn_aktivitas_keluar">KELUAR</string>
+    <string name="def_titik_dua">: %1$s</string>
 
 </resources>
