@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.submain.TabDipesanFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ftd_recycler"
+        android:id="@+id/tab_dipesan_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_status_pesanan"
