@@ -66,5 +66,8 @@
     <color name="booking_date_date_textcolor">@color/azure</color>
     <color name="booking_date_date_textcolor_selected">@color/white</color>
     <color name="device_bgtint_card_logo">#D9E1E9</color>
+    <color name="status_pesan_dipesan">#A6A52A2A</color>
+    <color name="status_pesan_disetujui">#CC00A86B</color>
+    <color name="status_pesan_ditolak">#A6ED2939</color>
 
 </resources>

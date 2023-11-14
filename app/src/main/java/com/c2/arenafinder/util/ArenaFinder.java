@@ -177,7 +177,7 @@ public class ArenaFinder {
     }
 
     public static String toMoneyCase(int price){
-        return new DecimalFormat("#,###.00").format(price);
+        return new DecimalFormat("#,###").format(price);
     }
 
     public static String oneComa(float number) {

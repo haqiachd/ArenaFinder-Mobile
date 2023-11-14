@@ -89,7 +89,7 @@ public class MenuBookingFragment extends Fragment {
             LinearLayout linearLayout = getActivity().findViewById(R.id.sub_linear);
             linearLayout.setVisibility(View.VISIBLE);
             TextView txtTitle = getActivity().findViewById(R.id.sub_title);
-            txtTitle.setText(R.string.txt_pesan_lapangan);
+            txtTitle.setText(R.string.txt_histori_booking);
         }
     }
 }

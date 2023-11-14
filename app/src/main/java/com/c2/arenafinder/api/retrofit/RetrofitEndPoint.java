@@ -11,10 +11,12 @@ import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 import com.c2.arenafinder.data.model.EditCommentModel;
+import com.c2.arenafinder.data.model.StatusPesananModel;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.BerandaResponse;
 import com.c2.arenafinder.data.response.CreateBookingResponse;
+import com.c2.arenafinder.data.response.StatusPesananResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.data.response.VenueBookingResponse;
@@ -22,6 +24,7 @@ import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.data.response.VenueExtendedResponse;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
+import com.google.gson.annotations.Expose;
 
 public interface RetrofitEndPoint {
 
@@ -203,6 +206,12 @@ public interface RetrofitEndPoint {
             @Field("id_booking") String idVenue,
             @Field("date") String date,
             @Field("id_price") String idPrice
+    );
+
+    @GET("feature/venues/booking/order_status.php")
+    Call<StatusPesananResponse> getStatusPesanan(
+            @Query("email") String email,
+            @Query("status") String status
     );
 
 

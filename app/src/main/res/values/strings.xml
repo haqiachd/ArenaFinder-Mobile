@@ -352,5 +352,15 @@
     <string name="txt_payment_method">Payment Method</string>
     <string name="txt_total_jadwal">Total Jadwal</string>
     <string name="txt_tanggal">Tanggal</string>
+    <string name="btn_pesan_lagi">Pesan Lagi</string>
+
+    <string name="txt_histori_booking">Riwayat Booking</string>
+    <string name="txt_total_jadwal_val">: %1$d Jadwal</string>
+    <string name="txt_payment_method_val">: %1$s</string>
+    <string name="txt_tanggal_val">: %1$s</string>
+    <string name="txt_total_price_booking">Rp. %1$s</string>
+    <string name="txt_status_booking_dipesan">Pesanan ini sedang menunggu konfirmasi dari pengelola lapangan.</string>
+    <string name="txt_status_booking_disetujui">Pesanan telah diterima oleh pengelola lapangan pada tanggal %1$s.</string>
+    <string name="txt_status_booking_ditolak">Pesanan telah ditolak oleh pengelola lapangan pada tanggal %1$s.</string>
 
 </resources>
