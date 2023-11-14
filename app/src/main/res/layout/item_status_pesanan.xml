@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/isp_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/_10sdp"
-    android:layout_marginEnd="@dimen/_10sdp"
     android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
     android:layout_marginBottom="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_10sdp"
     app:strokeColor="@color/jade_green"
@@ -157,28 +158,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginEnd="@dimen/_2sdp"
-                >
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:id="@+id/isp_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/opensans_semibold"
-                    android:textColor="@color/biru_gelap"
-                    android:textSize="@dimen/_9sdp"
                     android:text="Pesanan telah diterima oleh pengelola lapangan pada tanggal 31 Desember 2023"
-                    />
+                    android:textColor="@color/biru_gelap"
+                    android:textSize="@dimen/_9sdp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="#80696969"
-                    />
+                    android:background="#80696969" />
 
             </LinearLayout>
 
@@ -186,16 +185,16 @@
 
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/isp_btn_pesan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:text="Pesan Lagi"
-            android:textAllCaps="false"
             android:fontFamily="@font/poppins_semibold"
+            android:text="@string/btn_pesan_lagi"
+            android:textAllCaps="false"
             android:textSize="@dimen/_9sdp"
-            app:layout_constraintTop_toBottomOf="@id/isp_content_center"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@id/isp_content_center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
