@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:background="@color/primary_color"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,10 +64,10 @@
         android:id="@+id/fad_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/fad_appbar"
-        app:layout_constraintBottom_toTopOf="@id/fad_bottom_nav"
         android:background="@color/background_light"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/fad_bottom_nav"
+        app:layout_constraintTop_toBottomOf="@id/fad_appbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,13 +82,12 @@
                 android:background="@color/azure">
 
                 <ImageView
-                    android:id="@+id/fad_image_test"
+                    android:id="@+id/fad_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/alt_card_venue"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_venue_test_2"
-                    android:visibility="gone" />
+                    android:src="@drawable/ic_venue_test_2" />
 
                 <ImageView
                     android:id="@+id/fad_back"
@@ -130,7 +129,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/fad_venue_name"
+                    android:id="@+id/fad_aktivitas_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -157,7 +156,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/fad_top_member_val"
+                        android:id="@+id/fad_venue_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -220,7 +219,8 @@
                     android:fontFamily="@font/opensans_semibold"
                     android:text="@string/txt_lorem_deksripsi_def"
                     android:textColor="@color/dimgray"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textSize="@dimen/_11ssp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -294,7 +294,7 @@
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:id="@+id/fad_jam_mulai"
+                                android:id="@+id/fad_jam_main"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
@@ -318,9 +318,9 @@
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:id="@+id/fad_member"
+                                android:id="@+id/fad_membership"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:fontFamily="@font/poppins_semibold"
                                 android:text=": Member"
@@ -342,7 +342,7 @@
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:id="@+id/txt_harga"
+                                android:id="@+id/fad_txt_harga"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
@@ -507,6 +507,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/poppins_regular"
             android:text="Harga"
+            android:visibility="gone"
             android:textColor="@color/dimgray"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toTopOf="@id/dtld_nav_txt_data"
@@ -522,19 +523,20 @@
             android:text="Rp. 75.000"
             android:textColor="@color/black"
             android:textSize="@dimen/_13sdp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/dtld_nav_txt_top"
             app:layout_constraintTop_toBottomOf="@id/dtld_nav_txt_top" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/dtld_nav_button"
+            android:id="@+id/fad_nav_button"
             android:layout_width="@dimen/_90ssp"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_13sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:backgroundTint="@color/primary_color"
-            android:text="GABUNG"
+            android:text="@string/btn_aktivitas_gabung"
             app:cornerRadius="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

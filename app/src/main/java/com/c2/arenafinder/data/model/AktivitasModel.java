@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class AktivitasModel {
 
     @Expose
-    @SerializedName("id_aktvitias")
+    @SerializedName("id_aktivitas")
     private int idAktvitias;
 
     @Expose
@@ -38,24 +38,49 @@ public class AktivitasModel {
     private String photo;
 
     @Expose
+    @SerializedName("sport")
+    private String jenisOlahraga;
+
+    @Expose
     @SerializedName("end_hour")
     private String endHour;
+
+    @Expose
+    @SerializedName("jam_main")
+    private String jamMain;
 
     @Expose
     @SerializedName("jumlah_member")
     private int jumlahMember;
 
-    public AktivitasModel(int idAktvitias, String venueName, String date, String namaAktivitas, int price, int maxMember, String startHour, String photo, String endHour, int jumlahMember) {
+    @Expose
+    @SerializedName("membership")
+    private String membership;
+
+    @Expose
+    @SerializedName("location")
+    private String location;
+
+    @Expose
+    @SerializedName("coordinate")
+    private String coordinate;
+
+    public AktivitasModel(int idAktvitias, String venueName, String date, String namaAktivitas, int price, int maxMember, String jenisOlahraga, String jamMain, String startHour, String photo, String endHour, int jumlahMember, String membership, String location, String coordinate) {
         this.idAktvitias = idAktvitias;
         this.venueName = venueName;
         this.date = date;
         this.namaAktivitas = namaAktivitas;
         this.price = price;
         this.maxMember = maxMember;
+        this.jenisOlahraga = jenisOlahraga;
         this.startHour = startHour;
         this.photo = photo;
         this.endHour = endHour;
         this.jumlahMember = jumlahMember;
+        this.membership = membership;
+        this.jamMain = jamMain;
+        this.location = location;
+        this.coordinate = coordinate;
     }
 
     public int getidAktvitias() {
@@ -136,5 +161,45 @@ public class AktivitasModel {
 
     public void setJumlahMember(int value) {
         this.jumlahMember = value;
+    }
+
+    public String getJamMain() {
+        return jamMain;
+    }
+
+    public void setJamMain(String jamMain) {
+        this.jamMain = jamMain;
+    }
+
+    public String getMembership() {
+        return membership;
+    }
+
+    public void setMembership(String membership) {
+        this.membership = membership;
+    }
+
+    public String getJenisOlahraga() {
+        return jenisOlahraga;
+    }
+
+    public void setJenisOlahraga(String jenisOlahraga) {
+        this.jenisOlahraga = jenisOlahraga;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(String coordinate) {
+        this.coordinate = coordinate;
     }
 }

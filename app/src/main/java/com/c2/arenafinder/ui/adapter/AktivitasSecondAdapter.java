@@ -50,9 +50,10 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
         holder.txtNamaAktivitas.setText(model.getNamaAktivitas());
         holder.txtVenueAktivitas.setText(model.getVenueName());
 //        holder.txtAnggotaAktivitas.setText(context.getString(R.string.txt_aktivitas_anggota_value, model.getJumlahMember(), model.getMaxMember()));
-        holder.txtAnggotaAktivitas.setText("" + model.getJumlahMember() + " Anggota");
+        holder.txtAnggotaAktivitas.setText(context.getString(R.string.txt_anggota_aktivitas_val, model.getJumlahMember()));
         holder.txtTanggalAktivitas.setText(ArenaFinder.convertToDate(model.getDate()));
-        holder.txtTimeAktivitas.setText(context.getString(R.string.txt_aktivitas_jam, model.getStartHour(), model.getEndHour()));
+//        holder.txtTimeAktivitas.setText(context.getString(R.string.txt_aktivitas_jam, model.getStartHour(), model.getEndHour()));
+        holder.txtTimeAktivitas.setText(context.getString(R.string.txt_jam_main_val, model.getJamMain()));
         holder.txtHargaAktivitas.setText(context.getString(R.string.txt_aktivitas_price_value, String.valueOf(model.getPrice())));
 
         if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
