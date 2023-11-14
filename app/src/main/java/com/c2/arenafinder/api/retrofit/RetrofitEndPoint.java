@@ -2,6 +2,7 @@ package com.c2.arenafinder.api.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -10,8 +11,11 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
+import com.c2.arenafinder.data.model.AktivitasMemberModel;
 import com.c2.arenafinder.data.model.EditCommentModel;
 import com.c2.arenafinder.data.model.StatusPesananModel;
+import com.c2.arenafinder.data.response.AktivitasDetailedResponse;
+import com.c2.arenafinder.data.response.AktivitasMemberResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.BerandaResponse;
@@ -214,5 +218,21 @@ public interface RetrofitEndPoint {
             @Query("status") String status
     );
 
+    @GET("feature/activities/activity_detailed.php")
+    Call<AktivitasDetailedResponse> aktivitasDetailed(
+            @Query("id_aktivitas") String idAktivitas,
+            @Query("email") String email
+    );
+
+    @PUT("feature/activities/activity_join.php")
+    Call<AktivitasMemberResponse> joinActivity(
+            @Body AktivitasMemberModel model
+    );
+
+    @HTTP(method = "DELETE", path = "feature/activities/activity_leave.php", hasBody = true)
+//    @DELETE("feature/activities/activity_leave.php")
+    Call<AktivitasMemberResponse> leaveActivity(
+            @Body AktivitasMemberModel model
+    );
 
 }

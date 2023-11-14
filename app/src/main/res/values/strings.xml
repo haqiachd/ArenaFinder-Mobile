@@ -359,8 +359,18 @@
     <string name="txt_payment_method_val">: %1$s</string>
     <string name="txt_tanggal_val">: %1$s</string>
     <string name="txt_total_price_booking">Rp. %1$s</string>
+    <string name="txt_total_price_booking_val">: Rp. %1$s</string>
     <string name="txt_status_booking_dipesan">Pesanan ini sedang menunggu konfirmasi dari pengelola lapangan.</string>
     <string name="txt_status_booking_disetujui">Pesanan telah diterima oleh pengelola lapangan pada tanggal %1$s.</string>
     <string name="txt_status_booking_ditolak">Pesanan telah ditolak oleh pengelola lapangan pada tanggal %1$s.</string>
+    <string name="txt_jam_main_val">%1$s Jam Main</string>
+    <string name="txt_jam_main_val2">: %1$s Jam Main</string>
+    <string name="txt_anggota_aktivitas_val">%1$d Anggota</string>
+    <string name="txt_aktivitas_lokasi">Lokasi</string>
+    <string name="txt_status_jam_main">Jam Main</string>
+    <string name="btn_status_aktivitas_batal">Batalkan</string>
+    <string name="btn_status_anggota_val">: %1$s</string>
+    <string name="btn_aktivitas_gabung">GABUNG</string>
+    <string name="btn_aktivitas_keluar">KELUAR</string>
 
 </resources>
