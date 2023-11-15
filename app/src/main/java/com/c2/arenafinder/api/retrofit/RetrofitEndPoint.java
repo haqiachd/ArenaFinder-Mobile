@@ -17,6 +17,7 @@ import com.c2.arenafinder.data.model.StatusPesananModel;
 import com.c2.arenafinder.data.response.AktivitasDetailedResponse;
 import com.c2.arenafinder.data.response.AktivitasMemberResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
+import com.c2.arenafinder.data.response.AktivitasSecondResponse;
 import com.c2.arenafinder.data.response.AktivitasStatusResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.data.response.BerandaResponse;
@@ -166,6 +167,15 @@ public interface RetrofitEndPoint {
     Call<VenueExtendedResponse> searchVenue(
             @Query("name") String name
     );
+
+    @GET("page/sub/all/alla_aktivitas_seru.php")
+    Call<AktivitasSecondResponse> getAllAktivitasSeru();
+
+    @GET("page/sub/all/alla_aktivitas_kosong.php")
+    Call<AktivitasSecondResponse> getAllAktivitasKosong();
+
+    @GET("page/sub/all/alla_aktivitas_baru.php")
+    Call<AktivitasSecondResponse> getAllAktivitasBaru();
 
     @GET("feature/venues/venue_detailed.php")
     Call<VenueDetailedResponse> venueDetailed(

@@ -31,6 +31,7 @@ import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.fragment.submain.SearchWorldFragment;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
+import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.button.MaterialButton;
@@ -159,6 +160,7 @@ public class AktivitasFragment extends Fragment {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.AKTIVITAS_BARU)
             );
         });
 
@@ -166,6 +168,7 @@ public class AktivitasFragment extends Fragment {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.AKTIVITAS_KOSONG)
             );
         });
 

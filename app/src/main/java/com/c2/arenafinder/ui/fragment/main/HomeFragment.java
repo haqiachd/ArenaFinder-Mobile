@@ -253,6 +253,7 @@ public class HomeFragment extends Fragment {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
                             .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.AKTIVITAS_SERU)
             );
         });
 

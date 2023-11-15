@@ -327,6 +327,9 @@
     <string name="sub_venue_gratis">Gratis</string>
     <string name="sub_venue_berbayar">Berbayar</string>
     <string name="sub_venue_disewakan">Disewakan</string>
+    <string name="sub_aktivtas_seru">Aktivitas Seru</string>
+    <string name="sub_aktivitas_baru">Aktivitas Baru</string>
+    <string name="sub_aktivitas_kosong">Aktivitas Kosong</string>
 
     <string name="hint_search_world">Cari Tempat Olahraga</string>
 

@@ -19,9 +19,13 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.VenueExtendedModel;
+import com.c2.arenafinder.data.response.AktivitasResponse;
+import com.c2.arenafinder.data.response.AktivitasSecondResponse;
 import com.c2.arenafinder.data.response.VenueExtendedResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
+import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueExtendedAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 
@@ -37,9 +41,10 @@ public class ViewAllFragment extends Fragment {
 
     public static final int VENUE_BARU = 1, VENUE_REKOMENDASI = 2, VENUE_LOKASI = 3, VENUE_RATING = 4,
             VENUE_KOSONG = 5, VENUE_GRATIS = 6, VENUE_BERBAYAR = 7, VENUE_DISEWAKAN = 8,
-            AKTIVITAS_SERU = 9, AKTIVITAS_KOSONG = 10, ALTIVITAS_ALL = 11;
+            AKTIVITAS_SERU = 9, AKTIVITAS_KOSONG = 10, AKTIVITAS_BARU = 11;
 
-    private @StringRes int actionName = R.string.sub_main_activity;
+    private @StringRes
+    int actionName = R.string.sub_main_activity;
 
     private int action;
 
@@ -122,6 +127,21 @@ public class ViewAllFragment extends Fragment {
                 actionName = R.string.sub_venue_disewakan;
                 break;
             }
+            case AKTIVITAS_SERU: {
+                actionName = R.string.sub_venue_disewakan;
+                actionAktivitasSeru();
+                break;
+            }
+            case AKTIVITAS_KOSONG: {
+                actionName = R.string.sub_aktivitas_kosong;
+                actionAktivitasKosong();
+                break;
+            }
+            case AKTIVITAS_BARU: {
+                actionName = R.string.sub_aktivitas_baru;
+                actionAktivitasBaru();
+                break;
+            }
             default: {
                 Toast.makeText(requireContext(), "ERROR DEFAULT", Toast.LENGTH_SHORT).show();
             }
@@ -131,9 +151,9 @@ public class ViewAllFragment extends Fragment {
 
     }
 
-    private void getAppbar(){
+    private void getAppbar() {
 
-        if (getActivity() != null){
+        if (getActivity() != null) {
 
             TextView title = getActivity().findViewById(R.id.sub_title);
             ImageView imgExtend = getActivity().findViewById(R.id.sub_detailed);
@@ -160,6 +180,14 @@ public class ViewAllFragment extends Fragment {
         );
     }
 
+    private void openDetailedActivity(String id) {
+        startActivity(
+                new Intent(requireContext(), DetailedActivity.class)
+                        .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.ACTIVITY)
+                        .putExtra(DetailedActivity.ID, id)
+        );
+    }
+
     private void showRecyclerVenue(ArrayList<VenueExtendedModel> models) {
 
         // show data
@@ -175,6 +203,24 @@ public class ViewAllFragment extends Fragment {
         } else {
             // TODO : show error when data is 0
         }
+    }
+
+    private void showRecyclerActivity(ArrayList<AktivitasModel> models) {
+
+        // show data
+        if (models.size() > 0) {
+            recyclerAll.setAdapter(new AktivitasSecondAdapter(
+                    requireContext(), models, new AdapterActionListener() {
+                @Override
+                public void onClickListener(int position) {
+                    openDetailedActivity(Integer.toString(models.get(position).getidAktvitias()));
+                }
+            }
+            ));
+        } else {
+            // TODO : show error when data is 0
+        }
+
     }
 
     private void actionRating() {
@@ -261,7 +307,7 @@ public class ViewAllFragment extends Fragment {
 
     }
 
-    private void actionLokasi(){
+    private void actionLokasi() {
 
         // request data
         RetrofitClient.getInstance().getAllLokasi().enqueue(new Callback<>() {
@@ -283,7 +329,7 @@ public class ViewAllFragment extends Fragment {
 
     }
 
-    private void actionGratis(){
+    private void actionGratis() {
 
         // request data
         RetrofitClient.getInstance().getAllGratis().enqueue(new Callback<>() {
@@ -305,7 +351,7 @@ public class ViewAllFragment extends Fragment {
 
     }
 
-    private void actionBebayar(){
+    private void actionBebayar() {
 
         // request data
         RetrofitClient.getInstance().getAllBebayar().enqueue(new Callback<>() {
@@ -327,7 +373,7 @@ public class ViewAllFragment extends Fragment {
 
     }
 
-    private void actionDisewakan(){
+    private void actionDisewakan() {
 
         // request data
         RetrofitClient.getInstance().getAllDisewakan().enqueue(new Callback<>() {
@@ -343,9 +389,72 @@ public class ViewAllFragment extends Fragment {
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
+                t.printStackTrace();
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private void actionAktivitasSeru() {
+
+        RetrofitClient.getInstance().getAllAktivitasSeru().enqueue(new Callback<AktivitasSecondResponse>() {
+            @Override
+            public void onResponse(Call<AktivitasSecondResponse> call, Response<AktivitasSecondResponse> response) {
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                    // show recycler view
+                    showRecyclerActivity(response.body().getData());
+                } else {
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AktivitasSecondResponse> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void actionAktivitasBaru(){
+        RetrofitClient.getInstance().getAllAktivitasBaru().enqueue(new Callback<AktivitasSecondResponse>() {
+            @Override
+            public void onResponse(Call<AktivitasSecondResponse> call, Response<AktivitasSecondResponse> response) {
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                    // show recycler view
+                    showRecyclerActivity(response.body().getData());
+                } else {
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AktivitasSecondResponse> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void actionAktivitasKosong(){
+        RetrofitClient.getInstance().getAllAktivitasKosong().enqueue(new Callback<AktivitasSecondResponse>() {
+            @Override
+            public void onResponse(Call<AktivitasSecondResponse> call, Response<AktivitasSecondResponse> response) {
+                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                    // show recycler view
+                    showRecyclerActivity(response.body().getData());
+                } else {
+                    Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AktivitasSecondResponse> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
