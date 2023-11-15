@@ -21,9 +21,11 @@ import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.appbar.AppBarLayout;
 
+import java.util.Objects;
+
 public class SubMainActivity extends AppCompatActivity {
 
-    public static final String FRAGMENT = "fragment", SPORT_ACTION = "sport_type", SPORT_DATA = "sport_data";
+    public static final String FRAGMENT = "fragment", SPORT_ACTION = "sport_type", SPORT_DATA = "sport_data", SEARCH_TYPE = "search_type";
 
     public static final String EDIT_ACCOUNT = "edit_acc", MENU_ALUR = "alur", MENU_BOOKING = "booking", MENU_COMMUNITY = "community",
             MENU_TROLLEY = "trolley", NOTIFICATIONS = "notif", SEARCH_WORLD = "search",
@@ -84,9 +86,12 @@ public class SubMainActivity extends AppCompatActivity {
                 break;
             }
             case SEARCH_WORLD: {
+                String type = getIntent().getStringExtra(SEARCH_TYPE);
+
                 FragmentUtil.switchFragmentSubMain(
-                        getSupportFragmentManager(), new SearchWorldFragment(), false
+                        getSupportFragmentManager(), SearchWorldFragment.newInstance(Objects.requireNonNullElse(type, "")), false
                 );
+
                 break;
             }
             case SPORT_TYPE: {

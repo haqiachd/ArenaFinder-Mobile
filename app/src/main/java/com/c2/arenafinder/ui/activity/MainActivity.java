@@ -20,10 +20,7 @@ import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.ui.custom.BottomNavCustom;
-import com.c2.arenafinder.ui.fragment.main.AktivitasFragment;
 import com.c2.arenafinder.ui.fragment.main.HomeFragment;
-import com.c2.arenafinder.ui.fragment.main.ProfileFragment;
-import com.c2.arenafinder.ui.fragment.main.ReferensiFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.card.MaterialCardView;
@@ -188,10 +185,10 @@ public class MainActivity extends AppCompatActivity {
     private void onClickGroups() {
 
         cardSearch.setOnClickListener(v -> {
-            startActivity(
-                    new Intent(MainActivity.this, SubMainActivity.class)
-                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
-            );
+//            startActivity(
+//                    new Intent(MainActivity.this, SubMainActivity.class)
+//                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
+//            );
         });
 
         imgNotif.setOnClickListener(v -> {

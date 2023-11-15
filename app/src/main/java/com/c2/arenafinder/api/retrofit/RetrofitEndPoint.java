@@ -238,8 +238,18 @@ public interface RetrofitEndPoint {
 
     @GET("feature/activities/activity_status.php")
     Call<AktivitasStatusResponse> statusActivity(
-      @Query("email") String email,
-      @Query("status") String status
+            @Query("email") String email,
+            @Query("status") String status
+    );
+
+    @GET("page/sub/type/sport_type_activity.php")
+    Call<AktivitasStatusResponse> sportActivity(
+            @Query("sport") String sport
+    );
+
+    @GET("page/sub/search/alla_search.php")
+    Call<AktivitasStatusResponse> searchActivity(
+            @Query("name") String name
     );
 
 }

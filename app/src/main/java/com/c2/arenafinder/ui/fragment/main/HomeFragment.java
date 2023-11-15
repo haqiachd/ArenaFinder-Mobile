@@ -3,7 +3,9 @@ package com.c2.arenafinder.ui.fragment.main;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,10 +19,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -36,7 +39,6 @@ import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.response.BerandaResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
-import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
 import com.c2.arenafinder.ui.adapter.HomeInfoAdapter;
@@ -44,10 +46,12 @@ import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
+import com.c2.arenafinder.ui.fragment.submain.SearchWorldFragment;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -66,6 +70,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     private int prevScroll = 0;
     private boolean isShown = false;
+
+    private String selectedSearch = "";
 
     private ArrayList<TextView> dots;
     private ArrayList<HomeInfoModel> homeInfoModels;
@@ -218,6 +224,7 @@ public class HomeFragment extends Fragment {
             onClickGroups();
             showPager();
             pagerAction();
+            getAppbar();
         }
 
     }
@@ -225,6 +232,61 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    private void getAppbar(){
+        if (getActivity() != null){
+            MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
+            cardSearch.setOnClickListener(v -> {
+                ArenaFinder.playVibrator(getActivity(), ArenaFinder.VIBRATOR_SHORT);
+                BottomSheetDialog sheet = new BottomSheetDialog(getActivity(), R.style.BottomSheetTheme);
+                View sheetInflater = getActivity().getLayoutInflater().inflate(R.layout.sheet_choose_search, null);
+                sheet.setContentView(sheetInflater);
+
+                ImageView activityIndicator = sheetInflater.findViewById(R.id.scs_activity_indicator);
+                ImageView venueIndicator = sheetInflater.findViewById(R.id.scs_venue_indicator);
+
+                MaterialCardView cardActivity = sheetInflater.findViewById(R.id.scs_btn_choose_acvitity);
+                MaterialCardView cardVenue = sheetInflater.findViewById(R.id.scs_btn_choose_venue);
+
+                sheetInflater.findViewById(R.id.scs_button).setOnClickListener(view -> {
+                    if (!selectedSearch.isEmpty()){
+                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
+                                        .putExtra(SubMainActivity.SEARCH_TYPE, selectedSearch)
+                        );
+                        sheet.dismiss();
+                    }else {
+                        Toast.makeText(requireContext(), "Pilih Tipe Cari", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                cardActivity.setOnClickListener(p -> {
+                    activityIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_selected));
+                    venueIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_unselected));
+                    cardActivity.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.azure));
+                    cardVenue.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.dimgray));
+                    selectedSearch = SearchWorldFragment.SEARCH_ACTIVITY;
+                });
+
+                cardVenue.setOnClickListener(o -> {
+                    venueIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_selected));
+                    activityIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_unselected));
+                    cardActivity.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.dimgray));
+                    cardVenue.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.azure));
+                    selectedSearch = SearchWorldFragment.SEARCH_VENUE;
+                });
+
+                sheet.show();
+                sheet.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                sheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                sheet.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnim;
+                sheet.getWindow().setGravity(Gravity.BOTTOM);
+
+            });
+        }
     }
 
     private void onClickGroups() {

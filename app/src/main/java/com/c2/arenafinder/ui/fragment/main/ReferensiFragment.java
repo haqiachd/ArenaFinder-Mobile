@@ -31,11 +31,13 @@ import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
 import com.c2.arenafinder.ui.adapter.VenueSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueThirdAdapter;
+import com.c2.arenafinder.ui.fragment.submain.SearchWorldFragment;
 import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
@@ -140,6 +142,7 @@ public class ReferensiFragment extends Fragment {
             fetchData();
             adapterLapangan();
             onClickGroups();
+            getAppbar();
         }
 
     }
@@ -147,6 +150,19 @@ public class ReferensiFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    private void getAppbar(){
+        if (getActivity() != null){
+            MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
+            cardSearch.setOnClickListener(v -> {
+                startActivity(
+                        new Intent(requireActivity(), SubMainActivity.class)
+                                .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
+                                .putExtra(SubMainActivity.SEARCH_TYPE, SearchWorldFragment.SEARCH_VENUE)
+                );
+            });
+        }
     }
 
     private void onClickGroups() {
@@ -220,7 +236,7 @@ public class ReferensiFragment extends Fragment {
                         startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
-                                        .putExtra(SubMainActivity.SPORT_ACTION, SportTypeFragment.TYPE_VENUE)
+                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(SportTypeFragment.TYPE_VENUE))
                                         .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
                         );
                     }
