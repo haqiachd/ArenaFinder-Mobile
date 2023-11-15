@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -52,6 +53,7 @@ import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -71,7 +73,8 @@ public class HomeFragment extends Fragment {
     private int prevScroll = 0;
     private boolean isShown = false;
 
-    private String selectedSearch = "";
+    private String sheetSearch = "";
+    private int sportType = 0;
 
     private ArrayList<TextView> dots;
     private ArrayList<HomeInfoModel> homeInfoModels;
@@ -87,8 +90,6 @@ public class HomeFragment extends Fragment {
     private LinearLayout homeDots, venueBaruLayout, venueRekomendasiLayout, aktivitasLayout, venueLokasiLayout;
 
     private RecyclerView jenisLapangan, venueBaruRecycler, buatKamuRecycler, aktivitasRecycler, venueTerdekatRecycler;
-
-    private boolean scrollable = false;
 
     public void initViews(View view) {
 
@@ -172,54 +173,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        MainActivity.bottomNav.setDeactivatedOnFrame(BottomNavCustom.ITEM_HOME);
-//
-
-//
-//        MainActivity.bottomNav.setOnActionHomeOnFrame(new Runnable() {
-//            @Override
-//            public void run() {
-//                scrollView.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        scrollView.smoothScrollTo(0, 0); // Mengatur posisi ke atas (0, 0)
-//                    }
-//                });
-//            }
-//        });
-//
-//        scrollView.setOnTouchListener((v, event) -> {
-//            LogApp.info(requireActivity(), LogTag.LIFEFCYLE, "ScrollView Listener");
-//            return !scrollable;
-//        });
-//
-//        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-//            @Override
-//            public void onScrollChanged() {
-//                int currentScroll = scrollView.getScrollY();
-//
-//                if (currentScroll < 400) {
-//                    MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
-//                } else if (currentScroll < 700) {
-////                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_second_icon_def);
-//                } else if (currentScroll < 2100) {
-////                    MainActivity.bottomNav.showSecondIcon(BottomNavCustom.ITEM_HOME, R.drawable.ic_logo_google);
-//                } else {
-//                    MainActivity.bottomNav.hideSecondIcon(BottomNavCustom.ITEM_HOME);
-//                }
-//
-//            }
-//        });
-//
-
-//
-//        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-//            MainActivity.bottomNav.closeAnimation(BottomNavCustom.ITEM_HOME);
-//            scrollable = true;
-//        }, 100);
-
-        adapterLapangan();
         if (isAdded()) {
+            adapterLapangan();
             fetchData();
             onClickGroups();
             showPager();
@@ -234,57 +189,16 @@ public class HomeFragment extends Fragment {
         super.onResume();
     }
 
-    private void getAppbar(){
-        if (getActivity() != null){
+    private void getAppbar() {
+        if (getActivity() != null) {
             MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
             cardSearch.setOnClickListener(v -> {
-                ArenaFinder.playVibrator(getActivity(), ArenaFinder.VIBRATOR_SHORT);
-                BottomSheetDialog sheet = new BottomSheetDialog(getActivity(), R.style.BottomSheetTheme);
-                View sheetInflater = getActivity().getLayoutInflater().inflate(R.layout.sheet_choose_search, null);
-                sheet.setContentView(sheetInflater);
-
-                ImageView activityIndicator = sheetInflater.findViewById(R.id.scs_activity_indicator);
-                ImageView venueIndicator = sheetInflater.findViewById(R.id.scs_venue_indicator);
-
-                MaterialCardView cardActivity = sheetInflater.findViewById(R.id.scs_btn_choose_acvitity);
-                MaterialCardView cardVenue = sheetInflater.findViewById(R.id.scs_btn_choose_venue);
-
-                sheetInflater.findViewById(R.id.scs_button).setOnClickListener(view -> {
-                    if (!selectedSearch.isEmpty()){
-                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                        startActivity(
+                showSheet(R.string.txt_pilih_tipe_pencarian, R.string.btn_cari, R.string.btn_cari_aktivitas, R.string.btn_cari_tempat_olahraga,
+                        () -> startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
-                                        .putExtra(SubMainActivity.SEARCH_TYPE, selectedSearch)
-                        );
-                        sheet.dismiss();
-                    }else {
-                        Toast.makeText(requireContext(), "Pilih Tipe Cari", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                cardActivity.setOnClickListener(p -> {
-                    activityIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_selected));
-                    venueIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_unselected));
-                    cardActivity.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.azure));
-                    cardVenue.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.dimgray));
-                    selectedSearch = SearchWorldFragment.SEARCH_ACTIVITY;
-                });
-
-                cardVenue.setOnClickListener(o -> {
-                    venueIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_selected));
-                    activityIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_unselected));
-                    cardActivity.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.dimgray));
-                    cardVenue.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.azure));
-                    selectedSearch = SearchWorldFragment.SEARCH_VENUE;
-                });
-
-                sheet.show();
-                sheet.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                sheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                sheet.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnim;
-                sheet.getWindow().setGravity(Gravity.BOTTOM);
-
+                                        .putExtra(SubMainActivity.SEARCH_TYPE, sheetSearch)
+                        ));
             });
         }
     }
@@ -349,6 +263,72 @@ public class HomeFragment extends Fragment {
                             .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_LOKASI)
             );
         });
+
+    }
+
+    private void showSheet(
+            @StringRes int title, @StringRes int btnMsg, @StringRes int btn1, @StringRes int btn2, Runnable runnable)
+    {
+//        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+        BottomSheetDialog sheet = new BottomSheetDialog(requireContext(), R.style.BottomSheetTheme);
+        View sheetInflater = requireActivity().getLayoutInflater().inflate(R.layout.sheet_choose_search, null);
+        sheet.setContentView(sheetInflater);
+
+        TextView txtTitle = sheetInflater.findViewById(R.id.scs_title);
+        TextView txtActivity = sheetInflater.findViewById(R.id.scs_txt_activity);
+        TextView txtVenue = sheetInflater.findViewById(R.id.scs_txt_venue);
+
+        // indicator icon
+        ImageView activityIndicator = sheetInflater.findViewById(R.id.scs_activity_indicator);
+        ImageView venueIndicator = sheetInflater.findViewById(R.id.scs_venue_indicator);
+
+        // button choose type
+        MaterialCardView cardActivity = sheetInflater.findViewById(R.id.scs_btn_choose_acvitity);
+        MaterialCardView cardVenue = sheetInflater.findViewById(R.id.scs_btn_choose_venue);
+        MaterialButton button = sheetInflater.findViewById(R.id.scs_button);
+
+        txtTitle.setText(title);
+        button.setText(btnMsg);
+        txtActivity.setText(btn1);
+        txtVenue.setText(btn2);
+
+        // button cari
+        button.setOnClickListener(view -> {
+            if (!sheetSearch.isEmpty()) {
+                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                runnable.run();
+                sheet.dismiss();
+            } else {
+                Toast.makeText(requireContext(), "Pilih Tipe Cari", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // button activity
+        cardActivity.setOnClickListener(p -> {
+            activityIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_selected));
+            venueIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_unselected));
+            cardActivity.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.azure));
+            cardVenue.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.dimgray));
+            sheetSearch = SearchWorldFragment.SEARCH_ACTIVITY;
+            sportType = SportTypeFragment.TYPE_ACTIVITY;
+        });
+
+        // button venue
+        cardVenue.setOnClickListener(o -> {
+            venueIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_selected));
+            activityIndicator.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_indicator_unselected));
+            cardActivity.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.dimgray));
+            cardVenue.setStrokeColor(ContextCompat.getColor(requireContext(), R.color.azure));
+            sheetSearch = SearchWorldFragment.SEARCH_VENUE;
+            sportType = SportTypeFragment.TYPE_VENUE;
+        });
+
+        // show dialog
+        sheet.show();
+        sheet.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        sheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        sheet.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnim;
+        sheet.getWindow().setGravity(Gravity.BOTTOM);
 
     }
 
@@ -560,7 +540,6 @@ public class HomeFragment extends Fragment {
 
     private void adapterLapangan() {
         ArrayList<JenisLapanganModel> lapanganModels = new ArrayList<>();
-//        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_all, "Semua"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_badminton, "Bulu Tangkis"));
         lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
@@ -570,12 +549,13 @@ public class HomeFragment extends Fragment {
                 new AdapterActionListener() {
                     @Override
                     public void onClickListener(int position) {
-                        startActivity(
+                        showSheet(R.string.txt_pilih_tipe_sport, R.string.btn_tampilkan, R.string.btn_sport_activity, R.string.btn_sport_venue,
+                                () -> startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
-                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(SportTypeFragment.TYPE_ALL))
+                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(sportType))
                                         .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
-                        );
+                        ));
                     }
                 }
         );

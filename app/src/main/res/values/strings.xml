@@ -376,8 +376,12 @@
     <string name="hint_search_sport">Cari Tempat Olahraga</string>
     <string name="hint_search_activity">Cari Aktivitas Seru</string>
     <string name="txt_pilih_tipe_pencarian">Pilih Tipe Pencarian</string>
+    <string name="txt_pilih_tipe_sport">Pilih Salah Satu</string>
     <string name="btn_cari">Cari</string>
+    <string name="btn_tampilkan">Tampilkan</string>
     <string name="btn_cari_aktivitas">Cari Aktivitas</string>
     <string name="btn_cari_tempat_olahraga">Cari Tempat Olahraga</string>
+    <string name="btn_sport_activity">Aktivitas Seru</string>
+    <string name="btn_sport_venue">Tempat Olahraga</string>
 
 </resources>
