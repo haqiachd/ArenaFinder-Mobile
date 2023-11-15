@@ -373,5 +373,11 @@
     <string name="btn_aktivitas_gabung">GABUNG</string>
     <string name="btn_aktivitas_keluar">KELUAR</string>
     <string name="def_titik_dua">: %1$s</string>
+    <string name="hint_search_sport">Cari Tempat Olahraga</string>
+    <string name="hint_search_activity">Cari Aktivitas Seru</string>
+    <string name="txt_pilih_tipe_pencarian">Pilih Tipe Pencarian</string>
+    <string name="btn_cari">Cari</string>
+    <string name="btn_cari_aktivitas">Cari Aktivitas</string>
+    <string name="btn_cari_tempat_olahraga">Cari Tempat Olahraga</string>
 
 </resources>
