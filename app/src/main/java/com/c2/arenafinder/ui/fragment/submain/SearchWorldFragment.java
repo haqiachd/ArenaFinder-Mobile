@@ -103,9 +103,10 @@ public class SearchWorldFragment extends Fragment {
 
             inputLayout.setEndIconOnClickListener(v -> {
                 Objects.requireNonNull(inputEditText.getText()).clear();
+                recyclerView.setAdapter(null);
             });
 
-            switch (type){
+            switch (type) {
                 case SEARCH_ACTIVITY: {
                     inputEditText.setHint(R.string.hint_search_activity);
                     break;
@@ -124,7 +125,7 @@ public class SearchWorldFragment extends Fragment {
 
                     if (!Objects.requireNonNull(inputEditText.getText()).toString().isEmpty() && !inputEditText.getText().toString().isBlank()) {
 
-                        switch (type){
+                        switch (type) {
                             case SEARCH_ALL: {
                                 Toast.makeText(requireContext(), "SEARCH ALL", Toast.LENGTH_SHORT).show();
                                 break;
@@ -136,11 +137,14 @@ public class SearchWorldFragment extends Fragment {
                             case SEARCH_VENUE: {
                                 searchVenue(inputEditText);
                                 break;
-                            } default:{
+                            }
+                            default: {
                                 Toast.makeText(requireContext(), "NO TYPE", Toast.LENGTH_SHORT).show();
                             }
                         }
 
+                    } else {
+                        recyclerView.setAdapter(null);
                     }
 
                     return true;
@@ -152,7 +156,7 @@ public class SearchWorldFragment extends Fragment {
 
     }
 
-    private void searchVenue(TextInputEditText inputEditText){
+    private void searchVenue(TextInputEditText inputEditText) {
         RetrofitClient.getInstance().searchVenue(Objects.requireNonNull(inputEditText.getText()).toString())
                 .enqueue(new Callback<VenueExtendedResponse>() {
 
@@ -163,14 +167,15 @@ public class SearchWorldFragment extends Fragment {
                             ArrayList<VenueExtendedModel> models = response.body().getData();
 
                             recyclerView.setAdapter(new VenueExtendedAdapter(
-                                    requireContext(), models, new AdapterActionListener() {
-                                @Override
-                                public void onClickListener(int position) {
-                                    startActivity(new Intent(requireActivity(), DetailedActivity.class)
-                                            .putExtra(DetailedActivity.ID, models.get(position).getidVenue())
-                                    );
-                                }
-                            }
+                                    requireContext(), models,
+                                    new AdapterActionListener() {
+                                        @Override
+                                        public void onClickListener(int position) {
+                                            startActivity(new Intent(requireActivity(), DetailedActivity.class)
+                                                    .putExtra(DetailedActivity.ID, models.get(position).getidVenue())
+                                            );
+                                        }
+                                    }, inputEditText.getText().toString()
                             ));
 
                         } else {
@@ -186,7 +191,7 @@ public class SearchWorldFragment extends Fragment {
                 });
     }
 
-    private void searchActivity(TextInputEditText inputEditText){
+    private void searchActivity(TextInputEditText inputEditText) {
 
         RetrofitClient.getInstance().searchActivity(Objects.requireNonNull(inputEditText.getText()).toString()).enqueue(new Callback<AktivitasStatusResponse>() {
             @Override
@@ -196,16 +201,17 @@ public class SearchWorldFragment extends Fragment {
                     ArrayList<AktivitasModel> models = response.body().getData();
 
                     recyclerView.setAdapter(new AktivitasSecondAdapter(
-                            requireContext(), models, new AdapterActionListener() {
-                        @Override
-                        public void onClickListener(int position) {
-                            startActivity(
-                                    new Intent(requireActivity(), DetailedActivity.class)
-                                            .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.ACTIVITY)
-                                            .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidAktvitias()))
-                            );
-                        }
-                    }
+                            requireContext(), models,
+                            new AdapterActionListener() {
+                                @Override
+                                public void onClickListener(int position) {
+                                    startActivity(
+                                            new Intent(requireActivity(), DetailedActivity.class)
+                                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.ACTIVITY)
+                                                    .putExtra(DetailedActivity.ID, Integer.toString(models.get(position).getidAktvitias()))
+                                    );
+                                }
+                            }, inputEditText.getText().toString()
                     ));
 
                 } else {

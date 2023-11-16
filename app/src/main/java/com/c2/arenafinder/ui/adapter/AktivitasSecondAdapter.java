@@ -1,6 +1,9 @@
 package com.c2.arenafinder.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
@@ -25,12 +30,23 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
 
     private final ArrayList<AktivitasModel> models;
 
-    private AdapterActionListener listener;
+    private final AdapterActionListener listener;
 
-    public AktivitasSecondAdapter(Context context, ArrayList<AktivitasModel> models, AdapterActionListener listener){
+    private final String search;
+
+    public AktivitasSecondAdapter(Context context, ArrayList<AktivitasModel> models, AdapterActionListener listener, String search){
         this.context = context;
         this.models = models;
         this.listener = listener;
+        if (search != null){
+            this.search = search.toLowerCase();
+        }else {
+            this.search = search;
+        }
+    }
+
+    public AktivitasSecondAdapter(Context context, ArrayList<AktivitasModel> models, AdapterActionListener listener){
+        this(context, models, listener, null);
     }
 
     @NonNull
@@ -62,6 +78,32 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
                 listener.onClickListener(holder.getAdapterPosition());
             });
 
+        }
+
+        try {
+
+            if (search != null && !search.isEmpty() && !search.isBlank()) {
+                String text = model.getNamaAktivitas().toLowerCase();
+                int index = text.indexOf(search);
+                int endIndex = index + search.length();
+
+                if (index == -1) {
+                    index = 0;
+                    endIndex++;
+                }
+
+                LogApp.info(this, LogTag.LIFEFCYLE, "INDEX --> " + index);
+                LogApp.info(this, LogTag.LIFEFCYLE, "END INDEX --> " + endIndex);
+
+                SpannableString spannable = new SpannableString(model.getNamaAktivitas());
+                spannable.setSpan(new BackgroundColorSpan(Color.YELLOW), index, endIndex, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                holder.txtNamaAktivitas.setText(spannable);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogApp.error(this, LogTag.LIFEFCYLE, "ERROR INDEX --> ", e);
         }
 
     }

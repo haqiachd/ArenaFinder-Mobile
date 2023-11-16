@@ -123,7 +123,7 @@
     <string name="txt_aktivitas_anggota_value">%1$d/%2$d Anggota</string>
     <string name="txt_aktivitas_price">Rp. 15.0000 / Orang</string>
     <string name="txt_aktivitas_time">07:00 – 10:20</string>
-    <string name="txt_aktivitas_price_value">Rp. %1$s / Orang</string>
+    <string name="txt_aktivitas_price_value">Rp. %1$s</string>
     <string name="txt_no_ratting">N/A</string>
     <string name="txt_lorem_deksripsi_def">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</string>
     <string name="txt_lorem_deksripsi_def_double">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</string>
