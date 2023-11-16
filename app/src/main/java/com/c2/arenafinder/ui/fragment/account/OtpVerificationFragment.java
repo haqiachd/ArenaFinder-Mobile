@@ -159,7 +159,6 @@ public class OtpVerificationFragment extends Fragment {
                     public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
                         if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
                             loadingVerify.dismiss();
-                            verifyUtil.removeOtp();
                             // show dialog information
                             new AlertDialog.Builder(requireContext())
                                     .setTitle(R.string.dia_title_inform)
@@ -168,16 +167,17 @@ public class OtpVerificationFragment extends Fragment {
                                     .setPositiveButton(R.string.dia_positive_login, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            verifyUtil.removeOtp();
                                             // buka fragment login
                                             FragmentUtil.switchFragmentAccount(
                                                     requireActivity().getSupportFragmentManager(),
                                                     new SignInFragment(),
                                                     false
                                             );
+                                            verifyUtil.removeOtp();
                                         }
                                     })
                                     .create().show();
+                            verifyUtil.removeOtp();
                         }else {
                             ArenaFinder.VibratorToast(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
                         }
@@ -313,13 +313,13 @@ public class OtpVerificationFragment extends Fragment {
                                     .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            verifyUtil.removeOtp();
                                             // buka fragment ganti sandi
                                             FragmentUtil.switchFragmentAccount(
                                                     requireActivity().getSupportFragmentManager(),
                                                     ChangePasswordFragment.newInstance(verifyUtil.getEmail()),
                                                     false
                                             );
+                                            verifyUtil.removeOtp();
                                         }
                                     })
                                     .create().show();
