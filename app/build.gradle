@@ -52,6 +52,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.github.appsfeature:otp-view:1.0'
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc04'
 
     // google
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
@@ -61,6 +63,8 @@ dependencies {
 
     // maps
     implementation 'org.osmdroid:osmdroid-android:6.1.17'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     // data sources
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
