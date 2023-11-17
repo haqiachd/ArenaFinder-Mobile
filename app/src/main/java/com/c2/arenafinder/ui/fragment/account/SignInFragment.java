@@ -143,29 +143,39 @@ public class SignInFragment extends Fragment {
                 LogApp.info(requireContext(), String.valueOf(google.getUserData().getPhotoUrl()));
             }
 
-            RetrofitEndPoint endPoint = RetrofitClient.getInstance();
-            endPoint.loginGoogle(google.getUserData().getEmail(), UUID.randomUUID().toString())
-                    .enqueue(new Callback<UsersResponse>() {
-                        @Override
-                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                            if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
-                                // saving data ke preferences
-                                new UsersUtil(requireContext(), response.body().getData());
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                @Override
+                public void onComplete(@NonNull Task<String> task) {
+                    // Get the device token here
+                    String token = task.getResult();
+                    Log.d("MyFirebaseMessaging", "Device Token: " + token);
 
-                                // open main activity
-                                Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
-                            } else {
-                                Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
+                    // Send the token to your server
+                    RetrofitEndPoint endPoint = RetrofitClient.getInstance();
+                    endPoint.loginGoogle(google.getUserData().getEmail(), token)
+                            .enqueue(new Callback<UsersResponse>() {
+                                @Override
+                                public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                                    if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                                        // saving data ke preferences
+                                        new UsersUtil(requireContext(), response.body().getData());
 
-                        @Override
-                        public void onFailure(Call<UsersResponse> call, Throwable t) {
-                            ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_MEDIUM);
-                            Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                        // open main activity
+                                        Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
+                                    } else {
+                                        Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<UsersResponse> call, Throwable t) {
+                                    ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_MEDIUM);
+                                    Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            });
 
         }
     }
