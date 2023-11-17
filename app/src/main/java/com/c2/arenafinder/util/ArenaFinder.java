@@ -29,9 +29,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.data.model.JenisLapanganModel;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -105,6 +107,19 @@ public class ArenaFinder {
             e.printStackTrace();
         }
         return inputDateFormat.toString();
+    }
+
+    public static ArrayList<JenisLapanganModel> getSportType(){
+        ArrayList<JenisLapanganModel> lapanganModels = new ArrayList<>();
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_badminton, "Bulu Tangkis"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_sport_tennis_table, "Tenis Meja"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_futsal, "Futsal"));
+        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_fitness, "Fitness"));
+
+        return lapanganModels;
     }
 
     public static void setRecyclerWidthByItem(
