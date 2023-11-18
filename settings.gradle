@@ -7,6 +7,10 @@ pluginManagement {
             url ("https://jcenter.bintray.com")
             maven {url 'https://jitpack.io'}
         }
+        maven {
+            url  'https://oss.sonatype.org/content/repositories/snapshots/'
+            name 'OSS-Sonatype'
+        }
         jcenter()
     }
 }
@@ -19,8 +23,13 @@ dependencyResolutionManagement {
             url ("https://jcenter.bintray.com")
             maven {url 'https://jitpack.io'}
         }
+        maven {
+            url  'https://oss.sonatype.org/content/repositories/snapshots/'
+            name 'OSS-Sonatype'
+        }
         jcenter()
     }
 }
 rootProject.name = "ArenaFinder"
 include ':app'
+include ':app', ':osmand'
