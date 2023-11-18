@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.maps.MapOSM;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
@@ -55,6 +56,14 @@ import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+
+import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 
@@ -83,6 +92,10 @@ public class HomeFragment extends Fragment {
 
     private SwipeRefreshLayout refreshLayout;
 
+    private MapView mMap;
+
+    private MapOSM mapOSM;
+
     private View btnVallBaru, btnVallRekomendasi, btnVallAktivitas, btnVallLokasi;
 
     private MaterialCardView menuAlur, menuKomunitas, menuTrolley, menuBooking;
@@ -98,6 +111,7 @@ public class HomeFragment extends Fragment {
         menuKomunitas = view.findViewById(R.id.mho_menu_komunitas);
         menuTrolley = view.findViewById(R.id.mho_menu_trolley);
         menuBooking = view.findViewById(R.id.mho_menu_booking);
+        mMap = view.findViewById(R.id.mho_mapview);
 
         btnVallBaru = view.findViewById(R.id.mho_vall_baru);
         btnVallRekomendasi = view.findViewById(R.id.mho_vall_rekomendasi);
@@ -150,6 +164,8 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    private IMapController controller;
+    private MyLocationNewOverlay mMyLocationOverlay;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -172,6 +188,38 @@ public class HomeFragment extends Fragment {
                 }, 1500L);
             }
         });
+
+        mapOSM = new MapOSM(requireActivity(), mMap);
+        mapOSM.initializeMap(-7.579969721425336, 111.88849882053768, 15.0);
+
+//        Configuration.getInstance().load(
+//                requireContext(),
+//                requireActivity().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
+//        );
+//
+//        mMap.setTileSource(TileSourceFactory.MAPNIK);
+////        mMap.mapCenter(new GeoPoint(0.0, 0.0)); // Set the initial map center coordinates
+//        mMap.setExpectedCenter(new GeoPoint(-7.579969721425336, 111.88849882053768)); // Set the initial map center coordinates
+//
+//        mMap.setMultiTouchControls(true);
+//
+//        mMyLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(requireActivity()), mMap);
+//        controller = mMap.getController();
+//
+//        mMyLocationOverlay.enableMyLocation();
+//        mMyLocationOverlay.enableFollowLocation();
+//        mMyLocationOverlay.setDrawAccuracyEnabled(true);
+//
+//        mMyLocationOverlay.runOnFirstFix(() -> {
+//            requireActivity().runOnUiThread(() -> {
+//                controller.setCenter(mMyLocationOverlay.getMyLocation());
+//                controller.animateTo(mMyLocationOverlay.getMyLocation());
+//            });
+//        });
+//
+//        controller.setZoom(15.0);
+//
+//        mMap.getOverlays().add(mMyLocationOverlay);
 
         if (isAdded()) {
             adapterLapangan();

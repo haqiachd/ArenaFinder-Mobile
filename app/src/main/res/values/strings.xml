@@ -386,5 +386,6 @@
     <string name="btn_cari_tempat_olahraga">Cari Tempat Olahraga</string>
     <string name="btn_sport_activity">Aktivitas Seru</string>
     <string name="btn_sport_venue">Tempat Olahraga</string>
+    <string name="arenafinder_osm_map">com.c2.arenafinder.OSM_MAP</string>
 
 </resources>
