@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.maps.MapOSM;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
@@ -49,6 +50,8 @@ import com.c2.arenafinder.util.FragmentUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 
+import org.osmdroid.views.MapView;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -63,6 +66,8 @@ public class VenueDetailedFragment extends Fragment {
 
     private ViewTreeObserver.OnScrollChangedListener listener;
 
+    private MapView mapView;
+    private MapOSM mapOSM;
     private AppBarLayout appBarLayout;
     private TextView txtVenueNameAppbar;
     private ImageView btnBackAppbar, btnVerticalAppbar, imgSport, star1, star2, star3, star4, star5;
@@ -92,6 +97,7 @@ public class VenueDetailedFragment extends Fragment {
         btnVerticalAppbar = view.findViewById(R.id.fvd_vertical_menu_appbar);
         txtVenueNameAppbar = view.findViewById(R.id.fvd_nama_lapangan_appbar);
 
+        mapView = view.findViewById(R.id.fvd_map_view);
         viewPagerPhoto = view.findViewById(R.id.fvd_viewpager);
         fasilitasRecycler = view.findViewById(R.id.fvd_recyler_fasilitas);
         contactRecycler = view.findViewById(R.id.fvd_contact_recycler);
@@ -304,6 +310,7 @@ public class VenueDetailedFragment extends Fragment {
                     showVenueData(data.getVenue());
                     showDayOperasional(data.getJamOperasional());
                     showFasilitas(data.getFasilitas());
+                    showMap(data.getVenue().getVenueName(), data.getVenue().getCoordinate());
                     showRatting(data.getRating());
                     showComment(data.getComment());
                     showContact(data.getContact());
@@ -378,6 +385,26 @@ public class VenueDetailedFragment extends Fragment {
                     new VenueFasilitasAdapter(requireContext(), model)
             );
         }
+    }
+
+    private void showMap(String venueName, String coordinate){
+
+        double latitude = ArenaFinder.getLatitude(coordinate),
+                longitude = ArenaFinder.getLongitude(coordinate);
+
+        mapOSM = new MapOSM(requireActivity(), mapView);
+        mapOSM.initializeMap(latitude, longitude, 15.0, false);
+        mapOSM.setCenterMap();
+        mapOSM.addMarker(
+                latitude, longitude, venueName, R.drawable.ic_map_maker,
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                }
+        );
+
     }
 
     private void showRatting(VenueRatingModel model) {

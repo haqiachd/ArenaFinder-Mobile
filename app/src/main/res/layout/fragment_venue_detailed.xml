@@ -584,12 +584,10 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     app:cardCornerRadius="@dimen/_10sdp">
 
-                    <ImageView
+                    <org.osmdroid.views.MapView
+                        android:id="@+id/fvd_map_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@string/alt_bottom_nav_profile"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_home_map_test" />
+                        android:layout_height="match_parent"/>
 
                 </androidx.cardview.widget.CardView>
 

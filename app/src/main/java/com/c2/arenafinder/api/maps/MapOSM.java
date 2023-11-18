@@ -11,6 +11,7 @@ import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.LogApp;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -68,7 +69,7 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         this.longitude = longitude;
     }
 
-    public void initializeMap(double latitude, double longitude, double zoomLevel) {
+    public void initializeMap(double latitude, double longitude, double zoomLevel, boolean centerIsMyLocation) {
         setCoordinate(latitude, longitude);
 
         mMap.setTileSource(TileSourceFactory.MAPNIK);
@@ -76,30 +77,40 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         controller = mMap.getController();
 
         // cek permission access location
-        if (checkPermissionGranted()) {
-            // show map center by current location
-            mMyLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(activity), mMap);
-            mMyLocationOverlay.enableMyLocation();
-            mMyLocationOverlay.enableFollowLocation();
-            mMyLocationOverlay.setDrawAccuracyEnabled(true);
+        if (centerIsMyLocation) {
+            if (checkPermissionGranted()) {
+                // show map center by current location
+                mMyLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(activity), mMap);
+                mMyLocationOverlay.enableMyLocation();
+                mMyLocationOverlay.enableFollowLocation();
+                mMyLocationOverlay.setDrawAccuracyEnabled(true);
 
-            mMyLocationOverlay.runOnFirstFix(() -> activity.runOnUiThread(() -> {
-                controller.setCenter(mMyLocationOverlay.getMyLocation());
-                controller.animateTo(mMyLocationOverlay.getMyLocation());
-            }));
+                mMyLocationOverlay.runOnFirstFix(() -> activity.runOnUiThread(() -> {
+                    controller.setCenter(mMyLocationOverlay.getMyLocation());
+                    controller.animateTo(mMyLocationOverlay.getMyLocation());
+                }));
 
-            controller.setZoom(zoomLevel);
-            mMap.getOverlays().add(mMyLocationOverlay);
+                controller.setZoom(zoomLevel);
+                mMap.getOverlays().add(mMyLocationOverlay);
+
+            } else {
+                // show map center by default coordinate
+                setCenterMap();
+            }
         } else {
             // show map center by default coordinate
-            mMap.getController().animateTo(new GeoPoint(this.latitude, this.longitude), zoomLevel, ANIMATE_SPEED);
-            mMap.invalidate();
+            setCenterMap();
         }
 
     }
 
     public void initializeMap() {
-        initializeMap(DEF_LATITUDE, DEF_LONGITUDE, DEF_ZOOM);
+        initializeMap(DEF_LATITUDE, DEF_LONGITUDE, DEF_ZOOM, false);
+    }
+
+    public void setCenterMap() {
+        mMap.getController().animateTo(new GeoPoint(this.latitude, this.longitude), 15.0, ANIMATE_SPEED);
+        mMap.invalidate();
     }
 
     private double getZoomLevelMarker() {
@@ -119,6 +130,7 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
 
         // set marker location
         GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+        LogApp.info(activity, "ADDED Marker With Coordinate " + latitude + "," + longitude);
 
         // Create a marker
         Marker marker = new Marker(mMap);

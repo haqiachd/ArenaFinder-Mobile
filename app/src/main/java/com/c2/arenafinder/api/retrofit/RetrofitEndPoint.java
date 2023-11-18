@@ -2,7 +2,6 @@ package com.c2.arenafinder.api.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -13,14 +12,13 @@ import retrofit2.http.Query;
 
 import com.c2.arenafinder.data.model.AktivitasMemberModel;
 import com.c2.arenafinder.data.model.EditCommentModel;
-import com.c2.arenafinder.data.model.StatusPesananModel;
 import com.c2.arenafinder.data.response.AktivitasDetailedResponse;
 import com.c2.arenafinder.data.response.AktivitasMemberResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.AktivitasSecondResponse;
 import com.c2.arenafinder.data.response.AktivitasStatusResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
-import com.c2.arenafinder.data.response.BerandaResponse;
+import com.c2.arenafinder.data.response.HomeResponse;
 import com.c2.arenafinder.data.response.CreateBookingResponse;
 import com.c2.arenafinder.data.response.StatusPesananResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
@@ -30,7 +28,6 @@ import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.data.response.VenueExtendedResponse;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
-import com.google.gson.annotations.Expose;
 
 public interface RetrofitEndPoint {
 
@@ -126,7 +123,7 @@ public interface RetrofitEndPoint {
     Call<ReferensiResponse> getVenueBaru();
 
     @GET("page/dashboard.php")
-    Call<BerandaResponse> homePage();
+    Call<HomeResponse> homePage();
 
     @GET("page/aktivitas.php")
     Call<AktivitasResponse> aktivitasPage();

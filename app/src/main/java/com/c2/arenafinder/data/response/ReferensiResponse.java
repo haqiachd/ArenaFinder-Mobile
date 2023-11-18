@@ -1,6 +1,7 @@
 package com.c2.arenafinder.data.response;
 
 import com.c2.arenafinder.data.model.ReferensiModel;
+import com.c2.arenafinder.data.model.VenueCoordinateModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -74,13 +75,18 @@ public class ReferensiResponse {
         @SerializedName("venue_disewakan")
         private ArrayList<ReferensiModel> venueDisewakan;
 
-        public Data(ArrayList<ReferensiModel> topRatting, ArrayList<ReferensiModel> venueLokasi, ArrayList<ReferensiModel> venueKosong, ArrayList<ReferensiModel> venueGratis, ArrayList<ReferensiModel> venueBerbayar, ArrayList<ReferensiModel> venueDisewakan) {
+        @Expose
+        @SerializedName("coordinate")
+        private ArrayList<VenueCoordinateModel> coordinate;
+
+        public Data(ArrayList<ReferensiModel> topRatting, ArrayList<ReferensiModel> venueLokasi, ArrayList<ReferensiModel> venueKosong, ArrayList<ReferensiModel> venueGratis, ArrayList<ReferensiModel> venueBerbayar, ArrayList<ReferensiModel> venueDisewakan, ArrayList<VenueCoordinateModel> coordinate) {
             this.topRatting = topRatting;
             this.venueLokasi = venueLokasi;
             this.venueKosong = venueKosong;
             this.venueGratis = venueGratis;
             this.venueBerbayar = venueBerbayar;
             this.venueDisewakan = venueDisewakan;
+            this.coordinate = coordinate;
         }
 
         public ArrayList<ReferensiModel> getTopRatting() {
@@ -129,6 +135,14 @@ public class ReferensiResponse {
 
         public void setVenueDisewakan(ArrayList<ReferensiModel> venueDisewakan) {
             this.venueDisewakan = venueDisewakan;
+        }
+
+        public ArrayList<VenueCoordinateModel> getCoordinate() {
+            return coordinate;
+        }
+
+        public void setCoordinate(ArrayList<VenueCoordinateModel> coordinate) {
+            this.coordinate = coordinate;
         }
     }
 

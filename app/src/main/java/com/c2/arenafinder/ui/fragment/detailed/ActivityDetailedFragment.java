@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.maps.MapOSM;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.AktivitasMemberModel;
 import com.c2.arenafinder.data.model.AktivitasModel;
@@ -36,6 +37,8 @@ import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
+
+import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
 
@@ -53,6 +56,9 @@ public class ActivityDetailedFragment extends Fragment {
 
     private ViewTreeObserver.OnScrollChangedListener listener;
     private UsersUtil usersUtil;
+
+    private MapView mapView;
+    private MapOSM mapOSM;
 
     private AppBarLayout appBarLayout;
     private TextView txtAktivitasNameAppbar;
@@ -78,6 +84,7 @@ public class ActivityDetailedFragment extends Fragment {
         btnVerticalAppbar = root.findViewById(R.id.fad_vertical_menu_appbar);
         txtAktivitasNameAppbar = root.findViewById(R.id.fad_nama_lapangan_appbar);
         scrollView = root.findViewById(R.id.fad_scroll);
+        mapView = root.findViewById(R.id.fad_map_view);
 
         imgBack = root.findViewById(R.id.fad_back);
         imgPhoto = root.findViewById(R.id.fad_image);
@@ -219,6 +226,8 @@ public class ActivityDetailedFragment extends Fragment {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                     });
 
+                    showMap(aktivitasData.getVenueName(), aktivitasData.getCoordinate());
+
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -337,6 +346,26 @@ public class ActivityDetailedFragment extends Fragment {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    private void showMap(String venueName, String coordinate){
+
+        double latitude = ArenaFinder.getLatitude(coordinate),
+                longitude = ArenaFinder.getLongitude(coordinate);
+
+        mapOSM = new MapOSM(requireActivity(), mapView);
+        mapOSM.initializeMap(latitude, longitude, 15.0, false);
+        mapOSM.setCenterMap();
+        mapOSM.addMarker(
+                latitude, longitude, venueName, R.drawable.ic_map_maker,
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                }
+        );
 
     }
 

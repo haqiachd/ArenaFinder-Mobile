@@ -2,12 +2,13 @@ package com.c2.arenafinder.data.response;
 
 import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.ReferensiModel;
+import com.c2.arenafinder.data.model.VenueCoordinateModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class BerandaResponse {
+public class HomeResponse {
 
     @Expose
     @SerializedName("status")
@@ -17,9 +18,9 @@ public class BerandaResponse {
     private String message;
     @Expose
     @SerializedName("data")
-    private BerandaResponse.Data data;
+    private HomeResponse.Data data;
 
-    public BerandaResponse(String status, String message, BerandaResponse.Data data) {
+    public HomeResponse(String status, String message, HomeResponse.Data data) {
         this.status = status;
         this.message = message;
         this.data = data;
@@ -41,11 +42,11 @@ public class BerandaResponse {
         return message;
     }
 
-    public BerandaResponse.Data getData() {
+    public HomeResponse.Data getData() {
         return data;
     }
 
-    public void setData(BerandaResponse.Data data) {
+    public void setData(HomeResponse.Data data) {
         this.data = data;
     }
 
@@ -64,13 +65,18 @@ public class BerandaResponse {
         private ArrayList<AktivitasModel> aktivitasSeru;
 
         @Expose
+        @SerializedName("coordinate")
+        private ArrayList<VenueCoordinateModel> coordinate;
+
+        @Expose
         @SerializedName("dekat_kamu")
         private ArrayList<ReferensiModel> venueLokasi;
 
-        public Data(ArrayList<ReferensiModel> venueBaru, ArrayList<ReferensiModel> venueRekomendasi, ArrayList<AktivitasModel> aktivitasSeru, ArrayList<ReferensiModel> venueLokasi) {
+        public Data(ArrayList<ReferensiModel> venueBaru, ArrayList<ReferensiModel> venueRekomendasi, ArrayList<AktivitasModel> aktivitasSeru, ArrayList<VenueCoordinateModel> coordinate, ArrayList<ReferensiModel> venueLokasi) {
             this.venueBaru = venueBaru;
             this.venueRekomendasi = venueRekomendasi;
             this.aktivitasSeru = aktivitasSeru;
+            this.coordinate = coordinate;
             this.venueLokasi = venueLokasi;
         }
 
@@ -105,6 +111,14 @@ public class BerandaResponse {
 
         public void setVenueLokasi(ArrayList<ReferensiModel> venueLokasi) {
             this.venueLokasi = venueLokasi;
+        }
+
+        public ArrayList<VenueCoordinateModel> getCoordinate() {
+            return coordinate;
+        }
+
+        public void setCoordinate(ArrayList<VenueCoordinateModel> coordinate) {
+            this.coordinate = coordinate;
         }
     }
 

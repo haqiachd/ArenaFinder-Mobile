@@ -18,14 +18,15 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.maps.MapOSM;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.ReferensiModel;
+import com.c2.arenafinder.data.model.VenueCoordinateModel;
 import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
-import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
 import com.c2.arenafinder.ui.adapter.VenueFirstAdapter;
@@ -39,6 +40,8 @@ import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
+import org.osmdroid.views.MapView;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -51,6 +54,10 @@ public class ReferensiFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private SwipeRefreshLayout refreshLayout;
+
+    private MapView mapView;
+
+    private MapOSM mapOSM;
 
     private MaterialButton btnFilter;
 
@@ -78,6 +85,7 @@ public class ReferensiFragment extends Fragment {
         venueDisewakanLayout = view.findViewById(R.id.mre_venue_disewakan_layout);
         btnFilter = view.findViewById(R.id.mre_btn_filter);
 
+        mapView = view.findViewById(R.id.mre_map_view);
         jenisLapangan = view.findViewById(R.id.mre_recycler_jenis);
         venueRattingRecycler = view.findViewById(R.id.mre_recycler_ratting);
         venueKosongRecycler = view.findViewById(R.id.mre_recycler_venue_kosong);
@@ -258,6 +266,7 @@ public class ReferensiFragment extends Fragment {
                     ArrayList<ReferensiModel> venueGratis = data.getVenueGratis();
                     ArrayList<ReferensiModel> venueBerbayar = data.getVenueBerbayar();
                     ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
+                    ArrayList<VenueCoordinateModel> venueCoordinate = data.getCoordinate();
 
                     if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
 //                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
@@ -270,6 +279,7 @@ public class ReferensiFragment extends Fragment {
                         showVenueGratis(venueGratis);
                         showVenueBerbayar(venueBerbayar);
                         showVenueDisewakan(venueDisewakan);
+                        showMap(venueCoordinate);
                     }
 
                 } else {
@@ -481,5 +491,33 @@ public class ReferensiFragment extends Fragment {
         }
 
     }
+
+
+    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels){
+        mapOSM = new MapOSM(requireActivity(), mapView);
+        mapOSM.initializeMap();
+
+        if (coordinateModels.size() <= 0){
+            mapView.setVisibility(View.GONE);
+        }else {
+            if (isAdded()){
+                for (VenueCoordinateModel coordinate : coordinateModels){
+                    mapOSM.addMarker(
+                            ArenaFinder.getLatitude(coordinate.getCoordinate()),
+                            ArenaFinder.getLongitude(coordinate.getCoordinate()),
+                            coordinate.getVenueName(), R.drawable.ic_map_maker, new Runnable() {
+                                @Override
+                                public void run() {
+
+                                }
+                            }
+                    );
+                }
+            }
+        }
+
+
+    }
+
 
 }

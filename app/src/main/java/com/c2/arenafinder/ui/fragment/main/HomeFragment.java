@@ -39,7 +39,8 @@ import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.HomeInfoModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.ReferensiModel;
-import com.c2.arenafinder.data.response.BerandaResponse;
+import com.c2.arenafinder.data.model.VenueCoordinateModel;
+import com.c2.arenafinder.data.response.HomeResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
@@ -58,11 +59,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
 import org.osmdroid.api.IMapController;
-import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
@@ -197,9 +194,33 @@ public class HomeFragment extends Fragment {
             pagerAction();
             getAppbar();
 
-            mapOSM = new MapOSM(requireActivity(), mMap);
-            mapOSM.initializeMap();
         }
+
+    }
+
+    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels){
+        mapOSM = new MapOSM(requireActivity(), mMap);
+        mapOSM.initializeMap();
+
+        if (coordinateModels.size() <= 0){
+            mMap.setVisibility(View.GONE);
+        }else {
+            if (isAdded()){
+                for (VenueCoordinateModel coordinate : coordinateModels){
+                    mapOSM.addMarker(
+                            ArenaFinder.getLatitude(coordinate.getCoordinate()),
+                            ArenaFinder.getLongitude(coordinate.getCoordinate()),
+                            coordinate.getVenueName(), R.drawable.ic_map_maker, new Runnable() {
+                                @Override
+                                public void run() {
+
+                                }
+                            }
+                    );
+                }
+            }
+        }
+
 
     }
 
@@ -406,18 +427,19 @@ public class HomeFragment extends Fragment {
 
     private void fetchData() {
 
-        RetrofitClient.getInstance().homePage().enqueue(new Callback<BerandaResponse>() {
+        RetrofitClient.getInstance().homePage().enqueue(new Callback<HomeResponse>() {
             @Override
-            public void onResponse(Call<BerandaResponse> call, Response<BerandaResponse> response) {
+            public void onResponse(Call<HomeResponse> call, Response<HomeResponse> response) {
 
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     LogApp.info(this, LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
-                    BerandaResponse.Data data = response.body().getData();
+                    HomeResponse.Data data = response.body().getData();
 
                     // get data models
                     ArrayList<ReferensiModel> venueBaru = data.getVenueBaru();
                     ArrayList<ReferensiModel> venueRekomendasi = data.getVenueRekomendasi();
                     ArrayList<AktivitasModel> aktivitasBaru = data.getAktivitasSeru();
+                    ArrayList<VenueCoordinateModel> coordinate = data.getCoordinate();
                     ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
 
                     if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0) {
@@ -428,6 +450,7 @@ public class HomeFragment extends Fragment {
                         showVenueRekomendasi(venueRekomendasi);
                         showAktivitasSeru(aktivitasBaru);
                         showVenueLokasi(venueLokasi);
+                        showMap(coordinate);
                     }
 
                 } else {
@@ -438,7 +461,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<BerandaResponse> call, Throwable t) {
+            public void onFailure(Call<HomeResponse> call, Throwable t) {
                 Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 handlerNullData();
             }

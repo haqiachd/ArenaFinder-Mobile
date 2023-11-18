@@ -203,4 +203,35 @@ public class ArenaFinder {
     }
 
 
+    // Metode pertama untuk mendapatkan latitude dari string data
+    public static double getLatitude(String data) {
+        try {
+            // Pisahkan data menjadi bagian-bagian yang sesuai (gunakan split, delimiter, atau metode lainnya)
+            // Sebagai contoh, jika data adalah "-7.58100688171412, 112.1438935"
+            String[] parts = data.split(",");
+            // Ambil bagian pertama sebagai latitude
+            return Double.parseDouble(parts[0].trim());
+        } catch (Exception e) {
+            // Tangani kesalahan atau kembalikan nilai default jika parsing tidak berhasil
+            e.printStackTrace();
+            return 0.0;
+        }
+    }
+
+    // Metode kedua untuk mendapatkan longitude dari string data
+    public static double getLongitude(String data) {
+        try {
+            // Pisahkan data menjadi bagian-bagian yang sesuai (gunakan split, delimiter, atau metode lainnya)
+            // Sebagai contoh, jika data adalah "-7.58100688171412, 112.1438935"
+            String[] parts = data.split(",");
+            // Ambil bagian kedua sebagai longitude
+            return Double.parseDouble(parts[1].trim());
+        } catch (Exception e) {
+            // Tangani kesalahan atau kembalikan nilai default jika parsing tidak berhasil
+            e.printStackTrace();
+            return 0.0;
+        }
+    }
+
+
 }
