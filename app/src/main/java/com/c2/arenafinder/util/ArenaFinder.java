@@ -45,6 +45,9 @@ public class ArenaFinder {
     public static final int MILLIS_OF_REFRESHING = 1500;
     public static final int TRANSPARENT_STATUS_BAR = 1_1;
     public static final int WHITE_STATUS_BAR = 6_0_9;
+    public static final int PERMISSION_CURRENT_POSITION = 100;
+    public static final int PERMISSION_CAMERA = 101;
+    public static final int PERMISSION_STORAGE = 102;
 
     public static void playVibrator(@NonNull Context context, int millis){
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

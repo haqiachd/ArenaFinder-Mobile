@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.GpsStatus;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
@@ -99,7 +98,7 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
 
     }
 
-    public void initializedMap() {
+    public void initializeMap() {
         initializeMap(DEF_LATITUDE, DEF_LONGITUDE, DEF_ZOOM);
     }
 

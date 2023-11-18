@@ -189,38 +189,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mapOSM = new MapOSM(requireActivity(), mMap);
-        mapOSM.initializeMap(-7.579969721425336, 111.88849882053768, 15.0);
-
-//        Configuration.getInstance().load(
-//                requireContext(),
-//                requireActivity().getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
-//        );
-//
-//        mMap.setTileSource(TileSourceFactory.MAPNIK);
-////        mMap.mapCenter(new GeoPoint(0.0, 0.0)); // Set the initial map center coordinates
-//        mMap.setExpectedCenter(new GeoPoint(-7.579969721425336, 111.88849882053768)); // Set the initial map center coordinates
-//
-//        mMap.setMultiTouchControls(true);
-//
-//        mMyLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(requireActivity()), mMap);
-//        controller = mMap.getController();
-//
-//        mMyLocationOverlay.enableMyLocation();
-//        mMyLocationOverlay.enableFollowLocation();
-//        mMyLocationOverlay.setDrawAccuracyEnabled(true);
-//
-//        mMyLocationOverlay.runOnFirstFix(() -> {
-//            requireActivity().runOnUiThread(() -> {
-//                controller.setCenter(mMyLocationOverlay.getMyLocation());
-//                controller.animateTo(mMyLocationOverlay.getMyLocation());
-//            });
-//        });
-//
-//        controller.setZoom(15.0);
-//
-//        mMap.getOverlays().add(mMyLocationOverlay);
-
         if (isAdded()) {
             adapterLapangan();
             fetchData();
@@ -228,6 +196,9 @@ public class HomeFragment extends Fragment {
             showPager();
             pagerAction();
             getAppbar();
+
+            mapOSM = new MapOSM(requireActivity(), mMap);
+            mapOSM.initializeMap();
         }
 
     }
