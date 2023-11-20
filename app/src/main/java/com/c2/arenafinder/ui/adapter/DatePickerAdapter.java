@@ -56,23 +56,25 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Vi
             holder.setDeactiveDate(context);
         }
 
+        if (holder.getAdapterPosition() == 0){
+            holder.setActiveDate(context);
+            models.get(position).setClicked(true);
+        }
+
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
-            holder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    for (int i = 0; i < models.size(); i++) {
-                        DatePickerModel model = models.get(i);
-                        if (i != holder.getAdapterPosition()){
-                            model.setClicked(false);
-                            models.set(i, model);
-                        }else {
-                            model.setClicked(true);
-                            models.set(i, model);
-                        }
-                        notifyItemChanged(i);
+            holder.cardView.setOnClickListener(v -> {
+                for (int i = 0; i < models.size(); i++) {
+                    DatePickerModel model = models.get(i);
+                    if (i != holder.getAdapterPosition()){
+                        model.setClicked(false);
+                        models.set(i, model);
+                    }else {
+                        model.setClicked(true);
+                        models.set(i, model);
                     }
-                    listener.onClickListener(holder.getAdapterPosition());
+                    notifyItemChanged(i);
                 }
+                listener.onClickListener(holder.getAdapterPosition());
             });
         }
     }

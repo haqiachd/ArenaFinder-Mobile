@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,20 +17,23 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.applandeo.materialcalendarview.CalendarDay;
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.DatePickerModel;
 import com.c2.arenafinder.data.model.JadwalPickerModel;
-import com.c2.arenafinder.data.model.JamOperasionalModel;
 import com.c2.arenafinder.data.model.VenueBookingModel;
 import com.c2.arenafinder.data.response.CreateBookingResponse;
 import com.c2.arenafinder.data.response.VenueBookingResponse;
-import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.adapter.DatePickerAdapter;
 import com.c2.arenafinder.ui.adapter.VenueBookingAdapter;
@@ -43,6 +47,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -59,6 +64,8 @@ public class BookingVenueFragment extends Fragment {
 
     private RecyclerView recyclerDate, recyclerVenue;
 
+    private ImageView btnChooseDate;
+
     private UsersUtil usersUtil;
 
     private String dateChooser;
@@ -72,6 +79,7 @@ public class BookingVenueFragment extends Fragment {
     private void initViews(View view) {
         recyclerDate = view.findViewById(R.id.fbv_recycler_date);
         recyclerVenue = view.findViewById(R.id.fbv_recycler_lapangan);
+        btnChooseDate = view.findViewById(R.id.fbv_date_picker);
     }
 
 
@@ -113,6 +121,53 @@ public class BookingVenueFragment extends Fragment {
         String currentDate = sdf.format(calendar.getTime());
         showJadwal(currentDate);
         updateBottomNav(0);
+
+        onClickGroups();
+    }
+
+    private void onClickGroups() {
+
+        btnChooseDate.setOnClickListener(v -> {
+
+            Toast.makeText(requireContext(), "Date Pick", Toast.LENGTH_SHORT).show();
+
+           View custom = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_material_calendar, null);
+           CalendarView calendarView = custom.findViewById(R.id.dia_calendar);
+
+           new AlertDialog.Builder(requireContext())
+                   .setView(custom)
+                   .create().show();
+
+           // set minimun date
+            Calendar cMin = Calendar.getInstance();
+            cMin.set(cMin.get(Calendar.YEAR), cMin.get(Calendar.MONTH), cMin.get(Calendar.DAY_OF_MONTH)-1);
+            calendarView.setMinimumDate(cMin);
+            Calendar c = Calendar.getInstance();
+
+            // set date now background
+            List<CalendarDay> dys = new ArrayList<>();
+            CalendarDay cday = new CalendarDay(c);
+            cday.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_calendar_view_red));
+            dys.add(cday);
+            calendarView.setCalendarDays(dys);
+
+            calendarView.setOnDayClickListener(new OnDayClickListener() {
+                @Override
+                public void onDayClick(@NonNull EventDay eventDay) {
+                    Calendar clickedDayCalendar = eventDay.getCalendar();
+                    Calendar kemarin = Calendar.getInstance();
+                    kemarin.set(kemarin.get(Calendar.YEAR), kemarin.get(Calendar.MONTH), kemarin.get(Calendar.DAY_OF_MONTH)-1);
+                    if (clickedDayCalendar.before(kemarin)){
+                        Toast.makeText(requireContext(), "TOLOL", Toast.LENGTH_SHORT).show();
+                    }else {
+                        String day = "" + clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
+                        Toast.makeText(requireContext(), "Date -> " + day, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        });
+
     }
 
     private void showDatePicker() {
