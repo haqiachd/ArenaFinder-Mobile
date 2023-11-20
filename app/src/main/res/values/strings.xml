@@ -388,5 +388,6 @@
     <string name="btn_sport_venue">Tempat Olahraga</string>
     <string name="arenafinder_osm_map">com.c2.arenafinder.OSM_MAP</string>
     <string name="date_picker_title">Pilih Tanggal Booking</string>
+    <string name="date_picker_bef_date">Tanggal yang dipilih sudah terlewat</string>
 
 </resources>

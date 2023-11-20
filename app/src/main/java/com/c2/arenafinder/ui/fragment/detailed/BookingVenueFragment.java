@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -13,11 +14,14 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +51,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -128,46 +131,117 @@ public class BookingVenueFragment extends Fragment {
     private void onClickGroups() {
 
         btnChooseDate.setOnClickListener(v -> {
+            btnChooseDate.setClickable(false);
 
-            Toast.makeText(requireContext(), "Date Pick", Toast.LENGTH_SHORT).show();
+            // initialized dialog view
+            View customView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_material_calendar, null);
+            CalendarView calendarView = customView.findViewById(R.id.dia_pick_calendar);
+            TextView txtCancel = customView.findViewById(R.id.dia_pick_cancel);
+            ProgressBar prog = customView.findViewById(R.id.dia_pick_prog);
 
-           View custom = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_material_calendar, null);
-           CalendarView calendarView = custom.findViewById(R.id.dia_calendar);
+            // show dialog
+            AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                    .setView(customView).create();
+            dialog.show();
 
-           new AlertDialog.Builder(requireContext())
-                   .setView(custom)
-                   .create().show();
+            new Handler(Looper.getMainLooper())
+                    .postDelayed(() -> {
+                        prog.setVisibility(View.GONE);
+                        calendarView.setVisibility(View.VISIBLE);
+                    }, 1000L);
 
-           // set minimun date
-            Calendar cMin = Calendar.getInstance();
-            cMin.set(cMin.get(Calendar.YEAR), cMin.get(Calendar.MONTH), cMin.get(Calendar.DAY_OF_MONTH)-1);
-            calendarView.setMinimumDate(cMin);
-            Calendar c = Calendar.getInstance();
+            // set minimun date
+            Calendar minDate = Calendar.getInstance();
+            minDate.set(minDate.get(Calendar.YEAR), minDate.get(Calendar.MONTH), minDate.get(Calendar.DAY_OF_MONTH) - 1);
+            calendarView.setMinimumDate(minDate);
 
             // set date now background
-            List<CalendarDay> dys = new ArrayList<>();
-            CalendarDay cday = new CalendarDay(c);
-            cday.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_calendar_view_red));
-            dys.add(cday);
-            calendarView.setCalendarDays(dys);
+            ArrayList<CalendarDay> days = new ArrayList<>();
+            CalendarDay cday = new CalendarDay(Calendar.getInstance());
+            days.add(cday);
+            changeDateBackground(calendarView, days, R.drawable.bg_calendar_view_grey);
 
+            // action when prev date
+            calendarView.setOnPreviousPageChangeListener(() -> {
+                prog.setVisibility(View.VISIBLE);
+                calendarView.setVisibility(View.INVISIBLE);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayList<CalendarDay> ds = new ArrayList<>();
+                        ds.add(new CalendarDay(calendarView.getCurrentPageDate()));
+                        changeDateBackground(
+                                calendarView, ds, R.drawable.bg_calendar_view_grey
+                        );
+
+                        prog.setVisibility(View.GONE);
+                        calendarView.setVisibility(View.VISIBLE);
+                    }
+                }, 500L);
+            });
+
+            // action when forward date
+            calendarView.setOnForwardPageChangeListener(() -> {
+                prog.setVisibility(View.VISIBLE);
+                calendarView.setVisibility(View.INVISIBLE);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayList<CalendarDay> ds = new ArrayList<>();
+                        ds.add(new CalendarDay(calendarView.getCurrentPageDate()));
+                        changeDateBackground(
+                                calendarView, ds, R.drawable.bg_calendar_view_grey
+                        );
+
+                        prog.setVisibility(View.GONE);
+                        calendarView.setVisibility(View.VISIBLE);
+                    }
+                }, 500L);
+            });
+
+            // action when users selected a date
             calendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
                 public void onDayClick(@NonNull EventDay eventDay) {
+                    // get date selected
                     Calendar clickedDayCalendar = eventDay.getCalendar();
+                    // get yesterday date
                     Calendar kemarin = Calendar.getInstance();
-                    kemarin.set(kemarin.get(Calendar.YEAR), kemarin.get(Calendar.MONTH), kemarin.get(Calendar.DAY_OF_MONTH)-1);
-                    if (clickedDayCalendar.before(kemarin)){
-                        Toast.makeText(requireContext(), "TOLOL", Toast.LENGTH_SHORT).show();
-                    }else {
+                    kemarin.set(kemarin.get(Calendar.YEAR), kemarin.get(Calendar.MONTH), kemarin.get(Calendar.DAY_OF_MONTH) - 1);
+
+                    // check whether the selected date is before today's date
+                    if (clickedDayCalendar.before(kemarin)) {
+                        Toast.makeText(requireContext(), R.string.date_picker_bef_date, Toast.LENGTH_SHORT).show();
+                    } else {
                         String day = "" + clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
                         Toast.makeText(requireContext(), "Date -> " + day, Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        btnChooseDate.setClickable(true);
                     }
                 }
             });
 
-        });
+            // action when user canceled select a date
+            txtCancel.setOnClickListener(p -> {
+                dialog.dismiss();
+                btnChooseDate.setClickable(true);
+            });
+            dialog.setOnCancelListener(c -> {
+                btnChooseDate.setClickable(true);
+            });
 
+        });
+    }
+
+    private void changeDateBackground(CalendarView calendarView, ArrayList<CalendarDay> days, @DrawableRes int draw){
+
+        for (CalendarDay day : days){
+            day.setBackgroundDrawable(
+                    ContextCompat.getDrawable(requireContext(), draw)
+            );
+        }
+
+        calendarView.setCalendarDays(days);
     }
 
     private void showDatePicker() {

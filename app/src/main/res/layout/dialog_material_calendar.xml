@@ -5,26 +5,44 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/dia_calendar"
+    <ProgressBar
+        android:id="@+id/dia_pick_prog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/dia_pick_calendar"
+        app:layout_constraintBottom_toBottomOf="@id/dia_pick_calendar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/dia_pick_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dia_calendar">
+        app:layout_constraintTop_toBottomOf="@id/dia_pick_calendar">
 
         <TextView
+            android:id="@+id/dia_pick_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Pilih" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/dia_negative_cancel"
+            android:textColor="@color/azure"
+            android:textSize="@dimen/_12ssp" />
 
     </LinearLayout>
 
