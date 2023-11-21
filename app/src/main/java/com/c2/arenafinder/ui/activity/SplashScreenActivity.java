@@ -132,7 +132,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (usersUtil.isSignIn()) {
             // Jika pengguna sudah masuk, buka MainActivity
             LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
+//            startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
             startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+
         } else {
             // Jika pengguna belum masuk, buka WelcomeActivity
             LogApp.info(this, LogTag.LIFEFCYLE, "Membuka WelcomeActivity");

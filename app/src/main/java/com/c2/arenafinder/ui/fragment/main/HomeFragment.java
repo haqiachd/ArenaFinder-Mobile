@@ -14,12 +14,14 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +34,7 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.maps.MapOSM;
-import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.api.retrofit.RetrofitState;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasModel;
@@ -40,7 +42,9 @@ import com.c2.arenafinder.data.model.HomeInfoModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueCoordinateModel;
+import com.c2.arenafinder.data.repository.HomeRepository;
 import com.c2.arenafinder.data.response.HomeResponse;
+import com.c2.arenafinder.di.HomeViewModelFactory;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
@@ -54,6 +58,7 @@ import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.viewmodel.HomeViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -63,13 +68,11 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
+
+    private static final String KEY_TEST = "test";
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -81,6 +84,8 @@ public class HomeFragment extends Fragment {
 
     private String sheetSearch = "";
     private int sportType = 0;
+
+    private HomeViewModel homeViewModel;
 
     private ArrayList<TextView> dots;
     private ArrayList<HomeInfoModel> homeInfoModels;
@@ -167,46 +172,104 @@ public class HomeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        LogApp.info(requireActivity(), "first");
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
+        homeViewModel = new ViewModelProvider(
+                requireActivity(),
+                new HomeViewModelFactory(new HomeRepository())
+        ).get(HomeViewModel.class);
+
         LogApp.info(this, LogTag.LIFEFCYLE, "onViewCreated() Called");
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        fetchData();
-                        refreshLayout.setRefreshing(false);
-                    }
-                }, 1500L);
-            }
-        });
+        refreshLayout.setOnRefreshListener(() ->
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    observer();
+                    refreshLayout.setRefreshing(false);
+                    requireActivity().runOnUiThread(() -> homeViewModel.fetchHome());
+                }, 1500L)
+        );
 
         if (isAdded()) {
+            if (getView() != null) {
+                if (savedInstanceState != null){
+                    Parcelable parcelable = savedInstanceState.getParcelable(KEY_TEST);
+                    Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onRestoreInstanceState(parcelable);
+                    Toast.makeText(requireContext(), "RESTORE", Toast.LENGTH_SHORT).show();
+                }else {
+                    new Handler(Looper.getMainLooper()).post(this::observer);
+                }
+            }
             adapterLapangan();
-            fetchData();
             onClickGroups();
             showPager();
             pagerAction();
             getAppbar();
-
         }
 
     }
 
-    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels){
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Toast.makeText(requireContext(), "SAVED", Toast.LENGTH_SHORT).show();
+        outState.putParcelable(KEY_TEST, Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onSaveInstanceState());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        homeViewModel.getHomeData().removeObservers(getViewLifecycleOwner());
+    }
+
+    private void observer() {
+
+        homeViewModel.getHomeData().observe(getViewLifecycleOwner(), dataState -> {
+
+            if (dataState instanceof RetrofitState.Loading) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_LOADING, "Dashboard loaded");
+            } else if (dataState instanceof RetrofitState.Error) {
+                Toast.makeText(requireActivity(), "FAILURE " + ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
+                handlerNullData();
+            } else if (dataState instanceof RetrofitState.Success) {
+                HomeResponse.Data data = ((RetrofitState.Success<HomeResponse>) dataState).getData().getData();
+
+                // get data models
+                ArrayList<ReferensiModel> venueBaru = data.getVenueBaru();
+                ArrayList<ReferensiModel> venueRekomendasi = data.getVenueRekomendasi();
+                ArrayList<AktivitasModel> aktivitasBaru = data.getAktivitasSeru();
+                ArrayList<VenueCoordinateModel> coordinate = data.getCoordinate();
+                ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
+
+                if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0) {
+                    handlerNullData();
+                } else {
+                    // show recyclerview
+                    requireActivity().runOnUiThread(() -> {
+                        showVenueBaru(venueBaru);
+                        showVenueRekomendasi(venueRekomendasi);
+                        showAktivitasSeru(aktivitasBaru);
+                        showVenueLokasi(venueLokasi);
+                        showMap(coordinate);
+                    });
+
+                }
+            }
+
+        });
+
+    }
+
+    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels) {
         mapOSM = new MapOSM(requireActivity(), mMap);
         mapOSM.initializeMap();
 
-        if (coordinateModels.size() <= 0){
+        if (coordinateModels.size() <= 0) {
             mMap.setVisibility(View.GONE);
-        }else {
-            if (isAdded()){
-                for (VenueCoordinateModel coordinate : coordinateModels){
+        } else {
+            if (isAdded()) {
+                for (VenueCoordinateModel coordinate : coordinateModels) {
                     mapOSM.addMarker(
                             ArenaFinder.getLatitude(coordinate.getCoordinate()),
                             ArenaFinder.getLongitude(coordinate.getCoordinate()),
@@ -220,14 +283,8 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
-
-
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     private void getAppbar() {
         if (getActivity() != null) {
@@ -308,8 +365,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void showSheet(
-            @StringRes int title, @StringRes int btnMsg, @StringRes int btn1, @StringRes int btn2, Runnable runnable)
-    {
+            @StringRes int title, @StringRes int btnMsg, @StringRes int btn1, @StringRes int btn2, Runnable runnable) {
 //        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
         BottomSheetDialog sheet = new BottomSheetDialog(requireContext(), R.style.BottomSheetTheme);
         View sheetInflater = requireActivity().getLayoutInflater().inflate(R.layout.sheet_choose_search, null);
@@ -425,50 +481,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void fetchData() {
-
-        RetrofitClient.getInstance().homePage().enqueue(new Callback<HomeResponse>() {
-            @Override
-            public void onResponse(Call<HomeResponse> call, Response<HomeResponse> response) {
-
-                if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
-                    LogApp.info(this, LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
-                    HomeResponse.Data data = response.body().getData();
-
-                    // get data models
-                    ArrayList<ReferensiModel> venueBaru = data.getVenueBaru();
-                    ArrayList<ReferensiModel> venueRekomendasi = data.getVenueRekomendasi();
-                    ArrayList<AktivitasModel> aktivitasBaru = data.getAktivitasSeru();
-                    ArrayList<VenueCoordinateModel> coordinate = data.getCoordinate();
-                    ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
-
-                    if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0) {
-                        handlerNullData();
-                    } else {
-                        // show recyclerview
-                        showVenueBaru(venueBaru);
-                        showVenueRekomendasi(venueRekomendasi);
-                        showAktivitasSeru(aktivitasBaru);
-                        showVenueLokasi(venueLokasi);
-                        showMap(coordinate);
-                    }
-
-                } else {
-                    Toast.makeText(requireActivity(), "FAILURE " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    handlerNullData();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<HomeResponse> call, Throwable t) {
-                Toast.makeText(requireActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                handlerNullData();
-            }
-        });
-
-    }
-
     private void handlerNullData() {
         venueBaruLayout.setVisibility(View.GONE);
         aktivitasLayout.setVisibility(View.GONE);
@@ -496,6 +508,7 @@ public class HomeFragment extends Fragment {
                     }
                 }, VenueFirstAdapter.DEFAULT
                 ));
+
 
                 ArenaFinder.setRecyclerWidthByItem(requireContext(), venueBaruRecycler, models.size(), R.dimen.card_venue_width_java);
             }
@@ -590,11 +603,11 @@ public class HomeFragment extends Fragment {
                     public void onClickListener(int position) {
                         showSheet(R.string.txt_pilih_tipe_sport, R.string.btn_tampilkan, R.string.btn_sport_activity, R.string.btn_sport_venue,
                                 () -> startActivity(
-                                new Intent(requireActivity(), SubMainActivity.class)
-                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
-                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(sportType))
-                                        .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
-                        ));
+                                        new Intent(requireActivity(), SubMainActivity.class)
+                                                .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
+                                                .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(sportType))
+                                                .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
+                                ));
                     }
                 }
         );
