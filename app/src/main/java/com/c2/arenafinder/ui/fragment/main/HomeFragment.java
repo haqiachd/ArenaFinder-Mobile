@@ -63,9 +63,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -166,21 +164,17 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    private IMapController controller;
-    private MyLocationNewOverlay mMyLocationOverlay;
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        LogApp.info(this, LogTag.LIFEFCYLE, "onViewCreated() Called");
 
         homeViewModel = new ViewModelProvider(
                 requireActivity(),
                 new HomeViewModelFactory(new HomeRepository())
         ).get(HomeViewModel.class);
-
-        LogApp.info(this, LogTag.LIFEFCYLE, "onViewCreated() Called");
 
         refreshLayout.setOnRefreshListener(() ->
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -190,23 +184,25 @@ public class HomeFragment extends Fragment {
                 }, 1500L)
         );
 
+        mapOSM = new MapOSM(requireActivity(), mMap);
+
         if (isAdded()) {
             if (getView() != null) {
-                if (savedInstanceState != null){
+                if (savedInstanceState != null) {
                     Parcelable parcelable = savedInstanceState.getParcelable(KEY_TEST);
                     Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onRestoreInstanceState(parcelable);
                     Toast.makeText(requireContext(), "RESTORE", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     new Handler(Looper.getMainLooper()).post(this::observer);
                 }
             }
+
             adapterLapangan();
             onClickGroups();
             showPager();
             pagerAction();
             getAppbar();
         }
-
     }
 
     @Override
@@ -260,31 +256,6 @@ public class HomeFragment extends Fragment {
         });
 
     }
-
-    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels) {
-        mapOSM = new MapOSM(requireActivity(), mMap);
-        mapOSM.initializeMap();
-
-        if (coordinateModels.size() <= 0) {
-            mMap.setVisibility(View.GONE);
-        } else {
-            if (isAdded()) {
-                for (VenueCoordinateModel coordinate : coordinateModels) {
-                    mapOSM.addMarker(
-                            ArenaFinder.getLatitude(coordinate.getCoordinate()),
-                            ArenaFinder.getLongitude(coordinate.getCoordinate()),
-                            coordinate.getVenueName(), R.drawable.ic_map_maker, new Runnable() {
-                                @Override
-                                public void run() {
-
-                                }
-                            }
-                    );
-                }
-            }
-        }
-    }
-
 
     private void getAppbar() {
         if (getActivity() != null) {
@@ -361,6 +332,27 @@ public class HomeFragment extends Fragment {
                             .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.VENUE_LOKASI)
             );
         });
+
+    }
+
+    private void adapterLapangan() {
+        ArrayList<JenisLapanganModel> lapanganModels = ArenaFinder.getSportType();
+
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
+                new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        showSheet(R.string.txt_pilih_tipe_sport, R.string.btn_tampilkan, R.string.btn_sport_activity, R.string.btn_sport_venue,
+                                () -> startActivity(
+                                        new Intent(requireActivity(), SubMainActivity.class)
+                                                .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
+                                                .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(sportType))
+                                                .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
+                                ));
+                    }
+                }
+        );
+        jenisLapangan.setAdapter(lapanganAdapter);
 
     }
 
@@ -593,26 +585,29 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels) {
+        mapOSM.initializeMap();
 
-    private void adapterLapangan() {
-        ArrayList<JenisLapanganModel> lapanganModels = ArenaFinder.getSportType();
+        if (coordinateModels.size() <= 0) {
+            mMap.setVisibility(View.GONE);
+        } else {
+            if (isAdded()) {
+                for (VenueCoordinateModel coordinate : coordinateModels) {
+                    mapOSM.addMarker(
+                            ArenaFinder.getLatitude(coordinate.getCoordinate()),
+                            ArenaFinder.getLongitude(coordinate.getCoordinate()),
+                            coordinate.getVenueName(), R.drawable.ic_map_maker, new Runnable() {
+                                @Override
+                                public void run() {
 
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
-                new AdapterActionListener() {
-                    @Override
-                    public void onClickListener(int position) {
-                        showSheet(R.string.txt_pilih_tipe_sport, R.string.btn_tampilkan, R.string.btn_sport_activity, R.string.btn_sport_venue,
-                                () -> startActivity(
-                                        new Intent(requireActivity(), SubMainActivity.class)
-                                                .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
-                                                .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(sportType))
-                                                .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
-                                ));
-                    }
+                                }
+                            }
+                    );
                 }
-        );
-        jenisLapangan.setAdapter(lapanganAdapter);
-
+            }
+        }
     }
+
+
 
 }

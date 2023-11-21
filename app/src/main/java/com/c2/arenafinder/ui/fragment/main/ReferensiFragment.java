@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -20,12 +21,17 @@ import android.widget.Toast;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.maps.MapOSM;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.api.retrofit.RetrofitState;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 import com.c2.arenafinder.data.model.ReferensiModel;
 import com.c2.arenafinder.data.model.VenueCoordinateModel;
+import com.c2.arenafinder.data.repository.AktivitasRepository;
+import com.c2.arenafinder.data.repository.ReferensiRepository;
 import com.c2.arenafinder.data.response.ReferensiResponse;
+import com.c2.arenafinder.di.AktivitasViewModelFactory;
+import com.c2.arenafinder.di.ReferensiViewModelFactory;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.JenisLapanganAdapter;
@@ -37,6 +43,7 @@ import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.viewmodel.ReferensiViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
@@ -52,6 +59,8 @@ public class ReferensiFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ReferensiViewModel referensiViewModel;
 
     private SwipeRefreshLayout refreshLayout;
 
@@ -132,13 +141,18 @@ public class ReferensiFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
+        referensiViewModel = new ViewModelProvider(
+                requireActivity(),
+                new ReferensiViewModelFactory(new ReferensiRepository())
+        ).get(ReferensiViewModel.class);
+
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        fetchData();
+                        requireActivity().runOnUiThread(() -> referensiViewModel.fetchAktivitas());
                         refreshLayout.setRefreshing(false);
                     }
                 }, 1500L);
@@ -147,7 +161,9 @@ public class ReferensiFragment extends Fragment {
 
         if (isAdded()) {
             LogApp.info(requireContext(), "PREPARING LOAD DATA TO SERVER");
-            fetchData();
+            if (getView() != null){
+                new Handler(Looper.getMainLooper()).post(this::observer);
+            }
             adapterLapangan();
             onClickGroups();
             getAppbar();
@@ -160,8 +176,14 @@ public class ReferensiFragment extends Fragment {
         super.onResume();
     }
 
-    private void getAppbar(){
-        if (getActivity() != null){
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        referensiViewModel.getReferensiData().removeObservers(getViewLifecycleOwner());
+    }
+
+    private void getAppbar() {
+        if (getActivity() != null) {
             MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
             cardSearch.setOnClickListener(v -> {
                 startActivity(
@@ -246,6 +268,48 @@ public class ReferensiFragment extends Fragment {
                 }
         );
         jenisLapangan.setAdapter(lapanganAdapter);
+
+    }
+
+    private void observer() {
+
+        referensiViewModel.getReferensiData().observe(getViewLifecycleOwner(), dataState -> {
+
+            if (dataState instanceof RetrofitState.Loading) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_LOADING, "Referensi loaded");
+            } else if (dataState instanceof RetrofitState.Error) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_FAILURE, "Referensi loaded");
+                Toast.makeText(requireActivity(), "FAILURE " + ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
+                handlerNullData();
+            } else if (dataState instanceof RetrofitState.Success) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "Referensi loaded");
+                ReferensiResponse.Data data = ((RetrofitState.Success<ReferensiResponse>) dataState).getData().getData();
+
+                // get data models
+                ArrayList<ReferensiModel> topRating = data.getTopRatting();
+                ArrayList<ReferensiModel> venueKosong = data.getVenueKosong();
+                ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
+                ArrayList<ReferensiModel> venueGratis = data.getVenueGratis();
+                ArrayList<ReferensiModel> venueBerbayar = data.getVenueBerbayar();
+                ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
+                ArrayList<VenueCoordinateModel> venueCoordinate = data.getCoordinate();
+
+                if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
+//                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+                    handlerNullData();
+                } else {
+                    // show referensi recyclerview
+                    showVenueTopRatting(topRating);
+                    showVenueKosong(venueKosong);
+                    showVenueLokasi(venueLokasi);
+                    showVenueGratis(venueGratis);
+                    showVenueBerbayar(venueBerbayar);
+                    showVenueDisewakan(venueDisewakan);
+                    showMap(venueCoordinate);
+                }
+            }
+
+        });
 
     }
 
@@ -493,15 +557,15 @@ public class ReferensiFragment extends Fragment {
     }
 
 
-    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels){
+    private void showMap(ArrayList<VenueCoordinateModel> coordinateModels) {
         mapOSM = new MapOSM(requireActivity(), mapView);
         mapOSM.initializeMap();
 
-        if (coordinateModels.size() <= 0){
+        if (coordinateModels.size() <= 0) {
             mapView.setVisibility(View.GONE);
-        }else {
-            if (isAdded()){
-                for (VenueCoordinateModel coordinate : coordinateModels){
+        } else {
+            if (isAdded()) {
+                for (VenueCoordinateModel coordinate : coordinateModels) {
                     mapOSM.addMarker(
                             ArenaFinder.getLatitude(coordinate.getCoordinate()),
                             ArenaFinder.getLongitude(coordinate.getCoordinate()),
