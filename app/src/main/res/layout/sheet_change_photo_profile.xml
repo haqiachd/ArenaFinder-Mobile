@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_bottom_sheet"
+    >
+
+    <ImageView
+        android:id="@+id/scpp_line_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sheet_line_indicator"
+        android:contentDescription="@string/alt_bottom_sheet_line_indicator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scpp_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sheet_title_margin_top"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/txt_sheet_cpp_title"
+        android:textSize="@dimen/sheet_title_textsize"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/scpp_line_indicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/scpp_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/scpp_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/scpp_opsi_foto"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sheet_cpp_height"
+            >
+
+            <ImageView
+                android:id="@+id/scpp_cpp_camera_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sheet_cpp_foto"
+                android:contentDescription="@string/alt_sheet_cpp_photo"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                />
+
+            <TextView
+                android:id="@+id/scpp_cpp_camera_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/txt_sheet_cpp_camera"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/scpp_cpp_camera_icon"
+                tools:ignore="RelativeOverlap"
+                />
+
+            <ImageView
+                android:id="@+id/scpp_cpp_camera_endicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:src="@drawable/ic_sheet_more_than"
+                android:contentDescription="@string/alt_sheet_more_than"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/scpp_opsi_galery"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sheet_cpp_height"
+            >
+
+            <ImageView
+                android:id="@+id/scpp_cpp_galery_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sheet_cpp_galery"
+                android:contentDescription="@string/alt_sheet_cpp_galery"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                />
+
+            <TextView
+                android:id="@+id/scpp_cpp_galery_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/txt_sheet_cpp_galery"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_toEndOf="@id/scpp_cpp_galery_icon"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                tools:ignore="RelativeOverlap"
+                />
+
+            <ImageView
+                android:id="@+id/scpp_cpp_galery_endicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:src="@drawable/ic_sheet_more_than"
+                android:contentDescription="@string/alt_sheet_more_than"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/scpp_opsi_hapus"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sheet_cpp_height"
+            >
+
+            <ImageView
+                android:id="@+id/scpp_cpp_hapus_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sheet_cpp_hapus"
+                android:contentDescription="@string/alt_sheet_cpp_photo"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                />
+
+            <TextView
+                android:id="@+id/scpp_cpp_hapus_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_13sdp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/txt_sheet_cpp_hapus_title"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@id/scpp_cpp_hapus_icon"
+                tools:ignore="RelativeOverlap"
+                />
+
+            <ImageView
+                android:id="@+id/scpp_cpp_hapus_endicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:src="@drawable/ic_sheet_more_than"
+                android:contentDescription="@string/alt_sheet_more_than"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
