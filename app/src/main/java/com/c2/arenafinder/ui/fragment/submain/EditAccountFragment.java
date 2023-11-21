@@ -1,16 +1,13 @@
 package com.c2.arenafinder.ui.fragment.submain;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -19,10 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.DataShared;
@@ -37,6 +35,9 @@ import com.c2.arenafinder.util.UsersUtil;
 
 import java.io.IOException;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.card.MaterialCardView;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,7 +49,6 @@ public class EditAccountFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private static final int PICK_IMAGE = 1;
-    private static final int PERMISSION_REQUEST_STORAGE = 2;
 
     private String mParam1;
     private String mParam2;
@@ -56,7 +56,8 @@ public class EditAccountFragment extends Fragment {
     private DataShared dataShared;
     private Uri uri;
 
-    private Button btnSimpan;
+    private MaterialCardView cardPhoto;
+    private Button btnBatal, btnSimpan;
     private TextView btnChoose;
     private EditText inpUsername, inpNama;
     private CircleImageView imgPhoto;
@@ -66,6 +67,8 @@ public class EditAccountFragment extends Fragment {
     }
 
     private void initViews(View view){
+        cardPhoto = view.findViewById(R.id.edacc_card_photo);
+        btnBatal = view.findViewById(R.id.edacc_batal);
         btnSimpan = view.findViewById(R.id.edacc_simpan);
         inpUsername = view.findViewById(R.id.edacc_inp_username);
         inpNama = view.findViewById(R.id.edacc_inp_name);
@@ -114,24 +117,32 @@ public class EditAccountFragment extends Fragment {
         inpNama.setText(usersUtil.getFullName());
 
         onClickGroups();
+        getAppbar();
+    }
+
+    private void getAppbar(){
+
+        if (getActivity() != null){
+
+            LinearLayout linear = getActivity().findViewById(R.id.sub_linear);
+            TextView txtTitle = getActivity().findViewById(R.id.sub_title);
+            ImageView imgBack = getActivity().findViewById(R.id.sub_back);
+
+            linear.setVisibility(View.VISIBLE);
+
+            txtTitle.setText(getString(R.string.item_mpr_edit_account));
+
+            imgBack.setOnClickListener(v -> {
+                requireActivity().onBackPressed();
+            });
+
+        }
+
     }
 
     private void choosePhoto() {
-//        if (ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED
-//                && ContextCompat.checkSelfPermission(requireActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//
-//            ActivityCompat.requestPermissions(requireActivity(),
-//                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-//                    PERMISSION_REQUEST_STORAGE);
-//
-//            Toast.makeText(requireActivity(), "permission needed", Toast.LENGTH_SHORT).show();
-//        }else{
-//            Toast.makeText(requireActivity(), "permission granted", Toast.LENGTH_SHORT).show();
+        // tambahkan user permission
         openGallery();
-//        }
-//        checkAndRequestStoragePermission();
     }
 
     public void openGallery() {
@@ -202,31 +213,6 @@ public class EditAccountFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        switch (requestCode) {
-//            case PERMISSION_REQUEST_STORAGE: {
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//
-//                    openGallery();
-//                }
-//
-//                return;
-//            }
-//        }
-//    }
-
-    // Method to check and request permission if needed.
-    private void checkAndRequestStoragePermission() {
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            openGallery();
-        }else {
-            Toast.makeText(requireActivity(), "Permission Denied :v", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -259,6 +245,15 @@ public class EditAccountFragment extends Fragment {
             }else{
                 Toast.makeText(requireActivity(), "You must choose the image", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        btnBatal.setOnClickListener(v -> {
+            requireActivity().onBackPressed();
+        });
+
+        cardPhoto.setOnClickListener(v -> {
+            LogApp.info(requireContext(), LogTag.ON_CLICK, "Button Choose Diclik");
+            choosePhoto();
         });
 
         btnChoose.setOnClickListener(v -> {

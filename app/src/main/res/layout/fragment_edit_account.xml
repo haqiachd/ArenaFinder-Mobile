@@ -1,159 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.submain.EditAccountFragment"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".ui.fragment.submain.EditAccountFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/edacc_photo"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_150sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_50sdp"
+                android:layout_width="@dimen/_115sdp"
+                android:layout_height="@dimen/_115sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:src="@drawable/ic_profile"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/edacc_card_photo"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:background="@color/white"
+                app:cardCornerRadius="@dimen/_100sdp"
+                app:cardElevation="@dimen/_10sdp"
+                app:cardMaxElevation="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@id/edacc_photo"
+                app:layout_constraintEnd_toEndOf="@id/edacc_photo">
+
+                <ImageView
+                    android:layout_width="@dimen/_19sdp"
+                    android:layout_height="@dimen/_19sdp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/txt_mpr_tentang_app"
+                    android:src="@drawable/ic_profile_edit_photo_profile" />
+
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="@id/edacc_photo"
-                app:layout_constraintStart_toEndOf="@id/edacc_photo"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/edacc_photo"
-                >
+                app:layout_constraintStart_toEndOf="@id/edacc_photo"
+                app:layout_constraintTop_toTopOf="@id/edacc_photo">
 
                 <TextView
                     android:id="@+id/edacc_choose_pp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Edit Photo"
-                    android:textSize="@dimen/_12sdp"
                     android:fontFamily="@font/poppins_semibold"
+                    android:text="Edit Photo"
                     android:textColor="@color/primary_color"
-                    />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/mpr_upload_pp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Upload"
-                    android:textSize="@dimen/_12sdp"
                     android:fontFamily="@font/poppins_semibold"
+                    android:text="Upload"
                     android:textColor="@color/primary_color"
-                    android:visibility="gone"
-                    />
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/mpr_linear"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_23sdp"
                 android:layout_marginTop="@dimen/_20ssp"
-                app:layout_constraintTop_toBottomOf="@id/edacc_photo"
-                >
+                android:layout_marginEnd="@dimen/_23sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edacc_photo">
 
-                <LinearLayout
-                    android:id="@+id/signup_edit"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_18sdp"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent"
-                    >
+                    android:layout_marginTop="@dimen/acc_input_margintop"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxStrokeColor="@color/stroke_input_account"
+                    app:boxStrokeWidth="@dimen/acc_input_stroke"
+                    app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edacc_inp_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/acc_input_height"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:hint="@string/hint_edit_username"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/acc_input_textsize"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:boxCornerRadiusBottomEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusBottomStart="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopEnd="@dimen/acc_stroke_radius_input"
+                    app:boxCornerRadiusTopStart="@dimen/acc_stroke_radius_input"
+                    app:boxStrokeColor="@color/stroke_input_account"
+                    app:boxStrokeWidth="@dimen/acc_input_stroke"
+                    app:boxStrokeWidthFocused="@dimen/acc_input_stroke_focused"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edacc_inp_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="true"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeWidth="@dimen/_2sdp"
-                        app:boxStrokeColor="@color/dogerblue"
-                        app:boxStrokeWidthFocused="@dimen/_2sdp"
-                        app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                        app:boxCornerRadiusTopStart="@dimen/_20sdp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        >
+                        android:fontFamily="@font/poppins_semibold"
+                        android:hint="@string/hint_edit_nama_lengkap"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/acc_input_textsize"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edacc_inp_username"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Masukan Username"
-                            android:inputType="text"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:textColor="@color/dogerblue"
-                            android:textSize="@dimen/_11ssp"
-                            />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:hintEnabled="true"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeWidth="@dimen/_2sdp"
-                        app:boxStrokeColor="@color/dogerblue"
-                        app:boxStrokeWidthFocused="@dimen/_2sdp"
-                        app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                        app:boxCornerRadiusTopStart="@dimen/_20sdp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        >
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edacc_inp_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Masukan Nama"
-                            android:inputType="text"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:textColor="@color/dogerblue"
-                            android:textSize="@dimen/_11ssp"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/edacc_simpan"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:backgroundTint="@color/butterfly_blue"
-                android:text="Simpan"
-                android:textAllCaps="false"
-                android:fontFamily="@font/poppins_semibold"
-                app:layout_constraintTop_toBottomOf="@id/mpr_linear"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
+                android:layout_marginTop="@dimen/_30sdp"
+                app:layout_constraintEnd_toEndOf="@id/mpr_linear"
+                app:layout_constraintTop_toBottomOf="@id/mpr_linear">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/edacc_batal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:backgroundTint="@color/red"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/btn_batal"
+                    android:textAllCaps="false" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/edacc_simpan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary_color"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/btn_simpan"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

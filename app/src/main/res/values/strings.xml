@@ -309,7 +309,7 @@
     <string name="txt_mpr_def_email">loremipsum@polije.ac.id</string>
     <string name="txt_mpr_tentang_akun">Tentang AKun</string>
     <string name="txt_mpr_tentang_app">Tentang Aplikasi</string>
-    <string name="item_mpr_edit_account">Edit AKun</string>
+    <string name="item_mpr_edit_account">Edit Akun</string>
     <string name="item_mpr_verify_status">Status Verifikasi</string>
     <string name="item_mpr_change_pass">Ganti Password</string>
     <string name="item_mpr_logout">Keluar</string>
@@ -389,5 +389,9 @@
     <string name="arenafinder_osm_map">com.c2.arenafinder.OSM_MAP</string>
     <string name="date_picker_title">Pilih Tanggal Booking</string>
     <string name="date_picker_bef_date">Tanggal yang dipilih sudah terlewat</string>
+    <string name="hint_edit_username">Edit Username</string>
+    <string name="hint_edit_nama_lengkap">Edit Nama Lengkap</string>
+    <string name="btn_simpan">Simpan</string>
+    <string name="btn_batal">Batal</string>
 
 </resources>
