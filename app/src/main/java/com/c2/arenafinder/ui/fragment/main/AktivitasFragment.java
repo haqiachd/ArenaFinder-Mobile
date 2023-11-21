@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -19,11 +20,14 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.api.retrofit.RetrofitState;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
+import com.c2.arenafinder.data.repository.AktivitasRepository;
 import com.c2.arenafinder.data.response.AktivitasResponse;
+import com.c2.arenafinder.di.AktivitasViewModelFactory;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasFirstAdapter;
@@ -34,6 +38,7 @@ import com.c2.arenafinder.ui.fragment.submain.SportTypeFragment;
 import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.viewmodel.AktivitasViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
@@ -50,6 +55,8 @@ public class AktivitasFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private AktivitasViewModel aktivitasViewModel;
 
     private SwipeRefreshLayout refreshLayout;
 
@@ -110,13 +117,18 @@ public class AktivitasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
+        aktivitasViewModel = new ViewModelProvider(
+                requireActivity(),
+                new AktivitasViewModelFactory(new AktivitasRepository())
+        ).get(AktivitasViewModel.class);
+
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        fetchData();
+                        requireActivity().runOnUiThread(() -> aktivitasViewModel.fetchAktivitas());
                         refreshLayout.setRefreshing(false);
                     }
                 }, 1500L);
@@ -124,7 +136,9 @@ public class AktivitasFragment extends Fragment {
         });
 
         if (isAdded()) {
-            fetchData();
+            if (getView() != null){
+                new Handler(Looper.getMainLooper()).post(this::observer);
+            }
             adapterLapangan();
             onClickGroups();
             getAppbar();
@@ -137,8 +151,48 @@ public class AktivitasFragment extends Fragment {
         super.onResume();
     }
 
-    private void getAppbar(){
-        if (getActivity() != null){
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        aktivitasViewModel.getAktivitasData().removeObservers(getViewLifecycleOwner());
+        LogApp.info(this, LogTag.LIFEFCYLE, "AktivitasFragment OnDestroyView");
+    }
+
+    private void observer() {
+
+        aktivitasViewModel.getAktivitasData().observe(getViewLifecycleOwner(), dataState -> {
+
+            if (dataState instanceof RetrofitState.Loading) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_LOADING, "Aktivitas loaded");
+            } else if (dataState instanceof RetrofitState.Error) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_FAILURE, "Aktivitas Failure");
+                Toast.makeText(requireActivity(), ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
+                handlerNullData();
+            } else if (dataState instanceof RetrofitState.Success) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "Dashboard Response");
+                AktivitasResponse.Data data = ((RetrofitState.Success<AktivitasResponse>) dataState).getData().getData();
+
+                // get data model
+                ArrayList<AktivitasModel> aktivitasBaru = data.getAktivitasBaru();
+                ArrayList<AktivitasModel> akivitasKosong = data.getAktivitasKosong();
+                ArrayList<AktivitasModel> semuaAktivitas = data.getSemuaAktivitas();
+
+                if (aktivitasBaru.size() == 0 && akivitasKosong.size() == 0 && semuaAktivitas.size() == 0) {
+                    handlerNullData();
+                } else {
+
+                    // show recycler data
+                    showAktivitasBaru(aktivitasBaru);
+                    showAktivitasKosong(akivitasKosong);
+                    showSemuaAktivitasyList(semuaAktivitas);
+                }
+            }
+
+        });
+    }
+
+    private void getAppbar() {
+        if (getActivity() != null) {
             MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
             cardSearch.setOnClickListener(v -> {
                 startActivity(
