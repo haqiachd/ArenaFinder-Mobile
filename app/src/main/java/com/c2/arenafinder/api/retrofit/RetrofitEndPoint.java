@@ -78,6 +78,11 @@ public interface RetrofitEndPoint {
             @Field("password") String password
     );
 
+    @GET("users/is_verified.php")
+    Call<UsersResponse> isVerified(
+        @Query("email") String email
+    );
+
     @FormUrlEncoded
     @POST("users/update_pw.php")
     Call<UsersResponse> updatePassword(

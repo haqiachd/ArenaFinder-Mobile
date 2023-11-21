@@ -12,9 +12,18 @@ class UsersRepository {
     private val _deletePhoto = MutableLiveData<UsersResponse>()
     val deletePhoto : LiveData<UsersResponse> get() = _deletePhoto
 
+    private val _isVerified = MutableLiveData<UsersResponse>()
+    val isVerified : LiveData<UsersResponse> get() = _isVerified
+
     suspend fun removePhoto(email : String) = withContext(Dispatchers.IO){
         _deletePhoto.postValue(
             RetrofitClient.getInstance().deletePhoto(email).execute().body()
+        )
+    }
+
+    suspend fun fetchVerified(email: String) = withContext(Dispatchers.IO){
+        _isVerified.postValue(
+            RetrofitClient.getInstance().isVerified(email).execute().body()
         )
     }
 

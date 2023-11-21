@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.empty.VerifyStatusFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/fev_lottie"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_240sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:elevation="@dimen/_25sdp"
+            app:lottie_rawRes="@raw/raw_verify_success"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_speed="0.8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fev_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/fev_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="@dimen/_25sdp"
+            android:text="@string/txt_email_terverifikasi"
+            android:textColor="@color/butterfly_blue"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/fev_lottie"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/fev_txt_deks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:text="@string/fev_desc"
+            android:fontFamily="@font/opensans_bold"
+            android:textStyle="bold"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintStart_toStartOf="@id/fev_txt"
+            app:layout_constraintEnd_toEndOf="@id/fev_txt"
+            app:layout_constraintTop_toBottomOf="@id/fev_txt"
+            />
+
+        <LinearLayout
+            android:id="@+id/fev_lin_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/fev_txt_deks"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fev_button"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/txt_kembali"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/_15ssp"
+                android:textAllCaps="false"
+                android:theme="@style/Theme.MaterialComponents.DayNight"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeWidth="@dimen/_3sdp"
+                app:strokeColor="@color/dark_pastel_purple"
+                app:cornerRadius="@dimen/_10sdp"
+                />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

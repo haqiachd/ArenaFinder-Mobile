@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.ui.fragment.empty.VerifyStatusFragment;
 import com.c2.arenafinder.ui.fragment.submain.EditAccountFragment;
 import com.c2.arenafinder.ui.fragment.submain.MenuAlurPemesanan;
 import com.c2.arenafinder.ui.fragment.submain.MenuBookingFragment;
@@ -29,7 +30,7 @@ public class SubMainActivity extends AppCompatActivity {
 
     public static final String EDIT_ACCOUNT = "edit_acc", MENU_ALUR = "alur", MENU_BOOKING = "booking", MENU_COMMUNITY = "community",
             MENU_TROLLEY = "trolley", NOTIFICATIONS = "notif", SEARCH_WORLD = "search",
-            SPORT_TYPE = "sport", VIEW_ALL = "view";
+            SPORT_TYPE = "sport", VIEW_ALL = "view", VERIFY_STATUS = "v-status";
 
     private AppBarLayout appBarLayout;
     private ImageView btnBack;
@@ -122,6 +123,10 @@ public class SubMainActivity extends AppCompatActivity {
                         ViewAllFragment.newInstance(getIntent().getIntExtra(SPORT_ACTION, 0)),
                         false
                 );
+                break;
+            }
+            case VERIFY_STATUS: {
+                FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new VerifyStatusFragment(), true);
                 break;
             }
         }

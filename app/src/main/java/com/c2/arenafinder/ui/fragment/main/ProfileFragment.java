@@ -168,6 +168,11 @@ public class ProfileFragment extends Fragment {
                         break;
                     }
                     case 1 :
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VERIFY_STATUS)
+                        );
+                        break;
                     case 2 : {
                         Toast.makeText(requireActivity(), listItem.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
                         break;

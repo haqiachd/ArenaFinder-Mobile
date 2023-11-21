@@ -17,6 +17,9 @@ class UsersViewModel(
     private val _deletePhoto = MutableLiveData<RetrofitState<UsersResponse>>()
     fun deletePhoto() : LiveData<RetrofitState<UsersResponse>> = _deletePhoto
 
+    private val _verifiedData = MutableLiveData<RetrofitState<UsersResponse>>()
+    fun isVerified() : LiveData<RetrofitState<UsersResponse>> = _verifiedData
+
     fun doDeletePhoto(email: String){
         viewModelScope.launch {
             try {
@@ -37,4 +40,39 @@ class UsersViewModel(
         }
     }
 
+    fun fetchVerified(email: String){
+        viewModelScope.launch {
+            try {
+                // get verified
+                _verifiedData.value = RetrofitState.Loading(true)
+                repository.fetchVerified(email)
+                val response = repository.isVerified
+                // check and return state of data
+                if (response.value?.status?.lowercase() == RetrofitClient.SUCCESSFUL_RESPONSE){
+                    _verifiedData.value = RetrofitState.Success(response.value!!)
+                }else{
+                    _verifiedData.value = RetrofitState.Error(response.value?.message.toString())
+                }
+            }catch (ex : Throwable){
+                ex.printStackTrace()
+                _verifiedData.value = RetrofitState.Error(ex.message.toString())
+            }
+        }
+    }
+
 }
+
+
+/**
+ *    private fun checkResponse(
+_data : MutableLiveData<RetrofitState<UsersResponse>>,
+response : LiveData<UsersResponse>
+){
+// check and return state of data
+if (response.value?.status?.lowercase() == RetrofitClient.SUCCESSFUL_RESPONSE){
+_data.value = RetrofitState.Success(response.value!!)
+}else{
+_data.value = RetrofitState.Error(response.value?.message.toString())
+}
+}
+ */

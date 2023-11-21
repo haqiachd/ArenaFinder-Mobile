@@ -403,5 +403,8 @@
     <string name="toast_cannot_open_galery">Tidak bisa membuka Galery, Berikan izin ArenaFinder untuk mengakses galeri kamu.</string>
     <string name="toast_cannot_open_camera">Tidak bisa membuka Kamera, Berikan izin ArenaFinder untuk mengakses kamera kamu</string>
     <string name="dia_confirm_delete_photo">Apakah kamu yakin ingin menghapus foto profile?</string>
+    <string name="txt_kembali">Kembali</string>
+    <string name="txt_email_terverifikasi">Email Terverifikasi</string>
+    <string name="fev_desc">Selamat email Anda %1$s telah berhasil tervefifikasi.</string>
 
 </resources>
