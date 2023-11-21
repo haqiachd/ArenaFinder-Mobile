@@ -174,7 +174,10 @@ public class ProfileFragment extends Fragment {
                         );
                         break;
                     case 2 : {
-                        Toast.makeText(requireActivity(), listItem.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.CHANGE_PASS)
+                        );
                         break;
                     }
                     case 3 : {

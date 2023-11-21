@@ -330,6 +330,8 @@
     <string name="sub_aktivtas_seru">Aktivitas Seru</string>
     <string name="sub_aktivitas_baru">Aktivitas Baru</string>
     <string name="sub_aktivitas_kosong">Aktivitas Kosong</string>
+    <string name="sub_verify_status">Status Verifikasi</string>
+    <string name="sub_change_pass">Ubah Kata Sandi</string>
 
     <string name="hint_search_world">Cari Tempat Olahraga</string>
 
@@ -406,5 +408,7 @@
     <string name="txt_kembali">Kembali</string>
     <string name="txt_email_terverifikasi">Email Terverifikasi</string>
     <string name="fev_desc">Selamat email Anda %1$s telah berhasil tervefifikasi.</string>
+    <string name="txt_kata_sandi_baru">Kata Sandi baru</string>
+    <string name="txt_kata_sandi_saat_ini">Kata Sandi Saat Ini</string>
 
 </resources>

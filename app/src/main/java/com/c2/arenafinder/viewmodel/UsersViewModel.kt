@@ -14,11 +14,34 @@ class UsersViewModel(
     private val repository: UsersRepository
 ) : ViewModel() {
 
+    private val _changePassLogin = MutableLiveData<RetrofitState<UsersResponse>>()
+    fun changePassLogin() : LiveData<RetrofitState<UsersResponse>> = _changePassLogin
+
     private val _deletePhoto = MutableLiveData<RetrofitState<UsersResponse>>()
     fun deletePhoto() : LiveData<RetrofitState<UsersResponse>> = _deletePhoto
 
     private val _verifiedData = MutableLiveData<RetrofitState<UsersResponse>>()
     fun isVerified() : LiveData<RetrofitState<UsersResponse>> = _verifiedData
+
+    fun doChangePassLogin(email: String, pwNow : String, pwNew : String){
+        viewModelScope.launch {
+            try {
+                // change password
+                _changePassLogin.value = RetrofitState.Loading(true)
+                repository.modifyPassLogin(email, pwNow, pwNew)
+                val response = repository.changePassLogin
+                // check and return state of data
+                if (response.value?.status?.lowercase() == RetrofitClient.SUCCESSFUL_RESPONSE){
+                    _changePassLogin.value = RetrofitState.Success(response.value!!)
+                }else{
+                    _changePassLogin.value = RetrofitState.Error(response.value?.message.toString())
+                }
+            }catch (ex : Throwable){
+                ex.printStackTrace()
+                _changePassLogin.value = RetrofitState.Error(ex.message.toString())
+            }
+        }
+    }
 
     fun doDeletePhoto(email: String){
         viewModelScope.launch {

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,6 +111,25 @@ public class VerifyStatusFragment extends Fragment {
             observer();
         }
 
+        getAppbar();
+    }
+
+    private void getAppbar() {
+
+        if (getActivity() != null) {
+
+            LinearLayout linear = getActivity().findViewById(R.id.sub_linear);
+            TextView txtTitle = getActivity().findViewById(R.id.sub_title);
+            ImageView imgBack = getActivity().findViewById(R.id.sub_back);
+
+            linear.setVisibility(View.VISIBLE);
+
+            txtTitle.setText(getString(R.string.sub_verify_status));
+
+            imgBack.setOnClickListener(v -> {
+                requireActivity().onBackPressed();
+            });
+        }
     }
 
     private void observer(){
@@ -135,11 +156,9 @@ public class VerifyStatusFragment extends Fragment {
 
         button.animate().translationY(-1800F).setDuration(600).setStartDelay(delay * 3)
                 .withEndAction(
-                        () -> {
-                            requireActivity().onBackPressed();
-                            requireActivity().onBackPressed();
-                        }
+                        () -> requireActivity().onBackPressed()
                 );
     }
+
 
 }

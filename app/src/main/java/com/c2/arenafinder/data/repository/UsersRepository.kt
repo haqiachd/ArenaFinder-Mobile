@@ -9,11 +9,20 @@ import kotlinx.coroutines.withContext
 
 class UsersRepository {
 
+    private val _changePassLogin = MutableLiveData<UsersResponse>()
+    val changePassLogin : LiveData<UsersResponse> get() = _changePassLogin
+
     private val _deletePhoto = MutableLiveData<UsersResponse>()
     val deletePhoto : LiveData<UsersResponse> get() = _deletePhoto
 
     private val _isVerified = MutableLiveData<UsersResponse>()
     val isVerified : LiveData<UsersResponse> get() = _isVerified
+
+    suspend fun modifyPassLogin(email: String, pwNow : String, pwNew : String) = withContext(Dispatchers.IO){
+        _changePassLogin.postValue(
+            RetrofitClient.getInstance().updatePasswordLogin(email, pwNow, pwNew).execute().body()
+        )
+    }
 
     suspend fun removePhoto(email : String) = withContext(Dispatchers.IO){
         _deletePhoto.postValue(

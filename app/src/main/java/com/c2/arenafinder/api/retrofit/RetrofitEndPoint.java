@@ -91,6 +91,14 @@ public interface RetrofitEndPoint {
     );
 
     @FormUrlEncoded
+    @POST("users/update_pw_login.php")
+    Call<UsersResponse> updatePasswordLogin(
+            @Field("email") String email,
+            @Field("password_now") String pwNow,
+            @Field("password_new") String pwNew
+    );
+
+    @FormUrlEncoded
     @POST("users/update_pp.php")
     Call<UsersResponse> uploadPhotoBase64(
             @Field("email") String email,
