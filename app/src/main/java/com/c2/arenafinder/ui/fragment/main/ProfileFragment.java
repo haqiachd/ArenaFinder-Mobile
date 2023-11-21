@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView imgPhoto;
     private ListView listAkun, listAbout;
 
-    private void initViews(View view){
+    private void initViews(View view) {
         txtEmail = view.findViewById(R.id.mpr_email);
         txtName = view.findViewById(R.id.mpr_nama);
         btnUpload = view.findViewById(R.id.mpr_upload_pp);
@@ -146,7 +146,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    private void showListAkun(){
+    private void showListAkun() {
 
         ArrayList<ProfileMenuModel> listItem = new ArrayList<>();
         listItem.add(new ProfileMenuModel(R.drawable.ic_listview_profile_akun_editakun, R.string.item_mpr_edit_account, ItemProfileAdapter.DEFAULT_END_ICON));
@@ -159,28 +159,28 @@ public class ProfileFragment extends Fragment {
         listAkun.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0 : {
+                switch (position) {
+                    case 0: {
                         startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.EDIT_ACCOUNT)
                         );
                         break;
                     }
-                    case 1 :
+                    case 1:
                         startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VERIFY_STATUS)
                         );
                         break;
-                    case 2 : {
+                    case 2: {
                         startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.CHANGE_PASS)
                         );
                         break;
                     }
-                    case 3 : {
+                    case 3: {
                         LogApp.info(requireActivity(), LogTag.ON_CLICK, "Logout Account");
                         ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
                         // konfirmasi logout
@@ -196,7 +196,8 @@ public class ProfileFragment extends Fragment {
                                         );
                                     }
                                 },
-                                (dialog, which) -> {}
+                                (dialog, which) -> {
+                                }
                         );
                         break;
                     }
@@ -206,7 +207,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void showListAbout(){
+    private void showListAbout() {
 
         ArrayList<ProfileMenuModel> listItems = new ArrayList<>();
 
@@ -220,11 +221,20 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                switch (position){
-                    case 0 :
-                    case 1 :
-                    case 2 : {
-                        Toast.makeText(requireActivity(), listItems.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
+                switch (position) {
+                    case 0: {
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.APP_INFO)
+                        );
+                        break;
+                    }
+                    case 1:
+                    case 2: {
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.LANG_SETTING)
+                        );
                         break;
                     }
                     default:
@@ -249,7 +259,7 @@ public class ProfileFragment extends Fragment {
 //            Toast.makeText(requireActivity(), "permission needed", Toast.LENGTH_SHORT).show();
 //        }else{
 //            Toast.makeText(requireActivity(), "permission granted", Toast.LENGTH_SHORT).show();
-            openGallery();
+        openGallery();
 //        }
 //        checkAndRequestStoragePermission();
     }
@@ -265,7 +275,7 @@ public class ProfileFragment extends Fragment {
         RetrofitClient.getInstance().uploadPhotoBase64(usersUtil.getEmail(), imgBase64).enqueue(new Callback<UsersResponse>() {
             @Override
             public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                if (RetrofitClient.apakahSukses(response)){
+                if (RetrofitClient.apakahSukses(response)) {
                     assert response.body() != null;
                     UserModel model = response.body().getData();
                     usersUtil.setUserPhoto(model.getUserPhoto());
@@ -276,7 +286,7 @@ public class ProfileFragment extends Fragment {
                             .into(imgPhoto);
 
                     Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT);
                     Toast.makeText(requireActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -310,7 +320,7 @@ public class ProfileFragment extends Fragment {
     private void checkAndRequestStoragePermission() {
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             openGallery();
-        }else {
+        } else {
             Toast.makeText(requireActivity(), "Permission Denied :v", Toast.LENGTH_SHORT).show();
         }
     }
@@ -319,7 +329,7 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            if(data != null) {
+            if (data != null) {
                 uri = data.getData();
 
                 Glide.with(requireActivity())
@@ -330,7 +340,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
         btnLogout.setOnClickListener(v -> {
             LogApp.info(requireActivity(), LogTag.ON_CLICK, "Logout Account");
@@ -348,7 +358,8 @@ public class ProfileFragment extends Fragment {
                             );
                         }
                     },
-                    (dialog, which) -> {}
+                    (dialog, which) -> {
+                    }
             );
         });
 
@@ -358,7 +369,7 @@ public class ProfileFragment extends Fragment {
         });
 
         btnUpload.setOnClickListener(v -> {
-            if(uri != null) {
+            if (uri != null) {
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
@@ -368,7 +379,7 @@ public class ProfileFragment extends Fragment {
 
                 String encoded = ImageUtil.bitmapToBase64String(bitmap, 100);
                 uploadPhoto(encoded);
-            }else{
+            } else {
                 Toast.makeText(requireActivity(), "You must choose the image", Toast.LENGTH_SHORT).show();
             }
         });

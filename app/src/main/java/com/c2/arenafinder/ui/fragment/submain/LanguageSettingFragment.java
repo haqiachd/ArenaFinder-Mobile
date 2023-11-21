@@ -1,28 +1,57 @@
 package com.c2.arenafinder.ui.fragment.submain;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.DataShared;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
+import com.c2.arenafinder.ui.activity.SplashScreenActivity;
+import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.LanguagesUtil;
+import com.google.android.material.button.MaterialButton;
+
+import static com.c2.arenafinder.util.LanguagesUtil.ENGLISH;
+import static com.c2.arenafinder.util.LanguagesUtil.INDONESIAN;
+import static com.c2.arenafinder.util.LanguagesUtil.JAVANESE;
 
 public class LanguageSettingFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String langCode;
+
+    private LanguagesUtil language;
+
+    private MaterialButton btnSave;
+    private RadioButton opsiIndo, opsiJawir, opsiInggris;
 
     public LanguageSettingFragment() {
         // Required empty public constructor
+    }
+
+    private void initViews(View view) {
+        opsiIndo = view.findViewById(R.id.lsf_opsi_indo);
+        opsiJawir = view.findViewById(R.id.lsf_opsi_jawa);
+        opsiInggris = view.findViewById(R.id.lsf_opsi_inggris);
+        btnSave = view.findViewById(R.id.lsf_btn_simpan);
     }
 
     public static LanguageSettingFragment newInstance(String param1, String param2) {
@@ -53,5 +82,83 @@ public class LanguageSettingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initViews(view);
+        getAppbar();
+
+        language = new LanguagesUtil(requireActivity(), new DataShared(requireContext()));
+        langCode = language.getActivatedLanguage();
+
+        switch (langCode) {
+            case INDONESIAN: {
+                opsiIndo.setChecked(true);
+                LogApp.info(requireContext(), LogTag.ON_WHEN, "LANG INDO");
+                break;
+            }
+            case JAVANESE: {
+                opsiJawir.setChecked(true);
+                LogApp.info(requireContext(), LogTag.ON_WHEN, "LANG JAVANESE");
+                break;
+            }
+            case ENGLISH: {
+                opsiInggris.setChecked(true);
+                LogApp.info(requireContext(), LogTag.ON_WHEN, "LANG ENGLISH");
+                break;
+            }
+            default: {
+                opsiIndo.setChecked(true);
+            }
+        }
+
+        opsiIndo.setOnClickListener(indo -> {
+            LogApp.info(requireContext(), LogTag.ON_CLICK, "Change Language to Indonesian");
+            langCode = INDONESIAN;
+        });
+
+        opsiJawir.setOnClickListener(jawa -> {
+            LogApp.info(requireContext(), LogTag.ON_CLICK, "Change Language to Javanese");
+            langCode = JAVANESE;
+        });
+
+        opsiInggris.setOnClickListener(inggris -> {
+            LogApp.info(requireContext(), LogTag.ON_CLICK, "Change Language to English");
+            langCode = ENGLISH;
+        });
+
+        btnSave.setOnClickListener(save -> {
+            // confirm change language
+            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.dia_title_inform)
+                    .setMessage(R.string.dia_change_langueage)
+                    .setPositiveButton(R.string.dia_positive_ok, (dialog, which) -> {
+                        // save setting and restart app
+                        language.setActivatedLanguage(langCode);
+                        language.changeLanguage();
+                        ArenaFinder.restartApplication(requireContext(), SplashScreenActivity.class);
+                    })
+                    .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+
+                    }).create().show();
+        });
+
     }
+
+    private void getAppbar() {
+
+        if (getActivity() != null) {
+
+            LinearLayout linear = getActivity().findViewById(R.id.sub_linear);
+            TextView txtTitle = getActivity().findViewById(R.id.sub_title);
+            ImageView imgBack = getActivity().findViewById(R.id.sub_back);
+
+            linear.setVisibility(View.VISIBLE);
+
+            txtTitle.setText(getString(R.string.sub_change_lang));
+
+            imgBack.setOnClickListener(v -> {
+                requireActivity().onBackPressed();
+            });
+        }
+    }
+
 }

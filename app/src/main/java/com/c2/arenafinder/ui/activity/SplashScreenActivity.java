@@ -27,6 +27,7 @@ import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
 import com.c2.arenafinder.util.ArenaFinder;
+import com.c2.arenafinder.util.LanguagesUtil;
 import com.c2.arenafinder.util.UsersUtil;
 import com.google.firebase.FirebaseApp;
 
@@ -48,6 +49,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     private UsersUtil usersUtil;
 
     private DataShared shared;
+
+    private LanguagesUtil languagesUtil;
 
     private LottieAnimationView loading;
 
@@ -74,10 +77,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         // initialize class
         usersUtil = new UsersUtil(this);
         shared = new DataShared(this);
+        languagesUtil = new LanguagesUtil(this, shared);
 
         if (!shared.contains(IS_FIRST_TIME_INSTALL)){
             shared.setData(IS_FIRST_TIME_INSTALL, "NO");
+            languagesUtil.setActivatedLanguage(LanguagesUtil.INDONESIAN);
         }
+
+        languagesUtil.changeLanguage();
 
         // cek koneksi
         new Handler().postDelayed(this::cekKoneksi, 900L);

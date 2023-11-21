@@ -332,6 +332,8 @@
     <string name="sub_aktivitas_kosong">Aktivitas Kosong</string>
     <string name="sub_verify_status">Status Verifikasi</string>
     <string name="sub_change_pass">Ubah Kata Sandi</string>
+    <string name="sub_app_info">Info Aplikasi</string>
+    <string name="sub_change_lang">Change Language</string>
 
     <string name="hint_search_world">Cari Tempat Olahraga</string>
 
@@ -393,7 +395,7 @@
     <string name="date_picker_bef_date">Tanggal yang dipilih sudah terlewat</string>
     <string name="hint_edit_username">Edit Username</string>
     <string name="hint_edit_nama_lengkap">Edit Nama Lengkap</string>
-    <string name="btn_simpan">Simpan</string>
+    <string name="btn_simpan">Save</string>
     <string name="btn_batal">Batal</string>
     <string name="alt_sheet_more_than">Lebih Dari</string>
     <string name="alt_sheet_cpp_photo">Kamera</string>
@@ -410,5 +412,11 @@
     <string name="fev_desc">Selamat email Anda %1$s telah berhasil tervefifikasi.</string>
     <string name="txt_kata_sandi_baru">Kata Sandi baru</string>
     <string name="txt_kata_sandi_saat_ini">Kata Sandi Saat Ini</string>
+
+    <string name="bahasa_choose">Choose Language</string>
+    <string name="bahasa_indonesia">Indonesian</string>
+    <string name="bahasa_jawa">Javanese</string>
+    <string name="bahasa_inggris">English</string>
+    <string name="dia_change_langueage">The application will restart when you change the application language</string>
 
 </resources>

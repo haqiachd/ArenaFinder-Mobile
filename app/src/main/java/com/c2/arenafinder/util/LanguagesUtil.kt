@@ -13,11 +13,12 @@ class LanguagesUtil(
 
     companion object{
         const val ENGLISH = "en"
-        const val INDONESIAN = "in" // def
+        const val INDONESIAN = "id" // def
         const val JAVANESE = "jv"
     }
 
-    fun changeLanguage(langCode : String = INDONESIAN){
+    @JvmOverloads
+    fun changeLanguage(langCode : String = getActivatedLanguage()){
         val desiredLocale = Locale(langCode)
         val config = activity.resources.configuration
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

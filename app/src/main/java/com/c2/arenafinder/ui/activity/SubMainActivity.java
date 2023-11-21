@@ -10,8 +10,10 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.ui.fragment.empty.VerifyStatusFragment;
+import com.c2.arenafinder.ui.fragment.submain.AppInfoFragment;
 import com.c2.arenafinder.ui.fragment.submain.ChangePwOnProfile;
 import com.c2.arenafinder.ui.fragment.submain.EditAccountFragment;
+import com.c2.arenafinder.ui.fragment.submain.LanguageSettingFragment;
 import com.c2.arenafinder.ui.fragment.submain.MenuAlurPemesanan;
 import com.c2.arenafinder.ui.fragment.submain.MenuBookingFragment;
 import com.c2.arenafinder.ui.fragment.submain.MenuCommunityFragment;
@@ -31,7 +33,8 @@ public class SubMainActivity extends AppCompatActivity {
 
     public static final String EDIT_ACCOUNT = "edit_acc", MENU_ALUR = "alur", MENU_BOOKING = "booking", MENU_COMMUNITY = "community",
             MENU_TROLLEY = "trolley", NOTIFICATIONS = "notif", SEARCH_WORLD = "search",
-            SPORT_TYPE = "sport", VIEW_ALL = "view", VERIFY_STATUS = "v-status", CHANGE_PASS = "chgpass";
+            SPORT_TYPE = "sport", VIEW_ALL = "view", VERIFY_STATUS = "v-status", CHANGE_PASS = "chgpass",
+            APP_INFO = "info", LANG_SETTING = "lang";
 
     private AppBarLayout appBarLayout;
     private ImageView btnBack;
@@ -132,6 +135,14 @@ public class SubMainActivity extends AppCompatActivity {
             }
             case CHANGE_PASS: {
                 FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new ChangePwOnProfile(), false);
+                break;
+            }
+            case APP_INFO: {
+                FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new AppInfoFragment(), false);
+                break;
+            }
+            case LANG_SETTING: {
+                FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new LanguageSettingFragment(), false);
                 break;
             }
         }

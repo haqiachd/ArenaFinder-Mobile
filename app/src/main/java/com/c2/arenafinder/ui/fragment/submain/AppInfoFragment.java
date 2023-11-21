@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 
@@ -53,5 +56,26 @@ public class AppInfoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getAppbar();
     }
+
+    private void getAppbar() {
+
+        if (getActivity() != null) {
+
+            LinearLayout linear = getActivity().findViewById(R.id.sub_linear);
+            TextView txtTitle = getActivity().findViewById(R.id.sub_title);
+            ImageView imgBack = getActivity().findViewById(R.id.sub_back);
+
+            linear.setVisibility(View.VISIBLE);
+
+            txtTitle.setText(getString(R.string.sub_app_info));
+
+            imgBack.setOnClickListener(v -> {
+                requireActivity().onBackPressed();
+            });
+        }
+    }
+
 }
