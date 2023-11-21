@@ -92,6 +92,12 @@ public interface RetrofitEndPoint {
             @Field("photo") String photo);
 
     @FormUrlEncoded
+    @POST("users/delete_pp.php")
+    Call<UsersResponse> deletePhoto(
+            @Field("email") String email
+            );
+
+    @FormUrlEncoded
     @POST("users/update_acc.php")
     Call<UsersResponse> updateAccount(
             @Field("email") String email,

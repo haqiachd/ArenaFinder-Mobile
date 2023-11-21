@@ -393,5 +393,15 @@
     <string name="hint_edit_nama_lengkap">Edit Nama Lengkap</string>
     <string name="btn_simpan">Simpan</string>
     <string name="btn_batal">Batal</string>
+    <string name="alt_sheet_more_than">Lebih Dari</string>
+    <string name="alt_sheet_cpp_photo">Kamera</string>
+    <string name="txt_sheet_cpp_camera">Ambil Foto</string>
+    <string name="txt_sheet_cpp_title">Ganti foto profile</string>
+    <string name="alt_sheet_cpp_galery">Galery</string>
+    <string name="txt_sheet_cpp_galery">Pilih dari Galeri</string>
+    <string name="txt_sheet_cpp_hapus_title">Hapus Foto</string>
+    <string name="toast_cannot_open_galery">Tidak bisa membuka Galery, Berikan izin ArenaFinder untuk mengakses galeri kamu.</string>
+    <string name="toast_cannot_open_camera">Tidak bisa membuka Kamera, Berikan izin ArenaFinder untuk mengakses kamera kamu</string>
+    <string name="dia_confirm_delete_photo">Apakah kamu yakin ingin menghapus foto profile?</string>
 
 </resources>

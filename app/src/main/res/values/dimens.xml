@@ -158,5 +158,14 @@
     <dimen name="appbar_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="sheet_title_margin_top">@dimen/_18sdp</dimen>
+    <dimen name="sheet_title_textsize">@dimen/_18ssp</dimen>
+    <dimen name="sheet_cpp_height">@dimen/_35sdp</dimen>
+    <dimen name="sheet_ca_height">@dimen/_55sdp</dimen>
+    <dimen name="sheet_ca_profile_size">@dimen/_42sdp</dimen>
+    <dimen name="sheet_ca_button_height">@dimen/_45sdp</dimen>
+    <dimen name="sheet_ca_button_margin">@dimen/_5sdp</dimen>
+    <dimen name="sheet_ca_button_stroke">@dimen/_2sdp</dimen>
+    <dimen name="sheet_ca_button_corner">@dimen/_8sdp</dimen>
 
 </resources>

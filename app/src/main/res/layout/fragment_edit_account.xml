@@ -150,6 +150,17 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/edacc_txt_helper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/acc_txt_helper_margin"
+                    android:alpha="0.9"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/azure"
+                    android:textSize="@dimen/_9sdp"
+                    tools:ignore="TextContrastCheck" />
+
 
             </LinearLayout>
 
