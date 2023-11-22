@@ -112,17 +112,31 @@ public class ArenaFinder {
         return inputDateFormat.toString();
     }
 
-    public static ArrayList<JenisLapanganModel> getSportType(){
-        ArrayList<JenisLapanganModel> lapanganModels = new ArrayList<>();
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, "Sepak Bola"));
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_badminton, "Bulu Tangkis"));
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_voli, "Bola Voli"));
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_basket, "Bola Basket"));
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_sport_tennis_table, "Tenis Meja"));
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_futsal, "Futsal"));
-        lapanganModels.add(new JenisLapanganModel(R.drawable.ic_lapangan_fitness, "Fitness"));
+    public static ArrayList<JenisLapanganModel> getSportType(Context context){
+        ArrayList<JenisLapanganModel> fieldsModel = new ArrayList<>();
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_lapangan_sepak_bola, context.getString(R.string.txt_olahraga_football))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_lapangan_badminton, context.getString(R.string.txt_olahraga_badminton))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_lapangan_voli, context.getString(R.string.txt_olahraga_voli))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_lapangan_basket, context.getString(R.string.txt_olahraga_basket))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_sport_tennis_table, context.getString(R.string.txt_olahraga_tenis_meja))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_lapangan_futsal, context.getString(R.string.txt_olahraga_futsal))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_lapangan_fitness, context.getString(R.string.txt_olahraga_fitness))
+        );
 
-        return lapanganModels;
+        return fieldsModel;
     }
 
     public static void setRecyclerWidthByItem(

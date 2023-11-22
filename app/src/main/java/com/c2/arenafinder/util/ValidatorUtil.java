@@ -157,7 +157,7 @@ public class ValidatorUtil {
         }
 
         // panjang password harus berada dalam rentang 8 hingga 30 karakter.
-        if (password.length() < 8 || password.length() > 30) {
+        if (password.length() < 8 || password.length() > 12) {
             message = R.string.err_password_length;
             return false;
         }

@@ -252,7 +252,7 @@ public class ReferensiFragment extends Fragment {
     }
 
     private void adapterLapangan() {
-        ArrayList<JenisLapanganModel> lapanganModels = ArenaFinder.getSportType();
+        ArrayList<JenisLapanganModel> lapanganModels = ArenaFinder.getSportType(requireContext());
 
         JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
                 new AdapterActionListener() {

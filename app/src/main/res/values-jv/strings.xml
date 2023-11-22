@@ -152,6 +152,7 @@
     <string name="txt_olahraga_basket">Bola Basket</string>
     <string name="txt_olahraga_voli">Bola Voli</string>
     <string name="txt_olahraga_tenis">Tenis Lapangan</string>
+    <string name="txt_olahraga_tenis_meja">Tenis Meja</string>
     <string name="txt_olahraga_atletik">Atletik</string>
     <string name="txt_olahraga_fitness">Fitness</string>
     <string name="txt_olahraga_renang">Renang</string>
@@ -267,7 +268,7 @@
     <string name="err_name_numbers">Nama tidak boleh mengandung angka</string>
     <string name="err_name_symbols">Simbol yang diizinkan hanyalah .,-\'</string>
     <string name="err_password_empty">Password tidak boleh kosong</string>
-    <string name="err_password_length">Password harus diantara 8–30 karakter</string>
+    <string name="err_password_length">Password harus diantara 8–12 karakter</string>
     <string name="err_password_uppercase">Password harus mengadung huruf besar</string>
     <string name="err_password_lowercase">Password harus mengandung huruf kecil</string>
     <string name="err_password_number">Password harus mengandung angka</string>
@@ -279,7 +280,8 @@
     <string name="err_no_data_selected">Tidak ada data yang dipilih.</string>
     <string name="err_google_auth_connection">Tidak dapat terhubung dengan Google Auth.</string>
     <string name="err_google_auth_fatal">Fatal error Google Auth.</string>
-    <string name="err_otp_invalid">Kote OTP tidak cocok</string>
+    <string name="err_otp_invalid">Kode OTP tidak cocok</string>
+    <string name="err_otp_expired">Kode OTP Kadaluarsa</string>
     <string name="txt_jam_operasional_t">Jam Operasional</string>
     <string name="txt_fasilitas_tempat">Fasilitas Tempat</string>
     <string name="txt_nama_fasilitas">Nama Fasilitas</string>

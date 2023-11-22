@@ -139,7 +139,8 @@ public class OtpVerificationFragment extends Fragment {
                                 startActivity(new Intent(requireContext(), EmptyActivity.class).putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME));
                             }
                         })
-                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+                        })
                         .create().show();
             }
         });
@@ -148,7 +149,7 @@ public class OtpVerificationFragment extends Fragment {
         onListener();
     }
 
-    private void updateVerify(){
+    private void updateVerify() {
         loadingVerify.show();
 
         new Handler().postDelayed(new Runnable() {
@@ -157,7 +158,7 @@ public class OtpVerificationFragment extends Fragment {
                 RetrofitClient.getInstance().updateVerify(verifyUtil.getEmail()).enqueue(new Callback<VerifyResponse>() {
                     @Override
                     public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
-                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
+                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                             loadingVerify.dismiss();
                             // show dialog information
                             new AlertDialog.Builder(requireContext())
@@ -178,7 +179,7 @@ public class OtpVerificationFragment extends Fragment {
                                     })
                                     .create().show();
                             verifyUtil.removeOtp();
-                        }else {
+                        } else {
                             ArenaFinder.VibratorToast(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
                         }
                         btnSend.setProgress(ButtonAccountCustom.KILL_PROGRESS);
@@ -286,7 +287,17 @@ public class OtpVerificationFragment extends Fragment {
             @Override
             public void onOTPComplete(@NonNull String otp) {
 
-                if (otp.equals(verifyUtil.getOtp())) {
+                if (!verifyUtil.haveOtp()) {
+                    helperText.setText(R.string.err_otp_expired);
+                    helperText.setTextColor(ContextCompat.getColor(requireContext(), R.color.vivid_orange));
+                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            inpOtp.showError();
+                        }
+                    });
+                } else if (otp.equals(verifyUtil.getOtp())) {
                     helperText.setText(R.string.suc_otp_valid);
                     // show success info
                     ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
