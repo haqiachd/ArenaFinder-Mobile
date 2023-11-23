@@ -51,7 +51,7 @@ public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapte
         holder.txtUsername.setText(context.getString(R.string.txt_review_username, reviewModel.getUsername()));
         holder.txtFullName.setText(reviewModel.getFullName());
         holder.txtComment.setText(reviewModel.getComment());
-        holder.txtDate.setText(ArenaFinder.convertToDate(reviewModel.getDate()));
+        holder.txtDate.setText(ArenaFinder.convertToDate(context, reviewModel.getDate()));
 
         holder.setPhotoProfile(context, reviewModel.getPhotoProfile());
         holder.showRatings(context, reviewModel.getRatting());

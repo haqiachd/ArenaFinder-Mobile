@@ -56,7 +56,7 @@ public class StatusAktivitasAdapter extends RecyclerView.Adapter<StatusAktivitas
         holder.txtPrice.setText(context.getString(R.string.txt_total_price_booking, ArenaFinder.toMoneyCase(model.getPrice())));
         holder.txtVenue.setText(context.getString(R.string.def_titik_dua, model.getVenueName()));
         holder.txtJamMain.setText(context.getString(R.string.txt_jam_main_val2, model.getJamMain()));
-        holder.txtTanggal.setText(context.getString(R.string.def_titik_dua, ArenaFinder.convertToDate(model.getDate())));
+        holder.txtTanggal.setText(context.getString(R.string.def_titik_dua, ArenaFinder.convertToDate(context, model.getDate())));
 
         holder.setImageAktivitas(model.getPhoto());
 

@@ -52,8 +52,7 @@ public class VenueSecondAdapter extends RecyclerView.Adapter<VenueSecondAdapter.
         ReferensiModel model = models.get(position);
 
         holder.txtName.setText(model.getVenueName());
-        holder.txtStatus.setText(model.getStatus());
-        holder.txtSport.setText(model.getSport());
+        holder.txtSport.setText(ArenaFinder.localizationSport(model.getSport()));
         holder.txtRatting.setText(String.valueOf(model.getRating()));
 
         holder.setImage(model.getVenuePhoto());
@@ -70,22 +69,26 @@ public class VenueSecondAdapter extends RecyclerView.Adapter<VenueSecondAdapter.
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
                 holder.txtDescFirst.setText("1 Slot Kosong");
                 holder.txtDescSecond.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
+                holder.txtStatus.setText(R.string.status_disewakan);
                 break;
             }
             case "gratis" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_gratis, R.color.venue_status_gratis);
                 holder.txtDescSecond.setText(R.string.txt_gratis_v);
                 holder.txtDescFirst.setText("");
+                holder.txtStatus.setText(R.string.status_gratis);
                 break;
             }
             case "berbayar" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_berbayar, R.color.venue_status_berbayar);
                 holder.txtDescSecond.setText("");
                 holder.txtDescFirst.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHarga())));
+                holder.txtStatus.setText(R.string.status_berbayar);
                 break;
             }
             case "bervariasi" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_variasi, R.color.venue_status_bervariasi);
+                holder.txtStatus.setText(R.string.status_bervariasi);
                 break;
             }
         }

@@ -59,8 +59,7 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
 
         // show data
         holder.txtNama.setText(model.getVenueName());
-        holder.txtSport.setText(model.getSport());
-        holder.txtStatus.setText(model.getStatus());
+        holder.txtSport.setText(ArenaFinder.localizationSport(model.getSport()));
         holder.setImage(model.getVenuePhoto());
 
         if (model.getRating() <= 0.0){
@@ -74,21 +73,25 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
                 holder.txtDesc.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
+                holder.txtStatus.setText(context.getString(R.string.status_disewakan));
                 break;
             }
             case "gratis" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_gratis, R.color.venue_status_gratis);
                 holder.txtDesc.setText(R.string.txt_gratis_v);
+                holder.txtStatus.setText(context.getString(R.string.status_gratis));
                 break;
             }
             case "berbayar" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_berbayar, R.color.venue_status_berbayar);
                 holder.txtDesc.setText(context.getString(R.string.txt_berbayar_val, ArenaFinder.toMoneyCase(model.getHarga())));
+                holder.txtStatus.setText(context.getString(R.string.status_berbayar));
                 break;
             }
             case "bervariasi" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_variasi, R.color.venue_status_bervariasi);
                 holder.txtDesc.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
+                holder.txtStatus.setText(context.getString(R.string.status_bervariasi));
                 break;
             }
 

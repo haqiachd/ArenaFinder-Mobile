@@ -48,15 +48,15 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         // get data
-        AktivitasModel aktivitasModel = models.get(position);
+        AktivitasModel model = models.get(position);
 
         // show data
-        holder.txtNama.setText(aktivitasModel.getNamaAktivitas());
-        holder.txtVenue.setText(aktivitasModel.getVenueName());
-//        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, aktivitasModel.getJumlahMember(), aktivitasModel.getMaxMember()));
-        holder.txtAnggota.setText("" + aktivitasModel.getJumlahMember() + " Anggota");
-        holder.txtTanggal.setText(ArenaFinder.convertToDate(aktivitasModel.getDate()));
-        holder.setAktivitasImage(aktivitasModel.getPhoto());
+        holder.txtNama.setText(model.getNamaAktivitas());
+        holder.txtVenue.setText(model.getVenueName());
+//        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, model.getJumlahMember(), model.getMaxMember()));
+        holder.txtAnggota.setText(context.getString(R.string.txt_num_member, model.getJumlahMember()));
+        holder.txtTanggal.setText(ArenaFinder.convertToDate(context, model.getDate()));
+        holder.setAktivitasImage(model.getPhoto());
 
         if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
 

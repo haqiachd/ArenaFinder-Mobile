@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.DataShared;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
@@ -36,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 public class ArenaFinder {
 
@@ -99,17 +101,37 @@ public class ArenaFinder {
         VibratorToast(context, context.getString(msg), toastLong, vibratorLong);
     }
 
-    public static String convertToDate(@NonNull String date){
-        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+    public static String convertToDate(Context context, @NonNull String date){
         try {
-            Date inputDate = inputDateFormat.parse(date);
-            SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("id"));
-            assert inputDate != null;
-            return outputDateFormat.format(inputDate);
-        } catch (ParseException | java.text.ParseException e) {
+            StringTokenizer tokenizer = new StringTokenizer(date, "-");
+            String year = tokenizer.nextToken(),
+                    monthValue = tokenizer.nextToken(),
+                    dateMonth = tokenizer.nextToken();
+            @StringRes int monthName;
+
+            switch (Integer.parseInt(monthValue)){
+                case 1: monthName = R.string.month_january; break;
+                case 2: monthName = R.string.month_february; break;
+                case 3: monthName = R.string.month_march; break;
+                case 4: monthName = R.string.month_april; break;
+                case 5: monthName = R.string.month_may; break;
+                case 6: monthName = R.string.month_june; break;
+                case 7: monthName = R.string.month_july; break;
+                case 8: monthName = R.string.month_august; break;
+                case 9: monthName = R.string.month_september; break;
+                case 10: monthName = R.string.month_october; break;
+                case 11: monthName = R.string.month_november; break;
+                case 12: monthName = R.string.month_december; break;
+                default: monthName = R.string.month_bulan; break;
+            }
+
+            // Displaying the results
+            return String.format("%s %s %s", dateMonth, context.getString(monthName), year);
+        } catch (Throwable e) {
             e.printStackTrace();
         }
-        return inputDateFormat.toString();
+
+        return date;
     }
 
     public static ArrayList<JenisLapanganModel> getSportType(Context context){
@@ -216,34 +238,40 @@ public class ArenaFinder {
         return String.valueOf(((int) (number * 10)) / 10.0);
     }
 
-
-    // Metode pertama untuk mendapatkan latitude dari string data
     public static double getLatitude(String data) {
         try {
-            // Pisahkan data menjadi bagian-bagian yang sesuai (gunakan split, delimiter, atau metode lainnya)
-            // Sebagai contoh, jika data adalah "-7.58100688171412, 112.1438935"
             String[] parts = data.split(",");
-            // Ambil bagian pertama sebagai latitude
             return Double.parseDouble(parts[0].trim());
         } catch (Exception e) {
-            // Tangani kesalahan atau kembalikan nilai default jika parsing tidak berhasil
             e.printStackTrace();
             return 0.0;
         }
     }
 
-    // Metode kedua untuk mendapatkan longitude dari string data
     public static double getLongitude(String data) {
         try {
-            // Pisahkan data menjadi bagian-bagian yang sesuai (gunakan split, delimiter, atau metode lainnya)
-            // Sebagai contoh, jika data adalah "-7.58100688171412, 112.1438935"
             String[] parts = data.split(",");
-            // Ambil bagian kedua sebagai longitude
             return Double.parseDouble(parts[1].trim());
         } catch (Exception e) {
-            // Tangani kesalahan atau kembalikan nilai default jika parsing tidak berhasil
             e.printStackTrace();
             return 0.0;
+        }
+    }
+
+    public static @StringRes int localizationSport(String sport){
+        switch (sport.toLowerCase()){
+            case "futsal" : return R.string.txt_olahraga_futsal;
+            case "bulu tangkis" : return R.string.txt_olahraga_badminton;
+            case "sepak bola" : return R.string.txt_olahraga_football;
+            case "bola basket" : return R.string.txt_olahraga_basket;
+            case "bola voli" : return R.string.txt_olahraga_voli;
+            case "tenis lapangan" : return R.string.txt_olahraga_tenis;
+            case "tenis meja" : return R.string.txt_olahraga_tenis_meja;
+            case "atletik" : return R.string.txt_olahraga_atletik;
+            case "fitness" : return R.string.txt_olahraga_fitness;
+            case "renang" : return R.string.txt_olahraga_renang;
+            case "pencak silat" : return R.string.txt_olahraga_silat;
+            default: return R.string.txt_olahraga_def;
         }
     }
 

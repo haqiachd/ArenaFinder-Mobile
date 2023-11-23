@@ -51,7 +51,7 @@ public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdap
         holder.txtPrice.setText(context.getString(R.string.txt_total_price_booking, ArenaFinder.toMoneyCase(model.getTotalPrice())));
         holder.txtJadwal.setText(context.getString(R.string.txt_total_jadwal_val, model.getTotalJadwal()));
         holder.txtMethod.setText(context.getString(R.string.txt_payment_method_val, model.getPaymentMethod()));
-        holder.txtTanggal.setText(context.getString(R.string.txt_tanggal_val, ArenaFinder.convertToDate(model.getTanggalPesan())));
+        holder.txtTanggal.setText(context.getString(R.string.txt_tanggal_val, ArenaFinder.convertToDate(context, model.getTanggalPesan())));
         holder.setImage(model.getVenuePhoto());
 
         switch (model.getPaymentStatus().toLowerCase()) {
@@ -62,12 +62,12 @@ public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdap
             }
             case "rejected": {
                 holder.cardView.setStrokeColor(ContextCompat.getColor(context, R.color.status_pesan_ditolak));
-                holder.txtStatus.setText(context.getString(R.string.txt_status_booking_ditolak, ArenaFinder.convertToDate(model.getTanggalPesan())));
+                holder.txtStatus.setText(context.getString(R.string.txt_status_booking_ditolak, ArenaFinder.convertToDate(context, model.getTanggalPesan())));
                 break;
             }
             case "accepted": {
                 holder.cardView.setStrokeColor(ContextCompat.getColor(context, R.color.status_pesan_disetujui));
-                holder.txtStatus.setText(context.getString(R.string.txt_status_booking_disetujui, ArenaFinder.convertToDate(model.getTanggalPesan())));
+                holder.txtStatus.setText(context.getString(R.string.txt_status_booking_disetujui, ArenaFinder.convertToDate(context, model.getTanggalPesan())));
                 break;
             }
         }

@@ -157,6 +157,8 @@
     <string name="txt_olahraga_fitness">Fitness</string>
     <string name="txt_olahraga_renang">Renang</string>
     <string name="txt_olahraga_silat">Pencak Silat</string>
+    <string name="txt_olahraga_def">Olahraga</string>
+
     <string name="txt_aktivitas_jam">%1$s - %2$s</string>
     <string name="txt_total_views">%1$d x Dilihat</string>
     <string name="txt_total_shared">%1$d x Dibagikan</string>
@@ -181,6 +183,24 @@
     <string name="dino_sabtu">Sabtu</string>
     <string name="dino_minggu">Minggu</string>
 
+    <string name="month_january">Januari</string>
+    <string name="month_february">Februari</string>
+    <string name="month_march">Maret</string>
+    <string name="month_april">April</string>
+    <string name="month_may">Mei</string>
+    <string name="month_june">Juni</string>
+    <string name="month_july">Juli</string>
+    <string name="month_august">Agustus</string>
+    <string name="month_september">September</string>
+    <string name="month_october">Oktober</string>
+    <string name="month_november">November</string>
+    <string name="month_december">Desember</string>
+    <string name="month_bulan">Bulan</string>
+
+    <string name="status_gratis">Gratis</string>
+    <string name="status_berbayar">Berbayar</string>
+    <string name="status_disewakan">Disewakan</string>
+    <string name="status_bervariasi">Bervariasi</string>
 
     <string name="alt_appbar_search">Cari data</string>
     <string name="alt_appbar_notif">Notifikasi</string>
@@ -420,5 +440,6 @@
     <string name="bahasa_jawa">Jawa</string>
     <string name="bahasa_inggris">Inggris</string>
     <string name="dia_change_langueage">Aplikasi bakal di-restart nalika sampeyan ngganti basa aplikasi.</string>
+    <string name="txt_num_member">%1$d Anggota</string>
 
 </resources>

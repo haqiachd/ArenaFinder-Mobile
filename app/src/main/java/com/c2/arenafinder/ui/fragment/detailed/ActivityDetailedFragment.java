@@ -254,8 +254,8 @@ public class ActivityDetailedFragment extends Fragment {
             txtAktivitasName.setText(model.getNamaAktivitas());
             txtAktivitasNameAppbar.setText(model.getNamaAktivitas());
             txtVenueName.setText(model.getVenueName());
-            txtSport.setText(model.getJenisOlahraga());
-            txtDateStart.setText(requireContext().getString(R.string.txt_tanggal_val, ArenaFinder.convertToDate(model.getDate())));
+            txtSport.setText(ArenaFinder.localizationSport(model.getJenisOlahraga()));
+            txtDateStart.setText(requireContext().getString(R.string.txt_tanggal_val, ArenaFinder.convertToDate(requireContext(), model.getDate())));
             txtJamMain.setText(requireContext().getString(R.string.txt_jam_main_val2, model.getJamMain()));
             txtStatusAnggota.setText(requireContext().getString(R.string.btn_status_anggota_val, model.getMembership()));
             txtHarga.setText(requireContext().getString(R.string.txt_total_price_booking_val, ArenaFinder.toMoneyCase(model.getPrice())));

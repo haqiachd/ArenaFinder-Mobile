@@ -349,7 +349,7 @@ public class VenueDetailedFragment extends Fragment {
         txtVenueNameAppbar.setText(model.getVenueName());
         txtFasilitas.setText(model.getDescFacility());
         txtAlamat.setText(model.getLocation());
-        txtTopSport.setText(model.getSport());
+        txtTopSport.setText(ArenaFinder.localizationSport(model.getSport()));
         txtTopViews.setText(getString(R.string.txt_total_views, model.getViews()));
         txtTopShared.setText(getString(R.string.txt_total_shared, model.getShared()));
 

@@ -221,7 +221,7 @@ public class VenueReviewFragment extends Fragment {
                     R.drawable.ic_review_star_yellow
             );
             txtMyComment.setText(model.getComment());
-            txtMyDate.setText(ArenaFinder.convertToDate(model.getDate()));
+            txtMyDate.setText(ArenaFinder.convertToDate(requireContext(), model.getDate()));
             txtMyRatting.setText(R.string.txt_review_kamu);
 
             txtEditMy.setOnClickListener(v -> {
