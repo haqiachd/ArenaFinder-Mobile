@@ -38,11 +38,61 @@
         app:layout_constraintTop_toBottomOf="@id/scp_title">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/scp_card_online"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/azure"
+            app:strokeColor="@color/dimgray"
+            app:strokeWidth="@dimen/_2sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/onl_icon"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/ic_payment_gatway"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center_vertical"
+                    android:text="@string/online_segera"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintStart_toEndOf="@id/onl_icon" />
+
+                <ImageView
+                    android:id="@+id/scp_online_indicator"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/ic_indicator_unselected"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/scp_card_cod"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:strokeColor="@color/dimgray"
             app:strokeWidth="@dimen/_2sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,16 +115,17 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center_vertical"
-                    android:text="Bayar ditempat"
+                    android:text="@string/bayar_ditempat"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13sdp"
                     app:layout_constraintStart_toEndOf="@id/cod_icon" />
 
                 <ImageView
+                    android:id="@+id/scp_cod_indicator"
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@drawable/ic_indicator_selected"
+                    android:src="@drawable/ic_indicator_unselected"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -82,6 +133,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
 
     </LinearLayout>
 
@@ -101,7 +153,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_2sdp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Booking Lapangan"
+        android:text="@string/booking_lapangan"
         android:textAllCaps="false"
         android:textSize="@dimen/_12ssp"
         app:cornerRadius="@dimen/_10sdp"
