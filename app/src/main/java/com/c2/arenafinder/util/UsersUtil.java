@@ -10,10 +10,10 @@ public class UsersUtil {
 
     private final DataShared dataShared;
 
-    public UsersUtil(Context context, UserModel model){
+    public UsersUtil(Context context, UserModel model) {
         dataShared = new DataShared(context);
 
-        if (model != null){
+        if (model != null) {
             setId(String.valueOf(model.getIdUser()));
             setUsername(model.getUsername());
             setEmail(model.getEmail());
@@ -22,83 +22,101 @@ public class UsersUtil {
             setVerified(model.getVerified());
             setUserPhoto(model.getUserPhoto());
             setCreated(model.getCreatedAt());
+            setNoHp(model.getNoHp());
+            setAlamat(model.getAlamat());
         }
     }
 
-    public UsersUtil(Context context){
+    public UsersUtil(Context context) {
         this(context, null);
     }
 
-    public boolean isSignIn(){
-        return  dataShared.contains(KEY.ACC_USERNAME) &&
+    public boolean isSignIn() {
+        return dataShared.contains(KEY.ACC_USERNAME) &&
                 !dataShared.getData(KEY.ACC_USERNAME).isEmpty();
     }
 
-    public String getId(){
+    public String getId() {
         return dataShared.getData(KEY.ACC_ID_USER);
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         dataShared.setData(KEY.ACC_ID_USER, id);
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return dataShared.getData(KEY.ACC_USERNAME);
     }
 
-    public void setUsername(String username){
+    public void setUsername(String username) {
         dataShared.setData(KEY.ACC_USERNAME, username);
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return dataShared.getData(KEY.ACC_EMAIL);
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         dataShared.setData(KEY.ACC_EMAIL, email);
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return dataShared.getData(KEY.ACC_FULL_NAME);
     }
 
-    public void setFullName(String name){
+    public void setFullName(String name) {
         dataShared.setData(KEY.ACC_FULL_NAME, name);
     }
 
-    public String getLevel(){
+    public String getLevel() {
         return dataShared.getData(KEY.ACC_LEVEL);
     }
 
-    public void setLevel(String level){
+    public void setLevel(String level) {
         dataShared.setData(KEY.ACC_LEVEL, level);
     }
 
-    public String getVerified(){
+    public String getVerified() {
         return dataShared.getData(KEY.ACC_EMAIL_VERIFY);
     }
 
-    public void setVerified(String verified){
+    public void setVerified(String verified) {
         dataShared.setData(KEY.ACC_EMAIL_VERIFY, verified);
     }
 
-    public void setUserPhoto(String newUserPhoto){
+    public void setUserPhoto(String newUserPhoto) {
         dataShared.setData(KEY.ACC_PHOTO, newUserPhoto);
     }
 
-    public String getUserPhoto(){
+    public String getUserPhoto() {
         return dataShared.getData(KEY.ACC_PHOTO);
     }
 
-    public String getCreated(){
+    public String getCreated() {
         return dataShared.getData(KEY.ACC_CREATED);
     }
 
-    public void setCreated(String created){
+    public void setCreated(String created) {
         dataShared.setData(KEY.ACC_CREATED, created);
     }
 
-    public void signOut(){
+    public String getNoHp() {
+        return dataShared.getData(KEY.ACC_NO_HP);
+    }
+
+    public void setNoHp(String noHp) {
+        dataShared.setData(KEY.ACC_NO_HP, noHp);
+    }
+
+    public String getAlamat(){
+        return dataShared.getData(KEY.ACC_ALAMAT);
+    }
+
+    public void setAlamat(String alamat){
+        dataShared.setData(KEY.ACC_ALAMAT, alamat);
+    }
+
+    public void signOut() {
         dataShared.setNullData(KEY.ACC_ID_USER);
         dataShared.setNullData(KEY.ACC_USERNAME);
         dataShared.setNullData(KEY.ACC_EMAIL);

@@ -3,11 +3,15 @@ package com.c2.arenafinder.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.c2.arenafinder.api.retrofit.RetrofitClient
+import com.c2.arenafinder.data.model.UserModel
 import com.c2.arenafinder.data.response.UsersResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class UsersRepository {
+
+    private val _isLogin = MutableLiveData<UsersResponse>()
+    val isLogin : LiveData<UsersResponse> get() = _isLogin
 
     private val _changePassLogin = MutableLiveData<UsersResponse>()
     val changePassLogin : LiveData<UsersResponse> get() = _changePassLogin
@@ -17,6 +21,15 @@ class UsersRepository {
 
     private val _isVerified = MutableLiveData<UsersResponse>()
     val isVerified : LiveData<UsersResponse> get() = _isVerified
+
+    private val _logout = MutableLiveData<UsersResponse>()
+    val logout : LiveData<UsersResponse> get() = _logout
+
+    suspend fun checkIsLogin(email: String) = withContext(Dispatchers.IO){
+        _isLogin.postValue(
+            RetrofitClient.getInstance().isLogin(email).execute().body()
+        )
+    }
 
     suspend fun modifyPassLogin(email: String, pwNow : String, pwNew : String) = withContext(Dispatchers.IO){
         _changePassLogin.postValue(
@@ -36,5 +49,10 @@ class UsersRepository {
         )
     }
 
+    suspend fun logout(model : UserModel) = withContext(Dispatchers.IO){
+        _logout.postValue(
+            RetrofitClient.getInstance().logout(model).execute().body()
+        )
+    }
 
 }

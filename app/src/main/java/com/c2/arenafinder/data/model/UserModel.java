@@ -18,6 +18,12 @@ public class UserModel {
     @SerializedName("full_name")
     private String nama;
     @Expose
+    @SerializedName("no_hp")
+    private String noHp;
+    @Expose
+    @SerializedName("alamat")
+    private String alamat;
+    @Expose
     @SerializedName("password")
     private String password;
     @Expose
@@ -33,11 +39,13 @@ public class UserModel {
     @SerializedName("created_at")
     private String createdAt;
 
-    public UserModel(int idUser, String username, String email, String nama, String password, String level, String isVerified, String userPhoto, String createdAt) {
+    public UserModel(int idUser, String username, String email, String nama, String noHp, String alamat, String password, String level, String isVerified, String userPhoto, String createdAt) {
         this.idUser = idUser;
         this.username = username;
         this.email = email;
         this.nama = nama;
+        this.noHp = noHp;
+        this.alamat = alamat;
         this.password = password;
         this.level = level;
         this.isVerified = isVerified;
@@ -116,4 +124,29 @@ public class UserModel {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getNoHp() {
+        return noHp;
+    }
+
+    public void setNoHp(String noHp) {
+        this.noHp = noHp;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getIsVerified() {
+        return isVerified;
+    }
+
+    public void setIsVerified(String isVerified) {
+        this.isVerified = isVerified;
+    }
+
 }
