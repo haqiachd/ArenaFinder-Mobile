@@ -100,7 +100,7 @@ public class SportTypeFragment extends Fragment {
 
     private void fetchDataVenue() {
 
-        RetrofitClient.getInstance().sportType(sport).enqueue(new Callback<VenueExtendedResponse>() {
+        RetrofitClient.getInstance().sportType(sport).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
@@ -110,12 +110,17 @@ public class SportTypeFragment extends Fragment {
                         if (isAdded()) {
                             venueRecycler.setAdapter(
                                     new VenueExtendedAdapter(
-                                            requireContext(), extended, new AdapterActionListener() {
-                                        @Override
-                                        public void onClickListener(int position) {
-                                            Toast.makeText(requireContext(), "ID -> " + extended.get(position).getidVenue(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
+                                            requireContext(), extended,
+                                            new AdapterActionListener() {
+                                                @Override
+                                                public void onClickListener(int position) {
+                                                    startActivity(
+                                                            new Intent(requireActivity(), DetailedActivity.class)
+                                                                    .putExtra(DetailedActivity.FRAGMENT, DetailedActivity.VENUE)
+                                                                    .putExtra(DetailedActivity.ID, Integer.toString(extended.get(position).getidVenue()))
+                                                    );
+                                                }
+                                            }
                                     )
                             );
                         }

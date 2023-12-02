@@ -14,12 +14,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.data.local.LogApp;
+import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JadwalPickerModel;
 import com.c2.arenafinder.data.model.VenueBookingModel;
 import com.c2.arenafinder.util.AdapterActionListener;
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 
 public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapter.ViewHolder> {
 
@@ -54,8 +57,8 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         holder.txtNamaLapangan.setText(bookingModel.getLapanganName());
         holder.txtSlotKosong.setText(bookingModel.getTotalSlot());
 
-
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+            // show and hide lapangan
             holder.lapanganLayout.setOnClickListener(v -> {
                 if (holder.jadwalPickerLayout.getVisibility() == View.VISIBLE) {
                     holder.jadwalPickerLayout.setVisibility(View.GONE);
@@ -66,16 +69,20 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
                 }
             });
 
-            jadwalPickerAdapter = new JadwalPickerAdapter(context, models.get(position).getJadwal(), new AdapterActionListener() {
-                @Override
-                public void onClickListener(int position) {
-                    listener.onClickListener(position);
-                }
-            });
-
+            // create adapter for show jadwal adapter
+            ArrayList<JadwalPickerModel> jadwalPickerModel = models.get(position).getJadwal();
+            jadwalPickerAdapter = new JadwalPickerAdapter(
+                    context, models.get(position).getLapanganName(),
+                    models.get(position).getJadwal(), // jadwal lapangan
+                    new AdapterActionListener() {
+                        @Override
+                        public void onClickListener(int position) {
+                            listener.onClickListener(position);
+                        }
+                    });
             holder.recyclerJadwal.setAdapter(jadwalPickerAdapter);
+            showJadwalKosong(jadwalPickerModel, holder.txtSlotKosong);
         }
-
     }
 
     @Override
@@ -83,12 +90,30 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         return models != null ? models.size() : 0;
     }
 
-    public int getSelectedItem() {
-        return jadwalPickerAdapter.getSelectedItem();
+    public void showJadwalKosong(ArrayList<JadwalPickerModel> models, TextView textView){
+        int kosong = 0;
+        for (JadwalPickerModel model : models){
+            if (!model.isBooked()){
+                kosong++;
+            }
+        }
+        textView.setText(context.getString(R.string.slot_kosong_val, kosong));
     }
 
-    public ArrayList<JadwalPickerModel> getPicker(){
-        return jadwalPickerAdapter.getPick();
+    public ArrayList<JadwalPickerModel> getJadwalDipilih() {
+        return jadwalPickerAdapter.getJadwalDipilih();
+    }
+
+    public ArrayList<String> getItemDetails() {
+        return jadwalPickerAdapter.getItemDetails();
+    }
+
+    public void resetTotalHarga(){
+        jadwalPickerAdapter.resetTotalHarga();
+    }
+
+    public int getTotalHarga() {
+        return jadwalPickerAdapter.getTotalHarga();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

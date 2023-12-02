@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class ReferensiModel {
 
+    public static final String STATUS_GRATIS = "gratis";
+    public static final String STATUS_BERBAYAR = "berbayar";
+    public static final String STATUS_DISEWAKAN = "disewakan";
+    public static final String STATUS_BERVARIASI = "bervariasai";
+
     @Expose
     @SerializedName("id_venue")
     private int idVenue;

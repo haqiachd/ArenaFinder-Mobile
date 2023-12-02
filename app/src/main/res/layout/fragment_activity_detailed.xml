@@ -52,6 +52,7 @@
                 android:layout_marginEnd="@dimen/_10ssp"
                 android:contentDescription="@string/alt_collapse_olahraga"
                 android:src="@drawable/ic_detailed_vertical_menu"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -113,6 +114,7 @@
                     android:contentDescription="@string/alt_detailed_kembali"
                     android:elevation="0dp"
                     android:src="@drawable/ic_detailed_vertical_menu"
+                    android:visibility="gone"
                     app:cardCornerRadius="@dimen/_50ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -397,7 +399,7 @@
                     <org.osmdroid.views.MapView
                         android:id="@+id/fad_map_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -491,7 +493,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <View
-            android:id="@+id/detailed_line_top"
+            android:id="@+id/fvd_line_top"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:background="#80696969"
@@ -505,12 +507,12 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/poppins_regular"
             android:text="Harga"
-            android:visibility="gone"
             android:textColor="@color/dimgray"
             android:textSize="@dimen/_10ssp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/dtld_nav_txt_data"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailed_line_top" />
+            app:layout_constraintTop_toBottomOf="@id/fvd_line_top" />
 
         <TextView
             android:id="@+id/dtld_nav_txt_data"

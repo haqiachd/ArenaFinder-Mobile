@@ -7,14 +7,15 @@ import android.os.Bundle;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,10 +50,14 @@ import retrofit2.Response;
 public class VenueReviewFragment extends Fragment {
 
     private static final String ARG_ID = "id_venue";
+    private static final String ARG_VENUE_NAME = "venue";
 
     private UsersUtil usersUtil;
 
     private String id;
+    private String venueName;
+
+    private SwipeRefreshLayout refreshLayout;
 
     private RecyclerView commentRecycler;
 
@@ -83,6 +88,7 @@ public class VenueReviewFragment extends Fragment {
         txtMyComment = view.findViewById(R.id.fvr_review_comment);
         txtMyDate = view.findViewById(R.id.fvr_ratting_date);
         txtEditMy = view.findViewById(R.id.fvr_edit_ulasan);
+        refreshLayout = view.findViewById(R.id.fvr_refresh);
 
         prog1 = view.findViewById(R.id.fvr_prog_ratting_1);
         prog2 = view.findViewById(R.id.fvr_prog_ratting_2);
@@ -111,10 +117,11 @@ public class VenueReviewFragment extends Fragment {
         txtWriteReview = view.findViewById(R.id.fvr_tambah_ulasan);
     }
 
-    public static VenueReviewFragment newInstance(String id) {
+    public static VenueReviewFragment newInstance(String id, String venueName) {
         VenueReviewFragment fragment = new VenueReviewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_ID, id);
+        args.putString(ARG_VENUE_NAME, venueName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -124,6 +131,7 @@ public class VenueReviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             id = getArguments().getString(ARG_ID);
+            venueName = getArguments().getString(ARG_VENUE_NAME);
         }
     }
 
@@ -140,6 +148,15 @@ public class VenueReviewFragment extends Fragment {
         initViews(view);
         usersUtil = new UsersUtil(requireContext());
 
+        ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, com.otpview.R.color.grey, false);
+
+        refreshLayout.setOnRefreshListener(() -> {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                fetchData();
+                refreshLayout.setRefreshing(false);
+            }, 1500L);
+        });
+
         fetchData();
         onClickGroups();
     }
@@ -147,7 +164,7 @@ public class VenueReviewFragment extends Fragment {
     private void fetchData() {
 
         RetrofitClient.getInstance().venueComment(new UsersUtil(requireContext()).getId(), id)
-                .enqueue(new Callback<VenueReviewsResponse>() {
+                .enqueue(new Callback<>() {
                     @Override
                     public void onResponse(Call<VenueReviewsResponse> call, Response<VenueReviewsResponse> response) {
                         if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
@@ -157,7 +174,7 @@ public class VenueReviewFragment extends Fragment {
 
                             // show data
                             try {
-                                showMyComment(data.getMyComment());
+                                showMyComment(data.getMyComment(), data.isCanComment());
                                 showRatting(data.getRating());
                                 showComment(data.getComment());
                             } catch (Exception e) {
@@ -206,11 +223,18 @@ public class VenueReviewFragment extends Fragment {
                     true
             );
         });
-
-
     }
 
-    private void showMyComment(VenueCommentModel model) throws NumberFormatException, NullPointerException {
+    private void showMyComment(VenueCommentModel model, boolean canComment) throws NumberFormatException, NullPointerException {
+
+        if(!canComment){
+            writeLayout.setVisibility(View.GONE);
+            myCommentLayout.setVisibility(View.GONE);
+            txtMyComment.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        txtMyComment.setVisibility(View.VISIBLE);
 
         if (model.getIdReview() > 0) {
             writeLayout.setVisibility(View.GONE);
@@ -239,29 +263,15 @@ public class VenueReviewFragment extends Fragment {
                 });
 
                 sheetInflater.findViewById(R.id.sec_btn_hapus).setOnClickListener(mudi -> {
-
-                    RetrofitClient.getInstance().deleteComment(new EditCommentModel(id, usersUtil.getId()))
-                            .enqueue(new Callback<VenueReviewsResponse>() {
-                                @Override
-                                public void onResponse(Call<VenueReviewsResponse> call, Response<VenueReviewsResponse> response) {
-
-                                    if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
-                                        sheet.dismiss();
-                                        fetchData();
-                                    } else {
-                                        sheet.dismiss();
-                                        Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<VenueReviewsResponse> call, Throwable t) {
-                                    sheet.dismiss();
-                                    Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-
+                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                    new AlertDialog.Builder(requireContext())
+                            .setTitle(R.string.dia_title_confirm)
+                            .setMessage(R.string.delete_comment)
+                            .setCancelable(false)
+                            .setPositiveButton(R.string.dia_btn_hapus, (dialog, which) -> deleteComment())
+                            .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                            .create().show();
+                    sheet.dismiss();
                 });
 
                 sheet.show();
@@ -279,6 +289,27 @@ public class VenueReviewFragment extends Fragment {
         }
     }
 
+    private void deleteComment(){
+        RetrofitClient.getInstance().deleteComment(new EditCommentModel(id, usersUtil.getId()))
+                .enqueue(new Callback<>() {
+                    @Override
+                    public void onResponse(Call<VenueReviewsResponse> call, Response<VenueReviewsResponse> response) {
+
+                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                            fetchData();
+                        } else {
+                            Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<VenueReviewsResponse> call, Throwable t) {
+                        Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
     private void showComment(ArrayList<VenueCommentModel> models) {
 
         if (models.size() <= 0) {
@@ -291,12 +322,12 @@ public class VenueReviewFragment extends Fragment {
 
         } else {
             commentRecycler.setAdapter(
-                    new VenueCommentAdapter(requireContext(), models, new AdapterActionListener() {
+                    new VenueCommentAdapter(requireActivity(), models, new AdapterActionListener() {
                         @Override
                         public void onClickListener(int position) {
-                            Toast.makeText(requireContext(), models.get(position).getFullName(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(requireContext(), models.get(position).getFullName(), Toast.LENGTH_SHORT).show();
                         }
-                    })
+                    }, id, venueName)
             );
         }
 

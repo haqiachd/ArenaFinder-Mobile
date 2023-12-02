@@ -154,7 +154,7 @@ public class AktivitasFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        aktivitasViewModel.getAktivitasData().removeObservers(getViewLifecycleOwner());
+//        aktivitasViewModel.getAktivitasData().removeObservers(getViewLifecycleOwner());
         LogApp.info(this, LogTag.LIFEFCYLE, "AktivitasFragment OnDestroyView");
     }
 
@@ -194,6 +194,7 @@ public class AktivitasFragment extends Fragment {
     private void getAppbar() {
         if (getActivity() != null) {
             MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
+            cardSearch.setVisibility(View.VISIBLE);
             cardSearch.setOnClickListener(v -> {
                 startActivity(
                         new Intent(requireActivity(), SubMainActivity.class)

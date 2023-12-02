@@ -70,7 +70,7 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
         holder.txtTanggalAktivitas.setText(ArenaFinder.convertToDate(context, model.getDate()));
 //        holder.txtTimeAktivitas.setText(context.getString(R.string.txt_aktivitas_jam, model.getStartHour(), model.getEndHour()));
         holder.txtTimeAktivitas.setText(context.getString(R.string.txt_jam_main_val, model.getJamMain()));
-        holder.txtHargaAktivitas.setText(context.getString(R.string.txt_aktivitas_price_value, String.valueOf(model.getPrice())));
+        holder.txtHargaAktivitas.setText(context.getString(R.string.txt_price_value, String.valueOf(model.getPrice())));
 
         if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
 

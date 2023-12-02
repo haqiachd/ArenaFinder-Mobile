@@ -54,6 +54,10 @@ public class VenueReviewsResponse {
     public static class Data{
 
         @Expose
+        @SerializedName("is_can_comment")
+        private boolean canComment;
+
+        @Expose
         @SerializedName("my_comment")
         private VenueCommentModel myComment;
 
@@ -65,7 +69,8 @@ public class VenueReviewsResponse {
         @SerializedName("venue_comment")
         private ArrayList<VenueCommentModel> comment;
 
-        public Data(VenueCommentModel myComment, VenueRatingModel rating, ArrayList<VenueCommentModel> comment) {
+        public Data(boolean canComment, VenueCommentModel myComment, VenueRatingModel rating, ArrayList<VenueCommentModel> comment) {
+            this.canComment = canComment;
             this.myComment = myComment;
             this.rating = rating;
             this.comment = comment;
@@ -93,6 +98,14 @@ public class VenueReviewsResponse {
 
         public void setMyComment(VenueCommentModel myComment) {
             this.myComment = myComment;
+        }
+
+        public boolean isCanComment() {
+            return canComment;
+        }
+
+        public void setCanComment(boolean canComment) {
+            this.canComment = canComment;
         }
     }
 }

@@ -24,7 +24,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 app:cardBackgroundColor="@color/primary_color"
-                app:cardCornerRadius="@dimen/_50sdp"
+                app:cardCornerRadius="@dimen/_25sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -33,7 +33,8 @@
                     android:id="@+id/main_appbar_appname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/primary_color"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:fontFamily="@font/kanit_regular"
@@ -46,10 +47,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/main_appbar_search"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                app:cardCornerRadius="@dimen/_50sdp"
+                app:cardCornerRadius="@dimen/_25sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/main_appbar_card"
                 app:layout_constraintEnd_toStartOf="@id/main_appbar_notif"
@@ -59,7 +60,7 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:orientation="horizontal"
@@ -129,7 +130,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
-            android:background="@drawable/gr_navigation"
+            android:background="#CCE1E3EC"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout

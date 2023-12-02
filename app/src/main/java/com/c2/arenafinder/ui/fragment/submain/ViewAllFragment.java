@@ -21,7 +21,6 @@ import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.model.VenueExtendedModel;
-import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.AktivitasSecondResponse;
 import com.c2.arenafinder.data.response.VenueExtendedResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;

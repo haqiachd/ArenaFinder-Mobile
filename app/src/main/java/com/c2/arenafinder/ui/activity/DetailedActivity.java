@@ -2,14 +2,9 @@ package com.c2.arenafinder.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.data.local.LogApp;
@@ -18,7 +13,6 @@ import com.c2.arenafinder.ui.fragment.detailed.BookingVenueFragment;
 import com.c2.arenafinder.ui.fragment.detailed.VenueDetailedFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 
 public class DetailedActivity extends AppCompatActivity {
@@ -78,33 +72,6 @@ public class DetailedActivity extends AppCompatActivity {
             }
         }
 
-        button.setOnClickListener(v -> {
-            switch (getSupportFragmentManager().getBackStackEntryCount()){
-                case 1 : {
-                    FragmentUtil.switchFragmentDetailed(
-                            this.getSupportFragmentManager(), BookingVenueFragment.newInstance(idSelected), true
-                    );
-                    break;
-                }
-                case 2 : {
-                    ArenaFinder.playVibrator(this, ArenaFinder.VIBRATOR_SHORT);
-                    BottomSheetDialog sheet = new BottomSheetDialog(this, R.style.BottomSheetTheme);
-                    View sheetInflater = getLayoutInflater().inflate(R.layout.sheet_choose_payment, null);
-                    sheet.setContentView(sheetInflater);
-
-                    sheetInflater.findViewById(R.id.scp_button).setOnClickListener(view -> {
-                        Toast.makeText(this, "Cek", Toast.LENGTH_SHORT).show();
-                    });
-
-                    sheet.show();
-                    sheet.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    sheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    sheet.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnim;
-                    sheet.getWindow().setGravity(Gravity.BOTTOM);
-                    break;
-                }
-            }
-        });
     }
 
     @Override

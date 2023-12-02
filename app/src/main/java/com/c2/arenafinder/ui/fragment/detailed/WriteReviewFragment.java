@@ -16,10 +16,9 @@ import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.local.LogApp;
-import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.EditCommentModel;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
+import com.c2.arenafinder.util.ArenaFinder;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -101,6 +100,8 @@ public class WriteReviewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         intiViews(view);
 
+        ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, com.otpview.R.color.grey, false);
+
         myRattins = new ImageView[]{star1, star2, star3, star4, star5};
 
         inpComment.setText(comment);
@@ -112,25 +113,11 @@ public class WriteReviewFragment extends Fragment {
     private void onClickGroups(){
 
         btnPosting.setOnClickListener(v -> {
-            RetrofitClient.getInstance().editComment(new EditCommentModel(idVenue, idUser, Integer.toString(newStar), Objects.requireNonNull(inpComment.getText()).toString()))
-                    .enqueue(new Callback<VenueReviewsResponse>() {
-                        @Override
-                        public void onResponse(Call<VenueReviewsResponse> call, Response<VenueReviewsResponse> response) {
-                            if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)){
-                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                requireActivity().onBackPressed();
-                            }else {
-                                Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                requireActivity().onBackPressed();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<VenueReviewsResponse> call, Throwable t) {
-                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                            requireActivity().onBackPressed();
-                        }
-                    });
+            if (Objects.requireNonNull(inpComment.getText()).toString().length() <= 300){
+                insertRatting();
+            }else {
+                ArenaFinder.VibratorToast(requireContext(), R.string.ratting_max, Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_SHORT);
+            }
         });
 
         for (int i = 0; i < myRattins.length; i++) {
@@ -141,6 +128,23 @@ public class WriteReviewFragment extends Fragment {
             });
         }
 
+    }
+
+    private void insertRatting(){
+        RetrofitClient.getInstance().editComment(new EditCommentModel(idVenue, idUser, Integer.toString(newStar), Objects.requireNonNull(inpComment.getText()).toString()))
+                .enqueue(new Callback<>() {
+                    @Override
+                    public void onResponse(Call<VenueReviewsResponse> call, Response<VenueReviewsResponse> response) {
+                        Toast.makeText(requireContext(), Objects.requireNonNull(response.body()).getMessage(), Toast.LENGTH_SHORT).show();
+                        requireActivity().onBackPressed();
+                    }
+
+                    @Override
+                    public void onFailure(Call<VenueReviewsResponse> call, Throwable t) {
+                        Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        requireActivity().onBackPressed();
+                    }
+                });
     }
 
     private void showRattingStar(ImageView[] ratings, int rating, @DrawableRes int ratingIcon) {

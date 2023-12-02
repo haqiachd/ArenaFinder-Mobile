@@ -25,6 +25,8 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Vi
 
     private final AdapterActionListener listener;
 
+    private boolean isFirstShow = true;
+
     private int selectedModel = -500;
 
     public DatePickerAdapter(Context context, ArrayList<DatePickerModel> models, AdapterActionListener listener) {
@@ -56,9 +58,12 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Vi
             holder.setDeactiveDate(context);
         }
 
-        if (holder.getAdapterPosition() == 0){
-            holder.setActiveDate(context);
-            models.get(position).setClicked(true);
+        if (isFirstShow){
+            if (holder.getAdapterPosition() == 0){
+                holder.setActiveDate(context);
+                models.get(position).setClicked(true);
+            }
+            isFirstShow = false;
         }
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {

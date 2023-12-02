@@ -251,6 +251,7 @@
                     android:layout_height="@dimen/_90sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
+                    android:nestedScrollingEnabled="true"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt_jenis_lapangan"

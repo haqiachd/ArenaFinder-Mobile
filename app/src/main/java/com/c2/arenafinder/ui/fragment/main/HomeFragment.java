@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -59,14 +60,19 @@ import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.viewmodel.HomeViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import retrofit2.http.Url;
 
 public class HomeFragment extends Fragment {
 
@@ -184,24 +190,30 @@ public class HomeFragment extends Fragment {
                 }, 1500L)
         );
 
-        mapOSM = new MapOSM(requireActivity(), mMap);
+        try {
+            mapOSM = new MapOSM(requireActivity(), mMap);
 
-        if (isAdded()) {
-            if (getView() != null) {
-                if (savedInstanceState != null) {
-                    Parcelable parcelable = savedInstanceState.getParcelable(KEY_TEST);
-                    Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onRestoreInstanceState(parcelable);
-                    Toast.makeText(requireContext(), "RESTORE", Toast.LENGTH_SHORT).show();
-                } else {
-                    new Handler(Looper.getMainLooper()).post(this::observer);
+            if (isAdded()) {
+                if (getView() != null) {
+                    if (savedInstanceState != null) {
+                        Parcelable parcelable = savedInstanceState.getParcelable(KEY_TEST);
+                        Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onRestoreInstanceState(parcelable);
+                        Toast.makeText(requireContext(), "RESTORE", Toast.LENGTH_SHORT).show();
+                    } else {
+                        new Handler(Looper.getMainLooper()).post(this::observer);
+                    }
                 }
+
+                adapterLapangan();
+                onClickGroups();
+                showPager();
+                pagerAction();
+                getAppbar();
             }
 
-            adapterLapangan();
-            onClickGroups();
-            showPager();
-            pagerAction();
-            getAppbar();
+        }catch (Throwable ex){
+            ex.printStackTrace();
+            Toast.makeText(requireContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -209,14 +221,14 @@ public class HomeFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        Toast.makeText(requireContext(), "SAVED", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(requireContext(), "SAVED", Toast.LENGTH_SHORT).show();
         outState.putParcelable(KEY_TEST, Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onSaveInstanceState());
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        homeViewModel.getHomeData().removeObservers(getViewLifecycleOwner());
+//        homeViewModel.getHomeData().removeObservers(getViewLifecycleOwner());
     }
 
     private void observer() {
@@ -260,6 +272,7 @@ public class HomeFragment extends Fragment {
     private void getAppbar() {
         if (getActivity() != null) {
             MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
+            cardSearch.setVisibility(View.VISIBLE);
             cardSearch.setOnClickListener(v -> {
                 showSheet(R.string.txt_pilih_tipe_pencarian, R.string.btn_cari, R.string.btn_cari_aktivitas, R.string.btn_cari_tempat_olahraga,
                         () -> startActivity(
@@ -274,10 +287,7 @@ public class HomeFragment extends Fragment {
     private void onClickGroups() {
 
         menuAlur.setOnClickListener(v -> {
-            startActivity(
-                    new Intent(requireActivity(), SubMainActivity.class)
-                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_ALUR)
-            );
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://arenafinder.tifnganjuk.com/alur-pesan.php")));
         });
 
         menuKomunitas.setOnClickListener(v -> {
@@ -288,10 +298,7 @@ public class HomeFragment extends Fragment {
         });
 
         menuTrolley.setOnClickListener(v -> {
-            startActivity(
-                    new Intent(requireActivity(), SubMainActivity.class)
-                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.MENU_TROLLEY)
-            );
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://arenafinder.tifnganjuk.com")));
         });
 
         menuBooking.setOnClickListener(v -> {

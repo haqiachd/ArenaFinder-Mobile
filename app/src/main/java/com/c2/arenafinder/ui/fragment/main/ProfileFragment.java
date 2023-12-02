@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import android.os.Handler;
 import android.provider.MediaStore;
 
 import android.view.LayoutInflater;
@@ -34,12 +32,12 @@ import com.c2.arenafinder.data.model.ProfileMenuModel;
 import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.ui.activity.EmptyActivity;
-import com.c2.arenafinder.ui.activity.MainActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.ItemProfileAdapter;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,6 +141,14 @@ public class ProfileFragment extends Fragment {
 
         showListAkun();
         showListAbout();
+        getAppbar();
+    }
+
+    private void getAppbar() {
+        if (getActivity() != null) {
+            MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
+            cardSearch.setVisibility(View.INVISIBLE);
+        }
     }
 
 
@@ -212,7 +218,7 @@ public class ProfileFragment extends Fragment {
         ArrayList<ProfileMenuModel> listItems = new ArrayList<>();
 
         listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_infoapp, R.string.item_mpr_info_app, ItemProfileAdapter.DEFAULT_END_ICON));
-        listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_giverate, R.string.item_mpr_beri_ratting, ItemProfileAdapter.DEFAULT_END_ICON));
+//        listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_giverate, R.string.item_mpr_beri_ratting, ItemProfileAdapter.DEFAULT_END_ICON));
         listItems.add(new ProfileMenuModel(R.drawable.ic_listview_profile_app_language, R.string.item_mpr_lang_app, ItemProfileAdapter.DEFAULT_END_ICON));
 
         listAbout.setAdapter(new ItemProfileAdapter(requireActivity(), R.layout.item_profile, listItems));
@@ -229,8 +235,8 @@ public class ProfileFragment extends Fragment {
                         );
                         break;
                     }
-                    case 1:
-                    case 2: {
+//                    case 1:
+                    case 1: {
                         startActivity(
                                 new Intent(requireActivity(), SubMainActivity.class)
                                         .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.LANG_SETTING)

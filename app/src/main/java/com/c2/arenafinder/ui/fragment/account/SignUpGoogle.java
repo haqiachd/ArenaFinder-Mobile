@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ import com.c2.arenafinder.ui.fragment.empty.AccountMessageFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
 import com.c2.arenafinder.util.ValidatorUtil;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,7 +122,8 @@ public class SignUpGoogle extends Fragment {
                                 requireActivity().finish();
                             }
                         })
-                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+                        })
                         .create().show();
             }
         });
@@ -131,41 +136,54 @@ public class SignUpGoogle extends Fragment {
 
         btnRegister.setOnClickLoadingListener(() -> {
 
-            RetrofitClient.getInstance().registerGoogle(
-                    inpUsername.getText().toString(), email,
-                    fullName, inpPassword.getText().toString()
-            ).enqueue(new Callback<UsersResponse>() {
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
                 @Override
-                public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                    if (response.body() != null && RetrofitClient.apakahSukses(response)) {
+                public void onComplete(@NonNull Task<String> task) {
+                    // Get the device token here
+                    String token = task.getResult();
+                    Log.d("MyFirebaseMessaging", "Device Token: " + token);
 
-                        // saving data ke preferences
-                        new UsersUtil(requireContext(), response.body().getData());
+                    dataShared.setData(DataShared.KEY.SAVED_DEVICE_TOKEN, token);
 
-                        startActivity(
-                                new Intent(requireActivity(), EmptyActivity.class)
-                                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.ACCOUNT_MESSAGE)
-                                        .putExtra(EmptyActivity.FRAGMENT_MESSAGE, AccountMessageFragment.SIGNUP)
-                        );
-                        requireActivity().finish();
+                    // Send the token to your server
+                    RetrofitClient.getInstance().registerGoogle(
+                            inpUsername.getText().toString(), email,
+                            fullName, inpPassword.getText().toString(), token
+                    ).enqueue(new Callback<>() {
+                        @Override
+                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                            if (response.body() != null && RetrofitClient.apakahSukses(response)) {
 
-                    } else {
-                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                        txtHelper.setText(response.body().getMessage());
-                        txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
-                        Toast.makeText(SignUpGoogle.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                                // saving data ke preferences
+                                new UsersUtil(requireContext(), response.body().getData());
 
-                    btnRegister.setProgress(ButtonAccountCustom.KILL_PROGRESS);
-                }
+                                startActivity(
+                                        new Intent(requireActivity(), EmptyActivity.class)
+                                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.ACCOUNT_MESSAGE)
+                                                .putExtra(EmptyActivity.FRAGMENT_MESSAGE, AccountMessageFragment.SIGNUP)
+                                );
+                                requireActivity().finish();
 
-                @Override
-                public void onFailure(Call<UsersResponse> call, Throwable t) {
-                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                    Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
+                            } else {
+                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                txtHelper.setText(response.body().getMessage());
+                                txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
+                                Toast.makeText(SignUpGoogle.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            btnRegister.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                        }
+
+                        @Override
+                        public void onFailure(Call<UsersResponse> call, Throwable t) {
+                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                            Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            btnRegister.setStatus(ButtonAccountCustom.KILL_PROGRESS);
+                        }
+                    });
                 }
             });
+
 
         });
 

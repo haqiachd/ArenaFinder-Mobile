@@ -179,12 +179,13 @@ public class ReferensiFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        referensiViewModel.getReferensiData().removeObservers(getViewLifecycleOwner());
+//        referensiViewModel.getReferensiData().removeObservers(getViewLifecycleOwner());
     }
 
     private void getAppbar() {
         if (getActivity() != null) {
             MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
+            cardSearch.setVisibility(View.VISIBLE);
             cardSearch.setOnClickListener(v -> {
                 startActivity(
                         new Intent(requireActivity(), SubMainActivity.class)

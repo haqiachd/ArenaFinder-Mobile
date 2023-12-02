@@ -152,7 +152,7 @@ public class ActivityDetailedFragment extends Fragment {
         };
 
         if (getActivity() != null) {
-            ConstraintLayout bot = getActivity().findViewById(R.id.detailed_bottom_nav);
+            ConstraintLayout bot = getActivity().findViewById(R.id.fvd_bottom_nav);
             bot.setVisibility(View.GONE);
         }
     }

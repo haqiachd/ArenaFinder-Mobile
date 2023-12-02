@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
-    tools:context=".ui.fragment.detailed.BookingVenueFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.fragment.detailed.BookingVenueFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/fbv_appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,26 +32,15 @@
 
             <TextView
                 android:id="@+id/fbv_nama_olahraga"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/roboto_bold"
-                android:gravity="center_vertical"
-                android:text="Jenis Olahraga"
+                android:text="@string/pilih_jadwal_lapangan"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/fbv_expanded"
-                android:layout_width="@dimen/_13ssp"
-                android:layout_height="@dimen/_13ssp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:contentDescription="@string/alt_collapse_olahraga"
-                android:src="@drawable/ic_expanded_jenis_olahraga"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/fbv_nama_olahraga"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -60,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
         android:background="@color/background_light"
         tools:context=".ui.fragment.detailed.BookingVenueFragment">
 
@@ -77,8 +68,8 @@
                     android:id="@+id/fbv_recycler_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_7ssp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -93,10 +84,9 @@
                     android:layout_width="@dimen/_37sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/fbv_recycler_date"
-                    app:layout_constraintTop_toTopOf="@id/fbv_recycler_date"
-                    >
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fbv_recycler_date">
 
                     <View
                         android:layout_width="@dimen/_1sdp"
@@ -122,9 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
-                tools:listitem="@layout/item_venue_booking"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
+                tools:listitem="@layout/item_venue_booking" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,4 +124,74 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fvd_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/fvd_line_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#80696969"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fbv_nav_txt_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/fbv_total_harga"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toTopOf="@id/fbv_nav_txt_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fvd_line_top" />
+
+        <TextView
+            android:id="@+id/fbv_nav_txt_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Rp. 0"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/fbv_nav_txt_top"
+            app:layout_constraintTop_toBottomOf="@id/fbv_nav_txt_top" />
+
+        <TextView
+            android:id="@+id/fbv_nav_txt_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="dari 0 jadwal"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/fbv_nav_txt_data"
+            app:layout_constraintStart_toEndOf="@id/fbv_nav_txt_data"
+            app:layout_constraintTop_toTopOf="@id/fbv_nav_txt_data" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fbv_nav_button"
+            android:layout_width="@dimen/_90ssp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_13sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:backgroundTint="@color/primary_color"
+            android:text="@string/pesan"
+            app:cornerRadius="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

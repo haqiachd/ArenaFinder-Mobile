@@ -150,6 +150,8 @@ public class SignInFragment extends Fragment {
                     String token = task.getResult();
                     Log.d("MyFirebaseMessaging", "Device Token: " + token);
 
+                    dataShared.setData(DataShared.KEY.SAVED_DEVICE_TOKEN, token);
+
                     // Send the token to your server
                     RetrofitEndPoint endPoint = RetrofitClient.getInstance();
                     endPoint.loginGoogle(google.getUserData().getEmail(), token)
@@ -216,56 +218,55 @@ public class SignInFragment extends Fragment {
             String email = inpEmail.getText().toString(),
                     password = inpPassword.getText().toString();
 
-            test(email, password);
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    // Get the device token here
+                    String token = task.getResult();
+                    Log.d("MyFirebaseMessaging", "Device Token: " + token);
+
+                    dataShared.setData(DataShared.KEY.SAVED_DEVICE_TOKEN, token);
+
+                    // Send the token to your server
+                    RetrofitEndPoint endPoint = RetrofitClient.getConnection().create(RetrofitEndPoint.class);
+                    Call<UsersResponse> responseCall = endPoint.login(email, password, token);
+                    responseCall.enqueue(new Callback<>() {
+                        @Override
+                        public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
+                            if (response.body() != null && response.body().getStatus().equals("success")) {
+                                // saving data ke preferences
+                                new UsersUtil(requireContext(), response.body().getData());
+
+                                // open main activity
+                                Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
+                            } else {
+                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                txtHelper.setText(response.body().getMessage());
+                                txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
+                                Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                            btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                        }
+
+                        @Override
+                        public void onFailure(Call<UsersResponse> call, Throwable t) {
+                            ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
+                            Toast.makeText(SignInFragment.this.requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
+                        }
+                    });
+                } else {
+                    Toast.makeText(requireContext(), "Fetching FCM registration token failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         });
 
     }
 
     private void test(String email, String password) {
-        FirebaseApp.initializeApp(requireContext());
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (task.isSuccessful() && task.getResult() != null) {
-                            // Get the device token here
-                            String token = task.getResult();
-                            Log.d("MyFirebaseMessaging", "Device Token: " + token);
 
-                            // Send the token to your server
-                            RetrofitEndPoint endPoint = RetrofitClient.getConnection().create(RetrofitEndPoint.class);
-                            Call<UsersResponse> responseCall = endPoint.login(email, password, token);
-                            responseCall.enqueue(new Callback<UsersResponse>() {
-                                @Override
-                                public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                                    if (response.body() != null && response.body().getStatus().equals("success")) {
-                                        // saving data ke preferences
-                                        new UsersUtil(requireContext(), response.body().getData());
 
-                                        // open main activity
-                                        Toast.makeText(SignInFragment.this.requireContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(SignInFragment.this.requireActivity(), MainActivity.class));
-                                    } else {
-                                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                                        txtHelper.setText(response.body().getMessage());
-                                        txtHelper.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangered));
-                                        Toast.makeText(SignInFragment.this.requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                    btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
-                                }
-
-                                @Override
-                                public void onFailure(Call<UsersResponse> call, Throwable t) {
-                                    ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_MEDIUM);
-                                    Toast.makeText(SignInFragment.this.requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                                    btnLogin.setProgress(ButtonAccountCustom.KILL_PROGRESS);
-                                }
-                            });
-                        } else {
-                            Toast.makeText(requireContext(), "Fetching FCM registration token failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 
     private void onChangedListener() {

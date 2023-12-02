@@ -52,7 +52,7 @@ public class HomeInfoAdapter extends RecyclerView.Adapter<HomeInfoAdapter.ViewHo
 
         public void setImage(String url){
             Glide.with(binding.getRoot())
-                    .load(RetrofitClient.VENUE_IMG_URL + url)
+                    .load(RetrofitClient.HOME_PAGER + url)
                     .centerCrop()
                     .into(binding.ihiImage);
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
         android:background="@color/primary_color"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,7 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_light"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/fvd_appbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,8 +86,8 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/alt_card_venue"
                     android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    android:src="@drawable/ic_venue_test_2" />
+                    android:src="@drawable/ic_venue_test_2"
+                    android:visibility="gone" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/fvd_viewpager"
@@ -231,7 +233,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/fvd_top_shared_ic"
+                        android:id="@+id/fvd_top_status_ic"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_8sdp"
@@ -242,18 +244,18 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/fvd_shared_val"
+                        android:id="@+id/fvd_top_status_val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@id/fvd_top_view_ic"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:fontFamily="@font/opensans_semibold"
                         android:gravity="center_vertical"
-                        android:text="@string/txt_shared_def"
+                        android:text="@string/txt_disewakan"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/fvd_top_shared_ic"
+                        app:layout_constraintStart_toEndOf="@id/fvd_top_status_ic"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -503,6 +505,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/fvd_fasilitas_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kanit_semibold"
@@ -523,28 +526,12 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fvd_recyler_fasilitas"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_81sdp"
-                    android:nestedScrollingEnabled="false"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_9ssp"
+                    android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="3"
-                    tools:itemCount="3"
                     tools:listitem="@layout/item_fasilitas_tempat" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fvd_show_fasilitas"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/btn_lihat_semua_vd"
-                    android:textAllCaps="false"
-                    android:textSize="@dimen/_10sdp"
-                    app:cornerRadius="@dimen/_5sdp"
-                    app:strokeColor="@color/azure"
-                    app:strokeWidth="@dimen/_1sdp" />
 
             </LinearLayout>
 
@@ -553,7 +540,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/detailed_margin_width"
                 android:orientation="vertical">
 
@@ -587,7 +574,7 @@
                     <org.osmdroid.views.MapView
                         android:id="@+id/fvd_map_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -921,67 +908,8 @@
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="true"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_venue_contact"
                     tools:itemCount="2"
-                    />
-
-            </LinearLayout>
-
-            <!-- Venue Aktivitas-->
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/detailed_margin_width"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kanit_semibold"
-                    android:text="@string/txt_aktivitas_lapangan"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/txt_lorem_deksripsi_def"
-                    android:textColor="@color/dimgray"
-                    android:textSize="@dimen/_11ssp" />
-
-            </LinearLayout>
-
-            <!-- Venue Aktivitas-->
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/detailed_margin_width"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kanit_semibold"
-                    android:text="@string/txt_lapangat_terkait"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/txt_lorem_deksripsi_def"
-                    android:textColor="@color/dimgray"
-                    android:textSize="@dimen/_11ssp" />
+                    tools:listitem="@layout/item_venue_contact" />
 
             </LinearLayout>
 
@@ -994,5 +922,74 @@
 
     </ScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fvd_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-</LinearLayout>
+        <View
+            android:id="@+id/fvd_line_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#80696969"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fvd_nav_txt_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/fvd_mulai_dari"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toTopOf="@id/fvd_nav_txt_harga"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fvd_line_top" />
+
+        <TextView
+            android:id="@+id/fvd_nav_txt_harga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Rp. 75.000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/fvd_nav_txt_top"
+            app:layout_constraintTop_toBottomOf="@id/fvd_nav_txt_top" />
+
+        <TextView
+            android:id="@+id/fvd_nav_txt_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/fvd_sesi"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@id/fvd_nav_txt_harga"
+            app:layout_constraintStart_toEndOf="@id/fvd_nav_txt_harga"
+            app:layout_constraintTop_toTopOf="@id/fvd_nav_txt_harga" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fvd_nav_button"
+            android:layout_width="@dimen/_90ssp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_13sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:backgroundTint="@color/primary_color"
+            android:text="@string/btn_booking"
+            app:cornerRadius="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

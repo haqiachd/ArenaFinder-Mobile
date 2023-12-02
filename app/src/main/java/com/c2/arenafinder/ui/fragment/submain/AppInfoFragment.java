@@ -1,5 +1,7 @@
 package com.c2.arenafinder.ui.fragment.submain;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,8 +26,16 @@ public class AppInfoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private TextView txtAppName, txtVersi, txtDeveloper;
+
     public AppInfoFragment() {
         // Required empty public constructor
+    }
+
+    private void initViews(View view){
+        txtAppName = view.findViewById(R.id.fai_app_name);
+        txtVersi = view.findViewById(R.id.fai_version);
+        txtDeveloper = view.findViewById(R.id.fai_dev);
     }
 
     public static AppInfoFragment newInstance(String param1, String param2) {
@@ -56,8 +66,17 @@ public class AppInfoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initViews(view);
         getAppbar();
+
+        try {
+            PackageInfo pInfo = requireActivity().getPackageManager().getPackageInfo(requireActivity().getPackageName(), 0);
+            txtAppName.setText(getString(R.string.info_nama_aplikasi_val, getString(R.string.app_name)));
+            txtVersi.setText(getString(R.string.info_versi_aplikasi_val, pInfo.versionName));
+            txtDeveloper.setText(getString(R.string.info_developer_name_val, getString(R.string.dev_name)));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getAppbar() {

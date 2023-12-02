@@ -2,6 +2,7 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fvr_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/white"
@@ -10,19 +11,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Ulasan Pengguna"
+                android:text="@string/ulasan_pengguna_2"
                 android:layout_marginStart="@dimen/_18sdp"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/_13sdp"
@@ -396,9 +395,9 @@
                 <LinearLayout
                     android:id="@+id/fvr_write_comment_layout"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -483,10 +482,10 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fvr_recycler_review"
                     android:layout_width="match_parent"
-                    android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
+                    android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_venue_comment" />

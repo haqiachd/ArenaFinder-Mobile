@@ -12,11 +12,11 @@ public class VenueBookingModel {
     private int idLapangan;
 
     @Expose
-    @SerializedName("lapanan_img")
+    @SerializedName("photo")
     private String lapanganImg;
 
     @Expose
-    @SerializedName("lapnangan_name")
+    @SerializedName("nama_lapangan")
     private String lapanganName;
 
     @Expose

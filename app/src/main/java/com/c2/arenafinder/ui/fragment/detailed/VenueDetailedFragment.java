@@ -1,12 +1,16 @@
 package com.c2.arenafinder.ui.fragment.detailed;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -21,10 +25,10 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.maps.MapOSM;
@@ -39,6 +43,7 @@ import com.c2.arenafinder.data.model.VenueContactModel;
 import com.c2.arenafinder.data.model.VenueDetailedModel;
 import com.c2.arenafinder.data.model.VenuePhotos;
 import com.c2.arenafinder.data.model.VenueRatingModel;
+import com.c2.arenafinder.data.response.EmailReportResponse;
 import com.c2.arenafinder.data.response.VenueDetailedResponse;
 import com.c2.arenafinder.ui.adapter.VenueCommentAdapter;
 import com.c2.arenafinder.ui.adapter.VenueContactAdapter;
@@ -47,7 +52,9 @@ import com.c2.arenafinder.ui.adapter.VenuePhotoAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
+import com.c2.arenafinder.util.UsersUtil;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 
 import org.osmdroid.views.MapView;
@@ -58,6 +65,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.c2.arenafinder.data.model.ReferensiModel.STATUS_BERBAYAR;
+import static com.c2.arenafinder.data.model.ReferensiModel.STATUS_DISEWAKAN;
+import static com.c2.arenafinder.data.model.ReferensiModel.STATUS_GRATIS;
+
+
 public class VenueDetailedFragment extends Fragment {
 
     private static final String ARG_ID = "id";
@@ -67,25 +79,28 @@ public class VenueDetailedFragment extends Fragment {
     private ViewTreeObserver.OnScrollChangedListener listener;
 
     private MapView mapView;
-    private MapOSM mapOSM;
     private AppBarLayout appBarLayout;
     private TextView txtVenueNameAppbar;
     private ImageView btnBackAppbar, btnVerticalAppbar, imgSport, star1, star2, star3, star4, star5;
     private MaterialButton btnFasilitas, btnMap, btnReview;
 
-    private View line;
     private ConstraintLayout progLayout;
     private RecyclerView fasilitasRecycler, contactRecycler, commentRecycler;
     private ProgressBar prog1, prog2, prog3, prog4, prog5;
     private ViewPager2 viewPagerPhoto;
 
+    private View line;
     private ArrayList<TextView> dots = new ArrayList<>();
     private ScrollView scrollView;
-    private ImageView btnBack, btnVertical;
+    private ImageView btnBack, btnVertical, imgStatus;
     private LinearLayout venueDots;
 
-    private TextView txtPhotoValue, txtTopRating, txtTopViews, txtTopShared, txtTopSport, txtVenueName, txtVenueDesc,
+    private TextView txtPhotoValue, txtTopRating, txtTopViews, txtStatus, txtFasilitasTitle, txtTopSport, txtVenueName, txtVenueDesc,
             txtSenin, txtSelasa, txtRabu, txtKamis, txtJumat, txtSabtu, txtMinggu, txtFasilitas, txtAlamat, txtRatting, txtReviews;
+
+    private ConstraintLayout bottomNav;
+    private MaterialButton btnBookingBot;
+    private TextView txtHargaBot, txtTopBot, txtRightBot;
 
     public VenueDetailedFragment() {
         // Required empty public constructor
@@ -122,13 +137,15 @@ public class VenueDetailedFragment extends Fragment {
         txtPhotoValue = view.findViewById(R.id.fvd_photo_value);
         txtTopRating = view.findViewById(R.id.fvd_top_ratting_val);
         txtTopViews = view.findViewById(R.id.fvd_top_view_val);
-        txtTopShared = view.findViewById(R.id.fvd_shared_val);
         txtTopSport = view.findViewById(R.id.fvd_top_sport_val);
         imgSport = view.findViewById(R.id.fvd_top_sport_icon);
         txtVenueName = view.findViewById(R.id.fvd_venue_name);
         txtVenueDesc = view.findViewById(R.id.fvd_venue_desc);
+        txtFasilitasTitle = view.findViewById(R.id.fvd_fasilitas_title);
         txtFasilitas = view.findViewById(R.id.fvd_venue_fasilitas_desc);
         txtAlamat = view.findViewById(R.id.fvd_lokasi_desc);
+        txtStatus = view.findViewById(R.id.fvd_top_status_val);
+        imgStatus = view.findViewById(R.id.fvd_top_status_ic);
 
         txtSenin = view.findViewById(R.id.fvd_senin);
         txtSelasa = view.findViewById(R.id.fvd_selasa);
@@ -141,14 +158,18 @@ public class VenueDetailedFragment extends Fragment {
         txtRatting = view.findViewById(R.id.fvd_ratting_val);
         txtReviews = view.findViewById(R.id.fvd_total_review);
 
-        btnFasilitas = view.findViewById(R.id.fvd_show_fasilitas);
         btnReview = view.findViewById(R.id.fvd_btn_semua_comment);
         btnMap = view.findViewById(R.id.fvd_show_map);
 
         line = view.findViewById(R.id.fvd_ratting_line);
         progLayout = view.findViewById(R.id.fbv_prog_layout);
-    }
 
+        bottomNav = view.findViewById(R.id.fvd_bottom_nav);
+        txtHargaBot = view.findViewById(R.id.fvd_nav_txt_harga);
+        btnBookingBot = view.findViewById(R.id.fvd_nav_button);
+        txtTopBot = view.findViewById(R.id.fvd_nav_txt_top);
+        txtRightBot = view.findViewById(R.id.fvd_nav_txt_right);
+    }
 
     public static VenueDetailedFragment newInstance(String id) {
         VenueDetailedFragment fragment = new VenueDetailedFragment();
@@ -173,6 +194,96 @@ public class VenueDetailedFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_venue_detailed, container, false);
     }
 
+    private void showPopMenu(View view) {
+        PopupMenu menuAppbar = new PopupMenu(requireContext(), view);
+        menuAppbar.inflate(R.menu.menu_detailed_top);
+        menuAppbar.show();
+
+        menuAppbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.mdt_laporkan) {
+                // show bottom sheet
+                BottomSheetDialog sheet = new BottomSheetDialog(requireContext(), R.style.BottomSheetTheme);
+                View sheetInflater = requireActivity().getLayoutInflater().inflate(R.layout.sheet_report_venue, null);
+                sheet.setContentView(sheetInflater);
+
+                sheetInflater.findViewById(R.id.srv_val_1).setOnClickListener(v -> {
+                    reportVenue(R.string.r_venue_1);
+                    sheet.dismiss();
+                });
+
+                sheetInflater.findViewById(R.id.srv_val_2).setOnClickListener(v -> {
+                    reportVenue(R.string.r_venue_2);
+                    sheet.dismiss();
+                });
+
+                sheetInflater.findViewById(R.id.srv_val_3).setOnClickListener(v -> {
+                    reportVenue(R.string.r_venue_3);
+                    sheet.dismiss();
+                });
+
+                sheetInflater.findViewById(R.id.srv_val_4).setOnClickListener(v -> {
+                    reportVenue(R.string.r_venue_4);
+                    sheet.dismiss();
+                });
+
+                sheetInflater.findViewById(R.id.srv_val_5).setOnClickListener(v -> {
+                    reportVenue(R.string.r_venue_5);
+                    sheet.dismiss();
+                });
+
+                // show dialog
+                sheet.show();
+                sheet.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                sheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                sheet.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnim;
+                sheet.getWindow().setGravity(Gravity.BOTTOM);
+            }
+            return true;
+        });
+    }
+
+    private void reportVenue(@StringRes int reason) {
+
+        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+        new AlertDialog.Builder(requireContext())
+                .setTitle(R.string.dia_title_confirm)
+                .setMessage(requireContext().getString(R.string.report_venue, getString(reason)))
+                .setCancelable(false)
+                .setPositiveButton(R.string.dia_positive_laporkan, (dialog, which) -> {
+                    sendReport(getString(reason));
+                })
+                .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                .create().show();
+    }
+
+    private void sendReport(String reason){
+        var loading = new AlertDialog.Builder(requireContext())
+                .setView(LayoutInflater.from(requireContext()).inflate(R.layout.dialog_loading, null))
+                .setCancelable(false)
+                .create();
+        loading.show();
+
+        // send report
+        RetrofitClient.getInstance().sendReportVenue(
+                new UsersUtil(requireContext()).getEmail(), reason,
+                id, txtVenueName.getText().toString()
+        ).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<EmailReportResponse> call, Response<EmailReportResponse> response) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle(R.string.dia_title_inform)
+                        .setMessage(R.string.report_accepted)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.dia_positive_ok, (dialog, which) -> dialog.dismiss())
+                        .create().show();
+                loading.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<EmailReportResponse> call, Throwable t) {
+            }
+        });
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -180,23 +291,19 @@ public class VenueDetailedFragment extends Fragment {
 
         initViews(view);
 
-        listener = new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                int currentScroll = scrollView.getScrollY();
+        listener = () -> {
+            int currentScroll = scrollView.getScrollY();
 
-                if (currentScroll < getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._190sdp)) {
-                    ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
-                    appBarLayout.setVisibility(View.GONE);
-                } else {
-                    ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, R.color.primary_color_darker, false);
-                    appBarLayout.setVisibility(View.VISIBLE);
-                }
-
+            if (currentScroll < getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._190sdp)) {
+                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
+                appBarLayout.setVisibility(View.GONE);
+            } else {
+                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, R.color.primary_color_darker, false);
+                appBarLayout.setVisibility(View.VISIBLE);
             }
+
         };
 
-        updateBottomNav();
         fetchData(id);
         onClickGroups();
         pagerAction();
@@ -208,7 +315,7 @@ public class VenueDetailedFragment extends Fragment {
         super.onResume();
         scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
         ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
-        updateBottomNav();
+//        updateBottomNav();
     }
 
     @Override
@@ -228,21 +335,16 @@ public class VenueDetailedFragment extends Fragment {
 
         btnReview.setOnClickListener(v -> {
             FragmentUtil.switchFragmentDetailed(
-                    requireActivity().getSupportFragmentManager(), VenueReviewFragment.newInstance(id), true
+                    requireActivity().getSupportFragmentManager(),
+                    VenueReviewFragment.newInstance(id, txtVenueName.getText().toString()),
+                    true
+//                    R.anim.anim_top_to_bottom, R.anim.anim_bottom_to_top
             );
         });
 
-        btnFasilitas.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Button Fasilitas", Toast.LENGTH_SHORT).show();
-        });
+        btnVertical.setOnClickListener(this::showPopMenu);
 
-        btnVertical.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Button Vertical", Toast.LENGTH_SHORT).show();
-        });
-
-        btnVerticalAppbar.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Button Vertical Appbar", Toast.LENGTH_SHORT).show();
-        });
+        btnVerticalAppbar.setOnClickListener(this::showPopMenu);
 
         btnBack.setOnClickListener(v -> {
             requireActivity().onBackPressed();
@@ -250,6 +352,14 @@ public class VenueDetailedFragment extends Fragment {
 
         btnBackAppbar.setOnClickListener(v -> {
             requireActivity().onBackPressed();
+        });
+
+        btnBookingBot.setOnClickListener(v -> {
+            FragmentUtil.switchFragmentDetailed(
+                    requireActivity().getSupportFragmentManager(),
+                    BookingVenueFragment.newInstance(id, txtVenueName.getText().toString()),
+                    true
+            );
         });
 
     }
@@ -266,7 +376,7 @@ public class VenueDetailedFragment extends Fragment {
             dots.get(i).setPadding(0, 0, 3, 0);
             venueDots.addView(dots.get(i));
         }
-        txtPhotoValue.setText("1 / "+ (size - 1));
+        txtPhotoValue.setText("1 / " + (size - 1));
     }
 
     private void setSelectedColor(int posisi) {
@@ -290,7 +400,7 @@ public class VenueDetailedFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 changePosisi(position);
-                txtPhotoValue.setText((position + 1) + " / "+ dots.size());
+                txtPhotoValue.setText((position + 1) + " / " + dots.size());
             }
         });
 
@@ -351,8 +461,31 @@ public class VenueDetailedFragment extends Fragment {
         txtAlamat.setText(model.getLocation());
         txtTopSport.setText(ArenaFinder.localizationSport(model.getSport()));
         txtTopViews.setText(getString(R.string.txt_total_views, model.getViews()));
-        txtTopShared.setText(getString(R.string.txt_total_shared, model.getShared()));
 
+        switch (model.getStatus().toLowerCase()) {
+            case STATUS_DISEWAKAN: {
+                txtStatus.setText(R.string.txt_disewakan);
+                txtTopBot.setText(R.string.fvd_mulai_dari);
+                imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_rent));
+                txtHargaBot.setText(getString(R.string.txt_price_value, ArenaFinder.toMoneyCase(model.getHargaSewa())));
+                break;
+            }
+            case STATUS_GRATIS: {
+                txtStatus.setText(R.string.txt_gratis);
+                bottomNav.setVisibility(View.GONE);
+                imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_free));
+                break;
+            }
+            case STATUS_BERBAYAR: {
+                txtStatus.setText(R.string.txt_berbayar);
+                txtRightBot.setVisibility(View.GONE);
+                btnBookingBot.setVisibility(View.GONE);
+                txtTopBot.setText(R.string.txt_harga_masuk);
+                imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_price));
+                txtHargaBot.setText(getString(R.string.txt_price_value, ArenaFinder.toMoneyCase(model.getPrice())));
+                break;
+            }
+        }
     }
 
     private void showJamOperasional(TextView textView, DayOperasionalModel jam) {
@@ -379,7 +512,8 @@ public class VenueDetailedFragment extends Fragment {
 
         if (model.size() <= 0) {
             fasilitasRecycler.setVisibility(View.GONE);
-            btnFasilitas.setVisibility(View.GONE);
+            txtFasilitasTitle.setVisibility(View.GONE);
+            txtFasilitas.setVisibility(View.GONE);
         } else {
             fasilitasRecycler.setAdapter(
                     new VenueFasilitasAdapter(requireContext(), model)
@@ -387,12 +521,12 @@ public class VenueDetailedFragment extends Fragment {
         }
     }
 
-    private void showMap(String venueName, String coordinate){
+    private void showMap(String venueName, String coordinate) {
 
         double latitude = ArenaFinder.getLatitude(coordinate),
                 longitude = ArenaFinder.getLongitude(coordinate);
 
-        mapOSM = new MapOSM(requireActivity(), mapView);
+        MapOSM mapOSM = new MapOSM(requireActivity(), mapView);
         mapOSM.initializeMap(latitude, longitude, 15.0, false);
         mapOSM.setCenterMap();
         mapOSM.addMarker(
@@ -460,12 +594,13 @@ public class VenueDetailedFragment extends Fragment {
 
         } else {
             commentRecycler.setAdapter(
-                    new VenueCommentAdapter(requireContext(), models, new AdapterActionListener() {
+                    new VenueCommentAdapter(requireActivity(), models, new AdapterActionListener() {
                         @Override
                         public void onClickListener(int position) {
 //                            Toast.makeText(requireContext(), models.get(position).getFullName(), Toast.LENGTH_SHORT).show();
                         }
-                    })
+                    }
+                            , id, txtVenueName.getText().toString())
             );
         }
 
@@ -479,7 +614,7 @@ public class VenueDetailedFragment extends Fragment {
                     @Override
                     public void onClickListener(int position) {
 //                        Toast.makeText(requireContext(), "PHONE -> " + model.get(position).getNoHp(), Toast.LENGTH_SHORT).show();
-                        var whatsappUri = Uri.parse("https://wa.me/"+model.get(position).getNoHp().substring(1));
+                        var whatsappUri = Uri.parse("https://wa.me/" + model.get(position).getNoHp().substring(1));
 
                         Intent intent = new Intent(Intent.ACTION_VIEW, whatsappUri);
                         startActivity(intent);
@@ -488,7 +623,6 @@ public class VenueDetailedFragment extends Fragment {
         );
 
     }
-
 
     private void updateBottomNav() {
         if (getActivity() != null) {
