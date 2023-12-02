@@ -18,8 +18,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RetrofitClient {
 
-    public static final String BASE_URL = "http://192.168.96.152/arenafinder/"; // local
-//    public static final String BASE_URL = "http://192.168.0.106/arenafinder/"; // wifi
+//    public static final String BASE_URL = "http://192.168.96.152/arenafinder/"; // local
+//    public static final String BASE_URL = "http://172.16.108.101/arenafinder/"; // wifi
+    public static final String BASE_URL = "https://arenafinder.tifnganjuk.com/";
 
     public static final String CONTROLLERS = BASE_URL + "controllers/mobile/";
 
@@ -27,11 +28,13 @@ public class RetrofitClient {
 
     public static final String USER_PHOTO_URL = PUBLIC_IMG + "user-photo/";
 
-    public static final String VENUE_IMG_URL = PUBLIC_IMG + "venues/";
+    public static final String HOME_PAGER = PUBLIC_IMG + "homepager/";
 
-    public static final String AKTIVITAS_URL = PUBLIC_IMG + "aktivitas/";
+    public static final String VENUE_IMG_URL = PUBLIC_IMG + "venue/";
 
-    public static final String FASILITAS_URL = PUBLIC_IMG + "fasilitas/";
+    public static final String AKTIVITAS_URL = PUBLIC_IMG + "venue/";
+
+    public static final String FASILITAS_URL = PUBLIC_IMG + "venue/";
 
     public static final String SUCCESSFUL_RESPONSE = "success";
 
@@ -51,8 +54,8 @@ public class RetrofitClient {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
                 .build();
 
         return new Retrofit.Builder()

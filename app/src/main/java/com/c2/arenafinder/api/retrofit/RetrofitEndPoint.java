@@ -2,6 +2,7 @@ package com.c2.arenafinder.api.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -12,14 +13,18 @@ import retrofit2.http.Query;
 
 import com.c2.arenafinder.data.model.AktivitasMemberModel;
 import com.c2.arenafinder.data.model.EditCommentModel;
+import com.c2.arenafinder.data.model.UserModel;
 import com.c2.arenafinder.data.response.AktivitasDetailedResponse;
 import com.c2.arenafinder.data.response.AktivitasMemberResponse;
 import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.AktivitasSecondResponse;
 import com.c2.arenafinder.data.response.AktivitasStatusResponse;
 import com.c2.arenafinder.data.response.ArenaFinderResponse;
+import com.c2.arenafinder.data.response.EmailReportResponse;
 import com.c2.arenafinder.data.response.HomeResponse;
 import com.c2.arenafinder.data.response.CreateBookingResponse;
+import com.c2.arenafinder.data.response.ListLapanganResponse;
+import com.c2.arenafinder.data.response.NotificationResponse;
 import com.c2.arenafinder.data.response.StatusPesananResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
@@ -34,6 +39,9 @@ public interface RetrofitEndPoint {
     @GET("cek_koneksi.php")
     Call<ArenaFinderResponse> cekKoneksi();
 
+    @GET("cek_koneksi.php")
+    Call<ArenaFinderResponse> cekKoneksiV();
+
     @GET("users/cek_user.php")
     Call<UsersResponse> cekUser(
             @Query("email") String email
@@ -42,6 +50,11 @@ public interface RetrofitEndPoint {
     @GET("users/cek_userid.php")
     Call<UsersResponse> cekUserID(
             @Query("username") String username,
+            @Query("email") String email
+    );
+
+    @GET("users/is_login.php")
+    Call<UsersResponse> isLogin(
             @Query("email") String email
     );
 
@@ -75,12 +88,13 @@ public interface RetrofitEndPoint {
             @Field("username") String username,
             @Field("email") String email,
             @Field("full_name") String fullName,
-            @Field("password") String password
+            @Field("password") String password,
+            @Field("device_token") String deviceToken
     );
 
     @GET("users/is_verified.php")
     Call<UsersResponse> isVerified(
-        @Query("email") String email
+            @Query("email") String email
     );
 
     @FormUrlEncoded
@@ -108,7 +122,7 @@ public interface RetrofitEndPoint {
     @POST("users/delete_pp.php")
     Call<UsersResponse> deletePhoto(
             @Field("email") String email
-            );
+    );
 
     @FormUrlEncoded
     @POST("users/update_acc.php")
@@ -122,6 +136,11 @@ public interface RetrofitEndPoint {
     Call<UsersResponse> cekUserId(
             @Query("username") String username,
             @Query("email") String email
+    );
+
+    @DELETE("users/logout.php")
+    Call<UsersResponse> logout(
+            @Body UserModel model
     );
 
     @FormUrlEncoded
@@ -230,6 +249,11 @@ public interface RetrofitEndPoint {
             @Field("total_price") String totalPrice
     );
 
+    @FormUrlEncoded
+    @POST("feature/venues/booking/cancel_booking.php")
+    Call<CreateBookingResponse> cancelBooking(
+            @Field("id_booking") String idBooking
+    );
 
     @FormUrlEncoded
     @POST("feature/venues/booking/booking_detail.php")
@@ -243,6 +267,11 @@ public interface RetrofitEndPoint {
     Call<StatusPesananResponse> getStatusPesanan(
             @Query("email") String email,
             @Query("status") String status
+    );
+
+    @GET("feature/venues/booking/get_list_lapangan.php")
+    Call<ListLapanganResponse> getListLapangan(
+            @Query("id_venue") String idVenue
     );
 
     @GET("feature/activities/activity_detailed.php")
@@ -276,6 +305,31 @@ public interface RetrofitEndPoint {
     @GET("page/sub/search/alla_search.php")
     Call<AktivitasStatusResponse> searchActivity(
             @Query("name") String name
+    );
+
+    @FormUrlEncoded
+    @POST("email/report_venue.php")
+    Call<EmailReportResponse> sendReportVenue(
+            @Field("email") String email,
+            @Field("reason") String reason,
+            @Field("venue_id") String venueId,
+            @Field("venue_name") String venueName
+    );
+
+    @FormUrlEncoded
+    @POST("email/report_comment.php")
+    Call<EmailReportResponse> sendReportComment(
+            @Field("username") String email,
+            @Field("username_reported") String usernameReported,
+            @Field("comment") String comment,
+            @Field("reason") String reason,
+            @Field("venue_id") String venueId,
+            @Field("venue_name") String venueName
+    );
+
+    @GET("notification/my_notif.php")
+    Call<NotificationResponse> myNotif(
+            @Query("email") String email
     );
 
 }
