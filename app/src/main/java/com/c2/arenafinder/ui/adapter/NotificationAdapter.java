@@ -1,11 +1,14 @@
 package com.c2.arenafinder.ui.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
@@ -15,9 +18,12 @@ import java.util.ArrayList;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder>{
 
-    private ArrayList<NotificationModel> models;
+    private final Context context;
 
-    public NotificationAdapter(ArrayList<NotificationModel> models){
+    private final ArrayList<NotificationModel> models;
+
+    public NotificationAdapter(Context context, ArrayList<NotificationModel> models){
+        this.context = context;
         this.models = models;
     }
 
@@ -35,9 +41,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         NotificationModel model = models.get(position);
 
-        holder.txtTitle.setText(model.getTitle());
-        holder.txtBody.setText(model.getBody());
-        holder.txtDate.setText(model.getDate());
+        holder.txtDate.setText(model.getTanggal());
+
+        switch (model.getStatus().toLowerCase()){
+            case "accepted" : {
+                holder.imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_notif_acc));
+                holder.txtTitle.setText(context.getString(R.string.notif_diterima));
+                holder.txtBody.setText(context.getString(R.string.notif_body_diterima, model.getTanggalKonfirmasi()));
+                break;
+            }
+            case "rejected" : {
+                holder.imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_notif_rej));
+                holder.txtTitle.setText(R.string.notif_ditolak);
+                holder.txtBody.setText(context.getString(R.string.notif_body_ditolak, model.getTanggalKonfirmasi()));
+                break;
+            }
+        }
 
     }
 
@@ -48,7 +67,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView txtTitle, txtBody, txtDate;
+        private final TextView txtTitle, txtBody, txtDate;
+
+        public final ImageView imageView;
 
         public ViewHolder(View view){
             super(view);
@@ -56,6 +77,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             txtTitle = view.findViewById(R.id.ino_title);
             txtBody = view.findViewById(R.id.ino_body);
             txtDate = view.findViewById(R.id.ino_date);
+            imageView = view.findViewById(R.id.ino_icon);
         }
 
     }

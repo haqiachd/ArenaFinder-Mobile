@@ -1,62 +1,49 @@
 package com.c2.arenafinder.data.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class NotificationModel {
 
-    private int idNotif;
+    @Expose
+    @SerializedName("tanggal")
+    private String tanggal;
 
-    private String title;
+    @Expose
+    @SerializedName("tanggal_konfirmasi")
+    private String tanggalKonfirmasi;
 
-    private String body;
+    @Expose
+    @SerializedName("status")
+    public String status;
 
-    private String type;
-
-    private String date;
-
-    public NotificationModel(int idNotif, String title, String body, String type, String date) {
-        this.idNotif = idNotif;
-        this.title = title;
-        this.body = body;
-        this.type = type;
-        this.date = date;
+    public NotificationModel(String tanggal, String tanggalKonfirmasi, String status) {
+        this.tanggal = tanggal;
+        this.tanggalKonfirmasi = tanggalKonfirmasi;
+        this.status = status;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTanggal() {
+        return tanggal;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
-    public int getIdNotif() {
-        return idNotif;
+    public String getStatus() {
+        return status;
     }
 
-    public void setIdNotif(int idNotif) {
-        this.idNotif = idNotif;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getBody() {
-        return body;
+    public String getTanggalKonfirmasi() {
+        return tanggalKonfirmasi;
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public void setTanggalKonfirmasi(String tanggalKonfirmasi) {
+        this.tanggalKonfirmasi = tanggalKonfirmasi;
     }
 }

@@ -12,12 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.NotificationModel;
+import com.c2.arenafinder.data.response.NotificationResponse;
 import com.c2.arenafinder.ui.adapter.NotificationAdapter;
+import com.c2.arenafinder.util.UsersUtil;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NotificationsFragment extends Fragment {
 
@@ -62,27 +70,36 @@ public class NotificationsFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.fno_recycler);
 
-        ArrayList<NotificationModel> models = new ArrayList<>();
-        models.add(new NotificationModel(
-                1, "Pesanan Diterima", "Pesanan kamu pada 2023-10-10 telah diterima olah pengelola lapangan","Pesanan-Diterima", "2020-10-10")
-        );
-        models.add(new NotificationModel(
-                1, "Pesanan Diterima", "Pesanan kamu pada 2023-10-10 telah diterima olah pengelola lapangan","Pesanan-Diterima", "2020-10-10")
-        );
-        models.add(new NotificationModel(
-                1, "Pesanan Diterima", "Pesanan kamu pada 2023-10-10 telah diterima olah pengelola lapangan","Pesanan-Diterima", "2020-10-10")
-        );
+        UsersUtil util = new UsersUtil(requireContext());
 
-        recyclerView.setAdapter(new NotificationAdapter(
-                models
-        ));
+        RetrofitClient.getInstance().myNotif(util.getEmail())
+                .enqueue(new Callback<>() {
+                    @Override
+                    public void onResponse(Call<NotificationResponse> call, Response<NotificationResponse> response) {
+                        if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
+                            ArrayList<NotificationModel> models = response.body().getData();
+
+                            if (isAdded()) {
+                                recyclerView.setAdapter(new NotificationAdapter(requireContext(), models));
+                            }
+                        } else {
+                            Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NotificationResponse> call, Throwable t) {
+                        Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
         getAppbar();
-
     }
 
-    private void getAppbar(){
-        if (getActivity() != null){
+
+    private void getAppbar() {
+        if (getActivity() != null) {
             LinearLayout linearLayout = getActivity().findViewById(R.id.sub_linear);
             linearLayout.setVisibility(View.VISIBLE);
             TextView txtTitle = getActivity().findViewById(R.id.sub_title);
