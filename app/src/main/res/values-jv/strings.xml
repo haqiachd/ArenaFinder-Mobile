@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">ArenaFinder</string>
+    <string name="dev_name">Kelompok C2</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_page_home">Beranda</string>
@@ -83,7 +85,7 @@
     <string name="txt_menu_kegiatan_lapangan">Alur Pesan</string>
     <string name="txt_menu_aktivitas_komunitas">Komunitas</string>
     <string name="txt_menu_alur_pesan">Alur Pemesanan</string>
-    <string name="txt_menu_informasi">Informasi</string>
+    <string name="txt_menu_informasi">Website</string>
     <string name="txt_pesan_lapangan">Booking</string>
     <string name="txt_sedang_kosong">Sedang Kosong</string>
     <string name="txt_sedang_kosnog_desc">Lihat Tempat Olahraga yang sedang Kosong</string>
@@ -123,7 +125,7 @@
     <string name="txt_aktivitas_anggota_value">%1$d/%2$d Anggota</string>
     <string name="txt_aktivitas_price">Rp. 15.0000 / Orang</string>
     <string name="txt_aktivitas_time">07:00 – 10:20</string>
-    <string name="txt_aktivitas_price_value">Rp. %1$s</string>
+    <string name="txt_price_value">Rp. %1$s</string>
     <string name="txt_no_ratting">N/A</string>
     <string name="txt_lorem_deksripsi_def">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</string>
     <string name="txt_lorem_deksripsi_def_double">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</string>
@@ -151,12 +153,12 @@
     <string name="txt_olahraga_football">Sepak Bola</string>
     <string name="txt_olahraga_basket">Bola Basket</string>
     <string name="txt_olahraga_voli">Bola Voli</string>
-    <string name="txt_olahraga_tenis">Tenis Lapangan</string>
+    <string name="txt_olahraga_tenis">Tenis</string>
     <string name="txt_olahraga_tenis_meja">Tenis Meja</string>
     <string name="txt_olahraga_atletik">Atletik</string>
     <string name="txt_olahraga_fitness">Fitness</string>
     <string name="txt_olahraga_renang">Renang</string>
-    <string name="txt_olahraga_silat">Pencak Silat</string>
+    <string name="txt_olahraga_silat">Silat</string>
     <string name="txt_olahraga_def">Olahraga</string>
 
     <string name="txt_aktivitas_jam">%1$s - %2$s</string>
@@ -441,5 +443,79 @@
     <string name="bahasa_inggris">Inggris</string>
     <string name="dia_change_langueage">Aplikasi bakal di-restart nalika sampeyan ngganti basa aplikasi.</string>
     <string name="txt_num_member">%1$d Anggota</string>
+    <string name="booking_lapangan">Booking Lapangan</string>
+    <string name="bayar_ditempat">Bayar ditempat</string>
+
+    <string name="fvd_mulai_dari">Mulai dari</string>
+    <string name="fvd_sesi">/ Sesi</string>
+    <string name="btn_booking">Booking</string>
+    <string name="txt_harga_masuk">Harga masuk</string>
+
+    <string name="menu_laporkan">Laporkan Tempat</string>
+    <string name="menu_laporkan_koment">Laporkan Komentar</string>
+    <string name="txt_alasan_report">Pilih alasan</string>
+    <string name="ujaran_kebencian">Ujaran kebencian</string>
+    <string name="informasi_palsu">Informasi palsu</string>
+    <string name="berbau_pornografi">Berbau pornografi</string>
+    <string name="perundungan_sosial">Perundungan sosial</string>
+    <string name="mengandung_ancaman">Mengandung ancaman</string>
+
+    <string name="report_comment">Apakah kamu yakin ingin melaporkan komentar dengan alasan \'%1$s\'</string>
+    <string name="report_venue">Apakah kamu yakin ingin melaporkan tempat olahraga ini dengan alasan \'%1$s\'</string>
+    <string name="dia_positive_laporkan">Laporkan</string>
+
+    <string name="r_venue_1">Informasi palsu</string>
+    <string name="r_venue_2">Pelayanan buruk</string>
+    <string name="r_venue_3">Jadwal tidak sesuai</string>
+    <string name="r_venue_4">Harga tidak sesuai</string>
+    <string name="r_venue_5">Keamanan buruk</string>
+    <string name="ulasan_pengguna">Ulasan Pengguna</string>
+
+    <string name="delete_comment">Apakah kamu yakin ingin menghapus komentar?</string>
+    <string name="dia_btn_hapus">Hapus</string>
+    <string name="ratting_max">Ratting tidak boleh lebih dari 300 karakter</string>
+    <string name="ulasan_pengguna_2">Ulasan Pengguna</string>
+    <string name="report_accepted">Laporan anda telah kami diterima, kami akan meninjau laporan anda</string>
+    <string name="txt_rician_jadwal">Rician Jadwal</string>
+    <string name="total_harga_rp_50_000">Total Harga : Rp. 50.000</string>
+    <string name="total_harga_rp_50_000_val">Total Harga : Rp. %1$s</string>
+    <string name="total_keseluruhan_harga">Total Keseluruhan Harga</string>
+    <string name="pembayaran">Pembayaran</string>
+    <string name="pilih_jadwal_lapangan">Pilih Jadwal Lapangan</string>
+    <string name="fbv_total_harga">Total Harga</string>
+    <string name="fbv_total_jadwal">dari %1$d jadwal</string>
+    <string name="pesan">Pesan</string>
+    <string name="txt_price_value_2">Rp. %1$d</string>
+    <string name="status_booking_adapter">Di Booking</string>
+    <string name="slot_kosong_val">%1$d slot kosong</string>
+    <string name="dia_msg_booking_success">Booking berhasil, Silahkan menunggu admin pengelola lapangan mengkonfirmasi pesanan booking kamu.</string>
+    <string name="dia_msg_booking_fail">Booking yang anda pesan mengalami kegagalan, Silahkan ulangi beberapa saat lagi.</string>
+    <string name="dia_confirm_booking">Apakah Kamu yakin ingin memesan lapangan di tempat ini dengan sistem COD? \n\nSilakan lakukan pembayaran kepada pengelola lapangan saat Kamu berada di lokasi</string>
+    <string name="dia_btn_yakin">YAKIN</string>
+    <string name="txt_payment_method_d">Pilih Metode Pembayaran</string>
+    <string name="btn_dia_kembali">KEMBALI</string>
+    <string name="total_jadwal">Total Jadwal : %1$s</string>
+    <string name="btn_dia_update">UPDATE</string>
+    <string name="btn_dia_skip">SKIP</string>
+    <string name="dia_title_update">Update Versi</string>
+    <string name="dia_msg_update">Update ArenaFinder telah tersedia, Anda dapat mengupdate ArenaFinder pada button Update \n\n Deskripsi : \n %1$s</string>
+    <string name="online_segera">Online (Segera)</string>
+    <string name="toast_segera">Segera</string>
+    <string name="info_nama_aplikasi">Nama Aplikasi :</string>
+    <string name="inf_versi_aplikasi">Versi Aplikasi</string>
+    <string name="info_developer_name">Developer Name</string>
+    <string name="txt_server_nonaktif">Server Nonaktif</string>
+    <string name="txt_server_nonaktif_desc">Server di nonaktifkan sementara oleh developer karena alasan tertentu.</string>
+    <string name="info_nama_aplikasi_val">Nama Aplikasi : %1$s</string>
+    <string name="info_versi_aplikasi_val">Versi Aplikasi : %1$s</string>
+    <string name="info_developer_name_val">Developer Name : %1$s</string>
+    <string name="info_contributor_val">Contributor : %1$s</string>
+    <string name="contributor">Contributor :</string>
+
+    <string name="notif_diterima">Pesanan Diterima</string>
+    <string name="notif_ditolak">Pesanan Ditolak</string>
+    <string name="notif_body_diterima">Pesanan kamu pada %1$s telah diterima olah pengelola lapangan</string>
+    <string name="notif_body_ditolak">Pesanan kamu pada %1$s telah ditolak olah pengelola lapangan</string>
+
 
 </resources>
