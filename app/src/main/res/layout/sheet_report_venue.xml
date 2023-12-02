@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet">
+
+    <ImageView
+        android:id="@+id/srv_line_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/alt_bottom_sheet_line_indicator"
+        android:src="@drawable/ic_sheet_line_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/srv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/txt_alasan_report"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintTop_toBottomOf="@id/srv_line_indicator" />
+
+
+    <LinearLayout
+        android:id="@+id/srv_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/srv_title">
+
+        <TextView
+            android:id="@+id/srv_val_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/r_venue_1"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/srv_val_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/r_venue_2"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/srv_val_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/r_venue_3"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/srv_val_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/r_venue_4"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/srv_val_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/r_venue_5"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/_13ssp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

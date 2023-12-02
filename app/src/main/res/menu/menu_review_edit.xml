@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mdr_laporkan"
+        android:title="@string/menu_laporkan_koment"
+        android:icon="@drawable/ic_menu_laporkan"
+        />
+    <item
+        android:id="@+id/mdr_edit"
+        android:title="@string/txt_edit_ulasan"
+        android:icon="@drawable/ic_edit_ulasan"
+        />
+</menu>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet">
+
+
+    <ImageView
+        android:id="@+id/sca_line_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/alt_bottom_sheet_line_indicator"
+        android:src="@drawable/ic_sheet_line_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scp_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/txt_alasan_report"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintTop_toBottomOf="@id/sca_line_indicator" />
+
+
+    <LinearLayout
+        android:id="@+id/scp_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/scp_title">
+
+        <TextView
+            android:id="@+id/src_val_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:textColor="@color/dimgray"
+            android:text="@string/ujaran_kebencian"
+            android:fontFamily="@font/poppins_semibold"
+            />
+
+        <TextView
+            android:id="@+id/src_val_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:textColor="@color/dimgray"
+            android:text="@string/informasi_palsu"
+            android:fontFamily="@font/poppins_semibold"
+            />
+
+        <TextView
+            android:id="@+id/src_val_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:textColor="@color/dimgray"
+            android:text="@string/berbau_pornografi"
+            android:fontFamily="@font/poppins_semibold"
+            />
+
+        <TextView
+            android:id="@+id/src_val_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:textColor="@color/dimgray"
+            android:text="@string/perundungan_sosial"
+            android:fontFamily="@font/poppins_semibold"
+            />
+
+        <TextView
+            android:id="@+id/src_val_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:textColor="@color/dimgray"
+            android:text="@string/mengandung_ancaman"
+            android:fontFamily="@font/poppins_semibold"
+            />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
