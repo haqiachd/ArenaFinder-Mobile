@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/fso_swipe"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    tools:context=".ui.fragment.empty.ServerNotFoundFragment"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/fso_lottie"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            app:lottie_rawRes="@raw/raw_server_off"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_speed="0.8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/fso_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="@dimen/_20sdp"
+            android:text="@string/txt_server_nonaktif"
+            android:textColor="@color/azure"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/fso_lottie"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/fso_txt_deks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:text="@string/txt_server_nonaktif_desc"
+            android:fontFamily="@font/opensans_bold"
+            android:textStyle="bold"
+            android:textColor="#808080"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@id/fso_txt"
+            app:layout_constraintEnd_toEndOf="@id/fso_txt"
+            app:layout_constraintTop_toBottomOf="@id/fso_txt"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
