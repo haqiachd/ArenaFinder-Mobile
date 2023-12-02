@@ -50,6 +50,7 @@ public class ArenaFinder {
     public static final int PERMISSION_CURRENT_POSITION = 100;
     public static final int PERMISSION_CAMERA = 101;
     public static final int PERMISSION_STORAGE = 102;
+    public static final int PERMISSION_PHONE = 103;
 
     public static void playVibrator(@NonNull Context context, int millis){
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -152,10 +153,22 @@ public class ArenaFinder {
                 new JenisLapanganModel(R.drawable.ic_sport_tennis_table, context.getString(R.string.txt_olahraga_tenis_meja))
         );
         fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_tennis, context.getString(R.string.txt_olahraga_tenis))
+        );
+        fieldsModel.add(
                 new JenisLapanganModel(R.drawable.ic_lapangan_futsal, context.getString(R.string.txt_olahraga_futsal))
         );
         fieldsModel.add(
                 new JenisLapanganModel(R.drawable.ic_lapangan_fitness, context.getString(R.string.txt_olahraga_fitness))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_renang, context.getString(R.string.txt_olahraga_renang))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_atletik, context.getString(R.string.txt_olahraga_atletik))
+        );
+        fieldsModel.add(
+                new JenisLapanganModel(R.drawable.ic_silat, context.getString(R.string.txt_olahraga_silat))
         );
 
         return fieldsModel;

@@ -13,7 +13,7 @@ android {
         minSdk 21
         targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName "1.0 - beta"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -80,6 +80,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
 
+    // midtrans
+    implementation 'com.midtrans:uikit:2.0.0-SANDBOX'
+    implementation 'com.midtrans:uikit:1.23.1'
 
     // testing
     testImplementation 'junit:junit:4.13.2'
