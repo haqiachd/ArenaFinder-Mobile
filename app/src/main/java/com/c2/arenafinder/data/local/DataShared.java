@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 
+import com.c2.arenafinder.util.LanguagesUtil;
+
 import java.util.HashMap;
 
 public class DataShared {
@@ -60,9 +62,20 @@ public class DataShared {
         this.sharedEditor.remove(key.name()).apply();
     }
 
+    public void resetDefaultValue(){
+        KEY[] keyArray = KEY.values();
+        for (KEY key : keyArray) {
+            setNullData(key);
+        }
+
+        setData(KEY.APP_LANGUAGE, LanguagesUtil.INDONESIAN);
+        setData(KEY.IS_FIRST_TIME_INSTALL, "no");
+    }
+
     public enum KEY {
 
         APP_LAUNCH_FROM,
+        SAVED_DEVICE_TOKEN,
         ACC_ID_USER,
         ACC_USERNAME,
         ACC_EMAIL,
@@ -71,6 +84,8 @@ public class DataShared {
         ACC_EMAIL_VERIFY,
         ACC_CREATED,
         ACC_PHOTO,
+        ACC_NO_HP,
+        ACC_ALAMAT,
         VERIFY_EMAIL,
         VERIFY_OTP_CODE,
         VERIFY_START_MILLIS,
