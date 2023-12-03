@@ -6,20 +6,23 @@ import com.google.gson.annotations.SerializedName
 data class ArenaFinderModel(
     @Expose
     @SerializedName("server_status")
-    val serverStatus : Boolean,
+    val serverStatus: Boolean,
     @Expose
     @SerializedName("have_update")
-    val haveUpdate : Boolean,
+    val haveUpdate: Boolean,
+    @Expose
+    @SerializedName("force_update")
+    val forceUpdate: Boolean,
     @Expose
     @SerializedName("min_version_code")
-    val minVersionCode : Int,
+    val minVersionCode: Int,
     @Expose
     @SerializedName("new_version_name")
-    val newVersionName : String,
+    val newVersionName: String,
     @Expose
     @SerializedName("update_link")
-    val updateLink : String,
+    val updateLink: String,
     @Expose
     @SerializedName("desc_update")
-    val descUpdate : String,
+    val descUpdate: String,
 )

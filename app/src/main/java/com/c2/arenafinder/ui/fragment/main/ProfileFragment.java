@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.provider.MediaStore;
 
 import android.view.LayoutInflater;
@@ -26,18 +28,25 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
+import com.c2.arenafinder.api.retrofit.RetrofitState;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.ProfileMenuModel;
 import com.c2.arenafinder.data.model.UserModel;
+import com.c2.arenafinder.data.repository.UsersRepository;
 import com.c2.arenafinder.data.response.UsersResponse;
+import com.c2.arenafinder.di.UsersViewModelFactory;
 import com.c2.arenafinder.ui.activity.EmptyActivity;
 import com.c2.arenafinder.ui.activity.SubMainActivity;
 import com.c2.arenafinder.ui.adapter.ItemProfileAdapter;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.ImageUtil;
 import com.c2.arenafinder.util.UsersUtil;
+import com.c2.arenafinder.viewmodel.UsersViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,11 +69,15 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String savedEmail, savedToken;
+
     private UsersUtil usersUtil;
     private Button btnLogout;
     private TextView txtUsername, txtEmail, txtName, txtLevel, btnChoose, btnUpload, btnEdit;
     private CircleImageView imgPhoto;
     private ListView listAkun, listAbout;
+
+    private UsersViewModel usersViewModel;
 
     private void initViews(View view) {
         txtEmail = view.findViewById(R.id.mpr_email);
@@ -110,29 +123,33 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
+        usersViewModel = new ViewModelProvider(
+                requireActivity(),
+                new UsersViewModelFactory(new UsersRepository())
+        ).get(UsersViewModel.class);
+
         usersUtil = new UsersUtil(requireActivity());
 
-//        txtUsername.setText(usersUtil.getUsername());
+        savedEmail = usersUtil.getEmail();
+        savedToken = usersUtil.getDeviceToken();
+
         txtEmail.setText(usersUtil.getEmail());
         txtName.setText(usersUtil.getFullName());
-//        txtLevel.setText(usersUtil.getLevel());
 
         Glide.with(requireActivity())
                 .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
                 .placeholder(R.drawable.ic_profile)
                 .into(imgPhoto);
 
-//        onClickGroups();
+        observer();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-//        txtUsername.setText(usersUtil.getUsername());
         txtEmail.setText(usersUtil.getEmail());
         txtName.setText(usersUtil.getFullName());
-//        txtLevel.setText(usersUtil.getLevel());
 
         Glide.with(requireActivity())
                 .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
@@ -151,6 +168,41 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private void observer() {
+
+        usersViewModel.logout().observe(getViewLifecycleOwner(), dataState -> {
+            if (dataState instanceof RetrofitState.Loading) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_LOADING, "ON LOADING LOGOUT");
+            } else if (dataState instanceof RetrofitState.Error) {
+                Toast.makeText(requireContext(), ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(requireActivity(), EmptyActivity.class)
+//                        .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+//                );
+            } else if (dataState instanceof RetrofitState.Success) {
+
+                try {
+                    // remove firebase token
+                    FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            LogApp.info(requireContext(), LogTag.FIREBASE_MESSAGING_SERVICES, "Logout AKun");
+                            startActivity(new Intent(requireActivity(), EmptyActivity.class)
+                                    .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                            );
+                        }
+                    });
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    LogApp.error(requireContext(), LogTag.FIREBASE_MESSAGING_SERVICES, "error : " + ex.getMessage());
+                    startActivity(new Intent(requireActivity(), EmptyActivity.class)
+                            .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                    );
+                }
+
+            }
+        });
+
+    }
 
     private void showListAkun() {
 
@@ -196,10 +248,7 @@ public class ProfileFragment extends Fragment {
                                 (dialog, which) -> {
                                     usersUtil.signOut();
                                     if (!usersUtil.isSignIn()) {
-                                        Toast.makeText(requireActivity(), "Logout Sukses", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(requireActivity(), EmptyActivity.class)
-                                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
-                                        );
+                                        usersViewModel.doLogout(new UserModel(savedEmail, savedToken));
                                     }
                                 },
                                 (dialog, which) -> {

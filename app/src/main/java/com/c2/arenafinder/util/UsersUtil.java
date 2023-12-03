@@ -116,6 +116,14 @@ public class UsersUtil {
         dataShared.setData(KEY.ACC_ALAMAT, alamat);
     }
 
+    public String getDeviceToken(){
+        return dataShared.getData(KEY.SAVED_DEVICE_TOKEN);
+    }
+
+    public void setDeviceToken(String deviceToken){
+        dataShared.setData(KEY.SAVED_DEVICE_TOKEN, deviceToken);
+    }
+
     public void signOut() {
         dataShared.setNullData(KEY.ACC_ID_USER);
         dataShared.setNullData(KEY.ACC_USERNAME);
@@ -125,6 +133,7 @@ public class UsersUtil {
         dataShared.setNullData(KEY.ACC_PHOTO);
         dataShared.setNullData(KEY.ACC_EMAIL_VERIFY);
         dataShared.setNullData(KEY.ACC_CREATED);
+        dataShared.setNullData(KEY.SAVED_DEVICE_TOKEN);
     }
 
 }

@@ -331,7 +331,7 @@
 
     <string name="txt_mpr_def_nama">Lorem Ipsum</string>
     <string name="txt_mpr_def_email">loremipsum@polije.ac.id</string>
-    <string name="txt_mpr_tentang_akun">Tentang AKun</string>
+    <string name="txt_mpr_tentang_akun">Tentang Akun</string>
     <string name="txt_mpr_tentang_app">Tentang Aplikasi</string>
     <string name="item_mpr_edit_account">Edit Akun</string>
     <string name="item_mpr_verify_status">Status Verifikasi</string>

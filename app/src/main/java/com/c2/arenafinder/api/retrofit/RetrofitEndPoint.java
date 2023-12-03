@@ -140,7 +140,7 @@ public interface RetrofitEndPoint {
             @Query("email") String email
     );
 
-    @DELETE("users/logout.php")
+    @HTTP(method = "DELETE", path = "users/logout.php", hasBody = true)
     Call<UsersResponse> logout(
             @Body UserModel model
     );

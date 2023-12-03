@@ -38,8 +38,11 @@ public class UserModel {
     @Expose
     @SerializedName("created_at")
     private String createdAt;
+    @Expose
+    @SerializedName("device_token")
+    private String deviceToken;
 
-    public UserModel(int idUser, String username, String email, String nama, String noHp, String alamat, String password, String level, String isVerified, String userPhoto, String createdAt) {
+    public UserModel(int idUser, String username, String email, String nama, String noHp, String alamat, String password, String level, String isVerified, String userPhoto, String createdAt, String deviceToken) {
         this.idUser = idUser;
         this.username = username;
         this.email = email;
@@ -51,6 +54,12 @@ public class UserModel {
         this.isVerified = isVerified;
         this.userPhoto = userPhoto;
         this.createdAt = createdAt;
+        this.deviceToken = deviceToken;
+    }
+
+    public UserModel(String email, String deviceToken){
+        this.email = email;
+        this.deviceToken = deviceToken;
     }
 
     public int getIdUser() {
@@ -149,4 +158,11 @@ public class UserModel {
         this.isVerified = isVerified;
     }
 
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
 }

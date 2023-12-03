@@ -60,6 +60,7 @@ import com.google.android.material.button.MaterialButton;
 import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -461,6 +462,53 @@ public class VenueDetailedFragment extends Fragment {
         txtAlamat.setText(model.getLocation());
         txtTopSport.setText(ArenaFinder.localizationSport(model.getSport()));
         txtTopViews.setText(getString(R.string.txt_total_views, model.getViews()));
+
+        switch(model.getSport().toLowerCase()){
+            case "futsal" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_futsal));
+                break;
+            }
+            case "badminton" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_badminton));
+                break;
+            }
+            case "sepak bola" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_football));
+                break;
+            }
+            case "bola basket" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_basket));
+                break;
+            }
+            case "bola voli" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_voli));
+                break;
+            }
+            case "tenis lapangan" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis));
+                break;
+            }
+            case "tenis meja" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis_table));
+                break;
+            }
+            case "atletik" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_atletik));
+                 break;
+            }
+            case "fitness" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_fitnes));
+                break;
+            }
+            case "renang" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_swiming));
+                break;
+            }
+            case "silat" : {
+                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_silat));
+                 break;
+            }
+        }
 
         switch (model.getStatus().toLowerCase()) {
             case STATUS_DISEWAKAN: {

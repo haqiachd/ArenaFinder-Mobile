@@ -193,7 +193,7 @@
                         <ImageView
                             android:id="@+id/fad_top_sport_icon"
                             android:layout_width="@dimen/_16sdp"
-                            android:layout_height="@dimen/_16sdp"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:contentDescription="@string/alt_sport_icon"
                             android:src="@drawable/ic_sport_badminton" />

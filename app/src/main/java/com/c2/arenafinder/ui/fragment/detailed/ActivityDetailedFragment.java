@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -66,7 +67,7 @@ public class ActivityDetailedFragment extends Fragment {
 
     private ScrollView scrollView;
 
-    private ImageView imgBack, imgPhoto, imgVertical;
+    private ImageView imgBack, imgPhoto, imgVertical, imgSport;
 
     private TextView txtAktivitasName, txtVenueName, txtSport, txtDateStart, txtJamMain, txtStatusAnggota, txtHarga, txtLokasi;
 
@@ -101,6 +102,7 @@ public class ActivityDetailedFragment extends Fragment {
         btnJoin = root.findViewById(R.id.fad_nav_button);
         recyclerContact = root.findViewById(R.id.fad_contact_recycler);
         recyclerMember = root.findViewById(R.id.fad_member_recycler);
+        imgSport = root.findViewById(R.id.fad_top_sport_icon);
     }
 
     public static ActivityDetailedFragment newInstance(String id) {
@@ -260,6 +262,54 @@ public class ActivityDetailedFragment extends Fragment {
             txtStatusAnggota.setText(requireContext().getString(R.string.btn_status_anggota_val, model.getMembership()));
             txtHarga.setText(requireContext().getString(R.string.txt_total_price_booking_val, ArenaFinder.toMoneyCase(model.getPrice())));
             txtLokasi.setText(model.getLocation());
+
+            switch(model.getJenisOlahraga().toLowerCase()){
+                case "futsal" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_futsal));
+                    break;
+                }
+                case "badminton" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_badminton));
+                    break;
+                }
+                case "sepak bola" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_football));
+                    break;
+                }
+                case "bola basket" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_basket));
+                    break;
+                }
+                case "bola voli" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_voli));
+                    break;
+                }
+                case "tenis lapangan" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis));
+                    break;
+                }
+                case "tenis meja" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis_table));
+                    break;
+                }
+                case "atletik" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_atletik));
+                    break;
+                }
+                case "fitness" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_fitnes));
+                    break;
+                }
+                case "renang" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_swiming));
+                    break;
+                }
+                case "silat" : {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_silat));
+                    break;
+                }
+            }
+
 
         }
     }

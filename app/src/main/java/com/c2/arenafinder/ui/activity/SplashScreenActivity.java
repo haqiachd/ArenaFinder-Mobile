@@ -170,7 +170,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 if (model.getServerStatus() || userLevel.equals("SUPER ADMIN")) {
 
                     // show notif when on develop mode
-                    if (!model.getServerStatus() && userLevel.equals("SUPER ADMIN")){
+                    if (!model.getServerStatus() && userLevel.equals("SUPER ADMIN")) {
                         ArenaFinder.VibratorToast(this, "You are logged in in development mode", Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_SHORT);
                     }
 
@@ -185,23 +185,28 @@ public class SplashScreenActivity extends AppCompatActivity {
                             // check whether the user needs to update
                             if (model.getMinVersionCode() > versionCode) {
                                 loading.cancelAnimation();
-                                // show update dialog
-                                new AlertDialog.Builder(this)
+                                // create update dialog
+                                var updateDialog = new AlertDialog.Builder(this)
                                         .setTitle(R.string.dia_title_update)
                                         .setMessage(getString(R.string.dia_msg_update, model.getDescUpdate()))
                                         .setPositiveButton(R.string.btn_dia_update, (dialog, which) -> {
-                                            LogApp.info(this, LogTag.LIFEFCYLE, "ACTION 1");
+                                            LogApp.info(this, LogTag.LIFEFCYLE, "Update App");
                                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(model.getUpdateLink())));
                                             // open app
                                             requestNextPermission();
-                                        })
-                                        .setNegativeButton(R.string.btn_dia_skip, (dialog, which) -> {
-                                            // open app
-                                            LogApp.info(this, LogTag.LIFEFCYLE, "ACTION 2");
-                                            requestNextPermission();
-                                        })
-                                        .setCancelable(false)
-                                        .create().show();
+                                        });
+
+                                // add skip update button when update can be skipped
+                                if (!model.getForceUpdate()) {
+                                    updateDialog.setNegativeButton(R.string.btn_dia_skip, (dialog, which) -> {
+                                        // open app
+                                        LogApp.info(this, LogTag.LIFEFCYLE, "Skip Update");
+                                        requestNextPermission();
+                                    });
+                                }
+
+                                // show update dialog
+                                updateDialog.setCancelable(false).create().show();
                             }
                         } else {
                             // open app
@@ -251,6 +256,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                             // open main activity
                             startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                            overridePendingTransition(R.anim.anim_bottom_to_top, R.anim.anim_top_to_bottom);
                         }
                     }
                 });
@@ -258,6 +264,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 ex.printStackTrace();
                 LogApp.error(this, LogTag.FIREBASE_MESSAGING_SERVICES, "error : " + ex.getMessage());
                 startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.anim_bottom_to_top, R.anim.anim_top_to_bottom);
             }
         } else {
             // Jika pengguna belum login, Membuka WelcomeActiity
