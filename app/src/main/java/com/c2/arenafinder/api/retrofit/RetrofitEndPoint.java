@@ -25,6 +25,8 @@ import com.c2.arenafinder.data.response.HomeResponse;
 import com.c2.arenafinder.data.response.CreateBookingResponse;
 import com.c2.arenafinder.data.response.ListLapanganResponse;
 import com.c2.arenafinder.data.response.NotificationResponse;
+import com.c2.arenafinder.data.response.SportTypeActivityResponse;
+import com.c2.arenafinder.data.response.SportTypeVenueResponse;
 import com.c2.arenafinder.data.response.StatusPesananResponse;
 import com.c2.arenafinder.data.response.UsersResponse;
 import com.c2.arenafinder.data.response.ReferensiResponse;
@@ -170,7 +172,7 @@ public interface RetrofitEndPoint {
     Call<ReferensiResponse> referensiPage();
 
     @GET("page/sub/type/sport_type_venue.php")
-    Call<VenueExtendedResponse> sportType(
+    Call<SportTypeVenueResponse> sportType(
             @Query("sport") String sport
     );
 
@@ -298,7 +300,7 @@ public interface RetrofitEndPoint {
     );
 
     @GET("page/sub/type/sport_type_activity.php")
-    Call<AktivitasStatusResponse> sportActivity(
+    Call<SportTypeActivityResponse> sportActivity(
             @Query("sport") String sport
     );
 

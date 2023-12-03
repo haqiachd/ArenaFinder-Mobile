@@ -11,25 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
-import com.c2.arenafinder.data.model.VenueExtendedModel;
-import com.c2.arenafinder.data.response.AktivitasStatusResponse;
-import com.c2.arenafinder.data.response.ReferensiResponse;
-import com.c2.arenafinder.data.response.VenueExtendedResponse;
+import com.c2.arenafinder.data.response.SportTypeActivityResponse;
+import com.c2.arenafinder.data.response.SportTypeVenueResponse;
 import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueExtendedAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +33,7 @@ import retrofit2.Response;
 
 public class SportTypeFragment extends Fragment {
 
-    public static final int TYPE_ALL = 1, TYPE_ACTIVITY = 2, TYPE_VENUE = 3;
+    public static final int TYPE_ACTIVITY = 2, TYPE_VENUE = 3;
 
     private static final String ARG_ACTION = "action";
     private static final String ARG_SPORT = "sport";
@@ -45,6 +41,7 @@ public class SportTypeFragment extends Fragment {
     private int action;
     private String sport;
 
+    private ImageView imgType;
     private RecyclerView venueRecycler;
 
     public SportTypeFragment() {
@@ -52,6 +49,7 @@ public class SportTypeFragment extends Fragment {
     }
 
     private void initViews(View view) {
+        imgType = view.findViewById(R.id.fst_image);
         venueRecycler = view.findViewById(R.id.fst_recycler_sport);
     }
 
@@ -102,10 +100,18 @@ public class SportTypeFragment extends Fragment {
 
         RetrofitClient.getInstance().sportType(sport).enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
+            public void onResponse(Call<SportTypeVenueResponse> call, Response<SportTypeVenueResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
 
-                    var extended = response.body().getData();
+                    // show image
+                    Glide.with(requireContext())
+                            .load(response.body().getData().getImgUrl())
+                            .centerCrop()
+                            .placeholder(R.drawable.ic_type_football)
+                            .into(imgType);
+
+                    // show list
+                    var extended = response.body().getData().getVenues();
                     if (extended.size() > 0) {
                         if (isAdded()) {
                             venueRecycler.setAdapter(
@@ -131,7 +137,7 @@ public class SportTypeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
+            public void onFailure(Call<SportTypeVenueResponse> call, Throwable t) {
                 ArenaFinder.VibratorToast(requireContext(), t.getMessage(), Toast.LENGTH_SHORT, ArenaFinder.VIBRATOR_MEDIUM);
             }
         });
@@ -141,12 +147,18 @@ public class SportTypeFragment extends Fragment {
     private void fetchDataActivity() {
 
         RetrofitClient.getInstance().sportActivity(sport)
-                .enqueue(new Callback<AktivitasStatusResponse>() {
+                .enqueue(new Callback<>() {
                     @Override
-                    public void onResponse(Call<AktivitasStatusResponse> call, Response<AktivitasStatusResponse> response) {
+                    public void onResponse(Call<SportTypeActivityResponse> call, Response<SportTypeActivityResponse> response) {
                         if (response.body() != null && response.body().getStatus().equalsIgnoreCase("success")) {
 
-                            var extended = response.body().getData();
+                            Glide.with(requireContext())
+                                    .load(response.body().getData().getImgUrl())
+                                    .centerCrop()
+                                    .placeholder(R.drawable.ic_type_football)
+                                    .into(imgType);
+
+                            var extended = response.body().getData().getActivities();
                             if (extended.size() > 0) {
                                 if (isAdded()) {
                                     venueRecycler.setAdapter(new AktivitasSecondAdapter(
@@ -169,14 +181,10 @@ public class SportTypeFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<AktivitasStatusResponse> call, Throwable t) {
+                    public void onFailure(Call<SportTypeActivityResponse> call, Throwable t) {
                         Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-    }
-
-    private void showRecycler(ArrayList<VenueExtendedModel> extended) {
 
     }
 
@@ -187,8 +195,6 @@ public class SportTypeFragment extends Fragment {
             TextView textView = getActivity().findViewById(R.id.sub_title);
             textView.setText(sport);
             layout.setVisibility(View.VISIBLE);
-
-
         }
     }
 }

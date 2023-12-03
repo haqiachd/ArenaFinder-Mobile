@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.ParseException;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -23,20 +22,15 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.data.local.DataShared;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JenisLapanganModel;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 import java.util.StringTokenizer;
 
 public class ArenaFinder {
@@ -81,12 +75,6 @@ public class ArenaFinder {
     }
 
     public static void closeApplication(@NonNull AppCompatActivity app){
-        app.finishAffinity();
-        System.exit(0);
-        LogApp.info(app, LogTag.APPLICATION, "Aplikasi ditutup");
-    }
-
-    public static void closeApplication(@NonNull FragmentActivity app){
         app.finishAffinity();
         System.exit(0);
         LogApp.info(app, LogTag.APPLICATION, "Aplikasi ditutup");
@@ -150,10 +138,10 @@ public class ArenaFinder {
                 new JenisLapanganModel(R.drawable.ic_lapangan_basket, context.getString(R.string.txt_olahraga_basket))
         );
         fieldsModel.add(
-                new JenisLapanganModel(R.drawable.ic_sport_tennis_table, context.getString(R.string.txt_olahraga_tenis_meja))
+                new JenisLapanganModel(R.drawable.ic_lapangan_tennis_table, context.getString(R.string.txt_olahraga_tenis_meja))
         );
         fieldsModel.add(
-                new JenisLapanganModel(R.drawable.ic_tennis, context.getString(R.string.txt_olahraga_tenis))
+                new JenisLapanganModel(R.drawable.ic_lapangan_tennis, context.getString(R.string.txt_olahraga_tenis))
         );
         fieldsModel.add(
                 new JenisLapanganModel(R.drawable.ic_lapangan_futsal, context.getString(R.string.txt_olahraga_futsal))
@@ -162,13 +150,13 @@ public class ArenaFinder {
                 new JenisLapanganModel(R.drawable.ic_lapangan_fitness, context.getString(R.string.txt_olahraga_fitness))
         );
         fieldsModel.add(
-                new JenisLapanganModel(R.drawable.ic_renang, context.getString(R.string.txt_olahraga_renang))
+                new JenisLapanganModel(R.drawable.ic_lapangan_renang, context.getString(R.string.txt_olahraga_renang))
         );
         fieldsModel.add(
-                new JenisLapanganModel(R.drawable.ic_atletik, context.getString(R.string.txt_olahraga_atletik))
+                new JenisLapanganModel(R.drawable.ic_lapangan_atletik, context.getString(R.string.txt_olahraga_atletik))
         );
         fieldsModel.add(
-                new JenisLapanganModel(R.drawable.ic_silat, context.getString(R.string.txt_olahraga_silat))
+                new JenisLapanganModel(R.drawable.ic_lapangan_silat, context.getString(R.string.txt_olahraga_silat))
         );
 
         return fieldsModel;
@@ -208,37 +196,34 @@ public class ArenaFinder {
     @SuppressLint("Deprecated")
     public static void setStatusBarColor(Activity activity, int status, @ColorRes int color, boolean isLightStatusBar) {
         // Set window flags for transparent status bar
-        activity.getWindow().getDecorView().post(new Runnable() {
-            @Override
-            public void run() {
-                switch (status) {
-                    case TRANSPARENT_STATUS_BAR:
-                        activity.getWindow().getDecorView().setSystemUiVisibility(
-                                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        );
-                        activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
-                        break;
-                    case WHITE_STATUS_BAR:
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, color));
-                            if (isLightStatusBar){
-                                activity.getWindow().getDecorView().setSystemUiVisibility(
-                                        View.SYSTEM_UI_FLAG_VISIBLE
-                                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                                );
-                            }else {
-                                activity.getWindow().getDecorView().setSystemUiVisibility(
-                                        View.SYSTEM_UI_FLAG_VISIBLE
-                                );
-                            }
-
-                        } else {
+        activity.getWindow().getDecorView().post(() -> {
+            switch (status) {
+                case TRANSPARENT_STATUS_BAR:
+                    activity.getWindow().getDecorView().setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    );
+                    activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+                    break;
+                case WHITE_STATUS_BAR:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, color));
+                        if (isLightStatusBar){
                             activity.getWindow().getDecorView().setSystemUiVisibility(
-                                    View.SYSTEM_UI_FLAG_VISIBLE);
+                                    View.SYSTEM_UI_FLAG_VISIBLE
+                                            | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                            );
+                        }else {
+                            activity.getWindow().getDecorView().setSystemUiVisibility(
+                                    View.SYSTEM_UI_FLAG_VISIBLE
+                            );
                         }
-                        break;
-                }
+
+                    } else {
+                        activity.getWindow().getDecorView().setSystemUiVisibility(
+                                View.SYSTEM_UI_FLAG_VISIBLE);
+                    }
+                    break;
             }
         });
     }
@@ -287,6 +272,5 @@ public class ArenaFinder {
             default: return R.string.txt_olahraga_def;
         }
     }
-
 
 }

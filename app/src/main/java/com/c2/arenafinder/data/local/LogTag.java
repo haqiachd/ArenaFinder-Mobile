@@ -4,6 +4,7 @@ public enum LogTag {
 
     APPLICATION,
     CONSTRUCTOR,
+    SPLASH,
     METHOD,
     LIFEFCYLE,
     SIGNUP,

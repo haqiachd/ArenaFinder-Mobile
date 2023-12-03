@@ -504,8 +504,8 @@
     <string name="info_nama_aplikasi">Nama Aplikasi :</string>
     <string name="inf_versi_aplikasi">Versi Aplikasi</string>
     <string name="info_developer_name">Developer Name</string>
-    <string name="txt_server_nonaktif">Server Nonaktif</string>
-    <string name="txt_server_nonaktif_desc">Server di nonaktifkan sementara oleh developer karena alasan tertentu.</string>
+    <string name="txt_server_nonaktif">Server Dinonaktifkan</string>
+    <string name="txt_server_nonaktif_desc">Server sedang dinonaktifkan sementara oleh developer karena alasan tertentu.</string>
     <string name="info_nama_aplikasi_val">Nama Aplikasi : %1$s</string>
     <string name="info_versi_aplikasi_val">Versi Aplikasi : %1$s</string>
     <string name="info_developer_name_val">Developer Name : %1$s</string>

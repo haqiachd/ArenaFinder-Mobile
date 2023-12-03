@@ -1,5 +1,6 @@
 package com.c2.arenafinder.ui.activity;
 
+import static com.c2.arenafinder.data.local.DataShared.KEY.ACC_LEVEL;
 import static com.c2.arenafinder.data.local.DataShared.KEY.IS_FIRST_TIME_INSTALL;
 import static com.c2.arenafinder.data.local.DataShared.KEY.SAVED_DEVICE_TOKEN;
 
@@ -156,16 +157,23 @@ public class SplashScreenActivity extends AppCompatActivity {
             } else if (dataState instanceof RetrofitState.Success) {
                 LogApp.info(this, LogTag.RETROFIT_ON_LOADING, "On SplashScreen Response");
                 ArenaFinderModel model = ((RetrofitState.Success<ArenaFinderResponse>) dataState).getData().getData();
+                String userLevel = shared.getData(ACC_LEVEL);
 
-                LogApp.info(this, LogTag.LIFEFCYLE, "Server Status : " + model.getServerStatus());
-                LogApp.info(this, LogTag.LIFEFCYLE, "Have Update : " + model.getHaveUpdate());
-                LogApp.info(this, LogTag.LIFEFCYLE, "Min Version Code : " + model.getMinVersionCode());
-                LogApp.info(this, LogTag.LIFEFCYLE, "New Version Name : " + model.getNewVersionName());
-                LogApp.info(this, LogTag.LIFEFCYLE, "Update Link : " + model.getUpdateLink());
-                LogApp.info(this, LogTag.LIFEFCYLE, "Desc Update : " + model.getDescUpdate());
+                LogApp.info(this, LogTag.SPLASH, "Server Status : " + model.getServerStatus());
+                LogApp.info(this, LogTag.SPLASH, "Have Update : " + model.getHaveUpdate());
+                LogApp.info(this, LogTag.SPLASH, "Min Version Code : " + model.getMinVersionCode());
+                LogApp.info(this, LogTag.SPLASH, "New Version Name : " + model.getNewVersionName());
+                LogApp.info(this, LogTag.SPLASH, "Update Link : " + model.getUpdateLink());
+                LogApp.info(this, LogTag.SPLASH, "Desc Update : " + model.getDescUpdate());
 
                 // check status server
-                if (model.getServerStatus()) {
+                if (model.getServerStatus() || userLevel.equals("SUPER ADMIN")) {
+
+                    // show notif when on develop mode
+                    if (!model.getServerStatus() && userLevel.equals("SUPER ADMIN")){
+                        ArenaFinder.VibratorToast(this, "You are logged in in development mode", Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_SHORT);
+                    }
+
                     // handler update app
                     try {
                         // get version code
@@ -177,6 +185,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             // check whether the user needs to update
                             if (model.getMinVersionCode() > versionCode) {
                                 loading.cancelAnimation();
+                                // show update dialog
                                 new AlertDialog.Builder(this)
                                         .setTitle(R.string.dia_title_update)
                                         .setMessage(getString(R.string.dia_msg_update, model.getDescUpdate()))
@@ -220,25 +229,38 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void createUniverse() {
+
+        // jika pengguna sudah login
         if (usersUtil.isSignIn()) {
-            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<>() {
-                @Override
-                public void onComplete(@NonNull Task<String> task) {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        String token = task.getResult();
+            LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
+            try {
+                // get firebase token
+                FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        // cek token sukses didapatkan atau tidak
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            String token = task.getResult();
+                            LogApp.info(this, LogTag.FIREBASE_MESSAGING_SERVICES, "Token : " + token);
 
-                        if (!shared.getData(SAVED_DEVICE_TOKEN).equals(token)){
+                            // update token jika expired
+                            if (!token.equals(shared.getData(SAVED_DEVICE_TOKEN))) {
+                                shared.setData(SAVED_DEVICE_TOKEN, token);
+                                LogApp.info(this, LogTag.FIREBASE_MESSAGING_SERVICES, "updating device token");
+                            }
 
+                            // open main activity
+                            startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                         }
-                    } else {
-                        // Jika pengguna sudah masuk, buka MainActivity
-                        LogApp.info(this, LogTag.LIFEFCYLE, "Membuka MainActivity");
-                        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                     }
-                }
-            });
+                });
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                LogApp.error(this, LogTag.FIREBASE_MESSAGING_SERVICES, "error : " + ex.getMessage());
+                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+            }
         } else {
-            // Jika pengguna belum masuk, buka WelcomeActivity
+            // Jika pengguna belum login, Membuka WelcomeActiity
             LogApp.info(this, LogTag.LIFEFCYLE, "Membuka WelcomeActivity");
             startActivity(
                     new Intent(SplashScreenActivity.this, EmptyActivity.class)
@@ -250,7 +272,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void requestNextPermission() {
         if (currentPermissionIndex < allPermission.length) {
-            LogApp.info(this, LogTag.LIFEFCYLE, "permission");
+            LogApp.info(this, LogTag.SPLASH, "permission");
             String permission = allPermission[currentPermissionIndex];
             if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
                 currentPermissionIndex++;
@@ -259,7 +281,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{permission}, getPermissionRequestCode());
             }
         } else {
-            LogApp.info(this, LogTag.LIFEFCYLE, "create");
+            LogApp.info(this, LogTag.SPLASH, "create");
             createUniverse();
         }
     }
