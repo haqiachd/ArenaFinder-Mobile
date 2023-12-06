@@ -63,10 +63,6 @@ public class WelcomeFragment extends Fragment {
         initViews(view);
 
         view.findViewById(R.id.wlc_test).setOnClickListener(v -> {
-//            startActivity(new Intent(
-//                    requireActivity(), EmptyActivity.class
-//            ).putExtra(EmptyActivity.FRAGMENT, EmptyActivity.ACCOUNT_MESSAGE));
-//            requireActivity().finish();
             startActivity(new Intent(requireActivity(), AccountActivity.class)
                     .putExtra(AccountActivity.FRAGMENT, AccountActivity.OTP_VERIFY)
             );

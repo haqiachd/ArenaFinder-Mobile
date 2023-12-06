@@ -111,16 +111,13 @@ public class SignUpGoogle extends Fragment {
                         .setTitle(R.string.dia_title_confirm)
                         .setMessage(R.string.dia_msg_sgoogle_canceled)
                         .setCancelable(false)
-                        .setPositiveButton(R.string.dia_positive_ya, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // buka fragment signup first
-                                startActivity(
-                                        new Intent(requireContext(), EmptyActivity.class)
-                                                .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
-                                );
-                                requireActivity().finish();
-                            }
+                        .setPositiveButton(R.string.dia_positive_ya, (dialog, which) -> {
+                            // buka fragment signup first
+                            startActivity(
+                                    new Intent(requireContext(), EmptyActivity.class)
+                                            .putExtra(EmptyActivity.FRAGMENT, EmptyActivity.WELCOME)
+                            );
+                            requireActivity().finish();
                         })
                         .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
                         })

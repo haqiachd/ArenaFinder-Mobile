@@ -2,6 +2,7 @@ package com.c2.arenafinder.api.retrofit;
 
 import androidx.annotation.NonNull;
 
+import okhttp3.Credentials;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RetrofitClient {
 
-//    public static final String BASE_URL = "http://192.168.96.152/arenafinder/"; // local
+//    public static final String BASE_URL = "http://192.168.96.152/arenafinderweb/c/s/"; // local
 //    public static final String BASE_URL = "http://172.16.108.101/arenafinder/"; // wifi
     public static final String BASE_URL = "https://arenafinder.tifnganjuk.com/";
 
@@ -57,6 +58,17 @@ public class RetrofitClient {
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .build();
+
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .addInterceptor(chain -> {
+//                    String credentials = Credentials.basic("$apr1$hash", "$apr1$hash");
+//                    return chain.proceed(chain.request().newBuilder()
+//                            .header("Authorization", credentials)
+//                            .build());
+//                })
+//                .connectTimeout(20, TimeUnit.SECONDS)
+//                .writeTimeout(20, TimeUnit.SECONDS)
+//                .build();
 
         return new Retrofit.Builder()
                 .baseUrl(CONTROLLERS)

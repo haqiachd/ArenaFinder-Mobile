@@ -152,6 +152,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }
                 // unexpected error
                 else {
+                    LogApp.error(this, LogTag.SPLASH, ((RetrofitState.Error) dataState).getMessage());
                     ArenaFinder.VibratorToast(this, message, Toast.LENGTH_LONG, ArenaFinder.VIBRATOR_LONG);
                 }
             } else if (dataState instanceof RetrofitState.Success) {
@@ -176,6 +177,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                     // handler update app
                     try {
+                        LogApp.info(this, LogTag.SPLASH, "Check Update");
                         // get version code
                         PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                         int versionCode = packageInfo.versionCode;
@@ -184,7 +186,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                         if (model.getHaveUpdate()) {
                             // check whether the user needs to update
                             if (model.getMinVersionCode() > versionCode) {
+                                LogApp.info(this, LogTag.SPLASH, "Update Available");
                                 loading.cancelAnimation();
+
                                 // create update dialog
                                 var updateDialog = new AlertDialog.Builder(this)
                                         .setTitle(R.string.dia_title_update)
@@ -193,7 +197,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                             LogApp.info(this, LogTag.LIFEFCYLE, "Update App");
                                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(model.getUpdateLink())));
                                             // open app
-                                            requestNextPermission();
+//                                            requestNextPermission();
                                         });
 
                                 // add skip update button when update can be skipped
@@ -207,10 +211,14 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                                 // show update dialog
                                 updateDialog.setCancelable(false).create().show();
+
+                            }else {
+                                LogApp.info(this, LogTag.SPLASH, "Create Universe");
+                                requestNextPermission();
                             }
                         } else {
                             // open app
-                            LogApp.info(this, LogTag.LIFEFCYLE, "ACTION 1");
+                            LogApp.info(this, LogTag.SPLASH, "Create Universe");
                             requestNextPermission();
                         }
 
@@ -218,6 +226,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         // skip update
+                        LogApp.info(this, LogTag.SPLASH, "Create Universe");
                         loading.cancelAnimation();
                         requestNextPermission();
                     }

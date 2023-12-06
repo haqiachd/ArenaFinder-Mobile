@@ -82,7 +82,7 @@ public class SignUpTypeFragment extends Fragment {
                     .setMessage(R.string.dia_msg_signup_type)
                     .setPositiveButton(R.string.btn_wlc_register, (dialog, which) -> {
                         LogApp.info(requireContext(), LogTag.ON_DIALOG_POSITIVE, "membuka register admin pada web");
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=LgEfTUoiZpE&ab_channel=JKT48")));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://arenafinder.tifnganjuk.com/boots/login.php")));
                     })
                     .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
                     })
