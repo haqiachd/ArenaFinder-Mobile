@@ -35,8 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@string/pilih_jadwal_lapangan"
                 android:gravity="center"
+                android:text="@string/pilih_jadwal_lapangan"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +47,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/fbv_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_40sdp"
@@ -193,5 +194,37 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/fbv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/raw_data_not_found_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/pengelola_lapangan_belum_menuliskan_jadwal"
+            android:textAlignment="center"
+            android:textColor="@color/azure"
+            android:textSize="@dimen/_15sdp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

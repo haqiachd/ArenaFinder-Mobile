@@ -17,8 +17,10 @@ import android.os.Handler
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.StringRes
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,10 +31,8 @@ import com.c2.arenafinder.ui.adapter.DatePickerAdapter
 import com.c2.arenafinder.api.retrofit.RetrofitClient
 import com.c2.arenafinder.data.response.VenueBookingResponse
 import com.c2.arenafinder.data.model.VenueBookingModel
-import com.c2.arenafinder.data.response.CreateBookingResponse
 import com.c2.arenafinder.data.local.LogApp
 import com.c2.arenafinder.data.local.LogTag
-import com.c2.arenafinder.ui.activity.MainActivity
 import com.c2.arenafinder.ui.activity.PaymentGatewayActivity
 import com.c2.arenafinder.util.UsersUtil
 import com.c2.arenafinder.util.ArenaFinder
@@ -42,7 +42,6 @@ import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.EventDay
-import com.c2.arenafinder.data.model.JadwalPickerModel
 import com.c2.arenafinder.data.model.ListLapanganModel
 import com.c2.arenafinder.data.response.ListLapanganResponse
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -78,6 +77,9 @@ class BookingVenueFragment : Fragment() {
     private lateinit var recyclerVenue: RecyclerView
     private lateinit var btnChooseDate: ImageView
     private lateinit var imgBack: ImageView
+    private lateinit var msgLayout : LinearLayout
+    private lateinit var nestedScroll : NestedScrollView
+    private lateinit var bottomNav : ConstraintLayout
 
     private lateinit var txtPriceBot: TextView
     private lateinit var txtRightBot: TextView
@@ -91,6 +93,9 @@ class BookingVenueFragment : Fragment() {
         txtPriceBot = view.findViewById(R.id.fbv_nav_txt_data)
         txtRightBot = view.findViewById(R.id.fbv_nav_txt_right)
         btnPesan = view.findViewById(R.id.fbv_nav_button)
+        msgLayout = view.findViewById(R.id.fbv_message)
+        nestedScroll = view.findViewById(R.id.fbv_scrollview)
+        bottomNav = view.findViewById(R.id.fvd_bottom_nav)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,6 +139,8 @@ class BookingVenueFragment : Fragment() {
 
         // show tanggal dan jadwal
         dateChooser = currentDate
+
+        btnPesan.isClickable = false
 
         getListLapangan(idVenue!!)
         showDatePicker()
@@ -220,6 +227,10 @@ class BookingVenueFragment : Fragment() {
         }
 
         btnPesan.setOnClickListener {
+
+            if (venueBookingAdapter == null){
+                return@setOnClickListener
+            }
 
             if (venueBookingAdapter!!.jadwalDipilih.size > 0) {
                 val old = venueBookingAdapter!!.jadwalDipilih
@@ -395,7 +406,6 @@ class BookingVenueFragment : Fragment() {
 
         dateChooser = models[0].dateMonth
         updateBottomNav()
-//        Toast.makeText(requireContext(), "THE DATE -> $dateChooser", Toast.LENGTH_SHORT).show()
 
         // menampilkan date picker
         if (isAdded) {
@@ -426,11 +436,10 @@ class BookingVenueFragment : Fragment() {
                         listLapangan = response.body()!!.data
                         showListJadwal(dateChooser!!)
                     } else {
-                        // TODO : when lapangan is not found
-                        ArenaFinder.VibratorToast(requireContext(),
-                            "LAPANGAN TIDAK DIDAFTARKAN",
-                            Toast.LENGTH_LONG,
-                            ArenaFinder.VIBRATOR_MEDIUM)
+                        ArenaFinder.playVibrator(requireActivity(), ArenaFinder.VIBRATOR_SHORT)
+                        msgLayout.visibility = View.VISIBLE
+                        bottomNav.visibility = View.GONE
+                        nestedScroll.visibility = View.GONE
                     }
                 }
 
@@ -472,6 +481,7 @@ class BookingVenueFragment : Fragment() {
                                             }
                                         })
                                     recyclerVenue.adapter = venueBookingAdapter
+                                    btnPesan.isClickable = true
                                 }
                             }
                         } else {
