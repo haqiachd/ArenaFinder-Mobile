@@ -60,19 +60,14 @@ import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.viewmodel.HomeViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import retrofit2.http.Url;
 
 public class HomeFragment extends Fragment {
 
