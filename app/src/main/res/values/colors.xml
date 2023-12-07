@@ -70,5 +70,7 @@
     <color name="status_pesan_disetujui">#CC00A86B</color>
     <color name="status_pesan_ditolak">#A6ED2939</color>
     <color name="dark_pastel_purple">#9A6DD8</color>
+    <color name="shimmer">#97A7B8</color>
+    <color name="shimmer_nested">#405265</color>
 
 </resources>
