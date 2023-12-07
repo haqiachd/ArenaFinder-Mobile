@@ -128,6 +128,10 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
 
     public void addMarker(double latitude, double longitude, String title, @DrawableRes int markerIcon, Runnable onClickLAction) {
 
+        if (mMap == null){
+            return;
+        }
+
         // set marker location
         GeoPoint geoPoint = new GeoPoint(latitude, longitude);
         LogApp.info(activity, "ADDED Marker With Coordinate " + latitude + "," + longitude);
