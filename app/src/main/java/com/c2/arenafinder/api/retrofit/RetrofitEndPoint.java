@@ -39,10 +39,10 @@ import com.c2.arenafinder.data.response.VerifyResponse;
 
 public interface RetrofitEndPoint {
 
-    @GET("cek_koneksi.php")
+    @GET("gate_1.php")
     Call<ArenaFinderResponse> cekKoneksi();
 
-    @GET("cek_koneksi.php")
+    @GET("gate_1.php")
     Call<ArenaFinderResponse> cekKoneksiV();
 
     @GET("users/cek_user.php")

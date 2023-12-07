@@ -58,6 +58,26 @@ public class ReferensiModel {
     @SerializedName("status")
     private String status;
 
+    @Expose
+    @SerializedName("distance")
+    private double distance;
+
+    public ReferensiModel(int idVenue, String venueName, String venuePhoto, String jamBuka, String jamTutup, String coordinate, int harga, int totalReview, float rating, int hargaSewa, String sport, String status, double distance) {
+        this.idVenue = idVenue;
+        this.venueName = venueName;
+        this.venuePhoto = venuePhoto;
+        this.jamBuka = jamBuka;
+        this.jamTutup = jamTutup;
+        this.coordinate = coordinate;
+        this.harga = harga;
+        this.totalReview = totalReview;
+        this.rating = rating;
+        this.hargaSewa = hargaSewa;
+        this.sport = sport;
+        this.status = status;
+        this.distance = distance;
+    }
+
     public int getidVenue() {
         return idVenue;
     }
@@ -152,5 +172,13 @@ public class ReferensiModel {
 
     public void setStatus(String value) {
         this.status = value;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }
