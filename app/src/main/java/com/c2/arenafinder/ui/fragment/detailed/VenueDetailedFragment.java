@@ -29,6 +29,7 @@ import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c2.arenafinder.R;
 import com.c2.arenafinder.api.maps.MapOSM;
@@ -253,11 +254,12 @@ public class VenueDetailedFragment extends Fragment {
                 .setPositiveButton(R.string.dia_positive_laporkan, (dialog, which) -> {
                     sendReport(getString(reason));
                 })
-                .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+                })
                 .create().show();
     }
 
-    private void sendReport(String reason){
+    private void sendReport(String reason) {
         var loading = new AlertDialog.Builder(requireContext())
                 .setView(LayoutInflater.from(requireContext()).inflate(R.layout.dialog_loading, null))
                 .setCancelable(false)
@@ -366,26 +368,33 @@ public class VenueDetailedFragment extends Fragment {
     }
 
     private void addDotsTextView(int size) {
-        Typeface typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold);
-        // add dots sesuai jumlah gambar
-        for (int i = 0; i < size; i++) {
-            dots.add(new TextView(requireActivity()));
-            dots.get(i).setText("•");
-            dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-            dots.get(i).setTextSize(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp));
-            dots.get(i).setTypeface(typeface);
-            dots.get(i).setPadding(0, 0, 3, 0);
-            venueDots.addView(dots.get(i));
+        if (isAdded()) {
+            Typeface typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold);
+            // add dots sesuai jumlah gambar
+            for (int i = 0; i < size; i++) {
+                TextView dot = new TextView(requireActivity());
+                dot.setText("•");
+                dot.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+                dot.setTextSize(getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._8sdp));
+                dot.setTypeface(typeface);
+                dot.setPadding(0, 0, 3, 0);
+
+                venueDots.addView(dot);
+                dots.add(dot);
+            }
+            txtPhotoValue.setText("1 / " + (size - 1));
         }
-        txtPhotoValue.setText("1 / " + (size - 1));
+
     }
 
     private void setSelectedColor(int posisi) {
-        for (int i = 0; i < dots.size(); i++) {
-            if (i == posisi) {
-                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.scarlet));
-            } else {
-                dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+        if (isAdded()) {
+            for (int i = 0; i < dots.size(); i++) {
+                if (i == posisi) {
+                    dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.scarlet));
+                } else {
+                    dots.get(i).setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+                }
             }
         }
     }
@@ -454,95 +463,101 @@ public class VenueDetailedFragment extends Fragment {
 
     private void showVenueData(VenueDetailedModel model) {
 
-        coordinate = model.getCoordinate();
-        txtVenueName.setText(model.getVenueName());
-        txtVenueDesc.setText(model.getDescVenue());
-        txtVenueNameAppbar.setText(model.getVenueName());
-        txtFasilitas.setText(model.getDescFacility());
-        txtAlamat.setText(model.getLocation());
-        txtTopSport.setText(ArenaFinder.localizationSport(model.getSport()));
-        txtTopViews.setText(getString(R.string.txt_total_views, model.getViews()));
+        if (isAdded()) {
 
-        switch(model.getSport().toLowerCase()){
-            case "futsal" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_futsal));
-                break;
+            coordinate = model.getCoordinate();
+            txtVenueName.setText(model.getVenueName());
+            txtVenueDesc.setText(model.getDescVenue());
+            txtVenueNameAppbar.setText(model.getVenueName());
+            txtFasilitas.setText(model.getDescFacility());
+            txtAlamat.setText(model.getLocation());
+            txtTopSport.setText(ArenaFinder.localizationSport(model.getSport()));
+            txtTopViews.setText(getString(R.string.txt_total_views, model.getViews()));
+
+            switch (model.getSport().toLowerCase()) {
+                case "futsal": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_futsal));
+                    break;
+                }
+                case "badminton": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_badminton));
+                    break;
+                }
+                case "sepak bola": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_football));
+                    break;
+                }
+                case "bola basket": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_basket));
+                    break;
+                }
+                case "bola voli": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_voli));
+                    break;
+                }
+                case "tenis lapangan": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis));
+                    break;
+                }
+                case "tenis meja": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis_table));
+                    break;
+                }
+                case "atletik": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_atletik));
+                    break;
+                }
+                case "fitness": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_fitnes));
+                    break;
+                }
+                case "renang": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_swiming));
+                    break;
+                }
+                case "silat": {
+                    imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_silat));
+                    break;
+                }
             }
-            case "badminton" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_badminton));
-                break;
-            }
-            case "sepak bola" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_football));
-                break;
-            }
-            case "bola basket" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_basket));
-                break;
-            }
-            case "bola voli" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_voli));
-                break;
-            }
-            case "tenis lapangan" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis));
-                break;
-            }
-            case "tenis meja" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis_table));
-                break;
-            }
-            case "atletik" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_atletik));
-                 break;
-            }
-            case "fitness" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_fitnes));
-                break;
-            }
-            case "renang" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_swiming));
-                break;
-            }
-            case "silat" : {
-                imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_silat));
-                 break;
+
+            switch (model.getStatus().toLowerCase()) {
+                case STATUS_DISEWAKAN: {
+                    txtStatus.setText(R.string.txt_disewakan);
+                    txtTopBot.setText(R.string.fvd_mulai_dari);
+                    imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_rent));
+                    txtHargaBot.setText(getString(R.string.txt_price_value, ArenaFinder.toMoneyCase(model.getHargaSewa())));
+                    break;
+                }
+                case STATUS_GRATIS: {
+                    txtStatus.setText(R.string.txt_gratis);
+                    bottomNav.setVisibility(View.GONE);
+                    imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_free));
+                    break;
+                }
+                case STATUS_BERBAYAR: {
+                    txtStatus.setText(R.string.txt_berbayar);
+                    txtRightBot.setVisibility(View.GONE);
+                    btnBookingBot.setVisibility(View.GONE);
+                    txtTopBot.setText(R.string.txt_harga_masuk);
+                    imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_price));
+                    txtHargaBot.setText(getString(R.string.txt_price_value, ArenaFinder.toMoneyCase(model.getPrice())));
+                    break;
+                }
             }
         }
 
-        switch (model.getStatus().toLowerCase()) {
-            case STATUS_DISEWAKAN: {
-                txtStatus.setText(R.string.txt_disewakan);
-                txtTopBot.setText(R.string.fvd_mulai_dari);
-                imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_rent));
-                txtHargaBot.setText(getString(R.string.txt_price_value, ArenaFinder.toMoneyCase(model.getHargaSewa())));
-                break;
-            }
-            case STATUS_GRATIS: {
-                txtStatus.setText(R.string.txt_gratis);
-                bottomNav.setVisibility(View.GONE);
-                imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_free));
-                break;
-            }
-            case STATUS_BERBAYAR: {
-                txtStatus.setText(R.string.txt_berbayar);
-                txtRightBot.setVisibility(View.GONE);
-                btnBookingBot.setVisibility(View.GONE);
-                txtTopBot.setText(R.string.txt_harga_masuk);
-                imgStatus.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_dtd_status_price));
-                txtHargaBot.setText(getString(R.string.txt_price_value, ArenaFinder.toMoneyCase(model.getPrice())));
-                break;
-            }
-        }
     }
 
     private void showJamOperasional(TextView textView, DayOperasionalModel jam) {
-        if (jam.getOpened().equalsIgnoreCase("tutup") || jam.getClosed().equalsIgnoreCase("tutup")) {
-            textView.setText(R.string.txt_tutup);
-            textView.setGravity(Gravity.CENTER);
-        } else {
-            textView.setText(getString(R.string.txt_jam_operasional, jam.getOpened(), jam.getClosed()));
-            textView.setGravity(Gravity.END);
+        if (isAdded()) {
+            if (jam.getOpened().equalsIgnoreCase("tutup") || jam.getClosed().equalsIgnoreCase("tutup")) {
+                textView.setText(R.string.txt_tutup);
+                textView.setGravity(Gravity.CENTER);
+            } else {
+                textView.setText(getString(R.string.txt_jam_operasional, jam.getOpened(), jam.getClosed()));
+                textView.setGravity(Gravity.END);
+            }
         }
     }
 
@@ -557,136 +572,117 @@ public class VenueDetailedFragment extends Fragment {
     }
 
     private void showFasilitas(ArrayList<FasilitasModel> model) {
-
-        if (model.size() <= 0) {
-            fasilitasRecycler.setVisibility(View.GONE);
-            txtFasilitasTitle.setVisibility(View.GONE);
-            txtFasilitas.setVisibility(View.GONE);
-        } else {
-            fasilitasRecycler.setAdapter(
-                    new VenueFasilitasAdapter(requireContext(), model)
-            );
+        if (isAdded()) {
+            if (model.size() <= 0) {
+                fasilitasRecycler.setVisibility(View.GONE);
+                txtFasilitasTitle.setVisibility(View.GONE);
+                txtFasilitas.setVisibility(View.GONE);
+            } else {
+                fasilitasRecycler.setAdapter(
+                        new VenueFasilitasAdapter(requireContext(), model)
+                );
+            }
         }
     }
 
     private void showMap(String venueName, String coordinate) {
 
-        double latitude = ArenaFinder.getLatitude(coordinate),
-                longitude = ArenaFinder.getLongitude(coordinate);
+        if (isAdded()) {
+            double latitude = ArenaFinder.getLatitude(coordinate),
+                    longitude = ArenaFinder.getLongitude(coordinate);
 
-        MapOSM mapOSM = new MapOSM(requireActivity(), mapView);
-        mapOSM.initializeMap(latitude, longitude, 15.0, false);
-        mapOSM.setCenterMap();
-        mapOSM.addMarker(
-                latitude, longitude, venueName, R.drawable.ic_map_maker,
-                new Runnable() {
-                    @Override
-                    public void run() {
-
+            MapOSM mapOSM = new MapOSM(requireActivity(), mapView);
+            mapOSM.initializeMap(latitude, longitude, 15.0, false);
+            mapOSM.setCenterMap();
+            mapOSM.addMarker(latitude, longitude, venueName, R.drawable.ic_map_maker,
+                    () -> {
                     }
-                }
-        );
-
+            );
+        }
     }
 
     private void showRatting(VenueRatingModel model) {
 
-        ProgressBar[] progressBars = {prog1, prog2, prog3, prog4, prog5};
-        ImageView[] stars = {star1, star2, star3, star4, star5};
-        String[] values = {model.getRating1(), model.getRating2(), model.getRating3(), model.getRating4(), model.getRating5()};
+        if (isAdded()) {
+            ProgressBar[] progressBars = {prog1, prog2, prog3, prog4, prog5};
+            ImageView[] stars = {star1, star2, star3, star4, star5};
+            String[] values = {model.getRating1(), model.getRating2(), model.getRating3(), model.getRating4(), model.getRating5()};
 
-        txtTopRating.setText(String.valueOf(model.getRating()));
-        txtRatting.setText(String.valueOf(model.getRating()));
-        txtReviews.setText(getString(R.string.txt_ulasan_val, model.getTotalReview()));
+            txtTopRating.setText(String.valueOf(model.getRating()));
+            txtRatting.setText(String.valueOf(model.getRating()));
+            txtReviews.setText(getString(R.string.txt_ulasan_val, model.getTotalReview()));
 
-        int rating = (int) Float.parseFloat(model.getRating());
+            int rating = (int) Float.parseFloat(model.getRating());
 
-        for (int i = 0; i < rating; i++) {
-            stars[i].setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_ratting_start));
+            for (int i = 0; i < rating; i++) {
+                stars[i].setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_ratting_start));
+            }
+
+            if ((Float.parseFloat(model.getRating()) % 1) != 0) {
+                stars[rating].setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_review_star_orange_half));
+            }
+
+            for (int i = 0; i < progressBars.length; i++) {
+                try {
+                    progressBars[i].setProgress(Integer.parseInt(values[i]));
+                    progressBars[i].setMax(Integer.parseInt(model.getTotalReview()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    progressBars[i].setMax(0);
+                    progressBars[i].setProgress(0);
+                }
+            }
+
         }
+    }
 
-        if ((Float.parseFloat(model.getRating()) % 1) != 0) {
-            stars[rating].setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_review_star_orange_half));
-        }
+    private void showComment(ArrayList<VenueCommentModel> models) {
 
+        if (isAdded()) {
+            if (models.size() <= 0) {
+                btnReview.setText(R.string.btn_give_rat);
+                commentRecycler.setVisibility(View.GONE);
+//            line.setVisibility(View.GONE);
+//            progLayout.setVisibility(View.GONE);
+                txtRatting.setText(R.string.txt_ratting_na);
+                txtReviews.setText(R.string.txt_ratting_is_0);
+                txtReviews.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-        for (int i = 0; i < progressBars.length; i++) {
-            try {
-                progressBars[i].setProgress(Integer.parseInt(values[i]));
-                progressBars[i].setMax(Integer.parseInt(model.getTotalReview()));
-            } catch (Exception e) {
-                e.printStackTrace();
-                progressBars[i].setMax(0);
-                progressBars[i].setProgress(0);
+            } else {
+                commentRecycler.setAdapter(
+                        new VenueCommentAdapter(requireActivity(), models, new AdapterActionListener() {
+                            @Override
+                            public void onClickListener(int position) {
+//                            Toast.makeText(requireContext(), models.get(position).getFullName(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                                , id, txtVenueName.getText().toString())
+                );
             }
         }
 
     }
 
-    private void showComment(ArrayList<VenueCommentModel> models) {
+    private void showContact(ArrayList<VenueContactModel> model) {
 
-        if (models.size() <= 0) {
-            btnReview.setText(R.string.btn_give_rat);
-            commentRecycler.setVisibility(View.GONE);
-//            line.setVisibility(View.GONE);
-//            progLayout.setVisibility(View.GONE);
-            txtRatting.setText(R.string.txt_ratting_na);
-            txtReviews.setText(R.string.txt_ratting_is_0);
-            txtReviews.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
-            ImageView[] starts = {star1, star2, star3, star4, star5};
-
-//            for (ImageView view : starts) {
-//                view.setVisibility(View.GONE);
-//            }
-
-        } else {
-            commentRecycler.setAdapter(
-                    new VenueCommentAdapter(requireActivity(), models, new AdapterActionListener() {
+        if (isAdded()) {
+            contactRecycler.setAdapter(
+                    new VenueContactAdapter(requireContext(), model, new AdapterActionListener() {
                         @Override
                         public void onClickListener(int position) {
-//                            Toast.makeText(requireContext(), models.get(position).getFullName(), Toast.LENGTH_SHORT).show();
+                            try {
+                                var whatsappUri = Uri.parse("https://wa.me/62" + model.get(position).getNoHp().substring(1));
+                                Intent intent = new Intent(Intent.ACTION_VIEW, whatsappUri);
+                                startActivity(intent);
+                            } catch (Throwable t) {
+                                t.printStackTrace();
+                                Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                            , id, txtVenueName.getText().toString())
+                    })
             );
         }
 
-
     }
-
-    private void showContact(ArrayList<VenueContactModel> model) {
-
-        contactRecycler.setAdapter(
-                new VenueContactAdapter(requireContext(), model, new AdapterActionListener() {
-                    @Override
-                    public void onClickListener(int position) {
-//                        Toast.makeText(requireContext(), "PHONE -> " + model.get(position).getNoHp(), Toast.LENGTH_SHORT).show();
-                        var whatsappUri = Uri.parse("https://wa.me/" + model.get(position).getNoHp().substring(1));
-
-                        Intent intent = new Intent(Intent.ACTION_VIEW, whatsappUri);
-                        startActivity(intent);
-                    }
-                })
-        );
-
-    }
-
-    private void updateBottomNav() {
-        if (getActivity() != null) {
-            TextView txtTop, txtData, txtRight;
-            MaterialButton button;
-            txtTop = getActivity().findViewById(R.id.dtld_nav_txt_top);
-            txtRight = getActivity().findViewById(R.id.dtld_nav_txt_right);
-            txtData = getActivity().findViewById(R.id.dtld_nav_txt_data);
-            button = getActivity().findViewById(R.id.dtld_nav_button);
-
-            txtTop.setText("Mulai dari");
-            txtRight.setText(" / Sesi");
-            txtData.setText("Rp. 75.000");
-            button.setText("BOOKING");
-        }
-    }
-
 
 }

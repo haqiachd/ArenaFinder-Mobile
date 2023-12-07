@@ -69,7 +69,7 @@ public class VenueFasilitasAdapter extends RecyclerView.Adapter<VenueFasilitasAd
             Glide.with(context)
                     .load(RetrofitClient.FASILITAS_URL + imgUrl)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_profile)
+                    .placeholder(R.drawable.ic_place_holder_venue_detailed)
                     .into(imgFasilitas);
         }
     }

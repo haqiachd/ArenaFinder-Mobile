@@ -63,10 +63,9 @@ public class VenueReviewFragment extends Fragment {
 
     private ConstraintLayout myCommentLayout;
 
-    private LinearLayout writeLayout;
+    private LinearLayout writeLayout, cantComment, noComment;
 
-    private TextView txtRatting, txtReviews, txtWriteReview, txtMyRatting, txtMyComment, txtMyDate,
-            txtEditMy;
+    private TextView txtRatting, txtReviews, txtWriteReview, txtMyRatting, txtMyComment, txtMyDate, txtEditMy;
 
     private ImageView star1, star2, star3, star4, star5,
             gStar1, gStar2, gStar3, gStar4, gStar5,
@@ -89,6 +88,8 @@ public class VenueReviewFragment extends Fragment {
         txtMyDate = view.findViewById(R.id.fvr_ratting_date);
         txtEditMy = view.findViewById(R.id.fvr_edit_ulasan);
         refreshLayout = view.findViewById(R.id.fvr_refresh);
+        cantComment = view.findViewById(R.id.fvr_cant_commnet);
+        noComment = view.findViewById(R.id.fvr_no_comment);
 
         prog1 = view.findViewById(R.id.fvr_prog_ratting_1);
         prog2 = view.findViewById(R.id.fvr_prog_ratting_2);
@@ -227,10 +228,11 @@ public class VenueReviewFragment extends Fragment {
 
     private void showMyComment(VenueCommentModel model, boolean canComment) throws NumberFormatException, NullPointerException {
 
-        if(!canComment){
+        if (!canComment) {
             writeLayout.setVisibility(View.GONE);
             myCommentLayout.setVisibility(View.GONE);
             txtMyComment.setVisibility(View.VISIBLE);
+            cantComment.setVisibility(View.VISIBLE);
             return;
         }
 
@@ -269,7 +271,8 @@ public class VenueReviewFragment extends Fragment {
                             .setMessage(R.string.delete_comment)
                             .setCancelable(false)
                             .setPositiveButton(R.string.dia_btn_hapus, (dialog, which) -> deleteComment())
-                            .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                            .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+                            })
                             .create().show();
                     sheet.dismiss();
                 });
@@ -289,7 +292,7 @@ public class VenueReviewFragment extends Fragment {
         }
     }
 
-    private void deleteComment(){
+    private void deleteComment() {
         RetrofitClient.getInstance().deleteComment(new EditCommentModel(id, usersUtil.getId()))
                 .enqueue(new Callback<>() {
                     @Override
@@ -314,12 +317,10 @@ public class VenueReviewFragment extends Fragment {
 
         if (models.size() <= 0) {
             commentRecycler.setVisibility(View.GONE);
-//            line.setVisibility(View.GONE);
-//            progLayout.setVisibility(View.GONE);
             txtRatting.setText(R.string.txt_ratting_na);
             txtReviews.setText(R.string.txt_ratting_is_0);
             txtReviews.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
+            noComment.setVisibility(View.VISIBLE);
         } else {
             commentRecycler.setAdapter(
                     new VenueCommentAdapter(requireActivity(), models, new AdapterActionListener() {

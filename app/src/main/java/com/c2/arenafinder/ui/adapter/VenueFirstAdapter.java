@@ -150,7 +150,7 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
             Glide.with(view)
                     .load(RetrofitClient.VENUE_IMG_URL + url)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_profile)
+                    .placeholder(R.drawable.ic_place_holder_venue_detailed)
                     .into(imgVenue);
         }
     }

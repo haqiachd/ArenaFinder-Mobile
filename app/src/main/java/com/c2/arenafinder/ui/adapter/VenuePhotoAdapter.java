@@ -55,7 +55,7 @@ public class VenuePhotoAdapter extends RecyclerView.Adapter<VenuePhotoAdapter.Vi
             Glide.with(itemView.getRoot())
                     .load(RetrofitClient.PUBLIC_IMG + url)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_profile)
+                    .placeholder(R.drawable.ic_place_holder_venue_detailed)
                     .into(itemView.ivpImage);
         }
     }
