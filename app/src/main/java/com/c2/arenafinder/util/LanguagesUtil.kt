@@ -5,6 +5,8 @@ import android.os.Build
 import java.util.Locale
 
 import com.c2.arenafinder.data.local.DataShared
+import com.c2.arenafinder.data.local.LogApp
+import com.c2.arenafinder.data.local.LogTag
 import com.c2.arenafinder.data.model.LanguageModel
 
 class LanguagesUtil(
@@ -37,6 +39,7 @@ class LanguagesUtil(
             dataShared.getData(DataShared.KEY.APP_LANGUAGE) ?: INDONESIAN
         } catch (ex: Throwable) {
             ex.printStackTrace()
+            LogApp.error(this, LogTag.DATA_MODEL_ERROR, "DEFAULT INDONESIAN LANGUAGE")
             INDONESIAN
         }
     }
