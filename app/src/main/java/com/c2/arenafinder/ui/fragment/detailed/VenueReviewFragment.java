@@ -237,6 +237,7 @@ public class VenueReviewFragment extends Fragment {
         }
 
         txtMyComment.setVisibility(View.VISIBLE);
+        cantComment.setVisibility(View.GONE);
 
         if (model.getIdReview() > 0) {
             writeLayout.setVisibility(View.GONE);
@@ -317,11 +318,13 @@ public class VenueReviewFragment extends Fragment {
 
         if (models.size() <= 0) {
             commentRecycler.setVisibility(View.GONE);
+            noComment.setVisibility(View.VISIBLE);
             txtRatting.setText(R.string.txt_ratting_na);
             txtReviews.setText(R.string.txt_ratting_is_0);
             txtReviews.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            noComment.setVisibility(View.VISIBLE);
         } else {
+            commentRecycler.setVisibility(View.VISIBLE);
+            noComment.setVisibility(View.GONE);
             commentRecycler.setAdapter(
                     new VenueCommentAdapter(requireActivity(), models, new AdapterActionListener() {
                         @Override

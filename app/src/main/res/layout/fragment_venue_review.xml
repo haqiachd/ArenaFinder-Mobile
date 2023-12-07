@@ -520,6 +520,8 @@
                         android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_120sdp"
                         android:layout_gravity="center"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
                         app:lottie_rawRes="@raw/raw_data_not_found_1" />
 
                     <TextView

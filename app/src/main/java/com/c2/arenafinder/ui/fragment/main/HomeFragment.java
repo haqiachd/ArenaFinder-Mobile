@@ -245,6 +245,13 @@ public class HomeFragment extends Fragment {
                 ArrayList<VenueCoordinateModel> coordinate = data.getCoordinate();
                 ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
 
+                for (ReferensiModel model : venueLokasi){
+                    double latitude = ArenaFinder.getLatitude(model.getCoordinate());
+                    double longitude = ArenaFinder.getLongitude(model.getCoordinate());
+                    double distance = MapOSM.calculateDistance(latitude, longitude);
+                    model.setDistance(Math.round(distance * 100.0) / 100.0);
+                }
+
                 if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0) {
                     handlerNullData();
                 } else {

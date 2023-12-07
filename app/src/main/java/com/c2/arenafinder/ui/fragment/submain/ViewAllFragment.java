@@ -127,7 +127,7 @@ public class ViewAllFragment extends Fragment {
                 break;
             }
             case AKTIVITAS_SERU: {
-                actionName = R.string.sub_venue_disewakan;
+                actionName = R.string.sub_aktivtas_seru;
                 actionAktivitasSeru();
                 break;
             }

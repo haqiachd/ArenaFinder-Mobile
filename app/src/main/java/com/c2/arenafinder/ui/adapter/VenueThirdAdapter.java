@@ -63,6 +63,8 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
             holder.txtReview.setText(context.getString(R.string.txt_ulasan_2, String.valueOf(model.getTotalReview())));
         }
 
+        holder.txtDesc.setText("Jarak " + model.getDistance() + " Km");
+
 
         holder.setImage(model.getVenuePhoto());
 
@@ -70,19 +72,19 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
         switch (model.getStatus().toLowerCase()){
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
-                holder.txtDesc.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
+//                holder.txtDesc.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
                 holder.txtStatus.setText(R.string.status_disewakan);
                 break;
             }
             case "gratis" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_gratis, R.color.venue_status_gratis);
-                holder.txtDesc.setText(context.getString(R.string.txt_gratis_v));
+//                holder.txtDesc.setText(context.getString(R.string.txt_gratis_v));
                 holder.txtStatus.setText(R.string.status_gratis);
                 break;
             }
             case "berbayar" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_berbayar, R.color.venue_status_berbayar);
-                holder.txtDesc.setText(context.getString(R.string.txt_berbayar_val, ArenaFinder.toMoneyCase(model.getHarga())));
+//                holder.txtDesc.setText(context.getString(R.string.txt_berbayar_val, ArenaFinder.toMoneyCase(model.getHarga())));
                 holder.txtStatus.setText(R.string.status_berbayar);
                 break;
             }

@@ -61,7 +61,6 @@ import com.google.android.material.button.MaterialButton;
 import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,7 +69,6 @@ import retrofit2.Response;
 import static com.c2.arenafinder.data.model.ReferensiModel.STATUS_BERBAYAR;
 import static com.c2.arenafinder.data.model.ReferensiModel.STATUS_DISEWAKAN;
 import static com.c2.arenafinder.data.model.ReferensiModel.STATUS_GRATIS;
-
 
 public class VenueDetailedFragment extends Fragment {
 

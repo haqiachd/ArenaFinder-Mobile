@@ -1,6 +1,7 @@
 package com.c2.arenafinder.ui.activity;
 
 import static com.c2.arenafinder.data.local.DataShared.KEY.ACC_LEVEL;
+import static com.c2.arenafinder.data.local.DataShared.KEY.APP_LANGUAGE;
 import static com.c2.arenafinder.data.local.DataShared.KEY.IS_FIRST_TIME_INSTALL;
 import static com.c2.arenafinder.data.local.DataShared.KEY.SAVED_DEVICE_TOKEN;
 
@@ -105,6 +106,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 callObserver();
             } else {
                 LogApp.error(this, LogTag.LIFEFCYLE, "HAS BEEN INSTALLED");
+                languagesUtil.changeLanguage(shared.getData(APP_LANGUAGE));
                 callObserver();
             }
         } catch (Throwable ex) {
@@ -196,8 +198,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                                         .setPositiveButton(R.string.btn_dia_update, (dialog, which) -> {
                                             LogApp.info(this, LogTag.LIFEFCYLE, "Update App");
                                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(model.getUpdateLink())));
-                                            // open app
-//                                            requestNextPermission();
+                                            if (!model.getForceUpdate()){
+                                                requestNextPermission();
+                                            }else{
+                                                ArenaFinder.closeApplication(this);
+                                            }
                                         });
 
                                 // add skip update button when update can be skipped
