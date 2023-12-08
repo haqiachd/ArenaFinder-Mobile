@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -193,7 +194,7 @@ public class HomeFragment extends Fragment {
                     if (savedInstanceState != null) {
                         Parcelable parcelable = savedInstanceState.getParcelable(KEY_TEST);
                         Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onRestoreInstanceState(parcelable);
-                        Toast.makeText(requireContext(), "RESTORE", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(requireContext(), "RESTORE", Toast.LENGTH_SHORT).show();
                     } else {
                         new Handler(Looper.getMainLooper()).post(this::observer);
                     }
@@ -569,6 +570,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void showVenueLokasi(ArrayList<ReferensiModel> models) {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
+            venueLokasiLayout.setVisibility(View.GONE);
+            mMap.setVisibility(View.GONE);
+            return;
+        }
 
         if (models.size() <= 0) {
             venueLokasiLayout.setVisibility(View.GONE);

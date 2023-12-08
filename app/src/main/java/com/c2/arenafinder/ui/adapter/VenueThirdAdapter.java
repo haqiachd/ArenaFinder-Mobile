@@ -1,6 +1,7 @@
 package com.c2.arenafinder.ui.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.c2.arenafinder.R;
+import com.c2.arenafinder.api.maps.MapOSM;
 import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
@@ -23,6 +25,9 @@ import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Locale;
 
 public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.ViewHolder> {
 
@@ -36,6 +41,10 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
         this.context = context;
         this.models = models;
         this.listener = listener;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Collections.sort(this.models, Comparator.comparing(ReferensiModel::getCoordinate, Comparator.reverseOrder()));
+        }
     }
 
     @NonNull
@@ -63,8 +72,8 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
             holder.txtReview.setText(context.getString(R.string.txt_ulasan_2, String.valueOf(model.getTotalReview())));
         }
 
-        holder.txtDesc.setText("Jarak " + model.getDistance() + " Km");
-
+        var distance = model.getDistance();
+        holder.txtDesc.setText(context.getString(R.string.distance_and_minutes, String.format(Locale.ENGLISH, "%.1f", distance), MapOSM.calculateMileage(distance)));
 
         holder.setImage(model.getVenuePhoto());
 

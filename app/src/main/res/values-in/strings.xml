@@ -518,6 +518,7 @@
     <string name="notif_body_ditolak">Pesanan kamu pada %1$s telah ditolak olah pengelola lapangan</string>
     <string name="pengelola_lapangan_belum_menuliskan_jadwal">Pengelola lapangan belum menuliskan jadwal</string>
     <string name="saat_ini_belum_terdapat_komentar">Saat ini belum terdapat komentar.</string>
+    <string name="distance_and_minutes">%1$s Km • %2$d Mnt</string>
 
 
 </resources>

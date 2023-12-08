@@ -519,5 +519,6 @@
     <string name="notif_body_ditolak">Pesenan kowe ing %1$s wis ditolak dening pengelola lapangan</string>
     <string name="pengelola_lapangan_belum_menuliskan_jadwal">Pengelola lapangan durung nulisake jadwal</string>
     <string name="saat_ini_belum_terdapat_komentar">Wektu iki durung ana komentar.</string>
+    <string name="distance_and_minutes">%1$s Km • %2$d Mnt</string>
 
 </resources>

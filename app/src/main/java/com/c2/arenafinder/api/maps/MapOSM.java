@@ -176,6 +176,10 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         return R * c;
     }
 
+    public static int calculateMileage(double kilometers){
+        return (int) ((kilometers / 60.0) * 100);
+    }
+
     public void setMapOsmListener(MapOSMListener listener) {
         this.listener = listener;
     }

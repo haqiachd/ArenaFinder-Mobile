@@ -1,6 +1,7 @@
 package com.c2.arenafinder.ui.fragment.main;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -293,6 +294,13 @@ public class ReferensiFragment extends Fragment {
                 ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
                 ArrayList<VenueCoordinateModel> venueCoordinate = data.getCoordinate();
 
+                for (ReferensiModel model : venueLokasi){
+                    double latitude = ArenaFinder.getLatitude(model.getCoordinate());
+                    double longitude = ArenaFinder.getLongitude(model.getCoordinate());
+                    double distance = MapOSM.calculateDistance(latitude, longitude);
+                    model.setDistance(Math.round(distance * 100.0) / 100.0);
+                }
+
                 if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
 //                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
                     handlerNullData();
@@ -451,6 +459,12 @@ public class ReferensiFragment extends Fragment {
     }
 
     private void showVenueLokasi(ArrayList<ReferensiModel> models) {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
+            venueLokasiLayout.setVisibility(View.GONE);
+            mapView.setVisibility(View.GONE);
+            return;
+        }
 
         if (models.size() <= 0) {
             venueLokasiLayout.setVisibility(View.GONE);
