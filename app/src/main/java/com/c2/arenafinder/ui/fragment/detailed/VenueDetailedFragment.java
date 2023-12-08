@@ -61,6 +61,7 @@ import com.google.android.material.button.MaterialButton;
 import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -96,7 +97,7 @@ public class VenueDetailedFragment extends Fragment {
     private LinearLayout venueDots;
 
     private TextView txtPhotoValue, txtTopRating, txtTopViews, txtStatus, txtFasilitasTitle, txtTopSport, txtVenueName, txtVenueDesc,
-            txtSenin, txtSelasa, txtRabu, txtKamis, txtJumat, txtSabtu, txtMinggu, txtFasilitas, txtAlamat, txtRatting, txtReviews;
+            txtSenin, txtSelasa, txtRabu, txtKamis, txtJumat, txtSabtu, txtMinggu, txtFasilitas, txtAlamat, txtRatting, txtReviews, txtDistance;
 
     private ConstraintLayout bottomNav;
     private MaterialButton btnBookingBot;
@@ -146,6 +147,7 @@ public class VenueDetailedFragment extends Fragment {
         txtAlamat = view.findViewById(R.id.fvd_lokasi_desc);
         txtStatus = view.findViewById(R.id.fvd_top_status_val);
         imgStatus = view.findViewById(R.id.fvd_top_status_ic);
+        txtDistance = view.findViewById(R.id.fvd_distance_desc);
 
         txtSenin = view.findViewById(R.id.fvd_senin);
         txtSelasa = view.findViewById(R.id.fvd_selasa);
@@ -471,6 +473,16 @@ public class VenueDetailedFragment extends Fragment {
             txtAlamat.setText(model.getLocation());
             txtTopSport.setText(ArenaFinder.localizationSport(model.getSport()));
             txtTopViews.setText(getString(R.string.txt_total_views, model.getViews()));
+
+            String coordinate = model.getCoordinate();
+            double distance = MapOSM.calculateDistance(
+                    ArenaFinder.getLatitude(coordinate), ArenaFinder.getLongitude(coordinate)
+            );
+            txtDistance.setText(getString(
+                    R.string.distance_and_minutes_2,
+                    String.format(Locale.ENGLISH,"%.1f", distance),
+                    MapOSM.calculateMileage(distance)
+            ));
 
             switch (model.getSport().toLowerCase()) {
                 case "futsal": {

@@ -525,5 +525,6 @@
     <string name="pengelola_lapangan_belum_menuliskan_jadwal">The field manager has not yet provided a schedule.</string>
     <string name="saat_ini_belum_terdapat_komentar">There are currently no comments.</string>
     <string name="distance_and_minutes">%1$s Km • %2$d Min</string>
+    <string name="distance_and_minutes_2">Distance : %1$s Km • %2$d Min</string>
 
 </resources>

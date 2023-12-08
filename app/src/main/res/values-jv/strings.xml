@@ -520,5 +520,6 @@
     <string name="pengelola_lapangan_belum_menuliskan_jadwal">Pengelola lapangan durung nulisake jadwal</string>
     <string name="saat_ini_belum_terdapat_komentar">Wektu iki durung ana komentar.</string>
     <string name="distance_and_minutes">%1$s Km • %2$d Mnt</string>
+    <string name="distance_and_minutes_2">Distance : %1$s Km • %2$d Min</string>
 
 </resources>

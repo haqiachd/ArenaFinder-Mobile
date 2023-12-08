@@ -43,7 +43,7 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
         this.listener = listener;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Collections.sort(this.models, Comparator.comparing(ReferensiModel::getCoordinate, Comparator.reverseOrder()));
+            Collections.sort(this.models, Comparator.comparing(ReferensiModel::getDistance));
         }
     }
 
