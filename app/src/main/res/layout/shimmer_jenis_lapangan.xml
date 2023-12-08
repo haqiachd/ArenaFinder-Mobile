@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_15sdp"
+    android:orientation="vertical">
+
+    <include layout="@layout/shimmer_title_text" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/shimmer_jenis_lap_start"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_effect_radius"
+                android:layout_height="@dimen/shimmer_effect_radius"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_jenis_lap_txt_width"
+                android:layout_height="@dimen/shimmer_jenis_lap_txt_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_txt_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/shimmer_jenis_lap_start"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_effect_radius"
+                android:layout_height="@dimen/shimmer_effect_radius"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_jenis_lap_txt_width"
+                android:layout_height="@dimen/shimmer_jenis_lap_txt_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_txt_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/shimmer_jenis_lap_start"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_effect_radius"
+                android:layout_height="@dimen/shimmer_effect_radius"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_jenis_lap_txt_width"
+                android:layout_height="@dimen/shimmer_jenis_lap_txt_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_txt_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/shimmer_jenis_lap_start"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_effect_radius"
+                android:layout_height="@dimen/shimmer_effect_radius"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_jenis_lap_txt_width"
+                android:layout_height="@dimen/shimmer_jenis_lap_txt_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_txt_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/shimmer_jenis_lap_start"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_effect_radius"
+                android:layout_height="@dimen/shimmer_effect_radius"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_jenis_lap_txt_width"
+                android:layout_height="@dimen/shimmer_jenis_lap_txt_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_txt_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/shimmer_jenis_lap_start"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_effect_radius"
+                android:layout_height="@dimen/shimmer_effect_radius"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/shimmer_jenis_lap_txt_width"
+                android:layout_height="@dimen/shimmer_jenis_lap_txt_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/shimmer_jenis_lap_txt_top"
+                app:cardBackgroundColor="@color/shimmer"
+                app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

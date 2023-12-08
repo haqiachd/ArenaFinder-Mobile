@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/card_venue_width"
+    android:layout_height="@dimen/card_venue_height"
+    android:layout_marginStart="@dimen/card_venue_margin_width"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/card_venue_margin_width"
+    app:cardBackgroundColor="@color/shimmer"
+    app:cardCornerRadius="@dimen/card_venue_corner">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_venue_image_height"
+            app:cardBackgroundColor="@color/shimmer_nested"
+            app:cardCornerRadius="@dimen/card_venue_image_corner"
+            app:cardElevation="@dimen/card_venue_image_elevation" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/card_venue_info_margin_width"
+            android:layout_marginTop="@dimen/card_venue_info_margin_top"
+            android:layout_marginEnd="@dimen/card_venue_info_margin_width"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_12ssp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/shimmer_nested"
+                    app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_8ssp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_73sdp"
+                    app:cardBackgroundColor="@color/shimmer_nested"
+                    app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_10ssp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        app:cardBackgroundColor="@color/shimmer_nested"
+                        app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_10ssp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:cardBackgroundColor="@color/shimmer_nested"
+                        app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    app:cardBackgroundColor="@color/shimmer_nested"
+                    app:cardCornerRadius="@dimen/shimmer_effect_radius" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
