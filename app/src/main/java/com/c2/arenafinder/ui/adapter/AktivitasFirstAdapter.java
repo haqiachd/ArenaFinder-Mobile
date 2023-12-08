@@ -97,7 +97,7 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
             Glide.with(view)
                     .load(RetrofitClient.AKTIVITAS_URL + url)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_profile)
+                    .placeholder(R.drawable.ic_place_holder_venue_detailed)
                     .into(aktivitasImage);
         }
 

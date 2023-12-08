@@ -70,7 +70,7 @@ public class AktivitasMemberAdapter extends RecyclerView.Adapter<AktivitasMember
             Glide.with(view)
                     .load(RetrofitClient.USER_PHOTO_URL + url)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_profile)
+                    .placeholder(R.drawable.ic_place_holder_venue_detailed)
                     .into(imgPhoto);
         }
 
