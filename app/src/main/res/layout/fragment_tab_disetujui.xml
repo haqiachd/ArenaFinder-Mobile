@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.submain.TabDisetujuiFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tab_disetujui_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_status_pesanan"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        tools:listitem="@layout/item_status_pesanan" />
+
+    <LinearLayout
+        android:id="@+id/tab_disetujui_kosong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="@dimen/_170sdp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/raw_data_currently_not_found" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/data_masih_kosong"
+            android:textColor="@color/azure"
+            android:textSize="@dimen/_16sdp" />
+
+    </LinearLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/tab_disetujui_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include layout="@layout/shimmer_history" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </FrameLayout>

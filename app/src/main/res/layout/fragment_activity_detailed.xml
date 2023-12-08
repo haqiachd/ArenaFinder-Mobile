@@ -1,560 +1,575 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
     tools:context=".ui.fragment.detailed.ActivityDetailedFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/fad_appbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fad_content"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_45sdp"
-        android:background="@color/primary_color"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/fad_appbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/_45sdp"
+            android:background="@color/primary_color"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/fad_back_appbar"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_marginStart="@dimen/_13sdp"
-                android:contentDescription="@string/alt_acc_back"
-                android:src="@drawable/ic_arrow_back_detailed_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/fad_nama_lapangan_appbar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_6ssp"
-                android:fontFamily="@font/kanit_semibold"
-                android:gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintEnd_toStartOf="@id/fad_vertical_menu_appbar"
-                app:layout_constraintStart_toEndOf="@id/fad_back_appbar" />
-
-            <ImageView
-                android:id="@+id/fad_vertical_menu_appbar"
-                android:layout_width="@dimen/_18ssp"
-                android:layout_height="@dimen/_18ssp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:contentDescription="@string/alt_collapse_olahraga"
-                android:src="@drawable/ic_detailed_vertical_menu"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <ScrollView
-        android:id="@+id/fad_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/background_light"
-        android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/fad_bottom_nav"
-        app:layout_constraintTop_toBottomOf="@id/fad_appbar">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_light"
-            android:orientation="vertical">
-
-            <!-- Top Layout -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_190sdp"
-                android:background="@color/azure">
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/fad_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/alt_card_venue"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_venue_test_2" />
-
-                <ImageView
-                    android:id="@+id/fad_back"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:background="@drawable/bg_detailed_back"
-                    android:contentDescription="@string/alt_detailed_kembali"
-                    android:elevation="0dp"
-                    android:src="@drawable/ic_detailed_back"
-                    app:cardCornerRadius="@dimen/_50ssp"
+                    android:id="@+id/fad_back_appbar"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:contentDescription="@string/alt_acc_back"
+                    android:src="@drawable/ic_arrow_back_detailed_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/fad_nama_lapangan_appbar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_6ssp"
+                    android:fontFamily="@font/kanit_semibold"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintEnd_toStartOf="@id/fad_vertical_menu_appbar"
+                    app:layout_constraintStart_toEndOf="@id/fad_back_appbar" />
+
                 <ImageView
-                    android:id="@+id/fad_vertical_menu"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/bg_detailed_back"
-                    android:contentDescription="@string/alt_detailed_kembali"
-                    android:elevation="0dp"
+                    android:id="@+id/fad_vertical_menu_appbar"
+                    android:layout_width="@dimen/_18ssp"
+                    android:layout_height="@dimen/_18ssp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:contentDescription="@string/alt_collapse_olahraga"
                     android:src="@drawable/ic_detailed_vertical_menu"
                     android:visibility="gone"
-                    app:cardCornerRadius="@dimen/_50ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Venue Description -->
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:id="@+id/fad_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background_light"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/fad_bottom_nav"
+            app:layout_constraintTop_toBottomOf="@id/fad_appbar">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:layout_marginEnd="@dimen/detailed_margin_width"
+                android:background="@color/background_light"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/fad_aktivitas_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/kanit_semibold"
-                    android:maxLines="3"
-                    android:text="Disini nantinya adalah nama aktivitas"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_17ssp" />
-
-                <!-- Venue Ratting, View and Shared-->
+                <!-- Top Layout -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_3sdp">
+                    android:layout_height="@dimen/_190sdp"
+                    android:background="@color/azure">
 
                     <ImageView
-                        android:id="@+id/fad_top_member_ic"
-                        android:layout_width="13dp"
-                        android:layout_height="15dp"
-                        android:contentDescription="@string/alt_ratting"
-                        android:src="@drawable/ic_map_maker"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/fad_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/alt_card_venue"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_venue_test_2" />
+
+                    <ImageView
+                        android:id="@+id/fad_back"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:background="@drawable/bg_detailed_back"
+                        android:contentDescription="@string/alt_detailed_kembali"
+                        android:elevation="0dp"
+                        android:src="@drawable/ic_detailed_back"
+                        app:cardCornerRadius="@dimen/_50ssp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/fad_venue_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:gravity="center_vertical"
-                        android:text="@string/txt_def_venue"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_11sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/fad_top_member_ic"
+                    <ImageView
+                        android:id="@+id/fad_vertical_menu"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/bg_detailed_back"
+                        android:contentDescription="@string/alt_detailed_kembali"
+                        android:elevation="0dp"
+                        android:src="@drawable/ic_detailed_vertical_menu"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/_50ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Venue Sport-->
-                <GridLayout
+                <!-- Venue Description -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:layout_marginBottom="@dimen/_3sdp"
-                    android:columnCount="2"
-                    android:orientation="horizontal"
-                    android:rowCount="5">
+                    android:layout_marginStart="@dimen/detailed_margin_width"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/detailed_margin_width"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:orientation="horizontal"
-                        tools:ignore="UseCompoundDrawables,UselessParent">
-
-                        <ImageView
-                            android:id="@+id/fad_top_sport_icon"
-                            android:layout_width="@dimen/_16sdp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:contentDescription="@string/alt_sport_icon"
-                            android:src="@drawable/ic_sport_badminton" />
-
-                        <TextView
-                            android:id="@+id/fad_top_sport_val"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/_4sdp"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="@string/txt_olahraga_badminton"
-                            android:textColor="#F2000000"
-                            android:textSize="@dimen/_11ssp" />
-
-                    </LinearLayout>
-
-                </GridLayout>
-
-                <TextView
-                    android:id="@+id/fad_venue_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/txt_lorem_deksripsi_def"
-                    android:textColor="@color/dimgray"
-                    android:textSize="@dimen/_11ssp"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-            <!-- Venue Jam Buka-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/detailed_margin_width"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kanit_semibold"
-                    android:text="@string/txt_informasi_aktivitas"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:strokeColor="@color/dimgray"
-                    app:strokeWidth="@dimen/_1sdp">
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/fad_aktivitas_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:orientation="vertical">
+                        android:ellipsize="end"
+                        android:fontFamily="@font/kanit_semibold"
+                        android:maxLines="3"
+                        android:text="Disini nantinya adalah nama aktivitas"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_17ssp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="@dimen/_100sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text="@string/txt_tanggal_mulai"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/fad_tgl_mulai"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text=": 31 Desember 2023"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="@dimen/_100sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text="@string/txt_jam_main"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/fad_jam_main"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text=": 2 Jam"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="@dimen/_100sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text="@string/txt_status_anggota"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/fad_membership"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text=": Member"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="@dimen/_100sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text="@string/txt_harga"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/fad_txt_harga"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text=": Rp. 75.000"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-            <!-- Venue Lokasi-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/detailed_margin_width"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kanit_semibold"
-                    android:text="@string/txt_lokasi_aktivitas"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp" />
-
-                <TextView
-                    android:id="@+id/fad_distance_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Jarak : 23.1 Km * 3 Min"
-                    android:textColor="@color/biru_gelap"
-                    android:textSize="@dimen/_10ssp" />
-
-                <TextView
-                    android:id="@+id/fad_lokasi_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/def_alamat_d_venue"
-                    android:textColor="@color/dimgray"
-                    android:textSize="@dimen/_11ssp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_145sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    app:cardCornerRadius="@dimen/_10sdp">
-
-                    <org.osmdroid.views.MapView
-                        android:id="@+id/fad_map_view"
+                    <!-- Venue Ratting, View and Shared-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_3sdp">
 
-                </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/fad_top_member_ic"
+                            android:layout_width="13dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/alt_ratting"
+                            android:src="@drawable/ic_map_maker"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fad_show_map"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        <TextView
+                            android:id="@+id/fad_venue_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center_vertical"
+                            android:text="@string/txt_def_venue"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/fad_top_member_ic"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Venue Sport-->
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:columnCount="2"
+                        android:orientation="horizontal"
+                        android:rowCount="5">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:orientation="horizontal"
+                            tools:ignore="UseCompoundDrawables,UselessParent">
+
+                            <ImageView
+                                android:id="@+id/fad_top_sport_icon"
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:contentDescription="@string/alt_sport_icon"
+                                android:src="@drawable/ic_sport_badminton" />
+
+                            <TextView
+                                android:id="@+id/fad_top_sport_val"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="@string/txt_olahraga_badminton"
+                                android:textColor="#F2000000"
+                                android:textSize="@dimen/_11ssp" />
+
+                        </LinearLayout>
+
+                    </GridLayout>
+
+                    <TextView
+                        android:id="@+id/fad_venue_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/txt_lorem_deksripsi_def"
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/_11ssp"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+                <!-- Venue Jam Buka-->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/txt_petunjuk_arah"
-                    android:textAllCaps="false"
-                    android:textSize="@dimen/_10sdp"
-                    app:cornerRadius="@dimen/_5sdp"
-                    app:strokeColor="@color/azure"
-                    app:strokeWidth="@dimen/_1sdp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/detailed_margin_width"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginEnd="@dimen/detailed_margin_width"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kanit_semibold"
+                        android:text="@string/txt_informasi_aktivitas"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:strokeColor="@color/dimgray"
+                        app:strokeWidth="@dimen/_1sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text="@string/txt_tanggal_mulai"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:id="@+id/fad_tgl_mulai"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text=": 31 Desember 2023"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text="@string/txt_jam_main"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:id="@+id/fad_jam_main"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text=": 2 Jam"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text="@string/txt_status_anggota"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:id="@+id/fad_membership"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text=": Member"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text="@string/txt_harga"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:id="@+id/fad_txt_harga"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text=": Rp. 75.000"
+                                    android:textColor="@color/black" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <!-- Venue Lokasi-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/detailed_margin_width"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginEnd="@dimen/detailed_margin_width"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kanit_semibold"
+                        android:text="@string/txt_lokasi_aktivitas"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <TextView
+                        android:id="@+id/fad_distance_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Jarak : 23.1 Km * 3 Min"
+                        android:textColor="@color/biru_gelap"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <TextView
+                        android:id="@+id/fad_lokasi_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/def_alamat_d_venue"
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/_11ssp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_145sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <org.osmdroid.views.MapView
+                            android:id="@+id/fad_map_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/fad_show_map"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/txt_petunjuk_arah"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/_10sdp"
+                        app:cornerRadius="@dimen/_5sdp"
+                        app:strokeColor="@color/azure"
+                        app:strokeWidth="@dimen/_1sdp" />
+
+                </LinearLayout>
+
+                <!-- Venue Kontak Pengelola-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/detailed_margin_width"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginEnd="@dimen/detailed_margin_width"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kanit_semibold"
+                        android:text="@string/txt_kontak_pengelola"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fad_contact_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_venue_contact" />
+
+                </LinearLayout>
+
+                <!-- Venue Kontak Pengelola-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/detailed_margin_width"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginEnd="@dimen/detailed_margin_width"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kanit_semibold"
+                        android:text="@string/txt_anggota_bergabung"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fad_member_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_activity_member" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70ssp"
+                    tools:ignore="UselessLeaf" />
 
             </LinearLayout>
 
-            <!-- Venue Kontak Pengelola-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/detailed_margin_width"
-                android:orientation="vertical">
+        </ScrollView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kanit_semibold"
-                    android:text="@string/txt_kontak_pengelola"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/fad_contact_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_venue_contact" />
-
-            </LinearLayout>
-
-            <!-- Venue Kontak Pengelola-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detailed_margin_width"
-                android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/detailed_margin_width"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/kanit_semibold"
-                    android:text="@string/txt_anggota_bergabung"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/fad_member_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_activity_member" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_70ssp"
-                tools:ignore="UselessLeaf" />
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fad_bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:background="@color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <View
-            android:id="@+id/fvd_line_top"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fad_bottom_nav"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="#80696969"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/dtld_nav_txt_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_17sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Harga"
-            android:textColor="@color/dimgray"
-            android:textSize="@dimen/_10ssp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/dtld_nav_txt_data"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fvd_line_top" />
+            <View
+                android:id="@+id/fvd_line_top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="#80696969"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/dtld_nav_txt_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Rp. 75.000"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13sdp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/dtld_nav_txt_top"
-            app:layout_constraintTop_toBottomOf="@id/dtld_nav_txt_top" />
+            <TextView
+                android:id="@+id/dtld_nav_txt_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Harga"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/_10ssp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/dtld_nav_txt_data"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fvd_line_top" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/fad_nav_button"
-            android:layout_width="@dimen/_90ssp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_13sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:backgroundTint="@color/primary_color"
-            android:text="@string/btn_aktivitas_gabung"
-            app:cornerRadius="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/dtld_nav_txt_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Rp. 75.000"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/dtld_nav_txt_top"
+                app:layout_constraintTop_toBottomOf="@id/dtld_nav_txt_top" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fad_nav_button"
+                android:layout_width="@dimen/_90ssp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/btn_aktivitas_gabung"
+                app:cornerRadius="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/fad_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include layout="@layout/shimmer_detailed_aktivitas" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</FrameLayout>

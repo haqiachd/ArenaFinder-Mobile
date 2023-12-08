@@ -113,8 +113,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_venue_booking" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/fbv_shimmer_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                >
+
+                <include layout="@layout/shimmer_venue_booking_second" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -205,7 +217,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="@dimen/_150sdp"
@@ -226,5 +239,17 @@
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/fbv_shimmer_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_40sdp"
+        >
+
+        <include layout="@layout/shimmer_venue_booking_first" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

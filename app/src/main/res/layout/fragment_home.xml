@@ -1,585 +1,602 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mho_swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.main.HomeFragment">
 
-    <ScrollView
-        android:id="@+id/mho_scroll"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/mho_swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.main.HomeFragment">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/mho_scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <!-- Home Info-->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/mho_top"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_165sdp"
-                android:layout_marginStart="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginEnd="@dimen/_13sdp"
-                android:elevation="0dp"
-                app:cardCornerRadius="@dimen/_13sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <!-- Home Info-->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mho_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_165sdp"
+                    android:layout_marginStart="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginEnd="@dimen/_13sdp"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="@dimen/_13sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/mho_top_education"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/primary_color"
+                            android:nestedScrollingEnabled="true"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/mho_dots"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Home Menu -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_63sdp"
+                    android:layout_marginStart="@dimen/_13ssp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_13ssp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mho_menu_alur"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/home_menu_height"
+                        android:layout_marginStart="@dimen/home_menu_margin"
+                        android:layout_marginEnd="@dimen/home_menu_margin"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/home_menu_corner"
+                        app:cardElevation="@dimen/home_menu_elevation"
+                        app:strokeColor="@color/dimgray">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5ssp"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:contentDescription="@string/alt_menu_1"
+                                android:src="@drawable/ic_home_menu_1" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/kanit_regular"
+                                android:text="@string/txt_menu_kegiatan_lapangan"
+                                android:textAlignment="center"
+                                android:textColor="@color/primary_color"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mho_menu_komunitas"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/home_menu_height"
+                        android:layout_marginStart="@dimen/home_menu_margin"
+                        android:layout_marginEnd="@dimen/home_menu_margin"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/home_menu_corner"
+                        app:cardElevation="@dimen/home_menu_elevation"
+                        app:strokeColor="@color/dimgray">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5ssp"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:contentDescription="@string/alt_menu_2"
+                                android:src="@drawable/ic_home_menu_2" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/kanit_regular"
+                                android:text="@string/txt_menu_aktivitas_komunitas"
+                                android:textAlignment="center"
+                                android:textColor="@color/primary_color"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mho_menu_trolley"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/home_menu_height"
+                        android:layout_marginStart="@dimen/home_menu_margin"
+                        android:layout_marginEnd="@dimen/home_menu_margin"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/primary_color"
+                        app:cardCornerRadius="@dimen/home_menu_corner"
+                        app:cardElevation="@dimen/home_menu_elevation"
+                        app:strokeColor="@color/dimgray">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5ssp"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:contentDescription="@string/alt_menu_3"
+                                android:src="@drawable/ic_home_menu_3" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/kanit_regular"
+                                android:text="@string/txt_menu_informasi"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/mho_menu_booking"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/home_menu_height"
+                        android:layout_marginStart="@dimen/home_menu_margin"
+                        android:layout_marginEnd="@dimen/home_menu_margin"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/home_menu_corner"
+                        app:cardElevation="@dimen/home_menu_elevation"
+                        app:strokeColor="@color/dimgray">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5ssp"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
+
+                            <ImageView
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:contentDescription="@string/alt_menu_4"
+                                android:src="@drawable/ic_home_menu_4" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/kanit_regular"
+                                android:text="@string/txt_pesan_lapangan"
+                                android:textAlignment="center"
+                                android:textColor="@color/primary_color"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <!-- Jenis Lapangan -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="@dimen/_130sdp"
+                    android:layout_marginTop="@dimen/_15sdp">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/mho_top_education"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/primary_color"
+                    <TextView
+                        android:id="@+id/txt_jenis_lapangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_14sdp"
+                        android:fontFamily="@font/kanit_medium"
+                        android:text="@string/txt_jenis_lapangan"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/home_recycler_jenis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:nestedScrollingEnabled="true"
-                        android:visibility="visible" />
-
-                    <LinearLayout
-                        android:id="@+id/mho_dots"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_3sdp"
                         android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_jenis_lapangan"
+                        tools:listitem="@layout/item_jenis_lapangan" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+                <!-- Venue Baru -->
+                <LinearLayout
+                    android:id="@+id/mho_venue_baru_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <!-- Home Menu -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_63sdp"
-                android:layout_marginStart="@dimen/_13ssp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_13ssp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/mho_menu_alur"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/home_menu_height"
-                    android:layout_marginStart="@dimen/home_menu_margin"
-                    android:layout_marginEnd="@dimen/home_menu_margin"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="@dimen/home_menu_corner"
-                    app:cardElevation="@dimen/home_menu_elevation"
-                    app:strokeColor="@color/dimgray">
-
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5ssp"
-                        android:orientation="vertical"
-                        tools:ignore="UseCompoundDrawables">
-
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:contentDescription="@string/alt_menu_1"
-                            android:src="@drawable/ic_home_menu_1" />
+                        android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/mho_txt_sedang_kosong"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/kanit_regular"
-                            android:text="@string/txt_menu_kegiatan_lapangan"
-                            android:textAlignment="center"
-                            android:textColor="@color/primary_color"
-                            android:textSize="@dimen/_10ssp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/mho_menu_komunitas"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/home_menu_height"
-                    android:layout_marginStart="@dimen/home_menu_margin"
-                    android:layout_marginEnd="@dimen/home_menu_margin"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="@dimen/home_menu_corner"
-                    app:cardElevation="@dimen/home_menu_elevation"
-                    app:strokeColor="@color/dimgray">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5ssp"
-                        android:orientation="vertical"
-                        tools:ignore="UseCompoundDrawables">
-
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:contentDescription="@string/alt_menu_2"
-                            android:src="@drawable/ic_home_menu_2" />
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:fontFamily="@font/kanit_medium"
+                            android:text="@string/txt_venue_baru"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/layout_card_title_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/mho_txt_sedang_kosong_desc"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/kanit_regular"
-                            android:text="@string/txt_menu_aktivitas_komunitas"
-                            android:textAlignment="center"
-                            android:textColor="@color/primary_color"
-                            android:textSize="@dimen/_10ssp" />
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:layout_marginTop="@dimen/layout_card_desc_margin_top"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="@string/txt_venue_baru_desc"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/layout_card_desc_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/mho_txt_sedang_kosong" />
 
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/mho_menu_trolley"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/home_menu_height"
-                    android:layout_marginStart="@dimen/home_menu_margin"
-                    android:layout_marginEnd="@dimen/home_menu_margin"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="@color/primary_color"
-                    app:cardCornerRadius="@dimen/home_menu_corner"
-                    app:cardElevation="@dimen/home_menu_elevation"
-                    app:strokeColor="@color/dimgray">
-
-                    <LinearLayout
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5ssp"
-                        android:orientation="vertical"
-                        tools:ignore="UseCompoundDrawables">
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="none">
 
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:contentDescription="@string/alt_menu_3"
-                            android:src="@drawable/ic_home_menu_3" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/mho_recycler_sedang_kosong"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/card_venue_recycler_height"
+                                android:layout_marginStart="@dimen/recycler_venue_margin_start"
+                                android:layout_marginTop="@dimen/recycler_venue_margin_top"
+                                android:orientation="horizontal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_venue_first" />
+
+                            <include
+                                android:id="@+id/mho_vall_baru"
+                                layout="@layout/button_pilih_semua"
+                                android:layout_width="@dimen/layout_button_all_size"
+                                android:layout_height="@dimen/layout_button_all_size"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                                android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <!-- Venue Rekomendasi-->
+                <LinearLayout
+                    android:id="@+id/mho_venue_rekomendasi_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/mho_txt_venue_baru"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/kanit_regular"
-                            android:text="@string/txt_menu_informasi"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10ssp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/mho_menu_booking"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/home_menu_height"
-                    android:layout_marginStart="@dimen/home_menu_margin"
-                    android:layout_marginEnd="@dimen/home_menu_margin"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="@dimen/home_menu_corner"
-                    app:cardElevation="@dimen/home_menu_elevation"
-                    app:strokeColor="@color/dimgray">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5ssp"
-                        android:orientation="vertical"
-                        tools:ignore="UseCompoundDrawables">
-
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="@dimen/_4sdp"
-                            android:contentDescription="@string/alt_menu_4"
-                            android:src="@drawable/ic_home_menu_4" />
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:fontFamily="@font/kanit_medium"
+                            android:text="@string/txt_buat_kamu"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/layout_card_title_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/mho_txt_sedang_venue_baru"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/kanit_regular"
-                            android:text="@string/txt_pesan_lapangan"
-                            android:textAlignment="center"
-                            android:textColor="@color/primary_color"
-                            android:textSize="@dimen/_10ssp" />
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:layout_marginTop="@dimen/layout_card_desc_margin_top"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="@string/txt_buat_kamu_desc"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/layout_card_desc_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/mho_txt_venue_baru" />
 
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-            <!-- Jenis Lapangan -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
-                android:layout_marginTop="@dimen/_15sdp">
-
-                <TextView
-                    android:id="@+id/txt_jenis_lapangan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_14sdp"
-                    android:fontFamily="@font/kanit_medium"
-                    android:text="@string/txt_jenis_lapangan"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/home_recycler_jenis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_90sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="horizontal"
-                    android:nestedScrollingEnabled="true"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_jenis_lapangan"
-                    tools:listitem="@layout/item_jenis_lapangan" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Venue Baru -->
-            <LinearLayout
-                android:id="@+id/mho_venue_baru_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/mho_txt_sedang_kosong"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:fontFamily="@font/kanit_medium"
-                        android:text="@string/txt_venue_baru"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/layout_card_title_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mho_txt_sedang_kosong_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:layout_marginTop="@dimen/layout_card_desc_margin_top"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/txt_venue_baru_desc"
-                        android:textColor="@color/dimgray"
-                        android:textSize="@dimen/layout_card_desc_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/mho_txt_sedang_kosong" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/mho_recycler_sedang_kosong"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_recycler_height"
-                            android:layout_marginStart="@dimen/recycler_venue_margin_start"
-                            android:layout_marginTop="@dimen/recycler_venue_margin_top"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_venue_first" />
-
-                        <include
-                            android:id="@+id/mho_vall_baru"
-                            layout="@layout/button_pilih_semua"
-                            android:layout_width="@dimen/layout_button_all_size"
-                            android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </LinearLayout>
-
-            <!-- Venue Rekomendasi-->
-            <LinearLayout
-                android:id="@+id/mho_venue_rekomendasi_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/mho_txt_venue_baru"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:fontFamily="@font/kanit_medium"
-                        android:text="@string/txt_buat_kamu"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/layout_card_title_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mho_txt_sedang_venue_baru"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:layout_marginTop="@dimen/layout_card_desc_margin_top"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/txt_buat_kamu_desc"
-                        android:textColor="@color/dimgray"
-                        android:textSize="@dimen/layout_card_desc_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/mho_txt_venue_baru" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/mho_recycler_venue_baru"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_second_height"
-                            android:layout_marginStart="@dimen/recycler_venue_margin_start"
-                            android:layout_marginTop="@dimen/recycler_venue_margin_top"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_venue_second" />
-
-                        <include
-                            android:id="@+id/mho_vall_rekomendasi"
-                            layout="@layout/button_pilih_semua"
-                            android:layout_width="@dimen/layout_button_all_size"
-                            android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </LinearLayout>
-
-            <!-- Aktivitas Seru -->
-            <LinearLayout
-                android:id="@+id/mho_aktivitas_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/mho_txt_aktivitas_seru"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:fontFamily="@font/kanit_medium"
-                        android:text="@string/txt_aktivitas_seru"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/layout_card_title_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mho_txt_aktivitas_seru_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:layout_marginTop="@dimen/layout_card_desc_margin_top"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/txt_aktivitas_seru_desc"
-                        android:textColor="@color/dimgray"
-                        android:textSize="@dimen/layout_card_desc_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/mho_txt_aktivitas_seru" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/mho_recycler_aktivitas_seru"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_210sdp"
-                            android:layout_marginStart="@dimen/recycler_venue_margin_start"
-                            android:layout_marginTop="@dimen/recycler_venue_margin_top"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_aktivitas_first" />
-
-                        <include
-                            android:id="@+id/mho_vall_aktivitas"
-                            layout="@layout/button_pilih_semua"
-                            android:layout_width="@dimen/layout_button_all_size"
-                            android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </LinearLayout>
-
-            <!-- Venue Terdekat-->
-            <LinearLayout
-                android:id="@+id/mho_venue_lokasi_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/mho_txt_venue_terdekat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:fontFamily="@font/kanit_medium"
-                        android:text="@string/txt_terdekat"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/layout_card_title_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mho_txt_sedang_venue_terdekat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_card_margin_start"
-                        android:layout_marginTop="@dimen/layout_card_desc_margin_top"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="@string/txt_terdekat_desc"
-                        android:textColor="@color/dimgray"
-                        android:textSize="@dimen/layout_card_desc_textsize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/mho_txt_venue_terdekat" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_170sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_10sdp">
-
-                    <org.osmdroid.views.MapView
-                        android:id="@+id/mho_mapview"
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="none">
 
-                </androidx.cardview.widget.CardView>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                <HorizontalScrollView
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/mho_recycler_venue_baru"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/card_venue_second_height"
+                                android:layout_marginStart="@dimen/recycler_venue_margin_start"
+                                android:layout_marginTop="@dimen/recycler_venue_margin_top"
+                                android:orientation="horizontal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_venue_second" />
+
+                            <include
+                                android:id="@+id/mho_vall_rekomendasi"
+                                layout="@layout/button_pilih_semua"
+                                android:layout_width="@dimen/layout_button_all_size"
+                                android:layout_height="@dimen/layout_button_all_size"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                                android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <!-- Aktivitas Seru -->
+                <LinearLayout
+                    android:id="@+id/mho_aktivitas_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:nestedScrollingEnabled="true"
-                    android:scrollbars="none">
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/mho_recycler_venue_terdekat"
+                        <TextView
+                            android:id="@+id/mho_txt_aktivitas_seru"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/card_venue_third_height"
-                            android:layout_marginStart="@dimen/recycler_venue_margin_start"
-                            android:layout_marginTop="@dimen/recycler_venue_margin_top"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_venue_first" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:fontFamily="@font/kanit_medium"
+                            android:text="@string/txt_aktivitas_seru"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/layout_card_title_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <include
-                            android:id="@+id/mho_vall_lokasi"
-                            layout="@layout/button_pilih_semua"
-                            android:layout_width="@dimen/layout_button_all_size"
-                            android:layout_height="@dimen/layout_button_all_size"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/layout_button_all_margin_start"
-                            android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
+                        <TextView
+                            android:id="@+id/mho_txt_aktivitas_seru_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:layout_marginTop="@dimen/layout_card_desc_margin_top"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="@string/txt_aktivitas_seru_desc"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/layout_card_desc_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/mho_txt_aktivitas_seru" />
 
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </HorizontalScrollView>
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="none">
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/mho_recycler_aktivitas_seru"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_210sdp"
+                                android:layout_marginStart="@dimen/recycler_venue_margin_start"
+                                android:layout_marginTop="@dimen/recycler_venue_margin_top"
+                                android:orientation="horizontal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_aktivitas_first" />
+
+                            <include
+                                android:id="@+id/mho_vall_aktivitas"
+                                layout="@layout/button_pilih_semua"
+                                android:layout_width="@dimen/layout_button_all_size"
+                                android:layout_height="@dimen/layout_button_all_size"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                                android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <!-- Venue Terdekat-->
+                <LinearLayout
+                    android:id="@+id/mho_venue_lokasi_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/mho_txt_venue_terdekat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:fontFamily="@font/kanit_medium"
+                            android:text="@string/txt_terdekat"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/layout_card_title_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/mho_txt_sedang_venue_terdekat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/layout_card_margin_start"
+                            android:layout_marginTop="@dimen/layout_card_desc_margin_top"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="@string/txt_terdekat_desc"
+                            android:textColor="@color/dimgray"
+                            android:textSize="@dimen/layout_card_desc_textsize"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/mho_txt_venue_terdekat" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_170sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <org.osmdroid.views.MapView
+                            android:id="@+id/mho_mapview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/mho_recycler_venue_terdekat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/card_venue_third_height"
+                                android:layout_marginStart="@dimen/recycler_venue_margin_start"
+                                android:layout_marginTop="@dimen/recycler_venue_margin_top"
+                                android:orientation="horizontal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_venue_first" />
+
+                            <include
+                                android:id="@+id/mho_vall_lokasi"
+                                layout="@layout/button_pilih_semua"
+                                android:layout_width="@dimen/layout_button_all_size"
+                                android:layout_height="@dimen/layout_button_all_size"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/layout_button_all_margin_start"
+                                android:layout_marginEnd="@dimen/layout_button_all_margin_end" />
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    tools:ignore="UselessLeaf" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_20sdp"
-                tools:ignore="UselessLeaf" />
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/mho_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <include layout="@layout/shimmer_home" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</FrameLayout>
