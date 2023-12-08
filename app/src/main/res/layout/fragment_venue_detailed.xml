@@ -558,7 +558,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Jarak : 23.1 Km * 3 Min"
                     android:textColor="@color/biru_gelap"

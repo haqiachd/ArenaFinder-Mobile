@@ -42,6 +42,7 @@ import com.google.android.material.button.MaterialButton;
 import org.osmdroid.views.MapView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,7 +70,7 @@ public class ActivityDetailedFragment extends Fragment {
 
     private ImageView imgBack, imgPhoto, imgVertical, imgSport;
 
-    private TextView txtAktivitasName, txtVenueName, txtSport, txtDateStart, txtJamMain, txtStatusAnggota, txtHarga, txtLokasi;
+    private TextView txtAktivitasName, txtVenueName, txtSport, txtDateStart, txtJamMain, txtStatusAnggota, txtHarga, txtLokasi, txtDistance;
 
     private MaterialButton btnMap, btnJoin;
 
@@ -103,6 +104,8 @@ public class ActivityDetailedFragment extends Fragment {
         recyclerContact = root.findViewById(R.id.fad_contact_recycler);
         recyclerMember = root.findViewById(R.id.fad_member_recycler);
         imgSport = root.findViewById(R.id.fad_top_sport_icon);
+        txtDistance = root.findViewById(R.id.fad_distance_desc);
+
     }
 
     public static ActivityDetailedFragment newInstance(String id) {
@@ -137,20 +140,17 @@ public class ActivityDetailedFragment extends Fragment {
         fetchData();
         onClickGroups();
 
-        listener = new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                int currentScroll = scrollView.getScrollY();
+        listener = () -> {
+            int currentScroll = scrollView.getScrollY();
 
-                if (currentScroll < getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._190sdp)) {
-                    ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
-                    appBarLayout.setVisibility(View.GONE);
-                } else {
-                    ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, R.color.primary_color_darker, false);
-                    appBarLayout.setVisibility(View.VISIBLE);
-                }
-
+            if (currentScroll < getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._190sdp)) {
+                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
+                appBarLayout.setVisibility(View.GONE);
+            } else {
+                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, R.color.primary_color_darker, false);
+                appBarLayout.setVisibility(View.VISIBLE);
             }
+
         };
 
         if (getActivity() != null) {
@@ -173,7 +173,7 @@ public class ActivityDetailedFragment extends Fragment {
         scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
     }
 
-    private void onClickGroups(){
+    private void onClickGroups() {
 
         imgBack.setOnClickListener(v -> {
             requireActivity().onBackPressed();
@@ -263,48 +263,58 @@ public class ActivityDetailedFragment extends Fragment {
             txtHarga.setText(requireContext().getString(R.string.txt_total_price_booking_val, ArenaFinder.toMoneyCase(model.getPrice())));
             txtLokasi.setText(model.getLocation());
 
-            switch(model.getJenisOlahraga().toLowerCase()){
-                case "futsal" : {
+            var coordinate = model.getCoordinate();
+            var distance = MapOSM.calculateDistance(
+                    ArenaFinder.getLatitude(coordinate), ArenaFinder.getLongitude(coordinate)
+            );
+            txtDistance.setText(getString(
+                    R.string.distance_and_minutes_2,
+                    String.format(Locale.ENGLISH, "%.1f", distance),
+                    MapOSM.calculateMileage(distance)
+            ));
+
+            switch (model.getJenisOlahraga().toLowerCase()) {
+                case "futsal": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_futsal));
                     break;
                 }
-                case "badminton" : {
+                case "badminton": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_badminton));
                     break;
                 }
-                case "sepak bola" : {
+                case "sepak bola": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_football));
                     break;
                 }
-                case "bola basket" : {
+                case "bola basket": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_basket));
                     break;
                 }
-                case "bola voli" : {
+                case "bola voli": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_voli));
                     break;
                 }
-                case "tenis lapangan" : {
+                case "tenis lapangan": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis));
                     break;
                 }
-                case "tenis meja" : {
+                case "tenis meja": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_tenis_table));
                     break;
                 }
-                case "atletik" : {
+                case "atletik": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_atletik));
                     break;
                 }
-                case "fitness" : {
+                case "fitness": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_fitnes));
                     break;
                 }
-                case "renang" : {
+                case "renang": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_swiming));
                     break;
                 }
-                case "silat" : {
+                case "silat": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_silat));
                     break;
                 }
@@ -350,7 +360,7 @@ public class ActivityDetailedFragment extends Fragment {
 
         Call<AktivitasMemberResponse> action;
 
-        switch (actionStatus){
+        switch (actionStatus) {
             case JOIN: {
                 action = RetrofitClient.getInstance().joinActivity(
                         new AktivitasMemberModel(id, usersUtil.getEmail())
@@ -399,7 +409,7 @@ public class ActivityDetailedFragment extends Fragment {
 
     }
 
-    private void showMap(String venueName, String coordinate){
+    private void showMap(String venueName, String coordinate) {
 
         double latitude = ArenaFinder.getLatitude(coordinate),
                 longitude = ArenaFinder.getLongitude(coordinate);
