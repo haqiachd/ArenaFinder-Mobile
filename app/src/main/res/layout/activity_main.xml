@@ -24,7 +24,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 app:cardBackgroundColor="@color/primary_color"
-                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardCornerRadius="@dimen/main_appbar_appname"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -50,7 +50,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                app:cardCornerRadius="@dimen/_25sdp"
+                app:cardCornerRadius="@dimen/main_appbar_appname"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/main_appbar_card"
                 app:layout_constraintEnd_toStartOf="@id/main_appbar_notif"

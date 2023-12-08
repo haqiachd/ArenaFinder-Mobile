@@ -138,7 +138,7 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
 
             Glide.with(view)
                     .load(RetrofitClient.AKTIVITAS_URL + uri)
-                    .placeholder(R.drawable.ic_profile)
+                    .placeholder(R.drawable.ic_place_holder_venue_detailed)
                     .centerCrop()
                     .into(imgAktivitas);
 

@@ -14,13 +14,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.c2.arenafinder.R;
-import com.c2.arenafinder.data.local.LogApp;
-import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.data.model.JadwalPickerModel;
 import com.c2.arenafinder.data.model.VenueBookingModel;
 import com.c2.arenafinder.util.AdapterActionListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -33,6 +29,8 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
     private final AdapterActionListener listener;
 
     private JadwalPickerAdapter jadwalPickerAdapter;
+
+    private ArrayList<Integer> jadwalKosong = new ArrayList();
 
     public VenueBookingAdapter(Context context, ArrayList<VenueBookingModel> models, AdapterActionListener listener) {
         this.context = context;
@@ -56,16 +54,27 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
 
         holder.txtNamaLapangan.setText(bookingModel.getLapanganName());
         holder.txtSlotKosong.setText(bookingModel.getTotalSlot());
+//        Toast.makeText(context, bookingModel.getTotalSlot(), Toast.LENGTH_SHORT).show();
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
-            // show and hide lapangan
             holder.lapanganLayout.setOnClickListener(v -> {
-                if (holder.jadwalPickerLayout.getVisibility() == View.VISIBLE) {
-                    holder.jadwalPickerLayout.setVisibility(View.GONE);
-                    holder.imgStatus.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_expanded));
-                } else {
-                    holder.jadwalPickerLayout.setVisibility(View.VISIBLE);
-                    holder.imgStatus.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_collapse));
+                // show and hide lapangan
+                if (holder.getAdapterPosition() == position){
+                    if (holder.linearContent.getVisibility() == View.VISIBLE || holder.linearNoData.getVisibility() == View.VISIBLE) {
+                        if (jadwalKosong.get(position) > 0) {
+                            holder.linearContent.setVisibility(View.GONE);
+                        } else {
+                            holder.linearNoData.setVisibility(View.GONE);
+                        }
+                        holder.imgStatus.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_expanded));
+                    } else {
+                        if (jadwalKosong.get(position) > 0) {
+                            holder.linearContent.setVisibility(View.VISIBLE);
+                        } else {
+                            holder.linearNoData.setVisibility(View.VISIBLE);
+                        }
+                        holder.imgStatus.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_collapse));
+                    }
                 }
             });
 
@@ -90,14 +99,20 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         return models != null ? models.size() : 0;
     }
 
-    public void showJadwalKosong(ArrayList<JadwalPickerModel> models, TextView textView){
+    public void showJadwalKosong(ArrayList<JadwalPickerModel> models, TextView textView) {
         int kosong = 0;
-        for (JadwalPickerModel model : models){
-            if (!model.isBooked()){
+        for (JadwalPickerModel model : models) {
+            if (!model.isBooked()) {
                 kosong++;
             }
         }
-        textView.setText(context.getString(R.string.slot_kosong_val, kosong));
+        if (kosong > 0) {
+            textView.setText(context.getString(R.string.slot_kosong_val, kosong));
+        } else {
+            textView.setText(R.string.jadwal_kosong);
+        }
+        jadwalKosong.add(kosong);
+
     }
 
     public ArrayList<JadwalPickerModel> getJadwalDipilih() {
@@ -108,7 +123,7 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         return jadwalPickerAdapter.getItemDetails();
     }
 
-    public void resetTotalHarga(){
+    public void resetTotalHarga() {
         jadwalPickerAdapter.resetTotalHarga();
     }
 
@@ -120,7 +135,7 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
 
         private final ConstraintLayout lapanganLayout;
 
-        private final LinearLayout jadwalPickerLayout;
+        private final LinearLayout linearContent, linearNoData;
 
         private final TextView txtNamaLapangan, txtSlotKosong;
 
@@ -132,13 +147,12 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
             super(view);
 
             lapanganLayout = view.findViewById(R.id.ivb_lapangan_layout);
-            jadwalPickerLayout = view.findViewById(R.id.ivb_jadwal_picker);
+            linearContent = view.findViewById(R.id.ivb_content_jadwal);
+            linearNoData = view.findViewById(R.id.ivb_content_nodata);
             txtNamaLapangan = view.findViewById(R.id.ivb_lapangan_name);
             txtSlotKosong = view.findViewById(R.id.ivb_lapangan_slot);
             recyclerJadwal = view.findViewById(R.id.ivb_recycler);
             imgStatus = view.findViewById(R.id.ivb_card_status);
-
-
         }
 
     }

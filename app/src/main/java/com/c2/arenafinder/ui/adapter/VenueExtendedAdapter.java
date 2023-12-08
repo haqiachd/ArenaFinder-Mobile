@@ -81,11 +81,12 @@ public class VenueExtendedAdapter extends RecyclerView.Adapter<VenueExtendedAdap
             holder.txtRatting.setText(ArenaFinder.oneComa(model.getRating()));
         }
 
+        holder.txtDescFirst.setVisibility(View.GONE);
         // change status venue color
         switch (model.getStatus().toLowerCase()) {
             case "disewakan": {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
-                holder.txtDescFirst.setText("1 Slot Kosong");
+//                holder.txtDescFirst.setText("1 Slot Kosong");
                 holder.txtDescSecond.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
                 break;
             }

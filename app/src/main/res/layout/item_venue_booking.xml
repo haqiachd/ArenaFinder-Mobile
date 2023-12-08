@@ -90,27 +90,68 @@
             android:id="@+id/ivb_jadwal_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ivb_content_jadwal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Pilih Jadwal yang Tersedia"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ivb_recycler"
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="@string/pilih_jadwal_yang_tersedia"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ivb_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_jadwal_picker" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ivb_content_nodata"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_8sdp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_jadwal_picker" />
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_130sdp"
+                    app:lottie_autoPlay="true"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    app:lottie_loop="true"
+                    android:layout_gravity="center"
+                    app:lottie_rawRes="@raw/raw_no_booking" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/jadwal_masih_kosong"
+                    android:textAlignment="center"
+                    android:textColor="@color/azure"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

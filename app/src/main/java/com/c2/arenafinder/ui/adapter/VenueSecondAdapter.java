@@ -67,7 +67,7 @@ public class VenueSecondAdapter extends RecyclerView.Adapter<VenueSecondAdapter.
         switch (model.getStatus().toLowerCase()){
             case "disewakan" : {
                 holder.setStatusColor(context, R.drawable.bg_venue_status_disewakan, R.color.venue_status_disewakan);
-                holder.txtDescFirst.setText("1 Slot Kosong");
+                holder.txtDescFirst.setText(context.getString(R.string.slot_kosong_values, model.getSlotKosong()));
                 holder.txtDescSecond.setText(context.getString(R.string.txt_disewakan_v, ArenaFinder.toMoneyCase(model.getHargaSewa())));
                 holder.txtStatus.setText(R.string.status_disewakan);
                 break;
