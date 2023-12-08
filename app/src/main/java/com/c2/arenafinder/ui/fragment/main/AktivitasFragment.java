@@ -39,6 +39,7 @@ import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.viewmodel.AktivitasViewModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
@@ -60,6 +61,8 @@ public class AktivitasFragment extends Fragment {
 
     private SwipeRefreshLayout refreshLayout;
 
+    private ShimmerFrameLayout shimmerLayout;
+
     private View btnVallBaru, btnVallKosong;
 
     private MaterialButton btnFilter;
@@ -74,6 +77,7 @@ public class AktivitasFragment extends Fragment {
 
     public void initViews(View view) {
         refreshLayout = view.findViewById(R.id.mak_refresh);
+        shimmerLayout = view.findViewById(R.id.mak_shimmer);
         btnVallBaru = view.findViewById(R.id.mak_vall_baru);
         btnVallKosong = view.findViewById(R.id.mak_vall_kosong);
         btnFilter = view.findViewById(R.id.mak_btn_filter);
@@ -122,20 +126,16 @@ public class AktivitasFragment extends Fragment {
                 new AktivitasViewModelFactory(new AktivitasRepository())
         ).get(AktivitasViewModel.class);
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        requireActivity().runOnUiThread(() -> aktivitasViewModel.fetchAktivitas());
-                        refreshLayout.setRefreshing(false);
-                    }
-                }, 1500L);
-            }
-        });
+        refreshLayout.setOnRefreshListener(() ->
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    observer();
+                    refreshLayout.setRefreshing(false);
+                    requireActivity().runOnUiThread(() -> aktivitasViewModel.fetchAktivitas());
+                }, 1500L)
+        );
 
         if (isAdded()) {
+            showShimmer(true);
             if (getView() != null){
                 new Handler(Looper.getMainLooper()).post(this::observer);
             }
@@ -146,16 +146,16 @@ public class AktivitasFragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        aktivitasViewModel.getAktivitasData().removeObservers(getViewLifecycleOwner());
-        LogApp.info(this, LogTag.LIFEFCYLE, "AktivitasFragment OnDestroyView");
+    private void showShimmer(boolean show){
+        if (show){
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            refreshLayout.setVisibility(View.GONE);
+        }else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void observer() {
@@ -168,6 +168,7 @@ public class AktivitasFragment extends Fragment {
                 LogApp.info(requireContext(), LogTag.RETROFIT_ON_FAILURE, "Aktivitas Failure");
                 Toast.makeText(requireActivity(), ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
                 handlerNullData();
+                showShimmer(false);
             } else if (dataState instanceof RetrofitState.Success) {
                 LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "Dashboard Response");
                 AktivitasResponse.Data data = ((RetrofitState.Success<AktivitasResponse>) dataState).getData().getData();
@@ -179,12 +180,13 @@ public class AktivitasFragment extends Fragment {
 
                 if (aktivitasBaru.size() == 0 && akivitasKosong.size() == 0 && semuaAktivitas.size() == 0) {
                     handlerNullData();
+                    showShimmer(false);
                 } else {
-
                     // show recycler data
                     showAktivitasBaru(aktivitasBaru);
                     showAktivitasKosong(akivitasKosong);
                     showSemuaAktivitasyList(semuaAktivitas);
+                    showShimmer(false);
                 }
             }
 

@@ -88,8 +88,8 @@ public class MenuCommunityFragment extends Fragment {
 
         BookingTabAdapter adapter = new BookingTabAdapter(requireActivity().getSupportFragmentManager());
 
-        adapter.addFragment(new TabActivityOngoingFragment(), "AKAN DATANG");
-        adapter.addFragment(new TabActivityFinishedFragment(), "SELESAI");
+        adapter.addFragment(new TabActivityOngoingFragment(), getString(R.string.history_activity_comingsoon));
+        adapter.addFragment(new TabActivityFinishedFragment(), getString(R.string.history_activity_finished));
 
         viewPager.setAdapter(adapter);
         tabLayuot.setupWithViewPager(viewPager);

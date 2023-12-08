@@ -44,6 +44,7 @@ import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.EventDay
 import com.c2.arenafinder.data.model.ListLapanganModel
 import com.c2.arenafinder.data.response.ListLapanganResponse
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 import com.google.android.material.button.MaterialButton
@@ -77,9 +78,11 @@ class BookingVenueFragment : Fragment() {
     private lateinit var recyclerVenue: RecyclerView
     private lateinit var btnChooseDate: ImageView
     private lateinit var imgBack: ImageView
-    private lateinit var msgLayout : LinearLayout
-    private lateinit var nestedScroll : NestedScrollView
-    private lateinit var bottomNav : ConstraintLayout
+    private lateinit var msgLayout: LinearLayout
+    private lateinit var nestedScroll: NestedScrollView
+    private lateinit var bottomNav: ConstraintLayout
+    private lateinit var shimmerFirstLayout: ShimmerFrameLayout
+    private lateinit var shimmerSecondLayout: ShimmerFrameLayout
 
     private lateinit var txtPriceBot: TextView
     private lateinit var txtRightBot: TextView
@@ -96,6 +99,8 @@ class BookingVenueFragment : Fragment() {
         msgLayout = view.findViewById(R.id.fbv_message)
         nestedScroll = view.findViewById(R.id.fbv_scrollview)
         bottomNav = view.findViewById(R.id.fvd_bottom_nav)
+        shimmerFirstLayout = view.findViewById(R.id.fbv_shimmer_1)
+        shimmerSecondLayout = view.findViewById(R.id.fbv_shimmer_2)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,10 +147,39 @@ class BookingVenueFragment : Fragment() {
 
         btnPesan.isClickable = false
 
+        showFirstShimmer(true)
         getListLapangan(idVenue!!)
         showDatePicker()
         updateBottomNav()
         onClickGroups()
+    }
+
+    private fun showFirstShimmer(show: Boolean) {
+        if (show) {
+            shimmerFirstLayout.visibility = View.VISIBLE
+            shimmerFirstLayout.startShimmer()
+            nestedScroll.visibility = View.GONE
+            btnPesan.isClickable = false
+        } else {
+            shimmerFirstLayout.visibility = View.GONE
+            shimmerFirstLayout.stopShimmer()
+            nestedScroll.visibility = View.VISIBLE
+            btnPesan.isClickable = true
+        }
+    }
+
+    private fun showSecondShimmer(show: Boolean) {
+        if (show) {
+            shimmerSecondLayout.visibility = View.VISIBLE
+            shimmerSecondLayout.startShimmer()
+            recyclerVenue.visibility = View.GONE
+            btnPesan.isClickable = false
+        } else {
+            shimmerSecondLayout.visibility = View.GONE
+            shimmerSecondLayout.stopShimmer()
+            recyclerVenue.visibility = View.VISIBLE
+            btnPesan.isClickable = true
+        }
     }
 
     private fun onClickGroups() {
@@ -208,6 +242,7 @@ class BookingVenueFragment : Fragment() {
 //                        Toast.makeText(requireContext(), "Date -> $date", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                         updateBottomNav()
+                        showFirstShimmer(true)
                         btnChooseDate.isClickable = true
                         venueBookingAdapter!!.resetTotalHarga()
                         showDatePicker(false, clickedDayCalendar)
@@ -228,7 +263,7 @@ class BookingVenueFragment : Fragment() {
 
         btnPesan.setOnClickListener {
 
-            if (venueBookingAdapter == null){
+            if (venueBookingAdapter == null) {
                 return@setOnClickListener
             }
 
@@ -295,7 +330,9 @@ class BookingVenueFragment : Fragment() {
                         "online" -> {
 //                            actionButton("online")
 //                            sheet.dismiss()
-                            Toast.makeText(requireContext(), getString(R.string.toast_segera), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(),
+                                getString(R.string.toast_segera),
+                                Toast.LENGTH_SHORT).show()
                         }
                         else -> {
                             Toast.makeText(requireContext(),
@@ -416,6 +453,7 @@ class BookingVenueFragment : Fragment() {
                         dateChooser = models[position].dateMonth
                         updateBottomNav()
                         getListLapangan(idVenue!!)
+                        showSecondShimmer(true)
                     }
                 })
             recyclerDate.adapter = pickerAdapter
@@ -467,6 +505,8 @@ class BookingVenueFragment : Fragment() {
                         if (response.body() != null && response.body()!!
                                 .status.equals("success", ignoreCase = true)
                         ) {
+                            showFirstShimmer(false)
+                            showSecondShimmer(false)
                             // menambahkan data lapangan ke list
                             bookingModels.add(response.body()!!.data)
 
@@ -485,6 +525,8 @@ class BookingVenueFragment : Fragment() {
                                 }
                             }
                         } else {
+                            showFirstShimmer(false)
+                            showSecondShimmer(false)
                             Toast.makeText(requireContext(),
                                 response.body()!!.message,
                                 Toast.LENGTH_SHORT).show()
@@ -493,6 +535,8 @@ class BookingVenueFragment : Fragment() {
 
                     override fun onFailure(call: Call<VenueBookingResponse?>, t: Throwable) {
                         Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+                        showFirstShimmer(false)
+                        showSecondShimmer(false)
                     }
                 })
         }

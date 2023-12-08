@@ -1,6 +1,5 @@
 package com.c2.arenafinder.ui.fragment.submain;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
@@ -20,15 +20,15 @@ import com.c2.arenafinder.api.retrofit.RetrofitClient;
 import com.c2.arenafinder.data.model.AktivitasMemberModel;
 import com.c2.arenafinder.data.model.AktivitasModel;
 import com.c2.arenafinder.data.response.AktivitasMemberResponse;
-import com.c2.arenafinder.data.response.AktivitasResponse;
 import com.c2.arenafinder.data.response.AktivitasStatusResponse;
-import com.c2.arenafinder.data.response.ReferensiResponse;
 import com.c2.arenafinder.ui.adapter.StatusAktivitasAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,12 +46,18 @@ public class TabActivityOngoingFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
+    private ShimmerFrameLayout shimmerLayout;
+
+    private LinearLayout linearLayout;
+
     public TabActivityOngoingFragment() {
         // Required empty public constructor
     }
 
     private void initViews(View view) {
         recyclerView = view.findViewById(R.id.tab_ongoing_recycler);
+        shimmerLayout = view.findViewById(R.id.tab_ongoing_shimmer);
+        linearLayout = view.findViewById(R.id.tab_ongoing_kosong);
     }
 
     public static TabActivityOngoingFragment newInstance(String param1, String param2) {
@@ -84,27 +90,57 @@ public class TabActivityOngoingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
         usersUtil = new UsersUtil(requireContext());
+
+        showShimmer(true);
         fetchData();
+    }
+
+    private void showShimmer(boolean show) {
+        if (show) {
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            recyclerView.setVisibility(View.GONE);
+            showContent(true);
+        } else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showContent(boolean show) {
+        if (show) {
+            linearLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        } else {
+            linearLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
     }
 
     private void fetchData() {
 
         RetrofitClient.getInstance().statusActivity(
                 usersUtil.getEmail(), AktivitasModel.STATUS_ONGOING
-        ).enqueue(new Callback<AktivitasStatusResponse>() {
+        ).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<AktivitasStatusResponse> call, Response<AktivitasStatusResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     ArrayList<AktivitasModel> models = response.body().getData();
                     showData(models);
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
+                    showContent(false);
                 }
             }
 
             @Override
             public void onFailure(Call<AktivitasStatusResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
+                showContent(false);
             }
         });
     }
@@ -112,27 +148,34 @@ public class TabActivityOngoingFragment extends Fragment {
     private void showData(ArrayList<AktivitasModel> models) {
         if (models.size() <= 0) {
             recyclerView.setVisibility(View.GONE);
+            showContent(false);
         } else {
             if (isAdded()) {
+                showContent(true);
                 recyclerView.setAdapter(
                         new StatusAktivitasAdapter(
-                                requireContext(), models, new AdapterActionListener() {
-                            @Override
-                            public void onClickListener(int position) {
-                                ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
-                                new AlertDialog.Builder(requireContext())
-                                        .setMessage(R.string.dia_title_warning)
-                                        .setMessage("Apakah kamu yakin ingin keluar dari aktivitas " + models.get(position).getNamaAktivitas()+ "?")
-                                        .setCancelable(true)
-                                        .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                action(Integer.toString(models.get(position).getidAktvitias()));
-                                            }
-                                        }).create().show();
-                            }
-                        }, false)
+                                requireContext(), models,
+                                new AdapterActionListener() {
+                                    @Override
+                                    public void onClickListener(int position) {
+                                        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
+                                        new AlertDialog.Builder(requireContext())
+                                                .setMessage(R.string.dia_title_warning)
+                                                .setMessage("Apakah kamu yakin ingin keluar dari aktivitas " + models.get(position).getNamaAktivitas() + "?")
+                                                .setCancelable(true)
+                                                .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        action(Integer.toString(models.get(position).getidAktvitias()));
+                                                        models.remove(position);
+                                                        Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(position);
+                                                    }
+                                                }).create().show();
+                                    }
+                                }, false)
                 );
+            } else {
+                showContent(false);
             }
         }
     }
@@ -140,7 +183,7 @@ public class TabActivityOngoingFragment extends Fragment {
     private void action(String id) {
         RetrofitClient.getInstance().leaveActivity(
                 new AktivitasMemberModel(id, usersUtil.getEmail())
-        ).enqueue(new Callback<AktivitasMemberResponse>() {
+        ).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<AktivitasMemberResponse> call, Response<AktivitasMemberResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
@@ -149,12 +192,7 @@ public class TabActivityOngoingFragment extends Fragment {
                             .setTitle(R.string.dia_title_inform)
                             .setMessage(response.body().getMessage())
                             .setCancelable(false)
-                            .setPositiveButton(R.string.dia_positive_ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    fetchData();
-                                }
-                            })
+                            .setPositiveButton(R.string.dia_positive_ok, (dialog, which) -> fetchData())
                             .create().show();
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

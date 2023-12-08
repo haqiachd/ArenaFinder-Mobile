@@ -27,6 +27,7 @@ import com.c2.arenafinder.ui.activity.DetailedActivity;
 import com.c2.arenafinder.ui.adapter.AktivitasSecondAdapter;
 import com.c2.arenafinder.ui.adapter.VenueExtendedAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 
@@ -49,12 +50,15 @@ public class ViewAllFragment extends Fragment {
 
     private RecyclerView recyclerAll;
 
+    private ShimmerFrameLayout shimmerLayout;
+
     public ViewAllFragment() {
         // Required empty public constructor
     }
 
     private void initViews(View view) {
         recyclerAll = view.findViewById(R.id.fva_recycler);
+        shimmerLayout = view.findViewById(R.id.fva_shimmer);
     }
 
     public static ViewAllFragment newInstance(int action) {
@@ -85,6 +89,7 @@ public class ViewAllFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
+        showShimmer(true);
         switch (action) {
             case VENUE_BARU: {
                 actionBaru();
@@ -171,6 +176,18 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    private void showShimmer(boolean show){
+        if (show){
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            recyclerAll.setVisibility(View.GONE);
+        }else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            recyclerAll.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void openDetailedVenue(String id) {
         startActivity(
                 new Intent(requireContext(), DetailedActivity.class)
@@ -230,14 +247,17 @@ public class ViewAllFragment extends Fragment {
             public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -251,14 +271,17 @@ public class ViewAllFragment extends Fragment {
             public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -272,14 +295,17 @@ public class ViewAllFragment extends Fragment {
             public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -293,14 +319,17 @@ public class ViewAllFragment extends Fragment {
             public void onResponse(Call<VenueExtendedResponse> call, Response<VenueExtendedResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -315,14 +344,17 @@ public class ViewAllFragment extends Fragment {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     // show recycler view
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -337,14 +369,17 @@ public class ViewAllFragment extends Fragment {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     // show recycler view
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -359,14 +394,17 @@ public class ViewAllFragment extends Fragment {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     // show recycler view
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
             @Override
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -381,8 +419,10 @@ public class ViewAllFragment extends Fragment {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     // show recycler view
                     showRecyclerVenue(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
@@ -390,6 +430,7 @@ public class ViewAllFragment extends Fragment {
             public void onFailure(Call<VenueExtendedResponse> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -403,8 +444,10 @@ public class ViewAllFragment extends Fragment {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     // show recycler view
                     showRecyclerActivity(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
@@ -412,6 +455,7 @@ public class ViewAllFragment extends Fragment {
             public void onFailure(Call<AktivitasSecondResponse> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
 
@@ -424,8 +468,10 @@ public class ViewAllFragment extends Fragment {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     // show recycler view
                     showRecyclerActivity(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
@@ -433,6 +479,7 @@ public class ViewAllFragment extends Fragment {
             public void onFailure(Call<AktivitasSecondResponse> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
     }
@@ -444,8 +491,10 @@ public class ViewAllFragment extends Fragment {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                     // show recycler view
                     showRecyclerActivity(response.body().getData());
+                    showShimmer(false);
                 } else {
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    showShimmer(false);
                 }
             }
 
@@ -453,6 +502,7 @@ public class ViewAllFragment extends Fragment {
             public void onFailure(Call<AktivitasSecondResponse> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                showShimmer(false);
             }
         });
     }

@@ -54,6 +54,7 @@ import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.UsersUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
@@ -85,6 +86,9 @@ public class VenueDetailedFragment extends Fragment {
     private ImageView btnBackAppbar, btnVerticalAppbar, imgSport, star1, star2, star3, star4, star5;
     private MaterialButton btnFasilitas, btnMap, btnReview;
 
+    private ConstraintLayout contentLayout;
+    private ShimmerFrameLayout shimmerLayout;
+
     private ConstraintLayout progLayout;
     private RecyclerView fasilitasRecycler, contactRecycler, commentRecycler;
     private ProgressBar prog1, prog2, prog3, prog4, prog5;
@@ -109,6 +113,8 @@ public class VenueDetailedFragment extends Fragment {
 
     private void initViews(View view) {
         appBarLayout = view.findViewById(R.id.fvd_appbar);
+        contentLayout = view.findViewById(R.id.fvd_content);
+        shimmerLayout = view.findViewById(R.id.fvd_shimmer);
         btnBackAppbar = view.findViewById(R.id.fvd_back_appbar);
         btnVerticalAppbar = view.findViewById(R.id.fvd_vertical_menu_appbar);
         txtVenueNameAppbar = view.findViewById(R.id.fvd_nama_lapangan_appbar);
@@ -194,6 +200,59 @@ public class VenueDetailedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_venue_detailed, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initViews(view);
+
+        listener = () -> {
+            int currentScroll = scrollView.getScrollY();
+
+            if (currentScroll < getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._190sdp)) {
+                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
+                appBarLayout.setVisibility(View.GONE);
+            } else {
+                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, R.color.primary_color_darker, false);
+                appBarLayout.setVisibility(View.VISIBLE);
+            }
+
+        };
+
+        showShimmer(true);
+        fetchData(id);
+        onClickGroups();
+        pagerAction();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
+        ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
+//        updateBottomNav();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
+        venueDots.removeAllViews();
+        dots = new ArrayList<>();
+    }
+
+    private void showShimmer(boolean show){
+        if (show){
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            contentLayout.setVisibility(View.GONE);
+        }else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            contentLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showPopMenu(View view) {
@@ -286,47 +345,6 @@ public class VenueDetailedFragment extends Fragment {
             public void onFailure(Call<EmailReportResponse> call, Throwable t) {
             }
         });
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        initViews(view);
-
-        listener = () -> {
-            int currentScroll = scrollView.getScrollY();
-
-            if (currentScroll < getResources().getDimensionPixelOffset(com.intuit.sdp.R.dimen._190sdp)) {
-                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
-                appBarLayout.setVisibility(View.GONE);
-            } else {
-                ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.WHITE_STATUS_BAR, R.color.primary_color_darker, false);
-                appBarLayout.setVisibility(View.VISIBLE);
-            }
-
-        };
-
-        fetchData(id);
-        onClickGroups();
-        pagerAction();
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
-        ArenaFinder.setStatusBarColor(requireActivity(), ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, false);
-//        updateBottomNav();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
-        venueDots.removeAllViews();
-        dots = new ArrayList<>();
     }
 
     private void onClickGroups() {
@@ -435,8 +453,11 @@ public class VenueDetailedFragment extends Fragment {
                     showComment(data.getComment());
                     showContact(data.getContact());
 
+                    showShimmer(false);
+
                 } else {
                     LogApp.warn(requireActivity(), LogTag.RETROFIT_ON_FAILURE, response.body().getMessage());
+                    showShimmer(false);
                 }
 
             }
@@ -444,6 +465,7 @@ public class VenueDetailedFragment extends Fragment {
             @Override
             public void onFailure(Call<VenueDetailedResponse> call, Throwable t) {
                 t.printStackTrace();
+                showShimmer(false);
             }
         });
 
@@ -618,7 +640,11 @@ public class VenueDetailedFragment extends Fragment {
             ImageView[] stars = {star1, star2, star3, star4, star5};
             String[] values = {model.getRating1(), model.getRating2(), model.getRating3(), model.getRating4(), model.getRating5()};
 
-            txtTopRating.setText(String.valueOf(model.getRating()));
+            if (Float.parseFloat(model.getRating()) <= 0.0){
+                txtTopRating.setText(R.string.txt_ratting_na);
+            }else{
+                txtTopRating.setText(String.valueOf(model.getRating()));
+            }
             txtRatting.setText(String.valueOf(model.getRating()));
             txtReviews.setText(getString(R.string.txt_ulasan_val, model.getTotalReview()));
 

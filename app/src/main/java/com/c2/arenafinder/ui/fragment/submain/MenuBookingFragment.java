@@ -66,9 +66,9 @@ public class MenuBookingFragment extends Fragment {
 
         BookingTabAdapter adapter = new BookingTabAdapter(requireActivity().getSupportFragmentManager());
 
-        adapter.addFragment(new TabDipesanFragment(), "Di pesan");
-        adapter.addFragment(new TabDisetujuiFragment(), "Di setujui");
-        adapter.addFragment(new TabDitolakFragment(), "Di tolak");
+        adapter.addFragment(new TabDipesanFragment(), getString(R.string.history_venue_dipesan));
+        adapter.addFragment(new TabDisetujuiFragment(), getString(R.string.history_venue_disetujui));
+        adapter.addFragment(new TabDitolakFragment(), getString(R.string.history_venue_ditolak));
 
         // Tambahkan fragment-fragment lainnya
         viewPager.setAdapter(adapter);

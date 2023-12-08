@@ -39,6 +39,7 @@ import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 import com.c2.arenafinder.util.UsersUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -59,6 +60,8 @@ public class VenueReviewFragment extends Fragment {
 
     private SwipeRefreshLayout refreshLayout;
 
+    private ShimmerFrameLayout shimmerLayout;
+
     private RecyclerView commentRecycler;
 
     private ConstraintLayout myCommentLayout;
@@ -78,6 +81,8 @@ public class VenueReviewFragment extends Fragment {
     }
 
     private void initViews(View view) {
+        refreshLayout = view.findViewById(R.id.fvr_refresh);
+        shimmerLayout = view.findViewById(R.id.fvr_shimmer);
         writeLayout = view.findViewById(R.id.fvr_write_comment_layout);
         myCommentLayout = view.findViewById(R.id.fvr_mycomment_layout);
         commentRecycler = view.findViewById(R.id.fvr_recycler_review);
@@ -87,7 +92,6 @@ public class VenueReviewFragment extends Fragment {
         txtMyComment = view.findViewById(R.id.fvr_review_comment);
         txtMyDate = view.findViewById(R.id.fvr_ratting_date);
         txtEditMy = view.findViewById(R.id.fvr_edit_ulasan);
-        refreshLayout = view.findViewById(R.id.fvr_refresh);
         cantComment = view.findViewById(R.id.fvr_cant_commnet);
         noComment = view.findViewById(R.id.fvr_no_comment);
 
@@ -158,8 +162,21 @@ public class VenueReviewFragment extends Fragment {
             }, 1500L);
         });
 
+        showShimmer(true);
         fetchData();
         onClickGroups();
+    }
+
+    private void showShimmer(boolean show){
+        if (show){
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            refreshLayout.setVisibility(View.GONE);
+        }else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void fetchData() {
@@ -178,18 +195,23 @@ public class VenueReviewFragment extends Fragment {
                                 showMyComment(data.getMyComment(), data.isCanComment());
                                 showRatting(data.getRating());
                                 showComment(data.getComment());
+
+                                showShimmer(false);
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 Toast.makeText(requireContext(), "Gagal menampilkan data", Toast.LENGTH_SHORT).show();
+                                showShimmer(false);
                             }
                         } else {
                             Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            showShimmer(false);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<VenueReviewsResponse> call, Throwable t) {
                         t.printStackTrace();
+                        showShimmer(false);
                     }
                 });
 

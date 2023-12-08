@@ -61,6 +61,7 @@ import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.viewmodel.HomeViewModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -94,6 +95,8 @@ public class HomeFragment extends Fragment {
 
     private SwipeRefreshLayout refreshLayout;
 
+    private ShimmerFrameLayout shimmerLayout;
+
     private MapView mMap;
 
     private MapOSM mapOSM;
@@ -109,6 +112,7 @@ public class HomeFragment extends Fragment {
     public void initViews(View view) {
 
         refreshLayout = view.findViewById(R.id.mho_swipe);
+        shimmerLayout = view.findViewById(R.id.mho_shimmer);
         menuAlur = view.findViewById(R.id.mho_menu_alur);
         menuKomunitas = view.findViewById(R.id.mho_menu_komunitas);
         menuTrolley = view.findViewById(R.id.mho_menu_trolley);
@@ -186,6 +190,8 @@ public class HomeFragment extends Fragment {
                 }, 1500L)
         );
 
+        showShimmer(true);
+
         try {
             mapOSM = new MapOSM(requireActivity(), mMap);
 
@@ -194,7 +200,6 @@ public class HomeFragment extends Fragment {
                     if (savedInstanceState != null) {
                         Parcelable parcelable = savedInstanceState.getParcelable(KEY_TEST);
                         Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onRestoreInstanceState(parcelable);
-//                        Toast.makeText(requireContext(), "RESTORE", Toast.LENGTH_SHORT).show();
                     } else {
                         new Handler(Looper.getMainLooper()).post(this::observer);
                     }
@@ -207,7 +212,7 @@ public class HomeFragment extends Fragment {
                 getAppbar();
             }
 
-        }catch (Throwable ex){
+        } catch (Throwable ex) {
             ex.printStackTrace();
             Toast.makeText(requireContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -216,15 +221,19 @@ public class HomeFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
-//        Toast.makeText(requireContext(), "SAVED", Toast.LENGTH_SHORT).show();
         outState.putParcelable(KEY_TEST, Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onSaveInstanceState());
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        homeViewModel.getHomeData().removeObservers(getViewLifecycleOwner());
+    private void showShimmer(boolean show) {
+        if (show) {
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            refreshLayout.setVisibility(View.GONE);
+        } else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void observer() {
@@ -236,6 +245,7 @@ public class HomeFragment extends Fragment {
             } else if (dataState instanceof RetrofitState.Error) {
                 Toast.makeText(requireActivity(), "FAILURE " + ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
                 handlerNullData();
+                showShimmer(false);
             } else if (dataState instanceof RetrofitState.Success) {
                 HomeResponse.Data data = ((RetrofitState.Success<HomeResponse>) dataState).getData().getData();
 
@@ -246,7 +256,7 @@ public class HomeFragment extends Fragment {
                 ArrayList<VenueCoordinateModel> coordinate = data.getCoordinate();
                 ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
 
-                for (ReferensiModel model : venueLokasi){
+                for (ReferensiModel model : venueLokasi) {
                     double latitude = ArenaFinder.getLatitude(model.getCoordinate());
                     double longitude = ArenaFinder.getLongitude(model.getCoordinate());
                     double distance = MapOSM.calculateDistance(latitude, longitude);
@@ -255,6 +265,7 @@ public class HomeFragment extends Fragment {
 
                 if (venueBaru.size() == 0 && venueRekomendasi.size() == 0 && aktivitasBaru.size() == 0 && venueLokasi.size() == 0) {
                     handlerNullData();
+                    showShimmer(false);
                 } else {
                     // show recyclerview
                     requireActivity().runOnUiThread(() -> {
@@ -263,6 +274,7 @@ public class HomeFragment extends Fragment {
                         showAktivitasSeru(aktivitasBaru);
                         showVenueLokasi(venueLokasi);
                         showMap(coordinate);
+                        showShimmer(false);
                     });
 
                 }
@@ -571,7 +583,7 @@ public class HomeFragment extends Fragment {
 
     private void showVenueLokasi(ArrayList<ReferensiModel> models) {
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             venueLokasiLayout.setVisibility(View.GONE);
             mMap.setVisibility(View.GONE);
             return;
@@ -623,7 +635,6 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
 
 
 }

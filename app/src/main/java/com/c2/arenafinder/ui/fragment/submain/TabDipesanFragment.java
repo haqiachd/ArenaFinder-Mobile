@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.c2.arenafinder.R;
@@ -18,6 +19,7 @@ import com.c2.arenafinder.data.model.StatusPesananModel;
 import com.c2.arenafinder.data.response.StatusPesananResponse;
 import com.c2.arenafinder.ui.adapter.StatusPesananAdapter;
 import com.c2.arenafinder.util.UsersUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 
@@ -37,12 +39,18 @@ public class TabDipesanFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
+    private ShimmerFrameLayout shimmerLayout;
+
+    private LinearLayout linearLayout;
+
     public TabDipesanFragment() {
         // Required empty public constructor
     }
 
     public void initViews(View root) {
         recyclerView = root.findViewById(R.id.tab_dipesan_recycler);
+        shimmerLayout = root.findViewById(R.id.tab_dipesan_shimmer);
+        linearLayout = root.findViewById(R.id.tab_dipesan_kosong);
     }
 
     public static TabDipesanFragment newInstance(String param1, String param2) {
@@ -76,34 +84,64 @@ public class TabDipesanFragment extends Fragment {
         initViews(view);
         usersUtil = new UsersUtil(requireContext());
 
+        showShimmer(true);
         fetchData();
+    }
+
+    private void showShimmer(boolean show){
+        if (show){
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            recyclerView.setVisibility(View.GONE);
+            showContent(true);
+        }else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showContent(boolean show){
+        if (show){
+            linearLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }else {
+            linearLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
     }
 
     private void fetchData() {
 
         RetrofitClient.getInstance().getStatusPesanan(usersUtil.getEmail(), StatusPesananModel.DI_PESAN)
-                .enqueue(new Callback<StatusPesananResponse>() {
+                .enqueue(new Callback<>() {
                     @Override
                     public void onResponse(Call<StatusPesananResponse> call, Response<StatusPesananResponse> response) {
                         if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
                             showData(response.body().getData());
+                            showShimmer(false);
                         } else {
                             Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            showShimmer(false);
+                            showContent(false);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<StatusPesananResponse> call, Throwable t) {
                         Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        showShimmer(false);
+                        showContent(false);
                     }
                 });
     }
 
     private void showData(ArrayList<StatusPesananModel> models){
         if(models.size() <= 0){
-            recyclerView.setVisibility(View.GONE);
+            showContent(false);
         }else {
             if (isAdded()){
+                showContent(true);
                 recyclerView.setAdapter(new StatusPesananAdapter(
                         requireContext(), models
                 ));

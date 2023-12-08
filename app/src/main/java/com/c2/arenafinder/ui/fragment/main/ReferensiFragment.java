@@ -43,6 +43,7 @@ import com.c2.arenafinder.ui.fragment.submain.ViewAllFragment;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.viewmodel.ReferensiViewModel;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
@@ -62,6 +63,8 @@ public class ReferensiFragment extends Fragment {
     private ReferensiViewModel referensiViewModel;
 
     private SwipeRefreshLayout refreshLayout;
+
+    private ShimmerFrameLayout shimmerLayout;
 
     private MapView mapView;
 
@@ -85,6 +88,7 @@ public class ReferensiFragment extends Fragment {
 
     private void initViews(View view) {
         refreshLayout = view.findViewById(R.id.mre_refresh_layout);
+        shimmerLayout = view.findViewById(R.id.mre_shimmer);
         topRattingLayout = view.findViewById(R.id.mre_top_ratting_layout);
         venueKosongLayout = view.findViewById(R.id.mre_venue_kosong_layout);
         venueLokasiLayout = view.findViewById(R.id.mre_venue_lokasi_layout);
@@ -145,22 +149,18 @@ public class ReferensiFragment extends Fragment {
                 new ReferensiViewModelFactory(new ReferensiRepository())
         ).get(ReferensiViewModel.class);
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        requireActivity().runOnUiThread(() -> referensiViewModel.fetchAktivitas());
-                        refreshLayout.setRefreshing(false);
-                    }
-                }, 1500L);
-            }
-        });
+        refreshLayout.setOnRefreshListener(() ->
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    observer();
+                    refreshLayout.setRefreshing(false);
+                    requireActivity().runOnUiThread(() -> referensiViewModel.fetchReferensi());
+                }, 1500L)
+        );
 
         if (isAdded()) {
+            showShimmer(true);
             LogApp.info(requireContext(), "PREPARING LOAD DATA TO SERVER");
-            if (getView() != null){
+            if (getView() != null) {
                 new Handler(Looper.getMainLooper()).post(this::observer);
             }
             adapterLapangan();
@@ -170,15 +170,74 @@ public class ReferensiFragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void showShimmer(boolean show) {
+        if (show) {
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            refreshLayout.setVisibility(View.GONE);
+        } else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-//        referensiViewModel.getReferensiData().removeObservers(getViewLifecycleOwner());
+
+    private void observer() {
+
+        if (getView() == null) {
+            return;
+        }
+
+        //java.lang.IllegalStateException: Can't access the Fragment View's LifecycleOwner for ReferensiFragment{acb4d2a} (44bf92bf-85ca-4298-98a3-583095a7d339) when getView() is null i.e., before onCreateView() or after onDestroyView()
+        referensiViewModel.getReferensiData().observe(getViewLifecycleOwner(), dataState -> {
+
+            if (dataState instanceof RetrofitState.Loading) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_LOADING, "Referensi loaded");
+            } else if (dataState instanceof RetrofitState.Error) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_FAILURE, "Referensi loaded");
+                Toast.makeText(requireActivity(), "FAILURE " + ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
+                handlerNullData();
+                showShimmer(false);
+            } else if (dataState instanceof RetrofitState.Success) {
+                LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "Referensi loaded");
+                ReferensiResponse.Data data = ((RetrofitState.Success<ReferensiResponse>) dataState).getData().getData();
+
+                // get data models
+                ArrayList<ReferensiModel> topRating = data.getTopRatting();
+                ArrayList<ReferensiModel> venueKosong = data.getVenueKosong();
+                ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
+                ArrayList<ReferensiModel> venueGratis = data.getVenueGratis();
+                ArrayList<ReferensiModel> venueBerbayar = data.getVenueBerbayar();
+                ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
+                ArrayList<VenueCoordinateModel> venueCoordinate = data.getCoordinate();
+
+                for (ReferensiModel model : venueLokasi) {
+                    double latitude = ArenaFinder.getLatitude(model.getCoordinate());
+                    double longitude = ArenaFinder.getLongitude(model.getCoordinate());
+                    double distance = MapOSM.calculateDistance(latitude, longitude);
+                    model.setDistance(Math.round(distance * 100.0) / 100.0);
+                }
+
+                if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
+//                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
+                    handlerNullData();
+                    showShimmer(false);
+                } else {
+                    // show referensi recyclerview
+                    showVenueTopRatting(topRating);
+                    showVenueKosong(venueKosong);
+                    showVenueLokasi(venueLokasi);
+                    showVenueGratis(venueGratis);
+                    showVenueBerbayar(venueBerbayar);
+                    showVenueDisewakan(venueDisewakan);
+                    showMap(venueCoordinate);
+                    showShimmer(false);
+                }
+            }
+
+        });
+
     }
 
     private void getAppbar() {
@@ -271,55 +330,6 @@ public class ReferensiFragment extends Fragment {
 
     }
 
-    private void observer() {
-
-        referensiViewModel.getReferensiData().observe(getViewLifecycleOwner(), dataState -> {
-
-            if (dataState instanceof RetrofitState.Loading) {
-                LogApp.info(requireContext(), LogTag.RETROFIT_ON_LOADING, "Referensi loaded");
-            } else if (dataState instanceof RetrofitState.Error) {
-                LogApp.info(requireContext(), LogTag.RETROFIT_ON_FAILURE, "Referensi loaded");
-                Toast.makeText(requireActivity(), "FAILURE " + ((RetrofitState.Error) dataState).getMessage(), Toast.LENGTH_SHORT).show();
-                handlerNullData();
-            } else if (dataState instanceof RetrofitState.Success) {
-                LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "Referensi loaded");
-                ReferensiResponse.Data data = ((RetrofitState.Success<ReferensiResponse>) dataState).getData().getData();
-
-                // get data models
-                ArrayList<ReferensiModel> topRating = data.getTopRatting();
-                ArrayList<ReferensiModel> venueKosong = data.getVenueKosong();
-                ArrayList<ReferensiModel> venueLokasi = data.getVenueLokasi();
-                ArrayList<ReferensiModel> venueGratis = data.getVenueGratis();
-                ArrayList<ReferensiModel> venueBerbayar = data.getVenueBerbayar();
-                ArrayList<ReferensiModel> venueDisewakan = data.getVenueDisewakan();
-                ArrayList<VenueCoordinateModel> venueCoordinate = data.getCoordinate();
-
-                for (ReferensiModel model : venueLokasi){
-                    double latitude = ArenaFinder.getLatitude(model.getCoordinate());
-                    double longitude = ArenaFinder.getLongitude(model.getCoordinate());
-                    double distance = MapOSM.calculateDistance(latitude, longitude);
-                    model.setDistance(Math.round(distance * 100.0) / 100.0);
-                }
-
-                if (topRating.size() == 0 && venueKosong.size() == 0 && venueLokasi.size() == 0 && venueGratis.size() == 0 && venueBerbayar.size() == 0 && venueDisewakan.size() == 0) {
-//                        Toast.makeText(requireActivity(), "SEMUA DATA NULL", Toast.LENGTH_SHORT).show();
-                    handlerNullData();
-                } else {
-                    // show referensi recyclerview
-                    showVenueTopRatting(topRating);
-                    showVenueKosong(venueKosong);
-                    showVenueLokasi(venueLokasi);
-                    showVenueGratis(venueGratis);
-                    showVenueBerbayar(venueBerbayar);
-                    showVenueDisewakan(venueDisewakan);
-                    showMap(venueCoordinate);
-                }
-            }
-
-        });
-
-    }
-
     private void fetchData() {
 
         RetrofitClient.getInstance().referensiPage().enqueue(new Callback<ReferensiResponse>() {
@@ -377,23 +387,23 @@ public class ReferensiFragment extends Fragment {
 //        venueKosongRecycler.setAdapter(null);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        nullAdapter();
-    }
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        nullAdapter();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        nullAdapter();
+//    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        nullAdapter();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        nullAdapter();
-    }
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        nullAdapter();
+//    }
 
     private void handlerNullData() {
         venueLokasiLayout.setVisibility(View.GONE);
@@ -436,6 +446,7 @@ public class ReferensiFragment extends Fragment {
 
         if (models.size() <= 0) {
             venueKosongLayout.setVisibility(View.GONE);
+//            LogApp.error(requireContext(), "VENUE KOSONG GONE");
         } else {
             if (isAdded()) {
                 LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue kosong -> " + models.size());
@@ -460,7 +471,7 @@ public class ReferensiFragment extends Fragment {
 
     private void showVenueLokasi(ArrayList<ReferensiModel> models) {
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             venueLokasiLayout.setVisibility(View.GONE);
             mapView.setVisibility(View.GONE);
             return;

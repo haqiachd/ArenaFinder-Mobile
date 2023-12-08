@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -148,6 +149,8 @@ public class EditAccountFragment extends Fragment {
         if (getView() != null) {
             observer();
         }
+
+//        Toast.makeText(requireContext(), "Device : " + Build.BRAND, Toast.LENGTH_SHORT).show();
     }
 
     private void getAppbar() {
@@ -172,12 +175,20 @@ public class EditAccountFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == ArenaFinder.PERMISSION_STORAGE) {
+            if (Build.BRAND.contains("samsung")) {
+                openGallery();
+                return;
+            }
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openGallery();
             } else {
                 Toast.makeText(requireActivity(), R.string.toast_cannot_open_galery, Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == ArenaFinder.PERMISSION_CAMERA) {
+            if (Build.BRAND.contains("samsung")) {
+                openCamera();
+                return;
+            }
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openCamera();
             } else {
@@ -302,7 +313,8 @@ public class EditAccountFragment extends Fragment {
                                 usersViewModel.doDeletePhoto(usersUtil.getEmail());
                             }
                         })
-                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+                        })
                         .create().show();
                 sheet.dismiss();
             });

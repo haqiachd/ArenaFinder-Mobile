@@ -36,6 +36,7 @@ import com.c2.arenafinder.ui.adapter.VenueContactAdapter;
 import com.c2.arenafinder.util.AdapterActionListener;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.UsersUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 
@@ -66,11 +67,14 @@ public class ActivityDetailedFragment extends Fragment {
     private TextView txtAktivitasNameAppbar;
     private ImageView btnBackAppbar, btnVerticalAppbar;
 
+    private ConstraintLayout contentLayout;
+    private ShimmerFrameLayout shimmerLayout;
+
     private ScrollView scrollView;
 
     private ImageView imgBack, imgPhoto, imgVertical, imgSport;
 
-    private TextView txtAktivitasName, txtVenueName, txtSport, txtDateStart, txtJamMain, txtStatusAnggota, txtHarga, txtLokasi, txtDistance;
+    private TextView txtAktivitasName, txtVenueName, txtDesc, txtSport, txtDateStart, txtJamMain, txtStatusAnggota, txtHarga, txtLokasi, txtDistance;
 
     private MaterialButton btnMap, btnJoin;
 
@@ -82,6 +86,8 @@ public class ActivityDetailedFragment extends Fragment {
 
     private void initViews(View root) {
         appBarLayout = root.findViewById(R.id.fad_appbar);
+        contentLayout = root.findViewById(R.id.fad_content);
+        shimmerLayout = root.findViewById(R.id.fad_shimmer);
         btnBackAppbar = root.findViewById(R.id.fad_back_appbar);
         btnVerticalAppbar = root.findViewById(R.id.fad_vertical_menu_appbar);
         txtAktivitasNameAppbar = root.findViewById(R.id.fad_nama_lapangan_appbar);
@@ -92,6 +98,7 @@ public class ActivityDetailedFragment extends Fragment {
         imgPhoto = root.findViewById(R.id.fad_image);
         imgVertical = root.findViewById(R.id.fad_vertical_menu);
         txtAktivitasName = root.findViewById(R.id.fad_aktivitas_name);
+        txtDesc = root.findViewById(R.id.fad_venue_desc);
         txtVenueName = root.findViewById(R.id.fad_venue_name);
         txtSport = root.findViewById(R.id.fad_top_sport_val);
         txtDateStart = root.findViewById(R.id.fad_tgl_mulai);
@@ -137,6 +144,7 @@ public class ActivityDetailedFragment extends Fragment {
         initViews(view);
         usersUtil = new UsersUtil(requireContext());
 
+        showShimmer(true);
         fetchData();
         onClickGroups();
 
@@ -173,6 +181,18 @@ public class ActivityDetailedFragment extends Fragment {
         scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
     }
 
+    private void showShimmer(boolean show){
+        if (show){
+            shimmerLayout.setVisibility(View.VISIBLE);
+            shimmerLayout.startShimmer();
+            contentLayout.setVisibility(View.GONE);
+        }else {
+            shimmerLayout.setVisibility(View.GONE);
+            shimmerLayout.stopShimmer();
+            contentLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void onClickGroups() {
 
         imgBack.setOnClickListener(v -> {
@@ -195,7 +215,7 @@ public class ActivityDetailedFragment extends Fragment {
 
     private void fetchData() {
 
-        RetrofitClient.getInstance().aktivitasDetailed(id, usersUtil.getEmail()).enqueue(new Callback<AktivitasDetailedResponse>() {
+        RetrofitClient.getInstance().aktivitasDetailed(id, usersUtil.getEmail()).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<AktivitasDetailedResponse> call, Response<AktivitasDetailedResponse> response) {
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
@@ -230,7 +250,10 @@ public class ActivityDetailedFragment extends Fragment {
 
                     showMap(aktivitasData.getVenueName(), aktivitasData.getCoordinate());
 
+                    showShimmer(false);
+
                 } else {
+                    showShimmer(false);
                     Toast.makeText(requireContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -239,6 +262,7 @@ public class ActivityDetailedFragment extends Fragment {
             public void onFailure(Call<AktivitasDetailedResponse> call, Throwable t) {
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                showShimmer(false);
             }
         });
 
@@ -256,6 +280,7 @@ public class ActivityDetailedFragment extends Fragment {
             txtAktivitasName.setText(model.getNamaAktivitas());
             txtAktivitasNameAppbar.setText(model.getNamaAktivitas());
             txtVenueName.setText(model.getVenueName());
+            txtDesc.setText(model.getDescAktivitas());
             txtSport.setText(ArenaFinder.localizationSport(model.getJenisOlahraga()));
             txtDateStart.setText(requireContext().getString(R.string.txt_tanggal_val, ArenaFinder.convertToDate(requireContext(), model.getDate())));
             txtJamMain.setText(requireContext().getString(R.string.txt_jam_main_val2, model.getJamMain()));

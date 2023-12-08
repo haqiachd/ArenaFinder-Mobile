@@ -2,7 +2,6 @@ package com.c2.arenafinder.ui.fragment.empty;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -139,11 +138,11 @@ public class VerifyStatusFragment extends Fragment {
             }
             else if (dataState instanceof RetrofitState.Error){
                 LogApp.error(requireContext(), LogTag.RETROFIT_ON_FAILURE, "VERIFIED ON ERROR");
-                Toast.makeText(requireContext(), "not verified", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(requireContext(), "not verified", Toast.LENGTH_SHORT).show();
             }
             else if (dataState instanceof RetrofitState.Success){
                 LogApp.info(requireContext(), LogTag.RETROFIT_ON_RESPONSE, "VERIFIED ON SUCCESS");
-                Toast.makeText(requireContext(), "verified", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(requireContext(), "verified", Toast.LENGTH_SHORT).show();
             }
         });
     }
