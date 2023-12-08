@@ -527,4 +527,21 @@
     <string name="distance_and_minutes">%1$s Km • %2$d Min</string>
     <string name="distance_and_minutes_2">Distance : %1$s Km • %2$d Min</string>
 
+    <string name="history_venue_dipesan">ORDERED</string>
+    <string name="history_venue_disetujui">APPROVED</string>
+    <string name="history_venue_ditolak">REJECTED</string>
+    <string name="history_activity_comingsoon">ON GOING</string>
+    <string name="history_activity_finished">FINISHED</string>
+
+    <string name="search_data">Type keywords</string>
+    <string name="search_not_found">Data not found</string>
+    <string name="data_saat_ini_belum_ada">Data currently is not available</string>
+    <string name="data_masih_kosong">Data is still empty</string>
+
+    <string name="slot_kosong_values">%1$d empty slot</string>
+    <string name="pilih_jadwal_yang_tersedia">Select an Available Schedule</string>
+    <string name="jadwal_kosong">Empty Schedule</string>
+    <string name="jadwal_masih_kosong">The schedule for this date has not been added by the management.</string>
+    <string name="edit_alt_profile">Edit</string>
+
 </resources>

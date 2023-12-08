@@ -521,5 +521,21 @@
     <string name="distance_and_minutes">%1$s Km • %2$d Mnt</string>
     <string name="distance_and_minutes_2">Jarak : %1$s Km • %2$d Min</string>
 
+    <string name="history_venue_dipesan">DI PESAN</string>
+    <string name="history_venue_disetujui">DI SETUJUI</string>
+    <string name="history_venue_ditolak">DI TOLAK</string>
+    <string name="history_activity_comingsoon">AKAN DATANG</string>
+    <string name="history_activity_finished">SELESAI</string>
+
+    <string name="search_data">Ketikan data yang dicari</string>
+    <string name="search_not_found">Data tidak ditemukan</string>
+    <string name="data_saat_ini_belum_ada">Data saat ini belum ada</string>
+    <string name="data_masih_kosong">Data masih kosong</string>
+
+    <string name="slot_kosong_values">%1$d slot kosong</string>
+    <string name="pilih_jadwal_yang_tersedia">Pilih Jadwal yang Tersedia</string>
+    <string name="jadwal_kosong">Jadwal Kosong</string>
+    <string name="jadwal_masih_kosong">Jadwal pada tanggal ini belum ditambahkan oleh pengelola.</string>
+    <string name="edit_alt_profile">Edit</string>
 
 </resources>

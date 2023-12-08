@@ -9,10 +9,10 @@
     <dimen name="jarak_antar_item">0dp</dimen>
     <dimen name="textsize_bottom_nav">@dimen/_8ssp</dimen>
     <dimen name="main_appbar_height">@dimen/_50sdp</dimen>
-    <dimen name="main_appbar_appname">@dimen/_10sdp</dimen>
+    <dimen name="main_appbar_appname">@dimen/_25sdp</dimen>
 
     <dimen name="acc_stroke_radius_input">@dimen/_8sdp</dimen>
-    <dimen name="acc_edit_photo_card">@dimen/_10sdp</dimen>
+    <dimen name="acc_edit_photo_card">@dimen/_100sdp</dimen>
 
     <dimen name="btn_acc_width">@dimen/_210sdp</dimen>
     <dimen name="btn_acc_height">@dimen/_36sdp</dimen>

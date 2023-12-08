@@ -72,7 +72,7 @@
     <string name="txt_fsnf_server_desk">Ora iso kaubung karo %1$s. mangga age-age hubungi pengembang kanggo ngatasi masalah iki.</string>
     <string name="txt_welcome_desc">Aktivitas penunjang kauripan kang luwih sehat lan nyenengake lan kagiyatan kang nambahi kualitas urip.</string>
     <string name="txt_signup_type">Dhaptar akun dadi</string>
-    <string name="txt_signup_type_desc">Pilih tipe akun, kowe arep dhaptar dadi pengguna umum utawa pengelola lapangan</string>
+    <string name="txt_signup_type_desc">Pilih tipe akun, sampeyan arep dhaptar dadi pengguna umum utawa pengelola lapangan</string>
     <string name="txt_accmsg_title_def">Pesen saka account</string>
     <string name="txt_accmsg_desc_def">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</string>
     <string name="txt_accmsg_signup_desc">Dhaptar akun karo google kasil, mangga tekan tombol \'buka app\' kanggo mbuka beranda.</string>
@@ -250,20 +250,20 @@
     <string name="dia_title_verificaton">Memverifikasi Akun</string>
     <string name="dia_positive_out">Metu</string>
     <string name="dia_msg_confirm_logout">Apa Kowe Pengin Logout?</string>
-    <string name="dia_msg_confirm_close">Apa kowe pengin metu saka aplikasi.</string>
-    <string name="dia_msg_otp_signup_suc">OTP kang kowe lebonan valid, mangga login karo akun kowe.</string>
-    <string name="dia_msg_otp_forgot_suc">OTP kang kowe lebonan valid, mangga ngganti password kowe.</string>
-    <string name="dia_msg_inform_signup">Dhaptar akun kasil, cek email kowe kanggo nglakoni verifikasi kodhe OTP.</string>
+    <string name="dia_msg_confirm_close">Apa sampeyan pengin metu saka aplikasi.</string>
+    <string name="dia_msg_otp_signup_suc">OTP kang sampeyan lebonan valid, mangga login karo akun sampeyan.</string>
+    <string name="dia_msg_otp_forgot_suc">OTP kang sampeyan lebonan valid, mangga ngganti password sampeyan.</string>
+    <string name="dia_msg_inform_signup">Dhaptar akun kasil, cek email sampeyan kanggo nglakoni verifikasi kodhe OTP.</string>
     <string name="dia_msg_account_is_registered">Akun kasebut wis kadhaftar!</string>
     <string name="dia_msg_password_changed">Password kasil diowah, mangga login karo password kang anyar.</string>
-    <string name="dia_msg_inform_forgot">Kita wis ngirimake kodhe otp menyang email kowe kanggo nglakoni verifikasi.</string>
+    <string name="dia_msg_inform_forgot">Kita wis ngirimake kodhe otp menyang email sampeyan kanggo nglakoni verifikasi.</string>
     <string name="dia_msg_signup_type">Kowe arep diarahake menyang halaman web menawa ndhaptar dadi pengelola lapangan.</string>
     <string name="dia_msg_loading">Enteni sebentar…</string>
     <string name="dia_msg_otp_expired">Kodhe OTP wis kadaluarsa</string>
-    <string name="dia_msg_otp_updated">Kodhe OTP kasil dikirim balen, mangga cek email kowe.</string>
-    <string name="dia_msg_otp_canceled">Apa kowe yakin pengin mbatalake verifikasi kodhe otp?</string>
-    <string name="dia_msg_chgpass_canceled">Apa kowe yakin pengin mbatalake genti sandhi.</string>
-    <string name="dia_msg_sgoogle_canceled">Apa kowe yakin pengin mbatalake dhaptar akun Google</string>
+    <string name="dia_msg_otp_updated">Kodhe OTP kasil dikirim balen, mangga cek email sampeyan.</string>
+    <string name="dia_msg_otp_canceled">Apa sampeyan yakin pengin mbatalake verifikasi kodhe otp?</string>
+    <string name="dia_msg_chgpass_canceled">Apa sampeyan yakin pengin mbatalake genti sandhi.</string>
+    <string name="dia_msg_sgoogle_canceled">Apa sampeyan yakin pengin mbatalake dhaptar akun Google</string>
 
     <string name="suc_userid_valid">Email utawa username valid</string>
     <string name="msg_otp_input">Lebonan kodhe OTP</string>
@@ -429,9 +429,9 @@
     <string name="alt_sheet_cpp_galery">Galeri</string>
     <string name="txt_sheet_cpp_galery">Pilih Saka Galeri</string>
     <string name="txt_sheet_cpp_hapus_title">Busek Foto</string>
-    <string name="toast_cannot_open_galery">Ora bisa mbuka Galeri, wenehake ijin ArenaFinder kanggo ngakses galeri kowe.</string>
-    <string name="toast_cannot_open_camera">Ora bisa mbuka Kamera, wenehake ijin ArenaFinder kanggo ngakses galeri kowe.</string>
-    <string name="dia_confirm_delete_photo">Apa kowe yakin pengin mbusek foto profile?</string>
+    <string name="toast_cannot_open_galery">Ora bisa mbuka Galeri, wenehake ijin ArenaFinder kanggo ngakses galeri sampeyan.</string>
+    <string name="toast_cannot_open_camera">Ora bisa mbuka Kamera, wenehake ijin ArenaFinder kanggo ngakses galeri sampeyan.</string>
+    <string name="dia_confirm_delete_photo">Apa sampeyan yakin pengin mbusek foto profile?</string>
     <string name="txt_kembali">Mbalek</string>
     <string name="txt_email_terverifikasi">Email Terverifikasi</string>
     <string name="fev_desc">Slamet email panjenengan %1$s wis kasil terverifikasi.</string>
@@ -461,8 +461,8 @@
     <string name="perundungan_sosial">Perundungan sosial</string>
     <string name="mengandung_ancaman">Ngandhut anceman</string>
 
-    <string name="report_comment">Apa kowe yakin pengin nglaporake komentar karo alesan \'%1$s\'</string>
-    <string name="report_venue">Apa kowe yakin pengin nglaporake papan olahraga iki karo alesan \'%1$s\'</string>
+    <string name="report_comment">Apa sampeyan yakin pengin nglaporake komentar karo alesan \'%1$s\'</string>
+    <string name="report_venue">Apa sampeyan yakin pengin nglaporake papan olahraga iki karo alesan \'%1$s\'</string>
     <string name="dia_positive_laporkan">Laporake</string>
 
     <string name="r_venue_1">Inpormasi Gawean</string>
@@ -472,7 +472,7 @@
     <string name="r_venue_5">Keamanan elek</string>
     <string name="ulasan_pengguna">Ulasan Pengguna</string>
 
-    <string name="delete_comment">Apa kowe yakin pengin mbusek komentar?</string>
+    <string name="delete_comment">Apa sampeyan yakin pengin mbusek komentar?</string>
     <string name="dia_btn_hapus">Busek</string>
     <string name="ratting_max">Ratting ora oleh luwih saka 300 karakter</string>
     <string name="ulasan_pengguna_2">Ulasan Pengguna</string>
@@ -489,9 +489,9 @@
     <string name="txt_price_value_2">Rp. %1$d</string>
     <string name="status_booking_adapter">Ing Booking</string>
     <string name="slot_kosong_val">%1$d slot kosong</string>
-    <string name="dia_msg_booking_success">Booking kasil, Mangga nunggu admin pengelola lapangan mengkonfirmasi pesenan booking kowe.</string>
+    <string name="dia_msg_booking_success">Booking kasil, Mangga nunggu admin pengelola lapangan mengkonfirmasi pesenan booking sampeyan.</string>
     <string name="dia_msg_booking_fail">Booking kang panjenengan pesen ngalami kegagalan, Mangga baleni pira-pira wektu maneh.</string>
-    <string name="dia_confirm_booking">Apa kowe yakin pengin mesen lapangan ing papan iki karo sistem cod? \n\nsilakan tindakake pembayaran marang pengelola lapangan wektu kowe ana ing lokasi</string>
+    <string name="dia_confirm_booking">Apa sampeyan yakin pengin mesen lapangan ing papan iki karo sistem cod? \n\nsilakan tindakake pembayaran marang pengelola lapangan wektu sampeyan ana ing lokasi</string>
     <string name="dia_btn_yakin">YAKIN</string>
     <string name="txt_payment_method_d">Pilih Methode pembayaran</string>
     <string name="btn_dia_kembali">MBALEK</string>
@@ -515,11 +515,28 @@
 
     <string name="notif_diterima">Pesenan Ditampa</string>
     <string name="notif_ditolak">Pesenan Ditolak</string>
-    <string name="notif_body_diterima">Pesenan kowe ing %1$s wis ditampa dening pengelola lapangan</string>
-    <string name="notif_body_ditolak">Pesenan kowe ing %1$s wis ditolak dening pengelola lapangan</string>
+    <string name="notif_body_diterima">Pesenan sampeyan ing %1$s wis ditampa dening pengelola lapangan</string>
+    <string name="notif_body_ditolak">Pesenan sampeyan ing %1$s wis ditolak dening pengelola lapangan</string>
     <string name="pengelola_lapangan_belum_menuliskan_jadwal">Pengelola lapangan durung nulisake jadwal</string>
     <string name="saat_ini_belum_terdapat_komentar">Wektu iki durung ana komentar.</string>
     <string name="distance_and_minutes">%1$s Km • %2$d Mnt</string>
     <string name="distance_and_minutes_2">Distance : %1$s Km • %2$d Min</string>
+
+    <string name="history_venue_dipesan">ING PESEN</string>
+    <string name="history_venue_disetujui">ING TRIMA</string>
+    <string name="history_venue_ditolak">ING TOLAK</string>
+    <string name="history_activity_comingsoon">AREP TEKA</string>
+    <string name="history_activity_finished">WIS MARI</string>
+
+    <string name="search_data">Ketikan dhata kang digoleki</string>
+    <string name="search_not_found">Dhata ora tinemu</string>
+    <string name="data_saat_ini_belum_ada">Dhata wektu iki durung ana</string>
+    <string name="data_masih_kosong">Data masih kosong</string>
+
+    <string name="slot_kosong_values">%1$d slot kosong</string>
+    <string name="pilih_jadwal_yang_tersedia">Pilih jadwal kang ana</string>
+    <string name="jadwal_kosong">Jadwal Kosong</string>
+    <string name="jadwal_masih_kosong">Jadwal ing tanggal iki durung ditambahake dening pengelola.</string>
+    <string name="edit_alt_profile">Edit</string>
 
 </resources>
