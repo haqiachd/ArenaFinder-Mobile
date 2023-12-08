@@ -62,7 +62,11 @@ public class ReferensiModel {
     @SerializedName("distance")
     private double distance;
 
-    public ReferensiModel(int idVenue, String venueName, String venuePhoto, String jamBuka, String jamTutup, String coordinate, int harga, int totalReview, float rating, int hargaSewa, String sport, String status, double distance) {
+    @Expose
+    @SerializedName("total_slot")
+    public int slotKosong;
+
+    public ReferensiModel(int idVenue, String venueName, String venuePhoto, String jamBuka, String jamTutup, String coordinate, int harga, int totalReview, float rating, int hargaSewa, String sport, String status, double distance, int slotKosong) {
         this.idVenue = idVenue;
         this.venueName = venueName;
         this.venuePhoto = venuePhoto;
@@ -76,6 +80,7 @@ public class ReferensiModel {
         this.sport = sport;
         this.status = status;
         this.distance = distance;
+        this.slotKosong = slotKosong;
     }
 
     public int getidVenue() {
@@ -112,6 +117,22 @@ public class ReferensiModel {
 
     public String getJamTutup() {
         return jamTutup;
+    }
+
+    public int getIdVenue() {
+        return idVenue;
+    }
+
+    public void setIdVenue(int idVenue) {
+        this.idVenue = idVenue;
+    }
+
+    public int getSlotKosong() {
+        return slotKosong;
+    }
+
+    public void setSlotKosong(int slotKosong) {
+        this.slotKosong = slotKosong;
     }
 
     public void setJamTutup(String value) {

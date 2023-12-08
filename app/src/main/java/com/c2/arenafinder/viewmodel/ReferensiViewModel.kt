@@ -16,13 +16,13 @@ class ReferensiViewModel(
 
     private val _referensiData : MutableLiveData<RetrofitState<ReferensiResponse>> by lazy{
         MutableLiveData<RetrofitState<ReferensiResponse>>().also {
-            fetchAktivitas()
+            fetchReferensi()
         }
     }
 
     val referensiData : LiveData<RetrofitState<ReferensiResponse>> = _referensiData
 
-    fun fetchAktivitas(){
+    fun fetchReferensi(){
         viewModelScope.launch {
             try {
                 // get data server

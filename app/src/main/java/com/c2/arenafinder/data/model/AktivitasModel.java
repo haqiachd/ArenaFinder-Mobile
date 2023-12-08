@@ -24,6 +24,10 @@ public class AktivitasModel {
     private String namaAktivitas;
 
     @Expose
+    @SerializedName("desc_aktivitas")
+    private String descAktivitas;
+
+    @Expose
     @SerializedName("price")
     private int price;
 
@@ -67,11 +71,12 @@ public class AktivitasModel {
     @SerializedName("coordinate")
     private String coordinate;
 
-    public AktivitasModel(int idAktvitias, String venueName, String date, String namaAktivitas, int price, int maxMember, String jenisOlahraga, String jamMain, String startHour, String photo, String endHour, int jumlahMember, String membership, String location, String coordinate) {
+    public AktivitasModel(int idAktvitias, String venueName, String date, String namaAktivitas, String descAktivitas, int price, int maxMember, String jenisOlahraga, String jamMain, String startHour, String photo, String endHour, int jumlahMember, String membership, String location, String coordinate) {
         this.idAktvitias = idAktvitias;
         this.venueName = venueName;
         this.date = date;
         this.namaAktivitas = namaAktivitas;
+        this.descAktivitas = descAktivitas;
         this.price = price;
         this.maxMember = maxMember;
         this.jenisOlahraga = jenisOlahraga;
@@ -203,5 +208,13 @@ public class AktivitasModel {
 
     public void setCoordinate(String coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public String getDescAktivitas() {
+        return descAktivitas;
+    }
+
+    public void setDescAktivitas(String descAktivitas) {
+        this.descAktivitas = descAktivitas;
     }
 }
