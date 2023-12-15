@@ -1,4 +1,4 @@
-<br>
+[<br>
 <p align="center">
  <a href="https://www.youtube.com/watch?v=t9VWICGOD90&ab_channel=HITSRecords"><img src="images/logo-c2.png" alt="Logo Kelompok C2" width="195" height="155"></a>
 </p>
@@ -9,25 +9,25 @@
 <!-- Project Shields -->
 <span align="center">
 
-  [![Forks][forks-shield]][forks-url]
-  [![Repo Size][repo-shield]][repo-url]
-  [![Contributors][contributors-shield]][contributors-url]
-  [![Last Commit][commit-shield]][commit-url]
+[![Forks][forks-shield]][forks-url]
+[![Repo Size][repo-shield]][repo-url]
+[![Contributors][contributors-shield]][contributors-url]
+[![Last Commit][commit-shield]][commit-url]
   <!-- [![Stargazers][stars-shield]][stars-url] -->
   <!-- [![Issues][issues-shield]][issues-url] -->
 
-  [repo-shield]: https://img.shields.io/github/repo-size/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-  [repo-url]: https://img.shields.io/github/repo-size/haqiachd/ArenaFinder-Mobile.svg
-  [contributors-shield]: https://img.shields.io/github/contributors/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-  [contributors-url]: https://github.com/haqiachd/ArenaFinder-Mobile/graphs/contributors
-  [forks-shield]: https://img.shields.io/github/forks/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-  [forks-url]: https://github.com/haqiachd/ArenaFinder-Mobile/network/members
-  [stars-shield]: https://img.shields.io/github/stars/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-  [stars-url]: https://github.com/haqiachd/ArenaFinder-Mobile/stargazers
-  [commit-shield]: https://img.shields.io/github/last-commit/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-  [commit-url]: https://github.com/haqiachd/ArenaFinder-Mobile/commits
-  [issues-shield]: https://img.shields.io/github/issues/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
-  [issues-url]: https://github.com/haqiachd/ArenaFinder-Mobile/issues
+[repo-shield]: https://img.shields.io/github/repo-size/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+[repo-url]: https://img.shields.io/github/repo-size/haqiachd/ArenaFinder-Mobile.svg
+[contributors-shield]: https://img.shields.io/github/contributors/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+[contributors-url]: https://github.com/haqiachd/ArenaFinder-Mobile/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+[forks-url]: https://github.com/haqiachd/ArenaFinder-Mobile/network/members
+[stars-shield]: https://img.shields.io/github/stars/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+[stars-url]: https://github.com/haqiachd/ArenaFinder-Mobile/stargazers
+[commit-shield]: https://img.shields.io/github/last-commit/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+[commit-url]: https://github.com/haqiachd/ArenaFinder-Mobile/commits
+[issues-shield]: https://img.shields.io/github/issues/haqiachd/ArenaFinder-Mobile.svg?style=for-the-badge
+[issues-url]: https://github.com/haqiachd/ArenaFinder-Mobile/issues
 
 </span>
 
@@ -57,10 +57,10 @@
     <li>
     <a href="#fitur">Fitur Aplikasi</a>
       <ul>
-        <li><a href="#fitur-1">Fitur 1</a></li>
-        <li><a href="#fitur-2">Fitur 2</a></li>
-        <li><a href="#fitur-3">Fitur 3</a></li>
-        <li><a href="#fitur-4">Fitur 4</a></li>
+        <li><a href="#informasi-tempat-olahraga">Informasi Tempat Olahraga</a></li>
+        <li><a href="#cari-tempat-olahraga">Cari Tempat Olahraga</a></li>
+        <li><a href="#booking-tempat-olahraga">Booking Tempat Olahraga</a></li>
+        <li><a href="#join-aktivitas-olahraga">Join Aktivitas Olahraga</a></li>
       </ul>
     </li>
    <li><a href="#instalasi-aplikasi">Instalasi Aplikasi</a></li>
@@ -80,7 +80,11 @@
 
 
 ## Deskripsi Aplikasi <a name = "desc_project"></a>
-Aplikasi ini memberikan informasi lengkap tentang tempat-tempat olahraga yang tersedia, termasuk lokasi, fasilitas yang ditawarkan, jam operasional, dan ulasan dari pengguna lain. Anda dapat dengan mudah mencari tempat yang sesuai dengan preferensi Anda, mengakses informasi kontak, dan bahkan merencanakan kunjungan Anda.
+Aplikasi ini memberikan informasi lengkap tentang tempat-tempat olahraga yang tersedia, termasuk lokasi, harga sewa atau harga masuk, fasilitas yang ditawarkan, dan ulasan dari pengguna lain. Anda dapat dengan mudah mencari tempat yang sesuai dengan preferensi Anda, mengakses informasi kontak, dan bahkan merencanakan kunjungan Anda.
+
+Anda dapat mengunduh aplikasi ArenaFinder Mobile melalui button dibawah ini. <br>
+<a href="https://drive.google.com/drive/folders/1NzhzlVMZNfOdnnYuJHRgl8ivFdWt_Y1Q?usp=sharing"><img src="images/download.png" alt="Logo Download ArenaFinder" width="50" height="20"></a>
+
 
 ## Screenshot Tampilan<a name = "ss_app"></a>
 
@@ -89,17 +93,17 @@ Aplikasi ini memberikan informasi lengkap tentang tempat-tempat olahraga yang te
 
 ## Fitur Aplikasi <a name = "fitur"></a>
 
-### Fitur 1
-ini fitur 1
+### Informasi Tempat Olahraga
+Anda dapat melihat informasi lengkap mengenai tempat-tempat olahraga yang tersedia, termasuk lokasi, harga sewa atau biaya masuk, deskripsi tempat, kontak pengelola, dan berbagai informasi lainnya tentang tempat olahraga dalam aplikasi ini.
 
-### Fitur 2
-ini fitur 2
+### Cari Tempat Olahraga
+Anda dapat mencari tempat olahraga yang sesuai dengan kriteria Anda, seperti menemukan tempat olahraga terdekat dari lokasi Anda, melihat tempat olahraga yang memiliki jadwal kosong pada hari ini, atau mencari tempat olahraga yang tersedia secara gratis, berbayar, atau untuk disewa.
 
-### Fitur 3
-ini fitur 3
+### Booking Tempat Olahraga
+Anda dapat melakukan pemesanan tempat olahraga melalui aplikasi ini dengan cara yang sangat mudah. Anda hanya perlu mencari tempat olahraga yang diinginkan, memilih jadwal yang tersedia, dan kemudian menerima konfirmasi dari pengelola lapangan.
 
-### Fitur 4
-ini fitur 4
+### Join Aktivitas Olahraga
+Anda dapat bergabung dalam berbagai aktivitas seru di tempat olahraga, seperti kompetisi, perlombaan, atau kegiatan lainnya melalui aplikasi ArenaFinder ini.
 
 ## Instalasi Aplikasi
 Saat ini, aplikasi ArenaFinder berbasis mobile masih dalam tahap pengembangan dan belum tersedia di ```PlayStore```. Jika Anda tertarik untuk mencoba aplikasi mobile ArenaFinder, silakan mengikuti petunjuk yang terdapat dalam Panduan Pengguna yang ada dalam file <a href="https://github.com/haqiachd/ArenaFinder-Mobile/blob/main/GUIDE.md" target="_blank" style="font-weight: bold;">GUIDE.md</a>.
@@ -113,3 +117,4 @@ Saat ini, aplikasi ArenaFinder berbasis mobile masih dalam tahap pengembangan da
 
 ## Kontak Kami
 Jika Anda memiliki pertanyaan atau memerlukan bantuan, silakan hubungi kami melalui email di [arenafinder.app@gmail.com](mailto:arenafinder.app@gmail.com).
+](https://drive.google.com/drive/folders/1NzhzlVMZNfOdnnYuJHRgl8ivFdWt_Y1Q?usp=sharing)https://drive.google.com/drive/folders/1NzhzlVMZNfOdnnYuJHRgl8ivFdWt_Y1Q?usp=sharing
