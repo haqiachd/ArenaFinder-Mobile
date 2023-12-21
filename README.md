@@ -1,4 +1,4 @@
-[<br>
+<br>
 <p align="center">
  <a href="https://www.youtube.com/watch?v=t9VWICGOD90&ab_channel=HITSRecords"><img src="images/logo-c2.png" alt="Logo Kelompok C2" width="195" height="155"></a>
 </p>
@@ -83,7 +83,7 @@
 Aplikasi ini memberikan informasi lengkap tentang tempat-tempat olahraga yang tersedia, termasuk lokasi, harga sewa atau harga masuk, fasilitas yang ditawarkan, dan ulasan dari pengguna lain. Anda dapat dengan mudah mencari tempat yang sesuai dengan preferensi Anda, mengakses informasi kontak, dan bahkan merencanakan kunjungan Anda.
 
 Anda dapat mengunduh aplikasi ArenaFinder Mobile melalui button dibawah ini. <br>
-<a href="https://drive.google.com/drive/folders/1NzhzlVMZNfOdnnYuJHRgl8ivFdWt_Y1Q?usp=sharing"><img src="images/download.png" alt="Logo Download ArenaFinder" width="50" height="20"></a>
+<a href="https://drive.google.com/drive/folders/12XBjgQncHZMxfbNMwWyMXiRuxqCMvgA5?usp=sharing"><img src="images/download.png" alt="Logo Download ArenaFinder" width="50" height="45"></a>
 
 
 ## Screenshot Tampilan<a name = "ss_app"></a>
@@ -117,4 +117,3 @@ Saat ini, aplikasi ArenaFinder berbasis mobile masih dalam tahap pengembangan da
 
 ## Kontak Kami
 Jika Anda memiliki pertanyaan atau memerlukan bantuan, silakan hubungi kami melalui email di [arenafinder.app@gmail.com](mailto:arenafinder.app@gmail.com).
-](https://drive.google.com/drive/folders/1NzhzlVMZNfOdnnYuJHRgl8ivFdWt_Y1Q?usp=sharing)https://drive.google.com/drive/folders/1NzhzlVMZNfOdnnYuJHRgl8ivFdWt_Y1Q?usp=sharing
