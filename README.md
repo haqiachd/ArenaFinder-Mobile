@@ -86,13 +86,13 @@ Anda dapat mengunduh aplikasi ArenaFinder Mobile melalui button dibawah ini. <br
 ## Tampilan Aplikasi<a name = "ss_app"></a>
 
 ### Tampilan Welcome, SignIn SignUp
-![Tampilan Welcome, SignIn & SignUp](images/v-1.3/tampilan-1.png)
+<img src="images/v-1.3/tampilan-1.png" alt="Tampilan 1" width="650" height="400">
 
 ### Tampilan Beranda, Aktivitas, Referensi
-![Tampilan Welcome, SignIn & SignUp](images/v-1.3/tampilan-2.png)
+<img src="images/v-1.3/tampilan-2.png" alt="Tampilan 2" width="630" height="400">
 
 ### Detail Venue, Detail Aktivitas, Booking Venue
-![Tampilan Welcome, SignIn & SignUp](images/v-1.3/tampilan-1.png)
+<img src="images/v-1.3/tampilan-3.png" alt="Tampilan 3" width="650" height="400">
 
 ## Fitur Aplikasi <a name = "fitur"></a>
 
