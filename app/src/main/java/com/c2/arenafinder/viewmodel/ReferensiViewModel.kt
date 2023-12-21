@@ -10,6 +10,10 @@ import com.c2.arenafinder.data.repository.ReferensiRepository
 import com.c2.arenafinder.data.response.ReferensiResponse
 import kotlinx.coroutines.launch
 
+/**
+ * Untuk menyediakan dan mengelola data referensi untuk tampilan fragment di aplikasi.
+ *
+ */
 class ReferensiViewModel(
     private val repository: ReferensiRepository
 ) : ViewModel() {

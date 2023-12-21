@@ -73,8 +73,14 @@ public class WelcomeFragment extends Fragment {
 
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups(){
 
+        /*
+         * Aksi saat button register di klik
+         */
         btnSignUp.setOnClickListener(v -> {
             startActivity(new Intent(
                     requireActivity(), AccountActivity.class
@@ -82,6 +88,9 @@ public class WelcomeFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button sign in di klik
+         */
         btnSignIn.setOnClickListener(v -> {
             startActivity(new Intent(
                     requireActivity(), AccountActivity.class

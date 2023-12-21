@@ -17,6 +17,9 @@ import com.c2.arenafinder.data.local.LogTag;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Digunakan untuk menghubungkan aplikasi ke REST API / Server
+ */
 public class RetrofitClient {
 
 //    public static final String BASE_URL = "http://192.168.96.152/arenafinderweb/c/s/"; // local
@@ -39,6 +42,11 @@ public class RetrofitClient {
 
     public static final String SUCCESSFUL_RESPONSE = "success";
 
+    /**
+     * Membuat instance dari koneksi
+     *
+     * @return koneksi
+     */
     @NonNull
     public static RetrofitEndPoint getInstance(){
         return getConnection().create(RetrofitEndPoint.class);
@@ -59,17 +67,6 @@ public class RetrofitClient {
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .build();
 
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .addInterceptor(chain -> {
-//                    String credentials = Credentials.basic("$apr1$hash", "$apr1$hash");
-//                    return chain.proceed(chain.request().newBuilder()
-//                            .header("Authorization", credentials)
-//                            .build());
-//                })
-//                .connectTimeout(20, TimeUnit.SECONDS)
-//                .writeTimeout(20, TimeUnit.SECONDS)
-//                .build();
-
         return new Retrofit.Builder()
                 .baseUrl(CONTROLLERS)
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -77,6 +74,12 @@ public class RetrofitClient {
                 .build();
     }
 
+    /**
+     * cek apakah koneksi berhasil atau tidak
+     *
+     * @param response response dari koneksi
+     * @return status koneksi
+     */
     public static boolean apakahSukses(Response<UsersResponse> response) {
         return response.body() != null && response.body().getStatus().equalsIgnoreCase(SUCCESSFUL_RESPONSE);
     }

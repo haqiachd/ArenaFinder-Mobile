@@ -136,6 +136,7 @@ public class ProfileFragment extends Fragment {
         txtEmail.setText(usersUtil.getEmail());
         txtName.setText(usersUtil.getFullName());
 
+        // menampilkan foto profile
         Glide.with(requireActivity())
                 .load(RetrofitClient.USER_PHOTO_URL + usersUtil.getUserPhoto())
                 .placeholder(R.drawable.ic_profile)
@@ -168,6 +169,9 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    /**
+     * Mendapatkan data dari database
+     */
     private void observer() {
 
         usersViewModel.logout().observe(getViewLifecycleOwner(), dataState -> {
@@ -204,6 +208,9 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari akun
+     */
     private void showListAkun() {
 
         ArrayList<ProfileMenuModel> listItem = new ArrayList<>();
@@ -262,6 +269,9 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list tentang app
+     */
     private void showListAbout() {
 
         ArrayList<ProfileMenuModel> listItems = new ArrayList<>();

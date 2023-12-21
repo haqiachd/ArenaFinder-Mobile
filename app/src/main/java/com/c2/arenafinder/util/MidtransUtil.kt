@@ -6,6 +6,9 @@ import com.midtrans.sdk.corekit.models.CustomerDetails
 import com.midtrans.sdk.corekit.models.ShippingAddress
 import java.util.UUID
 
+/**
+ * Berisi method-method umum untuk mengelola pembayaran dengan menggunakan Midtrans
+ */
 class MidtransUtil(
     private val usersUtil: UsersUtil,
 ) {

@@ -30,6 +30,10 @@ import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data list pada activity Sub Main
+ *
+ */
 public class VenueExtendedAdapter extends RecyclerView.Adapter<VenueExtendedAdapter.ViewHolder> {
 
     private final Context context;
@@ -55,6 +59,7 @@ public class VenueExtendedAdapter extends RecyclerView.Adapter<VenueExtendedAdap
         this(context, models, listener, null);
     }
 
+
     @NonNull
     @Override
     public VenueExtendedAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -64,10 +69,19 @@ public class VenueExtendedAdapter extends RecyclerView.Adapter<VenueExtendedAdap
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull VenueExtendedAdapter.ViewHolder holder, int position) {
+
+        // get data
         VenueExtendedModel model = models.get(position);
 
+        // show data
         holder.txtName.setText(model.getVenueName());
         holder.txtStatus.setText(model.getStatus());
         holder.txtSport.setText(model.getSport());
@@ -108,7 +122,7 @@ public class VenueExtendedAdapter extends RecyclerView.Adapter<VenueExtendedAdap
             }
         }
 
-        // action listener
+        // action listener / aksi saat list di klik
         if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
             holder.itemView.setOnClickListener(v -> {
                 LogApp.info(context, LogTag.ON_CLICK, "adapter clicked on -> " + holder.getAdapterPosition());
@@ -150,6 +164,10 @@ public class VenueExtendedAdapter extends RecyclerView.Adapter<VenueExtendedAdap
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;
@@ -177,6 +195,11 @@ public class VenueExtendedAdapter extends RecyclerView.Adapter<VenueExtendedAdap
             txtStatus.setBackground(ContextCompat.getDrawable(context, background));
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         private void setImage(String url) {
             Glide.with(view)
                     .load(RetrofitClient.VENUE_IMG_URL + url)

@@ -7,6 +7,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menerima response dari server pada data ReferensiModel di halaman referensi
+ *
+ */
 public class ReferensiResponse {
 
     @Expose

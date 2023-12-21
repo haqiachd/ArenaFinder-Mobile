@@ -3,6 +3,10 @@ package com.c2.arenafinder.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Digunakan untuk menyimpan data-data pada halaman venue detail, seperti nama venue, deksripsi venue, harga, dll
+ *
+ */
 public class VenueDetailedModel {
 
     @Expose

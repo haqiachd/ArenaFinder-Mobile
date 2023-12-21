@@ -4,6 +4,10 @@ import com.c2.arenafinder.data.model.UserModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Digunakan untuk menerima response dari server pada data user
+ *
+ */
 public class UsersResponse {
 
     @Expose

@@ -217,6 +217,9 @@ public class VenueReviewFragment extends Fragment {
 
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
         ImageView[] myRattins = {gStar1, gStar2, gStar3, gStar4, gStar5};
@@ -238,6 +241,9 @@ public class VenueReviewFragment extends Fragment {
             });
         }
 
+        /*
+         * Aksi saat button tulis review di klik
+         */
         txtWriteReview.setOnClickListener(v -> {
 
             FragmentUtil.switchFragmentDetailed(
@@ -248,6 +254,14 @@ public class VenueReviewFragment extends Fragment {
         });
     }
 
+    /**
+     * Menampilkan commentar user
+     *
+     * @param model .
+     * @param canComment .
+     * @throws NumberFormatException .
+     * @throws NullPointerException .
+     */
     private void showMyComment(VenueCommentModel model, boolean canComment) throws NumberFormatException, NullPointerException {
 
         if (!canComment) {

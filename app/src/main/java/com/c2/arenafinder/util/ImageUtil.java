@@ -5,6 +5,9 @@ import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * Berisi method-method umum untuk mengelola gambar
+ */
 public class ImageUtil {
 
     public static String bitmapToBase64String(Bitmap bmp, int quality) {

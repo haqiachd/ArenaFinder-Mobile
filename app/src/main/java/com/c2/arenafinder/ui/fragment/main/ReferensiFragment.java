@@ -170,6 +170,11 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan shimmer
+     *
+     * @param show status tampilkan
+     */
     private void showShimmer(boolean show) {
         if (show) {
             shimmerLayout.setVisibility(View.VISIBLE);
@@ -183,6 +188,9 @@ public class ReferensiFragment extends Fragment {
     }
 
 
+    /**
+     * Mendapatkan data dari database
+     */
     private void observer() {
 
         if (getView() == null) {
@@ -254,12 +262,21 @@ public class ReferensiFragment extends Fragment {
         }
     }
 
+    /**
+     * Mendapatkan data dari databaes
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button filter di klik
+         */
         btnFilter.setOnClickListener(v -> {
             Toast.makeText(requireActivity(), "Filter", Toast.LENGTH_SHORT).show();
         });
 
+        /*
+         * Aksi saat button venue rating di klik
+         */
         btnVallRatting.setOnClickListener(v ->
                 startActivity(
                         new Intent(requireActivity(), SubMainActivity.class)
@@ -268,6 +285,9 @@ public class ReferensiFragment extends Fragment {
                 )
         );
 
+        /*
+         * Aksi saat button venue kosong di klik
+         */
         btnVallKosong.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -276,6 +296,9 @@ public class ReferensiFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button venue lokasi di klik
+         */
         btnValLokasi.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -284,6 +307,9 @@ public class ReferensiFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button venue gratis di klik
+         */
         btnVallGratis.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -292,6 +318,9 @@ public class ReferensiFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button venue berbayar di klik
+         */
         btnVallBerbayar.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -300,6 +329,9 @@ public class ReferensiFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button venue disewakan di klik
+         */
         btnVallDisewakan.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -330,6 +362,9 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Mendapatkan data dari database
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().referensiPage().enqueue(new Callback<ReferensiResponse>() {
@@ -415,6 +450,11 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue rating
+     *
+     * @param models data
+     */
     private void showVenueTopRatting(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
@@ -442,6 +482,11 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue kosong
+     *
+     * @param models data
+     */
     private void showVenueKosong(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
@@ -469,6 +514,11 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue lokasi
+     *
+     * @param models data
+     */
     private void showVenueLokasi(ArrayList<ReferensiModel> models) {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -501,6 +551,11 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue gratis
+     *
+     * @param models data
+     */
     private void showVenueGratis(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
@@ -527,6 +582,11 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue berbayar
+     *
+     * @param models data
+     */
     private void showVenueBerbayar(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
@@ -553,6 +613,11 @@ public class ReferensiFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue disewakan
+     *
+     * @param models data
+     */
     private void showVenueDisewakan(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
@@ -581,6 +646,10 @@ public class ReferensiFragment extends Fragment {
     }
 
 
+    /**
+     * Menampilkan map
+     *
+     */
     private void showMap(ArrayList<VenueCoordinateModel> coordinateModels) {
         mapOSM = new MapOSM(requireActivity(), mapView);
         mapOSM.initializeMap();

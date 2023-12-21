@@ -7,6 +7,10 @@ import com.c2.arenafinder.data.response.ArenaFinderResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Mengelola data-data yang didapatkan dari server ke aplikasi arenafinder
+ *
+ */
 class ArenaFinderRepository {
 
     private val _cekKoneksi = MutableLiveData<ArenaFinderResponse>()

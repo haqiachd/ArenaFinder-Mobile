@@ -88,6 +88,7 @@ public class MenuCommunityFragment extends Fragment {
 
         BookingTabAdapter adapter = new BookingTabAdapter(requireActivity().getSupportFragmentManager());
 
+        // tab tab status on going, finished
         adapter.addFragment(new TabActivityOngoingFragment(), getString(R.string.history_activity_comingsoon));
         adapter.addFragment(new TabActivityFinishedFragment(), getString(R.string.history_activity_finished));
 

@@ -110,8 +110,14 @@ public class WriteReviewFragment extends Fragment {
         onClickGroups();
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups(){
 
+        /*
+         * Aksi saat button btn posting di klik
+         */
         btnPosting.setOnClickListener(v -> {
             if (Objects.requireNonNull(inpComment.getText()).toString().length() <= 300){
                 insertRatting();

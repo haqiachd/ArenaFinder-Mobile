@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data RicianSession / jadwal pada Booking
+ *
+ */
 public class RicianSessionAdapter extends RecyclerView.Adapter<RicianSessionAdapter.ViewHolder> {
 
     private final Context context;
@@ -35,11 +39,19 @@ public class RicianSessionAdapter extends RecyclerView.Adapter<RicianSessionAdap
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // get data
         PaymentDetailModel.RicianSession model = ricianSessions.get(position);
 
+        // show data
         holder.txtSession.setText(model.getSession());
         holder.txtPrice.setText(context.getString(R.string.txt_price_value, ArenaFinder.toMoneyCase(Integer.parseInt(model.getPrice()))));
     }
@@ -49,6 +61,10 @@ public class RicianSessionAdapter extends RecyclerView.Adapter<RicianSessionAdap
         return ricianSessions != null ? ricianSessions.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView txtSession, txtPrice;

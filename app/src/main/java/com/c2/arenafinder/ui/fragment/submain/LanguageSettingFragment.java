@@ -1,6 +1,5 @@
 package com.c2.arenafinder.ui.fragment.submain;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -41,7 +40,7 @@ public class LanguageSettingFragment extends Fragment {
     private LanguagesUtil language;
 
     private MaterialButton btnSave;
-    private RadioButton opsiIndo, opsiJawir, opsiInggris;
+    private RadioButton opsiIndo, opsiJawa, opsiInggris;
 
     public LanguageSettingFragment() {
         // Required empty public constructor
@@ -49,7 +48,7 @@ public class LanguageSettingFragment extends Fragment {
 
     private void initViews(View view) {
         opsiIndo = view.findViewById(R.id.lsf_opsi_indo);
-        opsiJawir = view.findViewById(R.id.lsf_opsi_jawa);
+        opsiJawa = view.findViewById(R.id.lsf_opsi_jawa);
         opsiInggris = view.findViewById(R.id.lsf_opsi_inggris);
         btnSave = view.findViewById(R.id.lsf_btn_simpan);
     }
@@ -95,7 +94,7 @@ public class LanguageSettingFragment extends Fragment {
                 break;
             }
             case JAVANESE: {
-                opsiJawir.setChecked(true);
+                opsiJawa.setChecked(true);
                 LogApp.info(requireContext(), LogTag.ON_WHEN, "LANG JAVANESE");
                 break;
             }
@@ -109,21 +108,33 @@ public class LanguageSettingFragment extends Fragment {
             }
         }
 
+        /*
+         * Aksi saat button opsi indo di klik
+         */
         opsiIndo.setOnClickListener(indo -> {
             LogApp.info(requireContext(), LogTag.ON_CLICK, "Change Language to Indonesian");
             langCode = INDONESIAN;
         });
 
-        opsiJawir.setOnClickListener(jawa -> {
+        /*
+         * Aksi saat button opsi jawa di klik
+         */
+        opsiJawa.setOnClickListener(jawa -> {
             LogApp.info(requireContext(), LogTag.ON_CLICK, "Change Language to Javanese");
             langCode = JAVANESE;
         });
 
+        /*
+         * Aksi saat button opsi inggris di klik
+         */
         opsiInggris.setOnClickListener(inggris -> {
             LogApp.info(requireContext(), LogTag.ON_CLICK, "Change Language to English");
             langCode = ENGLISH;
         });
 
+        /*
+         * Aksi saat button opsi save di klik
+         */
         btnSave.setOnClickListener(save -> {
             // confirm change language
             ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);

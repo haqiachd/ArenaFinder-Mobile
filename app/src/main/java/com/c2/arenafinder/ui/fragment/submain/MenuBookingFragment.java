@@ -66,6 +66,7 @@ public class MenuBookingFragment extends Fragment {
 
         BookingTabAdapter adapter = new BookingTabAdapter(requireActivity().getSupportFragmentManager());
 
+        // tab tab status dipesan, ditolak, diterima
         adapter.addFragment(new TabDipesanFragment(), getString(R.string.history_venue_dipesan));
         adapter.addFragment(new TabDisetujuiFragment(), getString(R.string.history_venue_disetujui));
         adapter.addFragment(new TabDitolakFragment(), getString(R.string.history_venue_ditolak));

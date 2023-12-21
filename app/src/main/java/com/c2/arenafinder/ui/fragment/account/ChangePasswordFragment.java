@@ -90,6 +90,7 @@ public class ChangePasswordFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+
                 // show dialog confirm
                 ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
                 new AlertDialog.Builder(requireContext())
@@ -99,10 +100,11 @@ public class ChangePasswordFragment extends Fragment {
                         .setPositiveButton(R.string.dia_positive_ya, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(),false);
+                                FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignInFragment(), false);
                             }
                         })
-                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {})
+                        .setNegativeButton(R.string.dia_negative_cancel, (dialog, which) -> {
+                        })
                         .create().show();
             }
         });
@@ -111,10 +113,19 @@ public class ChangePasswordFragment extends Fragment {
         onChangedGroups();
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button ganti password di klik
+         */
         btnChange.setOnClickLoadingListener(() -> {
 
+            /*
+             Digunakan untuk menganti password
+             */
             RetrofitClient.getInstance().updatePassword(email, inpPassword.getText().toString())
                     .enqueue(new Callback<UsersResponse>() {
                         @Override

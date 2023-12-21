@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menyimpan data-data pada halaman venu booking, seperti nama lapangan, slot, jadwal, dll
+ *
+ */
 public class VenueBookingModel {
 
     @Expose

@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.c2.arenafinder.data.repository.ReferensiRepository
 import com.c2.arenafinder.viewmodel.ReferensiViewModel
 
+/**
+ * Digunakan untuk menghubungkan class ReferensiRepository dengan ReferensiViewMddel
+ *
+ */
 class ReferensiViewModelFactory(
     private val repository: ReferensiRepository
 ) : ViewModelProvider.Factory {

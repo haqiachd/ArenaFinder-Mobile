@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menerima response dari server pada data yang ada dihalaman beranda/home
+ *
+ */
 public class HomeResponse {
 
     @Expose

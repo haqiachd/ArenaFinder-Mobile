@@ -182,8 +182,14 @@ public class SignInFragment extends Fragment {
         }
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button forgot di klik
+         */
         btnForgot.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.acc_frame_layout, new ForgotPasswordFragment())
@@ -191,6 +197,9 @@ public class SignInFragment extends Fragment {
                     .commit();
         });
 
+        /*
+         * Aksi saat button google di klik
+         */
         btnGoogle.setOnClickListener(v -> {
             LogApp.info(requireContext(), v, "Button Google diclick");
 
@@ -210,10 +219,16 @@ public class SignInFragment extends Fragment {
             }
         });
 
+        /*
+         * Aksi saat button sign-up di klik
+         */
         btnSignUp.setOnClickListener(v -> {
             FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpTypeFragment(), false);
         });
 
+        /*
+         * Aksi saat button login di klik
+         */
         btnLogin.setOnClickLoadingListener(() -> {
             String email = inpEmail.getText().toString(),
                     password = inpPassword.getText().toString();
@@ -261,11 +276,6 @@ public class SignInFragment extends Fragment {
             });
 
         });
-
-    }
-
-    private void test(String email, String password) {
-
 
     }
 

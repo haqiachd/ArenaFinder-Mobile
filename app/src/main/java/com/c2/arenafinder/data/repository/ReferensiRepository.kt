@@ -7,6 +7,10 @@ import com.c2.arenafinder.data.response.ReferensiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Mengelola data-data yang didapatkan dari server ke halaman referensi
+ *
+ */
 class ReferensiRepository {
 
     private val _referensiData = MutableLiveData<ReferensiResponse>()

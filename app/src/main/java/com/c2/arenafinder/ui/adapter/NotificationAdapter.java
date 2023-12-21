@@ -16,6 +16,10 @@ import com.c2.arenafinder.data.model.NotificationModel;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Notifikasi pada MainActivity
+ *
+ */
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder>{
 
     private final Context context;
@@ -36,6 +40,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -65,6 +75,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView txtTitle, txtBody, txtDate;

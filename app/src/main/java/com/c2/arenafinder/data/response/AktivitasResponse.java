@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menerima response dari server pada data AktivitasModel di halaman aktivitas
+ *
+ */
 public class AktivitasResponse {
 
     @Expose

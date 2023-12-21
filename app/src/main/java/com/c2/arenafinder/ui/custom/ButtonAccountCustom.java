@@ -17,7 +17,7 @@ import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 
 /**
- * Custom button that displays a progress bar when the button is in progress.
+ * Custom button that displays a progress bar when the button is in progress...
  *
  * @author Achmad Baihaqi
  */

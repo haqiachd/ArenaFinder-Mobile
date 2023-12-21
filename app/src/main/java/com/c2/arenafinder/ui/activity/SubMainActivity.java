@@ -53,44 +53,54 @@ public class SubMainActivity extends AppCompatActivity {
 
         initViews();
 
+        /*
+         * menampilkan sub halaman dari mainactivity
+         */
         switch (getIntent().getStringExtra(FRAGMENT)) {
             case EDIT_ACCOUNT: {
+                // menampilkan fragment
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(), new EditAccountFragment(), false
                 );
                 break;
             }
             case MENU_ALUR: {
+                // menampilkan fragment alur
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(), new MenuAlurPemesanan(), false
                 );
                 break;
             }
             case MENU_BOOKING: {
+                // menampilkan fragment booking
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(), new MenuBookingFragment(), false
                 );
                 break;
             }
             case MENU_COMMUNITY: {
+                // menampilkan fragment community
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(), new MenuCommunityFragment(), false
                 );
                 break;
             }
             case MENU_TROLLEY: {
+                // menampilkan fragment trolley
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(), new MenuInformasiFragment(), false
                 );
                 break;
             }
             case NOTIFICATIONS: {
+                // menampilkan fragment notification
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(), new NotificationsFragment(), false
                 );
                 break;
             }
             case SEARCH_WORLD: {
+                // menampilkan fragment searching
                 String type = getIntent().getStringExtra(SEARCH_TYPE);
 
                 FragmentUtil.switchFragmentSubMain(
@@ -100,7 +110,7 @@ public class SubMainActivity extends AppCompatActivity {
                 break;
             }
             case SPORT_TYPE: {
-                // get action and data
+                // menampilkan fragment sport type
                 String action = getIntent().getStringExtra(SPORT_ACTION),
                         data = getIntent().getStringExtra(SPORT_DATA);
                 LogApp.info(this, LogTag.LIFEFCYLE, "ACTION --> " + action);
@@ -122,6 +132,7 @@ public class SubMainActivity extends AppCompatActivity {
                 break;
             }
             case VIEW_ALL: {
+                // menampilkan fragment view all
                 FragmentUtil.switchFragmentSubMain(
                         getSupportFragmentManager(),
                         ViewAllFragment.newInstance(getIntent().getIntExtra(SPORT_ACTION, 0)),
@@ -130,18 +141,22 @@ public class SubMainActivity extends AppCompatActivity {
                 break;
             }
             case VERIFY_STATUS: {
+                // menampilkan fragment status verifikasi
                 FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new VerifyStatusFragment(), false);
                 break;
             }
             case CHANGE_PASS: {
+                // menampilkan fragment ubah password
                 FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new ChangePwOnProfile(), false);
                 break;
             }
             case APP_INFO: {
+                // menampilkan fragment app info
                 FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new AppInfoFragment(), false);
                 break;
             }
             case LANG_SETTING: {
+                // menampilkan fragment bahasa
                 FragmentUtil.switchFragmentSubMain(getSupportFragmentManager(), new LanguageSettingFragment(), false);
                 break;
             }

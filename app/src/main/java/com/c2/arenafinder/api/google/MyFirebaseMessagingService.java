@@ -7,18 +7,34 @@ import com.c2.arenafinder.data.local.LogTag;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+/**
+ * Menerima Notifikasi dari Website
+ *
+ */
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    /**
+     * Digunakan untuk membuat token device baru
+     * @param token dari device
+     */
     @Override
     public void onNewToken(@NonNull String token) {
        LogApp.info(this, LogTag.ON_NOTIFICATION, "Refreshed Token : " + token);
     }
 
+    /**
+     * Digunakan untuk menghandle saat notifikasi dihapus
+     */
     @Override
     public void onDeletedMessages() {
         LogApp.error(this, LogTag.ON_NOTIFICATION, "ON DELETE");
     }
 
+    /**
+     * Digunakan untuk menhadle penerimaan notifikasi yang dikirim dari website
+     *
+     * @param message informasi notifikasi
+     */
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         if (message.getData().size() > 0 && message.getNotification() != null){

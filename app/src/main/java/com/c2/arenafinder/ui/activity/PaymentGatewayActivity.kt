@@ -45,6 +45,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Payment Gateway dengan MidTrans
+ */
 class PaymentGatewayActivity : AppCompatActivity() {
 
     private val gson = Gson()

@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Menampilkan log informasi saat proses debugging
+ */
 public class LogApp {
 
     @NonNull

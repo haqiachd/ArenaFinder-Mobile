@@ -126,6 +126,7 @@ public class AktivitasFragment extends Fragment {
                 new AktivitasViewModelFactory(new AktivitasRepository())
         ).get(AktivitasViewModel.class);
 
+        // action saat refersh
         refreshLayout.setOnRefreshListener(() ->
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     observer();
@@ -146,6 +147,11 @@ public class AktivitasFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan shimmer
+     *
+     * @param show status tampilkan
+     */
     private void showShimmer(boolean show){
         if (show){
             shimmerLayout.setVisibility(View.VISIBLE);
@@ -158,6 +164,9 @@ public class AktivitasFragment extends Fragment {
         }
     }
 
+    /**
+     * Mendapatkan data dari database
+     */
     private void observer() {
 
         aktivitasViewModel.getAktivitasData().observe(getViewLifecycleOwner(), dataState -> {
@@ -193,69 +202,16 @@ public class AktivitasFragment extends Fragment {
         });
     }
 
-    private void getAppbar() {
-        if (getActivity() != null) {
-            MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
-            cardSearch.setVisibility(View.VISIBLE);
-            cardSearch.setOnClickListener(v -> {
-                startActivity(
-                        new Intent(requireActivity(), SubMainActivity.class)
-                                .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
-                                .putExtra(SubMainActivity.SEARCH_TYPE, SearchWorldFragment.SEARCH_ACTIVITY)
-                );
-            });
-        }
-    }
-
-    private void onClickGroups() {
-
-        btnFilter.setOnClickListener(v -> {
-            Toast.makeText(requireActivity(), "Filter", Toast.LENGTH_SHORT).show();
-        });
-
-        btnVallBaru.setOnClickListener(v -> {
-            startActivity(
-                    new Intent(requireActivity(), SubMainActivity.class)
-                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
-                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.AKTIVITAS_BARU)
-            );
-        });
-
-        btnVallKosong.setOnClickListener(v -> {
-            startActivity(
-                    new Intent(requireActivity(), SubMainActivity.class)
-                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
-                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.AKTIVITAS_KOSONG)
-            );
-        });
-
-    }
-
-    private void adapterLapangan() {
-        ArrayList<JenisLapanganModel> lapanganModels = ArenaFinder.getSportType(requireContext());
-
-        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
-                new AdapterActionListener() {
-                    @Override
-                    public void onClickListener(int position) {
-                        startActivity(
-                                new Intent(requireActivity(), SubMainActivity.class)
-                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
-                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(SportTypeFragment.TYPE_ACTIVITY))
-                                        .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
-                        );
-                    }
-                });
-        jenisLapangan.setAdapter(lapanganAdapter);
-
-    }
-
+    /**
+     * Mendapatkan data dari databaes
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().aktivitasPage().enqueue(new Callback<AktivitasResponse>() {
             @Override
             public void onResponse(Call<AktivitasResponse> call, Response<AktivitasResponse> response) {
 
+                // cek koneksi berhasil atau tidak
                 if (response.body() != null && response.body().getStatus().equalsIgnoreCase(RetrofitClient.SUCCESSFUL_RESPONSE)) {
 
                     LogApp.info(this, LogTag.RETROFIT_ON_RESPONSE, "ON RESPONSE");
@@ -293,12 +249,92 @@ public class AktivitasFragment extends Fragment {
 
     }
 
+    private void getAppbar() {
+        if (getActivity() != null) {
+            MaterialCardView cardSearch = getActivity().findViewById(R.id.main_appbar_search);
+            cardSearch.setVisibility(View.VISIBLE);
+            cardSearch.setOnClickListener(v -> {
+                startActivity(
+                        new Intent(requireActivity(), SubMainActivity.class)
+                                .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SEARCH_WORLD)
+                                .putExtra(SubMainActivity.SEARCH_TYPE, SearchWorldFragment.SEARCH_ACTIVITY)
+                );
+            });
+        }
+    }
+
+
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
+    private void onClickGroups() {
+
+        /*
+         * Aksi saat button filter di klik
+         */
+        btnFilter.setOnClickListener(v -> {
+            Toast.makeText(requireActivity(), "Filter", Toast.LENGTH_SHORT).show();
+        });
+
+        /*
+         * Aksi saat button venue semua di klik
+         */
+        btnVallBaru.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.AKTIVITAS_BARU)
+            );
+        });
+
+        /*
+         * Aksi saat button venue kosong di klik
+         */
+        btnVallKosong.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(requireActivity(), SubMainActivity.class)
+                            .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.VIEW_ALL)
+                            .putExtra(SubMainActivity.SPORT_ACTION, ViewAllFragment.AKTIVITAS_KOSONG)
+            );
+        });
+
+    }
+
+    /**
+     * Menampilkan adapter lapangan
+     */
+    private void adapterLapangan() {
+        ArrayList<JenisLapanganModel> lapanganModels = ArenaFinder.getSportType(requireContext());
+
+        JenisLapanganAdapter lapanganAdapter = new JenisLapanganAdapter(requireActivity(), lapanganModels,
+                new AdapterActionListener() {
+                    @Override
+                    public void onClickListener(int position) {
+                        startActivity(
+                                new Intent(requireActivity(), SubMainActivity.class)
+                                        .putExtra(SubMainActivity.FRAGMENT, SubMainActivity.SPORT_TYPE)
+                                        .putExtra(SubMainActivity.SPORT_ACTION, Integer.toString(SportTypeFragment.TYPE_ACTIVITY))
+                                        .putExtra(SubMainActivity.SPORT_DATA, lapanganModels.get(position).getNamaLapangan())
+                        );
+                    }
+                });
+        jenisLapangan.setAdapter(lapanganAdapter);
+
+    }
+
+
+
     private void handlerNullData() {
         aktivitasKosongLayout.setVisibility(View.GONE);
         aktivitasBaruLayout.setVisibility(View.GONE);
         semuaAktivitasLayout.setVisibility(View.GONE);
     }
 
+    /**
+     * Menampilkan aktivitas baru
+     *
+     * @param models data
+     */
     private void showAktivitasBaru(ArrayList<AktivitasModel> models) {
 
         if (models.size() == 0) {
@@ -325,6 +361,11 @@ public class AktivitasFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan aktivitas kosong
+     *
+     * @param models data
+     */
     private void showAktivitasKosong(ArrayList<AktivitasModel> models) {
 
         if (models.size() == 0) {
@@ -351,6 +392,11 @@ public class AktivitasFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan aktivitas semua
+     *
+     * @param models data
+     */
     private void showSemuaAktivitasyList(ArrayList<AktivitasModel> models) {
 
         if (models.size() == 0) {

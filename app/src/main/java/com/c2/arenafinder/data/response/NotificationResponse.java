@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menerima response dari server pada data notifikasi yang dikirimkan web
+ *
+ */
 public class NotificationResponse {
 
     @Expose

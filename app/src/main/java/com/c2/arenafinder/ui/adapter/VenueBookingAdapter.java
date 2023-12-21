@@ -20,6 +20,9 @@ import com.c2.arenafinder.util.AdapterActionListener;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data jadwal booking pada Booking
+ */
 public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapter.ViewHolder> {
 
     private final Context context;
@@ -47,19 +50,29 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // get data
         VenueBookingModel bookingModel = models.get(position);
 
+        // show data
         holder.txtNamaLapangan.setText(bookingModel.getLapanganName());
         holder.txtSlotKosong.setText(bookingModel.getTotalSlot());
 //        Toast.makeText(context, bookingModel.getTotalSlot(), Toast.LENGTH_SHORT).show();
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+
+            // aksi saat list di klik
             holder.lapanganLayout.setOnClickListener(v -> {
                 // show and hide lapangan
-                if (holder.getAdapterPosition() == position){
+                if (holder.getAdapterPosition() == position) {
                     if (holder.linearContent.getVisibility() == View.VISIBLE || holder.linearNoData.getVisibility() == View.VISIBLE) {
                         if (jadwalKosong.get(position) > 0) {
                             holder.linearContent.setVisibility(View.GONE);
@@ -123,14 +136,25 @@ public class VenueBookingAdapter extends RecyclerView.Adapter<VenueBookingAdapte
         return jadwalPickerAdapter.getItemDetails();
     }
 
+    /**
+     * mereset total harga
+     */
     public void resetTotalHarga() {
         jadwalPickerAdapter.resetTotalHarga();
     }
 
+    /**
+     * Mendapatkan total harga
+     *
+     * @return total harga
+     */
     public int getTotalHarga() {
         return jadwalPickerAdapter.getTotalHarga();
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ConstraintLayout lapanganLayout;

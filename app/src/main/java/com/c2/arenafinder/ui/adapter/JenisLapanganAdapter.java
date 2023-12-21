@@ -18,6 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Jenis Lapangan pada MainActivity
+ *
+ */
 public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdapter.ViewHolder>{
 
     private final Context context;
@@ -41,13 +45,23 @@ public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdap
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // get data
         JenisLapanganModel model = models.get(position);
+
+        // show data
         holder.txtNamaLapangan.setText(model.getNamaLapangan());
         holder.iconLapangan.setImageDrawable(ContextCompat.getDrawable(context, model.getIconDrawable()));
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+            // aksi saat list di klik
             holder.itemView.setOnClickListener(v -> {
                 listener.onClickListener(position);
             });
@@ -59,6 +73,10 @@ public class JenisLapanganAdapter extends RecyclerView.Adapter<JenisLapanganAdap
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;

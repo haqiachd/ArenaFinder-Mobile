@@ -14,6 +14,9 @@ import com.c2.arenafinder.ui.fragment.empty.WelcomeFragment;
 import com.c2.arenafinder.util.ArenaFinder;
 import com.c2.arenafinder.util.FragmentUtil;
 
+/**
+ * Activity untuk menampilkan message-message aja
+ */
 public class EmptyActivity extends AppCompatActivity {
 
     public static final String FRAGMENT = "fragment";
@@ -30,18 +33,22 @@ public class EmptyActivity extends AppCompatActivity {
 
         switch (getIntent().getStringExtra(FRAGMENT)) {
             case WELCOME: {
+                // nampilin welcome fragment
                 FragmentUtil.switchFragmentEmpty(getSupportFragmentManager(), new WelcomeFragment(), false);
                 break;
             }
             case SERVER_NOT_FOUND: {
+                // nampilin server not found fragment
                 FragmentUtil.switchFragmentEmpty(getSupportFragmentManager(), new ServerNotFoundFragment(), false);
                 break;
             }
             case SERVER_OFF: {
+                // nampilin server off fragment
                 FragmentUtil.switchFragmentEmpty(getSupportFragmentManager(), new ServerOffFragment(), false);
                 break;
             }
             case ACCOUNT_MESSAGE: {
+                // nampilin account message
                 LogApp.info(this, "fragment -> " + getIntent().getStringExtra(FRAGMENT));
                 LogApp.info(this, "fragment message -> " + getIntent().getStringExtra(FRAGMENT_MESSAGE));
                 FragmentUtil.switchFragmentEmpty(

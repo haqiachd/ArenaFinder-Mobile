@@ -2,6 +2,10 @@ package com.c2.arenafinder.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Digunakan untuk menyimpan data-data dari edit/tambah komentar dari venue, seperti rating, comment, tanggal, dll
+ *
+ */
 public class EditCommentModel {
 
     @SerializedName("id_venue")

@@ -50,10 +50,10 @@ public class SplashScreenActivity extends AppCompatActivity {
     private int currentPermissionIndex = 0;
 
     private final String[] allPermission = {
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_PHONE_STATE
+            Manifest.permission.ACCESS_FINE_LOCATION, // access lokasi
+            Manifest.permission.READ_EXTERNAL_STORAGE, // access galery
+            Manifest.permission.CAMERA, // access camera
+            Manifest.permission.READ_PHONE_STATE // acess kontak telephone
     };
 
     private UsersUtil usersUtil;
@@ -71,6 +71,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // remove status bar dan navigation bar
         getWindow().getDecorView().post(() -> new Thread(() -> runOnUiThread(() -> {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
@@ -126,6 +127,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> viewModel.doCheckKoneksi(), 1000L);
     }
 
+    /**
+     * Mendapatkan data-data dari aplikasi, seperti status server, versi aplikasi, status update, dll
+     */
     private void observer() {
 
         viewModel.cekKoneksi().observe(this, dataState -> {
@@ -291,6 +295,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Digunakan untuk melakukan request semua permission yang dibutuhkan oleh aplikasi
+     *
+     */
     private void requestNextPermission() {
         if (currentPermissionIndex < allPermission.length) {
             LogApp.info(this, LogTag.SPLASH, "permission");
@@ -307,6 +315,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * digunakan utnuk melakukan kode permission
+     *
+     * @return kode permission
+     */
     private int getPermissionRequestCode() {
         switch (allPermission[currentPermissionIndex]) {
             case Manifest.permission.ACCESS_FINE_LOCATION:
@@ -322,6 +335,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Menampilkan request permission yang dibutuhkan oleh aplikasi
+     *
+     * @param requestCode kode request
+     * @param permissions yang dibutuhkan
+     * @param grantResults status result
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

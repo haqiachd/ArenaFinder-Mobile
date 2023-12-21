@@ -15,6 +15,10 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.regex.Pattern;
 
+/**
+ * Berisi method-method umum untuk melakukan validasi data pada aplikasi, seperti email, username, password, dll
+ *
+ * */
 public class ValidatorUtil {
 
     private @StringRes

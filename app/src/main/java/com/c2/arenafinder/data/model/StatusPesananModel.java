@@ -3,6 +3,10 @@ package com.c2.arenafinder.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Digunakan untuk menyimpan data-data histori dari pemesanan/booking user pada venue
+ *
+ */
 public class StatusPesananModel {
 
     public static final String DI_PESAN = "Pending", DI_SETUJUI = "Accepted", DI_TOLAK = "Rejected";

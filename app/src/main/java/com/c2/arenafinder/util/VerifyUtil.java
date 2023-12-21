@@ -11,6 +11,10 @@ import com.c2.arenafinder.data.model.VerifyModel;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Berisi method-method umum untuk mengelola data verifikasi yang diambil dari DataShared
+ *
+ * */
 public class VerifyUtil {
 
     public static final String TYPE_SIGNUP = "SignUp";

@@ -181,38 +181,57 @@ public class ActivityDetailedFragment extends Fragment {
         scrollView.getViewTreeObserver().removeOnScrollChangedListener(listener);
     }
 
-    private void showShimmer(boolean show){
-        if (show){
+    private void showShimmer(boolean show) {
+        if (show) {
             shimmerLayout.setVisibility(View.VISIBLE);
             shimmerLayout.startShimmer();
             contentLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             shimmerLayout.setVisibility(View.GONE);
             shimmerLayout.stopShimmer();
             contentLayout.setVisibility(View.VISIBLE);
         }
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button back di klik
+         */
         imgBack.setOnClickListener(v -> {
             requireActivity().onBackPressed();
         });
 
+        /*
+         * Aksi saat button back di klik
+         */
         btnBackAppbar.setOnClickListener(v -> {
             requireActivity().onBackPressed();
         });
 
+        /*
+         * Aksi saat button vertical di klik
+         */
         imgVertical.setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Menu Vertical", Toast.LENGTH_SHORT).show();
         });
 
+        /*
+         * Aksi saat button vertical di klik
+         */
         btnVerticalAppbar.setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Menu Vertical", Toast.LENGTH_SHORT).show();
         });
 
     }
 
+    /**
+     * Menampilkan data aktivitas
+     *
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().aktivitasDetailed(id, usersUtil.getEmail()).enqueue(new Callback<>() {
@@ -268,15 +287,22 @@ public class ActivityDetailedFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan data dari aktivitas
+     *
+     * @param model data dari aktivitas
+     */
     private void showAktivitasData(AktivitasModel model) {
         if (isAdded()) {
 
+            // menampilkan data gambar
             Glide.with(requireContext())
                     .load(RetrofitClient.AKTIVITAS_URL + model.getPhoto())
                     .centerCrop()
                     .placeholder(R.drawable.ic_profile)
                     .into(imgPhoto);
 
+            // menampilkan data aktivitas
             txtAktivitasName.setText(model.getNamaAktivitas());
             txtAktivitasNameAppbar.setText(model.getNamaAktivitas());
             txtVenueName.setText(model.getVenueName());
@@ -298,6 +324,7 @@ public class ActivityDetailedFragment extends Fragment {
                     MapOSM.calculateMileage(distance)
             ));
 
+            // status jenis lapangan
             switch (model.getJenisOlahraga().toLowerCase()) {
                 case "futsal": {
                     imgSport.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_sport_futsal));
@@ -344,11 +371,14 @@ public class ActivityDetailedFragment extends Fragment {
                     break;
                 }
             }
-
-
         }
     }
 
+    /**
+     * Menampilkan data kontak
+     *
+     * @param models data kontak
+     */
     private void showContact(ArrayList<VenueContactModel> models) {
 
         if (models.size() <= 0) {
@@ -371,6 +401,11 @@ public class ActivityDetailedFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan data member
+     *
+     * @param models data member
+     */
     private void showAktivitasMember(ArrayList<AktivitasMemberModel> models) {
         if (models.size() <= 0) {
             recyclerMember.setVisibility(View.GONE);
@@ -381,6 +416,11 @@ public class ActivityDetailedFragment extends Fragment {
         }
     }
 
+    /**
+     * Aksi saat user bergabung atau keluar dari aktivitas
+     *
+     * @param actionStatus status member
+     */
     private void buttonAction(String actionStatus) {
 
         Call<AktivitasMemberResponse> action;
@@ -434,6 +474,12 @@ public class ActivityDetailedFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan map dari aktivitas
+     *
+     * @param venueName nama aktivitas
+     * @param coordinate dari aktivitas
+     */
     private void showMap(String venueName, String coordinate) {
 
         double latitude = ArenaFinder.getLatitude(coordinate),

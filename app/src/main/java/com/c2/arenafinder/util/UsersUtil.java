@@ -6,6 +6,10 @@ import com.c2.arenafinder.data.local.DataShared;
 import com.c2.arenafinder.data.local.DataShared.KEY;
 import com.c2.arenafinder.data.model.UserModel;
 
+/**
+ * Berisi method-method umum untuk mengelola data user yang diambil dari DataShared
+ *
+ * */
 public class UsersUtil {
 
     private final DataShared dataShared;

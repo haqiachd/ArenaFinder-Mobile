@@ -126,6 +126,9 @@ public class ChangePwOnProfile extends Fragment {
         }
     }
 
+    /**
+     * Untuk mengganti password
+     */
     private void observer(){
         usersViewModel.changePassLogin().observe(getViewLifecycleOwner(), dataState -> {
             if (dataState instanceof RetrofitState.Loading){
@@ -147,8 +150,14 @@ public class ChangePwOnProfile extends Fragment {
         });
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onCLickGroups(){
 
+        /*
+         * Aksi saat button ganti pw di klik
+         */
         btnGantiPw.setOnClickLoadingListener(() -> {
             usersViewModel.doChangePassLogin(
                     usersUtil.getEmail(), Objects.requireNonNull(inpPass.getText()).toString(),

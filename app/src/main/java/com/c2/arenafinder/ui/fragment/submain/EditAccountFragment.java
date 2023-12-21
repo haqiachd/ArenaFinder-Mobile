@@ -221,6 +221,9 @@ public class EditAccountFragment extends Fragment {
         }
     }
 
+    /**
+     * Mengedti data dari akun
+     */
     private void observer() {
         usersViewModel.deletePhoto().observe(getViewLifecycleOwner(), dataState -> {
             if (dataState instanceof RetrofitState.Loading) {
@@ -242,8 +245,14 @@ public class EditAccountFragment extends Fragment {
         });
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button simpan di klik
+         */
         btnSimpan.setOnClickListener(v -> {
             ValidatorUtil validatorUtil = new ValidatorUtil(requireContext(), btnSimpan, txtHelper);
 
@@ -276,10 +285,16 @@ public class EditAccountFragment extends Fragment {
 
         });
 
+        /*
+         * Aksi saat button batal di klik
+         */
         btnBatal.setOnClickListener(v -> {
             requireActivity().onBackPressed();
         });
 
+        /*
+         * Aksi saat button photo di klik
+         */
         cardPhoto.setOnClickListener(v -> {
             cardPhoto.setClickable(false);
             LogApp.info(requireContext(), LogTag.ON_CLICK, "Button Choose Diclik");
@@ -327,6 +342,9 @@ public class EditAccountFragment extends Fragment {
             sheet.getWindow().setGravity(Gravity.BOTTOM);
         });
 
+        /*
+         * Aksi saat button ganti photo di klik
+         */
         btnChoose.setOnClickListener(v -> {
             LogApp.info(requireContext(), LogTag.ON_CLICK, "Button Choose Diclik");
             choosePhoto();

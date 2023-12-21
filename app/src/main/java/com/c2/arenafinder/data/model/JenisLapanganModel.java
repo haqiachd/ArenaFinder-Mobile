@@ -2,6 +2,10 @@ package com.c2.arenafinder.data.model;
 
 import androidx.annotation.DrawableRes;
 
+/**
+ * Digunakan untuk menyimpan data-data dari jenis lapangan
+ *
+ */
 public class JenisLapanganModel {
 
     private @DrawableRes int iconDrawable;

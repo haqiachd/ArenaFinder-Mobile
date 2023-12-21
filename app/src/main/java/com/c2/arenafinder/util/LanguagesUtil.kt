@@ -9,6 +9,9 @@ import com.c2.arenafinder.data.local.LogApp
 import com.c2.arenafinder.data.local.LogTag
 import com.c2.arenafinder.data.model.LanguageModel
 
+/**
+ * Berisi method-method untuk mengelola bahasa dalam aplikasi ArenaFinder
+ */
 class LanguagesUtil(
     private val activity: Activity,
     private val dataShared: DataShared,

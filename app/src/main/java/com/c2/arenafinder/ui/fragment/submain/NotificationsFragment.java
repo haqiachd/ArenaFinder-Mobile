@@ -72,6 +72,7 @@ public class NotificationsFragment extends Fragment {
 
         UsersUtil util = new UsersUtil(requireContext());
 
+        // menampilkan notifikasi yang diterima oleh app dari web
         RetrofitClient.getInstance().myNotif(util.getEmail())
                 .enqueue(new Callback<>() {
                     @Override

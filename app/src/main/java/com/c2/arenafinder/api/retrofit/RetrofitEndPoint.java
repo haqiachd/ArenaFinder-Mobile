@@ -37,6 +37,10 @@ import com.c2.arenafinder.data.response.VenueExtendedResponse;
 import com.c2.arenafinder.data.response.VenueReviewsResponse;
 import com.c2.arenafinder.data.response.VerifyResponse;
 
+/**
+ * Menghubungkan aplikasi dengan file-file controllers yang ada dialam web / php
+ *
+ */
 public interface RetrofitEndPoint {
 
     @GET("gate_1.php")

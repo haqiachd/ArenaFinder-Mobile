@@ -14,6 +14,10 @@ import com.c2.arenafinder.databinding.ItemVenuePhotoBinding;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Venue Photo pada Detail Venue
+ *
+ */
 public class VenuePhotoAdapter extends RecyclerView.Adapter<VenuePhotoAdapter.ViewHolder> {
 
     private final ArrayList<VenuePhotos> models;
@@ -32,8 +36,15 @@ public class VenuePhotoAdapter extends RecyclerView.Adapter<VenuePhotoAdapter.Vi
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull VenuePhotoAdapter.ViewHolder holder, int position) {
+        // show gambar
         holder.setImage(models.get(position).getPhoto());
     }
 
@@ -42,6 +53,10 @@ public class VenuePhotoAdapter extends RecyclerView.Adapter<VenuePhotoAdapter.Vi
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ItemVenuePhotoBinding itemView;
@@ -51,6 +66,11 @@ public class VenuePhotoAdapter extends RecyclerView.Adapter<VenuePhotoAdapter.Vi
             this.itemView = itemView;
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         private void setImage(String url){
             Glide.with(itemView.getRoot())
                     .load(RetrofitClient.PUBLIC_IMG + url)

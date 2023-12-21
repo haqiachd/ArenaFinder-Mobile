@@ -3,6 +3,10 @@ package com.c2.arenafinder.data.model;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
+/**
+ * Digunakan untuk menyimpan data-data item pada menu profile
+ *
+ */
 public class ProfileMenuModel {
     @DrawableRes
     private int icon;

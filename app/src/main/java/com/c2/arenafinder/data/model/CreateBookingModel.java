@@ -3,6 +3,10 @@ package com.c2.arenafinder.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Digunakan untuk menyimpan data-data dari venue yang dibooking oleh user, seperti id_venue, id_booking, tanggal dan lain-lain
+ *
+ */
 public class CreateBookingModel {
 
     @Expose

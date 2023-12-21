@@ -24,6 +24,10 @@ import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data 'Semua Aktivitas' pada MainActivity
+ *
+ */
 public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecondAdapter.ViewHolder> {
 
     private final Context context;
@@ -58,22 +62,30 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        // get data
         AktivitasModel model = models.get(position);
 
+        // show data
         holder.setImage(model.getPhoto());
         holder.txtNamaAktivitas.setText(model.getNamaAktivitas());
         holder.txtVenueAktivitas.setText(model.getVenueName());
-//        holder.txtAnggotaAktivitas.setText(context.getString(R.string.txt_aktivitas_anggota_value, model.getJumlahMember(), model.getMaxMember()));
         holder.txtAnggotaAktivitas.setText(context.getString(R.string.txt_anggota_aktivitas_val, model.getJumlahMember()));
         holder.txtTanggalAktivitas.setText(ArenaFinder.convertToDate(context, model.getDate()));
-//        holder.txtTimeAktivitas.setText(context.getString(R.string.txt_aktivitas_jam, model.getStartHour(), model.getEndHour()));
         holder.txtTimeAktivitas.setText(context.getString(R.string.txt_jam_main_val, model.getJamMain()));
         holder.txtHargaAktivitas.setText(context.getString(R.string.txt_price_value, String.valueOf(model.getPrice())));
 
         if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
 
+            // aksi saat list diklik
             holder.itemView.setOnClickListener(v -> {
                 listener.onClickListener(holder.getAdapterPosition());
             });
@@ -113,6 +125,10 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;
@@ -134,6 +150,11 @@ public class AktivitasSecondAdapter extends RecyclerView.Adapter<AktivitasSecond
             this.txtHargaAktivitas = view.findViewById(R.id.ias_aktivitas_price_value);
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param uri dari gambar
+         */
         private void setImage(String uri){
 
             Glide.with(view)

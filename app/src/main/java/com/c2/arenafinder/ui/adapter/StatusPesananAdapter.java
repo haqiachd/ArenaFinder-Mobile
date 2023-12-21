@@ -23,6 +23,11 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Status 'Status Diterima' dan 'Status Ditolak' atau 'Status Diterima'
+ * pada MainActivity
+ *
+ */
 public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdapter.ViewHolder> {
 
     private final Context context;
@@ -43,10 +48,19 @@ public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdap
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // get data
         StatusPesananModel model = models.get(position);
+
+        // show data
         holder.txtVenue.setText(model.getVenueName());
         holder.txtPrice.setText(context.getString(R.string.txt_total_price_booking, ArenaFinder.toMoneyCase(model.getTotalPrice())));
         holder.txtJadwal.setText(context.getString(R.string.txt_total_jadwal_val, model.getTotalJadwal()));
@@ -54,6 +68,7 @@ public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdap
         holder.txtTanggal.setText(context.getString(R.string.txt_tanggal_val, ArenaFinder.convertToDate(context, model.getTanggalPesan())));
         holder.setImage(model.getVenuePhoto());
 
+        // tapilkan status pesanan
         switch (model.getPaymentStatus().toLowerCase()) {
             case "pending": {
                 holder.cardView.setStrokeColor(ContextCompat.getColor(context, R.color.status_pesan_dipesan));
@@ -73,6 +88,8 @@ public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdap
         }
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+
+            // aksi saat list di klik
             holder.btnPesan.setOnClickListener(v -> {
                 context.startActivity(
                         new Intent(context, DetailedActivity.class)
@@ -89,6 +106,10 @@ public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdap
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;
@@ -116,6 +137,11 @@ public class StatusPesananAdapter extends RecyclerView.Adapter<StatusPesananAdap
             btnPesan = view.findViewById(R.id.isp_btn_pesan);
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         public void setImage(String url) {
             Glide.with(view)
                     .load(RetrofitClient.VENUE_IMG_URL + url)

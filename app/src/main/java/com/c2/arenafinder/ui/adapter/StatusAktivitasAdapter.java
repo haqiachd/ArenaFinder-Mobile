@@ -21,6 +21,10 @@ import com.c2.arenafinder.R;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Status 'Aktivitas Saat Ini' dan 'Aktivitas Finished' pada MainActivity
+ *
+ */
 public class StatusAktivitasAdapter extends RecyclerView.Adapter<StatusAktivitasAdapter.ViewHolder>{
 
     private final Context context;
@@ -47,11 +51,19 @@ public class StatusAktivitasAdapter extends RecyclerView.Adapter<StatusAktivitas
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // get data
         AktivitasModel model = models.get(position);
 
+        // show data
         holder.txtAktivitasName.setText(model.getNamaAktivitas());
         holder.txtPrice.setText(context.getString(R.string.txt_total_price_booking, ArenaFinder.toMoneyCase(model.getPrice())));
         holder.txtVenue.setText(context.getString(R.string.def_titik_dua, model.getVenueName()));
@@ -61,6 +73,7 @@ public class StatusAktivitasAdapter extends RecyclerView.Adapter<StatusAktivitas
         holder.setImageAktivitas(model.getPhoto());
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION && listener != null){
+            // aksi saat list di klik
             holder.btnLeave.setOnClickListener(v -> {
                 listener.onClickListener(position);
             });
@@ -78,6 +91,10 @@ public class StatusAktivitasAdapter extends RecyclerView.Adapter<StatusAktivitas
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private final View view, line;
@@ -103,6 +120,11 @@ public class StatusAktivitasAdapter extends RecyclerView.Adapter<StatusAktivitas
 
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         private void setImageAktivitas(String url){
             Glide.with(view)
                     .load(RetrofitClient.AKTIVITAS_URL + url)

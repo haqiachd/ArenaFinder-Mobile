@@ -18,6 +18,10 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data list Jadwal pada Booking
+ *
+ */
 public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapter.ViewHolder> {
 
     private final Context context;
@@ -50,6 +54,12 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull JadwalPickerAdapter.ViewHolder holder, int position) {
 
@@ -149,6 +159,10 @@ public class JadwalPickerAdapter extends RecyclerView.Adapter<JadwalPickerAdapte
         return totalHarga;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final MaterialCardView layout;

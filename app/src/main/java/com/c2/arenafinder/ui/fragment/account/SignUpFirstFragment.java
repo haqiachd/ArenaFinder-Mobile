@@ -184,8 +184,14 @@ public class SignUpFirstFragment extends Fragment {
         }
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button next di klik
+         */
         btnNext.setOnClickLoadingListener(() -> {
 
             // reset input text color
@@ -230,6 +236,9 @@ public class SignUpFirstFragment extends Fragment {
                     });
         });
 
+        /*
+         * Aksi saat button google di klik
+         */
         btnGoogle.setOnClickListener(v -> {
             LogApp.info(requireContext(), v, LogTag.ON_CLICK, "Button google di click");
 
@@ -246,6 +255,9 @@ public class SignUpFirstFragment extends Fragment {
             }
         });
 
+        /*
+         * Aksi saat button login di klik
+         */
         btnLogin.setOnClickListener(v -> {
             google.resetLastSignIn();
             google = null;

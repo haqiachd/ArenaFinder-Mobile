@@ -121,8 +121,14 @@ public class AccountMessageFragment extends Fragment {
         }
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups(){
 
+        /*
+         * Aksi saat button msg di klik
+         */
         btnMsg.setOnClickListener(v ->{
             buttonAction();
         });

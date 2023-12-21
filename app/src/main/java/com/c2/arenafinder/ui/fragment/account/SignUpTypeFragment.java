@@ -73,8 +73,14 @@ public class SignUpTypeFragment extends Fragment {
         onClickGroups();
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups(){
 
+        /*
+         * Aksi saat button admin di klik
+         */
         btnAdmin.setOnClickListener(v -> {
             ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
             new AlertDialog.Builder(requireContext())
@@ -90,6 +96,9 @@ public class SignUpTypeFragment extends Fragment {
 
         });
 
+        /*
+         * Aksi saat button user di klik
+         */
         btnUser.setOnClickListener(v -> {
             FragmentUtil.switchFragmentAccount(requireActivity().getSupportFragmentManager(), new SignUpFirstFragment(), false);
         });

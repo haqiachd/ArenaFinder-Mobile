@@ -118,6 +118,9 @@ public class TabActivityFinishedFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan data tab finished
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().statusActivity(

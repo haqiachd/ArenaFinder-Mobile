@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.c2.arenafinder.data.repository.AktivitasRepository
 import com.c2.arenafinder.viewmodel.AktivitasViewModel
 
+/**
+ * Digunakan untuk menghubungkan class AktivitasRepository dengan AktivitasViewModel
+ *
+ */
 class AktivitasViewModelFactory(
     private val repository: AktivitasRepository
 ) : ViewModelProvider.Factory {

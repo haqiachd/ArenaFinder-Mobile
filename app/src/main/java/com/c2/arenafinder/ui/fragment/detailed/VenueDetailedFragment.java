@@ -347,13 +347,22 @@ public class VenueDetailedFragment extends Fragment {
         });
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button map di klik
+         */
         btnMap.setOnClickListener(v -> {
             String url = "https://www.google.com/maps/@" + coordinate + ",19z?entry=ttu";
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         });
 
+        /*
+         * Aksi saat button review di klik
+         */
         btnReview.setOnClickListener(v -> {
             FragmentUtil.switchFragmentDetailed(
                     requireActivity().getSupportFragmentManager(),
@@ -363,18 +372,33 @@ public class VenueDetailedFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button vertical di klik
+         */
         btnVertical.setOnClickListener(this::showPopMenu);
 
+        /*
+         * Aksi saat button vertical di klik
+         */
         btnVerticalAppbar.setOnClickListener(this::showPopMenu);
 
+        /*
+         * Aksi saat button back di klik
+         */
         btnBack.setOnClickListener(v -> {
             requireActivity().onBackPressed();
         });
 
+        /*
+         * Aksi saat button back di klik
+         */
         btnBackAppbar.setOnClickListener(v -> {
             requireActivity().onBackPressed();
         });
 
+        /*
+         * Aksi saat button booking bottom di klik
+         */
         btnBookingBot.setOnClickListener(v -> {
             FragmentUtil.switchFragmentDetailed(
                     requireActivity().getSupportFragmentManager(),

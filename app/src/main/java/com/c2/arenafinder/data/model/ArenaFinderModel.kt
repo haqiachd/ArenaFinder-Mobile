@@ -3,6 +3,10 @@ package com.c2.arenafinder.data.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Digunakan untuk menyimpan data-data dari informasi aplikasi ArenaFinder seperti status server, update aplikasi, versi aplikasi dan lain-lain
+ *
+ */
 data class ArenaFinderModel(
     @Expose
     @SerializedName("server_status")

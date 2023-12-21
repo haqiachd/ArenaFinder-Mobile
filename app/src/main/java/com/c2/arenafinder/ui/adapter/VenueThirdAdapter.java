@@ -29,6 +29,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
 
+/**
+ * Digunakan untuk menampilkan list dari data Dekat Lokasi pada MainActivity
+ *
+ */
 public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.ViewHolder> {
 
     private final Context context;
@@ -56,11 +60,19 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // get data
         ReferensiModel model = models.get(position);
 
+        // show data
         holder.txtNama.setText(model.getVenueName());
         holder.txtSport.setText(ArenaFinder.localizationSport(model.getSport()));
 
@@ -119,6 +131,10 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;
@@ -146,6 +162,11 @@ public class VenueThirdAdapter extends RecyclerView.Adapter<VenueThirdAdapter.Vi
             txtStatus.setBackground(ContextCompat.getDrawable(context, background));
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         private void setImage(String url){
             Glide.with(view)
                     .load(RetrofitClient.VENUE_IMG_URL + url)

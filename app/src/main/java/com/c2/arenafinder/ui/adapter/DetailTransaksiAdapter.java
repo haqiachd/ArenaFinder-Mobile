@@ -15,6 +15,10 @@ import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data DetailTransaksi pada Booking
+ *
+ */
 public class DetailTransaksiAdapter extends RecyclerView.Adapter<DetailTransaksiAdapter.ViewHolder> {
 
     private final Context context;
@@ -35,6 +39,12 @@ public class DetailTransaksiAdapter extends RecyclerView.Adapter<DetailTransaksi
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -55,6 +65,10 @@ public class DetailTransaksiAdapter extends RecyclerView.Adapter<DetailTransaksi
     }
 
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView txtNamaLapangan, txtDate, txtHarga;

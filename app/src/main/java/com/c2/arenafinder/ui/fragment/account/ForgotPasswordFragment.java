@@ -90,8 +90,14 @@ public class ForgotPasswordFragment extends Fragment {
         onChangedGroups();
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     public void onClickGroups() {
 
+        /*
+         * Aksi saat button ganti kirim di klik
+         */
         btnSend.setOnClickLoadingListener(() -> {
 
             RetrofitClient.getInstance().sendEmail(inpEmail.getText().toString(), VerifyUtil.TYPE_FORGOT, VerifyUtil.ACTION_NEW)

@@ -14,12 +14,11 @@ import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 
-public class MenuAlurPemesanan extends Fragment {
+public class  MenuAlurPemesanan extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -27,7 +26,6 @@ public class MenuAlurPemesanan extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static MenuAlurPemesanan newInstance(String param1, String param2) {
         MenuAlurPemesanan fragment = new MenuAlurPemesanan();
         Bundle args = new Bundle();

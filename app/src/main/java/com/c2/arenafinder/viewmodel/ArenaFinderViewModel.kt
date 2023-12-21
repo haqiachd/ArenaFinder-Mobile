@@ -11,6 +11,10 @@ import com.c2.arenafinder.data.repository.ArenaFinderRepository
 import com.c2.arenafinder.data.response.ArenaFinderResponse
 import kotlinx.coroutines.launch
 
+/**
+ * Untuk menyediakan dan mengelola data-data aplikasi untuk tampilan fragment/activity di aplikasi.
+ *
+ */
 class ArenaFinderViewModel(
     private val repository: ArenaFinderRepository
 ) : ViewModel() {

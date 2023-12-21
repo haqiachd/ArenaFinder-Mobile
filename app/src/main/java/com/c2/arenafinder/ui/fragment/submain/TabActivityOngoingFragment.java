@@ -118,6 +118,9 @@ public class TabActivityOngoingFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan data tab ongoing
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().statusActivity(

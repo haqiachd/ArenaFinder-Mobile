@@ -111,6 +111,9 @@ public class TabDipesanFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan data tab dipesan
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().getStatusPesanan(usersUtil.getEmail(), StatusPesananModel.DI_PESAN)

@@ -89,6 +89,9 @@ public class ViewAllFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
+        /*
+         * Menampilan semua list saat user menekan tombol semua
+         */
         showShimmer(true);
         switch (action) {
             case VENUE_BARU: {
@@ -188,6 +191,11 @@ public class ViewAllFragment extends Fragment {
         }
     }
 
+    /**
+     * menampilkan detail venue
+     *
+     * @param id id
+     */
     private void openDetailedVenue(String id) {
         startActivity(
                 new Intent(requireContext(), DetailedActivity.class)
@@ -196,6 +204,11 @@ public class ViewAllFragment extends Fragment {
         );
     }
 
+    /**
+     * menampilkan detail aktivitas
+     *
+     * @param id id
+     */
     private void openDetailedActivity(String id) {
         startActivity(
                 new Intent(requireContext(), DetailedActivity.class)
@@ -204,6 +217,11 @@ public class ViewAllFragment extends Fragment {
         );
     }
 
+    /**
+     * Menampilkan list dari detail venue
+     *
+     * @param models data
+     */
     private void showRecyclerVenue(ArrayList<VenueExtendedModel> models) {
 
         // show data
@@ -221,6 +239,11 @@ public class ViewAllFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan list dari detail aktivitas
+     *
+     * @param models data
+     */
     private void showRecyclerActivity(ArrayList<AktivitasModel> models) {
 
         // show data
@@ -239,6 +262,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue ratting
+     *
+     */
     private void actionRating() {
 
         // request data
@@ -263,6 +290,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue baru
+     *
+     */
     private void actionBaru() {
 
         // request data
@@ -287,6 +318,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue rekomendasi
+     *
+     */
     private void actionRekomendasi() {
 
         // request data
@@ -311,6 +346,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue kosong
+     *
+     */
     private void actionKosong() {
 
         // request data
@@ -335,6 +374,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue lokasi
+     *
+     */
     private void actionLokasi() {
 
         // request data
@@ -360,6 +403,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue gratis
+     *
+     */
     private void actionGratis() {
 
         // request data
@@ -385,6 +432,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue berbayar
+     *
+     */
     private void actionBebayar() {
 
         // request data
@@ -410,6 +461,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari venue disewakan
+     *
+     */
     private void actionDisewakan() {
 
         // request data
@@ -436,6 +491,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari aktivitas seru
+     *
+     */
     private void actionAktivitasSeru() {
 
         RetrofitClient.getInstance().getAllAktivitasSeru().enqueue(new Callback<AktivitasSecondResponse>() {
@@ -461,6 +520,10 @@ public class ViewAllFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan list dari aktivitas baru
+     *
+     */
     private void actionAktivitasBaru(){
         RetrofitClient.getInstance().getAllAktivitasBaru().enqueue(new Callback<AktivitasSecondResponse>() {
             @Override
@@ -484,6 +547,10 @@ public class ViewAllFragment extends Fragment {
         });
     }
 
+    /**
+     * Menampilkan list dari venue kosong
+     *
+     */
     private void actionAktivitasKosong(){
         RetrofitClient.getInstance().getAllAktivitasKosong().enqueue(new Callback<AktivitasSecondResponse>() {
             @Override

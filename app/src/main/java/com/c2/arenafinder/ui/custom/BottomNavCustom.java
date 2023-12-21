@@ -19,7 +19,7 @@ import com.c2.arenafinder.ui.fragment.main.ReferensiFragment;
 import com.c2.arenafinder.util.FragmentUtil;
 
 /**
- * Bottom navigation custom
+ * Method-method umum yang digunakan untuk manippulasi bottom nav
  *
  * @author Achmad Baihaqi
  */

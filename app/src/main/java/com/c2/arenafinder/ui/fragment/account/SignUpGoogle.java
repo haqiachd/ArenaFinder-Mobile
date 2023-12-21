@@ -129,8 +129,14 @@ public class SignUpGoogle extends Fragment {
         onChangedGroups();
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button register di klik
+         */
         btnRegister.setOnClickLoadingListener(() -> {
 
             FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {

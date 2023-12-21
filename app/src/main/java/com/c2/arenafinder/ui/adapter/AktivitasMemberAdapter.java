@@ -17,6 +17,10 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Digunakan untuk menampilkan list dari data Aktivitas Member pada Detail Aktivitas
+ *
+ */
 public class AktivitasMemberAdapter extends RecyclerView.Adapter<AktivitasMemberAdapter.ViewHolder>{
 
     private ArrayList<AktivitasMemberModel> models;
@@ -34,11 +38,19 @@ public class AktivitasMemberAdapter extends RecyclerView.Adapter<AktivitasMember
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // get data
         AktivitasMemberModel model = models.get(position);
 
+        // show data
         holder.txtName.setText(model.getFullName());
         holder.txtUsername.setText(model.getUsername());
         holder.setImagePhoto(model.getPhoto());
@@ -49,6 +61,10 @@ public class AktivitasMemberAdapter extends RecyclerView.Adapter<AktivitasMember
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;

@@ -24,6 +24,10 @@ import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Baru Ditambahkan, Ratting Tertinggi, Berbayar, Disewakan, dan Berbayar pada MainActivity
+ *
+ */
 public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.ViewHolder> {
 
     public static final int DEFAULT = 1, RATTING = 2,  SLOT = 6;
@@ -52,6 +56,12 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get data
@@ -121,6 +131,10 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;
@@ -146,6 +160,11 @@ public class VenueFirstAdapter extends RecyclerView.Adapter<VenueFirstAdapter.Vi
             txtStatus.setBackground(ContextCompat.getDrawable(context, background));
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         public void setImage(String url){
             Glide.with(view)
                     .load(RetrofitClient.VENUE_IMG_URL + url)

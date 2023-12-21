@@ -6,6 +6,10 @@ import com.c2.arenafinder.data.model.ArenaFinderModel
 import com.c2.arenafinder.data.repository.ArenaFinderRepository
 import com.c2.arenafinder.viewmodel.ArenaFinderViewModel
 
+/**
+ * Digunakan untuk menghubungkan class ArenaFinderRepository dengan ArenaFinderViewModel
+ *
+ */
 class ArenaFinderViewModelFactory(
     val repository: ArenaFinderRepository
 ) : ViewModelProvider.Factory {

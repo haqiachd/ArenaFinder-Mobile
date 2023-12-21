@@ -26,8 +26,14 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.osmdroid.views.overlay.Marker;
 
 
+/**
+ * Menampilkan Map dari tempat olahraga
+ */
 public class MapOSM implements GpsStatus.Listener, MapListener {
 
+    /**
+     * Default coordinate saat lokasi device tidak aktif
+     */
     private static final double DEF_LATITUDE = -7.582177001317065,
             DEF_LONGITUDE = 112.13986904786631,
             DEF_ZOOM = 12.0;
@@ -56,6 +62,11 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         );
     }
 
+    /**
+     * Digunakan untuk mengecek permission lokasi dari device user
+     *
+     * @return permission dari lokasi
+     */
     private boolean checkPermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
@@ -64,11 +75,25 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         return true;
     }
 
+    /**
+     * Mengatur data coordinate dari suatu tempat
+     *
+     * @param latitude dari coordinate
+     * @param longitude dari coordinate
+     */
     public void setCoordinate(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
+    /**
+     * Digunakan untuk menginisialisasi map (menampilkan) pada halaman aplikasi
+     *
+     * @param latitude dari map yang ditampilkan
+     * @param longitude dari map yang ditampilkan
+     * @param zoomLevel dari map yang ditampilkan
+     * @param centerIsMyLocation status center pada mapp
+     */
     public void initializeMap(double latitude, double longitude, double zoomLevel, boolean centerIsMyLocation) {
         setCoordinate(latitude, longitude);
 
@@ -79,7 +104,7 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         // cek permission access location
         if (centerIsMyLocation) {
             if (checkPermissionGranted()) {
-                // show map center by current location
+                // menampilkan map berdasarkan lokasi user
                 mMyLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(activity), mMap);
                 mMyLocationOverlay.enableMyLocation();
                 mMyLocationOverlay.enableFollowLocation();
@@ -94,7 +119,7 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
                 mMap.getOverlays().add(mMyLocationOverlay);
 
             } else {
-                // show map center by default coordinate
+                // menampilkan map berdasarkan lokasi default jika device lokasinya tidak aktif
                 setCenterMap();
             }
         } else {
@@ -104,15 +129,26 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
 
     }
 
+    /**
+     * Digunakan untuk menginisialisasi map pada default coordinate
+     */
     public void initializeMap() {
         initializeMap(DEF_LATITUDE, DEF_LONGITUDE, DEF_ZOOM, false);
     }
 
+    /**
+     * Mengatur titik tengah dari map yang ditampilkan
+     */
     public void setCenterMap() {
         mMap.getController().animateTo(new GeoPoint(this.latitude, this.longitude), 15.0, ANIMATE_SPEED);
         mMap.invalidate();
     }
 
+    /**
+     * Mendapatkan zoom level dari map yang ditampilkan
+     *
+     * @return zoom level
+     */
     private double getZoomLevelMarker() {
         double oldZoom = mMap.getZoomLevelDouble();
 
@@ -126,23 +162,32 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         return oldZoom;
     }
 
+    /**
+     * Menambahkan marker pada lokasi tempat tertentu, seperti contohnya tempat olahraga
+     *
+     * @param latitude dari coordinate lokasi
+     * @param longitude dari coordinate lokasi
+     * @param title dari lokasi
+     * @param markerIcon dari lokasi
+     * @param onClickLAction aksi saat lokasi di click
+     */
     public void addMarker(double latitude, double longitude, String title, @DrawableRes int markerIcon, Runnable onClickLAction) {
 
         if (mMap == null){
             return;
         }
 
-        // set marker location
+        // mengatur lokasi marker
         GeoPoint geoPoint = new GeoPoint(latitude, longitude);
         LogApp.info(activity, "ADDED Marker With Coordinate " + latitude + "," + longitude);
 
-        // Create a marker
+        // membuat marker
         Marker marker = new Marker(mMap);
         marker.setPosition(geoPoint);
         marker.setTitle(title);
         marker.setIcon(ContextCompat.getDrawable(activity, markerIcon));
 
-        // action when marker clicked
+        // mengatur aksi saat marker di klik
         marker.setOnMarkerClickListener((marker1, mapView) -> {
             mMap.getController().animateTo(geoPoint, getZoomLevelMarker(), ANIMATE_SPEED);
             marker.showInfoWindow();
@@ -157,6 +202,13 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         mMap.invalidate();
     }
 
+    /**
+     * Menghitung jarak dari suatu lokasi dengan lokasi dari user
+     *
+     * @param lat2 latitude dari lokasi yang dituju
+     * @param lon2 longitude dari lokasi yang dituju
+     * @return jarak dalam kilometer
+     */
     public static double calculateDistance(double lat2, double lon2) {
         // Radius of the Earth in kilometers
         final double R = 6371.0;
@@ -176,6 +228,12 @@ public class MapOSM implements GpsStatus.Listener, MapListener {
         return R * c;
     }
 
+    /**
+     * Digunakan untuk menghitung jarak tempuh dari lokasi berdasarkan jarak-nya (kilometer)
+     * @param kilometers jarak dari lokasi
+     *
+     * @return jarak tempuh dalam menit
+     */
     public static int calculateMileage(double kilometers){
         return (int) ((kilometers / 60.0) * 100);
     }

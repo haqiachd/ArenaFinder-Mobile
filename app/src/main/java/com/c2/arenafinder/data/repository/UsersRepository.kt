@@ -8,6 +8,10 @@ import com.c2.arenafinder.data.response.UsersResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Mengelola data-data yang didapatkan dari server pada data user
+ *
+ */
 class UsersRepository {
 
     private val _isLogin = MutableLiveData<UsersResponse>()

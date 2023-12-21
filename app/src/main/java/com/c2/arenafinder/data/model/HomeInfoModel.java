@@ -1,5 +1,9 @@
 package com.c2.arenafinder.data.model;
 
+/**
+ * Digunakan untuk menyimpan data-data informasi pada atas halaman home/beranda
+ *
+ */
 public class HomeInfoModel {
 
     private String imgUrl;

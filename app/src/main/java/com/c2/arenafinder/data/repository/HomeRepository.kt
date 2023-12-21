@@ -7,6 +7,10 @@ import com.c2.arenafinder.data.response.HomeResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Mengelola data-data yang didapatkan dari server ke halaman beranda/home
+ *
+ */
 class HomeRepository {
 
     private val _homeData = MutableLiveData<HomeResponse>()

@@ -18,6 +18,10 @@ import com.c2.arenafinder.util.AdapterActionListener;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data kontak pengelola pada detail aktivitas atau venue
+ *
+ */
 public class VenueContactAdapter extends RecyclerView.Adapter<VenueContactAdapter.ViewHolder> {
 
     private final Context context;
@@ -41,6 +45,12 @@ public class VenueContactAdapter extends RecyclerView.Adapter<VenueContactAdapte
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -52,6 +62,7 @@ public class VenueContactAdapter extends RecyclerView.Adapter<VenueContactAdapte
 
         if(holder.getAdapterPosition() != RecyclerView.NO_POSITION){
 
+            // aksi saat list di klik
             holder.imgWhatsapp.setOnClickListener(v -> {
                 listener.onClickListener(holder.getAdapterPosition());
             });
@@ -64,7 +75,10 @@ public class VenueContactAdapter extends RecyclerView.Adapter<VenueContactAdapte
         return models != null ? models.size() : 0;
     }
 
-
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imgProfile, imgWhatsapp;
@@ -81,6 +95,11 @@ public class VenueContactAdapter extends RecyclerView.Adapter<VenueContactAdapte
 
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param img dari gambar
+         */
         private void showProfile(Context context, String img){
             Glide.with(context)
                     .load(RetrofitClient.USER_PHOTO_URL + img)

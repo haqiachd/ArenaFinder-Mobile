@@ -3,6 +3,10 @@ package com.c2.arenafinder.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Digunakan untuk menyimpan data-data dari venue, seperti nama, lokasi, harga sewa, ratting, dll
+ *
+ */
 public class ReferensiModel {
 
     public static final String STATUS_GRATIS = "gratis";

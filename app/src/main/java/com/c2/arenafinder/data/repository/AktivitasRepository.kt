@@ -7,6 +7,10 @@ import com.c2.arenafinder.data.response.AktivitasResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Mengelola data-data yang didapatkan dari server ke halaman aktivitas
+ *
+ */
 class AktivitasRepository {
 
     private val _aktivitasData = MutableLiveData<AktivitasResponse>()

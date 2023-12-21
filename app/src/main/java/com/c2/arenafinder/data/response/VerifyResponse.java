@@ -4,6 +4,10 @@ import com.c2.arenafinder.data.model.VerifyModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Digunakan untuk menerima response dari server pada data verifikasi email
+ *
+ */
 public class VerifyResponse {
 
     @Expose

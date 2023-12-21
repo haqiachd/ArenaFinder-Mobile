@@ -13,6 +13,10 @@ import com.c2.arenafinder.databinding.ItemHomeInfoBinding;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Informasi Aplikasi pada MainActivity
+ *
+ */
 public class HomeInfoAdapter extends RecyclerView.Adapter<HomeInfoAdapter.ViewHolder> {
 
     private final ArrayList<HomeInfoModel> models;
@@ -31,8 +35,16 @@ public class HomeInfoAdapter extends RecyclerView.Adapter<HomeInfoAdapter.ViewHo
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull HomeInfoAdapter.ViewHolder holder, int position) {
+
+        // menampilkan gambar
         holder.setImage(models.get(position).getImgUrl());
     }
 
@@ -41,6 +53,10 @@ public class HomeInfoAdapter extends RecyclerView.Adapter<HomeInfoAdapter.ViewHo
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public final ItemHomeInfoBinding binding;
@@ -50,6 +66,11 @@ public class HomeInfoAdapter extends RecyclerView.Adapter<HomeInfoAdapter.ViewHo
             this.binding = binding;
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         public void setImage(String url){
             Glide.with(binding.getRoot())
                     .load(RetrofitClient.HOME_PAGER + url)

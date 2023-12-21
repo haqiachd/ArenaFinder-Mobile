@@ -1,5 +1,8 @@
 package com.c2.arenafinder.data.local;
 
+/**
+ * Tag-tag dari log
+ */
 public enum LogTag {
 
     APPLICATION,

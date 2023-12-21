@@ -33,6 +33,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+/**
+ * Berisi method-method yang bersifat umun yang sering digunakan untuk aplikasi
+ */
 public class ArenaFinder {
 
     public static final int VIBRATOR_SHORT = 150;

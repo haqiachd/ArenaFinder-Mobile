@@ -10,6 +10,10 @@ import com.c2.arenafinder.data.repository.HomeRepository
 import com.c2.arenafinder.data.response.HomeResponse
 import kotlinx.coroutines.launch
 
+/**
+ * Untuk menyediakan dan mengelola data home/beranda untuk tampilan fragment di aplikasi.
+ *
+ */
 class HomeViewModel(
     private val repository: HomeRepository
 ) : ViewModel() {

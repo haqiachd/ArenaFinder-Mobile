@@ -149,6 +149,9 @@ public class OtpVerificationFragment extends Fragment {
         onListener();
     }
 
+    /**
+     * Mengupdate verifikasi
+     */
     private void updateVerify() {
         loadingVerify.show();
 
@@ -205,6 +208,9 @@ public class OtpVerificationFragment extends Fragment {
         }
     }
 
+    /**
+     * Mengupdate dari detik aplikasi
+     */
     private void updateSecond() {
         Handler handler = new Handler(Looper.getMainLooper());
 
@@ -225,13 +231,22 @@ public class OtpVerificationFragment extends Fragment {
         handler.post(runnable);
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button send di klik
+         */
         btnSend.setOnClickLoadingListener(new ButtonAccountCustom.OnClickLoadingListener() {
             @Override
             public void onClick() {
                 Toast.makeText(requireContext(), R.string.txt_update_otp, Toast.LENGTH_SHORT).show();
 
+            /*
+                Digunakan untuk mengirim email
+             */
                 RetrofitClient.getInstance().sendEmail(verifyUtil.getEmail(), verifyUtil.getType(), VerifyUtil.ACTION_UPDATE)
                         .enqueue(new Callback<VerifyResponse>() {
                             @Override
@@ -275,8 +290,14 @@ public class OtpVerificationFragment extends Fragment {
 
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onListener() {
 
+        /*
+         * Aksi saat button input otp di klik
+         */
         inpOtp.setOtpListener(new OTPListener() {
             @Override
             public void onInteractionListener() {

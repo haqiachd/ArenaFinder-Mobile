@@ -21,6 +21,10 @@ import com.c2.arenafinder.util.ArenaFinder;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Aktivitas Seru, Aktivitas Baru dan Aktivitas Kosong pada MainActivity
+ *
+ */
 public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAdapter.ViewHolder> {
 
     private final Context context;
@@ -29,7 +33,7 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
 
     private final AdapterActionListener listener;
 
-    public AktivitasFirstAdapter(Context context, ArrayList<AktivitasModel> models, AdapterActionListener listener){
+    public AktivitasFirstAdapter(Context context, ArrayList<AktivitasModel> models, AdapterActionListener listener) {
         this.context = context;
         this.models = models;
         this.listener = listener;
@@ -44,6 +48,12 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -53,13 +63,13 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
         // show data
         holder.txtNama.setText(model.getNamaAktivitas());
         holder.txtVenue.setText(model.getVenueName());
-//        holder.txtAnggota.setText(context.getString(R.string.txt_aktivitas_anggota_value, model.getJumlahMember(), model.getMaxMember()));
         holder.txtAnggota.setText(context.getString(R.string.txt_num_member, model.getJumlahMember()));
         holder.txtTanggal.setText(ArenaFinder.convertToDate(context, model.getDate()));
         holder.setAktivitasImage(model.getPhoto());
 
-        if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION){
+        if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
 
+            // aksi saat list di klik
             holder.itemView.setOnClickListener(v -> {
                 LogApp.info(context, LogTag.ON_CLICK, "on click" + holder.getAdapterPosition());
                 listener.onClickListener(holder.getAdapterPosition());
@@ -74,7 +84,11 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
         return models != null ? models.size() : 0;
     }
 
-     public static class ViewHolder extends RecyclerView.ViewHolder {
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;
 
@@ -82,7 +96,7 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
 
         private final TextView txtNama, txtVenue, txtAnggota, txtTanggal;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
 
             this.view = view;
@@ -93,7 +107,12 @@ public class AktivitasFirstAdapter extends RecyclerView.Adapter<AktivitasFirstAd
             txtTanggal = view.findViewById(R.id.iaf_aktivitas_tgl);
         }
 
-        public void setAktivitasImage(String url){
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
+        public void setAktivitasImage(String url) {
             Glide.with(view)
                     .load(RetrofitClient.AKTIVITAS_URL + url)
                     .centerCrop()

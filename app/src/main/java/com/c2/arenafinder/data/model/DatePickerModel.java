@@ -1,5 +1,9 @@
 package com.c2.arenafinder.data.model;
 
+/**
+ * Digunakan untuk menyimpan data-data dari dari tanggal pada jadwal booking
+ *
+ */
 public class DatePickerModel {
 
     private String date;

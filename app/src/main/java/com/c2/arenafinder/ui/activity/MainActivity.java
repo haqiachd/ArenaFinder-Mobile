@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         spannableString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.mint_green)), 5, appname.length(), 0);
         txtAppName.setText(spannableString);
 
+        /* action saat button nav di klik */
         BottomNavCustom bottomNav = new BottomNavCustom(this);
         bottomNav.playAnimation(BottomNavCustom.ITEM_HOME);
         bottomNav.setActivatedItem(BottomNavCustom.ITEM_HOME);

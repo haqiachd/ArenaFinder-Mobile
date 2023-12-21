@@ -9,6 +9,9 @@ import com.c2.arenafinder.R
 import com.c2.arenafinder.data.local.LogApp
 import com.c2.arenafinder.data.local.LogTag
 
+/**
+ * Berisi method-method umum untuk melakukan perpindahan dari satu fragment ke fragment lainya
+ */
 object FragmentUtil {
 
     private const val defaultAnim = R.anim.anim_default_anim

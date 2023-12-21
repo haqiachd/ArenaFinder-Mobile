@@ -181,8 +181,15 @@ public class SignUpSecondFragment extends Fragment {
                 });
     }
 
+
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button register di klik
+         */
         btnSignUp.setOnClickListener(v -> {
 
             loadingVerify.show();
@@ -210,6 +217,9 @@ public class SignUpSecondFragment extends Fragment {
                     });
         });
 
+        /*
+         * Aksi saat button prev di klik
+         */
         btnPrev.setOnClickListener(v -> {
             requireActivity().getOnBackPressedDispatcher().onBackPressed();
         });

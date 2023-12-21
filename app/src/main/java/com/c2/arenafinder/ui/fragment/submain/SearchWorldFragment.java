@@ -41,6 +41,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Digunakan untuk mencari aktivitas / venue
+ */
 public class SearchWorldFragment extends Fragment {
 
     private static final String ARG_TYPE = "type";
@@ -193,6 +196,11 @@ public class SearchWorldFragment extends Fragment {
         }
     }
 
+    /**
+     * Digunakan untuk mencari data venue
+     *
+     * @param inputEditText data input
+     */
     private void searchVenue(TextInputEditText inputEditText) {
         RetrofitClient.getInstance().searchVenue(Objects.requireNonNull(inputEditText.getText()).toString())
                 .enqueue(new Callback<>() {
@@ -241,6 +249,11 @@ public class SearchWorldFragment extends Fragment {
                 });
     }
 
+    /**
+     * Digunakan untuk mencari data aktivitas
+     *
+     * @param inputEditText data input
+     */
     private void searchActivity(TextInputEditText inputEditText) {
 
         RetrofitClient.getInstance().searchActivity(Objects.requireNonNull(inputEditText.getText()).toString()).enqueue(new Callback<AktivitasStatusResponse>() {

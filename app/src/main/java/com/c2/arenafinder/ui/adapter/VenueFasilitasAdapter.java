@@ -17,6 +17,10 @@ import com.c2.arenafinder.data.model.FasilitasModel;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data Fasilitas pada Detail Aktivitas
+ *
+ */
 public class VenueFasilitasAdapter extends RecyclerView.Adapter<VenueFasilitasAdapter.ViewHolder> {
 
     private final Context context;
@@ -37,6 +41,12 @@ public class VenueFasilitasAdapter extends RecyclerView.Adapter<VenueFasilitasAd
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -52,6 +62,10 @@ public class VenueFasilitasAdapter extends RecyclerView.Adapter<VenueFasilitasAd
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imgFasilitas;
@@ -65,6 +79,11 @@ public class VenueFasilitasAdapter extends RecyclerView.Adapter<VenueFasilitasAd
             txtFasilitas = itemView.findViewById(R.id.ift_nama_fasilitias);
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param url dari gambar
+         */
         private void showFasilitasImage(Context context, String imgUrl){
             Glide.with(context)
                     .load(RetrofitClient.FASILITAS_URL + imgUrl)

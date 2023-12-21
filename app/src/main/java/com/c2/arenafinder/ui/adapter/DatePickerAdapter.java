@@ -17,6 +17,10 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data tanggal pada booking pada halaman venue detail
+ *
+ */
 public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.ViewHolder> {
 
     private final Context context;
@@ -44,6 +48,12 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Vi
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -89,6 +99,10 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Vi
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final View view;

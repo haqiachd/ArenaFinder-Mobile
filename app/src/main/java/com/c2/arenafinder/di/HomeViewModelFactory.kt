@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.c2.arenafinder.data.repository.HomeRepository
 import com.c2.arenafinder.viewmodel.HomeViewModel
 
+/**
+ * Digunakan untuk menghubungkan class HomeRepository dengan HomeViewModel
+ *
+ */
 class HomeViewModelFactory(
     private val repository: HomeRepository
 ) : ViewModelProvider.Factory {

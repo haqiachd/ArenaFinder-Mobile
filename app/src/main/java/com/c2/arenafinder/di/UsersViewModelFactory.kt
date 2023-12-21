@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.c2.arenafinder.data.repository.UsersRepository
 import com.c2.arenafinder.viewmodel.UsersViewModel
 
+/**
+ * Digunakan untuk menghubungkan class UsersRepository dengan UsersViewMddel
+ *
+ */
 class UsersViewModelFactory(
     private val repository: UsersRepository
 ) : ViewModelProvider.Factory {

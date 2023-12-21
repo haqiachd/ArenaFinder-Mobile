@@ -54,31 +54,37 @@ public class AccountActivity extends AppCompatActivity {
             switch (data.getLastPathSegment()) {
                 case "sign-up": {
                     IAM_IN = SIGN_IN;
+                    // membuka sign in
                     FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new SignInFragment(), false);
                     break;
                 }
                 case "forgot": {
                     IAM_IN = CHANGE_PASS;
+                    // membuka ubah password
                     FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new ChangePasswordFragment(), false);
                     break;
                 }
             }
         }
+
         // jika activity dibuka melalui activity atau fragment lain
         else {
             switch (getIntent().getStringExtra(FRAGMENT)) {
                 case SIGN_UP_FIRST: {
                     IAM_IN = SIGN_UP_FIRST;
+                    // membuka register
                     FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new SignUpTypeFragment(), false);
                     break;
                 }
                 case SIGN_IN: {
                     IAM_IN = SIGN_IN;
+                    // membuka login
                     FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new SignInFragment(), false);
                     break;
                 }
                 case OTP_VERIFY: {
                     IAM_IN = OTP_VERIFY;
+                    // membuka verifikasi
                     FragmentUtil.switchFragmentAccount(getSupportFragmentManager(), new OtpVerificationFragment(), false);
                     break;
                 }

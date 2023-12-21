@@ -131,6 +131,9 @@ public class VerifyStatusFragment extends Fragment {
         }
     }
 
+    /**
+     * menampilkan data status verifikasi
+     */
     private void observer(){
         usersViewModel.isVerified().observe(getViewLifecycleOwner(), dataState -> {
             if (dataState instanceof RetrofitState.Loading){

@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import com.c2.arenafinder.R;
 
+/**
+ * Menampilkan informasi dari aplikasi
+ */
 public class AppInfoFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +35,7 @@ public class AppInfoFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
         txtAppName = view.findViewById(R.id.fai_app_name);
         txtVersi = view.findViewById(R.id.fai_version);
         txtDeveloper = view.findViewById(R.id.fai_dev);
@@ -70,6 +73,7 @@ public class AppInfoFragment extends Fragment {
         getAppbar();
 
         try {
+            // menampilkan data aplikasi
             PackageInfo pInfo = requireActivity().getPackageManager().getPackageInfo(requireActivity().getPackageName(), 0);
             txtAppName.setText(getString(R.string.info_nama_aplikasi_val, getString(R.string.app_name)));
             txtVersi.setText(getString(R.string.info_versi_aplikasi_val, pInfo.versionName));

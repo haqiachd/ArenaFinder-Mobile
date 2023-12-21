@@ -111,6 +111,9 @@ public class TabDisetujuiFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan data tab disetujui
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().getStatusPesanan(usersUtil.getEmail(), StatusPesananModel.DI_SETUJUI)

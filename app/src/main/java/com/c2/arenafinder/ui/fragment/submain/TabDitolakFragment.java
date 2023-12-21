@@ -111,6 +111,9 @@ public class TabDitolakFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan data tab ditolak
+     */
     private void fetchData() {
 
         RetrofitClient.getInstance().getStatusPesanan(usersUtil.getEmail(), StatusPesananModel.DI_TOLAK)

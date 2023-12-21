@@ -11,6 +11,10 @@ import com.c2.arenafinder.data.repository.UsersRepository
 import com.c2.arenafinder.data.response.UsersResponse
 import kotlinx.coroutines.launch
 
+/**
+ * Untuk menyediakan dan mengelola data user untuk tampilan fragment/activity di aplikasi.
+ *
+ */
 class UsersViewModel(
     private val repository: UsersRepository
 ) : ViewModel() {

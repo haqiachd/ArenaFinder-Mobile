@@ -56,6 +56,7 @@ public class DetailedActivity extends AppCompatActivity {
         switch (selectedFragment) {
             case VENUE: {
                 ArenaFinder.setStatusBarColor(this, ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.transparent, true);
+                // membuka venue detailed
                 FragmentUtil.switchFragmentDetailed(
                         this.getSupportFragmentManager(),
                         VenueDetailedFragment.newInstance(idSelected), true
@@ -64,6 +65,7 @@ public class DetailedActivity extends AppCompatActivity {
             }
             case ACTIVITY: {
                 ArenaFinder.setStatusBarColor(this, ArenaFinder.TRANSPARENT_STATUS_BAR, R.color.white, true);
+                // membuka venue activity
                 FragmentUtil.switchFragmentDetailed(
                         this.getSupportFragmentManager(),
                         ActivityDetailedFragment.newInstance(idSelected), true

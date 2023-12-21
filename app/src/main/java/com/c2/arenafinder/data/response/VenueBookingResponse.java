@@ -7,6 +7,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menerima response dari server pada data di halaman venue booking
+ *
+ */
 public class VenueBookingResponse {
 
     @Expose

@@ -35,6 +35,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Digunakan untuk menampilkan list dari data Komentar Venue pada Detail Venue
+ *
+ */
 public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapter.ViewHolder> {
 
     private final Activity context;
@@ -65,11 +69,19 @@ public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapte
         );
     }
 
+    /**
+     * Untuk mendapatkan dan menampilkan data kedalam list
+     *
+     * @param holder   .
+     * @param position .
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        // get data
         VenueCommentModel reviewModel = models.get(position);
 
+        // show data
         holder.txtUsername.setText(context.getString(R.string.txt_review_username, reviewModel.getUsername()));
         holder.txtFullName.setText(reviewModel.getFullName());
         holder.txtComment.setText(reviewModel.getComment());
@@ -84,6 +96,7 @@ public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapte
 
         if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
 
+            // aksi saat list di klik
             holder.itemView.setOnClickListener(v -> {
                 listener.onClickListener(holder.getAdapterPosition());
             });
@@ -143,6 +156,12 @@ public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapte
         return models != null ? models.size() : 0;
     }
 
+    /**
+     * Mengirimkan report ke developer
+     *
+     * @param model data
+     * @param reason alasan report
+     */
     private void reportCommentar(VenueCommentModel model, @StringRes int reason) {
         ArenaFinder.playVibrator(context, ArenaFinder.VIBRATOR_SHORT);
         new AlertDialog.Builder(context)
@@ -188,6 +207,10 @@ public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapte
         });
     }
 
+    /**
+     * Digunakan untuk menghubungkan antara adapter dengan layout-nya dengan menggunakan id
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imgProfile;
@@ -217,6 +240,11 @@ public class VenueCommentAdapter extends RecyclerView.Adapter<VenueCommentAdapte
             txtDate = view.findViewById(R.id.ivr_ratting_date);
         }
 
+        /**
+         * untuk menampilkan gambar dari list
+         *
+         * @param imgName dari gambar
+         */
         private void setPhotoProfile(Context context, String imgName) {
             Glide.with(context)
                     .load(RetrofitClient.USER_PHOTO_URL + imgName)

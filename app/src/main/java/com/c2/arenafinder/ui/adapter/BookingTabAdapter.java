@@ -8,6 +8,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Digunakan untuk menampilkan list dari data booking status seperti Status Dipesan, Status Diterima dan Status Ditolak
+ * pada Booking
+ *
+ */
 public class BookingTabAdapter extends FragmentPagerAdapter {
 
     private final ArrayList<Fragment> fragmentList = new ArrayList<>();

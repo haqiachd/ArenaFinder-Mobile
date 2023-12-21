@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
 
     private View btnVallBaru, btnVallRekomendasi, btnVallAktivitas, btnVallLokasi;
 
-    private MaterialCardView menuAlur, menuKomunitas, menuTrolley, menuBooking;
+    private MaterialCardView menuAlur, menuKomunitas, menuWebsite, menuBooking;
 
     private LinearLayout homeDots, venueBaruLayout, venueRekomendasiLayout, aktivitasLayout, venueLokasiLayout;
 
@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
         shimmerLayout = view.findViewById(R.id.mho_shimmer);
         menuAlur = view.findViewById(R.id.mho_menu_alur);
         menuKomunitas = view.findViewById(R.id.mho_menu_komunitas);
-        menuTrolley = view.findViewById(R.id.mho_menu_trolley);
+        menuWebsite = view.findViewById(R.id.mho_menu_trolley);
         menuBooking = view.findViewById(R.id.mho_menu_booking);
         mMap = view.findViewById(R.id.mho_mapview);
 
@@ -182,6 +182,7 @@ public class HomeFragment extends Fragment {
                 new HomeViewModelFactory(new HomeRepository())
         ).get(HomeViewModel.class);
 
+        // refresh data aplikasi
         refreshLayout.setOnRefreshListener(() ->
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     observer();
@@ -192,6 +193,7 @@ public class HomeFragment extends Fragment {
 
         showShimmer(true);
 
+        // menampilkan map
         try {
             mapOSM = new MapOSM(requireActivity(), mMap);
 
@@ -205,8 +207,8 @@ public class HomeFragment extends Fragment {
                     }
                 }
 
-                adapterLapangan();
                 onClickGroups();
+                adapterLapangan();
                 showPager();
                 pagerAction();
                 getAppbar();
@@ -224,6 +226,11 @@ public class HomeFragment extends Fragment {
         outState.putParcelable(KEY_TEST, Objects.requireNonNull(venueBaruRecycler.getLayoutManager()).onSaveInstanceState());
     }
 
+    /**
+     * Menampilkan shimmer
+     *
+     * @param show status tampilkan
+     */
     private void showShimmer(boolean show) {
         if (show) {
             shimmerLayout.setVisibility(View.VISIBLE);
@@ -236,6 +243,9 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    /**
+     * Mendapatkan data dari database
+     */
     private void observer() {
 
         homeViewModel.getHomeData().observe(getViewLifecycleOwner(), dataState -> {
@@ -299,12 +309,21 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private void onClickGroups() {
 
+        /*
+         * Aksi saat button alur di klik
+         */
         menuAlur.setOnClickListener(v -> {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://arenafinder.tifnganjuk.com/alur-pesan.php")));
         });
 
+        /*
+         * Aksi saat button komunitas di klik
+         */
         menuKomunitas.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -312,10 +331,16 @@ public class HomeFragment extends Fragment {
             );
         });
 
-        menuTrolley.setOnClickListener(v -> {
+        /*
+         * Aksi saat button website di klik
+         */
+        menuWebsite.setOnClickListener(v -> {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://arenafinder.tifnganjuk.com")));
         });
 
+        /*
+         * Aksi saat button booking di klik
+         */
         menuBooking.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -323,6 +348,9 @@ public class HomeFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button venue baru di klik
+         */
         btnVallBaru.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -331,6 +359,9 @@ public class HomeFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button venue rekomendasi di klik
+         */
         btnVallRekomendasi.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -339,6 +370,9 @@ public class HomeFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button aktivitas di klik
+         */
         btnVallAktivitas.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -347,6 +381,9 @@ public class HomeFragment extends Fragment {
             );
         });
 
+        /*
+         * Aksi saat button venue lokasi di klik
+         */
         btnVallLokasi.setOnClickListener(v -> {
             startActivity(
                     new Intent(requireActivity(), SubMainActivity.class)
@@ -378,6 +415,15 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan dialog bottom
+     *
+     * @param title .
+     * @param btnMsg .
+     * @param btn1 .
+     * @param btn2 .
+     * @param runnable .
+     */
     private void showSheet(
             @StringRes int title, @StringRes int btnMsg, @StringRes int btn1, @StringRes int btn2, Runnable runnable) {
 //        ArenaFinder.playVibrator(requireContext(), ArenaFinder.VIBRATOR_SHORT);
@@ -503,12 +549,18 @@ public class HomeFragment extends Fragment {
         venueLokasiLayout.setVisibility(View.GONE);
     }
 
+    /**
+     * Menampilkan venue baru
+     *
+     * @param models data
+     */
     private void showVenueBaru(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
             venueBaruLayout.setVisibility(View.GONE);
         } else {
             if (isAdded()) {
+                // menampilkan list dari data
                 LogApp.info(requireContext(), LogTag.LIFEFCYLE, "size of venue baru -> " + models.size());
                 venueBaruRecycler.setAdapter(new VenueFirstAdapter(
                         this.requireContext(), models, new AdapterActionListener() {
@@ -530,6 +582,11 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue rekomendasi
+     *
+     * @param models data
+     */
     private void showVenueRekomendasi(ArrayList<ReferensiModel> models) {
 
         if (models.size() <= 0) {
@@ -555,6 +612,11 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan aktivitas seru
+     *
+     * @param models data
+     */
     private void showAktivitasSeru(ArrayList<AktivitasModel> models) {
 
         if (models.size() <= 0) {
@@ -581,6 +643,11 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan venue lokasi
+     *
+     * @param models data
+     */
     private void showVenueLokasi(ArrayList<ReferensiModel> models) {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -613,6 +680,10 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan map
+     *
+     */
     private void showMap(ArrayList<VenueCoordinateModel> coordinateModels) {
         mapOSM.initializeMap();
 

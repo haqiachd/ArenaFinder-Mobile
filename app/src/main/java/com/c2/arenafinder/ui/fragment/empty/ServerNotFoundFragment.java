@@ -105,6 +105,9 @@ public class ServerNotFoundFragment extends Fragment {
 
     }
 
+    /**
+     * aksi saat refersh
+     */
     private void refreshAction(){
 
         RetrofitClient.getInstance().cekKoneksi().enqueue(new Callback<ArenaFinderResponse>() {

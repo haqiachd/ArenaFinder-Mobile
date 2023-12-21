@@ -11,19 +11,23 @@ import com.c2.arenafinder.data.repository.AktivitasRepository
 import com.c2.arenafinder.data.response.AktivitasResponse
 import kotlinx.coroutines.launch
 
+/**
+ * Untuk menyediakan dan mengelola data aktivitas untuk tampilan fragment di aplikasi.
+ *
+ */
 class AktivitasViewModel(
-    private val repository: AktivitasRepository
+    private val repository: AktivitasRepository,
 ) : ViewModel() {
 
-    private val _aktivitasData : MutableLiveData<RetrofitState<AktivitasResponse>> by lazy {
+    private val _aktivitasData: MutableLiveData<RetrofitState<AktivitasResponse>> by lazy {
         MutableLiveData<RetrofitState<AktivitasResponse>>().also {
             fetchAktivitas()
         }
     }
 
-    fun getAktivitasData() : LiveData<RetrofitState<AktivitasResponse>> = _aktivitasData
+    fun getAktivitasData(): LiveData<RetrofitState<AktivitasResponse>> = _aktivitasData
 
-    fun fetchAktivitas(){
+    fun fetchAktivitas() {
         viewModelScope.launch {
             try {
                 // get data dari server
@@ -31,12 +35,12 @@ class AktivitasViewModel(
                 repository.fetchAktivitasData()
                 val response = repository.aktivitasData
                 // cek dan return state dari data
-                if (response.value?.status?.lowercase() == RetrofitClient.SUCCESSFUL_RESPONSE){
+                if (response.value?.status?.lowercase() == RetrofitClient.SUCCESSFUL_RESPONSE) {
                     _aktivitasData.value = RetrofitState.Success(response.value!!)
-                }else{
+                } else {
                     _aktivitasData.value = RetrofitState.Error(response.value?.message.toString())
                 }
-            }catch (ex : Throwable){
+            } catch (ex: Throwable) {
                 ex.printStackTrace()
                 _aktivitasData.value = RetrofitState.Error(ex.message.toString())
             }

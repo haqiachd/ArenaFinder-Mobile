@@ -154,6 +154,9 @@ class BookingVenueFragment : Fragment() {
         onClickGroups()
     }
 
+    /**
+     * Menampilkan first shimmer
+     */
     private fun showFirstShimmer(show: Boolean) {
         if (show) {
             shimmerFirstLayout.visibility = View.VISIBLE
@@ -168,6 +171,9 @@ class BookingVenueFragment : Fragment() {
         }
     }
 
+    /**
+     * Menampilkan second shimmer
+     */
     private fun showSecondShimmer(show: Boolean) {
         if (show) {
             shimmerSecondLayout.visibility = View.VISIBLE
@@ -182,12 +188,21 @@ class BookingVenueFragment : Fragment() {
         }
     }
 
+    /**
+     * Handler aksi saat button-button yang ada didalam fragment di-klik
+     */
     private fun onClickGroups() {
 
+        /*
+         * Aksi saat button img back di klik
+         */
         imgBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
 
+        /*
+         * Aksi saat button choose data di klik
+         */
         btnChooseDate.setOnClickListener {
             btnChooseDate.isClickable = false
 
@@ -261,6 +276,9 @@ class BookingVenueFragment : Fragment() {
             }
         }
 
+        /*
+         * Aksi saat button pesan di klik
+         */
         btnPesan.setOnClickListener {
 
             if (venueBookingAdapter == null) {

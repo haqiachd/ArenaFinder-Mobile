@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * Berisi method-method umum untuk mengelola file
+ *
  * Created by Wim on 9/29/16.
  */
 public class FileUtil {

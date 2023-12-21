@@ -127,6 +127,9 @@ public class SportTypeFragment extends Fragment {
         }
     }
 
+    /**
+     * Menampilkan data berdasarkan jenis olahraganya dari venue
+     */
     private void fetchDataVenue() {
 
         RetrofitClient.getInstance().sportType(sport).enqueue(new Callback<>() {
@@ -185,6 +188,9 @@ public class SportTypeFragment extends Fragment {
 
     }
 
+    /**
+     * Menampilkan data berdasarkan jenis olahraganya dari aktivitas
+     */
     private void fetchDataActivity() {
 
         RetrofitClient.getInstance().sportActivity(sport)

@@ -19,6 +19,9 @@ import com.c2.arenafinder.data.local.LogApp;
 import com.c2.arenafinder.data.local.LogTag;
 import com.c2.arenafinder.util.ArenaFinder;
 
+/**
+ * Digunakan untuk melakukan login atau register dengan Google
+ */
 public class GoogleUsers {
 
     public static final int REQUEST_CODE = 1000;
@@ -74,7 +77,7 @@ public class GoogleUsers {
 
     /**
      *
-     * @return mendapatkan intent dari google auth
+     * @return mendapatkan intent atau tampilan dari google auth
      */
     public Intent getIntent(){
         return signInIntent;
@@ -89,22 +92,24 @@ public class GoogleUsers {
         LogApp.info(this, LogTag.GOOGLE_SIGN, "Membuka intent Google Auth");
 
         isAccountSelected = false;
+        // cek koneksi internet ada atau tidak
         if(!ArenaFinder.isInternetConnected(fragmentActivity)){
             LogApp.error(this, LogTag.GOOGLE_SIGN, fragmentActivity.getString(R.string.err_no_internet));
             Toast.makeText(fragmentActivity, fragmentActivity.getString(R.string.err_no_internet), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // get data akun yang dipilih
+        // mendapatkan data akun yang dipilih
         if (requestCode == REQUEST_CODE && data != null) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
             // jika data gagal didapatkan
             if(result == null || !result.isSuccess()){
                 LogApp.warn(this, LogTag.GOOGLE_SIGN, fragmentActivity.getString(R.string.err_no_data_selected));
                 Toast.makeText(fragmentActivity.getApplicationContext(), fragmentActivity.getString(R.string.err_no_data_selected), Toast.LENGTH_SHORT)
                         .show();
             }else{
-                // mendapatkan data akun
+                // mendapatkan data akun dan menyimpan datanya ke object account
                 this.account = result.getSignInAccount();
                 this.resetLastSignIn(); // remove
                 isAccountSelected = true;
@@ -115,19 +120,31 @@ public class GoogleUsers {
         }
     }
 
+    /**
+     *
+     * @return data-data dari akun yang dipilih
+     */
     public GoogleSignInAccount getUserData(){
         return this.account;
     }
 
+    /**
+     *
+     * @return untuk mengecek apakah ada akun yang dipilih atau tidak
+     */
     public boolean isAccountSelected(){
         return isAccountSelected;
     }
 
+    /**
+     * Menghapus akun yang sebelumnya dipilih
+     */
     public void resetLastSignIn() {
         LogApp.info(this, LogTag.GOOGLE_SIGN, "Remove data akun yang sedang dipilih");
 
         if (googleApiClient != null) {
             if (googleApiClient.isConnected()) {
+                // menghapus data akun sebelumnya
                 Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
                     @Override
                     public void onResult(@NonNull Status status) {
@@ -138,6 +155,9 @@ public class GoogleUsers {
         }
     }
 
+    /**
+     * disconect dari google api client, untuk reset app
+     */
     public void onDestroy() {
         if (googleApiClient != null) {
             LogApp.error(this, LogTag.SIGNIN, "ON DESTROY");
