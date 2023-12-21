@@ -49,10 +49,7 @@
   <ol>
     <li><a href="#desc_project">Deskripsi Aplikasi</a></li>
     <li>
-      <a href="#ss_app">Screenshot Tampilan</a>
-      <ul>
-        <li><a href="#ss_app">Tampilan 1</a></li>
-      </ul>
+      <a href="#ss_app">Tampilan Aplikasi</a>
     </li>
     <li>
     <a href="#fitur">Fitur Aplikasi</a>
@@ -86,10 +83,16 @@ Anda dapat mengunduh aplikasi ArenaFinder Mobile melalui button dibawah ini. <br
 <a href="https://drive.google.com/drive/folders/12XBjgQncHZMxfbNMwWyMXiRuxqCMvgA5?usp=sharing"><img src="images/download.png" alt="Logo Download ArenaFinder" width="50" height="45"></a>
 
 
-## Screenshot Tampilan<a name = "ss_app"></a>
+## Tampilan Aplikasi<a name = "ss_app"></a>
 
-#### Tampilan Welcome, SignIn SignUp
-![Tampilan Welcome, SignIn & SignUp](images/v-1/ss-1.png)
+### Tampilan Welcome, SignIn SignUp
+![Tampilan Welcome, SignIn & SignUp](images/v-1.3/tampilan-1.png)
+
+### Tampilan Beranda, Aktivitas, Referensi
+![Tampilan Welcome, SignIn & SignUp](images/v-1.3/tampilan-2.png)
+
+### Detail Venue, Detail Aktivitas, Booking Venue
+![Tampilan Welcome, SignIn & SignUp](images/v-1.3/tampilan-1.png)
 
 ## Fitur Aplikasi <a name = "fitur"></a>
 
